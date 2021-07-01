@@ -1,0 +1,119 @@
+@charset "utf-8";
+*{
+	margin:0; padding:0;	
+	font-family:"맑은고딕";
+}
+header>div, div.main_header>div{
+	width:1100px;
+	margin:auto;
+}
+
+/**
+*	header
+*/
+header{
+	width:100%;
+	border-top:5px solid #4fa9de;
+	border-bottom:1px solid #4fa9de;
+}
+div.main_header{
+	width:100%;
+	padding-top:5px;
+	position:absolute;
+	z-index:2;
+}
+header ul, div.main_header ul{
+	list-style-type:none;
+	padding:0; 
+	margin:0;
+}
+div.tap ul{
+	text-align:right;
+	margin-top:-35px;
+}
+div.tap>nav{
+	margin-top:35px;
+	text-align:center;
+}
+div.tap li{
+	display:inline-block;
+}
+header>div.tap li>div{
+	width:4px; 
+	height:4px;
+	border-radius:2px;
+	background-color:lightgray;
+	display:inline-block;
+	margin-bottom:3px;
+}
+div.main_header>div.tap li>div{
+	width:4px; 
+	height:4px;
+	border-radius:2px;
+	background-color:white;
+	display:inline-block;
+	margin-bottom:3px;
+}
+header>div.tap a{
+	text-decoration:none;
+	color:gray;
+	font-size:13px;
+	font-weight:bold;
+	padding:10px;
+}
+div.main_header>div.tap a{
+	text-decoration:none;
+	color:white;
+	font-size:13px;
+	font-weight:bold;
+	padding:10px;
+}
+div.menu_tap ul{
+	text-align:center;
+	padding:60px;
+	margin-top:-10px;
+	margin-bottom:-40px;
+}
+div.menu_tap li{
+	display:inline-block;
+}
+header>div.menu_tap a{
+	text-decoration:none;
+	color:black;
+	font-size:19px;
+	font-weight:bold;
+	padding:40px;
+}
+div.main_header>div.menu_tap a{
+	text-decoration:none;
+	color:white;
+	font-size:19px;
+	font-weight:bold;
+	padding:40px;
+}
+header>div.menu_tap a:hover{
+	color:#4fa9de;
+}
+div.main_header>div.menu_tap a:hover{
+	opacity:0.5;
+}
+
+div.carousel-inner img{
+	position:relative;
+	z-index:1;
+}
+
+
+
+
+/**
+*	content
+*/
+
+
+
+
+
+/**
+*	footer
+*/
