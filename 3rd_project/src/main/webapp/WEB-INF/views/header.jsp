@@ -18,12 +18,33 @@
 			</nav>
 		</div>
 		<div class="menu_tap">
-			<ul>
-				<li><a href="#">숙소</a></li>
-				<li><a href="#">맛집</a></li>
-				<li><a href="#">여행지</a></li>
+			<ul class="menu_list">
+				<li><a href="#">숙소</a>
+					<ul class="drop_menu">
+						<li><a href="#">호텔</a></li>					
+						<li><a href="#">에어비앤비</a></li>					
+					</ul>
+				</li>
+				<li><a href="#">맛집</a>
+					<ul class="drop_menu">
+						<li><a href="#">음식점</a></li>					
+						<li><a href="#">카페</a></li>					
+					</ul>
+				</li>
+				<li><a href="#">여행지</a>
+					<ul class="drop_menu">
+						<li><a href="#">관광지</a></li>					
+						<li><a href="#">포토스팟</a></li>					
+						<li><a href="#">차박스팟</a></li>					
+					</ul>
+				</li>
 				<li><a href="#">스토어</a></li>
-				<li><a href="#">커뮤니티</a></li>
+				<li><a href="#">커뮤니티</a>
+					<ul class="drop_menu">
+						<li><a href="#">자유게시판</a></li>					
+						<li><a href="#">요청게시판</a></li>					
+					</ul>
+				</li>
 			</ul>
 		</div>
 	</header>

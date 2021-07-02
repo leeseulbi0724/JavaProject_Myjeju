@@ -10,9 +10,9 @@
 	<script>
 		$(document).ready(function(){
 			$(".img2").hover(function(){
-		    	$(".img1").css('filter','brightness(50%)');
+		    	$(".img1").css('filter','brightness(50%)').css('transform','scale(1.1)');
 		    }, function() { 
-		        $(".img1").css('filter','brightness(100%)');
+		        $(".img1").css('filter','brightness(100%)').css('transform','scale(1)');
 		    });
 		}); 
 		
@@ -21,10 +21,16 @@
 		*{
 			margin:0; padding:0;	
 		}
+		.back_img1{
+			overflow:hidden; 
+			margin:0 auto;
+		}
 		.img1{
 			width:100%;
 			position:absolute;
 			z-index:1; 
+			transform:scale(1); 
+			transition:transform 0.5s linear;
 		}
 		.img2{
 			width:30%;
@@ -37,7 +43,7 @@
 	</style>
 </head>
 <body>
-	<div>
+	<div class="back_img1">
 		<img src="http://localhost:9000/myjeju/images/index/main_1.png" class="img1">
 	</div>
 	<div>

@@ -24,12 +24,33 @@
 			</nav>
 		</div>
 		<div class="menu_tap">
-			<ul>
-				<li><a href="#">숙소</a></li>
-				<li><a href="#">맛집</a></li>
-				<li><a href="#">여행지</a></li>
+			<ul class="menu_list">
+				<li><a href="#">숙소</a>
+					<ul class="drop_menu">
+						<li><a href="#">호텔</a></li>					
+						<li><a href="#">에어비앤비</a></li>					
+					</ul>
+				</li>
+				<li><a href="#">맛집</a>
+					<ul class="drop_menu">
+						<li><a href="#">음식점</a></li>					
+						<li><a href="#">카페</a></li>					
+					</ul>
+				</li>
+				<li><a href="#">여행지</a>
+					<ul class="drop_menu">
+						<li><a href="#">관광지</a></li>					
+						<li><a href="#">포토스팟</a></li>					
+						<li><a href="#">차박스팟</a></li>					
+					</ul>
+				</li>
 				<li><a href="#">스토어</a></li>
-				<li><a href="#">커뮤니티</a></li>
+				<li><a href="#">커뮤니티</a>
+					<ul class="drop_menu">
+						<li><a href="#">자유게시판</a></li>					
+						<li><a href="#">요청게시판</a></li>					
+					</ul>
+				</li>
 			</ul>
 		</div>
 	</div>
@@ -71,13 +92,74 @@
 	</a>
 	</div>
 	<!-- carousel 종료-->
-	 
-	 
-	 
-	 
+	
+	<div class="content">
+	 	<section class="rest_zone">
+	 		<div class="welcome">
+	 			<span>WELCOME</span><br>
+	 			<span>TO</span><br>
+	 			<span>JEJU</span>
+	 		</div>
+	 		<div class="rest_pic">
+	 			<div class="figure"></div>
+	 			<img src="http://localhost:9000/myjeju/images/index/airbnb2.jpg">
+	 		</div>
+	 		<div class="rest_infor">
+	 			<p>
+	 				자연의 섬,<br>
+					제주도에서 휴식을 즐기세요!
+				</p>	
+				<div></div>
+				<p>	
+					다양한 숙소를 검색하고,<br>
+					예약까지 한번에 할 수 있어요.<br>
+					지금 예약하세요!
+	 			</p>
+	 			<button type="button" class="btn_style" id="reserve_btn" onclick="location.href='#'">예약하기</button>
+	 		</div>
+	 	</section>
+	 	<section class="travel_zone">
+	 		<div class="travel_infor">
+	 			<p>
+	 				제주도의 포토스팟
+				</p>	
+				<div></div>
+				<p>	
+					인기 관광지와<br>
+					포토스팟, 차박스팟을<br> 
+					직접 경험해보세요!<br>
+					좋은 추억을 선사합니다.
+	 			</p>
+	 			<button type="button" class="btn_style2" id="more_btn" onclick="location.href='#'" style="width:110px">자세히보기</button>
+	 		</div>
+	 		<div class="travel_pic">
+	 			<a href="#"><img src="http://localhost:9000/myjeju/images/index/photospot3.jpg" class="photospot"></a>
+	 		</div>
+	 	</section>
+	 	<section class="other_zone">
+	 		<div class="other_pic">
+	 			<img src="http://localhost:9000/myjeju/images/index/food1.jpg">
+	 		</div>
+	 		<div class="other_pic">
+	 			<img src="http://localhost:9000/myjeju/images/index/food7.jpg">
+	 		</div>
+	 		<div class="other_pic">
+	 			<img src="http://localhost:9000/myjeju/images/index/car4.jpg">
+	 		</div>
+	 		<div class="other_pic">
+	 			<img src="http://localhost:9000/myjeju/images/index/goods1.jpg">
+	 		</div>
+	 		<div class="other_infor">
+	 			<p>	
+					제주도의 모든 것
+	 			</p>
+	 			<p>	
+					다양한 맛집, 굿즈 그리고 사람들의 실시간 후기를 확인해보세요!
+	 			</p>
+	 		</div>
+	 	</section>
+	 </div>
 	<!-- footer -->
-	<footer>
-		
-	</footer>
+	<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>
