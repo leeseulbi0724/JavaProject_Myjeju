@@ -1,0 +1,232 @@
+div.recommend_house{
+	width:1100px;
+	height:470px;
+	margin:auto;	
+}
+div.recommend_title{
+	width:1100px;
+	height:40px;
+	margin:auto;
+	text-align:center;
+	line-height:40px;
+	font-size:20px;
+	text-decoration:underline;
+	text-decoration-color:#4fa9de;
+}
+div.recommend_title2{
+	width:1000px;
+	height:40px;
+	margin:auto;
+	text-align:left;
+	line-height:40px;
+	font-weight:900;
+}
+div.recommend_content{
+	width:1000px;
+	height:400px;
+	margin:auto;
+	/*border:1px solid green;*/
+	margin-top:10px;
+}
+div.img1,div.img2,div.img3{
+	display:inline-block;
+}
+div.img1{
+	margin-right:11px;
+}
+div.img2{
+	margin-right:11px;
+}
+
+div.img1 img, div.img2 img, div.img3 img{
+	width: auto; height: auto;
+    max-width:320px;
+    max-height:320px;
+    border-radius:10px;
+}
+div.img_title1{
+	width:320px;
+	height:40px;
+	line-height:40px;
+	font-size:15px;
+	text-align:center;
+	font-weight:900;
+}
+
+div.img1_text{
+	width:320px;
+	height:40px;
+	/* border:1px solid blue;  */
+	font-weight:900;
+	font-size:16px;
+}
+div.heart{
+	width:13px;
+    height:13px;
+    background: rgb(246,246,246);
+    position: relative;
+    transform: rotate(45deg);
+    line-height:13px;
+    margin-right:10px;
+    display:inline-block;
+}
+.heart::before {
+    content: "";
+    width: 13px;
+    height: 13px;
+    position: absolute;
+    left: -50%;
+    border-radius: 50%;
+    background:  rgb(246,246,246);
+ }
+ .heart::after {
+    content: "";
+    width: 13px;
+    height: 13px;
+    position: absolute;
+    top: -45%;
+    left:-5%;
+    border-radius: 50%;
+    background:  rgb(246,246,246);
+}
+
+div.img1_text button{
+	float:left;
+	border:1px solid #4fa9de;
+	background-color:#4fa9de;
+	font-size:18px;
+	line-height:40px;
+	border-radius:10px;
+	padding:0px 20px;
+	color:white;
+}
+div.img_text2{
+	width:100px;
+	height:40px;
+	/* border:1px solid red; */
+	display:inline-block;
+	margin-left:15px;
+}
+div.star_text{
+	font-size:17px;
+	display:inline-block;
+	font-weight:900;
+	line-height:40px;
+	margin-left:10px;
+	/* border:1px solid red; */
+}
+div.star-rating { 
+	width:125px;
+	/* border:1px solid violet; */
+	vertical-align:middle;
+	
+}
+div.star-rating,.star-rating span { 
+	display:inline-block; 
+	height:25px; 
+	overflow:hidden; 
+	background:url('http://localhost:9000/myjeju/images/star3.png');
+	
+}
+div.star-rating span{ 
+	background-position:left bottom; 
+	line-height:0; 
+	vertical-align:top; 
+}
+div.score{
+	display:inline-block;
+	font-size:17px;
+	font-weight:900;
+	height:25px;
+	line-height:25px;
+	vertical-align:middle;
+}
+div.detail_text{
+	display:inline-block;
+	border:2px solid #4fa9de;
+	height:40px;
+	line-height:30px;
+	margin-left:10px;
+	border-radius:10px;
+	padding:0px 9px;
+}
+div.find_accomodation{
+	width:1000px;
+	height:500px;
+	margin:auto;
+	/* border:1px solid blue; */
+}
+div.find_title{
+	width:1000px;
+	height:40px;
+	margin:auto;
+	text-align:left;
+	line-height:40px;
+	font-weight:900;
+	margin-bottom:20px;
+}
+
+/* 카카오 지도 API css*/
+.map_wrap, .map_wrap * {margin:0; padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
+.map_wrap {position:relative;width:100%;height:500px; border-radius:10px;}
+#category {
+	position:absolute;
+	top:10px;
+	left:10px;
+	border-radius: 5px; 
+	border:1px solid #909090;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);
+	background: #fff;
+	overflow: hidden;
+	z-index: 2;
+	
+}
+#category li {
+	float:left;
+	list-style: none;
+	width:50px;px;
+	border-right:1px solid #acacac;
+	padding:6px 0;
+	text-align: center; 
+	cursor: pointer;
+	
+}
+#category li.on {background: #eee;}
+#category li:hover {background: #ffe6e6;border-left:1px solid #acacac;margin-left: -1px;}
+#category li:last-child{margin-right:0;border-right:0;}
+#category li span {display: block;margin:0 auto 3px;width:27px;height: 28px;}
+#category li .category_bg {background:url('http://localhost:9000/myjeju/images/blue_marker2.png') no-repeat;}
+#category li .hotel {background-position: -1px -1px;}
+#category li .restaurant {background-position: -1px -1px;}
+#category li .cafe {background-position: -1px -1px;}
+#category li .attraction {background-position: -1px -1px;}
+#category li .culture {background-position: -1px -1px;}
+#category li.on .category_bg {background-position-x:-46px;}
+.placeinfo_wrap {position:absolute;bottom:28px;left:-150px;width:300px;}
+.placeinfo {position:relative;width:100%;border-radius:6px;border: 1px solid #ccc;border-bottom:2px solid #ddd;padding-bottom: 10px;background: #fff;}
+.placeinfo:nth-of-type(n) {border:0; box-shadow:0px 1px 2px #888;}
+.placeinfo_wrap .after {content:'';position:relative;margin-left:-12px;left:50%;width:22px;height:12px;background:url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
+.placeinfo a, .placeinfo a:hover, .placeinfo a:active{color:#fff;text-decoration: none;}
+.placeinfo a, .placeinfo span {display: block;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
+.placeinfo span {margin:5px 5px 0 5px;cursor: default;font-size:13px;}
+.placeinfo .title {font-weight: bold; font-size:14px;border-radius: 6px 6px 0 0;margin: -1px -1px 0 -1px;padding:10px; color: #fff;background: #4fa9de; background: #4fa9de url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/arrow_white.png) no-repeat right 14px center;}
+.placeinfo .tel {color:#0f7833;}
+.placeinfo .jibun {color:#999;font-size:11px;margin-top:0;}
+
+/** 숙소 리스트 **/
+div.accomodation_list{
+	width:1000px;
+	height:500px;
+	margin:auto;
+	border:1px solid blue;
+	margin-top:80px;
+	margin-bottom:50px;	
+}
+div.accomodation_list_title{
+	width:1000px;
+	height:40px;
+	margin:auto;
+	text-align:left;
+	line-height:40px;
+	font-weight:900;
+}
