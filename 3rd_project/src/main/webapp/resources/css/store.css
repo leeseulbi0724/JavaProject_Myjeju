@@ -1,0 +1,120 @@
+@charset "UTF-8";
+/*
+* 1. store_main
+* 2. store_eat
+* 3.
+*/
+
+
+
+/******* STORE_MAIN ********/
+
+	.store_main {
+		width : 1100px;
+		margin : auto;
+		/* border : 1px solid red; */
+		margin-top : 50px;
+	}
+	
+	
+	.store_category_eat, .store_category_deco, .store_category_etc {
+		display : inline-block;
+		text-align : center;
+		font-size : 30px;
+		font-weight : 500;
+		margin-bottom : 20px;
+		/* border : 1px solid red; */
+		border-bottom : 2px solid #4fa9de;
+	}
+	
+	.storeeat, .storedeco, .storeetc {
+		width : 1100px;
+		margin : auto;
+		/* border : 1px solid red; */
+		margin-top : 50px;
+		text-align : center;
+	}
+	
+	.store_category>a {
+		/* border : 1px solid red; */
+		color : #444;
+	}
+	
+	.store_category>a>span {
+		border : 1px solid gray;
+		display : inline-block;
+		font-size : 20px;
+		font-weight : 400;
+		width : 150px;
+		height : 30px;
+		vertical-align : middle;
+		margin : 0 -7px 50px 0;
+	}
+	
+	.store_category>a:nth-child(2)>span, .store_category>a:nth-child(3)>span, .store_category>a:nth-child(4)>span {
+		border-left : none;
+	}
+	
+	
+	
+	/* STORE - MAIN */
+	.store_best, .store_eat, .store_deco, .store_etc {
+		/* border : 1px solid yellow; */
+		height : auto;
+		margin : 10px 0;
+	}
+	
+	.store_best>div, .store_eat>div, .store_deco>div, .store_etc>div {
+		/* border : 1px solid black; */
+	}
+	
+	.store_best>div>div, .store_eat>div>div, .store_deco>div>div, .store_etc>div>div {
+		/* border : 1px solid blue; */
+		display : inline-block;
+		font-size : 30px;
+		font-weight : 500;
+		
+	}
+	
+	.store_eat>div>a, .store_deco>div>a, .store_etc>div>a {
+		float : right;
+		color : #4d4d4d;
+		font-size : 18px;
+		margin : 3px 10px 0 0;
+		text-decoration : none;
+		
+	}
+	
+	/* 이미지 */
+	.store_best_image, .store_eat_image, .store_deco_image, .store_etc_image {
+		/* border : 1px solid green; */
+		margin-bottom : 30px;
+		text-align : center;
+	}
+	
+	.store_best_image>article>a, .store_eat_image>article>a, .store_deco_image>article>a, .store_etc_image>article>a {
+		text-decoration : none;
+		color : #4d4d4d;
+		border : 1px solid #4d4d4d;
+		border-radius : 8px;
+		display : inline-block;
+		margin : 20px 30px;
+		width : auto;
+		text-align : left;
+
+	}
+	
+	.store_best_image img, .store_eat_image img, .store_deco_image img, .store_etc_image img {
+		/* border : 1px solid red; */
+		padding : 5px;
+		/* border-radius : 8px; */
+	}
+	
+	.store_best_image p, .store_eat_image p, .store_deco_image p, .store_etc_image p {
+		/* border : 1px solid red; */
+		margin : 3px 0;
+		font-weight : 600;
+	}
+	
+	
+	
