@@ -19,9 +19,9 @@
 		</div>
 		<div class="menu_tap">
 			<ul class="menu_list">
-				<li><a href="#">숙소</a>
+				<li><a href="http://localhost:9000/myjeju/accomodation.do">숙소</a>
 					<ul class="drop_menu">
-						<li><a href="#">호텔</a></li>					
+						<li><a href="http://localhost:9000/myjeju/accomodation.do">호텔</a></li>					
 						<li><a href="#">에어비앤비</a></li>					
 					</ul>
 				</li>
@@ -31,18 +31,18 @@
 						<li><a href="#">카페</a></li>					
 					</ul>
 				</li>
-				<li><a href="#">여행지</a>
+				<li><a href="http://localhost:9000/myjeju/travel.do">여행지</a>
 					<ul class="drop_menu">
-						<li><a href="#">관광지</a></li>					
-						<li><a href="#">포토스팟</a></li>					
-						<li><a href="#">차박스팟</a></li>					
+						<li><a href="http://localhost:9000/myjeju/travel.do">관광지</a></li>					
+						<li><a href="http://localhost:9000/myjeju/photo_spot.do">포토스팟</a></li>					
+						<li><a href="http://localhost:9000/myjeju/car_spot.do">차박스팟</a></li>					
 					</ul>
 				</li>
-				<li><a href="#">스토어</a></li>
-				<li><a href="#">커뮤니티</a>
+				<li><a href="http://localhost:9000/myjeju/store.do">스토어</a></li>
+				<li><a href="http://localhost:9000/myjeju/free_board.do">커뮤니티</a>
 					<ul class="drop_menu">
-						<li><a href="#">자유게시판</a></li>					
-						<li><a href="#">요청게시판</a></li>					
+						<li><a href="http://localhost:9000/myjeju/free_board.do">자유게시판</a></li>					
+						<li><a href="http://localhost:9000/myjeju/request_board.do">요청게시판</a></li>					
 					</ul>
 				</li>
 			</ul>

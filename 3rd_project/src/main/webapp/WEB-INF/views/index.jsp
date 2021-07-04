@@ -13,6 +13,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <body>
+	<!-- header -->
 	<div class="main_header">
 		<div class="tap">
 			<nav>
@@ -25,7 +26,7 @@
 		</div>
 		<div class="menu_tap">
 			<ul class="menu_list">
-				<li><a href="#">숙소</a>
+				<li><a href="http://localhost:9000/myjeju/accomodation.do">숙소</a>
 					<ul class="drop_menu">
 						<li><a href="http://localhost:9000/myjeju/accomodation.do">호텔</a></li>					
 						<li><a href="#">에어비앤비</a></li>					
@@ -37,18 +38,18 @@
 						<li><a href="#">카페</a></li>					
 					</ul>
 				</li>
-				<li><a href="#">여행지</a>
+				<li><a href="http://localhost:9000/myjeju/travel.do">여행지</a>
 					<ul class="drop_menu">
-						<li><a href="#">관광지</a></li>					
-						<li><a href="#">포토스팟</a></li>					
-						<li><a href="#">차박스팟</a></li>					
+						<li><a href="http://localhost:9000/myjeju/travel.do">관광지</a></li>					
+						<li><a href="http://localhost:9000/myjeju/photo_spot.do">포토스팟</a></li>					
+						<li><a href="http://localhost:9000/myjeju/car_spot.do">차박스팟</a></li>					
 					</ul>
 				</li>
-				<li><a href="#">스토어</a></li>
-				<li><a href="#">커뮤니티</a>
+				<li><a href="http://localhost:9000/myjeju/store.do">스토어</a></li>
+				<li><a href="http://localhost:9000/myjeju/free_board.do">커뮤니티</a>
 					<ul class="drop_menu">
-						<li><a href="#">자유게시판</a></li>					
-						<li><a href="#">요청게시판</a></li>					
+						<li><a href="http://localhost:9000/myjeju/free_board.do">자유게시판</a></li>					
+						<li><a href="http://localhost:9000/myjeju/request_board.do">요청게시판</a></li>					
 					</ul>
 				</li>
 			</ul>
@@ -93,7 +94,7 @@
 	</div>
 	<!-- carousel 종료-->
 	
-	<div class="content">
+	<div class="index_content">
 	 	<section class="rest_zone">
 	 		<div class="welcome">
 	 			<span>WELCOME</span><br>
@@ -115,7 +116,7 @@
 					예약까지 한번에 할 수 있어요.<br>
 					지금 예약하세요!
 	 			</p>
-	 			<button type="button" class="btn_style" id="reserve_btn" onclick="location.href='#'">예약하기</button>
+	 			<button type="button" class="btn_style" id="reserve_btn" onclick="location.href='http://localhost:9000/myjeju/accomodation.do'">예약하기</button>
 	 		</div>
 	 	</section>
 	 	<section class="travel_zone">
@@ -151,15 +152,20 @@
 	 		</div>
 	 		<div class="other_infor">
 	 			<p>	
-					제주도의 모든 것
+					제주도의 모든 것,<br> 
+					<span>'MY JEJU ISLAND'</span> 에서 확인하세요!
 	 			</p>
+	 			<div></div>
 	 			<p>	
-					다양한 맛집, 굿즈 그리고 사람들의 실시간 후기를 확인해보세요!
+					다양한 맛집, 제주도만의 특별한 굿즈,<br>
+					그리고 사람들의 실시간 후기를 지금 바로 확인해보세요!
 	 			</p>
 	 		</div>
 	 	</section>
 	 </div>
+	 
 	<!-- footer -->
 	<jsp:include page="footer.jsp"></jsp:include>
+	
 </body>
 </html>

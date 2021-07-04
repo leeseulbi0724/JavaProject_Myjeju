@@ -141,8 +141,8 @@ ul.drop_menu{
 }
 ul.menu_list>li:hover ul.drop_menu{
 	display:block;
-	padding-top:20px;
-	margin-left:30px;
+	padding-top:30px;
+	/* margin-left:30px; */
 }
 header ul.drop_menu a{
 	text-decoration:none;
@@ -169,7 +169,7 @@ div.carousel-inner img{
 	position:relative;
 	z-index:1;
 }
-div.content{
+div.index_content{
 	width:1400px;
 	margin:200px auto;
 }
@@ -185,7 +185,7 @@ div.welcome span{
 	font-size:150px;
 	font-weight:bold;
 	color:#4fa9de;
-position: relative;
+	position: relative;
 }
 div.welcome span:after{
   content: "";
@@ -318,6 +318,9 @@ div.other_pic>img:hover{
 }
 
 div.other_infor{
+	border:10px solid #4fa9de;
+	width:1200px;
+	margin:auto;
 	margin-top:100px;
 	padding:50px 0;
 }
@@ -326,12 +329,25 @@ div.other_infor>p:first-child{
 	font-weight:bold;
 	margin-bottom:60px;
 }
-div.other_infor>p:nth-child(2){
+div.other_infor>p:first-child>span{
+	font-size:45px;
+	font-weight:bold;
+	color:#4fa9de;
+}
+div.other_infor>div{
+	width:25px;
+	height:2px;
+	background-color:gray;	
+	margin:auto;
+}
+div.other_infor>p:nth-child(3){
 	font-size:18px;
 	font-weight:bold;
 	color:#5b5b5b;
 	line-height:40px;
+	margin-top:30px;
 }
+
 
 /**
 *	footer
@@ -340,6 +356,7 @@ footer{
 	width:100%;
 	height:150px;
 	background-color:#4fa9de;
+	margin-top:150px;
 }
 footer>div:nth-child(2){
 	border-bottom:1px solid white;
@@ -364,7 +381,7 @@ footer>div:last-child{
 }
 footer>div:last-child>div{
 	display:inline-block;
-	padding:20px 0 20px 0;
+	padding:20px 0;
 }
 footer>div:last-child span:first-child{
 	color:white;
