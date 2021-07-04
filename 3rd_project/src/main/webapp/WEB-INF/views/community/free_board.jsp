@@ -25,7 +25,7 @@
 			<input type="text" class="form-control" id="search_input">
 			<a class="btn btn-outline-secondary" id="search" >검색</a>			
 		</div>
-		<table class="table " >
+		<table class="table" >
 			<thead>
 				<tr>
 					<th>번호</th>

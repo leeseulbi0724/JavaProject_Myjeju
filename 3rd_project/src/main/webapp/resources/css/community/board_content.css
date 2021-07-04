@@ -21,8 +21,6 @@
 	.comment_box ul { list-style:none; display:inline-block; }
 	.comment_box ul li { display:inline-block; }
 	
-	table tr:first-child { border-top:1px solid; }
-	table tr:last-child { border-bottom:1px solid lightgray; }
 	table th { text-align:left; }
 	
 	#con_textarea { background-color:white; border:none; font-size:14px; }	

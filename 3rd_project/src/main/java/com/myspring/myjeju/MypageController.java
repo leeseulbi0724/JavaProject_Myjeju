@@ -46,4 +46,12 @@ public class MypageController {
 	public String myinfo_out() {
 		return "mypage/myinfo/myinfo_out";
 	}
+	
+	/**
+	 * 주문내역
+	 */
+	@RequestMapping(value = "/myorder.do", method=RequestMethod.GET)
+	public String myorder() {
+		return "mypage/mystore/myorder";
+	}
 }

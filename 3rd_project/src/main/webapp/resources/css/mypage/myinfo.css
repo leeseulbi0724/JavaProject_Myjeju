@@ -16,7 +16,7 @@
 	
 	.table { border-top:1px solid; font-size:14px; margin-left:20px; }
 	.table th { font-weight:normal; text-align:left; }
-	.table th a { padding:1px 10px; font-size:14px; }
+	.table th a, .table th button { padding:1px 10px; font-size:14px; }
 	.table th:first-child {
 		 font-weight:normal; 
 		 width:150px; 

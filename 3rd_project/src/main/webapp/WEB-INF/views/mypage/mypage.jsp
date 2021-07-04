@@ -5,8 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" ></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" >
 <link rel="stylesheet" href="http://localhost:9000/myjeju/css/index.css">
 <style>
 	body { background-color:rgb(248,249,251); text-align:center; }
@@ -47,7 +47,7 @@
 	.center1>div>div, .center2>div>div, .center3>div>div { margin-left:40px; }
 	.center1 div a, .center2 div a, .center3 div a { text-decoration:none; color:gray; font-size:15px; }
 	.center1 div a:first-child, .center1 div a:nth-child(2), .center2 div a:first-child,
-	.center3 div a:first-child { 
+	.center3 div a:first-child, .center3 div a:nth-child(2) { 
 		border-right:1px solid; padding-right:10px; padding-left:5px; 
 	}
 	.center1 div a:hover, .center2 div a:hover, .center3 div a:hover { text-decoration:underline; }
@@ -79,16 +79,17 @@
 			<p>스토어</p>
 			<div>
 				<a href="#">장바구니</a>
-				<a href="#">주문내역</a>
+				<a href="myorder.do">주문내역</a>
 			</div>
 		</div>
 	</div>
 	<div class="center3">
 		<div>
-			<p>My이력</p>
+			<p>My 이력</p>
 			<div>
-				<a href="#">My게시글</a>
-				<a href="#">My좋아요</a>
+				<a href="#">My 게시글</a>
+				<a href="#">My 후기</a>
+				<a href="#">My 좋아요</a>
 			</div>
 		</div>
 	</div>

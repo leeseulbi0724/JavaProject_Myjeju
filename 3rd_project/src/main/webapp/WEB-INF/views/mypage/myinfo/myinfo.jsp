@@ -9,6 +9,19 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="http://localhost:9000/myjeju/css/index.css">
 <link rel="stylesheet" href="http://localhost:9000/myjeju/css/mypage/myinfo.css">
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+function addr() {
+	daum.postcode.load(function() {
+		new daum.Postcode({
+			oncomplete:function(data) {
+				
+			}
+		}).open();
+	});	
+}
+
+</script>
 </head>
 <body>
 <jsp:include page="../../header.jsp"></jsp:include> 
@@ -61,7 +74,7 @@
 			<th>
 				<input type="text" class="form-control addr" value="경기도 수원시 영통구 매탄동">
 				<input type="text" class="form-control addr" value="-">
-				<a class="btn btn-outline-dark" >주소 검색</a>
+				<button class="btn btn-outline-dark"  onclick="addr()" >주소 검색</button>
 			</th>
 		</tr>
 	</table>
