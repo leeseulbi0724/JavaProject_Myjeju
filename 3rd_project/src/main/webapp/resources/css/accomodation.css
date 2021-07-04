@@ -20,6 +20,8 @@ div.recommend_title2{
 	text-align:left;
 	line-height:40px;
 	font-weight:900;
+	text-decoration:underline;
+	text-decoration-color:#4fa9de;
 }
 div.recommend_content{
 	width:1000px;
@@ -164,6 +166,8 @@ div.find_title{
 	line-height:40px;
 	font-weight:900;
 	margin-bottom:20px;
+	text-decoration:underline;
+	text-decoration-color:#4fa9de;
 }
 
 /* 카카오 지도 API css*/
@@ -218,7 +222,7 @@ div.accomodation_list{
 	width:1000px;
 	height:500px;
 	margin:auto;
-	border:1px solid blue;
+	/* border:1px solid blue; */
 	margin-top:80px;
 	margin-bottom:50px;	
 }
@@ -229,4 +233,41 @@ div.accomodation_list_title{
 	text-align:left;
 	line-height:40px;
 	font-weight:900;
+	text-decoration:underline;
+	text-decoration-color:#4fa9de;
+}
+div.buttontext{
+	display:inline-block;
+	float:right;
+	margin-bottom:20px;
+}
+div.buttontext input{
+	border:2px solid #4fa9de;
+	height:19px;
+}
+div.buttontext button{
+	border:1px solid #4fa9de;
+	background-color:#4fa9de;
+	color:white;
+	font-weight:900;
+	font-size:14px;
+	padding:2px 10px;
+}
+
+div.accomodation_list table{
+	border-collapse:collapse;
+	margin-top:20px;
+	width:1000px;
+	border:2px solid #4fa9de;
+}
+div.accomodation_list table th{
+	padding:3px;
+	background-color:#4fa9de;
+	color:white;
+}
+div.accomodation_list table td{
+	text-align:center;
+	padding:5px;
+	font-weight:900;
+	border:2px solid #4fa9de;
 }

@@ -288,6 +288,126 @@ function changeCategoryClass(el) {
 </div>
 <div class="accomodation_list">
 	<div class="accomodation_list_title">숙소리스트</div>
+	<div class="buttontext">
+	<input type="text">
+	<button type="button">검색</button>
+	</div>
+	
+	<table border="1">
+		<tr>
+			<th>NO</th>
+			<th>등급</th>
+			<th>숙소명</th>
+			<th>객실수</th>
+			<th>소재지</th>
+			<th>홈페이지 주소</th>
+			<th>총지배인</th>
+			<th>전화번호</th>
+		</tr>
+		<tr>
+			<td>1</td>
+			<td>특1</td>
+			<td>(주)호텔신라 제주신라</td>
+			<td>429</td>
+			<td>서귀포시 색달동 </td>
+			<td>www.shilla.net</td>
+			<td>김영윤</td>
+			<td>736-4466</td>
+		</tr>
+		<tr>
+			<td>2</td>
+			<td>특1</td>
+			<td>롯데호텔 제주</td>
+			<td>500</td>
+			<td>서귀포시 색달동</td>
+			<td>www.lottehotel.co.kr</td>
+			<td>김승웅</td>
+			<td>731-1000</td>
+		</tr>
+		<tr>
+			<td>3</td>
+			<td>특1</td>
+			<td>하얏트리젠시 제주</td>
+			<td>224</td>
+			<td>서귀포시 색달동</td>
+			<td>www.hyattjeju.com</td>
+			<td>에드리안 스레이터</td>
+			<td>733-1234</td>
+		</tr>
+		<tr>
+			<td>4</td>
+			<td>특1</td>
+			<td>스위트호텔 제주</td>
+			<td>90</td>
+			<td>서귀포시 색달동</td>
+			<td>www.suites.co.kr</td>
+			<td>손현종</td>
+			<td>738-3800</td>
+		</tr>
+		<tr>
+			<td>5</td>
+			<td>특1</td>
+			<td>파라다이스호텔 제주</td>
+			<td>56</td>
+			<td>서귀포시 토평동</td>
+			<td>www.jeju.paradisehotel.co.kr</td>
+			<td>한상완</td>
+			<td>763-2100</td>
+		</tr>
+		<tr>
+			<td>6</td>
+			<td>특1</td>
+			<td>제주그랜드 호텔</td>
+			<td>512</td>
+			<td>제주시 연동동</td>
+			<td>www.oraresort.com</td>
+			<td>이병선</td>
+			<td>747-5000</td>
+		</tr>
+		<tr>
+			<td>7</td>
+			<td>특1</td>
+			<td>제주오리엔탈 호텔</td>
+			<td>313</td>
+			<td>제주시 삼도2동</td>
+			<td>www.oriental.co.kr</td>
+			<td>송재정</td>
+			<td>756-5552</td>
+		</tr>
+		<tr>
+			<td>8</td>
+			<td>특1</td>
+			<td>제주 KAL호텔</td>
+			<td>282</td>
+			<td>제주시 이도1동</td>
+			<td>www.kalhotel.co.kr</td>
+			<td>홍성균</td>
+			<td>724-2001</td>
+		</tr>
+		<tr>
+			<td>9</td>
+			<td>특1</td>
+			<td>크라운프라자호텔 제주</td>
+			<td>224</td>
+			<td>제주시 연동</td>
+			<td>www.crowneplaza.co.kr</td>
+			<td>이종화</td>
+			<td>741-8000</td>
+		</tr>
+		<tr>
+			<td>10</td>
+			<td>특1</td>
+			<td>제주퍼시픽호텔</td>
+			<td>177</td>
+			<td>제주시 용담1동</td>
+			<td>www.jejupacific.co.kr</td>
+			<td>차삼식</td>
+			<td>758-2500</td>
+		</tr>
+		
+		
+	</table>
+	
 	
 </div>
 	<!-- footer -->
