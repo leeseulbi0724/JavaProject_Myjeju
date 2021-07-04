@@ -48,4 +48,13 @@ public class StoreController {
 		return "store/store_content";
 	}
 
+	/**
+	 * store_buy.do : 스토어 구매 화면
+	 */
+	@RequestMapping(value = "/store_buy.do", method = RequestMethod.GET)
+	public String store_buy() {
+		return "store/storebuy";
+	}
+	
+	
 }

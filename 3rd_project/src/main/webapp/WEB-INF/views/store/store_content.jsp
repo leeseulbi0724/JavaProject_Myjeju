@@ -283,12 +283,12 @@
 						<div class = "option-box">
 							<div>수량　　<input type = "number" min = "0" max = "10"></div>
 							<span>옵션</span>
-							<select name = "hp1" id = "hp1">
+							<select name = "taste" id = "taste">
 								<option value = "choice">선택</option>
-								<option value = "010">기본</option>
-								<option value = "011">소금맛</option>
-								<option value = "016">설탕맛</option>
-								<option value = "017">허니버터맛</option>
+								<option value = "basic">기본</option>
+								<option value = "salt">소금맛</option>
+								<option value = "sugar">설탕맛</option>
+								<option value = "honeybutter">허니버터맛</option>
 							</select>
 						</div>
 						
