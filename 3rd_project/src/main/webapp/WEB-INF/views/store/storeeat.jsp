@@ -29,7 +29,7 @@
 		</div>
 		
 	
-		<div class = "store_category_eat">식품</div>
+		<div class = "store_category_logo">식품</div>
 	
 		<div class = "store_eat_image">
 				<article>

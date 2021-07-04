@@ -29,7 +29,7 @@
 		</div>
 		
 	
-		<div class = "store_category_deco">실내품</div>
+		<div class = "store_category_logo">실내품</div>
 	
 		<div class = "store_deco_image">
 				<article>

@@ -28,7 +28,7 @@
 		</div>
 		
 	
-		<div class = "store_category_etc">잡화</div>
+		<div class = "store_category_logo">잡화</div>
 	
 		<div class = "store_etc_image">
 				<article>

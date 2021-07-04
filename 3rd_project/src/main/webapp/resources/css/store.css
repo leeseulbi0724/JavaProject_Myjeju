@@ -2,27 +2,32 @@
 /*
 * 1. store_main
 * 2. store_eat
-* 3.
+* 3. store_content
 */
 
 
 
 /******* STORE_MAIN ********/
-
+	/* body {
+		background-color : rgb(248,249,251);
+	} */
+	
 	.store_main {
 		width : 1100px;
 		margin : auto;
+		/* background-color : white; */
 		/* border : 1px solid red; */
+		/* border:1px solid lightgray;  */
 		margin-top : 50px;
 	}
 	
 	
-	.store_category_eat, .store_category_deco, .store_category_etc {
+	.store_category_logo {
 		display : inline-block;
 		text-align : center;
 		font-size : 30px;
 		font-weight : 500;
-		margin-bottom : 20px;
+		margin-bottom : 30px;
 		/* border : 1px solid red; */
 		border-bottom : 2px solid #4fa9de;
 	}
