@@ -28,33 +28,44 @@
 	
 	<jsp:include page="../header.jsp"></jsp:include>
 		<div style="text-align:center; width:1200px; height: 50px; margin:65px auto; margin-bottom:80px;" >
-		<h3>로그인</h3>
+		<h3>비밀번호찾기</h3>
 		</div>
 		<div class="container" style="margin: 50px auto;">
 			<form method="post" action="./userLogin" style="margin-bottom:150px;">
 				<table class="table table-bordered table-hover" style="text-align: center; border: 1px solid #dddddd">
 					<tbody>
 						<tr>
-							<th style="width: 110px;"><h5>아이디</h5></th>
-							<td><input class="form-control" type="text" name="userID" maxlength="20" placeholder="아이디를 입력하세요."></td>
+							<td style="width: 110px;"><h5>아이디</h5></td>
+							<td><input class="form-control" type="text" id="userID" name="userID" maxlength="20" placeholder="아이디를 입력하세요."></td>
 						</tr>
 						<tr>
-							<th style="width: 110px;"><h5>비밀번호</h5></th>
-							<td><input class="form-control" type="password" name="userPassword" maxlength="20" placeholder="비밀번호를 입력하세요."></td>
+							<td style="width: 110px;"><h5>이름</h5></td>
+							<td colspan="2"><input class="form-control" id="userName" type="text"  name="userName" maxlength="20" placeholder="이름를 입력하세요."></td>
 						</tr>
 						<tr>
-							<td style="text-align : left" colspan="2">
-							<label>아이디저장</label>
-							<input type="checkbox" name="idsave" value ="true" style="margin-right: 20px;">
-							<label>자동로그인</label>
-							<input type="checkbox" name="loginck" value ="true">
-							<input class="btn btn-primary pull-right" type="submit" value="로그인" style="background-color:#4fa9de; border-color:#4fa9de;">
+							<td style="width: 110px;"><h5>이메일</h5></td>
+							<td colspan="2">
+							<input class="form-control pull-left" id="userEmail1" type="email" name="userEmail1" maxlength="20" placeholder="이메일을 입력하세요." style="width:42%;">
+							<span class="pull-left" style="background-color: rgba(0,0,0,0); font-color:black; font-size: 17px; margin: 4px 10px;">@</span>
+							<input class="form-control pull-left" id="userEmail2" type="email" name="userEmail2" maxlength="20" placeholder="이메일주소을 입력하세요." style="width:42%;">
+							<div class="dropdown pull-left" style="width:10%; margin-left:10px;">
+							  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="width:100%;">
+							    <span id="choosevalue">선택</span>
+							    <span class="caret"></span>
+							  </button>
+							  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+							    <li><a href="#">naver.com</a></li>
+							    <li><a href="#">gmail.com</a></li>
+							    <li><a href="#">daum.net</a></li>
+							    <li role="separator" class="divider"></li>
+							    <li><a href="#">직접입력</a></li>
+							  </ul>
+							</div>
 							</td>
 						</tr>
 						<tr>
 							<td style="text-align : left" colspan="2">
-							<input class="btn btn-primary pull-right" type="submit" value="비밀번호찾기" style="background-color:#4fa9de; border-color:#4fa9de;">
-							<input class="btn btn-primary pull-right" type="submit" value="아이디찾기"  style="margin-right: 10px; background-color:#4fa9de; border-color:#4fa9de;">
+							<input class="btn btn-primary pull-right" type="submit" value="비밀번호찾기"  style="margin-right: 10px; background-color:#4fa9de; border-color:#4fa9de;">
 							</td>
 						</tr>
 					</tbody>
