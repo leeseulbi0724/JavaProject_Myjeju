@@ -27,7 +27,7 @@
 			<ul class="menu_list">
 				<li><a href="#">숙소</a>
 					<ul class="drop_menu">
-						<li><a href="#">호텔</a></li>					
+						<li><a href="http://localhost:9000/myjeju/accomodation.do">호텔</a></li>					
 						<li><a href="#">에어비앤비</a></li>					
 					</ul>
 				</li>
