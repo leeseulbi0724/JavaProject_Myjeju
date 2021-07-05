@@ -32,10 +32,10 @@
 						<li><a href="#">에어비앤비</a></li>					
 					</ul>
 				</li>
-				<li><a href="#">맛집</a>
+				<li><a href="http://localhost:9000/myjeju/food.do">맛집</a>
 					<ul class="drop_menu">
-						<li><a href="#">음식점</a></li>					
-						<li><a href="#">카페</a></li>					
+						<li><a href="http://localhost:9000/myjeju/food.do">음식점</a></li>					
+						<li><a href="http://localhost:9000/myjeju/cafe.do">카페</a></li>					
 					</ul>
 				</li>
 				<li><a href="http://localhost:9000/myjeju/travel.do">여행지</a>

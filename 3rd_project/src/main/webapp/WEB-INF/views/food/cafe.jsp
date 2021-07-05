@@ -5,10 +5,9 @@
 <head>
 <meta charset="UTF-8">
 	<link rel="shortcut icon" type="image⁄x-icon" href="http://localhost:9000/myjeju/images/index/icon.png">
-	<title>차박스팟 | JEJU ISLAND</title>
+	<title>카페 | JEJU ISLAND</title>
 	<link rel="stylesheet" href="http://localhost:9000/myjeju/css/index.css">
 	<link rel="stylesheet" href="http://localhost:9000/myjeju/css/travel/travel.css">
-	<link rel="stylesheet" href="http://localhost:9000/myjeju/css/travel/car_spot.css">
 	<script src="http://localhost:9000/myjeju/js/jquery-3.6.0.min.js"></script>
 </head>
 <body>
@@ -17,9 +16,9 @@
 	
 	<!-- content -->
 	<div class="travel_content">
-		<h3>차박스팟</h3>
+		<h3>카페</h3>
 		<section class="recommend_zone">
-			<div class="travel_title">추천 차박스팟</div>
+			<div class="travel_title">추천 카페</div>
 			<div class="travel_spot">
 				<article class="travel_spot1">
 					<img src="http://localhost:9000/myjeju/images/travel/한라산.jpg">
@@ -51,16 +50,16 @@
 			</div>
 		</section>
 		<section class="map_zone">
-			<div class="travel_title">차박스팟 찾기</div>
+			<div class="food_title">카페 찾기</div>
 			
 		</section>
 		<section class="list_zone">
-			<div class="travel_title">차박스팟 리스트</div>
+			<div class="food_title">카페 리스트</div>
 			
 		</section>
 	</div>
-	
 	<!-- footer -->
 	<jsp:include page="../footer.jsp"></jsp:include>
+	
 </body>
 </html>

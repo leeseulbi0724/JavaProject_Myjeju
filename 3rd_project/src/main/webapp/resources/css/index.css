@@ -49,7 +49,7 @@ header>div, div.main_header>div,footer>div:first-child, footer>div:last-child{
 header{
 	width:100%;
 	border-top:5px solid #4fa9de;
-	border-bottom:1px solid #4fa9de;
+	border-bottom:2px solid #4fa9de;
 }
 div.main_header{
 	width:100%;
@@ -141,7 +141,7 @@ ul.drop_menu{
 }
 ul.menu_list>li:hover ul.drop_menu{
 	display:block;
-	padding-top:30px;
+	padding-top:40px;
 	/* margin-left:30px; */
 }
 header ul.drop_menu a{
@@ -354,7 +354,7 @@ div.other_infor>p:nth-child(3){
 */
 footer{
 	width:100%;
-	height:150px;
+	height:160px;
 	background-color:#4fa9de;
 	margin-top:150px;
 }

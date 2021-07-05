@@ -55,61 +55,63 @@ div.travel_content>h3{
 *	recommend_zone
 */
 section.recommend_zone{
-/* border:1px solid red; */
+border:1px solid red;
 	text-align:left;
 	margin:50px 0;
 }
-div.travel_title{
+div.food_title{
 	display:inline-block;
 	border-bottom:2px solid #4fa9de;
 	padding:0 5px 5px 5px;
 	font-size:17px;
 	font-weight:bold;
 }
-section.recommend_zone>div.travel_spot{
+section.recommend_zone>div.food_spot{
 	text-align:center;
 	margin-top:30px;
 }
-section.recommend_zone>div.travel_spot img{
+section.recommend_zone>div.food_spot img{
 	border-radius:5px;
 }
-article.travel_spot1{
+article.food_spot1{
 	display:inline-block;
 }
-article.travel_spot2{
+article.food_spot2{
 	display:inline-block;
 	margin:0 10px;
 }
-article.travel_spot3{
+article.food_spot3{
 	display:inline-block;
 }
-div.spot_infor{
+
+div.food_spot p{
 	text-align:left;
-	padding-left:10px;
-}
-div.spot_infor>p.spot_name{
-	font-size:17px;
+	font-size:16px;
 	font-weight:bold;
 	margin-top:10px;
 }
-div.spot_infor>p>span{
-	font-size:14px;
-	font-weight:bold;
-	color:gray;
-}
-div.spot_infor>p.spot_tag{
-	font-size:14px;
-	margin-top:10px;
-	color:gray;
-}
-div.spot_infor>button>img{
-	vertical-align:middle;
-	margin-left:-5px;
-	padding-right:10px;
-}
-div.spot_infor>img{
-	padding:0 10px;
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -127,15 +129,11 @@ div.spot_infor>img{
 *	map_zone
 */
 section.map_zone{
+border:1px solid red;
 	text-align:left;
-	margin:80px 0;
+	margin:50px 0;
 }
-section.map_zone>div.travel_map{
-	border:1px solid lightgray;
-	width:1000px;
-	height:500px;
-	margin-top:30px;
-}
+
 
 
 
@@ -147,42 +145,18 @@ section.map_zone>div.travel_map{
 *	list_zone
 */
 section.list_zone{
+border:1px solid red;
 	text-align:left;
-	margin:80px 0;
+	margin:50px 0;
 }
 
-table.travel_list{
-    border-top:1px solid lightgray;
-    border-collapse:collapse;
-	width: 100%;
-	margin-top:40px;
-}
-td {
-    border-bottom:1px solid lightgray;
-    padding:20px;
-}
-tr.travel_list1>td:first-child{
-	width:200px;
-}
 
-table.travel_list p.spot_name{
-	font-size:17px;
-	font-weight:bold;
-	margin-top:10px;
-}
-table.travel_list p.spot_name>span{
-	font-size:14px;
-	font-weight:bold;
-	color:gray;
-}
-table.travel_list p.spot_addr{
-	font-size:14px;
-	margin:10px 0;
-	color:gray;
-}
-table.travel_list span.star_score{
-	padding-left:10px;
-}
+
+
+
+
+
+
 
 
 
