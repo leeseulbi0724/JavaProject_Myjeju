@@ -4,49 +4,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<link rel="shortcut icon" type="image⁄x-icon" href="http://localhost:9000/myjeju/images/index/icon.png">
+<title>회원탈퇴 | JEJU ISLAND</title>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="http://localhost:9000/myjeju/css/index.css">
-<style>
-	section { text-align:center; margin-bottom:50px; }
-	.center { 
-		margin-top:80px; 
-		width:800px; 
-		display:inline-block; 
-	}
-	h3 { 
-		border-bottom:5px solid #4fa9de; 
-		font-size:20px; 
-		font-weight:bold;
-		display:inline-block;
-	}		
-	.box { 
-		width:800px; height:320x; 
-		display:inline-block;
-		margin-top:50px;
-		text-align:left;
-		font-size:14px;
-	 }
-	 .ul { list-style:none; margin:0; padding:0; margin-bottom:20px; }
-	 .ul li { margin-left:15px; }
-	 .box span { font-size:18px; display:block; }
-	#ok, #cancle { margin:5px; padding:2px 10px; }
-	#ok { background-color:#4fa9de; color:white; }
-	#ok:hover { background-color:rgb(23,86,123); }
-	
-	.table { border-top:1px solid; font-size:14px; }
-	.table th { font-weight:normal; text-align:left; }
-	.table th a, .table th button { padding:1px 10px; font-size:14px; }
-	.table th:first-child {
-		 font-weight:normal; 
-		 width:150px; 
-		 margin-bottom:10px; 		 
-		 background-color:rgb(247,248,249); 
-		 vertical-align:middle;
-	}
-	.form-control { width:200px; display:inline-block; height:25px; font-size:14px; }
-</style>
+<link rel="stylesheet" href="http://localhost:9000/myjeju/css/mypage/myout.css">
 </head>
 <body>
 <jsp:include page="../../header.jsp"></jsp:include>

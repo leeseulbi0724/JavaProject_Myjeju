@@ -54,4 +54,12 @@ public class MypageController {
 	public String myorder() {
 		return "mypage/mystore/myorder";
 	}
+	
+	/**
+	 * 장바구니
+	 */
+	@RequestMapping(value = "/mybaskit.do", method=RequestMethod.GET)
+	public String mybaskit() {
+		return "mypage/mystore/mybaskit";
+	}
 }
