@@ -8,7 +8,6 @@
 	<title>차박스팟 | JEJU ISLAND</title>
 	<link rel="stylesheet" href="http://localhost:9000/myjeju/css/index.css">
 	<link rel="stylesheet" href="http://localhost:9000/myjeju/css/travel/travel.css">
-	<link rel="stylesheet" href="http://localhost:9000/myjeju/css/travel/car_spot.css">
 	<script src="http://localhost:9000/myjeju/js/jquery-3.6.0.min.js"></script>
 </head>
 <body>
@@ -52,12 +51,73 @@
 		</section>
 		<section class="map_zone">
 			<div class="travel_title">차박스팟 찾기</div>
-			
+			<div class="travel_map">지도
+				
+			</div>
 		</section>
 		<section class="list_zone">
 			<div class="travel_title">차박스팟 리스트</div>
-			
+			<div class="travel_search_zone">
+				<input type="text" name="travel_search" id="travel_search" placeholder="차박스팟을 검색하세요.">
+				<button type="button" class="btn_style3" id="travel_search_btn">검색</button>
+			</div>
+			<table class="travel_list">
+				<tbody>
+					<tr class="travel_list1">
+						<td>
+							<img src="http://localhost:9000/myjeju/images/travel/우도.jpg">
+						</td>
+						<td>
+							<p class="spot_name">우도 <span>해양도립공원</span></p>
+							<p class="spot_addr">제주특별자치도 제주시 우도면 삼양고수물길 1</p>
+							<div>
+								<img src="http://localhost:9000/myjeju/images/travel/star.png"><span class="star_score">4.4 (268)</span>
+							</div>
+						</td>
+						<td>
+							<button type="button" class="btn_style" id="heart_btn"><img src="http://localhost:9000/myjeju/images/travel/empty_heart.png">1,674</button>
+							<button type="button" class="btn_style4" id="more_infor">상세정보</button>
+						</td>
+					</tr>
+					<tr class="travel_list2">
+						<td>
+							<img src="http://localhost:9000/myjeju/images/travel/이호테우.jpg">
+						</td>
+						<td>
+							<p class="spot_name">이호테우 해변 <span>해수욕장,해변</span></p>
+							<p class="spot_addr">제주특별자치도 제주시 서해안로 58</p>
+							<div>
+								<img src="http://localhost:9000/myjeju/images/travel/star.png"><span class="star_score">4.1 (683)</span>
+							</div>
+						</td>
+						<td>
+							<button type="button" class="btn_style" id="heart_btn"><img src="http://localhost:9000/myjeju/images/travel/empty_heart.png">354</button>
+							<button type="button" class="btn_style4" id="more_infor">상세정보</button>
+						</td>
+					</tr>
+					<tr class="travel_list3">
+						<td>
+							<img src="http://localhost:9000/myjeju/images/travel/천지연폭포.jpg">
+						</td>
+						<td>
+							<p class="spot_name">천지연 폭포 <span>폭포</span></p>
+							<p class="spot_addr">제주특별자치도 서귀포시 남성중로 2-15</p>
+							<div>
+								<img src="http://localhost:9000/myjeju/images/travel/star.png"><span class="star_score">4.3 (433)</span>
+							</div>
+						</td>
+						<td>
+							<button type="button" class="btn_style" id="heart_btn"><img src="http://localhost:9000/myjeju/images/travel/empty_heart.png">287</button>
+							<button type="button" class="btn_style4" id="more_infor">상세정보</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
 		</section>
+		<button type="button" class="btn_style5" id="more_btn">more
+			<img src="http://localhost:9000/myjeju/images/travel/bill_list_btn2.png">
+			<img src="http://localhost:9000/myjeju/images/travel/bill_list_btn.png">
+		</button>
 	</div>
 	
 	<!-- footer -->

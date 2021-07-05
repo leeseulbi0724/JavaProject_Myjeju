@@ -38,8 +38,61 @@
 	background-color:#4fa9de;
 	color:white;
 }
+.btn_style3{
+	width:50px;
+	background-color:#4fa9de;
+	border:1px solid #4fa9de;
+	border-radius:5px;
+	padding:5px 10px;
+	color:white;
+	font-size:13px;
+	font-weight:bold;
+	text-align:center;
+	/* margin-top:20px; */
+	cursor:pointer;
+}
+.btn_style3:hover{
+	background-color:#268ecc;
+	border:1px solid #268ecc;
+}
+.btn_style4{
+	width:100px;
+	background-color:white;
+	border:2px solid lightgray;
+	border-radius:10px;
+	padding:10px;
+	color:lightgray;
+	font-size:15px;
+	font-weight:bold;
+	text-align:center;
+	margin-top:20px;
+	cursor:pointer;
+}
+.btn_style4:hover{
+	border:2px solid #4fa9de;
+	color:#4fa9de;
+}
+.btn_style5{
+	width:65px;
+	background-color:white;
+	border:2px solid lightgray;
+	border-radius:50px;
+	padding:10px;
+	color:lightgray;
+	font-size:15px;
+	font-weight:bold;
+	text-align:center;
+	margin-top:20px;
+	cursor:pointer;
+}
+.btn_style5:hover{
+	border:2px solid #4fa9de;
+	color:#4fa9de;
+}
 
-
+/**
+*	travel_content
+*/
 div.travel_content{
 	width:1000px;
 	margin:80px auto;
@@ -102,7 +155,7 @@ div.spot_infor>p.spot_tag{
 	margin-top:10px;
 	color:gray;
 }
-div.spot_infor>button>img{
+button#heart_btn>img{
 	vertical-align:middle;
 	margin-left:-5px;
 	padding-right:10px;
@@ -150,12 +203,22 @@ section.list_zone{
 	text-align:left;
 	margin:80px 0;
 }
-
+div.travel_search_zone{
+	text-align:right;
+}
+input#travel_search{
+	width:250px;
+	height:28px;
+	margin-top:10px;
+	padding-left:5px;
+	border:1px solid #a1a1a1;
+	border-radius:4px;
+}
 table.travel_list{
     border-top:1px solid lightgray;
     border-collapse:collapse;
 	width: 100%;
-	margin-top:40px;
+	margin-top:30px;
 }
 td {
     border-bottom:1px solid lightgray;
@@ -163,6 +226,9 @@ td {
 }
 tr.travel_list1>td:first-child{
 	width:200px;
+}
+tr.travel_list1>td:nth-child(2){
+	width:450px;
 }
 
 table.travel_list p.spot_name{
@@ -183,24 +249,22 @@ table.travel_list p.spot_addr{
 table.travel_list span.star_score{
 	padding-left:10px;
 }
+button#more_infor{
+	margin-left:10px;
+}
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+button#more_btn>img{
+	width:18px;
+}
+button#more_btn>img:last-child{
+	display:none;
+}
+button#more_btn:hover img:first-child{
+	display:none;
+}
+button#more_btn:hover img:last-child{
+	display:inline-block;
+}

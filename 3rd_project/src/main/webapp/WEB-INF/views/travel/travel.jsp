@@ -57,6 +57,10 @@
 		</section>
 		<section class="list_zone">
 			<div class="travel_title">관광지 리스트</div>
+			<div class="travel_search_zone">
+				<input type="text" name="travel_search" id="travel_search" placeholder="관광지를 검색하세요.">
+				<button type="button" class="btn_style3" id="travel_search_btn">검색</button>
+			</div>
 			<table class="travel_list">
 				<tbody>
 					<tr class="travel_list1">
@@ -70,6 +74,10 @@
 								<img src="http://localhost:9000/myjeju/images/travel/star.png"><span class="star_score">4.4 (268)</span>
 							</div>
 						</td>
+						<td>
+							<button type="button" class="btn_style" id="heart_btn"><img src="http://localhost:9000/myjeju/images/travel/empty_heart.png">1,674</button>
+							<button type="button" class="btn_style4" id="more_infor">상세정보</button>
+						</td>
 					</tr>
 					<tr class="travel_list2">
 						<td>
@@ -81,6 +89,10 @@
 							<div>
 								<img src="http://localhost:9000/myjeju/images/travel/star.png"><span class="star_score">4.1 (683)</span>
 							</div>
+						</td>
+						<td>
+							<button type="button" class="btn_style" id="heart_btn"><img src="http://localhost:9000/myjeju/images/travel/empty_heart.png">354</button>
+							<button type="button" class="btn_style4" id="more_infor">상세정보</button>
 						</td>
 					</tr>
 					<tr class="travel_list3">
@@ -94,10 +106,18 @@
 								<img src="http://localhost:9000/myjeju/images/travel/star.png"><span class="star_score">4.3 (433)</span>
 							</div>
 						</td>
+						<td>
+							<button type="button" class="btn_style" id="heart_btn"><img src="http://localhost:9000/myjeju/images/travel/empty_heart.png">287</button>
+							<button type="button" class="btn_style4" id="more_infor">상세정보</button>
+						</td>
 					</tr>
 				</tbody>
 			</table>
 		</section>
+		<button type="button" class="btn_style5" id="more_btn">more
+			<img src="http://localhost:9000/myjeju/images/travel/bill_list_btn2.png">
+			<img src="http://localhost:9000/myjeju/images/travel/bill_list_btn.png">
+		</button>
 	</div>
 	<!-- footer -->
 	<jsp:include page="../footer.jsp"></jsp:include>
