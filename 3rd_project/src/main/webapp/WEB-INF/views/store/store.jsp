@@ -24,7 +24,7 @@
 	
 	<!-- Content -->
 	<div class = "store_main">
-	
+		<div><h3>스토어</h3></div>
 		<div class= "store_category">
 			<a href = "store.do"><span>전체</span></a>
 			<a href = "store_eat.do"><span>식품</span></a>

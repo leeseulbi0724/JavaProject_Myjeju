@@ -1,10 +1,14 @@
 @charset "UTF-8";
+*{
+	margin:0; padding:0;	
+	font-family:"맑은고딕";
+}
+
 /*
 * 1. store_main
 * 2. store_eat
 * 3. store_content
 */
-
 
 
 /******* STORE_MAIN ********/
@@ -18,25 +22,38 @@
 		/* background-color : white; */
 		/* border : 1px solid red; */
 		/* border:1px solid lightgray;  */
-		margin-top : 50px;
+		margin-top : 80px;
+	}
+	
+	.store_main>div:first-child, .storeeat>div:first-child, .storedeco>div:first-child, 
+	.storeetc>div:first-child, .store_content>div:first-child {
+		text-align : center;
+		/* border : 1px solid red; */
+		margin-bottom : 30px;
+	}
+	
+	.store_main>div>h3, .storeeat>div>h3, .storedeco>div>h3, .storeetc>div>h3, .store_content>div>h3 {
+		display:inline-block;
+		border-bottom:3px solid #4fa9de;
+		padding-bottom:5px;
 	}
 	
 	
 	.store_category_logo {
 		display : inline-block;
 		text-align : center;
-		font-size : 30px;
+		font-size : 24px;
 		font-weight : bold;
 		margin-bottom : 30px;
 		/* border : 1px solid red; */
-		border-bottom : 2px solid #4fa9de;
+		border-bottom : 3px solid #4fa9de;
 	}
 	
 	.storeeat, .storedeco, .storeetc {
 		width : 1100px;
 		margin : auto;
 		/* border : 1px solid red; */
-		margin-top : 50px;
+		margin-top : 80px;
 		text-align : center;
 	}
 	

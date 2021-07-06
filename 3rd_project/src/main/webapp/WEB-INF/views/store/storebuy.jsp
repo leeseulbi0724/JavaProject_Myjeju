@@ -8,6 +8,9 @@
 <title>스토어 | JEJU ISLAND</title>
 <link rel = "stylesheet" href = "http://localhost:9000/myjeju/css/index.css">
 <link rel = "stylesheet" href = "http://localhost:9000/myjeju/css/store.css">
+<link rel="stylesheet" href="css/admincss/bootstrap.css">
+<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="js/bootstrap.js"></script>
 <style>
 	.store_buy {
 		width : 1100px;
@@ -17,7 +20,7 @@
 	}
 	
 	.store_buy_top {
-		border : 1px solid red;
+		/* border : 1px solid red; */
 		margin : 10px 0 20px;
 	}
 	
@@ -40,22 +43,24 @@
 		list-style : none;
 	}
 	
-	/* STORE_BUY_TABLE */
+	/* STORE_BUY_TABLE 주문/결제 정보 */
 	.store_buy_table tr, .store_buy_table th, .store_buy_table td {
-		border : 1px dotted #595959;
+		border : 1px solid gainsboro;
 		border-collapse : collapse;
+		border-radius : 2px;
 	} 
 	
 	.store_buy_table {
 		/* border : 1px solid green; */
 		width : 100%;
-		text-align : center; 
+		text-align : center;
 		font-size : 14px;
 	}
 	
 	.store_buy_table th {
 		height : 17px;
 		font-size : 18px;
+		text-align : center;
 		/* border : 1px solid red; */
 	}
 	
@@ -76,10 +81,65 @@
 		font-size : 24px;
 		font-weight : bold;
 		position : absolute;
-		top : 25%;
+		top : 40%;
 	}
 	
+	/* 주문자 정보 */
+	.store_buy_addr {
+		/* border : 1px solid green; */
+		margin : 40px 0;
+		text-align : left;
+		
+	}
+
+	.store_buy_addr2>div:first-child {
+		margin : 20px 0;
+	}
 	
+	.store_buy_addr2>div:nth-child(2), .store_buy_addr2>div:nth-child(3),
+	.store_buy_addr2>div:nth-child(4), .store_buy_addr2>div:nth-child(5) {
+		height : 35px;
+		margin : 5px 0 10px 10px;
+		border-bottom : 1px dotted #595959;
+	}
+	
+	.store_buy_addr2>div>label {
+		display : inline-block;
+		width : 15%;
+		font-weight : bold;
+		font-size : 20px;
+	}
+	
+	.store_buy_addr2>div>span, .store_buy_addr2>div>select {
+		/* border : 1px solid green; */
+		color : #595959;
+		font-size : 18px;
+	}
+	
+	/* 총 결제 금액 */
+	.store_sum {
+		/* border : 1px solid purple; */
+		text-align : right;
+		font-size : 30px;
+	}
+
+	/* 결제 버튼 */
+	.store_btn_style3 {
+		margin : 15px 0;
+		background-color : #4fa9de;
+		border : 1px solid #4fa9de;
+		color : white;
+		width : 20%;
+		border-radius : 5px;
+		font-size : 26px;
+		font-weight : 600;
+		padding : 5px;
+	}
+	
+	.store_btn_style3:hover {
+		background-color:#268ecc;
+		border:1px solid #268ecc;
+	}
 	
 </style>
 </head>
@@ -105,7 +165,7 @@
 					</ol>
 				</div>	
 			</div>
-			<form name = "store_buy_form" action = "store_buy.do" method = "post" class = "store_buy_form">
+			<form name = "store_buy_form" action = "store_buy_proc.do" method = "post" class = "store_buy_form">
 				<div class = "store_buy_product">
 					<table class = "store_buy_table">
 						<tr>
@@ -120,32 +180,39 @@
 								<img src="http://localhost:9000/myjeju/images/store/store2.png">
 								<span>제주 오메기떡</span>
 							</td>
-							<td>2,500</td>
-							<td>1</td>
-							<td>12,400</td>
+							<td name = "store_ship">2,500</td>
+							<td name = "store_amount">1</td>
+							<td name = "store_sum">12,400</td>
 	
 						</tr>
 					</table>
 				</div>
 				
 				<div class = "store_buy_addr">
-					<div><h5>배송지 정보</h5></div>
-					<div> vo.getName() </div>
-					<div> vo.getHp() </div>
-					<div> vo.getAddr() </div>
-					
-					<select name = "addrRe" id = "addrRe">
-						<option value = "choice">요청사항을 입력해주세요.</option>
-						<option value = "Re1">배송 전에 미리 연락 바랍니다</option>
-						<option value = "Re2">부재시 경비실에 맡겨주세요</option>
-						<option value = "Re3">부재시 전화 주시거나 문자 남겨주세요</option>
-						<option value = "Re4">조심히 다뤄주세요</option>
-					</select>
+					<div class = "store_buy_addr2">
+						<div><h2>배송지 정보</h2></div>
+						<div><label>이름</label><span name = "store_name"> vo.getName() </span></div>
+						<div><label>휴대폰 번호</label><span name = "store_hp"> vo.getHp() </span></div>
+						<div><label>주소</label><span name = "store_addr"> vo.getAddr() </span></div>
+						<div>
+							<label>요청사항</label>
+							<select name = "addrRe" id = "addrRe">
+								<option value = "choice">요청사항을 입력해주세요.</option>
+								<option value = "Requ1">배송 전에 미리 연락 바랍니다</option>
+								<option value = "Requ2">부재시 경비실에 맡겨주세요</option>
+								<option value = "Requ3">부재시 전화 주시거나 문자 남겨주세요</option>
+								<option value = "Requ4">조심히 다뤄주세요</option>
+							</select>
+						</div>
+					</div>
 				</div>
+				
+				<div class = "store_sum">총 결제 금액 <strong>12,400 원</strong></div>
+				
+				<button type = "submit" class = "store_btn_style3" id = "store_buy">결제하기</button>
 				
 			</form>
 			
-			<div>총 결제 금액 <strong>12,400원</strong></div>
 		
 		</div>
 	

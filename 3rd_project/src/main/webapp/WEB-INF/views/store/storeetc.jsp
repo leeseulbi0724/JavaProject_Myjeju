@@ -12,6 +12,7 @@
 	.store_category>a:nth-child(4)>span {
 		color : #4fa9de;
 	}
+	
 </style>
 </head>
 <body>
@@ -20,15 +21,14 @@
 	
 	<!-- Content -->
 	<div class = "storeetc">
+		<div><h3>스토어</h3></div>
+		
 		<div class= "store_category">
 			<a href = "store.do"><span>전체</span></a>
 			<a href = "store_eat.do"><span>식품</span></a>
 			<a href = "store_deco.do"><span>실내품</span></a>
 			<a href = "store_etc.do"><span>잡화</span></a>
 		</div>
-		
-	
-		<div class = "store_category_logo">잡화</div>
 	
 		<div class = "store_etc_image">
 				<article>

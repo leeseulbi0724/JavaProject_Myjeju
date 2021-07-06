@@ -56,5 +56,10 @@ public class StoreController {
 		return "store/storebuy";
 	}
 	
+	@RequestMapping(value = "/store_modal.do", method = RequestMethod.GET)
+	public String store_modal() {
+		return "store/store_modal";
+	}
+	
 	
 }

@@ -21,15 +21,14 @@
 	
 	<!-- Content -->
 	<div class = "storeeat">
+		<div><h3>스토어</h3></div>
+		
 		<div class= "store_category">
 			<a href = "store.do"><span name = "store_all">전체</span></a>
 			<a href = "store_eat.do"><span name = "store_eat">식품</span></a>
 			<a href = "store_deco.do"><span name = "store_deco">실내품</span></a>
 			<a href = "store_etc.do"><span name = "store_etc">잡화</span></a>
 		</div>
-		
-	
-		<div class = "store_category_logo">식품</div>
 	
 		<div class = "store_eat_image">
 				<article>
