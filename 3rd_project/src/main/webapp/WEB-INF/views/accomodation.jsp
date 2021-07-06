@@ -1,13 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="com.myjeju.vo.* " %>
+<%@ page import="com.myjeju.vo.* , com.myjeju.dao.* " %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <link rel="shortcut icon" type="image⁄x-icon" href="http://localhost:9000/myjeju/images/index/icon.png">
-<title>숙박시설 정보조회</title>
+<title>숙박시설 | JEJU ISLAND</title>
 <link rel="stylesheet" href="http://localhost:9000/myjeju/css/accomodation.css">
 <link rel="stylesheet" href="http://localhost:9000/myjeju/css/index.css">
+<script src="http://localhost:9000/myjeju/js/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 	<!-- header -->
@@ -64,228 +66,146 @@
 	</div>
 	<div class="find_accomodation">
 		<div class="find_title">숙소찾기(지도)</div>
-		<p style="margin-top:-12px"></p>
-	<div class="map_wrap">
-	    <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
-	    <ul id="category">
-	        <li id="AD5" data-order="0"> 
-	            <span class="category_bg hotel"></span>
-	            숙박
-	        </li>       
-	        <li id="FD6" data-order="1"> 
-	            <span class="category_bg restaurant"></span>
-	            음식점
-	        </li>  
-	        <li id="CE7" data-order="2"> 
-	            <span class="category_bg cafe"></span>
-	            카페
-	        </li>
-	         <li id="AT4" data-order="3"> 
-	            <span class="category_bg attraction"></span>
-	            관광지
-	         </li> 
-	         <li id="CT1" data-order="4"> 
-	            <span class="category_bg culture"></span>
-	           	문화공간
-	         </li>    
-	        
-	    </ul>
-	</div>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2d54e46df64658650b7436b0cf338c67&libraries=services"></script>
-<script>
-// 마커를 클릭했을 때 해당 장소의 상세정보를 보여줄 커스텀오버레이입니다
-var placeOverlay = new kakao.maps.CustomOverlay({zIndex:1}), 
-    contentNode = document.createElement('div'), // 커스텀 오버레이의 컨텐츠 엘리먼트 입니다 
-    markers = [], // 마커를 담을 배열입니다
-    currCategory = ''; // 현재 선택된 카테고리를 가지고 있을 변수입니다
- 
-var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-    mapOption = {
-        center: new kakao.maps.LatLng(33.407461303086784, 126.61957095129178), // 지도의 중심좌표
-        level: 10 // 지도의 확대 레벨
-    };  
+		<div id="map" style="width:100%;height:500px;"></div>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2d54e46df64658650b7436b0cf338c67&libraries=services"></script>
+	<script>
+	var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
+    	mapOption = { 
+	        center: new kakao.maps.LatLng(33.407461303086784, 126.61957095129178), // 지도의 중심좌표
+	        level: 10 // 지도의 확대 레벨
+    };
 
-// 지도를 생성합니다    
-var map = new kakao.maps.Map(mapContainer, mapOption); 
+	var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+ 	
+	// 마커를 표시할 위치와 title 객체 배열입니다 
+	var positions = [
+    	{	
+    		title : '자운게스트하우스',
+    		addr : '제주특별자치도 서귀포시 대정읍 하모리 818-8',
+    		tel : '064-794-2415',
+        	latlng: new kakao.maps.LatLng(33.22677759096375, 126.25531933528)
+    	},
+    	{	
+    		title : '스테이라움',
+    		addr : '제주특별자치도 서귀포시 성산읍 오조리 570-1',
+    		tel : '010-7495-9910',
+        	latlng: new kakao.maps.LatLng(33.46824947997743, 126.91558647663133)
+    	},
+    	{	
+    		title : '한동지몽동',
+    		addr : '제주특별자치도 제주시 구좌읍 한동로1길',
+    		tel : '010-8810 7588',
+        	latlng: new kakao.maps.LatLng(33.538067745363335, 126.82689008525008)
+    	},
+    	{	
+    		title : '제주센트럴파크레지던스',
+    		addr : '제주특별자치도 제주시 연동 292-40',
+    		tel : '010-9983-0083',
+        	latlng: new kakao.maps.LatLng(33.48899088840315, 126.49520037084571)
+    	},
+    	{	
+    		title : '태흥예술극장',
+    		addr : '제주특별자치도 서귀포시 남원읍 태위로912번길 28',
+    		tel : '064-901-8738',
+        	latlng: new kakao.maps.LatLng(33.28455123295662, 126.74477008247413)
+    	},
+    	{	
+    		title : '당당하우스',
+    		addr : '제주특별자치도 제주시 구좌읍 송당리 1916-5',
+    		tel : '010-3249-7277',
+        	latlng: new kakao.maps.LatLng(33.46607756747349, 126.78261816217112)
+    	},
+    	{	
+    		title : '뚜르드제주',
+    		addr : '제주특별자치도 제주시 구좌읍 종달로1길',
+    		tel : '010-5007-5012',
+        	latlng: new kakao.maps.LatLng(33.49617928584109, 126.90002638433614)
+    	},
+    	{	
+    		title : '서귀포 Apro',
+    		addr : '제주특별자치도 서귀포시 표선면 토산리 1481-1',
+    		tel : '010-4157-9960',
+        	latlng: new kakao.maps.LatLng(33.328524652551685, 126.76570541316822)
+    	},
+    	{
+    		title : '팀버하우스',
+    		addr : '제주특별자치도 제주시 애월읍 곽지리 1624',
+    		tel : '010-9679-4241',
+        	latlng: new kakao.maps.LatLng(33.45119013793356, 126.30791458247862)
+    	},
+    	{
+    		title : '하랑게스트하우스',
+    		addr : '제주특별자치도 서귀포시 대정읍 일과로13번길 1',
+    		tel : '010-4404-5585',
+        	latlng: new kakao.maps.LatLng(33.23301495999036, 126.24381841502205)
+    	},
+    	{
+    		title : '디스이스핫(THISISHOT_EL)',
+    		addr : '제주특별자치도 제주시 구좌읍 하도리 59-1',
+    		tel : '064-784-4447',
+        	latlng: new kakao.maps.LatLng(33.5133628857966, 126.89734854015344)
+    	},
+    	{
+    		title : '하이레지던스',
+    		addr : '제주특별자치도 제주시 은남1길 46',
+    		tel : '064-743-1300',
+        	latlng: new kakao.maps.LatLng(33.4900513123438, 126.49112769416554)
+    	},
+    	{
+    		title : '그린나래',
+    		addr : '제주특별자치도 서귀포시 성산읍 서성일로 615',
+    		tel : '064-782-7071',
+        	latlng: new kakao.maps.LatLng(33.42822222927255, 126.85087311131457)
+    	},
+    	{
+    		title : '달다하우스',
+    		addr : '제주특별자치도 제주시 구좌읍 김녕리 1607',
+    		tel : '010-2695-7737',
+        	latlng: new kakao.maps.LatLng(33.55652291888224, 126.74883349597148)
+    	},
+    	{
+    		title : '더하도스파빌라',
+    		addr : '제주특별자치도 제주시 구좌읍 하도리 53-37',
+    		tel : '010-2696-0201',
+        	latlng: new kakao.maps.LatLng(33.51064209142311, 126.89294542480685)
+    	}
+    	
+	];
+	
+	for(let i=0; i < positions.length; i++){
+	    var data = positions[i];
+	    displayMarker(data);
+	}
+	
+	// 지도에 마커를 표시하는 함수입니다    
+	function displayMarker(data) { 
+	    var marker = new kakao.maps.Marker({
+	        map: map,
+	        position: data.latlng
+	    });
+	    var overlay = new kakao.maps.CustomOverlay({
+	        yAnchor: 1,
+	        position: marker.getPosition()
+	    });
+	    
+    	var content = document.createElement('div');
+  	    content.innerHTML =  data.title  += data.addr  += data.tel;
+  	    content.style.cssText = 'background: white; border: 1px solid black; padding:3px';
+	
+	    var closeBtn = document.createElement('button');
+	    closeBtn.innerHTML = '닫기';
+	    closeBtn.onclick = function () {
+	        overlay.setMap(null);
+	    };
+	    content.appendChild(closeBtn);
+	    overlay.setContent(content);
 
-// 장소 검색 객체를 생성합니다
-var ps = new kakao.maps.services.Places(map); 
-
-// 지도에 idle 이벤트를 등록합니다
-kakao.maps.event.addListener(map, 'idle', searchPlaces);
-
-// 커스텀 오버레이의 컨텐츠 노드에 css class를 추가합니다 
-contentNode.className = 'placeinfo_wrap';
-
-// 커스텀 오버레이의 컨텐츠 노드에 mousedown, touchstart 이벤트가 발생했을때
-// 지도 객체에 이벤트가 전달되지 않도록 이벤트 핸들러로 kakao.maps.event.preventMap 메소드를 등록합니다 
-addEventHandle(contentNode, 'mousedown', kakao.maps.event.preventMap);
-addEventHandle(contentNode, 'touchstart', kakao.maps.event.preventMap);
-
-// 커스텀 오버레이 컨텐츠를 설정합니다
-placeOverlay.setContent(contentNode);  
-
-// 각 카테고리에 클릭 이벤트를 등록합니다
-addCategoryClickEvent();
-
-// 엘리먼트에 이벤트 핸들러를 등록하는 함수입니다
-function addEventHandle(target, type, callback) {
-    if (target.addEventListener) {
-        target.addEventListener(type, callback);
-    } else {
-        target.attachEvent('on' + type, callback);
-    }
-}
-
-// 카테고리 검색을 요청하는 함수입니다
-function searchPlaces() {
-    if (!currCategory) {
-        return;
-    }
-    
-    // 커스텀 오버레이를 숨깁니다 
-    placeOverlay.setMap(null);
-
-    // 지도에 표시되고 있는 마커를 제거합니다
-    removeMarker();
-    
-    ps.categorySearch(currCategory, placesSearchCB, {useMapBounds:true}); 
-}
-
-// 장소검색이 완료됐을 때 호출되는 콜백함수 입니다
-function placesSearchCB(data, status, pagination) {
-    if (status === kakao.maps.services.Status.OK) {
-
-        // 정상적으로 검색이 완료됐으면 지도에 마커를 표출합니다
-        displayPlaces(data);
-    } else if (status === kakao.maps.services.Status.ZERO_RESULT) {
-        // 검색결과가 없는경우 해야할 처리가 있다면 이곳에 작성해 주세요
-
-    } else if (status === kakao.maps.services.Status.ERROR) {
-        // 에러로 인해 검색결과가 나오지 않은 경우 해야할 처리가 있다면 이곳에 작성해 주세요
-        
-    }
-}
-
-// 지도에 마커를 표출하는 함수입니다
-function displayPlaces(places) {
-
-    // 몇번째 카테고리가 선택되어 있는지 얻어옵니다
-    // 이 순서는 스프라이트 이미지에서의 위치를 계산하는데 사용됩니다
-    var order = document.getElementById(currCategory).getAttribute('data-order');
-
-    
-
-    for ( var i=0; i<places.length; i++ ) {
-
-            // 마커를 생성하고 지도에 표시합니다
-            var marker = addMarker(new kakao.maps.LatLng(places[i].y, places[i].x), order);
-
-            // 마커와 검색결과 항목을 클릭 했을 때
-            // 장소정보를 표출하도록 클릭 이벤트를 등록합니다
-            (function(marker, place) {
-                kakao.maps.event.addListener(marker, 'click', function() {
-                    displayPlaceInfo(place);
-                });
-            })(marker, places[i]);
-    }
-}
-
-// 마커를 생성하고 지도 위에 마커를 표시하는 함수입니다
-function addMarker(position, order) {
-    var imageSrc = "http://localhost:9000/myjeju/images/blue_marker2.png", // 마커 이미지 url, 스프라이트 이미지를 씁니다
-        imageSize = new kakao.maps.Size(27, 28),  // 마커 이미지의 크기
-        imgOptions =  {
-           /*  spriteSize : new kakao.maps.Size(72, 208), // 스프라이트 이미지의 크기
-            spriteOrigin : new kakao.maps.Point(46, (order*36)), */ // 스프라이트 이미지 중 사용할 영역의 좌상단 좌표
-            offset: new kakao.maps.Point(11, 28) // 마커 좌표에 일치시킬 이미지 내에서의 좌표
-        },
-        markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imgOptions),
-            marker = new kakao.maps.Marker({
-            position: position, // 마커의 위치
-            image: markerImage 
-        });
-
-    marker.setMap(map); // 지도 위에 마커를 표출합니다
-    markers.push(marker);  // 배열에 생성된 마커를 추가합니다
-
-    return marker;
-}
-
-// 지도 위에 표시되고 있는 마커를 모두 제거합니다
-function removeMarker() {
-    for ( var i = 0; i < markers.length; i++ ) {
-        markers[i].setMap(null);
-    }   
-    markers = [];
-}
-
-// 클릭한 마커에 대한 장소 상세정보를 커스텀 오버레이로 표시하는 함수입니다
-function displayPlaceInfo (place) {
-    var content = '<div class="placeinfo">' +
-                    '   <a class="title" href="' + place.place_url + '" target="_blank" title="' + place.place_name + '">' + place.place_name + '</a>';   
-
-    if (place.road_address_name) {
-        content += '    <span title="' + place.road_address_name + '">' + place.road_address_name + '</span>' +
-                    '  <span class="jibun" title="' + place.address_name + '">(지번 : ' + place.address_name + ')</span>';
-    }  else {
-        content += '    <span title="' + place.address_name + '">' + place.address_name + '</span>';
-    }                
-   
-    content += '    <span class="tel">' + place.phone + '</span>' + 
-                '</div>' + 
-                '<div class="after"></div>';
-
-    contentNode.innerHTML = content;
-    placeOverlay.setPosition(new kakao.maps.LatLng(place.y, place.x));
-    placeOverlay.setMap(map);  
-}
-
-
-// 각 카테고리에 클릭 이벤트를 등록합니다
-function addCategoryClickEvent() {
-    var category = document.getElementById('category'),
-        children = category.children;
-
-    for (var i=0; i<children.length; i++) {
-        children[i].onclick = onClickCategory;
-    }
-}
-
-// 카테고리를 클릭했을 때 호출되는 함수입니다
-function onClickCategory() {
-    var id = this.id,
-        className = this.className;
-
-    placeOverlay.setMap(null);
-
-    if (className === 'on') {
-        currCategory = '';
-        changeCategoryClass();
-        removeMarker();
-    } else {
-        currCategory = id;
-        changeCategoryClass(this);
-        searchPlaces();
-    }
-}
-
-// 클릭된 카테고리에만 클릭된 스타일을 적용하는 함수입니다
-function changeCategoryClass(el) {
-    var category = document.getElementById('category'),
-        children = category.children,
-        i;
-
-    for ( i=0; i<children.length; i++ ) {
-        children[i].className = '';
-    }
-
-    if (el) {
-        el.className = 'on';
-    } 
-} 
+	    kakao.maps.event.addListener(marker, 'click', function() {
+	        overlay.setMap(map);
+	    });
+	}
 </script>
-</div>
+	</div>
 <div class="accomodation_list">
 	<div class="accomodation_list_title">숙소리스트</div>
 	<div class="buttontext">
