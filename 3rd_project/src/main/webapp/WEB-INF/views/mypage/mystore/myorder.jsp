@@ -9,35 +9,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="http://localhost:9000/myjeju/css/index.css">
-<style>
-	section { text-align:center; margin-bottom:50px;  }
-	.center { 
-		margin-top:80px; 
-		width:1000px; 
-		display:inline-block; 
-	}
-	h3 { 
-		border-bottom:5px solid #4fa9de; 
-		font-size:20px; 
-		font-weight:bold; 
-		display:inline-block;
-	}
-	.center div { margin-top:50px; }
-	.center div:last-child { text-align:left; }
-	p { font-weight:bold; font-size:17px; }
-	p span { color:red; }
-	table { text-align:center; font-size:14px; }
-	table td { vertical-align:middle; }
-	td span { color:gray; }
-	table tr:first-child { background-color:rgb(247,248,249); }
-	table th:nth-child(3) { width:600px; }
-	
-	.search { display:inline-block; float:right; }
-	.search button { padding:1px 5px; font-size:13px; }
-	.form-control { display:inline-block; width:200px; height:30px; font-size:13px; }
-	
-	
-</style>
+<link rel="stylesheet" href="http://localhost:9000/myjeju/css/mypage/myorder.css">
 </head>
 <body>
 <jsp:include page="../../header.jsp"></jsp:include>

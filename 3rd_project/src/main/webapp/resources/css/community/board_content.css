@@ -41,3 +41,5 @@
 	#re_up, #close { display:inline-block; float:right; font-size:13px; padding:0 15px; }
 	#close { margin-top:5px; }
 	#re_up { margin-top:-35px; }
+	
+	th.title { background-color:rgb(247,248,249); }

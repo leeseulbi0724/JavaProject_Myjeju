@@ -62,4 +62,28 @@ public class MypageController {
 	public String mybaskit() {
 		return "mypage/mystore/mybaskit";
 	}
+	
+	/**
+	 * 나의 게시글
+	 */
+	@RequestMapping(value = "/myboard.do", method=RequestMethod.GET)
+	public String myboard() {
+		return "mypage/myrecord/myboard";
+	}
+	
+	/**
+	 * 나의 후기
+	 */
+	@RequestMapping(value = "/myreview.do", method=RequestMethod.GET)
+	public String myreview() {
+		return "mypage/myrecord/myreview";
+	}
+	
+	/**
+	 * 나의 좋아요
+	 */
+	@RequestMapping(value = "/myheart.do", method=RequestMethod.GET)
+	public String myheart() {
+		return "mypage/myrecord/myheart";
+	}
 }

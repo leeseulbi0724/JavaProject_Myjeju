@@ -36,7 +36,7 @@ $(document).ready(function() {
 		<p class="info">닉네임(아이디) | <span class="date">2021-07-01 21:29:12</span></p>
 		<table class="table">
 				<tr>
-					<th>제목</th>
+					<th class="title">제목</th>
 				</tr>
 				<tr>
 					<td>					 	
