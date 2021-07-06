@@ -214,6 +214,7 @@ input#travel_search{
 	border:1px solid #a1a1a1;
 	border-radius:4px;
 }
+
 table.travel_list{
     border-top:1px solid lightgray;
     border-collapse:collapse;
@@ -225,6 +226,9 @@ td {
     padding:20px;
 }
 tr.travel_list1>td:first-child{
+	width:200px;
+}
+td.travel_list_pic>img{
 	width:200px;
 }
 tr.travel_list1>td:nth-child(2){

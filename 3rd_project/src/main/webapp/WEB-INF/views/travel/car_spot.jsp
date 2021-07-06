@@ -18,31 +18,31 @@
 	<div class="travel_content">
 		<h3>차박스팟</h3>
 		<section class="recommend_zone">
-			<div class="travel_title">추천 차박스팟</div>
+			<div class="travel_title">추천 스팟</div>
 			<div class="travel_spot">
 				<article class="travel_spot1">
-					<img src="http://localhost:9000/myjeju/images/travel/한라산.jpg">
+					<img src="http://localhost:9000/myjeju/images/travel/금능해변.jpg">
 					<div class="spot_infor">
-						<p class="spot_name">한라산 <span>국립공원</span></p>
-						<p class="spot_tag">#산 #걷기/등산 #경관/포토 #친구 #사계절</p>
+						<p class="spot_name">금능해수욕장 <span>해수욕장,해변</span></p>
+						<p class="spot_tag">#일몰 #해수욕장 #액티비티 #가족 #차박 #여름</p>
 						<button type="button" class="btn_style" id="heart_btn"><img src="http://localhost:9000/myjeju/images/travel/empty_heart.png">516</button>
 						<img src="http://localhost:9000/myjeju/images/travel/star.png"><span class="star_score">4.6 (416)</span>
 					</div>
 				</article>
 				<article class="travel_spot2">
-					<img src="http://localhost:9000/myjeju/images/travel/성산일출봉.jpg">
+					<img src="http://localhost:9000/myjeju/images/travel/광치기해변.jpg">
 					<div class="spot_infor">
-						<p class="spot_name">성산일출봉 <span>봉우리,고지</span></p>
-						<p class="spot_tag">#일출 #오름 #경관/포토 #부모</p>
+						<p class="spot_name">광치기해변 <span>해수욕장,해변</span></p>
+						<p class="spot_tag">#일출 #해변 #경관/포토 #차박 #봄</p>
 						<button type="button" class="btn_style" id="heart_btn"><img src="http://localhost:9000/myjeju/images/travel/empty_heart.png">452</button>
 						<img src="http://localhost:9000/myjeju/images/travel/star.png"><span class="star_score">4.5 (594)</span>
 					</div>
 				</article>
 				<article class="travel_spot3">
-					<img src="http://localhost:9000/myjeju/images/travel/사려니숲길.jpg">
+					<img src="http://localhost:9000/myjeju/images/travel/함덕해수욕장.jpg">
 					<div class="spot_infor">
-						<p class="spot_name">사려니 숲길 <span>도보코스</span></p>
-						<p class="spot_tag">#숲길 #걷기/등산 #친구 #커플 #흐림 #봄</p>
+						<p class="spot_name">함덕해수욕장 <span>해수욕장,해변</span></p>
+						<p class="spot_tag">#해수욕장 #액티비티 #차박 #맑음 #여름</p>
 						<button type="button" class="btn_style" id="heart_btn"><img src="http://localhost:9000/myjeju/images/travel/empty_heart.png">248</button>
 						<img src="http://localhost:9000/myjeju/images/travel/star.png"><span class="star_score">4.4 (268)</span>
 					</div>
@@ -64,12 +64,12 @@
 			<table class="travel_list">
 				<tbody>
 					<tr class="travel_list1">
-						<td>
-							<img src="http://localhost:9000/myjeju/images/travel/우도.jpg">
+						<td class="travel_list_pic">
+							<img src="http://localhost:9000/myjeju/images/travel/신창풍차해안2.jpg">
 						</td>
 						<td>
-							<p class="spot_name">우도 <span>해양도립공원</span></p>
-							<p class="spot_addr">제주특별자치도 제주시 우도면 삼양고수물길 1</p>
+							<p class="spot_name">신창풍차해안 <span>드라이브</span></p>
+							<p class="spot_addr">제주특별자치도 제주시 한경면 신창리 1322-1</p>
 							<div>
 								<img src="http://localhost:9000/myjeju/images/travel/star.png"><span class="star_score">4.4 (268)</span>
 							</div>
@@ -80,12 +80,12 @@
 						</td>
 					</tr>
 					<tr class="travel_list2">
-						<td>
-							<img src="http://localhost:9000/myjeju/images/travel/이호테우.jpg">
+						<td class="travel_list_pic">
+							<img src="http://localhost:9000/myjeju/images/travel/표선해수욕장.jpg">
 						</td>
 						<td>
-							<p class="spot_name">이호테우 해변 <span>해수욕장,해변</span></p>
-							<p class="spot_addr">제주특별자치도 제주시 서해안로 58</p>
+							<p class="spot_name">표선해수욕장 <span>해수욕장,해변</span></p>
+							<p class="spot_addr">제주특별자치도 서귀포시 표선면 표선리</p>
 							<div>
 								<img src="http://localhost:9000/myjeju/images/travel/star.png"><span class="star_score">4.1 (683)</span>
 							</div>
@@ -96,12 +96,12 @@
 						</td>
 					</tr>
 					<tr class="travel_list3">
-						<td>
-							<img src="http://localhost:9000/myjeju/images/travel/천지연폭포.jpg">
+						<td class="travel_list_pic">
+							<img src="http://localhost:9000/myjeju/images/travel/수월봉.jpg">
 						</td>
 						<td>
-							<p class="spot_name">천지연 폭포 <span>폭포</span></p>
-							<p class="spot_addr">제주특별자치도 서귀포시 남성중로 2-15</p>
+							<p class="spot_name">수월봉 <span>봉우리,고지</span></p>
+							<p class="spot_addr">제주특별자치도 제주시 한경면 고산리 3760</p>
 							<div>
 								<img src="http://localhost:9000/myjeju/images/travel/star.png"><span class="star_score">4.3 (433)</span>
 							</div>
