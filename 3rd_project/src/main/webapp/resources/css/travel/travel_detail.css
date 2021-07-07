@@ -1,0 +1,143 @@
+@charset "utf-8";
+*{
+	margin:0; padding:0;	
+	font-family:"맑은고딕";
+}
+
+.btn_style{
+	width:100px;
+	background-color:#4fa9de;
+	border:1px solid #4fa9de;
+	border-radius:10px;
+	padding:10px;
+	color:white;
+	font-size:15px;
+	font-weight:bold;
+	text-align:center;
+	margin-top:20px;
+	cursor:pointer;
+}
+.btn_style:hover{
+	background-color:#268ecc;
+	border:1px solid #268ecc;
+}
+.btn_style2{
+	width:100px;
+	background-color:white;
+	border:2px solid #4fa9de;
+	border-radius:10px;
+	padding:10px;
+	color:#4fa9de;
+	font-size:15px;
+	font-weight:bold;
+	text-align:center;
+	margin-top:20px;
+	cursor:pointer;
+}
+.btn_style2:hover{
+	background-color:#4fa9de;
+	color:white;
+}
+.btn_style3{
+	width:50px;
+	background-color:#4fa9de;
+	border:1px solid #4fa9de;
+	border-radius:5px;
+	padding:5px 10px;
+	color:white;
+	font-size:13px;
+	font-weight:bold;
+	text-align:center;
+	/* margin-top:20px; */
+	cursor:pointer;
+}
+.btn_style3:hover{
+	background-color:#268ecc;
+	border:1px solid #268ecc;
+}
+.btn_style4{
+	width:100px;
+	background-color:white;
+	border:2px solid lightgray;
+	border-radius:10px;
+	padding:10px;
+	color:lightgray;
+	font-size:15px;
+	font-weight:bold;
+	text-align:center;
+	margin-top:20px;
+	cursor:pointer;
+}
+.btn_style4:hover{
+	border:2px solid #4fa9de;
+	color:#4fa9de;
+}
+.btn_style5{
+	width:65px;
+	background-color:white;
+	border:2px solid lightgray;
+	border-radius:50px;
+	padding:10px;
+	color:lightgray;
+	font-size:15px;
+	font-weight:bold;
+	text-align:center;
+	margin-top:20px;
+	cursor:pointer;
+}
+.btn_style5:hover{
+	border:2px solid #4fa9de;
+	color:#4fa9de;
+}
+/**
+*	travel_detail_content
+*/
+div.travel_detail_top{
+	display:inline-block;
+	position:relative;
+	overflow:hidden; 
+	width:100%;
+	height:900px;
+}
+div.travel_detail_top>img{
+	display:inline-block;
+	z-index:1;
+	width:100%;
+	filter:brightness(30%);
+}
+div.travel_detail_top>div{
+	display:inline-block;
+	position:relative;
+	top:-800px;
+	left:250px;
+	z-index:2;
+	color:white;
+}
+div.travel_detail_top h1{
+	font-size:40px;
+	margin-bottom:15px;
+	padding-left:20px;
+}
+div.travel_detail_top h2{
+	padding-left:20px;
+}
+div.travel_detail_top p{
+	border-top:2px solid white;
+	line-height:30px;
+	margin-top:30px;
+	padding:30px 20px 20px 20px;
+	font-weight:bold;
+}
+
+
+
+
+
+
+
+div.travel_detail_content{
+border:1px solid red;
+	width:1000px;
+	margin:80px auto;
+	text-align:center;
+}

@@ -217,7 +217,7 @@ div.rest_pic div.figure{
 	height:740px;
 	margin-top:-80px;
 	margin-left:-80px;
-	border:1px solid lightgray;
+	border:2px solid lightgray;
 	z-index:1;
 } 
 div.rest_pic img{
@@ -261,7 +261,7 @@ section.travel_zone{
 }
 div.travel_infor{
 	display:inline-block;
-	border:1px solid lightgray;
+	border:2px solid lightgray;
 	padding:130px;
 	margin:300px 0 200px 15px;
 }

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class TravelController {
 
 	/**
-	 * travel.do : 관광지 메인페이지
+	 * travel.do : 여행지 메인페이지
 	 */
 	@RequestMapping(value="/travel.do", method=RequestMethod.GET)
 	public String travel() {
@@ -27,5 +27,12 @@ public class TravelController {
 	@RequestMapping(value="/car_spot.do", method=RequestMethod.GET)
 	public String car_spot() {
 		return "travel/car_spot";
+	}
+	/**
+	 * travel_detail.do : 여행지 상세페이지
+	 */
+	@RequestMapping(value="/travel_detail.do", method=RequestMethod.GET)
+	public String travel_detail() {
+		return "travel/travel_detail";
 	}
 }

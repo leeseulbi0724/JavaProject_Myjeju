@@ -21,30 +21,30 @@
 			<div class="travel_title">추천 음식점</div>
 			<div class="travel_spot">
 				<article class="travel_spot1">
-					<img src="http://localhost:9000/myjeju/images/travel/한라산.jpg">
+					<a href="http://localhost:9000/myjeju/travel_detail.do"><img src="http://localhost:9000/myjeju/images/food/foodstore3.jpg"></a>
 					<div class="spot_infor">
-						<p class="spot_name">한라산 <span>국립공원</span></p>
-						<p class="spot_tag">#산 #걷기/등산 #경관/포토 #친구 #사계절</p>
-						<button type="button" class="btn_style" id="heart_btn"><img src="http://localhost:9000/myjeju/images/travel/empty_heart.png">516</button>
-						<img src="http://localhost:9000/myjeju/images/travel/star.png"><span class="star_score">4.6 (416)</span>
+						<p class="spot_name">하도작은식당 <span>서양음식전문점</span></p>
+						<p class="spot_tag">#양식 #파스타 #뇨끼 #와인 #하도</p>
+						<button type="button" class="btn_style" id="heart_btn"><img src="http://localhost:9000/myjeju/images/travel/empty_heart.png">675</button>
+						<img src="http://localhost:9000/myjeju/images/travel/star.png"><span class="star_score">4.8 (223)</span>
 					</div>
 				</article>
 				<article class="travel_spot2">
-					<img src="http://localhost:9000/myjeju/images/travel/성산일출봉.jpg">
+					<a href="http://localhost:9000/myjeju/travel_detail.do"><img src="http://localhost:9000/myjeju/images/food/foodstore2.jpg"></a>
 					<div class="spot_infor">
-						<p class="spot_name">성산일출봉 <span>봉우리,고지</span></p>
-						<p class="spot_tag">#일출 #오름 #경관/포토 #부모</p>
-						<button type="button" class="btn_style" id="heart_btn"><img src="http://localhost:9000/myjeju/images/travel/empty_heart.png">452</button>
-						<img src="http://localhost:9000/myjeju/images/travel/star.png"><span class="star_score">4.5 (594)</span>
+						<p class="spot_name">미도리 제주  <span>음식점</span></p>
+						<p class="spot_tag">#미도리 #정식 #연여구이 #제주시</p>
+						<button type="button" class="btn_style" id="heart_btn"><img src="http://localhost:9000/myjeju/images/travel/empty_heart.png">558</button>
+						<img src="http://localhost:9000/myjeju/images/travel/star.png"><span class="star_score">4.6 (89)</span>
 					</div>
 				</article>
 				<article class="travel_spot3">
-					<img src="http://localhost:9000/myjeju/images/travel/사려니숲길.jpg">
+					<a href="http://localhost:9000/myjeju/travel_detail.do"><img src="http://localhost:9000/myjeju/images/food/foodstore1.jpg"></a>
 					<div class="spot_infor">
-						<p class="spot_name">사려니 숲길 <span>도보코스</span></p>
-						<p class="spot_tag">#숲길 #걷기/등산 #친구 #커플 #흐림 #봄</p>
-						<button type="button" class="btn_style" id="heart_btn"><img src="http://localhost:9000/myjeju/images/travel/empty_heart.png">248</button>
-						<img src="http://localhost:9000/myjeju/images/travel/star.png"><span class="star_score">4.4 (268)</span>
+						<p class="spot_name">별돈별 <span>협재해변점</span></p>
+						<p class="spot_tag">#고기 #흑돼지 # #바다 #별돈별 #협재</p>
+						<button type="button" class="btn_style" id="heart_btn"><img src="http://localhost:9000/myjeju/images/travel/empty_heart.png">452</button>
+						<img src="http://localhost:9000/myjeju/images/travel/star.png"><span class="star_score">4.5 (103)</span>
 					</div>
 				</article>
 			</div>
@@ -64,30 +64,30 @@
 			<table class="travel_list">
 				<tbody>
 					<tr class="travel_list1">
-						<td>
-							<img src="http://localhost:9000/myjeju/images/travel/우도.jpg">
+						<td class="travel_list_pic">
+							<img src="http://localhost:9000/myjeju/images/food/foodstore4.jpg">
 						</td>
 						<td>
-							<p class="spot_name">우도 <span>해양도립공원</span></p>
-							<p class="spot_addr">제주특별자치도 제주시 우도면 삼양고수물길 1</p>
+							<p class="spot_name">우진해장국 <span>해장국 전문점</span></p>
+							<p class="spot_addr">제주특별자치도 제주시 삼도2동 서사로 11</p>
 							<div>
-								<img src="http://localhost:9000/myjeju/images/travel/star.png"><span class="star_score">4.4 (268)</span>
+								<img src="http://localhost:9000/myjeju/images/travel/star.png"><span class="star_score">4.6 (209)</span>
 							</div>
 						</td>
 						<td>
-							<button type="button" class="btn_style" id="heart_btn"><img src="http://localhost:9000/myjeju/images/travel/empty_heart.png">1,674</button>
+							<button type="button" class="btn_style" id="heart_btn"><img src="http://localhost:9000/myjeju/images/travel/empty_heart.png">1,029</button>
 							<button type="button" class="btn_style4" id="more_infor">상세정보</button>
 						</td>
 					</tr>
 					<tr class="travel_list2">
-						<td>
-							<img src="http://localhost:9000/myjeju/images/travel/이호테우.jpg">
+						<td class="travel_list_pic">
+							<img src="http://localhost:9000/myjeju/images/food/foodstore5.jpg">
 						</td>
 						<td>
-							<p class="spot_name">이호테우 해변 <span>해수욕장,해변</span></p>
-							<p class="spot_addr">제주특별자치도 제주시 서해안로 58</p>
+							<p class="spot_name">고집돌우럭 <span>함덕점</span></p>
+							<p class="spot_addr">제주특별자치도 제주시 특별자치도, 조천읍 신북로 491-9</p>
 							<div>
-								<img src="http://localhost:9000/myjeju/images/travel/star.png"><span class="star_score">4.1 (683)</span>
+								<img src="http://localhost:9000/myjeju/images/travel/star.png"><span class="star_score">4.0 (555)</span>
 							</div>
 						</td>
 						<td>
@@ -96,14 +96,14 @@
 						</td>
 					</tr>
 					<tr class="travel_list3">
-						<td>
-							<img src="http://localhost:9000/myjeju/images/travel/천지연폭포.jpg">
+						<td class="travel_list_pic">
+							<img src="http://localhost:9000/myjeju/images/food/foodstore6.jpg">
 						</td>
 						<td>
-							<p class="spot_name">천지연 폭포 <span>폭포</span></p>
-							<p class="spot_addr">제주특별자치도 서귀포시 남성중로 2-15</p>
+							<p class="spot_name">올래국수 <span>국수 전문점</span></p>
+							<p class="spot_addr">제주특별자치도 제주시 연동 귀아랑길 24</p>
 							<div>
-								<img src="http://localhost:9000/myjeju/images/travel/star.png"><span class="star_score">4.3 (433)</span>
+								<img src="http://localhost:9000/myjeju/images/travel/star.png"><span class="star_score">4.1 (869)</span>
 							</div>
 						</td>
 						<td>

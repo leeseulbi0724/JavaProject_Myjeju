@@ -27,10 +27,10 @@
 		<div class="menu_tap">
 			<ul class="menu_list">
 				<li><a href="http://localhost:9000/myjeju/accomodation.do">숙소</a>
-					<ul class="drop_menu">
+					<!-- <ul class="drop_menu">
 						<li><a href="http://localhost:9000/myjeju/accomodation.do">호텔</a></li>					
 						<li><a href="#">에어비앤비</a></li>					
-					</ul>
+					</ul> -->
 				</li>
 				<li><a href="http://localhost:9000/myjeju/food.do">맛집</a>
 					<ul class="drop_menu">
@@ -39,11 +39,11 @@
 					</ul>
 				</li>
 				<li><a href="http://localhost:9000/myjeju/travel.do">여행지</a>
-					<ul class="drop_menu">
+					<!-- <ul class="drop_menu">
 						<li><a href="http://localhost:9000/myjeju/travel.do">관광지</a></li>					
 						<li><a href="http://localhost:9000/myjeju/photo_spot.do">포토스팟</a></li>					
 						<li><a href="http://localhost:9000/myjeju/car_spot.do">차박스팟</a></li>					
-					</ul>
+					</ul> -->
 				</li>
 				<li><a href="http://localhost:9000/myjeju/store.do">스토어</a></li>
 				<li><a href="http://localhost:9000/myjeju/free_board.do">커뮤니티</a>
@@ -131,7 +131,7 @@
 					직접 경험해보세요!<br>
 					좋은 추억을 선사합니다.
 	 			</p>
-	 			<button type="button" class="btn_style2" id="more_btn" onclick="location.href='#'" style="width:110px">자세히보기</button>
+	 			<button type="button" class="btn_style2" id="more_btn" onclick="location.href='http://localhost:9000/myjeju/travel.do'" style="width:110px">자세히보기</button>
 	 		</div>
 	 		<div class="travel_pic">
 	 			<a href="#"><img src="http://localhost:9000/myjeju/images/index/photospot3.jpg" class="photospot"></a>

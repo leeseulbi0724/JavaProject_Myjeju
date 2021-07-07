@@ -123,8 +123,12 @@ section.recommend_zone>div.travel_spot{
 	text-align:center;
 	margin-top:30px;
 }
-section.recommend_zone>div.travel_spot img{
+section.recommend_zone>div.travel_spot a>img{
 	border-radius:5px;
+}
+section.recommend_zone>div.travel_spot a>img:hover{
+	border-radius:5px;
+	filter:brightness(60%);
 }
 article.travel_spot1{
 	display:inline-block;
