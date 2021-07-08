@@ -70,7 +70,7 @@
 			<table class="travel_list">
 				<tbody>
 					<tr class="travel_list1">
-						<td>
+						<td class="travel_list_pic">
 							<img src="http://localhost:9000/myjeju/images/travel/우도.jpg">
 						</td>
 						<td>
@@ -86,7 +86,7 @@
 						</td>
 					</tr>
 					<tr class="travel_list2">
-						<td>
+						<td class="travel_list_pic">
 							<img src="http://localhost:9000/myjeju/images/travel/이호테우.jpg">
 						</td>
 						<td>
@@ -102,7 +102,7 @@
 						</td>
 					</tr>
 					<tr class="travel_list3">
-						<td>
+						<td class="travel_list_pic">
 							<img src="http://localhost:9000/myjeju/images/travel/천지연폭포.jpg">
 						</td>
 						<td>

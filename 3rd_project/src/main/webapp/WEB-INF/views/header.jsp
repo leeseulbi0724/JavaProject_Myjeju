@@ -19,7 +19,7 @@
 		</div>
 		<div class="menu_tap">
 			<ul class="menu_list">
-				<li><a href="http://localhost:9000/myjeju/accomodation.do">숙소</a>
+				<li><a href="http://localhost:9000/myjeju/house.do">숙소</a>
 					<!-- <ul class="drop_menu">
 						<li><a href="http://localhost:9000/myjeju/accomodation.do">호텔</a></li>					
 						<li><a href="#">에어비앤비</a></li>					

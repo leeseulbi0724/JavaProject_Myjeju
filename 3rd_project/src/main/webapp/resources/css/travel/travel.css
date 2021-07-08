@@ -124,6 +124,7 @@ section.recommend_zone>div.travel_spot{
 	margin-top:30px;
 }
 section.recommend_zone>div.travel_spot a>img{
+	width:320px;
 	border-radius:5px;
 }
 section.recommend_zone>div.travel_spot a>img:hover{
@@ -187,11 +188,8 @@ section.map_zone{
 	text-align:left;
 	margin:80px 0;
 }
-section.map_zone>div.travel_map{
-	border:1px solid lightgray;
-	width:1000px;
-	height:500px;
-	margin-top:30px;
+section.map_zone>div.travel_title{
+	margin-bottom:30px;
 }
 
 

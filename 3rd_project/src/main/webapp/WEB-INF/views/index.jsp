@@ -26,7 +26,7 @@
 		</div>
 		<div class="menu_tap">
 			<ul class="menu_list">
-				<li><a href="http://localhost:9000/myjeju/accomodation.do">숙소</a>
+				<li><a href="http://localhost:9000/myjeju/house.do">숙소</a>
 					<!-- <ul class="drop_menu">
 						<li><a href="http://localhost:9000/myjeju/accomodation.do">호텔</a></li>					
 						<li><a href="#">에어비앤비</a></li>					
@@ -116,7 +116,7 @@
 					예약까지 한번에 할 수 있어요.<br>
 					지금 예약하세요!
 	 			</p>
-	 			<button type="button" class="btn_style" id="reserve_btn" onclick="location.href='http://localhost:9000/myjeju/accomodation.do'">예약하기</button>
+	 			<button type="button" class="btn_style" id="reserve_btn" onclick="location.href='http://localhost:9000/myjeju/house.do'">예약하기</button>
 	 		</div>
 	 	</section>
 	 	<section class="travel_zone">
