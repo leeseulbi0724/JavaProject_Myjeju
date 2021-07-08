@@ -66,7 +66,13 @@
 	</div>
 	<div class="find_accomodation">
 		<div class="find_title">숙소찾기(지도)</div>
-		<div id="map" style="width:100%;height:500px;"></div>
+		<div>
+				<c:forEach var="vo" items="${list}">
+					${vo.jname},${vo.jaddr},${vo.jtel}
+				</c:forEach>
+			
+		</div>
+	<div id="map" style="width:100%;height:500px;"></div>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2d54e46df64658650b7436b0cf338c67&libraries=services"></script>
 	<script>
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
