@@ -43,12 +43,13 @@
 	}
 	.card ul { list-style:none; text-align:left; margin:40px 200px; }
 	.card label { margin-bottom:5px; }
+	
 	.number .form-control, .day .form-control { display:inline-block; width:60px; height:25px; } 
 	.pass .form-control, .birth .form-control { display:inline-block; width:130px; height:25px; }
 	
 	.card span { font-size:13px; color:gray; }
 	.card>input { margin:10px 0 50px 0; }
-	
+		
 	.card a {
 		 text-decoration:none; border:1px solid lightgray; padding:5px 10px; border-radius:4px; }	
 	.back {
