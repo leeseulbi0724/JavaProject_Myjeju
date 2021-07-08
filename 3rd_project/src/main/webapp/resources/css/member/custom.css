@@ -11,10 +11,11 @@ h4 {
 }
 h3 {
 	font-family: 'Noto Sans KR', sans-serif;
-		border-bottom:5px solid #4fa9de; 
-		font-size:20px; 
+		border-bottom:3px solid #4fa9de; 
+		font-size:25px; 
 		font-weight:bold; 
-		float:left;
+		margin:0 auto;
+		padding-bottom:5px;
 }
 h2 {
 	font-family: 'Noto Sans KR', sans-serif;
@@ -227,7 +228,6 @@ height:40px;
 .text-red {
     color: #e74c3c;
 }  
-/* �쟾泥� 留곹겕 愿��젴 �쁺�뿭 */
 a {
 	color: #000000;
 	text-decoration: none;
@@ -282,7 +282,7 @@ a:hover {
 .navbar-default .navbar-toggle .icon-bar {
 	background-color: #dddddd;
 }                   
-@media (max-width: 767px) { /*�옉�� �솕硫댁씪 �븣 �뱶�엻�떎�슫 �븘�씠�뀥�뿉 留덉슦�뒪瑜� �삱�졇�쓣�븣*/
+@media (max-width: 767px) {
 	.navbar-default .navbar-nav .open .dropdown-menu > li > a {
 		color: #ffffff;
 	}
@@ -292,7 +292,6 @@ a:hover {
 		color: #eeeeee;
 	}
 }                       
-/* �궡鍮꾧쾶�씠�뀡 諛� 湲몄씠 �닔�젙 */
 .navbar-fixed-top {
 	min-height: 70px;
 }                      
@@ -311,7 +310,6 @@ a:hover {
 		line-height: 40px;
 	}
 }                       
-/* �뙆�씪 �뾽濡쒕뱶 �뵒�옄�씤 */
 .btn-file {
 	position: relative;
 	overflow: hidden;

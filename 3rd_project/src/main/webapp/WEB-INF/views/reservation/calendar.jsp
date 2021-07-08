@@ -15,8 +15,8 @@
 <script>
 $(document).ready(function(){
     // test라는 클래스를가진 div를 클릭할 경우 "테스트입니다요."라는 alert가 뜬다.
-    $(".days").click(function(){  
-        alert("테스트입니다.");
+    $(".days,.days_sun,.days_sat").click(function(){  
+        alert($(this).children().val());
     });    
 });	
 </script>
@@ -27,7 +27,7 @@ $(document).ready(function(){
 	
 	<!-- content -->
 	<div class="calendar_content">
-		<h3>예약하기</h3>
+		<h3 style="margin-bottom: 20px;">예약하기</h3>
 		<br>
 		<form action = "http://localhost:9000/myjeju/calendar.do" method="post">
 			<input type = "hidden" name = "preyear" value="${year}">
@@ -35,7 +35,7 @@ $(document).ready(function(){
 			<button type="submit"><</button>
 		</form>
 		
-		<h3 class="date">${year}.${month}</h3>
+		<h3 class="date" style="font-size:25px; margin-bottom: 20px;">${year}.${month}</h3>
 		
 		<form action ="http://localhost:9000/myjeju/calendar.do" method="post">
 			<input type = "hidden" name = "preyear" value="${year}">
@@ -53,7 +53,7 @@ $(document).ready(function(){
 		<br>
 		<div class="days_sun">${calvalue[0]} </div>
 		<c:forEach var="list" items="${calvalue}" varStatus="status" begin="1" end="5">
-		<div class="days" id="days">${list } </div>
+		<div class="days" id="days">${list } <input type="hidden" value = "${list}"> </div>
 		</c:forEach>
 		<div class="days_sat">${calvalue[6]} </div>
 		<br>
