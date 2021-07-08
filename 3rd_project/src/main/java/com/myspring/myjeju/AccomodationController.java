@@ -7,8 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import com.myjeju.dao.AccomodationDAO;
-import com.myjeju.vo.AccomodationVO;
+import com.myjeju.dao.HouseDAO;
+import com.myjeju.vo.HouseVO;
 
 @Controller
 public class AccomodationController {
@@ -19,10 +19,10 @@ public class AccomodationController {
 	public ModelAndView accomodation() {
 		ModelAndView mv = new ModelAndView();
 		
-		AccomodationDAO dao = new AccomodationDAO();
+		HouseDAO dao = new HouseDAO();
 		
 		
-		ArrayList<AccomodationVO> list = dao.getList(); 
+		ArrayList<HouseVO> list = dao.getList(); 
 		
 		mv.setViewName("accomodation");
 		mv.addObject("list",list);

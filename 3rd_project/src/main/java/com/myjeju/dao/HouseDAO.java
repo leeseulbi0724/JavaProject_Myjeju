@@ -2,22 +2,22 @@ package com.myjeju.dao;
 
 import java.util.ArrayList;
 
-import com.myjeju.vo.AccomodationVO;
+import com.myjeju.vo.HouseVO;
 
 
 
-public class AccomodationDAO extends DBConn {
+public class HouseDAO extends DBConn {
 	
 	//Select --> 전체 리스트
-	public ArrayList<AccomodationVO> getList(){
-		ArrayList<AccomodationVO> list = new ArrayList<AccomodationVO>();
+	public ArrayList<HouseVO> getList(){
+		ArrayList<HouseVO> list = new ArrayList<HouseVO>();
 		String sql = " select jlatitude, jlongitude, jname, jaddr, jtel from myjeju_accomodationlist ";
 		getPreparedStatement(sql);
 		
 		try {
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
-				AccomodationVO vo = new AccomodationVO();
+				HouseVO vo = new HouseVO();
 				vo.setJlatitude(rs.getString(1));
 				vo.setJlongitude(rs.getString(2));
 				vo.setJname(rs.getString(3));

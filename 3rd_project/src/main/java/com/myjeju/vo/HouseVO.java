@@ -1,6 +1,6 @@
 package com.myjeju.vo;
 
-public class AccomodationVO {
+public class HouseVO {
 	String jname,jaddr,jlatitude,jlongitude,jtel;
 
 	public String getJname() {
