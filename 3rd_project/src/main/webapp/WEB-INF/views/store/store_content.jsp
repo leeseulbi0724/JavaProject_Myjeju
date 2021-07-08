@@ -73,9 +73,16 @@
 		});
 		
 		
+		/* 문의하기 버튼 클릭시 모달창*/
 		$('#storefaqBtn').click(function(e){
 			e.preventDefault();
-			$('#testModal').modal("show");
+			$('#faqModal').modal("show");
+		});
+		
+		/* 답변하기 버튼 클릭시 모달창 */
+		$('#storereplyBtn').click(function(e){
+			e.preventDefault();
+			$('#replyModal').modal("show");
 		});
 		
 		
@@ -476,8 +483,18 @@
 	}
 	
 	
+	/******* 모달창 *******/
+	.modal-title {
+		text-align : left;
+		font-weight : 700;
+	}
 	
-
+	.modal-body>input:first-child, .modal-body>select, .modal-body>div>input {
+		display : inline-block;
+		width : 90%;
+		margin : 5px 0;
+	}
+	
 </style>
 
 
@@ -581,7 +598,7 @@
 					</div>
 					
 					  <!-- 문의하기 Modal-->
-						<div class="modal fade" id="testModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						<div class="modal fade" id="faqModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 							<div class="modal-dialog" role="document">
 								<div class="modal-content">
 									<div class="modal-header">
@@ -590,7 +607,18 @@
 										</button>
 										<h3 class="modal-title" id="exampleModalLabel">문의하기</h3>
 									</div>
-									<div class="modal-body"><input type = "text" placeholder = "문의할 내용을 입력해주세요"></input></div>
+									<div class="modal-body">
+										<input type = "text" value = "상품명 vo.stname" readonly>
+										<select name = "product_taste" id = "product_taste">
+											<option value = "choice">선택</option>
+											<option value = "basic">기본</option>
+											<option value = "salt">소금맛</option>
+											<option value = "sugar">설탕맛</option>
+											<option value = "honeybutter">허니버터맛</option>
+										</select>	
+										
+										<div><input type = "text" placeholder = "문의할 내용을 입력해주세요"></input></div>
+									</div>
 									<div class="modal-footer">
 										<a class="btn" id="modalY" href="#">문의하기</a>
 										<button class="btn" type="button" data-dismiss="modal">닫기</button>
@@ -605,7 +633,7 @@
 								<div><button>질문</button><strong>이진*</strong><span> vo.문의시간 </span></div>
 								<div> vo.수량 | vo.옵션 </div>
 								<div>상품문의 합니다. 이거 이렇게 하는거 맞나요? 오메기떡 맛있나요?</div>
-								<div><button type = "button">답변하기</button></div>
+								<div><button type = "button" id = "storereplyBtn">답변하기</button></div>
 							</div>
 						</article>
 						
@@ -616,13 +644,35 @@
 							</div>
 						</article>
 					</div>
+					
+					<!-- 답변하기 Modal-->
+						<div class="modal fade" id="replyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<button class="close" type="button" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">&times;</span></button>
+										</button>
+										<h3 class="modal-title" id="exampleModalLabel">문의하기</h3>
+									</div>
+									<div class="modal-body">
+										<input type = "text" value = "사용자명 vo.name" readonly>
+										<div><input type = "text" placeholder = "답변할 내용을 입력해주세요"></input></div>
+									</div>
+									<div class="modal-footer">
+										<a class="btn" id="modalY" href="#">답변하기</a>
+										<button class="btn" type="button" data-dismiss="modal">닫기</button>
+									</div>
+								</div>
+							</div>
+						</div>
 				
 				</div>
 				
 				<div class = "store_product_ship" id = "here4">
 					<div>배숑/교환/반품 안내</div>
 					<div class = "store_product_ship_content">
-						<div><h3>배송정보</h3></div>
+						<div><h4>배송정보</h4></div>
 						<table>
 							<tr>
 								<td>배송방법</td>
@@ -647,7 +697,7 @@
 							</tr>
 						</table>
 					
-						<div><h3>교환/반품 안내</h3></div>
+						<div><h4>교환/반품 안내</h4></div>
 						<table>
 							<tr>
 								<td>교환/반품 비용</td>
@@ -662,7 +712,7 @@
 							
 						</table>
 					
-						<div><h3>교환/반품 제한사항</h3></div>
+						<div><h4>교환/반품 제한사항</h4></div>
 						<div>ㆍ주문/제작 상품의 경우, 상품의 제작이 이미 진행된 경우</div>
 						<div>ㆍ상품 포장을 개봉하여 사용 또는 설치 완료되어 상품의 가치가 훼손된 경우 (단, 내용 확인을 위한 포장 개봉의 경우는 예외)</div>
 						<div>ㆍ고객의 사용, 시간경과, 일부 소비에 의하여 상품의 가치가 현저히 감소한 경우</div>
@@ -670,7 +720,7 @@
 						<div>ㆍ모니터 해상도의 차이로 인해 색상이나 이미지가 실제와 달라, 고객이 단순 변심으로 교환/반품을 무료로 요청하는 경우</div>
 						<div>ㆍ제조사의 사정 (신모델 출시 등) 및 부품 가격 변동 등에 의해 무료 교환/반품으로 요청하는 경우</div>
 					
-						<div><h3>※ 각 상품별로 아래와 같은 사유로 취소/반품이 제한 될 수 있습니다.</h3></div>
+						<div><h4>※ 각 상품별로 아래와 같은 사유로 취소/반품이 제한 될 수 있습니다.</h4></div>
 						<table>
 							<tr>
 								<td>의류/잡화/수입명품</td>
@@ -700,7 +750,7 @@
 							
 						</table>
 						
-						<div><h3>판매자정보</h3></div>
+						<div><h4>판매자정보</h4></div>
 						<table>
 							<tr>
 								<td>상호/대표자</td>

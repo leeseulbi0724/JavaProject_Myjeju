@@ -6,7 +6,7 @@
 	<meta name ="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="css/admincss/bootstrap.css">
 	<link rel="stylesheet" href="css/member/custom.css">
-	<link rel="stylesheet" href="http://localhost:9000/myjeju/css/index.css">
+	<link rel="stylesheet" href="http://localhost:9000/myjeju/css/member/index.css">
 	<link rel="shortcut icon" type="image⁄x-icon" href="http://localhost:9000/myjeju/images/index/icon.png">
 	<title>JEJU ISLAND</title>
 	<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
@@ -27,11 +27,11 @@
 	%>
 	
 	<jsp:include page="../header.jsp"></jsp:include>
-		<div style="text-align:center; width:1200px; height: 50px; margin:65px auto; margin-bottom:80px;" >
-		<h3>ID찾기</h3>
+		<div style="text-align:center; width:1200px; height: 50px; margin:85px auto; margin-bottom:80px;" >
+		<h3 style="width: 80px;">ID찾기</h3>
 		</div>
-		<div class="container" style="margin: 90px auto;">
-			<form method="post" action="./userLogin" style="margin-bottom:150px;">
+		<div class="container" style="margin: 100px auto;">
+			<form method="post" action="./userLogin" style="margin-bottom:110px;">
 				<table class="table table-bordered table-hover" style="text-align: center; border: 1px solid #dddddd">
 					<tbody>
 						<tr>

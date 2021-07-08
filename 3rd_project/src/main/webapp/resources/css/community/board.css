@@ -20,9 +20,11 @@
 	.notice_tbody tr { background-color:rgb(247,248,249); }
 	.notice_title { font-weight:bold; }
 	.noticeBtn {
-		border:1px solid lightgray;
-		color:red;
+		background-color:rgb(109,171,239);
+		border:none;
+		font-size:13px;
+		border-radius:5px;
+		color:white;
 		cursor:default;
-		background-color:rgb(255,227,228);
-		padding:0 10px;
+		padding:5px 10px;
 	}

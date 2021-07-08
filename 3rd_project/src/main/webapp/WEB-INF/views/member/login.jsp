@@ -6,7 +6,7 @@
 	<meta name ="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="css/admincss/bootstrap.css">
 	<link rel="stylesheet" href="css/member/custom.css">
-	<link rel="stylesheet" href="http://localhost:9000/myjeju/css/index.css">
+	<link rel="stylesheet" href="http://localhost:9000/myjeju/css/member/index.css">
 	<link rel="shortcut icon" type="image⁄x-icon" href="http://localhost:9000/myjeju/images/index/icon.png">
 	<title>JEJU ISLAND</title>
 	<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
@@ -27,38 +27,37 @@
 	%>
 	
 	<jsp:include page="../header.jsp"></jsp:include>
-		<div style="text-align:center; width:1200px; height: 50px; margin:65px auto; margin-bottom:80px;" >
-		<h3>로그인</h3>
+		<div style="text-align:center; width:1200px; height: 50px; margin:75px auto; margin-bottom:10px;" >
+		<h3 style="width: 80px;">로그인</h3>
 		</div>
-		<div class="container" style="margin: 50px auto;">
-			<form method="post" action="./userLogin" style="margin-bottom:150px;">
-				<table class="table table-bordered table-hover" style="text-align: center; border: 1px solid #dddddd">
+		<div class="container" style="margin: 90px auto; margin-top:60px;">
+			<form method="post" action="./userLogin" style="margin-bottom:120px; border:1px solid rgba(0,0,0,0.1); text-align:center; padding:65px; padding-bottom:40px; width:92%; margin:0 auto;">
+				<table class="table" style="text-align: center; width:55%; display:inline-block; margin-bottom:0;">
 					<tbody>
 						<tr>
-							<th style="width: 110px;"><h5>아이디</h5></th>
-							<td><input class="form-control" type="text" name="userID" maxlength="20" placeholder="아이디를 입력하세요."></td>
+							<td style="border:none; width: 400px;"><input class="form-control" type="text" name="userID" maxlength="20" placeholder="아이디 입력" style="height: 50px; border-radius:0;"></td>
+							<td rowspan=2 style="border:none;"><input class="btn btn-primary pull-right" type="submit" value="로그인" style="background-color:#4fa9de; border-color:#4fa9de; font-size: 20px; height: 115px; width:120px; border-radius:0;"></td>
 						</tr>
 						<tr>
-							<th style="width: 110px;"><h5>비밀번호</h5></th>
-							<td><input class="form-control" type="password" name="userPassword" maxlength="20" placeholder="비밀번호를 입력하세요."></td>
+							<td style="border:none;"><input class="form-control" type="password" name="userPassword" maxlength="20" placeholder="패스워드 입력" style="height: 50px; border-radius:0;"></td>
 						</tr>
 						<tr>
-							<td style="text-align : left" colspan="2">
-							<label>아이디저장</label>
-							<input type="checkbox" name="idsave" value ="true" style="margin-right: 20px;">
-							<label>자동로그인</label>
+							<td style="text-align : left; border:none;" colspan="2">
+							<input type="checkbox" name="idsave" value ="true">
+							<span style="margin-right: 20px; position:relative; top:-1px; font-size: 14px;">아이디 저장</span>
 							<input type="checkbox" name="loginck" value ="true">
-							<input class="btn btn-primary pull-right" type="submit" value="로그인" style="background-color:#4fa9de; border-color:#4fa9de;">
-							</td>
-						</tr>
-						<tr>
-							<td style="text-align : left" colspan="2">
-							<input class="btn btn-primary pull-right" type="submit" value="비밀번호찾기" style="background-color:#4fa9de; border-color:#4fa9de;">
-							<input class="btn btn-primary pull-right" type="submit" value="아이디찾기"  style="margin-right: 10px; background-color:#4fa9de; border-color:#4fa9de;">
+							<span style="margin-right: 20px; position:relative; top:-1px; font-size: 14px;">자동로그인</span>
+							<input class="btn btn-primary pull-right" type="submit" value="비밀번호찾기" style="background-color:rgba(0,0,0,0); border-color:rgba(0,0,0,0); color:black; position:relative; top:-6px; padding-right:0;">
+							<div class="pull-right" style="height:15px; width:1px; background-color:rgba(0,0,0,0.3); display:inline-block; margin-top:10px; margin-right:3px; position:relative; top:-6px;"></div>
+							<input class="btn btn-primary pull-right" type="submit" value="아이디찾기"  style="margin-right: 7px; background-color:rgba(0,0,0,0); border-color:rgba(0,0,0,0); color:black; position:relative; top:-6px;">
 							</td>
 						</tr>
 					</tbody>
 				</table>
+			</form>
+			<form method="post" action="./userLogin" style="margin-bottom:120px;text-align:center; padding:65px; padding-top:40px; width:92%; margin:0 auto;">
+			<span style="display:inline-block; width:100%; margin-bottom: 20px; font-size:15px; color: rgba(0,0,0,0.5);">아직 계정이 없으신가요?</span>
+			<input class="btn btn-primary" type="submit" value="회원가입" style="display:inline-block; background-color:rgba(0,0,0,0.8); border-color:rgba(0,0,0,0.8); font-size: 20px; height: 60px; width:54%; border-radius:0; margin: 0 auto;">
 			</form>
 		</div>
 		<%

@@ -56,8 +56,8 @@
 		}
 	%>
 	<jsp:include page="../header.jsp"></jsp:include>
-	<div style="text-align:center; width:1200px; height: 50px; margin:65px auto; margin-bottom:80px;" >
-		<h3>회원가입</h3>
+	<div style="text-align:center; width:1200px; height: 50px; margin:75px auto; margin-bottom:70px;" >
+		<h3 style="width: 100px;">회원가입</h3>
 		</div>
 		<div class="container" style="margin-bottom:100px;">
 			<form method="post" action="./userRegister">

@@ -6,220 +6,193 @@
 <meta charset="UTF-8">
 <link rel="shortcut icon" type="image⁄x-icon" href="http://localhost:9000/myjeju/images/index/icon.png">
 <title>스토어 | JEJU ISLAND</title>
-<link rel = "stylesheet" href = "http://localhost:9000/myjeju/css/index.css">
-<link rel = "stylesheet" href = "http://localhost:9000/myjeju/css/store.css">
-<link rel="stylesheet" href="css/admincss/bootstrap.css">
-<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script src="js/bootstrap.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" ></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" >
+<link rel="stylesheet" href="http://localhost:9000/myjeju/css/index.css">
+<script src="http://localhost:9000/myjeju/js/jquery-3.6.0.min.js"></script>
 <style>
-	.store_buy {
-		width : 1100px;
-		margin : auto;
-		margin-top  : 50px;
-		text-align : center;
+	section { text-align:center; margin-bottom:50px;  }
+	.center { 
+		margin-top:100px; 
+		width:1000px; 
+		display:inline-block; 
 	}
-	
-	.store_buy_top {
-		/* border : 1px solid red; */
-		margin : 10px 0 20px;
+	h3 { 
+		border-bottom:5px solid #4fa9de; 
+		font-size:20px; 
+		font-weight:bold; 
+		display:inline-block;
 	}
+	.center>div:first-child { margin-top:50px; margin-bottom:30px; }
 	
-	.store_buy_top>div:first-child {
-		width : 70%;
-		display : inline-block;
-		/* border : 1px solid blue; */
+	.table tr:first-child th { font-weight:normal; border-bottom:1px solid; }
+	.table tr:first-child th:first-child { 
+		font-weight:bold; 
+		text-align:left; 
+		font-size:20px; 
+		width:500px;
 	}
-	
-	.store_buy_top>div>h2 {
-		text-align : left;
-	}
-	
-	.store_buy_top2 {
-		width : 28%;
-		display : inline-block;
-	}
-	
-	li {
-		list-style : none;
-	}
-	
-	/* STORE_BUY_TABLE 주문/결제 정보 */
-	.store_buy_table tr, .store_buy_table th, .store_buy_table td {
-		border : 1px solid gainsboro;
-		border-collapse : collapse;
-		border-radius : 2px;
-	} 
-	
-	.store_buy_table {
-		/* border : 1px solid green; */
-		width : 100%;
-		text-align : center;
-		font-size : 14px;
-	}
-	
-	.store_buy_table th {
-		height : 17px;
-		font-size : 18px;
-		text-align : center;
-		/* border : 1px solid red; */
-	}
-	
-	.store_buy_table td:first-child {
-		/* border : 1px solid red; */
-		position : relative;
-	}
-	
-	.store_buy_table td:first-child>img {
-		margin-left : -150px;
-		padding : 10px 0;
-	}
-	
-	.store_buy_table td:first-child>span {
-		/* border : 1px solid red; */
-		margin-left : 50px;
-		text-align : center;
-		font-size : 24px;
-		font-weight : bold;
-		position : absolute;
-		top : 40%;
-	}
-	
-	/* 주문자 정보 */
-	.store_buy_addr {
-		/* border : 1px solid green; */
-		margin : 40px 0;
-		text-align : left;
+	.table tr:last-child td:first-child { text-align:left; }
+	.number { display:inline-block; width:100px; height:25px; }
 		
+	.addr { 
+		display:inline-block; 
+		width:560px;
+		height:300px;
+		float:left;
+		margin-top:20px; 
 	}
-
-	.store_buy_addr2>div:first-child {
-		margin : 20px 0;
+	.price {
+		display:inline-block; 
+		width:400px;
+		height:300px;
+		float:left;
+		margin-top:20px;		
+		float:right;
 	}
+	.addr>p, .price>p { font-weight:bold; font-size:20px; text-align:left; }
+	.addr>div { width:560px; height:200px; }
+	.price>div { wdith:4000px; height:200px; }
+	.addr>div, .price>div { 
+		border-top:1px solid;
+		border-left:1px solid lightgray;
+		border-right:1px solid lightgray;
+		border-bottom:1px solid lightgray;		
+		text-align:left;
+	}	
 	
-	.store_buy_addr2>div:nth-child(2), .store_buy_addr2>div:nth-child(3),
-	.store_buy_addr2>div:nth-child(4), .store_buy_addr2>div:nth-child(5) {
-		height : 35px;
-		margin : 5px 0 10px 10px;
-		border-bottom : 1px dotted #595959;
-	}
+	.addr img { margin:10px; margin-right:0; vertical-align:middle; }
+	.addr span.one { color:gray; font-weight:bold; font-size:17px; }
+	.addr div>p { margin-left:20px; }
+	.addr span.two { color:gray; }
 	
-	.store_buy_addr2>div>label {
-		display : inline-block;
-		width : 15%;
-		font-weight : bold;
-		font-size : 20px;
-	}
+	.form-select { width:300px; margin-left:30px; height:30px; padding:0 10px; }
+	.text { width:400px; height:30px; margin-left:30px; margin-top:5px; }
 	
-	.store_buy_addr2>div>span, .store_buy_addr2>div>select {
-		/* border : 1px solid green; */
-		color : #595959;
-		font-size : 18px;
+	.price>div>div { font-size:17px; margin:10px; }
+	.price>div>div.discount { margin-top:20px; padding-bottom:10px; border-bottom:1px solid lightgray; }
+	.price>div>div strong { float:right; }
+	.price>div>div .form-control { width:100px; display:inline-block; height:25px; font-size:14px; }
+	.price>div>div button { 
+		background-color:rgb(235,235,235); 
+		border:none; 
+		font-size:14px; 
+		border-radius:4px; 
+		padding:0 5px;
 	}
+	.price>div>div span { margin-left:100px; }
+	.price>div>div:nth-child(2)>span:last-child, .point_text { font-size:13px; color:gray; float:right; }
 	
-	/* 총 결제 금액 */
-	.store_sum {
-		/* border : 1px solid purple; */
-		text-align : right;
-		font-size : 30px;
-	}
-
-	/* 결제 버튼 */
-	.store_btn_style3 {
-		margin : 15px 0;
-		background-color : #4fa9de;
-		border : 1px solid #4fa9de;
-		color : white;
-		width : 20%;
-		border-radius : 5px;
-		font-size : 26px;
-		font-weight : 600;
-		padding : 5px;
-	}
-	
-	.store_btn_style3:hover {
-		background-color:#268ecc;
-		border:1px solid #268ecc;
-	}
-	
+	 .pay {
+	 	background-color:rgb(7,114,215); 
+	 	color:white;
+	 	 float:right; 
+	 	padding:2px 5px;
+	 	font-size:14px;
+	 	margin-top:-5px;
+	 	margin-right:10px; 
+	 	margin-left:10px;
+	 }
+	 .pay:hover { background-color:rgb(4,72,134); color:white; }
+	 
+	 
+	 .modal-dialog { margin-top:150px; }
+	 .modal-body { text-align:center; }
+	 .modal-body button {
+	 	border:1px solid lightgray;
+	 	width:250px; height:250px;
+	 	display:inline-block;
+	 	margin-right:20px;
+	 }
+	 .modal-title { font-weight:bold; }
+	 .self { background-color:rgb(245,245,245); }
 </style>
 </head>
+<script>
+	$(document).ready(function() {
+		$(".form-select").change(function() {
+			if ($(this).val() == "msg0") {
+				$(".text").attr("type","text");
+			} else {
+				$(".text").attr("type","hidden");
+			}			
+		});
+	});
+</script>
 <body>
-	<!-- Header -->
-	<jsp:include page = "../header.jsp"></jsp:include>
-	
-	<section>
-		<div class = "store_buy">
-		
-			<div class = "store_category_logo">상품 구매 페이지</div>
-		
-			<div class = "store_buy_top">
-				<div><h2>주문 / 결제</h2></div>
-				
-				<div class = "store_buy_top2">
-					<ol>
-						<li>
-							<span>장바구니 > </span>
-							<span><strong>주문 / 결제 </strong></span>
-							<span> > 완료</span>
-						</li>
-					</ol>
-				</div>	
+<jsp:include page="../header.jsp"></jsp:include>
+
+<section>
+	<div class="center">
+		<table class="table">		
+			<tr>
+				<th>주문상품 1개</th>
+				<th>수량</th>
+				<th>가격</th>
+			</tr>
+			<tr>
+				<td>
+					<img src="http://localhost:9000/myjeju/images/store/store2.png" width=50 height=30>
+					<a>오메기떡</a>
+				</td>
+				<td>
+					<input class="form-control number" type="number" value="1" disabled>
+				</td>
+				<td><strong>25,000원</strong></td>			
+		</table>		
+		<div class="addr">
+			<p>배송정보</p>
+			<div>
+				<img src="http://localhost:9000/myjeju/images/store/pin.png" width=30 height=30><span class="one">배송지</span>
+				<p>경기도 수원시 영통구 **** 204호<br>
+				<span class="two">이슬비 | 010-9369-2489</span></p>
+				<select class="form-select">
+					<option value="msg0">직접 입력
+					<option value="msg1">집 앞에 놔주세요.
+					<option value="msg2">배송전 연락 바랍니다.
+					<option value="msg3">부재 시 경비실에 맡겨주세요.
+				</select>
+				<input type="text" class="form-control text">
 			</div>
-			<form name = "store_buy_form" action = "store_buy_proc.do" method = "post" class = "store_buy_form">
-				<div class = "store_buy_product">
-					<table class = "store_buy_table">
-						<tr>
-							<th width = 60%>상품정보</th>
-							<th>배송비</th>
-							<th>수량</th>
-							<th>총 금액</th>
-						</tr>
-						
-						<tr>
-							<td>
-								<img src="http://localhost:9000/myjeju/images/store/store2.png">
-								<span>제주 오메기떡</span>
-							</td>
-							<td name = "store_ship">2,500</td>
-							<td name = "store_amount">1</td>
-							<td name = "store_sum">12,400</td>
-	
-						</tr>
-					</table>
-				</div>
-				
-				<div class = "store_buy_addr">
-					<div class = "store_buy_addr2">
-						<div><h2>배송지 정보</h2></div>
-						<div><label>이름</label><span name = "store_name"> vo.getName() </span></div>
-						<div><label>휴대폰 번호</label><span name = "store_hp"> vo.getHp() </span></div>
-						<div><label>주소</label><span name = "store_addr"> vo.getAddr() </span></div>
-						<div>
-							<label>요청사항</label>
-							<select name = "addrRe" id = "addrRe">
-								<option value = "choice">요청사항을 입력해주세요.</option>
-								<option value = "Requ1">배송 전에 미리 연락 바랍니다</option>
-								<option value = "Requ2">부재시 경비실에 맡겨주세요</option>
-								<option value = "Requ3">부재시 전화 주시거나 문자 남겨주세요</option>
-								<option value = "Requ4">조심히 다뤄주세요</option>
-							</select>
-						</div>
-					</div>
-				</div>
-				
-				<div class = "store_sum">총 결제 금액 <strong>12,400 원</strong></div>
-				
-				<button type = "submit" class = "store_btn_style3" id = "store_buy">결제하기</button>
-				
-			</form>
-			
-		
 		</div>
-	
-	
-	</section>
-	
-	<!-- Footer -->
-	<jsp:include page = "../footer.jsp"></jsp:include>
+		<div class="price">
+			<p>결제금액</p>
+			<div>
+				<div>상품금액<strong>25,500원</strong></div>
+				<div>포인트 사용
+					<span><input type="text" class="form-control">
+					<button>전체 사용</button>	</span>					
+					<span class="">총 보유 포인트 152p</span>
+				</div>
+				<div class="discount">할인금액<strong>152원</strong></div>
+				<div>결제금액<strong>25,348원</strong></div>
+				<span class="point_text">적립 예정 포인트 1267p
+				<a href="#" class="btn pay" data-bs-toggle="modal" data-bs-target="#staticBackdrop">결제하기</a></span>	
+			</div>
+		</div>		
+	</div>
+</section>
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">결제 방법</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <button class="self">
+        	<img src="http://localhost:9000/myjeju/images/store/card.png" width=100% height=100% >
+        </button>
+        <button class="kakao">
+        	<img src="http://localhost:9000/myjeju/images/store/pay.jpg" width=100% height=100% >
+        </button>
+      </div>      
+    </div>
+  </div>
+</div>
+
+<jsp:include page="../footer.jsp"></jsp:include>
 </body>
 </html>
