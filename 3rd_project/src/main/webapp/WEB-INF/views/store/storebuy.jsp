@@ -81,7 +81,7 @@
 		padding:0 5px;
 	}
 	.price>div>div span { margin-left:100px; }
-	.price>div>div:nth-child(2)>span:last-child { font-size:13px; color:gray; float:right; }
+	.price>div>div:nth-child(2)>span:last-child, .point_text { font-size:13px; color:gray; float:right; }
 	
 	 .pay {
 	 	background-color:rgb(7,114,215); 
@@ -91,8 +91,21 @@
 	 	font-size:14px;
 	 	margin-top:-5px;
 	 	margin-right:10px; 
+	 	margin-left:10px;
 	 }
 	 .pay:hover { background-color:rgb(4,72,134); color:white; }
+	 
+	 
+	 .modal-dialog { margin-top:150px; }
+	 .modal-body { text-align:center; }
+	 .modal-body button {
+	 	border:1px solid lightgray;
+	 	width:250px; height:250px;
+	 	display:inline-block;
+	 	margin-right:20px;
+	 }
+	 .modal-title { font-weight:bold; }
+	 .self { background-color:rgb(245,245,245); }
 </style>
 </head>
 <script>
@@ -149,15 +162,36 @@
 				<div>포인트 사용
 					<span><input type="text" class="form-control">
 					<button>전체 사용</button>	</span>					
-					<span>총 보유 포인트 152p</span>
+					<span class="">총 보유 포인트 152p</span>
 				</div>
 				<div class="discount">할인금액<strong>152원</strong></div>
 				<div>결제금액<strong>25,348원</strong></div>
-				<a href="#" class="btn pay">결제하기</a>		
+				<span class="point_text">적립 예정 포인트 1267p
+				<a href="#" class="btn pay" data-bs-toggle="modal" data-bs-target="#staticBackdrop">결제하기</a></span>	
 			</div>
 		</div>		
 	</div>
 </section>
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">결제 방법</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <button class="self">
+        	<img src="http://localhost:9000/myjeju/images/store/card.png" width=100% height=100% >
+        </button>
+        <button class="kakao">
+        	<img src="http://localhost:9000/myjeju/images/store/pay.jpg" width=100% height=100% >
+        </button>
+      </div>      
+    </div>
+  </div>
+</div>
 
 <jsp:include page="../footer.jsp"></jsp:include>
 </body>
