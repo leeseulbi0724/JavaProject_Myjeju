@@ -96,9 +96,9 @@
 	 .pay:hover { background-color:rgb(4,72,134); color:white; }
 	 
 	 
-	 .modal-dialog { margin-top:150px; }
+	 .modal-dialog { margin-top:180px; }
 	 .modal-body { text-align:center; }
-	 .modal-body button {
+	 .modal-body a {
 	 	border:1px solid lightgray;
 	 	width:250px; height:250px;
 	 	display:inline-block;
@@ -182,12 +182,12 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <button class="self">
+        <a href="payment.do" class="self">
         	<img src="http://localhost:9000/myjeju/images/store/card.png" width=100% height=100% >
-        </button>
-        <button class="kakao">
+        </a>
+        <a href="#" class="kakao">
         	<img src="http://localhost:9000/myjeju/images/store/pay.jpg" width=100% height=100% >
-        </button>
+        </a>
       </div>      
     </div>
   </div>
