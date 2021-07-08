@@ -38,21 +38,21 @@
 			</thead>
 			<tbody class="notice_tbody" >			
 				<tr>
-					<td><button class="noticeBtn">공지</button></td>
+					<td><a class="noticeBtn">공지</a></td>
 					<td><a href="#" class="notice_title">공지사항 제목</a></td>
 					<td>관리자</td>
 					<td>2021-07-06</td>
 					<td>254</td>
 				</tr>			
 				<tr>
-					<td><button class="noticeBtn">공지</button></td>
+					<td><a class="noticeBtn">공지</a></td>
 					<td><a href="#" class="notice_title">공지사항 제목</a></td>
 					<td>관리자</td>
 					<td>2021-07-06</td>
 					<td>254</td>
 				</tr>			
 				<tr>
-					<td><button class="noticeBtn">공지</button></td>
+					<td><a class="noticeBtn">공지</a></td>
 					<td><a href="#" class="notice_title">공지사항 제목</a></td>
 					<td>관리자</td>
 					<td>2021-07-06</td>

@@ -9,7 +9,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" ></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" >
 <link rel="stylesheet" href="http://localhost:9000/myjeju/css/index.css">
-<link rel="stylesheet" href="http://localhost:9000/myjeju/css/mypage/mybaskit.css">
+<link rel="stylesheet" href="http://localhost:9000/myjeju/css/mypage/mybasket.css">
 </head>
 <body>
 <jsp:include page="../../header.jsp"></jsp:include>
@@ -57,7 +57,7 @@
 			<p>총 결제 금액 : <span>50,000원</span></p>
 		</div>		
 		<a href="store.do" class="btn store">계속 쇼핑하기</a>
-		<a href="#" class="btn pay">결제하기</a>		
+		<a href="store_buy.do" class="btn pay">결제하기</a>		
 	</div>
 </section>
 
