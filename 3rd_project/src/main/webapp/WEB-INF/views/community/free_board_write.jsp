@@ -17,8 +17,8 @@
 <h3>자유게시판</h3>
 <div class="container">
 	<form autocomplete="off"  name="community_write" action="community_write_process.jsp" method="post" enctype= "multipart/form-data">
-		<input type="text" class="form-control input" name="title">
-		<textarea name="content" style="resize: none;" class="form-control textarea"></textarea>
+		<input type="text" class="form-control input" name="title" placeholder="제목">
+		<textarea name="content" style="resize: none;" class="form-control textarea" placeholder="내용"></textarea>
 		<input type="file" class="form-control input" name="file">
 	<a class="btn" href="free_board.do" id="list">목록</a>
 	<button type="button" class="btn"  id="write">등록</button>

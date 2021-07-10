@@ -19,7 +19,7 @@
 		<p>이슬비<span>님의 마이페이지</span></p>
 		<div class="img_div"><img src="http://localhost:9000/myjeju/images/mypage/human.png" width=300 height=300 ></div>
 		<div class="point_div">총 보유 포인트 <strong>152</strong>p</div>
-		<a href="#">포인트 내역보기</a>
+		<a href="mypoint.do">포인트 내역보기</a>
 	</div>
 	
 	<div class="center1">
@@ -34,10 +34,10 @@
 	</div>
 	<div class="center2">
 		<div>
-			<p>스토어</p>
+			<p>결제 및 예약</p>
 			<div>
 				<a href="mybasket.do">장바구니</a>
-				<a href="myorder.do">주문 내역</a>
+				<a href="myorder.do">결제 내역</a>
 			</div>
 		</div>
 	</div>

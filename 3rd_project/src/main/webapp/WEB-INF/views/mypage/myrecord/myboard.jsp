@@ -34,7 +34,6 @@
 
 <section>
 	<div class="center">
-		<div><h3>My 게시글</h3></div>
 		<a href="#" id="board">작성 글</a>
 		<a href="#" id="comment">작성 댓글</a>
 		<a href="#"  id="delete">삭제</a>

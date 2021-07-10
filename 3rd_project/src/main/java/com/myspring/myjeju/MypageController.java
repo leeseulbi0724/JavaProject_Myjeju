@@ -86,4 +86,12 @@ public class MypageController {
 	public String myheart() {
 		return "mypage/myrecord/myheart";
 	}
+	
+	/**
+	 * 나의 포인트
+	 */
+	@RequestMapping(value = "/mypoint.do", method=RequestMethod.GET)
+	public String mypoint() {
+		return "mypage/mypoint";
+	}
 }

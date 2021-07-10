@@ -16,7 +16,6 @@
 
 <section>
 	<div class="center">
-		<div><h3>장바구니</h3></div>
 		<table class="table">
 			<tr>
 				<th class="count">상품(2)</th>
