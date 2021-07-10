@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,7 +18,7 @@
 		/* 상단 카테고리 클릭 시 스크롤 다운 */
 		$("#move1").click(function() {
 			var offset = $("#here1").offset();
-			$('html').animate({scrollTop : offset.top}, 0);
+			$('html').animate({scrollTop : offset.top}, 100);
 		});
 		
 		$("#move2").click(function() {
@@ -38,13 +37,34 @@
 		});
 		
 		
-		/* 버튼 색상 변경 */
+		/* 버튼 색상 변경
 		$(".store_content_category>button").each(function() {
 			$(this).click(function() {
 				$(this).addClass("selected");
 				$(this).siblings().removeClass("selected");
 			});
-		});
+		}); */
+		
+		/* window 스크롤 시 메뉴바 색상 변경 */
+		/* $(window).scroll(function(){
+	        var scroll = $(window).scrollTop();
+	        var move1 = $("#move1").scrollTop();
+	        var move2 = $("#move2").scrollTop();
+	        var move3 = $("#move3").scrollTop();
+	        var move4 = $("#move4").scrollTop();
+	        
+	        if (scroll > move1) {
+				$("#move1").css("background" , "#4fa9de");
+	        } else if (scroll > move2){
+				$("#move2").css("background" , "#4fa9de");   
+	        } else if (scroll > move3) {
+	        	$("#move3").css("background" , "#4fa9de");
+	        } else if (scroll > move4) {
+	        	$("#move4").css("background", "#4fa9de");
+	        } else {
+	        	$(".store_content_category>button").css("background", "hsl(160, 0, 235)");
+	        }
+	      }); */
 		
 		/* 메뉴바 상단 고정 */
 		var menu = $(".store_content_category").offset();
@@ -57,14 +77,12 @@
 			}
 		});
 		
+		
+		/* 수량 유효성 검사 */
 		$("#store_buy").click(function() {
 			if($("#product_amount").val() == 0) {
 				alert("수량을 입력해주세요");
 				$("#product_amount").focus();
-				return false;
-			} else if ($("#product_taste").val() == "choice") {
-				alert("옵션을 선택해주세요");
-				$("#product_taste").focus();
 				return false;
 			} else {
 				store_form.submit();
@@ -151,6 +169,7 @@
 		font-weight : 700;
 		word-wrap: break-word;
 		letter-spacing: -0.5px;
+		margin-left : 5px;
 	}
 	
 	.store_content_price {
@@ -160,10 +179,11 @@
 		font-weight : 500;
 		word-wrap: break-word;
 		letter-spacing: -0.5px;
-		margin-top : 10px;
+		margin-top : 15px;
+		margin-left : 5px;
 	}
 	
-	/* 수량, 옵션 */
+	/* 수량 */
 	.option-box {
 		padding: 28px 0 28px;
 		position: relative;
@@ -184,18 +204,6 @@
 		font-size : 16px;
 	}
 	
-	.option-box>span:nth-child(2) {
-		margin: 5px 0;
-		font-size : 20px;
-		font-weight : 500;	
-		margin-right : 34px;
-	}
-	
-	.option-box>select:nth-child(3) {
-		border : 1px solid #444;
-		height : 30px;
-		width : 170px;
-	}
 	
 	/* 장바구니, 주문하기 버튼 */
 	.store_btn_style1 {
@@ -268,15 +276,19 @@
 		cursor : pointer;
 	}
 	
+	.content_category_btn:hover {
+		background-color : #e6e6e6;
+	}
+	
 	.content_area>img {
 		margin-top : -4px;
 	}
 	
 	/* Jquery 기능 */
-	.selected {
+	/* .selected {
 		background-color : #4fa9de;
 		color : white;
-	}
+	} */
 	
 	.menu-fixed {
 	  position: fixed;
@@ -288,7 +300,6 @@
 	/******* 상품평 ********/
 	.store_product_review {
 		/* border : 1px solid red; */
-		margin : 30px 0;
 		padding-top : 40px;
 	}
 	
@@ -328,10 +339,9 @@
 		color : #595959;
 	}
 	
-	.store_product_review>article>div:nth-child(5)>span:first-child,
-	.store_product_review>article>div:nth-child(6)>span:first-child {
+	.store_product_review>article>div:nth-child(4)>span:first-child {
 		display: inline-block;
-		width : 10%;
+		width : 8%;
 		font-weight : 700;
 	}
 	
@@ -409,12 +419,12 @@
 	}
 	
 	/* 답변하기 버튼 */
-	.store_product_faq_content>article>div>div:nth-child(4) {
+	.store_product_faq_content>article>div>div:nth-child(3) {
 		text-align : right;
 		margin-right : 10px;
 	}
 	
-	.store_product_faq_content>article>div>div:nth-child(4)>button {
+	.store_product_faq_content>article>div>div:nth-child(3)>button {
 		background-color : #4fa9de;
 		padding : 4px;
 		font-size : 14px;
@@ -425,7 +435,7 @@
 		cursor : pointer;
 	}
 	
-	.store_product_faq_content>article>div>div:nth-child(4)>button:hover {
+	.store_product_faq_content>article>div>div:nth-child(3)>button:hover {
 		background-color:#268ecc;
 		border:1px solid #268ecc;
 	}
@@ -442,8 +452,9 @@
 	
 	/***** 배송 / 교환 / 반품 안내 *****/
 	 .store_product_ship {
-	 	margin : 20px 0;
+	 	/* margin : 20px 0; */
 		padding : 30px 0;
+		/* border : 1px solid purple; */
 	 }
 	
 	.store_product_ship>div:first-child {
@@ -489,10 +500,14 @@
 		font-weight : 700;
 	}
 	
-	.modal-body>input:first-child, .modal-body>select, .modal-body>div>input {
+	.modal-body input{
 		display : inline-block;
 		width : 90%;
 		margin : 5px 0;
+	}
+	
+	.modal-body>input:first-child {
+		border : none;
 	}
 	
 </style>
@@ -519,23 +534,12 @@
 					<div class = "text_area">
 						<div class = "title-box">
 							<div class = "store_content_title">[식품] 제주도 오메기떡</div>
-							<div class = "store_content_price">￦ 9,900</div>
+							<div class = "store_content_price">가격　　　　　　9,900원</div>
 						</div>
 						
 						<div class = "option-box">
 							<div>수량　　<input type = "number" min = "0" max = "10" id = "product_amount" name = "product_amount"></div>
-							<span>옵션</span>
-							<select name = "product_taste" id = "product_taste">
-								<option value = "choice">선택</option>
-								<option value = "basic">기본</option>
-								<option value = "salt">소금맛</option>
-								<option value = "sugar">설탕맛</option>
-								<option value = "honeybutter">허니버터맛</option>
-							</select>
-						</div>
-						
-						<div class = "store_content_price_sum"> 가격 * 수량 </div>
-						
+						</div>						
 						
 						<button type = "button" class = "store_btn_style1" id = "storeBasket">장바구니</button>
 						<button type = "submit" class = "store_btn_style2" id = "store_buy">바로구매</button>
@@ -567,27 +571,21 @@
 						<div>이진옥</div>
 						<div><span>별점</span><span>2021.07.06</span></div>
 						<div>제주도 오메기떡</div>
-						<div>한줄평</div>
-						<div><span>신선도</span><span>아주좋아요</span></div>
-						<div><span>맛 만족도</span><span>아주 맛있어요</span></div>
+						<div><span>한줄평</span><span>맛있어요 짱</span></div>
 					</article>
 					
 					<article>
 						<div>이진옥</div>
 						<div><span>별점</span><span>2021.07.06</span></div>
 						<div>제주도 오메기떡</div>
-						<div>한줄평</div>
-						<div><span>신선도</span><span>아주좋아요</span></div>
-						<div><span>맛 만족도</span><span>아주 맛있어요</span></div>
+						<div><span>한줄평</span><span>맛있어요 짱</span></div>
 					</article>
 					
 					<article>
 						<div>이진옥</div>
 						<div><span>별점</span><span>2021.07.06</span></div>
 						<div>제주도 오메기떡</div>
-						<div>한줄평</div>
-						<div><span>신선도</span><span>아주좋아요</span></div>
-						<div><span>맛 만족도</span><span>아주 맛있어요</span></div>
+						<div><span>한줄평</span><span>맛있어요 짱</span></div>
 					</article>
 				</div>
 				
@@ -604,34 +602,25 @@
 									<div class="modal-header">
 										<button class="close" type="button" data-dismiss="modal" aria-label="Close">
 										<span aria-hidden="true">&times;</span></button>
-										</button>
 										<h3 class="modal-title" id="exampleModalLabel">문의하기</h3>
 									</div>
 									<div class="modal-body">
 										<input type = "text" value = "상품명 vo.stname" readonly>
-										<select name = "product_taste" id = "product_taste">
-											<option value = "choice">선택</option>
-											<option value = "basic">기본</option>
-											<option value = "salt">소금맛</option>
-											<option value = "sugar">설탕맛</option>
-											<option value = "honeybutter">허니버터맛</option>
-										</select>	
-										
 										<div><input type = "text" placeholder = "문의할 내용을 입력해주세요"></input></div>
 									</div>
 									<div class="modal-footer">
-										<a class="btn" id="modalY" href="#">문의하기</a>
+										<a class="btn" id="modalY" href="store_faq_proc.do">문의하기</a>
 										<button class="btn" type="button" data-dismiss="modal">닫기</button>
 									</div>
 								</div>
 							</div>
 						</div>
 					
+					
 					<div class = "store_product_faq_content">
 						<article>
 							<div>
-								<div><button>질문</button><strong>이진*</strong><span> vo.문의시간 </span></div>
-								<div> vo.수량 | vo.옵션 </div>
+								<div><button>질문</button><strong>이진*</strong>&emsp;&emsp;<span> vo.문의시간 </span></div>
 								<div>상품문의 합니다. 이거 이렇게 하는거 맞나요? 오메기떡 맛있나요?</div>
 								<div><button type = "button" id = "storereplyBtn">답변하기</button></div>
 							</div>
@@ -639,10 +628,11 @@
 						
 						<article>
 							<div>
-								<div><button>답변</button><strong>판매자</strong><span> vo.답변시간 </span></div>
+								<div><button>답변</button><strong>판매자</strong>&emsp;&emsp;<span> vo.답변시간 </span></div>
 								<div>안녕하세요 이용해주셔서 감사합니다. 네 맛있습니다.</div>
 							</div>
 						</article>
+						
 					</div>
 					
 					<!-- 답변하기 Modal-->
@@ -652,7 +642,6 @@
 									<div class="modal-header">
 										<button class="close" type="button" data-dismiss="modal" aria-label="Close">
 										<span aria-hidden="true">&times;</span></button>
-										</button>
 										<h3 class="modal-title" id="exampleModalLabel">문의하기</h3>
 									</div>
 									<div class="modal-body">
@@ -660,7 +649,7 @@
 										<div><input type = "text" placeholder = "답변할 내용을 입력해주세요"></input></div>
 									</div>
 									<div class="modal-footer">
-										<a class="btn" id="modalY" href="#">답변하기</a>
+										<a class="btn" id="modalY" href="store_faq_reply_proc.do">답변하기</a>
 										<button class="btn" type="button" data-dismiss="modal">닫기</button>
 									</div>
 								</div>

@@ -1,0 +1,97 @@
+@charset "UTF-8";
+
+	section {
+		text-align : center; 
+		margin-top : 80px;
+	}
+	
+	.store, .storeeat, .storesouve, .storeetc {
+		/* border : 1px solid blue; */
+		width : 1000px;
+		margin : auto;
+	}
+	
+	h3 {
+		border-bottom : 3px solid #4fa9de; 
+		font-size  :20px; 
+		font-weight : bold; 
+		display : inline-block;
+	}
+	
+	.store_best, .store_eat, .store_souve, .store_etc {
+		margin : 20px 0;
+	}
+	
+	.store_best>div:first-child, .store_eat>div:first-child, .store_souve>div:first-child, .store_etc>div:first-child {
+		border-bottom : 2px solid #ccc;
+	}
+	
+	.store_best>div:first-child>div:first-child {
+		padding-bottom : 5px;
+		text-align : left;
+		margin-left : 20px;
+	}
+	
+	.store_eat>div:first-child>div:first-child, 
+	.store_souve>div:first-child>div:first-child, .store_etc>div:first-child>div:first-child {
+		padding-bottom : 5px;
+		text-align : left;
+		width : 80%;
+		display : inline-block;
+	}
+	
+	.store_eat>div:first-child>div:nth-child(2), .store_souve>div:first-child>div:nth-child(2),
+	.store_etc>div:first-child>div:nth-child(2) {
+		width : 15%;
+		display : inline-block;
+		text-align : right;
+	}
+		
+	span {
+		font-weight : 600;
+		font-size : 24px;
+		color : #595959;
+	}
+	
+	.store_best ul li, .store_eat ul li, .store_souve ul li, .store_etc ul li,
+	.store_eat_list ul li, .store_souve_list ul li, .store_etc_list ul li {
+		display : inline-block;
+		margin : 50px;
+	}
+	
+	a {
+		text-decoration : none;
+		color : #666;
+		font-weight : 600;
+		font-size : 18px;
+	}
+	
+	
+	/* Menu-bar */
+	.store_nav {
+		margin : 20px 0;
+		/* border : 1px solid purple; */
+	}
+	.store_nav>ul {
+	  list-style-type : none;
+	  margin : 0;
+	  padding : 0;
+	}
+	
+	.store_nav>ul>li {
+	  display : inline-block;
+	  margin : 0 3px;
+	}
+	
+	.store_nav>ul>li>a {
+		display : inline-block;
+		color : #444;
+		font-weight : 700;
+		font-size : 22px;
+		width : 160px;
+	}
+	
+	.store_nav>ul>li>a:hover {
+		background-color : #f2f2f2;
+	}
+	

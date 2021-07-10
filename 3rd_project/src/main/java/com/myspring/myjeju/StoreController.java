@@ -25,11 +25,11 @@ public class StoreController {
 	}
 	
 	/**
-	 * store_deco.do : 스토어 실내장식품 화면
+	 * store_souve.do : 스토어 기념품 화면
 	 */
-	@RequestMapping(value = "/store_deco.do", method = RequestMethod.GET)
-	public String store_deco() {
-		return "store/storedeco";
+	@RequestMapping(value = "/store_souve.do", method = RequestMethod.GET)
+	public String store_souve() {
+		return "store/storesouve";
 	}
 	
 	/**
@@ -56,9 +56,21 @@ public class StoreController {
 		return "store/storebuy";
 	}
 	
-	@RequestMapping(value = "/store_modal.do", method = RequestMethod.GET)
-	public String store_modal() {
-		return "store/store_modal";
+	/**
+	 * store_faq_proc.do : 스토어 문의하기 처리
+	 */
+	@RequestMapping(value = "/store_faq_proc.do", method = RequestMethod.GET)
+	public String store_faq_proc() {
+		return "store/store_content";
+	}
+	
+	
+	/**
+	 * store_faq_reply_proc.do : 스토어 문의 -> 답변 처리
+	 */
+	@RequestMapping(value = "/store_faq_reply_proc.do", method = RequestMethod.GET)
+	public String store_faq_reply_proc() {
+		return "store/store_content";
 	}
 	
 	
