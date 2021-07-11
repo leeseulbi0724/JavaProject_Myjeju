@@ -182,7 +182,7 @@
 			    });
 			    
 		    	var content = document.createElement('div');
-		  	    content.innerHTML =  "<div>" + data.title + "</div>" + "<div>" + data.addr + "</div>" + "<div>" + data.tel +  "</div>";
+		  	    content.innerHTML =  "<div>" + data.title + "</div>" + "<div>" + data.addr + "</div>" + "<div>" + data.tel;
 		  	    content.style.cssText = 'background: white; border: 1px solid black; padding:3px; border-radius:5px ';
 			
 			    var closeBtn = document.createElement('button');

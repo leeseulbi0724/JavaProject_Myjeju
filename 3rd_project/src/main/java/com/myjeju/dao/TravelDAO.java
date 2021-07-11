@@ -10,7 +10,7 @@ public class TravelDAO extends DBConn {
 	//Select --> 전체 리스트
 		public ArrayList<TravelVO> getList(){
 			ArrayList<TravelVO> list = new ArrayList<TravelVO>();
-			String sql = " select t_vpoint, t_hpoint, t_name, t_addr, t_hp from myjeju_travel ";
+			String sql = " select t_vpoint, t_hpoint, t_name, t_addr, t_hp, t_tfile from myjeju_travel ";
 			getPreparedStatement(sql);
 			
 			try {
@@ -22,6 +22,7 @@ public class TravelDAO extends DBConn {
 					vo.setT_name(rs.getString(3));
 					vo.setT_addr(rs.getString(4));
 					vo.setT_hp(rs.getString(5));
+					vo.setT_tfile(rs.getString(6));
 					list.add(vo);
 				}
 			} catch (Exception e) {
