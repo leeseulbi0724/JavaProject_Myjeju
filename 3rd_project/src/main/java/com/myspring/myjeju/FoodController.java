@@ -42,4 +42,11 @@ public class FoodController {
 		return mv;
 	}
 	
+	/**
+	 * food_detail.do : 맛집 상세페이지
+	 */
+	@RequestMapping(value="/food_detail.do", method=RequestMethod.GET)
+	public String travel_detail() {
+		return "food/food_detail";
+	}
 }

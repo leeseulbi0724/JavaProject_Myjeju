@@ -22,7 +22,7 @@
 			<div class="travel_title">추천 카페</div>
 			<div class="travel_spot">
 				<article class="travel_spot1">
-					<a href="http://localhost:9000/myjeju/travel_detail.do"><img src="http://localhost:9000/myjeju/images/food/cafe2.jpg"></a>
+					<a href="http://localhost:9000/myjeju/food_detail.do"><img src="http://localhost:9000/myjeju/images/food/cafe2.jpg"></a>
 					<div class="spot_infor">
 						<p class="spot_name">CAFE가호 <span>애월 카페</span></p>
 						<p class="spot_tag">#애월 #카페 #커피 #디저트 #가호</p>
@@ -31,7 +31,7 @@
 					</div>
 				</article>
 				<article class="travel_spot2">
-					<a href="http://localhost:9000/myjeju/travel_detail.do"><img src="http://localhost:9000/myjeju/images/food/cafe1.jpg"></a>
+					<a href="http://localhost:9000/myjeju/food_detail.do"><img src="http://localhost:9000/myjeju/images/food/cafe1.jpg"></a>
 					<div class="spot_infor">
 						<p class="spot_name">카페 델문도 <span>함덕 카페</span></p>
 						<p class="spot_tag">#함덕 #바다위 #카페 #커피 #디저트</p>
@@ -40,7 +40,7 @@
 					</div>
 				</article>
 				<article class="travel_spot3">
-					<a href="http://localhost:9000/myjeju/travel_detail.do"><img src="http://localhost:9000/myjeju/images/food/cafe3.jpg"></a>
+					<a href="http://localhost:9000/myjeju/food_detail.do"><img src="http://localhost:9000/myjeju/images/food/cafe3.jpg"></a>
 					<div class="spot_infor">
 						<p class="spot_name">하이엔드 제주 <span>애월 카페</span></p>
 						<p class="spot_tag">#애월 #하이엔드 #카페 #커피 #디저트</p>
@@ -131,7 +131,7 @@
 						</td>
 						<td>
 							<button type="button" class="btn_style" id="heart_btn"><img src="http://localhost:9000/myjeju/images/travel/empty_heart.png">1,674</button>
-							<button type="button" class="btn_style4" id="more_infor">상세정보</button>
+							<button type="button" class="btn_style4" id="more_infor" onclick="location.href='http://localhost:9000/myjeju/food_detail.do'">상세정보</button>
 						</td>
 					</tr>
 					<tr class="travel_list2">
@@ -147,7 +147,7 @@
 						</td>
 						<td>
 							<button type="button" class="btn_style" id="heart_btn"><img src="http://localhost:9000/myjeju/images/travel/empty_heart.png">354</button>
-							<button type="button" class="btn_style4" id="more_infor">상세정보</button>
+							<button type="button" class="btn_style4" id="more_infor" onclick="location.href='http://localhost:9000/myjeju/food_detail.do'">상세정보</button>
 						</td>
 					</tr>
 					<tr class="travel_list3">
@@ -163,7 +163,7 @@
 						</td>
 						<td>
 							<button type="button" class="btn_style" id="heart_btn"><img src="http://localhost:9000/myjeju/images/travel/empty_heart.png">287</button>
-							<button type="button" class="btn_style4" id="more_infor">상세정보</button>
+							<button type="button" class="btn_style4" id="more_infor" onclick="location.href='http://localhost:9000/myjeju/food_detail.do'">상세정보</button>
 						</td>
 					</tr>
 				</tbody>

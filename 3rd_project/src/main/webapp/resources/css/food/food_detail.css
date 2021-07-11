@@ -109,81 +109,82 @@ button#more_btn:hover img:nth-child(2){
 	display:inline-block;
 } */
 
+
 /**
-*	travel_detail_top
+*	food_detail_top
 */
-div.travel_detail_top{
+div.food_detail_top{
+	margin:80px auto;
+	text-align:center;
+}
+div.food_detail_top>img{
 	display:inline-block;
+	width:600px;
+	text-align:center;
+	margin:0 auto;
+}
+div.food_detail_top>div{
+	display:inline-block;
+	color:gray;
+	margin-left:80px;
+	text-align:left;
 	position:relative;
-	overflow:hidden; 
-	width:100%;
-	height:900px;
+	top:-40px;
 }
-div.travel_detail_top>img{
-	display:inline-block;
-	z-index:1;
-	width:100%;
-	filter:brightness(30%);
-}
-div.travel_detail_top>div{
-	display:inline-block;
-	position:relative;
-	top:-800px;
-	left:250px;
-	z-index:2;
-	color:white;
-}
-div.travel_detail_top h1{
+div.food_detail_top h1{
+	color:black;
 	font-size:40px;
 	margin-bottom:15px;
 	padding-left:20px;
 }
-div.travel_detail_top h2{
+div.food_detail_top h3{
 	padding-left:20px;
 }
-div.travel_detail_top p{
-	border-top:2px solid white;
+div.food_detail_top p{
+	border-top:2px solid gray;
 	line-height:30px;
 	margin-top:30px;
 	padding:30px 20px 20px 20px;
 	font-weight:bold;
 }
-
+div.food_detail_top>div>div{
+	padding-left:20px;
+}
+button#heart_btn>img{
+	vertical-align:middle;
+	margin-left:-5px;
+	padding-right:10px;
+}
+div.food_detail_top>div>div>img{
+	padding:0 10px;
+}
 
 
 
 
 
 /**
-*	travel_detail_content
+*	food_detail_content
 */
-div.travel_detail_content{
+div.food_detail_content{
 	width:1000px;
 	margin:80px auto;
 	text-align:center;
-}
-div.travel_detail_content h3{
-	text-align:left;
-	margin-bottom:30px;
 }
 /**
 *	detail_infor
 */
 section.detail_infor{
 	border-bottom:2px solid lightgray;
-	padding:50px 0 80px 0;
+	padding:50px 0 130px 0;
 	text-align:center;
 }
-section.detail_infor h1{
-	font-size:35px;
-	margin-bottom:15px;
-} 
 section.detail_infor>div{
 	width:30px;
 	height:2px;
 	background-color:lightgray;
 	margin:30px auto;
-}
+} 
 section.detail_infor>p{
 	line-height:35px;
 	color:gray;
@@ -197,7 +198,7 @@ section.detail_infor>p{
 section.detail_image{
 	border-bottom:2px solid lightgray;
 	padding-bottom:80px;
-	margin:80px 0;
+	margin:80px 0 130px 0;
 }
 div.detail_image2{
 	display:inline-block;
@@ -220,71 +221,6 @@ div.detail_image2>img:hover{
 
 
 /**
-*	detail_spot
-*/
-section.detail_spot{
-	margin:80px 0;
-	text-align:left;
-	/* border-bottom:2px solid lightgray; */
-	padding-bottom:80px;
-}
-div.detail_spot_pic{
-	display:inline-block;
-	position: relative;
-	width:400px;
-	height:400px;
-	overflow:hidden; 
-	margin:0 auto;
-}
-div.detail_spot_pic>img{
-	/* position:absolute;
-	left:50%;
-	margin-left:-300px; */
-	width:400px;
-	height:400px;
-}
-div.detail_spot_infor{
-	display:inline-block;
-	margin-left:30px;
-}
-div.spot_choice{
-	display:inline-block;
-	position:absolute;
-	margin-top:20px;
-	margin-left:340px;
-	cursor:pointer;
-}
-div.spot_choice>h3{
-	display:inline-block;
-	width:90px;
-	border:2px solid lightgray;
-	border-radius:10px;
-	padding:10px;
-	margin-right:10px;
-	color:lightgray;
-	font-size:15px;
-	font-weight:bold;
-	text-align:center;
-}
-div.detail_spot_infor>p.spot_title{
-	display:block;
-	font-size:30px;
-	font-weight:bold;
-	padding-bottom:10px;
-	color:#4fa9de;
-	border-bottom:3px solid #4fa9de;
-}
-div.detail_spot_infor>p.spot_infor{
-	width:560px;
-	font-size:18px;
-	font-weight:bold;
-	color:#5b5b5b;
-	line-height:40px;
-	margin-top:30px;
-}
-
-
-/**
 *	detail_review
 */
 section.detail_review{
@@ -293,15 +229,15 @@ section.detail_review{
 	/* padding-top:40px; */
 	padding-bottom:80px;
 }
-div.travel_review_zone{
+div.food_review_zone{
 	border-bottom:3px solid lightgray;
 	padding-bottom:30px;
 	margin-bottom:20px;
 }
-div.travel_review_zone dt{
+div.food_review_zone dt{
 	text-align:left;
 }
-input#travel_review{
+input#food_review{
 	width:750px;
 	height:40px;
 	margin-top:10px;
@@ -309,10 +245,10 @@ input#travel_review{
 	border:1px solid #a1a1a1;
 	border-radius:4px;
 }
-input#travel_review::placeholder{
+input#food_review::placeholder{
 	font-size:15px;
 }
-button#travel_review_btn{
+button#food_review_btn{
 	margin-top:7px;
 	width:60px;
 	height:40px;
@@ -326,29 +262,29 @@ div.review_date{
 	color:gray;
 	font-size:13px;
 }
-div.travel_review_zone2 dl{
+div.food_review_zone2 dl{
 	display:inline-block;
 	text-align:left;
 	margin:20px 0;
 	border-bottom:1px solid #4fa9de;
 	padding-bottom:30px;
 }
-div.travel_review_zone dt,
-div.travel_review_zone2 dt{
+div.food_review_zone dt,
+div.food_review_zone2 dt{
 	display:inline-block;
 	width:80px;
 	margin-left:20px;
 	vertical-align:middle;
 }
-div.travel_review_zone dd:nth-child(2),
-div.travel_review_zone2 dd:nth-child(2){
+div.food_review_zone dd:nth-child(2),
+div.food_review_zone2 dd:nth-child(2){
 	display:inline-block;
 	width:750px;
 	margin-left:10px;
 	vertical-align:middle;
 }
-div.travel_review_zone dd:nth-child(3),
-div.travel_review_zone2 dd:nth-child(3){
+div.food_review_zone dd:nth-child(3),
+div.food_review_zone2 dd:nth-child(3){
 	display:inline-block;
 	width:50px;
 	margin-left:20px;

@@ -28,4 +28,12 @@ public class HouseController {
 		
 		return mv;
 	}
+	
+	/**
+	 * house_detail.do : 숙소 상세페이지
+	 */
+	@RequestMapping(value="/house_detail.do", method=RequestMethod.GET)
+	public String travel_detail() {
+		return "house/house_detail";
+	}
 }
