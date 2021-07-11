@@ -80,7 +80,7 @@ section.calendar>div.days_sun {
 	text-align: center;
 	line-height: 80px;	
 	color: red;
-}
+} 
 section.calendar>div.days_sat {
 	margin: 0;
 	padding: 0;
@@ -97,9 +97,34 @@ section.calendar>div:nth-child() {
 	color: red;
 	border : 2px solid red;
 }
+div.date {
+	font-size:20px;
+	font-weight: 700;
+	margin-top: 10px;
+}
 
+div.firstday , div.secondday{
+	display: inline-block;
+}
 
+form.search_form {
+	display: inline-block;
+	position:absolute;
+	left: 55.5%;
+}
 
+button.search_btn {
+	display: inline-block;	
+	border:1px solid #4fa9de;
+	background-color: #4fa9de;
+	color: white;
+	padding: 8px 10px;
+	border-radius: 15px;
+	font-size:15px;
+	position:relative;
+	bottom: 27px;
+	cursor:pointer;
+}
 
 
 

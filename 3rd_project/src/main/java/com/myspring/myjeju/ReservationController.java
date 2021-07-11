@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.myjeju.vo.DateVO;
+
 @Controller
 public class ReservationController {
 	public static int monthDay(int year, int month) {
@@ -24,13 +26,7 @@ public class ReservationController {
 		}
 	}
 
-	public static ArrayList<Integer> calprint(int year, int month, int maxrow) {
-		
-		
-//		System.out.println("");
-//
-//		System.out.println(year + "년 " + month + "월의 달력");
-//		System.out.println("");
+	public static ArrayList<DateVO> calprint(int year, int month, int maxrow) {
 
 		int sum = 0;
 
@@ -52,7 +48,8 @@ public class ReservationController {
 		int day = first % 7; // 입력한 month의 1일의 요일
 		
 		
-		ArrayList<Integer> calv = new ArrayList<Integer>();
+		ArrayList<DateVO> calv = new ArrayList<DateVO>();
+		
 		
 		
 		int num = 1; // month의 일 표시
@@ -62,10 +59,10 @@ public class ReservationController {
 		int next_day = 1;
 		
 		boolean start = false;
-//		System.out.println(" Sun  Mon  Tue  Wed  Thu  Fri  Sat ");
 
 		loop: for (int row = 0; row < maxrow; row++) {
 			for (int column = 0; column <= 6; column++) {
+				DateVO date = new DateVO();
 				if (row == 0 && !start) {
 					// 달력의 첫 행
 					if (column == day) {
@@ -73,19 +70,25 @@ public class ReservationController {
 						start = true;
 					} else {
 						// 시작 일에 도달 전에는 공백
-						calv.add(pre_day);
+						date.setDay(pre_day);
+						date.setMonth(month-1);
+						
+						calv.add(date);
 						pre_day++;
 						continue;
 					}
 				}
 				if(num <= max) {
-//					System.out.printf("  %02d ", num);
-					calv.add(num);
+					date.setDay(num);
+					date.setMonth(month);
+					
+					calv.add(date);
 					num++;
 				}else {
-//					System.out.print("     ");
+					date.setDay(next_day);
+					date.setMonth(month+1);
 					
-					calv.add(next_day);
+					calv.add(date);
 					next_day++;
 				}
 				
@@ -94,18 +97,10 @@ public class ReservationController {
 					break loop;
 				}
 			}
-//			System.out.println("");
 		}
-//		System.out.println();
-//		for(int i = 0; i < maxrow; i++) {
-//			for(int j = 0; j <= 6;j++) {
-//				System.out.print(cal[i][j] + " ");
-//			}
-//		}
 		return calv;
 	}
-
-
+	
 	/**
 	 * main.do : 시작페이지
 	 */
@@ -160,7 +155,7 @@ public class ReservationController {
 					maxrow = 5;
 				}
 		
-		ArrayList<Integer> value = calprint(year,month,maxrow);
+		ArrayList<DateVO> value = calprint(year,month,maxrow);
 		
 		mv.setViewName("reservation/calendar");
 		mv.addObject("calvalue",value);
@@ -168,6 +163,11 @@ public class ReservationController {
 		mv.addObject("year",year);
 		mv.addObject("month",month);
 		return mv;
+	}
+	
+	@RequestMapping(value="/reselvationList.do", method=RequestMethod.POST)
+	public String index() {
+		return "reservation/reselvationList";
 	}
 	
 	
