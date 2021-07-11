@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,11 +33,11 @@
 				<div><span>BEST MENU</span></div>
 			</div>
 				
-			<ul>
-				<li><a href = "store_content.do"><img src = "http://localhost:9000/myjeju/images/store/store1.png"><p>[식품] 감귤 타르트</p></a></li>
-				<li><a href = "#"><img src = "http://localhost:9000/myjeju/images/store/store2.png"><p>[식품] 제주 오메기떡</p></a></li>
-				<li><a href = "#"><img src = "http://localhost:9000/myjeju/images/store/store3.png"><p>[식품] 제주도 한라봉</p></a></li>
-			</ul>
+			<c:forEach var = "best" items = "${bestlist}">
+				<ul>
+					<li><a href = "store_content.do"><img src = "http://localhost:9000/myjeju/images/store/store1.png"><p>[${best.s_category}] ${best.s_name}</p></a></li>
+				</ul>
+			</c:forEach>
 		</div>
 		
 		<div class = "store_eat">
@@ -44,11 +45,11 @@
 				<div><span>식품</span></div>
 				<div><a href = "store_eat.do">더 보기 +</a></div>
 			</div>
-			<ul>
-				<li><a href = "store_content.do"><img src = "http://localhost:9000/myjeju/images/store/store1.png"><p>[식품] 감귤 타르트</p></a></li>
-				<li><a href = "#"><img src = "http://localhost:9000/myjeju/images/store/store2.png"><p>[식품] 제주 오메기떡</p></a></li>
-				<li><a href = "#"><img src = "http://localhost:9000/myjeju/images/store/store3.png"><p>[식품] 제주도 한라봉</p></a></li>
-			</ul>
+			<c:forEach var = "eat" items = "${eatlist}">
+				<ul>
+					<li><a href = "store_content.do"><img src = "http://localhost:9000/myjeju/images/store/store1.png"><p>[${eat.s_category}] ${eat.s_name}</p></a></li>
+				</ul>
+			</c:forEach>
 		</div>
 		
 		<div class = "store_souve">
@@ -56,11 +57,11 @@
 				<div><span>기념품</span></div>
 				<div><a href = "store_souve.do">더 보기 +</a></div>
 			</div>
-			<ul>
-				<li><a href = "store_content.do"><img src = "http://localhost:9000/myjeju/images/store/store1.png"><p>[식품] 감귤 타르트</p></a></li>
-				<li><a href = "#"><img src = "http://localhost:9000/myjeju/images/store/store2.png"><p>[식품] 제주 오메기떡</p></a></li>
-				<li><a href = "#"><img src = "http://localhost:9000/myjeju/images/store/store3.png"><p>[식품] 제주도 한라봉</p></a></li>
-			</ul>
+			<c:forEach var = "souve" items = "${souvelist}">
+				<ul>
+					<li><a href = "store_content.do"><img src = "http://localhost:9000/myjeju/images/store/store1.png"><p>[${souve.s_category}] ${souve.s_name}</p></a></li>
+				</ul>
+			</c:forEach>
 		</div>
 		
 		<div class = "store_etc">
@@ -68,11 +69,11 @@
 				<div><span>잡화</span></div>
 				<div><a href = "store_etc.do">더 보기 +</a></div>
 			</div>
-			<ul>
-				<li><a href = "store_content.do"><img src = "http://localhost:9000/myjeju/images/store/store1.png"><p>[식품] 감귤 타르트</p></a></li>
-				<li><a href = "#"><img src = "http://localhost:9000/myjeju/images/store/store2.png"><p>[식품] 제주 오메기떡</p></a></li>
-				<li><a href = "#"><img src = "http://localhost:9000/myjeju/images/store/store3.png"><p>[식품] 제주도 한라봉</p></a></li>
-			</ul>
+			<c:forEach var = "etc" items = "${etclist}">
+				<ul>
+					<li><a href = "store_content.do"><img src = "http://localhost:9000/myjeju/images/store/store1.png"><p>[${etc.s_category}] ${etc.s_name}</p></a></li>
+				</ul>
+			</c:forEach>
 		</div>
 	
 	</div>
