@@ -280,9 +280,6 @@
 		background-color : #e6e6e6;
 	}
 	
-	.content_area>img {
-		margin-top : -4px;
-	}
 	
 	/* Jquery 기능 */
 	/* .selected {
@@ -528,13 +525,13 @@
 				<form name = "store_form" action = "store_buy.do" method = "get" class = "store_content_form">
 				
 					<div class = "img_area">
-						<img src = "http://localhost:9000/myjeju/images/store/store2.png">
+						<img src = "http://localhost:9000/myjeju/upload/${vo.s_sfile}">
 					</div>
 					
 					<div class = "text_area">
 						<div class = "title-box">
-							<div class = "store_content_title">[식품] 제주도 오메기떡</div>
-							<div class = "store_content_price">가격　　　　　　9,900원</div>
+							<div class = "store_content_title">[${vo.s_category}] ${vo.s_name}</div>
+							<div class = "store_content_price">가격　　　　　　${vo.s_price}원</div>
 						</div>
 						
 						<div class = "option-box">
@@ -560,9 +557,7 @@
 				</div>
 			
 				<div class = "content_area">
-					<img src = "http://localhost:9000/myjeju/images/store/omegi1.jpg" id = "here1">
-					<img src = "http://localhost:9000/myjeju/images/store/omegi2.jpg">
-					<img src = "http://localhost:9000/myjeju/images/store/omegi3.jpg">
+					<img src = "http://localhost:9000/myjeju/upload/${vo.s_ssfile}" id = "here1">
 				</div>
 				
 				<div class = "store_product_review" id = "here2">

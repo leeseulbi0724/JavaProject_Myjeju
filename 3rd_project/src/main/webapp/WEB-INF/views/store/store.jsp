@@ -35,7 +35,11 @@
 				
 			<c:forEach var = "best" items = "${bestlist}">
 				<ul>
-					<li><a href = "store_content.do"><img src = "http://localhost:9000/myjeju/images/store/store1.png"><p>[${best.s_category}] ${best.s_name}</p></a></li>
+					<li>
+						<a href = "store_content.do?sid=${best.sid}">
+							<img src = "http://localhost:9000/myjeju/upload/${best.s_sfile}" width = "260"><p>[${best.s_category}] ${best.s_name}</p>
+						</a>
+					</li>
 				</ul>
 			</c:forEach>
 		</div>
@@ -47,7 +51,7 @@
 			</div>
 			<c:forEach var = "eat" items = "${eatlist}">
 				<ul>
-					<li><a href = "store_content.do"><img src = "http://localhost:9000/myjeju/images/store/store1.png"><p>[${eat.s_category}] ${eat.s_name}</p></a></li>
+					<li><a href = "store_content.do"><img src = "http://localhost:9000/myjeju/images/store/store1.png" width = "260"><p>[${eat.s_category}] ${eat.s_name}</p></a></li>
 				</ul>
 			</c:forEach>
 		</div>
@@ -59,7 +63,7 @@
 			</div>
 			<c:forEach var = "souve" items = "${souvelist}">
 				<ul>
-					<li><a href = "store_content.do"><img src = "http://localhost:9000/myjeju/images/store/store1.png"><p>[${souve.s_category}] ${souve.s_name}</p></a></li>
+					<li><a href = "store_content.do"><img src = "http://localhost:9000/myjeju/images/store/store1.png" width = "260"><p>[${souve.s_category}] ${souve.s_name}</p></a></li>
 				</ul>
 			</c:forEach>
 		</div>
@@ -71,7 +75,7 @@
 			</div>
 			<c:forEach var = "etc" items = "${etclist}">
 				<ul>
-					<li><a href = "store_content.do"><img src = "http://localhost:9000/myjeju/images/store/store1.png"><p>[${etc.s_category}] ${etc.s_name}</p></a></li>
+					<li><a href = "store_content.do?sid=${etc.sid}"><img src = "http://localhost:9000/myjeju/upload/${etc.s_sfile}" width = "260"><p>[${etc.s_category}] ${etc.s_name}</p></a></li>
 				</ul>
 			</c:forEach>
 		</div>

@@ -78,10 +78,10 @@
 					<td><input type = "file" name = "sfile1" id = "s_image"></td>
 				</tr>
 				
-				<!-- <tr>
+				<tr>
 					<th>내용 이미지</th>
-					<td><input type = "file" name = "s_content" id = "s_content"></td>
-				</tr> -->
+					<td><input type = "file" name = "sfile2" id = "s_content"></td>
+				</tr>
 				
 				<tr>
 					<td>

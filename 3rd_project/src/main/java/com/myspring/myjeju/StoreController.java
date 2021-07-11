@@ -33,6 +33,7 @@ public class StoreController {
 		ArrayList<StoreVO> etclist = dao.getEtcList();
 		
 		mv.setViewName("store/store");
+		
 		mv.addObject("bestlist", bestlist);
 		mv.addObject("eatlist", eatlist);
 		mv.addObject("souvelist", souvelist);
@@ -62,16 +63,30 @@ public class StoreController {
 	 * store_etc.do : 스토어 잡화 화면
 	 */
 	@RequestMapping(value = "/store_etc.do", method = RequestMethod.GET)
-	public String store_etc() {
-		return "store/storeetc";
+	public ModelAndView store_etc() {
+		ModelAndView mv = new ModelAndView();
+		StoreDAO dao = new StoreDAO();
+		ArrayList<StoreVO> list = dao.getEtcList2();
+		
+		mv.setViewName("store/storeetc");
+		mv.addObject("etclist", list);
+		
+		return mv;
 	}
 	
 	/**
 	 * store_content.do : 스토어 상품 상세화면
 	 */
 	@RequestMapping(value = "/store_content.do", method = RequestMethod.GET)
-	public String store_content() {
-		return "store/store_content";
+	public ModelAndView store_content(String sid) {
+		ModelAndView mv = new ModelAndView();
+		StoreDAO dao = new StoreDAO();
+		StoreVO vo = dao.getContent(sid);
+		
+		mv.setViewName("store/store_content");
+		mv.addObject("vo", vo);
+		
+		return mv;
 	}
 
 	/**
@@ -128,6 +143,9 @@ public class StoreController {
 			//DB저장
 			vo.setS_image(vo.getSfile1().getOriginalFilename());
 			vo.setS_sfile(uuid + "_" + vo.getSfile1().getOriginalFilename());
+			
+			vo.setS_content(vo.getSfile2().getOriginalFilename());
+			vo.setS_ssfile(uuid + "_" + vo.getSfile2().getOriginalFilename());
 		
 		}
 			
@@ -137,11 +155,13 @@ public class StoreController {
 		
 		if(result) {
 			
-			// 4. DB 연동 성공 --> upload 폴더에 저장
-			//DB저장 완료 후 폴더에 저장하기
+			// 4. DB 연동 성공 --> upload 폴더에 저장			//DB저장 완료 후 폴더에 저장하기
 			//File file = new File(root_path + attach_path + uuid + "_" + vo.getFile2().getOriginalFilename());
 			File file = new File(root_path + attach_path + vo.getS_sfile());
 			vo.getSfile1().transferTo(file);
+			
+			File file2 = new File(root_path + attach_path + vo.getS_ssfile());
+			vo.getSfile2().transferTo(file2);
 			
 			mv.setViewName("redirect:/store.do");
 		}
