@@ -185,7 +185,7 @@
         <a href="payment.do" class="self">
         	<img src="http://localhost:9000/myjeju/images/store/card.png" width=100% height=100% >
         </a>
-        <a href="#" class="kakao">
+        <a href="kakaopay.do" class="kakao">
         	<img src="http://localhost:9000/myjeju/images/store/pay.jpg" width=100% height=100% >
         </a>
       </div>      
