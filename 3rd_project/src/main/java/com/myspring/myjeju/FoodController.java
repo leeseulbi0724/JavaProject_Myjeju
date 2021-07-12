@@ -22,7 +22,8 @@ public class FoodController {
 	public ModelAndView food() {
 		ModelAndView mv = new ModelAndView();
 		FoodDAO dao = new FoodDAO();
-		ArrayList<FoodVO> list = dao.getList(); 
+		ArrayList<FoodVO> list = dao.getList();
+		
 		mv.setViewName("food/food");
 		mv.addObject("list",list);
 		

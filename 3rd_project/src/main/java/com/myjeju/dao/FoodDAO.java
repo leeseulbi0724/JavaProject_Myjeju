@@ -10,7 +10,7 @@ public class FoodDAO extends DBConn {
 	//Select --> 전체 리스트
 	public ArrayList<FoodVO> getList(){
 		ArrayList<FoodVO> list = new ArrayList<FoodVO>();
-		String sql = " select f_vpoint, f_hpoint, f_name, f_addr, f_hp from myjeju_food ";
+		String sql = " select f_vpoint, f_hpoint, f_name, f_addr, f_hp , f_ffile from myjeju_food ";
 		getPreparedStatement(sql);
 		
 		try {
@@ -22,6 +22,7 @@ public class FoodDAO extends DBConn {
 				vo.setF_name(rs.getString(3));
 				vo.setF_addr(rs.getString(4));
 				vo.setF_hp(rs.getString(5));
+				vo.setF_tfile(rs.getString(6));
 				list.add(vo);
 			}
 		} catch (Exception e) {

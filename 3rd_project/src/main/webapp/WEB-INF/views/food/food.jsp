@@ -14,7 +14,6 @@
 <body>
 	<!-- header -->
 	<jsp:include page="../header.jsp"></jsp:include>
-	
 	<!-- content -->
 	<div class="travel_content">
 		<h3>음식점</h3>
@@ -70,6 +69,7 @@
 			title : '${vo.f_name}',
 			addr : '${vo.f_addr}',
 			tel : '${vo.f_hp}',
+			img : '${vo.f_tfile}',
 			latlng:	new kakao.maps.LatLng(${vo.f_vpoint}, ${vo.f_hpoint})
 		},
 		</c:forEach>
@@ -92,7 +92,7 @@
 	    });
 	    
     	var content = document.createElement('div');
-  	    content.innerHTML =  "<div>" + data.title + "</div>" + "<div>" + data.addr + "</div>" + "<div>" + data.tel +  "</div>";
+  	    content.innerHTML = "<div>" + "<img src=" + "http://localhost:9000/myjeju/images/food/"+data.img + ">" + "</div>" + "<div>" + data.title + "</div>" + "<div>" + data.addr + "</div>" + "<div>" + data.tel +  "</div>";
   	    content.style.cssText = 'background: white; border: 1px solid black; padding:3px; border-radius:5px ';
 	
 	    var closeBtn = document.createElement('button');
