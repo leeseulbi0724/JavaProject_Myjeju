@@ -165,9 +165,9 @@ public class ReservationController {
 		return mv;
 	}
 	
-	@RequestMapping(value="/reselvationList.do", method=RequestMethod.POST)
+	@RequestMapping(value="/reservationList.do", method=RequestMethod.POST)
 	public String index() {
-		return "reservation/reselvationList";
+		return "reservation/reservationList";
 	}
 	
 	

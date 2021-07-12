@@ -274,7 +274,8 @@ $(document).ready(function(){
 		<br>
 		<div class="date">
 			<div class="firstday"></div> <div class="middleday" style="display: inline-block;"></div> <div class="secondday"></div>
-			<form class="search_form"action = "http://localhost:9000/myjeju/reselvationList.do" method="post">
+			<form class="search_form"action = "http://localhost:9000/myjeju/reservationList.do" method="post">
+			<input type = "hidden" class="preyear" name = "preyear" value="${year}">
 			<input type = "hidden" class="preday" name = "preday">
 			<input type = "hidden" class="presday" name = "presday">
 			<input type="hidden" name="currenthome" value=<%= currenthome %>>
