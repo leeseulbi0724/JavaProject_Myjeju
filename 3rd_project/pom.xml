@@ -117,6 +117,39 @@
 			<scope>test</scope>
 		</dependency>
 		
+		<dependency>
+   			<groupId>net.nurigo</groupId>
+    		<artifactId>javaSDK</artifactId>
+   			<version>2.2</version>
+		</dependency>   
+		
+		<!-- JDBC -->
+		<dependency>
+		 	<groupId>org.springframework</groupId>
+		 	<artifactId>spring-jdbc</artifactId>
+		 	<version>3.2.5.RELEASE</version>
+		</dependency>	
+		
+		<!-- DBCP -->
+		<dependency>
+			<groupId>commons-dbcp</groupId>
+			<artifactId>commons-dbcp</artifactId>
+			<version>1.4</version>
+		</dependency>
+		
+		<!-- Mybatis -->
+		<dependency>
+		    <groupId>org.mybatis</groupId>
+		    <artifactId>mybatis</artifactId>
+		    <version>3.3.1</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.mybatis</groupId>
+		    <artifactId>mybatis-spring</artifactId>
+		    <version>1.2.4</version>
+		</dependency>  
+		
 		<!-- FileUpload - MultipartHttpServletRequset -->
 		<dependency>
     		<groupId>commons-io</groupId>

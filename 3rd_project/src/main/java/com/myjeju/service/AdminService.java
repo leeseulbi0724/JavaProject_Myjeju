@@ -1,4 +1,4 @@
-package com.myspring.service;
+package com.myjeju.service;
 
 public interface AdminService {
 

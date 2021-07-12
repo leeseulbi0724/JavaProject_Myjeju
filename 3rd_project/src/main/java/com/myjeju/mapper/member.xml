@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="mapper.member">
+
+ 		<!-- 회원가입 -->
+ 		<insert id="join" parameterType="com.myjeju.vo.MemberVO">
+			insert into myjeju_member values (#{id},#{pass},#{name},#{birth},#{email1},#{hp},#{addr1},#{addr2},0,sysdate)		
+		</insert>
+
+</mapper>
