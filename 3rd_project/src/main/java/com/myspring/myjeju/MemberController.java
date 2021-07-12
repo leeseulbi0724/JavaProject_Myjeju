@@ -55,7 +55,6 @@ public class MemberController {
 	 */
 	@RequestMapping(value = "/join_proc.do", method=RequestMethod.POST ) 
 	public String join_proc(MemberVO vo) {
-		System.out.print(vo.getAddr1());
 		
 		String result = "";
 		

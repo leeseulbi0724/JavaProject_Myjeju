@@ -228,20 +228,20 @@
 						<tr>
 							<td style="width: 110px;"><h5>이메일</h5></td>
 							<td colspan="2">
-							<input class="form-control pull-left" id="userEmail1" type="email" name="email1" maxlength="20" placeholder="이메일을 입력하세요." style="width:42%;">
+							<input class="form-control pull-left" id="userEmail1" type="text" name="email1" maxlength="20" placeholder="이메일을 입력하세요." style="width:42%;">
 							<span class="pull-left" style="background-color: rgba(0,0,0,0); font-color:black; font-size: 17px; margin: 4px 10px;">@</span>
-							<input class="form-control pull-left" id="userEmail2" type="email" name="email2" maxlength="20" placeholder="이메일주소을 입력하세요." style="width:42%;">
+							<input class="form-control pull-left" id="userEmail2" type="text" name="email2" maxlength="20" placeholder="이메일주소을 입력하세요." style="width:42%;">
 							<div class="dropdown pull-left" style="width:10%; margin-left:10px;">
 							  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="width:100%;">
 							    <span id="choosevalue">선택</span>
 							    <span class="caret"></span>
 							  </button>
 							  <ul class="dropdown-menu email" aria-labelledby="dropdownMenu1">
-							    <li><a href="#">naver.com</a></li>
-							    <li><a href="#">gmail.com</a></li>
-							    <li><a href="#">daum.net</a></li>
+							    <li><a>naver.com</a></li>
+							    <li><a>gmail.com</a></li>
+							    <li><a>daum.net</a></li>
 							    <li role="separator" class="divider"></li>
-							    <li><a href="#">직접입력</a></li>
+							    <li><a>직접입력</a></li>
 							  </ul>
 							</div>
 							</td>
@@ -255,9 +255,9 @@
 							    <span class="caret"></span>
 							  </button>
 							  <ul class="dropdown-menu hp" aria-labelledby="dropdownMenu1">
-							    <li><a href="#">010</a></li>
-							    <li><a href="#">011</a></li>
-							    <li><a href="#">017</a></li>
+							    <li><a>010</a></li>
+							    <li><a>011</a></li>
+							    <li><a>017</a></li>
 							  </ul>
 							</div>
 							<input name="hp1" id="hp1" type="hidden">

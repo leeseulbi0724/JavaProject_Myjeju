@@ -40,7 +40,7 @@ public class MemberVO {
 	public void setEmail1(String email1) {
 		this.email1 = email1;
 	}
-	/*
+	
 	public String getEmail2() {
 		return email2;
 	}
@@ -49,15 +49,15 @@ public class MemberVO {
 	}
 	public String getEmail() {
 		if (email1 != null ) {
-			return email;
-		} else {
 			return email1+"@"+email2;
+		} else {
+			return email;
 		}
 		
 	}
 	public void setEmail(String email) {
 		this.email = email;
-	} */
+	}
 	public String getHp1() {
 		return hp1;
 	}
