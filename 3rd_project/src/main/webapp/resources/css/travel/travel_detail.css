@@ -127,8 +127,8 @@ div.travel_detail_top>img{
 }
 div.travel_detail_top>div{
 	display:inline-block;
-	position:relative;
-	top:-800px;
+	position:absolute;
+	top:250px;
 	left:250px;
 	z-index:2;
 	color:white;
@@ -202,17 +202,19 @@ section.detail_image{
 div.detail_image2{
 	display:inline-block;
 	position: relative;
-	width:400px;
+	/* width:400px;
 	height:300px;
-	overflow:hidden; 
+	object-fit:cover;
+	overflow:hidden;  */
 	margin:0 auto;
 }
 div.detail_image2>img{
-	/* position:absolute;
-	left:50%;
-	margin-left:-300px; */
 	transform:scale(1); 
 	transition:transform 0.5s linear;
+	width:400px;
+	height:300px;
+	object-fit:cover;
+	overflow:hidden; 
 }
 div.detail_image2>img:hover{
 	transform:scale(1.1);
@@ -288,9 +290,6 @@ div.detail_spot_infor>p.spot_infor{
 *	detail_review
 */
 section.detail_review{
-	/* border-top:2px solid lightgray; */
-	/* border-bottom:2px solid lightgray; */
-	/* padding-top:40px; */
 	padding-bottom:80px;
 }
 div.travel_review_zone{
@@ -298,11 +297,16 @@ div.travel_review_zone{
 	padding-bottom:30px;
 	margin-bottom:20px;
 }
+div.travel_review_zone dl{
+	width:940px;
+	margin:0 auto;
+	text-align:left;
+}
 div.travel_review_zone dt{
 	text-align:left;
 }
 input#travel_review{
-	width:750px;
+	width:620px;
 	height:40px;
 	margin-top:10px;
 	padding-left:5px;
@@ -328,6 +332,7 @@ div.review_date{
 }
 div.travel_review_zone2 dl{
 	display:inline-block;
+	width:940px;
 	text-align:left;
 	margin:20px 0;
 	border-bottom:1px solid #4fa9de;
@@ -343,12 +348,21 @@ div.travel_review_zone2 dt{
 div.travel_review_zone dd:nth-child(2),
 div.travel_review_zone2 dd:nth-child(2){
 	display:inline-block;
-	width:750px;
+	width:100px;
+	margin-left:10px;
+	vertical-align:middle;
+	text-align:left;
+}
+
+div.travel_review_zone dd:nth-child(3),
+div.travel_review_zone2 dd:nth-child(3){
+	display:inline-block;
+	width:620px;
 	margin-left:10px;
 	vertical-align:middle;
 }
-div.travel_review_zone dd:nth-child(3),
-div.travel_review_zone2 dd:nth-child(3){
+div.travel_review_zone dd:nth-child(4),
+div.travel_review_zone2 dd:nth-child(4){
 	display:inline-block;
 	width:50px;
 	margin-left:20px;
@@ -361,6 +375,9 @@ div.user_name{
 	font-size:14px;
 	text-align:center;
 	margin-top:5px;
+}
+img.review_star{
+	width:90px;
 }
 img.like_finger{
 	margin-left:7px;
@@ -375,7 +392,20 @@ img.btn_alert{
 	float:right;
 	margin-top:-30px;
 }
-
+select#star{
+	width:110px;
+	height:40px;
+	font-size:15px;
+	color:#face49;
+	border:1px solid #a1a1a1;
+	border-radius:4px;
+	margin-top:10px;
+	margin-left:-5px;
+}
+select#star option{
+	font-size:15px;
+	color:#face49;
+}
 
 
 

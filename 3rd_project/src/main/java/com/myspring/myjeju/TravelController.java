@@ -16,35 +16,52 @@ public class TravelController {
 	/**
 	 * travel.do : 여행지 메인페이지
 	 */
+	/*
 	@RequestMapping(value="/travel.do", method=RequestMethod.GET)
 	public ModelAndView travel() {
 		ModelAndView mv = new ModelAndView();
+		
 		TravelDAO tdao = new TravelDAO();
 		ArrayList<TravelVO> list = tdao.getList();
+		
 		mv.setViewName("travel/travel");
 		mv.addObject("list",list);
 		
 		return mv;
 	}
+	*/
+	
 	/**
-	 * photo_spot.do : 포토스팟 메인페이지
+	 * travel.do : 여행지 메인페이지
 	 */
-	@RequestMapping(value="/photo_spot.do", method=RequestMethod.GET)
-	public String photo_spot() {
-		return "travel/photo_spot";
+	@RequestMapping(value="/travel.do", method=RequestMethod.GET)
+	public ModelAndView travel() {
+		ModelAndView mv = new ModelAndView();
+		
+		TravelDAO dao = new TravelDAO();
+		ArrayList<TravelVO> list = dao.getTravelList();
+		ArrayList<TravelVO> toplist = dao.getTravelListTop3();
+		
+		mv.setViewName("travel/travel");
+		mv.addObject("list",list);
+		mv.addObject("toplist",toplist);
+		
+		return mv;
 	}
-	/**
-	 * car_spot.do : 차박스팟 메인페이지
-	 */
-	@RequestMapping(value="/car_spot.do", method=RequestMethod.GET)
-	public String car_spot() {
-		return "travel/car_spot";
-	}
+	
 	/**
 	 * travel_detail.do : 여행지 상세페이지
 	 */
 	@RequestMapping(value="/travel_detail.do", method=RequestMethod.GET)
-	public String travel_detail() {
-		return "travel/travel_detail";
+	public ModelAndView travel_detail(String tid) {
+		ModelAndView mv = new ModelAndView();
+		
+		TravelDAO dao = new TravelDAO();
+		TravelVO vo = dao.getTravelDetail(tid);
+		
+		mv.setViewName("travel/travel_detail");
+		mv.addObject("vo",vo);
+		
+		return mv;
 	}
 }

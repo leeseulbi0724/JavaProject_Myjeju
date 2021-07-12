@@ -120,8 +120,10 @@ div.food_detail_top{
 div.food_detail_top>img{
 	display:inline-block;
 	width:600px;
+	height:600px;
 	text-align:center;
 	margin:0 auto;
+	object-fit:cover;
 }
 div.food_detail_top>div{
 	display:inline-block;
@@ -206,6 +208,7 @@ div.detail_image2{
 	width:400px;
 	height:300px;
 	overflow:hidden; 
+	object-fit:cover;
 	margin:0 auto;
 }
 div.detail_image2>img{
@@ -224,9 +227,6 @@ div.detail_image2>img:hover{
 *	detail_review
 */
 section.detail_review{
-	/* border-top:2px solid lightgray; */
-	/* border-bottom:2px solid lightgray; */
-	/* padding-top:40px; */
 	padding-bottom:80px;
 }
 div.food_review_zone{
@@ -234,11 +234,16 @@ div.food_review_zone{
 	padding-bottom:30px;
 	margin-bottom:20px;
 }
+div.food_review_zone dl{
+	width:940px;
+	margin:0 auto;
+	text-align:left;
+}
 div.food_review_zone dt{
 	text-align:left;
 }
 input#food_review{
-	width:750px;
+	width:620px;
 	height:40px;
 	margin-top:10px;
 	padding-left:5px;
@@ -264,6 +269,7 @@ div.review_date{
 }
 div.food_review_zone2 dl{
 	display:inline-block;
+	width:940px;
 	text-align:left;
 	margin:20px 0;
 	border-bottom:1px solid #4fa9de;
@@ -279,12 +285,20 @@ div.food_review_zone2 dt{
 div.food_review_zone dd:nth-child(2),
 div.food_review_zone2 dd:nth-child(2){
 	display:inline-block;
-	width:750px;
+	width:100px;
 	margin-left:10px;
 	vertical-align:middle;
+	text-align:left;
 }
 div.food_review_zone dd:nth-child(3),
 div.food_review_zone2 dd:nth-child(3){
+	display:inline-block;
+	width:620px;
+	margin-left:10px;
+	vertical-align:middle;
+}
+div.food_review_zone dd:nth-child(4),
+div.food_review_zone2 dd:nth-child(4){
 	display:inline-block;
 	width:50px;
 	margin-left:20px;
@@ -297,6 +311,9 @@ div.user_name{
 	font-size:14px;
 	text-align:center;
 	margin-top:5px;
+}
+img.review_star{
+	width:90px;
 }
 img.like_finger{
 	margin-left:7px;
@@ -311,20 +328,24 @@ img.btn_alert{
 	float:right;
 	margin-top:-30px;
 }
+select#star{
+	width:110px;
+	height:40px;
+	font-size:15px;
+	color:#face49;
+	border:1px solid #a1a1a1;
+	border-radius:4px;
+	margin-top:10px;
+	margin-left:-5px;
+}
+select#star option{
+	font-size:15px;
+	color:#face49;
+}
 
-
-
-
-
-
-
-
-/**
-*	detail_recommend
-*/
-section.detail_recommend{
-border:1px solid blue;
-	margin:80px 0;
+button#reserve_btn{
+	margin-top:30px;
+	width:200px;
 }
 
 

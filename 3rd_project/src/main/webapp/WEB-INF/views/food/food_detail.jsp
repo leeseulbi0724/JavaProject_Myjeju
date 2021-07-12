@@ -49,7 +49,7 @@
 	
 	<!-- content -->
 	<div class="food_detail_top">
-		<img src="http://localhost:9000/myjeju/images/food/food_detail/foodstore3.jpg">
+		<img src="http://localhost:9000/myjeju/images/food/foodstore3_2.jpg">
 		<div>
 			<h1>하도작은식당</h1>
 			<h3>서양음식전문점</h3>
@@ -96,6 +96,15 @@
 						<img src="http://localhost:9000/myjeju/images/travel/travel_detail/human.png">
 						<div class="user_name">사용자</div>
 					</dt>
+					<dd>
+						<select name="star" id="star">
+							<option id="star5" value="star5">★★★★★</option>
+							<option id="star4" value="star4">★★★★☆</option>
+							<option id="star3" value="star3">★★★☆☆</option>
+							<option id="star2" value="star2">★★☆☆☆</option>
+							<option id="star1" value="star1">★☆☆☆☆</option>
+						</select>
+					</dd>
 					<dd><input type="text" name="food_review" id="food_review" placeholder="식사가 어떠셨나요? 리뷰를 남겨주세요."></dd>
 					<dd>
 						<button type="button" class="btn_style3" id="food_review_btn">등록</button>
@@ -109,6 +118,9 @@
 						<img src="http://localhost:9000/myjeju/images/travel/travel_detail/human.png">
 						<div class="user_name">장희수</div>
 					</dt>
+					<dd>
+						<img src="http://localhost:9000/myjeju/images/travel/star3.png"class="review_star">
+					</dd>
 					<dd>여기 정말 맛집입니다!!! 분위기도 너무 좋아요~~</dd>
 					<dd>
 						<img src="http://localhost:9000/myjeju/images/travel/travel_detail/like_finger.png" class="like_finger">
@@ -122,6 +134,9 @@
 						<img src="http://localhost:9000/myjeju/images/travel/travel_detail/human.png">
 						<div class="user_name">김민호</div>
 					</dt>
+					<dd>
+						<img src="http://localhost:9000/myjeju/images/travel/star3.png"class="review_star">
+					</dd>
 					<dd>제주도가면 꼭 가는 가게입니다! 강추입니다!</dd>
 					<dd>
 						<img src="http://localhost:9000/myjeju/images/travel/travel_detail/like_finger.png" class="like_finger">
@@ -135,6 +150,9 @@
 						<img src="http://localhost:9000/myjeju/images/travel/travel_detail/human.png">
 						<div class="user_name">이슬비</div>
 					</dt>
+					<dd>
+						<img src="http://localhost:9000/myjeju/images/travel/star3.png"class="review_star">
+					</dd>
 					<dd>제주도 맛집 top5안에 들어요~!</dd>
 					<dd>
 						<img src="http://localhost:9000/myjeju/images/travel/travel_detail/like_finger.png" class="like_finger">

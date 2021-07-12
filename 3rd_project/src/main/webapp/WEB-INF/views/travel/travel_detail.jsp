@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -58,31 +60,23 @@
 	
 	<!-- content -->
 	<div class="travel_detail_top">
-		<img src="http://localhost:9000/myjeju/images/travel/travel_detail/한라산2.jpg">
+		<img src="http://localhost:9000/myjeju/images/travel/${vo.t_image1}">
 		<div>
-			<h1>한라산</h1>
-			<h2>국립공원</h2>
+			<h1>${vo.t_name}</h1>
+			<h2>${vo.t_infor}</h2>
 			<p>
-				제주특별자치도 제주시 1100로 2070-61<br>
-				(+82) 064-713-9950
+				${vo.t_addr}<br>
+				${vo.t_hp}
 			</p>
 		</div>
 	</div>
+	
 	<div class="travel_detail_content">
 		<section class="detail_infor">
-			<h1>한라산 국립공원</h1>
+			<h1>${vo.t_name}</h1>
 			<div></div>
 			<p class="infor_content" >
-				지리산, 북한의 금강산과 함께 한반도의 3대 영산에 속하는 한라산은<br>
-				한반도의 최남단에 위치하고 있으며, 높이 해발 1,950m로 남한에서 가장 높다.<br><br>
-	
-				다양한 식생 분포를 이뤄 학술적 가치가 매우 높고 동식물의 보고로서, <br>
-				1966년 10월 12일 천연기념물 제182호인 한라산천연보호구역으로 지정보호되고 있다. <br>
-				1970년 3월 24일 국립공원으로 지정되었고, 2002년 12월에는 UNESCO 생물권 보전지역으로 지정되었다.<br><br>
-	
-				신생대 제4기의 젊은 화산섬인 한라산은 지금으로부터 2만 5천년 전까지 화산분화 활동을 하였으며, <br>
-				한라산 주변에는 360여 개의 오름들이 분포되어 있어 특이한 경관을 창출하고 있다.<br>
-				섬 중앙에 우뚝 솟은 한라산의 웅장한 자태는 자애로우면서도 강인한 기상을 가슴에 품고 있는 듯하다.
+				${vo.t_infor2}
 			</p>
 			<button type="button" class="btn_style6" id="more_btn">
 				<img src="http://localhost:9000/myjeju/images/travel/bill_list_btn2.png" class="more_img1">
@@ -92,16 +86,16 @@
 		
 		<section class="detail_image">
 			<div class="detail_image2">
-	 			<img src="http://localhost:9000/myjeju/images/travel/travel_detail/한라산4.jpg">
+	 			<img src="http://localhost:9000/myjeju/images/travel/travel_detail/${vo.t_image2}">
 	 		</div>
 	 		<div class="detail_image2">
-	 			<img src="http://localhost:9000/myjeju/images/travel/travel_detail/한라산5.jpg">
+	 			<img src="http://localhost:9000/myjeju/images/travel/travel_detail/${vo.t_image3}">
 	 		</div>
 	 		<div class="detail_image2">
-	 			<img src="http://localhost:9000/myjeju/images/travel/travel_detail/한라산7.jpg">
+	 			<img src="http://localhost:9000/myjeju/images/travel/travel_detail/${vo.t_image4}">
 	 		</div>
 	 		<div class="detail_image2">
-	 			<img src="http://localhost:9000/myjeju/images/travel/travel_detail/한라산8.jpg">
+	 			<img src="http://localhost:9000/myjeju/images/travel/travel_detail/${vo.t_image5}">
 	 		</div>
 		</section>
 		
@@ -153,6 +147,15 @@
 						<img src="http://localhost:9000/myjeju/images/travel/travel_detail/human.png">
 						<div class="user_name">사용자</div>
 					</dt>
+					<dd>
+						<select name="star" id="star">
+							<option id="star5" value="star5">★★★★★</option>
+							<option id="star4" value="star4">★★★★☆</option>
+							<option id="star3" value="star3">★★★☆☆</option>
+							<option id="star2" value="star2">★★☆☆☆</option>
+							<option id="star1" value="star1">★☆☆☆☆</option>
+						</select>
+					</dd>
 					<dd><input type="text" name="travel_review" id="travel_review" placeholder="여행지가 어떠셨나요? 리뷰를 남겨주세요."></dd>
 					<dd>
 						<button type="button" class="btn_style3" id="travel_review_btn">등록</button>
@@ -166,6 +169,9 @@
 						<img src="http://localhost:9000/myjeju/images/travel/travel_detail/human.png">
 						<div class="user_name">장희수</div>
 					</dt>
+					<dd>
+						<img src="http://localhost:9000/myjeju/images/travel/star5.png" class="review_star">
+					</dd>
 					<dd>한라산 정말 멋있어요! 올라가기 전에 김밥이나 간단한 초콜렛 꼭 챙겨가세요~ 많이 힘드네요</dd>
 					<dd>
 						<img src="http://localhost:9000/myjeju/images/travel/travel_detail/like_finger.png" class="like_finger">
@@ -179,6 +185,9 @@
 						<img src="http://localhost:9000/myjeju/images/travel/travel_detail/human.png">
 						<div class="user_name">김민호</div>
 					</dt>
+					<dd>
+						<img src="http://localhost:9000/myjeju/images/travel/star3.png"class="review_star">
+					</dd>
 					<dd>한라산 강추입니다!</dd>
 					<dd>
 						<img src="http://localhost:9000/myjeju/images/travel/travel_detail/like_finger.png" class="like_finger">
@@ -192,6 +201,9 @@
 						<img src="http://localhost:9000/myjeju/images/travel/travel_detail/human.png">
 						<div class="user_name">이슬비</div>
 					</dt>
+					<dd>
+						<img src="http://localhost:9000/myjeju/images/travel/star4.png"class="review_star">
+					</dd>
 					<dd>올라가는 건 힘들었지만 경치가 대박이에요!!!</dd>
 					<dd>
 						<img src="http://localhost:9000/myjeju/images/travel/travel_detail/like_finger.png" class="like_finger">

@@ -21,48 +21,29 @@
 		<section class="recommend_zone">
 			<div class="travel_title">추천 여행지</div>
 			<div class="travel_spot">
+			<c:forEach var="toplist" items="${toplist}">
 				<article class="travel_spot1">
-					<a href="http://localhost:9000/myjeju/travel_detail.do"><img src="http://localhost:9000/myjeju/images/travel/한라산.jpg"></a>
+					<a href="http://localhost:9000/myjeju/travel_detail.do?tid=${toplist.tid }"><img src="http://localhost:9000/myjeju/images/travel/${toplist.t_image1}"></a>
 					<div class="spot_infor">
-						<p class="spot_name">한라산 <span>국립공원</span></p>
-						<p class="spot_tag">#산 #걷기/등산 #경관/포토 #친구 #사계절</p>
+						<p class="spot_name">${toplist.t_name} <span>${toplist.t_infor}</span></p>
+						<p class="spot_tag">${toplist.t_tag}</p>
 						<button type="button" class="btn_style" id="heart_btn">
-							<img src="http://localhost:9000/myjeju/images/travel/empty_heart.png">516
+							<img src="http://localhost:9000/myjeju/images/travel/empty_heart.png">${toplist.t_like}
 						</button>
 						<img src="http://localhost:9000/myjeju/images/travel/star.png"><span class="star_score">4.6 (416)</span>
 					</div>
 				</article>
-				<article class="travel_spot2">
-					<a href="http://localhost:9000/myjeju/travel_detail.do"><img src="http://localhost:9000/myjeju/images/travel/성산일출봉.jpg"></a>
-					<div class="spot_infor">
-						<p class="spot_name">성산일출봉 <span>봉우리,고지</span></p>
-						<p class="spot_tag">#일출 #오름 #경관/포토 #부모</p>
-						<button type="button" class="btn_style" id="heart_btn">
-							<img src="http://localhost:9000/myjeju/images/travel/empty_heart.png">452
-						</button>
-						<img src="http://localhost:9000/myjeju/images/travel/star.png"><span class="star_score">4.5 (594)</span>
-					</div>
-				</article>
-				<article class="travel_spot3">
-					<a href="http://localhost:9000/myjeju/travel_detail.do"><img src="http://localhost:9000/myjeju/images/travel/사려니 숲길.jpg"></a>
-					<div class="spot_infor">
-						<p class="spot_name">사려니 숲길 <span>도보코스</span></p>
-						<p class="spot_tag">#숲길 #걷기/등산 #친구 #커플 #흐림 #봄</p>
-						<button type="button" class="btn_style" id="heart_btn">
-							<img src="http://localhost:9000/myjeju/images/travel/empty_heart.png">248
-						</button>
-						<img src="http://localhost:9000/myjeju/images/travel/star.png"><span class="star_score">4.4 (268)</span>
-					</div>
-				</article>
+			</c:forEach>
 			</div>
 		</section>
+		
 		<section class="map_zone">
 			<div class="travel_title" style="margin-bottom:20px;">여행지 찾기</div>
-			<div>
+			<%-- <div>
 				<c:forEach var="vo" items="${list}">
-				${vo.t_name},${vo.t_addr},${vo.t_hp},<img src="http://localhost:9000/myjeju/images/travel/${vo.t_tfile }">
+				${vo.t_name},${vo.t_addr},${vo.t_hp},<img src="http://localhost:9000/myjeju/images/travel/${vo.t_image1 }"> 
 				</c:forEach>
-			</div>
+			</div> --%>
 			<div id="map" style="width:100%;height:500px;"></div>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2d54e46df64658650b7436b0cf338c67&libraries=services"></script>
 	<script>
@@ -81,7 +62,7 @@
 			title : '${vo.t_name}',
 			addr : '${vo.t_addr}',
 			tel : '${vo.t_hp}',
-			img : '${vo.t_tfile}',
+			img : '${vo.t_image1}',
 			latlng:	new kakao.maps.LatLng(${vo.t_vpoint}, ${vo.t_hpoint})
 		},
 		</c:forEach>
@@ -130,54 +111,24 @@
 			</div>
 			<table class="travel_list">
 				<tbody>
+				<c:forEach var="vo" items="${list}">
 					<tr class="travel_list1">
-						<td>
-							<img src="http://localhost:9000/myjeju/images/travel/우도.jpg">
+						<td class="travel_list_pic">
+							<img src="http://localhost:9000/myjeju/images/travel/${vo.t_image1}">
 						</td>
 						<td>
-							<p class="spot_name">우도 <span>해양도립공원</span></p>
-							<p class="spot_addr">제주특별자치도 제주시 우도면 삼양고수물길 1</p>
+							<p class="spot_name">${vo.t_name} <span>${vo.t_infor}</span></p>
+							<p class="spot_addr">${vo.t_addr}</p>
 							<div>
 								<img src="http://localhost:9000/myjeju/images/travel/star.png"><span class="star_score">4.4 (268)</span>
 							</div>
 						</td>
 						<td>
-							<button type="button" class="btn_style" id="heart_btn"><img src="http://localhost:9000/myjeju/images/travel/empty_heart.png">1,674</button>
-							<button type="button" class="btn_style4" id="more_infor" onclick="location.href='http://localhost:9000/myjeju/travel_detail.do'">상세정보</button>
+							<button type="button" class="btn_style" id="heart_btn"><img src="http://localhost:9000/myjeju/images/travel/empty_heart.png">${vo.t_like}</button>
+							<button type="button" class="btn_style4" id="more_infor" onclick="location.href='http://localhost:9000/myjeju/travel_detail.do?tid=${vo.tid }'">상세정보</button>
 						</td>
 					</tr>
-					<tr class="travel_list2">
-						<td>
-							<img src="http://localhost:9000/myjeju/images/travel/이호테우.jpg">
-						</td>
-						<td>
-							<p class="spot_name">이호테우 해변 <span>해수욕장,해변</span></p>
-							<p class="spot_addr">제주특별자치도 제주시 서해안로 58</p>
-							<div>
-								<img src="http://localhost:9000/myjeju/images/travel/star.png"><span class="star_score">4.1 (683)</span>
-							</div>
-						</td>
-						<td>
-							<button type="button" class="btn_style" id="heart_btn"><img src="http://localhost:9000/myjeju/images/travel/empty_heart.png">354</button>
-							<button type="button" class="btn_style4" id="more_infor" onclick="location.href='http://localhost:9000/myjeju/travel_detail.do'">상세정보</button>
-						</td>
-					</tr>
-					<tr class="travel_list3">
-						<td>
-							<img src="http://localhost:9000/myjeju/images/travel/천지연폭포.jpg">
-						</td>
-						<td>
-							<p class="spot_name">천지연 폭포 <span>폭포</span></p>
-							<p class="spot_addr">제주특별자치도 서귀포시 남성중로 2-15</p>
-							<div>
-								<img src="http://localhost:9000/myjeju/images/travel/star.png"><span class="star_score">4.3 (433)</span>
-							</div>
-						</td>
-						<td>
-							<button type="button" class="btn_style" id="heart_btn"><img src="http://localhost:9000/myjeju/images/travel/empty_heart.png">287</button>
-							<button type="button" class="btn_style4" id="more_infor" onclick="location.href='http://localhost:9000/myjeju/travel_detail.do'">상세정보</button>
-						</td>
-					</tr>
+				</c:forEach>
 				</tbody>
 			</table>
 		</section>

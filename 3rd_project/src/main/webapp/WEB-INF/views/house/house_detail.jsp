@@ -72,6 +72,7 @@
 			<p>
 				객실 정보 : 2인실 전용 숙소
 			</p>
+			
 		</section>
 		
 		<section class="detail_image">
@@ -97,6 +98,15 @@
 						<img src="http://localhost:9000/myjeju/images/travel/travel_detail/human.png">
 						<div class="user_name">사용자</div>
 					</dt>
+					<dd>
+						<select name="star" id="star">
+							<option id="star5" value="star5">★★★★★</option>
+							<option id="star4" value="star4">★★★★☆</option>
+							<option id="star3" value="star3">★★★☆☆</option>
+							<option id="star2" value="star2">★★☆☆☆</option>
+							<option id="star1" value="star1">★☆☆☆☆</option>
+						</select>
+					</dd>
 					<dd><input type="text" name="food_review" id="food_review" placeholder="숙소가 어떠셨나요? 리뷰를 남겨주세요."></dd>
 					<dd>
 						<button type="button" class="btn_style3" id="food_review_btn">등록</button>
@@ -110,6 +120,9 @@
 						<img src="http://localhost:9000/myjeju/images/travel/travel_detail/human.png">
 						<div class="user_name">장희수</div>
 					</dt>
+					<dd>
+						<img src="http://localhost:9000/myjeju/images/travel/star3.png"class="review_star">
+					</dd>
 					<dd>숙소 풍경이 다 했습니다!!!</dd>
 					<dd>
 						<img src="http://localhost:9000/myjeju/images/travel/travel_detail/like_finger.png" class="like_finger">
@@ -123,6 +136,9 @@
 						<img src="http://localhost:9000/myjeju/images/travel/travel_detail/human.png">
 						<div class="user_name">김민호</div>
 					</dt>
+					<dd>
+						<img src="http://localhost:9000/myjeju/images/travel/star3.png"class="review_star">
+					</dd>
 					<dd>성산일출봉 일몰 정말 멋있어요! 숙소도 깨끗하고 좋았습니다.</dd>
 					<dd>
 						<img src="http://localhost:9000/myjeju/images/travel/travel_detail/like_finger.png" class="like_finger">
@@ -136,6 +152,9 @@
 						<img src="http://localhost:9000/myjeju/images/travel/travel_detail/human.png">
 						<div class="user_name">이슬비</div>
 					</dt>
+					<dd>
+						<img src="http://localhost:9000/myjeju/images/travel/star3.png"class="review_star">
+					</dd>
 					<dd>숙소 너무 깔끔하고 사장님도 친절하세요~~~ 다음에 또 묵고싶습니다!</dd>
 					<dd>
 						<img src="http://localhost:9000/myjeju/images/travel/travel_detail/like_finger.png" class="like_finger">
@@ -149,6 +168,7 @@
 				<img src="http://localhost:9000/myjeju/images/travel/bill_list_btn.png">
 			</button>
 		</section>
+		<button type="button" class="btn_style2" id="reserve_btn" onclick="location.href='http://localhost:9000/myjeju/calendar.do'">예약하기</button>
 	</div>
 	<!-- footer -->
 	<jsp:include page="../footer.jsp"></jsp:include>

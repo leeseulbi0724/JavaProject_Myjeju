@@ -120,12 +120,17 @@ div.travel_title{
 	font-weight:bold;
 }
 section.recommend_zone>div.travel_spot{
+	width:1000px;
 	text-align:center;
 	margin-top:30px;
 }
 section.recommend_zone>div.travel_spot a>img{
 	width:320px;
+	height:240px;
+	object-fit: cover;
+	overflow:hidden;
 	border-radius:5px;
+	/* margin-right:8px; */
 }
 section.recommend_zone>div.travel_spot a>img:hover{
 	border-radius:5px;
@@ -232,6 +237,9 @@ tr.travel_list1>td:first-child{
 }
 td.travel_list_pic>img{
 	width:200px;
+	height:150px;
+	overflow:hidden;
+	object-fit:cover;
 }
 tr.travel_list1>td:nth-child(2){
 	width:450px;

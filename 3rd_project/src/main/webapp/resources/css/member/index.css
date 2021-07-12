@@ -50,6 +50,7 @@ header{
 	width:100%;
 	border-top:5px solid #4fa9de;
 	border-bottom:2px solid #4fa9de;
+	background-color:#b0d9f0;
 }
 div.main_header{
 	width:100%;
@@ -89,6 +90,7 @@ div.main_header>div.tap li>div{
 	display:inline-block;
 	margin-bottom:3px;
 }
+
 header>div.tap a{
 	text-decoration:none;
 	color:gray;
@@ -96,6 +98,7 @@ header>div.tap a{
 	font-weight:bold;
 	padding:10px;
 }
+header>div.tap a,
 div.main_header>div.tap a{
 	text-decoration:none;
 	color:white;
@@ -120,6 +123,7 @@ header ul.menu_list>li>a{
 	font-weight:bold;
 	margin:40px;
 }
+header ul.menu_list>li>a,
 div.main_header ul.menu_list>li>a{
 	text-decoration:none;
 	color:white;

@@ -49,7 +49,7 @@ header>div, div.main_header>div,footer>div:first-child, footer>div:last-child{
 header{
 	width:100%;
 	border-top:5px solid #4fa9de;
-	border-bottom:2px solid #4fa9de;
+	
 }
 div.main_header{
 	width:100%;
@@ -103,12 +103,20 @@ div.main_header>div.tap a{
 	font-weight:bold;
 	padding:10px;
 }
-
-div.menu_tap ul.menu_list{
+div.menu_tap{
+	width:100%;
+}
+div.main_header>div.menu_tap ul.menu_list{
 	text-align:center;
-	padding:60px;
-	margin-top:-10px;
-	margin-bottom:-40px;
+	padding:15px 60px;
+	margin-top:50px;
+}
+header>div.menu_tap ul.menu_list{
+	background-color:#4fa9de;
+	text-align:center;
+	padding:15px 60px;
+	margin-top:50px;
+	border-bottom:2px solid #4fa9de;
 }
 div.menu_tap li{
 	display:inline-block;
@@ -120,6 +128,7 @@ header ul.menu_list>li>a{
 	font-weight:bold;
 	margin:40px;
 }
+header ul.menu_list>li>a,
 div.main_header ul.menu_list>li>a{
 	text-decoration:none;
 	color:white;
