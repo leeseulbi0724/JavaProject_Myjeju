@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+    <mapper namespace="mapper.mypage">
+    
+    	<!-- 패스워드 일치여부 -->
+		<select id="pass_check" parameterType="com.myjeju.vo.MemberVO"   resultType="java.lang.Integer">
+			select count(*) from myjeju_member where id=#{id} and pass=#{pass}
+		</select>
+		
+		<!-- 회원정보 가져오기 -->
+		<select id="content" parameterType="java.lang.String"   resultType="com.myjeju.vo.MemberVO">
+			select id, pass, name, birth, hp, email, addr1, addr2 from myjeju_member where id=#{id}
+		</select>
+		
+		<!-- 회원정보 수정하기 -->
+		<update id="info_update" parameterType="com.myjeju.vo.MemberVO">
+			update myjeju_member set email=#{email}, hp=#{hp}, addr1=#{addr1}, addr2=#{addr2} where id=#{id}
+		</update>
+		
+		<!-- 회원탈퇴 -->
+		<delete id="info_out" parameterType="java.lang.String">
+			delete from myjeju_member where id=#{id}
+		</delete>
+		
+    </mapper>

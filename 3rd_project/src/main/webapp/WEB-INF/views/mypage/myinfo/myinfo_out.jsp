@@ -10,7 +10,49 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="http://localhost:9000/myjeju/css/index.css">
 <link rel="stylesheet" href="http://localhost:9000/myjeju/css/mypage/myout.css">
+<script src="http://localhost:9000/myjeju/js/jquery-3.6.0.min.js"></script>
 </head>
+<script>
+	$(document).ready(function() {
+		$("#ok").click(function() {
+			if( $("#pass").val() == "" ) {
+				alert("비밀번호를 입력해주세요");
+				$("#pass").focus();
+			} else {
+				var pass = $("#pass").val();
+				 $.ajax({
+				        url:"pass_check.do",
+				        type:"post",
+				        data: {
+				     	 	pass: pass,
+				        }, 
+				        dataType: "json",
+				      success:function(result){
+				       		if ( result ) {
+				       		 $.ajax({
+							        url:"info_out.do",
+							        type:"POST",
+							        dataType: "json",
+							      success:function(result){
+							       		if ( result ) {
+							       		 alert("회원탈퇴 되었습니다. 그동안 이용해주셔서 감사합니다.");
+							       		location.replace("logout.do");
+							       		} else {
+							       			alert("회원 탈퇴 실패하셨습니다");
+							       			location.reload();
+							       		}							       		
+							       	},		
+							    });
+				       		} else {
+				       			alert("비밀번호가 일치하지 않습니다");
+				       			$("#pass").val("").focus();
+				       		}
+				       	},		
+				    });
+			}
+		});
+	});
+</script>
 <body>
 <jsp:include page="../../header.jsp"></jsp:include>
 
@@ -36,7 +78,7 @@
 			<table class="table">
 			<tr>
 				<th>비밀번호 입력</th>
-				<th><input type="password" class="form-control"> ※원활한 회원탈퇴를 위해 비밀번호를 입력해주세요.</th>
+				<th><input type="password" class="form-control" id="pass"> ※원활한 회원탈퇴를 위해 비밀번호를 입력해주세요.</th>
 			</tr>		
 			</table>		
 		</div>

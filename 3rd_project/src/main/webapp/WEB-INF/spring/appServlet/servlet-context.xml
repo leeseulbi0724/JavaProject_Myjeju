@@ -35,13 +35,13 @@
 	<beans:bean id="communityDAO" class="com.myjeju.dao.CommunityDAO"></beans:bean>
 	<beans:bean id="foodDAO" class="com.myjeju.dao.FoodDAO"></beans:bean>
 	<beans:bean id="houseDAO" class="com.myjeju.dao.HouseDAO"></beans:bean>
-	<beans:bean id="indexDAO" class="com.myjeju.dao.IndexDAO"></beans:bean>	
-	<beans:bean id="mypageDAO" class="com.myjeju.dao.MypageDAO"></beans:bean>
+	<beans:bean id="indexDAO" class="com.myjeju.dao.IndexDAO"></beans:bean>		
 	<beans:bean id="payDAO" class="com.myjeju.dao.PayDAO"></beans:bean>
 	<beans:bean id="reservationDAO" class="com.myjeju.dao.ReservationDAO"></beans:bean>
 	<beans:bean id="storeDAO" class="com.myjeju.dao.StoreDAO"></beans:bean>
 	<beans:bean id="travelDAO" class="com.myjeju.dao.TravelDAO"></beans:bean> -->
 	<beans:bean id="memberAO" class="com.myjeju.dao.MemberDAO"></beans:bean>
+	<beans:bean id="mypageDAO" class="com.myjeju.dao.MypageDAO"></beans:bean>
 	
 	<!-- Service Object -->
 	<!-- <beans:bean id="accomodationService" class="com.myjeju.service.AccomodationServiceImpl"></beans:bean>
@@ -49,14 +49,14 @@
 	<beans:bean id="communityService" class="com.myjeju.service.CommunityServiceImpl"></beans:bean>
 	<beans:bean id="foodService" class="com.myjeju.service.FoodServiceImpl"></beans:bean>
 	<beans:bean id="houseService" class="com.myjeju.service.HouseServiceImpl"></beans:bean>
-	<beans:bean id="indexService" class="com.myjeju.service.IndexServiceImpl"></beans:bean>	
-	<beans:bean id="mypageService" class="com.myjeju.service.MypageServiceImpl"></beans:bean>
+	<beans:bean id="indexService" class="com.myjeju.service.IndexServiceImpl"></beans:bean>		
 	<beans:bean id="payService" class="com.myjeju.service.PayServiceImpl"></beans:bean>
 	<beans:bean id="reservationService" class="com.myjeju.service.ReservationServiceImpl"></beans:bean>
 	<beans:bean id="storeService" class="com.myjeju.service.StoreServiceImpl"></beans:bean>
 	<beans:bean id="travelService" class="com.myjeju.service.TravelServiceImpl"></beans:bean> -->
 	<beans:bean id="MessageService" class="com.myjeju.service.MessageServiceImpl"></beans:bean>
 	<beans:bean id="MemberService" class="com.myjeju.service.MemberServiceImpl"></beans:bean>
+	<beans:bean id="MypageService" class="com.myjeju.service.MypageServiceImpl"></beans:bean>
 	
 	
 	<context:component-scan base-package="com.myspring.myjeju" />

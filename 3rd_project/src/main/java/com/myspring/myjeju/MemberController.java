@@ -97,15 +97,14 @@ public class MemberController {
 	 /**
 	  * 로그아웃 세션 종료
 	  */
-		/*
-		 * @RequestMapping(value = "/logout.do", method=RequestMethod.GET) public String
-		 * logout(HttpServletRequest request) { HttpSession session =
-		 * request.getSession(); session.invalidate();
-		 * 
-		 * return "index";
-		 * 
-		 * }
-		 */
+		
+		 @RequestMapping(value = "/logout.do", method=RequestMethod.GET) 
+		 public String logout(HttpServletRequest request) { 
+			 HttpSession session = request.getSession(); session.invalidate();		 
+		 return "index";
+		 
+	}
+
 	
 	/**
 	 * 아이디 찾기

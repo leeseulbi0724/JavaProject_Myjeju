@@ -28,4 +28,4 @@
 	.form-select { width:100px; display:inline-block; height:25px; padding:0 5px; font-size:14px;  }
 	
 	tr:nth-child(7) .form-control { width:80px; }
-	.addr { width:400px; margin-bottom:5px; }
+	tr:last-child .addr { width:500px; margin-bottom:5px; }

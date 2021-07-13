@@ -1,11 +1,27 @@
 package com.myspring.myjeju;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.myjeju.service.MemberService;
+import com.myjeju.service.MypageService;
+import com.myjeju.vo.MemberVO;
 
 @Controller
 public class MypageController {
+	
+	@Autowired
+	private MypageService MypageService;
+	
+	@Autowired
+	private MemberService memberService;
 	
 	/**
 	 * 마이페이지 메인
@@ -27,8 +43,27 @@ public class MypageController {
 	 * 기본정보수정 메인
 	 */
 	@RequestMapping(value = "/myinfo.do", method=RequestMethod.GET)
-	public String myinfo() {
-		return "mypage/myinfo/myinfo";
+	public ModelAndView myinfo(HttpSession session, HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView();
+		
+		//로그인 회원정보 가져오기
+		String id = (String) session.getAttribute("session_id");
+		
+		MemberVO vo = MypageService.getMemberContent(id);
+		
+		String email[] = vo.getEmail().split("@");
+		vo.setEmail1(email[0]);
+		vo.setEmail2(email[1]);
+		
+		String hp[] = vo.getHp().split("-");
+		vo.setHp1(hp[0]);
+		vo.setHp2(hp[1]);
+		vo.setHp3(hp[2]);
+		
+		mv.addObject("vo", vo);
+		mv.setViewName("mypage/myinfo/myinfo");
+		
+		return mv;
 	}
 	
 	/**
@@ -94,4 +129,90 @@ public class MypageController {
 	public String mypoint() {
 		return "mypage/mypoint";
 	}
+	
+	/**
+	 * 정보수정 전 패스워드 체크
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/pass_check.do", method=RequestMethod.POST)
+	public boolean pass_check(HttpSession session, HttpServletRequest request) {
+		// 로그인 회원정보 가져오기
+		String id = (String) session.getAttribute("session_id");
+		
+		boolean result = false;
+		
+		MemberVO vo = new MemberVO();
+		vo.setId(id);
+		vo.setPass(request.getParameter("pass"));
+		
+		int value = MypageService.getPassCheckResult(vo);
+		
+		if ( value != 0) {
+			result = true;
+		}
+		
+		
+		return result;
+		
+	}
+	
+	/**
+	 * 정보수정 DB
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/info_update.do", method=RequestMethod.POST) 
+	public boolean info_update(HttpSession session,HttpServletRequest request) {
+			// 로그인 회원정보 가져오기
+			String id = (String) session.getAttribute("session_id");
+			
+			MemberVO vo = new MemberVO();
+			vo.setAddr1(request.getParameter("addr1"));
+			vo.setAddr2(request.getParameter("addr2"));
+			vo.setHp1(request.getParameter("hp1"));
+			vo.setHp2(request.getParameter("hp2"));
+			vo.setHp3(request.getParameter("hp3"));
+			vo.setEmail1(request.getParameter("email1"));
+			vo.setEmail2(request.getParameter("email2"));			
+			vo.setId(id);			
+			
+			boolean result = MypageService.getInfoUpdate(vo);			
+		
+			
+			return result;
+	}
+	
+	/**
+	 * 비밀번호 변경
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/mypass_update_proc.do", method=RequestMethod.POST)
+	public boolean pass_update_proc2(HttpSession session, HttpServletRequest request) {
+		// 로그인 회원정보 가져오기
+		String id = (String) session.getAttribute("session_id");
+		MemberVO vo = new MemberVO();
+		
+		vo.setId(id);
+		vo.setPass(request.getParameter("pass"));
+		
+		boolean result = memberService.getPassUpdateResult(vo);
+		
+		return result;
+	
+	}
+	
+	/**
+	 * 회원탈퇴
+	 */
+		@ResponseBody
+		@RequestMapping(value = "/info_out.do", method=RequestMethod.POST)
+		public boolean info_out (HttpSession session) {
+			// 로그인 회원정보 가져오기
+			String id = (String) session.getAttribute("session_id");
+		
+			
+			boolean result = MypageService.getInfoOut(id);
+			
+			return result;
+		
+		}
 }
