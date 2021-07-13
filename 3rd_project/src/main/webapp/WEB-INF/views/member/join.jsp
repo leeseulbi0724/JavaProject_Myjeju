@@ -10,6 +10,7 @@
 	<link rel="shortcut icon" type="image⁄x-icon" href="http://localhost:9000/myjeju/images/index/icon.png">
 	<title>JEJU ISLAND</title>
 	<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script src="http://localhost:9000/myjeju/js/jquery-3.6.0.min.js"></script>
 	<script src="js/bootstrap.js"></script>
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script type="text/javascript">
@@ -92,6 +93,35 @@
 			});	
 		}
 		
+		$(function() {
+			$("#id_check").on("click", check);
+		})
+		
+		function check() {
+			var id = $("#userID").val();
+			 $.ajax({
+                url:"id_check_proc.do",
+                type:"post",
+                data: {
+             	 	id: id,
+                }, 
+                dataType: "json",
+              success:function(result){
+               		if (result) {
+                		alert("사용하실 수 있는 아이디입니다");
+                		$("#userPassword1").focus();
+                	} else {
+                		alert("존재하는 아이디입니다.")
+                		$("#userID").val("").focus();
+                	}
+                },
+                error(){
+                   
+                }
+                
+             });
+		}
+		
 		$(document).ready(function() {
 			$(".email li").click(function() {
 				$("#userEmail2").val($(this).text());
@@ -111,6 +141,7 @@
 		          var hp = $("#hp1").val()+$("#hp2").val()+$("#hp3").val();
 		          alert(hp);
 		 
+		          /** 유효성 체크 **/
 		      /*     
 		       var to = $("#to").val();
 		       var name = $("#name").val();
@@ -153,11 +184,7 @@
 		                   
 		                });  
 		          } else if(con_test == false) {
-			        	/*   $("#to").val("");
-			              $("#name").val("");
-			              $("#first").val("");
-			              $("#last").val("");
-			              $(".id").val(""); */
+		        	  /** 해당번호로 인증문자를 발송하시겠습니까?에서 취소 눌렀을 때 **/
 		             }
 /* 		         }  */  
 		    })
@@ -178,7 +205,7 @@
 		              $("#userNum").val("").focus();
 		           }          
 		       }
-		    });
+		    });			
 
 		});
 	</script>
@@ -207,7 +234,10 @@
 						<tr>
 							<td style="width: 110px;"><h5>아이디</h5></td>
 							<td><input class="form-control" type="text" id="userID" name="id" maxlength="20" placeholder="아이디를 입력하세요."></td>
-							<td style="width: 110px;"><button class="btn btn-primary" onclick="registerCheckFunction();" type="button" style="background-color:#4fa9de; border-color:#4fa9de;">중복체크</button></td>
+							<td style="width: 110px;">
+								<button class="btn btn-primary" id="id_check" type="button" style="background-color:#4fa9de; border-color:#4fa9de;">중복체크</button>
+								<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+							</td>
 						</tr>
 						<tr>
 							<td style="width: 110px;"><h5>비밀번호</h5></td>

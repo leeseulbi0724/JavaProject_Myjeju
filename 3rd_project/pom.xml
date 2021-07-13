@@ -150,6 +150,13 @@
 		    <version>1.2.4</version>
 		</dependency>  
 		
+		<!-- JACKSON -->
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>1.9.13</version>
+		</dependency>
+		
 		<!-- FileUpload - MultipartHttpServletRequset -->
 		<dependency>
     		<groupId>commons-io</groupId>

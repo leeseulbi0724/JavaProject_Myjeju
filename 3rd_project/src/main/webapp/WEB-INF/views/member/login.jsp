@@ -31,15 +31,15 @@
 		<h3 style="width: 80px;">로그인</h3>
 		</div>
 		<div class="container" style="margin: 90px auto; margin-top:60px;">
-			<form method="post" action="./userLogin" style="margin-bottom:120px; border:1px solid rgba(0,0,0,0.1); text-align:center; padding:65px; padding-bottom:40px; width:92%; margin:0 auto;">
+			<form method="post" action="login_proc.do" style="margin-bottom:120px; border:1px solid rgba(0,0,0,0.1); text-align:center; padding:65px; padding-bottom:40px; width:92%; margin:0 auto;">
 				<table class="table" style="text-align: center; width:55%; display:inline-block; margin-bottom:0;">
 					<tbody>
 						<tr>
-							<td style="border:none; width: 400px;"><input class="form-control" type="text" name="userID" maxlength="20" placeholder="아이디 입력" style="height: 50px; border-radius:0;"></td>
+							<td style="border:none; width: 400px;"><input class="form-control" type="text" name="id" maxlength="20" placeholder="아이디 입력" style="height: 50px; border-radius:0;"></td>
 							<td rowspan=2 style="border:none;"><input class="btn btn-primary pull-right" type="submit" value="로그인" style="background-color:#4fa9de; border-color:#4fa9de; font-size: 20px; height: 115px; width:120px; border-radius:0;"></td>
 						</tr>
 						<tr>
-							<td style="border:none;"><input class="form-control" type="password" name="userPassword" maxlength="20" placeholder="패스워드 입력" style="height: 50px; border-radius:0;"></td>
+							<td style="border:none;"><input class="form-control" type="password" name="pass" maxlength="20" placeholder="패스워드 입력" style="height: 50px; border-radius:0;"></td>
 						</tr>
 						<tr>
 							<td style="text-align : left; border:none;" colspan="2">

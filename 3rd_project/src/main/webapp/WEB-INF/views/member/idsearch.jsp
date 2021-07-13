@@ -11,6 +11,7 @@
 	<title>JEJU ISLAND</title>
 	<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="js/bootstrap.js"></script>
+	<script src="http://localhost:9000/myjeju/js/search_sms.js"></script>
 </head>
 <body>
 	<%
@@ -31,19 +32,19 @@
 		<h3 style="width: 80px;">ID찾기</h3>
 		</div>
 		<div class="container" style="margin: 100px auto;">
-			<form method="post" action="./userLogin" style="margin-bottom:110px;">
+			<form method="post" action="id_search_proc.do" style="margin-bottom:110px;">
 				<table class="table table-bordered table-hover" style="text-align: center; border: 1px solid #dddddd">
 					<tbody>
 						<tr>
 							<td style="width: 110px;"><h5>이름</h5></td>
-							<td colspan="2"><input class="form-control" id="userName" type="text"  name="userName" maxlength="20" placeholder="이름를 입력하세요."></td>
+							<td colspan="2"><input class="form-control" id="userName" type="text"  name="name" maxlength="20" placeholder="이름를 입력하세요."></td>
 						</tr>
 						<tr>
 							<td style="width: 110px;"><h5>이메일</h5></td>
 							<td colspan="2">
-							<input class="form-control pull-left" id="userEmail1" type="email" name="userEmail1" maxlength="20" placeholder="이메일을 입력하세요." style="width:42%;">
+							<input class="form-control pull-left" id="userEmail1" type="email" name="email" maxlength="20" placeholder="이메일을 입력하세요." style="width:42%;">
 							<span class="pull-left" style="background-color: rgba(0,0,0,0); font-color:black; font-size: 17px; margin: 4px 10px;">@</span>
-							<input class="form-control pull-left" id="userEmail2" type="email" name="userEmail2" maxlength="20" placeholder="이메일주소을 입력하세요." style="width:42%;">
+							<input class="form-control pull-left" id="userEmail2" type="email" name="email2 maxlength="20" placeholder="이메일주소을 입력하세요." style="width:42%;">
 							<div class="dropdown pull-left" style="width:10%; margin-left:10px;">
 							  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="width:100%;">
 							    <span id="choosevalue">선택</span>
@@ -60,8 +61,20 @@
 							</td>
 						</tr>
 						<tr>
+							<td style="width: 110px;"><h5>휴대폰번호</h5></td>
+							<td colspan="2"><input class="form-control" id="hp" type="text"  name="hp" maxlength="20" style="width:91%; display:inline-block; float:left; "placeholder="'-'를 포함한 휴대폰번호를 입력하세요.">
+							<button type="button" class="btn btn-primary pull-right" id="send">인증번호</button>
+							</td>
+						</tr>
+						<tr>
+							<td style="width: 110px;"><h5>인증번호</h5></td>
+							<td colspan="2"><input class="form-control" id="num" type="text"  name="hp_num" maxlength="20" style="width:94%; display:inline-block; float:left; "placeholder="인증번호 6자리를 입력하세요.">
+							<button type="button" class="btn btn-primary pull-right" id="enterBtn">확인</button>
+							<input type="hidden" name="text" id="text"></td>
+						</tr>
+						<tr>
 							<td style="text-align : left" colspan="2">
-							<input class="btn btn-primary pull-right" type="submit" value="아이디찾기"  style="margin-right: 10px; background-color:#4fa9de; border-color:#4fa9de;">
+							<input class="btn btn-primary pull-right" type="submit" value="아이디찾기"  id="search" style="margin-right: 10px; background-color:#4fa9de; border-color:#4fa9de;" disabled>
 							</td>
 						</tr>
 					</tbody>
