@@ -58,9 +58,11 @@ public class TravelController {
 		
 		TravelDAO dao = new TravelDAO();
 		TravelVO vo = dao.getTravelDetail(tid);
+		String infor2 = vo.getT_infor2().replace("\r\n", "<br>");
 		
 		mv.setViewName("travel/travel_detail");
 		mv.addObject("vo",vo);
+		mv.addObject("infor2",infor2);
 		
 		return mv;
 	}

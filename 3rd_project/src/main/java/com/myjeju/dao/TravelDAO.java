@@ -70,7 +70,7 @@ public class TravelDAO extends DBConn {
 		//여행지 상위3
 		public ArrayList<TravelVO> getTravelListTop3(){
 			ArrayList<TravelVO> list = new ArrayList<TravelVO>();
-			String sql = "select tid, t_name, t_tag, t_infor, t_like, t_image1 from myjeju_travel where rownum <= 3 order by t_like";
+			String sql = "select tid, t_name, t_tag, t_infor, t_like, t_image1 from myjeju_travel where rownum <= 3 order by t_like desc";
 			getPreparedStatement(sql);
 			
 			try {

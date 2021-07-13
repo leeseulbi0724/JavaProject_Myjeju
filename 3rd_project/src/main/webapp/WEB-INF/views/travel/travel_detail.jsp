@@ -76,7 +76,7 @@
 			<h1>${vo.t_name}</h1>
 			<div></div>
 			<p class="infor_content" >
-				${vo.t_infor2}
+				${infor2}
 			</p>
 			<button type="button" class="btn_style6" id="more_btn">
 				<img src="http://localhost:9000/myjeju/images/travel/bill_list_btn2.png" class="more_img1">

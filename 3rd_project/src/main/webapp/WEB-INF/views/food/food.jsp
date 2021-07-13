@@ -20,33 +20,19 @@
 		<section class="recommend_zone">
 			<div class="travel_title">추천 음식점</div>
 			<div class="travel_spot">
+			<c:forEach var="toplist" items="${toplist}">
 				<article class="travel_spot1">
-					<a href="http://localhost:9000/myjeju/food_detail.do"><img src="http://localhost:9000/myjeju/images/food/foodstore3.jpg"></a>
+					<a href="http://localhost:9000/myjeju/food_detail.do?fid=${toplist.fid}"><img src="http://localhost:9000/myjeju/images/food/${toplist.f_image1}"></a>
 					<div class="spot_infor">
-						<p class="spot_name">하도작은식당 <span>서양음식전문점</span></p>
-						<p class="spot_tag">#양식 #파스타 #뇨끼 #와인 #하도</p>
-						<button type="button" class="btn_style" id="heart_btn"><img src="http://localhost:9000/myjeju/images/travel/empty_heart.png">675</button>
+						<p class="spot_name">${toplist.f_name} <span>${toplist.f_infor}</span></p>
+						<p class="spot_tag">${toplist.f_tag}</p>
+						<button type="button" class="btn_style" id="heart_btn">
+							<img src="http://localhost:9000/myjeju/images/travel/empty_heart.png">${toplist.f_like}
+						</button>
 						<img src="http://localhost:9000/myjeju/images/travel/star.png"><span class="star_score">4.8 (223)</span>
 					</div>
 				</article>
-				<article class="travel_spot2">
-					<a href="http://localhost:9000/myjeju/food_detail.do"><img src="http://localhost:9000/myjeju/images/food/foodstore2.jpg"></a>
-					<div class="spot_infor">
-						<p class="spot_name">미도리 제주  <span>음식점</span></p>
-						<p class="spot_tag">#미도리 #정식 #연여구이 #제주시</p>
-						<button type="button" class="btn_style" id="heart_btn"><img src="http://localhost:9000/myjeju/images/travel/empty_heart.png">558</button>
-						<img src="http://localhost:9000/myjeju/images/travel/star.png"><span class="star_score">4.6 (89)</span>
-					</div>
-				</article>
-				<article class="travel_spot3">
-					<a href="http://localhost:9000/myjeju/food_detail.do"><img src="http://localhost:9000/myjeju/images/food/foodstore1.jpg"></a>
-					<div class="spot_infor">
-						<p class="spot_name">별돈별 <span>협재해변점</span></p>
-						<p class="spot_tag">#고기 #흑돼지 # #바다 #별돈별 #협재</p>
-						<button type="button" class="btn_style" id="heart_btn"><img src="http://localhost:9000/myjeju/images/travel/empty_heart.png">452</button>
-						<img src="http://localhost:9000/myjeju/images/travel/star.png"><span class="star_score">4.5 (103)</span>
-					</div>
-				</article>
+			</c:forEach>
 			</div>
 		</section>
 		<section class="map_zone">
@@ -69,7 +55,7 @@
 			title : '${vo.f_name}',
 			addr : '${vo.f_addr}',
 			tel : '${vo.f_hp}',
-			img : '${vo.f_tfile}',
+			img : '${vo.f_image1}',
 			latlng:	new kakao.maps.LatLng(${vo.f_vpoint}, ${vo.f_hpoint})
 		},
 		</c:forEach>
@@ -118,54 +104,24 @@
 			</div>
 			<table class="travel_list">
 				<tbody>
+				<c:forEach var="vo" items="${list}">
 					<tr class="travel_list1">
 						<td class="travel_list_pic">
-							<img src="http://localhost:9000/myjeju/images/food/foodstore4.jpg">
+							<img src="http://localhost:9000/myjeju/images/food/${vo.f_image1}">
 						</td>
 						<td>
-							<p class="spot_name">우진해장국 <span>해장국 전문점</span></p>
-							<p class="spot_addr">제주특별자치도 제주시 삼도2동 서사로 11</p>
+							<p class="spot_name">${vo.f_name} <span>${vo.f_infor}</span></p>
+							<p class="spot_addr">${vo.f_addr}</p>
 							<div>
 								<img src="http://localhost:9000/myjeju/images/travel/star.png"><span class="star_score">4.6 (209)</span>
 							</div>
 						</td>
 						<td>
-							<button type="button" class="btn_style" id="heart_btn"><img src="http://localhost:9000/myjeju/images/travel/empty_heart.png">1,029</button>
-							<button type="button" class="btn_style4" id="more_infor" onclick="location.href='http://localhost:9000/myjeju/food_detail.do'">상세정보</button>
+							<button type="button" class="btn_style" id="heart_btn"><img src="http://localhost:9000/myjeju/images/travel/empty_heart.png">${vo.f_like}</button>
+							<button type="button" class="btn_style4" id="more_infor" onclick="location.href='http://localhost:9000/myjeju/food_detail.do?fid=${vo.fid}'">상세정보</button>
 						</td>
 					</tr>
-					<tr class="travel_list2">
-						<td class="travel_list_pic">
-							<img src="http://localhost:9000/myjeju/images/food/foodstore5.jpg">
-						</td>
-						<td>
-							<p class="spot_name">고집돌우럭 <span>함덕점</span></p>
-							<p class="spot_addr">제주특별자치도 제주시 특별자치도, 조천읍 신북로 491-9</p>
-							<div>
-								<img src="http://localhost:9000/myjeju/images/travel/star.png"><span class="star_score">4.0 (555)</span>
-							</div>
-						</td>
-						<td>
-							<button type="button" class="btn_style" id="heart_btn"><img src="http://localhost:9000/myjeju/images/travel/empty_heart.png">354</button>
-							<button type="button" class="btn_style4" id="more_infor" onclick="location.href='http://localhost:9000/myjeju/food_detail.do'">상세정보</button>
-						</td>
-					</tr>
-					<tr class="travel_list3">
-						<td class="travel_list_pic">
-							<img src="http://localhost:9000/myjeju/images/food/foodstore6.jpg">
-						</td>
-						<td>
-							<p class="spot_name">올래국수 <span>국수 전문점</span></p>
-							<p class="spot_addr">제주특별자치도 제주시 연동 귀아랑길 24</p>
-							<div>
-								<img src="http://localhost:9000/myjeju/images/travel/star.png"><span class="star_score">4.1 (869)</span>
-							</div>
-						</td>
-						<td>
-							<button type="button" class="btn_style" id="heart_btn"><img src="http://localhost:9000/myjeju/images/travel/empty_heart.png">287</button>
-							<button type="button" class="btn_style4" id="more_infor" onclick="location.href='http://localhost:9000/myjeju/food_detail.do'">상세정보</button>
-						</td>
-					</tr>
+				</c:forEach>
 				</tbody>
 			</table>
 		</section>

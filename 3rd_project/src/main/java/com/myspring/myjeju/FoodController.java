@@ -21,11 +21,14 @@ public class FoodController {
 	@RequestMapping(value="/food.do", method=RequestMethod.GET)
 	public ModelAndView food() {
 		ModelAndView mv = new ModelAndView();
+		
 		FoodDAO dao = new FoodDAO();
-		ArrayList<FoodVO> list = dao.getList();
+		ArrayList<FoodVO> list = dao.getFoodList(); 
+		ArrayList<FoodVO> toplist = dao.getFoodListTop3();
 		
 		mv.setViewName("food/food");
 		mv.addObject("list",list);
+		mv.addObject("toplist",toplist);
 		
 		return mv;
 	}
@@ -35,19 +38,51 @@ public class FoodController {
 	@RequestMapping(value="/cafe.do", method=RequestMethod.GET)
 	public ModelAndView cafe() {
 		ModelAndView mv = new ModelAndView();
-		CafeDAO cadao = new CafeDAO();
-		ArrayList<CafeVO> list = cadao.getList();
+		
+		CafeDAO dao = new CafeDAO();
+		ArrayList<CafeVO> list = dao.getCafeList();
+		ArrayList<CafeVO> toplist = dao.getCafeListTop3();
+		
 		mv.setViewName("food/cafe");
 		mv.addObject("list",list);
+		mv.addObject("toplist",toplist);
 		
 		return mv;
 	}
 	
 	/**
-	 * food_detail.do : 맛집 상세페이지
+	 * food_detail.do : 음식점 상세페이지
 	 */
 	@RequestMapping(value="/food_detail.do", method=RequestMethod.GET)
-	public String travel_detail() {
-		return "food/food_detail";
+	public ModelAndView food_detail(String fid) {
+		ModelAndView mv = new ModelAndView();
+		
+		FoodDAO dao = new FoodDAO();
+		FoodVO vo = dao.getFoodDetail(fid);
+		String infor2 = vo.getF_infor2().replace("\r\n", "<br>");
+		
+		mv.setViewName("food/food_detail");
+		mv.addObject("vo",vo);
+		mv.addObject("infor2",infor2);
+		
+		return mv;
+	}
+	
+	/**
+	 * cafe_detail.do : 카페 상세페이지
+	 */
+	@RequestMapping(value="/cafe_detail.do", method=RequestMethod.GET)
+	public ModelAndView cafe_detail(String caid) {
+		ModelAndView mv = new ModelAndView();
+		
+		CafeDAO dao = new CafeDAO();
+		CafeVO vo = dao.getCafeDetail(caid);
+		String infor2 = vo.getCa_infor2().replace("\r\n", "<br>");
+		
+		mv.setViewName("food/cafe_detail");
+		mv.addObject("vo",vo);
+		mv.addObject("infor2",infor2);
+		
+		return mv;
 	}
 }

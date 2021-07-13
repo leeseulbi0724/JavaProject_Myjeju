@@ -208,15 +208,16 @@ div.detail_image2{
 	width:400px;
 	height:300px;
 	overflow:hidden; 
-	object-fit:cover;
+	object-fit:cover; 
 	margin:0 auto;
 }
 div.detail_image2>img{
-	/* position:absolute;
-	left:50%;
-	margin-left:-300px; */
 	transform:scale(1); 
 	transition:transform 0.5s linear;
+	width:400px;
+	height:300px;
+	overflow:hidden; 
+	object-fit:cover;
 }
 div.detail_image2>img:hover{
 	transform:scale(1.1);

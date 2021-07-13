@@ -1,95 +1,102 @@
 package com.myjeju.vo;
 
 public class FoodVO {
-	String fid,f_name,f_tag,f_infor,f_addr,f_vpoint,f_hpoint,f_hp,f_like,f_tfile,f_tsfile;
-
+	String fid, f_name, f_tag, f_infor, f_infor2, f_addr, f_vpoint, f_hpoint, f_hp, 
+	f_image1, f_image2, f_image3, f_image4, f_image5;
+	int f_like;
+	
 	public String getFid() {
 		return fid;
 	}
-
 	public void setFid(String fid) {
 		this.fid = fid;
 	}
-
 	public String getF_name() {
 		return f_name;
 	}
-
 	public void setF_name(String f_name) {
 		this.f_name = f_name;
 	}
-
 	public String getF_tag() {
 		return f_tag;
 	}
-
 	public void setF_tag(String f_tag) {
 		this.f_tag = f_tag;
 	}
-
 	public String getF_infor() {
 		return f_infor;
 	}
-
 	public void setF_infor(String f_infor) {
 		this.f_infor = f_infor;
 	}
-
+	public String getF_infor2() {
+		return f_infor2;
+	}
+	public void setF_infor2(String f_infor2) {
+		this.f_infor2 = f_infor2;
+	}
 	public String getF_addr() {
 		return f_addr;
 	}
-
 	public void setF_addr(String f_addr) {
 		this.f_addr = f_addr;
 	}
-
 	public String getF_vpoint() {
 		return f_vpoint;
 	}
-
 	public void setF_vpoint(String f_vpoint) {
 		this.f_vpoint = f_vpoint;
 	}
-
 	public String getF_hpoint() {
 		return f_hpoint;
 	}
-
 	public void setF_hpoint(String f_hpoint) {
 		this.f_hpoint = f_hpoint;
 	}
-
 	public String getF_hp() {
 		return f_hp;
 	}
-
 	public void setF_hp(String f_hp) {
 		this.f_hp = f_hp;
 	}
-
-	public String getF_like() {
+	public String getF_image1() {
+		return f_image1;
+	}
+	public void setF_image1(String f_image1) {
+		this.f_image1 = f_image1;
+	}
+	public String getF_image2() {
+		return f_image2;
+	}
+	public void setF_image2(String f_image2) {
+		this.f_image2 = f_image2;
+	}
+	public String getF_image3() {
+		return f_image3;
+	}
+	public void setF_image3(String f_image3) {
+		this.f_image3 = f_image3;
+	}
+	public String getF_image4() {
+		return f_image4;
+	}
+	public void setF_image4(String f_image4) {
+		this.f_image4 = f_image4;
+	}
+	public String getF_image5() {
+		return f_image5;
+	}
+	public void setF_image5(String f_image5) {
+		this.f_image5 = f_image5;
+	}
+	public int getF_like() {
 		return f_like;
 	}
-
-	public void setF_like(String f_like) {
+	public void setF_like(int f_like) {
 		this.f_like = f_like;
 	}
 
-	public String getF_tfile() {
-		return f_tfile;
-	}
-
-	public void setF_tfile(String f_tfile) {
-		this.f_tfile = f_tfile;
-	}
-
-	public String getF_tsfile() {
-		return f_tsfile;
-	}
-
-	public void setF_tsfile(String f_tsfile) {
-		this.f_tsfile = f_tsfile;
-	}
+	
 
 	
 	

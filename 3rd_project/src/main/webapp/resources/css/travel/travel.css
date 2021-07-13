@@ -130,7 +130,7 @@ section.recommend_zone>div.travel_spot a>img{
 	object-fit: cover;
 	overflow:hidden;
 	border-radius:5px;
-	/* margin-right:8px; */
+	margin-right:8px;
 }
 section.recommend_zone>div.travel_spot a>img:hover{
 	border-radius:5px;

@@ -21,33 +21,19 @@
 		<section class="recommend_zone">
 			<div class="travel_title">추천 카페</div>
 			<div class="travel_spot">
+			<c:forEach var="toplist" items="${toplist}">
 				<article class="travel_spot1">
-					<a href="http://localhost:9000/myjeju/food_detail.do"><img src="http://localhost:9000/myjeju/images/food/cafe2.jpg"></a>
+					<a href="http://localhost:9000/myjeju/cafe_detail.do?caid=${toplist.caid}"><img src="http://localhost:9000/myjeju/images/cafe/${toplist.ca_image1}"></a>
 					<div class="spot_infor">
-						<p class="spot_name">CAFE가호 <span>애월 카페</span></p>
-						<p class="spot_tag">#애월 #카페 #커피 #디저트 #가호</p>
-						<button type="button" class="btn_style" id="heart_btn"><img src="http://localhost:9000/myjeju/images/travel/empty_heart.png">516</button>
+						<p class="spot_name">${toplist.ca_name} <span>${toplist.ca_infor}</span></p>
+						<p class="spot_tag">${toplist.ca_tag}</p>
+						<button type="button" class="btn_style" id="heart_btn">
+							<img src="http://localhost:9000/myjeju/images/travel/empty_heart.png">${toplist.ca_like}
+						</button>
 						<img src="http://localhost:9000/myjeju/images/travel/star.png"><span class="star_score">4.5 (764)</span>
 					</div>
 				</article>
-				<article class="travel_spot2">
-					<a href="http://localhost:9000/myjeju/food_detail.do"><img src="http://localhost:9000/myjeju/images/food/cafe1.jpg"></a>
-					<div class="spot_infor">
-						<p class="spot_name">카페 델문도 <span>함덕 카페</span></p>
-						<p class="spot_tag">#함덕 #바다위 #카페 #커피 #디저트</p>
-						<button type="button" class="btn_style" id="heart_btn"><img src="http://localhost:9000/myjeju/images/travel/empty_heart.png">452</button>
-						<img src="http://localhost:9000/myjeju/images/travel/star.png"><span class="star_score">4.1 (869)</span>
-					</div>
-				</article>
-				<article class="travel_spot3">
-					<a href="http://localhost:9000/myjeju/food_detail.do"><img src="http://localhost:9000/myjeju/images/food/cafe3.jpg"></a>
-					<div class="spot_infor">
-						<p class="spot_name">하이엔드 제주 <span>애월 카페</span></p>
-						<p class="spot_tag">#애월 #하이엔드 #카페 #커피 #디저트</p>
-						<button type="button" class="btn_style" id="heart_btn"><img src="http://localhost:9000/myjeju/images/travel/empty_heart.png">248</button>
-						<img src="http://localhost:9000/myjeju/images/travel/star.png"><span class="star_score">3.8 (852)</span>
-					</div>
-				</article>
+			</c:forEach>
 			</div>
 		</section>
 		<section class="map_zone">
@@ -118,54 +104,24 @@
 			</div>
 			<table class="travel_list">
 				<tbody>
+				<c:forEach var="vo" items="${list}">
 					<tr class="travel_list1">
 						<td class="travel_list_pic">
-							<img src="http://localhost:9000/myjeju/images/food/cafe4.jpg">
+							<img src="http://localhost:9000/myjeju/images/cafe/${vo.ca_image1}">
 						</td>
 						<td>
-							<p class="spot_name">두갓 <span>카페</span></p>
-							<p class="spot_addr">제주특별자치도 제주시 해안동 2363-1</p>
+							<p class="spot_name">${vo.ca_name} <span>${vo.ca_infor}</span></p>
+							<p class="spot_addr">${vo.ca_addr}</p>
 							<div>
 								<img src="http://localhost:9000/myjeju/images/travel/star.png"><span class="star_score">4.6 (57)</span>
 							</div>
 						</td>
 						<td>
-							<button type="button" class="btn_style" id="heart_btn"><img src="http://localhost:9000/myjeju/images/travel/empty_heart.png">1,674</button>
-							<button type="button" class="btn_style4" id="more_infor" onclick="location.href='http://localhost:9000/myjeju/food_detail.do'">상세정보</button>
+							<button type="button" class="btn_style" id="heart_btn"><img src="http://localhost:9000/myjeju/images/travel/empty_heart.png">${vo.ca_like}</button>
+							<button type="button" class="btn_style4" id="more_infor" onclick="location.href='http://localhost:9000/myjeju/cafe_detail.do?caid=${vo.caid}'">상세정보</button>
 						</td>
 					</tr>
-					<tr class="travel_list2">
-						<td class="travel_list_pic">
-							<img src="http://localhost:9000/myjeju/images/food/cafe5.jpg">
-						</td>
-						<td>
-							<p class="spot_name">골목카페옥수 <span>애월 카페</span></p>
-							<p class="spot_addr">제주특별자치도 제주시 애월읍 소길1길 19</p>
-							<div>
-								<img src="http://localhost:9000/myjeju/images/travel/star.png"><span class="star_score">4.2 (142)</span>
-							</div>
-						</td>
-						<td>
-							<button type="button" class="btn_style" id="heart_btn"><img src="http://localhost:9000/myjeju/images/travel/empty_heart.png">354</button>
-							<button type="button" class="btn_style4" id="more_infor" onclick="location.href='http://localhost:9000/myjeju/food_detail.do'">상세정보</button>
-						</td>
-					</tr>
-					<tr class="travel_list3">
-						<td class="travel_list_pic">
-							<img src="http://localhost:9000/myjeju/images/food/cafe6.jpg">
-						</td>
-						<td>
-							<p class="spot_name">아뜨리에 카페명월 <span>서귀포 카페</span></p>
-							<p class="spot_addr">제주특별자치도 서귀포시 안덕면 상창리 1273-1</p>
-							<div>
-								<img src="http://localhost:9000/myjeju/images/travel/star.png"><span class="star_score">4.2 (93)</span>
-							</div>
-						</td>
-						<td>
-							<button type="button" class="btn_style" id="heart_btn"><img src="http://localhost:9000/myjeju/images/travel/empty_heart.png">287</button>
-							<button type="button" class="btn_style4" id="more_infor" onclick="location.href='http://localhost:9000/myjeju/food_detail.do'">상세정보</button>
-						</td>
-					</tr>
+				</c:forEach>
 				</tbody>
 			</table>
 		</section>

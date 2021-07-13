@@ -136,9 +136,9 @@ div.main_header ul.menu_list>li>a{
 	font-weight:bold;
 	margin:40px;
 }
-header>div.menu_tap a:hover{
+/* header>div.menu_tap a:hover{
 	color:#4fa9de;
-}
+} */
 div.main_header>div.menu_tap a:hover{
 	opacity:0.5;
 }

@@ -202,10 +202,10 @@ section.detail_image{
 div.detail_image2{
 	display:inline-block;
 	position: relative;
-	/* width:400px;
+	width:400px;
 	height:300px;
 	object-fit:cover;
-	overflow:hidden;  */
+	overflow:hidden; 
 	margin:0 auto;
 }
 div.detail_image2>img{

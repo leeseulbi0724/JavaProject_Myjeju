@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -49,16 +50,18 @@
 	
 	<!-- content -->
 	<div class="food_detail_top">
-		<img src="http://localhost:9000/myjeju/images/food/foodstore3_2.jpg">
+		<img src="http://localhost:9000/myjeju/images/food/${vo.f_image1}">
 		<div>
-			<h1>하도작은식당</h1>
-			<h3>서양음식전문점</h3>
+			<h1>${vo.f_name}</h1>
+			<h3>${vo.f_infor}</h3>
 			<p>
-				제주특별자치도 제주시 구좌읍 하도13길 62-9<br>
-				(+82) 010-4813-3091
+				${vo.f_addr}<br>
+				${vo.f_hp}
 			</p>
 			<div>
-				<button type="button" class="btn_style" id="heart_btn"><img src="http://localhost:9000/myjeju/images/travel/empty_heart.png">675</button>
+				<button type="button" class="btn_style" id="heart_btn">
+					<img src="http://localhost:9000/myjeju/images/travel/empty_heart.png">${vo.f_like}
+				</button>
 				<img src="http://localhost:9000/myjeju/images/travel/star.png"><span class="star_score">4.8 (223)</span>
 			</div>
 		</div>
@@ -66,25 +69,22 @@
 	<div class="food_detail_content">
 		<section class="detail_infor">
 			<p class="infor_content" >
-				서양음식을 주 메뉴로하는 동쪽 하도리에 위치한 예약제식당입니다.<br>
-				매주 월,화 휴무<br>
-				영업시간 pm12:00 ~ pm7:30<br>
-				쉬는시간 pm3:00 ~ pm5:00<br>
+				${infor2}
 			</p>
 		</section>
 		
 		<section class="detail_image">
 			<div class="detail_image2">
-	 			<img src="http://localhost:9000/myjeju/images/food/food_detail/하도리1.jpg">
+	 			<img src="http://localhost:9000/myjeju/images/food/food_detail/${vo.f_image2}">
 	 		</div>
 	 		<div class="detail_image2">
-	 			<img src="http://localhost:9000/myjeju/images/food/food_detail/하도리3.jpg">
+	 			<img src="http://localhost:9000/myjeju/images/food/food_detail/${vo.f_image3}">
 	 		</div>
 	 		<div class="detail_image2">
-	 			<img src="http://localhost:9000/myjeju/images/food/food_detail/하도리2.jpg">
+	 			<img src="http://localhost:9000/myjeju/images/food/food_detail/${vo.f_image4}">
 	 		</div>
 	 		<div class="detail_image2">
-	 			<img src="http://localhost:9000/myjeju/images/food/food_detail/하도리4.jpg">
+	 			<img src="http://localhost:9000/myjeju/images/food/food_detail/${vo.f_image5}">
 	 		</div>
 		</section>
 		
