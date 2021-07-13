@@ -115,14 +115,18 @@ button#more_btn:hover img:nth-child(2){
 div.travel_detail_top{
 	display:inline-block;
 	position:relative;
-	overflow:hidden; 
 	width:100%;
 	height:900px;
+	overflow:hidden; 
+	object-fit:cover;
 }
 div.travel_detail_top>img{
 	display:inline-block;
 	z-index:1;
 	width:100%;
+	height:900px;
+	overflow:hidden; 
+	object-fit:cover;
 	filter:brightness(30%);
 }
 div.travel_detail_top>div{

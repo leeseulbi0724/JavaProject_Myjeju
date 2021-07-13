@@ -59,7 +59,7 @@ public class FoodController {
 		
 		FoodDAO dao = new FoodDAO();
 		FoodVO vo = dao.getFoodDetail(fid);
-		String infor2 = vo.getF_infor2().replace("\r\n", "<br>");
+		String infor2 = vo.getF_infor2().replace("-", "<br>");
 		
 		mv.setViewName("food/food_detail");
 		mv.addObject("vo",vo);
@@ -77,7 +77,7 @@ public class FoodController {
 		
 		CafeDAO dao = new CafeDAO();
 		CafeVO vo = dao.getCafeDetail(caid);
-		String infor2 = vo.getCa_infor2().replace("\r\n", "<br>");
+		String infor2 = vo.getCa_infor2().replace("-", "<br>");
 		
 		mv.setViewName("food/cafe_detail");
 		mv.addObject("vo",vo);
