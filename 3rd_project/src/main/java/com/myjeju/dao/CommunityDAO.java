@@ -44,5 +44,41 @@ public class CommunityDAO {
 	public CommunityVO getFreeContent(String fid) {
 		return sqlSession.selectOne(namespace+".free_content", fid);
 	}
-
+	
+	//자유게시판 댓글 달기
+	public int getCommentResult(CommunityVO vo) {		
+		return sqlSession.insert(namespace+".comment", vo);
+	}
+	
+	//자유게시판 댓글 가져오기
+	public ArrayList<CommunityVO> getFreeComment(String fid) {
+		List<CommunityVO> list = sqlSession.selectList(namespace+".free_comment", fid);
+		
+		return (ArrayList<CommunityVO>)list;
+	}
+	
+	//기존에 저장된 파일 가져오기
+	public String getFileResult(String fid) {
+		return sqlSession.selectOne(namespace+".file_result", fid);
+	}
+	
+	//파일포함 --> 업데이트
+	public int getFileYesUpdate(CommunityVO vo) {
+		return sqlSession.update(namespace+".yes_update", vo);
+	}
+	
+	//파일미포함 --> 업데이트
+	public int getFileNoUpdate(CommunityVO vo) {
+		return sqlSession.update(namespace+".no_update", vo);
+	}
+	
+	//자유게시판 댓글 삭제하기
+	public int getCommentDelete(String cid) {
+		return sqlSession.delete(namespace+".comment_delete", cid);
+	}
+	
+	//자유게시판 게시글 삭제하기
+	public int getFreeBoardDelete(String fid) {
+		return sqlSession.delete(namespace+".free_board_delete", fid);
+	}
 }

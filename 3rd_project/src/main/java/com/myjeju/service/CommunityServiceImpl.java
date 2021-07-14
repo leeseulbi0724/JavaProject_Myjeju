@@ -40,4 +40,79 @@ public class CommunityServiceImpl implements CommunityService {
 	public  CommunityVO getFreeContent(String fid) {
 		return communityDAO.getFreeContent(fid);
 	}
+	
+	@Override
+	public boolean getCommentResult(CommunityVO vo) {
+		int val = communityDAO.getCommentResult(vo);
+		
+		boolean result = false;
+		
+		if ( val != 0 ) {
+			result = true;
+		}
+		
+		return result;
+	}
+	
+	@Override
+	public ArrayList<CommunityVO> getFreeComment(String fid) {
+		return communityDAO.getFreeComment(fid);
+	}
+	
+	@Override
+	public String getFileResult(String fid) {
+		return communityDAO.getFileResult(fid);
+	}
+	
+	@Override
+	public  boolean getFileYesUpdate(CommunityVO vo) {
+		int val = communityDAO.getFileYesUpdate(vo);
+		
+		boolean result = false;
+		
+		if ( val!= 0) {
+			result = true;
+		}
+		
+		return result;
+	}
+	
+	@Override
+	public  boolean getFileNoUpdate(CommunityVO vo) {
+		int val = communityDAO.getFileNoUpdate(vo);
+		
+		boolean result = false;
+		
+		if ( val!= 0) {
+			result = true;
+		}
+		
+		return result;
+	}
+	
+	@Override
+	public boolean getCommentDelete(String cid) {
+		int val = communityDAO.getCommentDelete(cid);
+
+		boolean result = false;
+		
+		if ( val != 0) {
+			result = true;
+		}
+		
+		return result;
+	}
+	
+	@Override
+	public boolean getFreeBoardDelete(String fid) {
+		int val = communityDAO.getFreeBoardDelete(fid);
+
+		boolean result = false;
+		
+		if ( val != 0) {
+			result = true;
+		}
+		
+		return result;
+	}
 }

@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.myjeju.commons.Commons;
@@ -53,9 +54,14 @@ public class CommunityController {
 	public ModelAndView free_board_content(String fid) {
 		ModelAndView mv = new ModelAndView();
 		
+		//게시물 내용
 		CommunityVO vo = communityService.getFreeContent(fid);
 		
+		//댓글 정보
+		ArrayList<CommunityVO> list = communityService.getFreeComment(fid);
+		
 		mv.addObject("vo", vo);
+		mv.addObject("list", list);
 		mv.setViewName("community/free_board_content");
 		
 		return mv;
@@ -67,6 +73,22 @@ public class CommunityController {
 	@RequestMapping(value="/free_board_write.do", method=RequestMethod.GET)
 	public String free_board_write() {
 		return "community/free_board_write";
+	}
+	
+	/**
+	 * 자유게시판 수정하기
+	 */
+	@RequestMapping(value="/free_board_update.do", method=RequestMethod.GET)
+	public ModelAndView free_board_update(String fid) {
+		ModelAndView mv = new ModelAndView();
+		
+		//게시물 내용
+		CommunityVO vo = communityService.getFreeContent(fid);
+		
+		mv.addObject("vo", vo);
+		mv.setViewName("community/free_board_update");
+		
+		return mv;
 	}
 	
 	/**
@@ -135,5 +157,107 @@ public class CommunityController {
 		
 	}
 	
+	/**
+	 * 자유게시판 댓글 DB
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/comment_up.do", method=RequestMethod.POST)
+	public boolean comment_up(HttpSession session, HttpServletRequest request) {
+		//로그인 회원정보 가져오기
+		String id = (String) session.getAttribute("session_id");
+		
+		CommunityVO vo = new CommunityVO();
+		vo.setComment_id(id);
+		vo.setCcomment(request.getParameter("content"));
+		vo.setFid(request.getParameter("fid"));
+		
+		boolean result = communityService.getCommentResult(vo);
+		
+		return result;		
+		
+	}
+	
+	/**
+	 * 자유게시판 수정하기
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/free_update_proc.do", method=RequestMethod.POST)
+	public ModelAndView free_update_proc(HttpServletRequest request, CommunityVO vo) throws Exception {
+			ModelAndView mv = new ModelAndView();
+			
+			if (vo.getFile1().getOriginalFilename() != "") {
+				//파일 존재
+				String root_path = request.getSession().getServletContext().getRealPath("/");
+				String attach_path = "\\resources\\upload\\";
+					
+				//rfname 중복방지 처리			
+				UUID uuid = UUID.randomUUID();
+				System.out.println((vo.getFile1().getOriginalFilename()));
+				System.out.println((uuid +"_"+vo.getFile1().getOriginalFilename()));	
+				System.out.print(vo.getFid());
+					
+				//DB저장
+				vo.setFfile(vo.getFile1().getOriginalFilename());
+				vo.setFsfile(uuid+ "_"+vo.getFile1().getOriginalFilename());
+		
+				//BoardDAO dao = new BoardDAO();
+				String old_bsfile = communityService.getFileResult(vo.getFid());
+				boolean result = communityService.getFileYesUpdate(vo);
+				
+				//DB저장 완료 후 폴더에 저장하기
+				if (result) {
+					File file = new File(root_path+attach_path+vo.getFsfile());
+					vo.getFile1().transferTo(file);
+					
+					//기존 upload 폴더에 존재하는 파일 삭제
+					File old_file = new File(root_path+attach_path+old_bsfile);
+					if ( old_file.exists()) {
+						old_file.delete();
+					}
+				}
+				
+			} else {
+				//파일 미포함 업데이트
+				boolean result = communityService.getFileNoUpdate(vo);
+			}	
+		
+			mv.setViewName("redirect:/free_board.do");
+			return mv;
+		
+	}
+	
+	/**
+	 * 자유게시판 댓글 삭제하기
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/comment_delete.do", method=RequestMethod.POST)
+	public boolean comment_delete(HttpServletRequest request) {
+		boolean result = communityService.getCommentDelete(request.getParameter("cid"));
+		
+		return result;
+	}
+	
+	/**
+	 * 자유게시판 게시글 삭제하기
+	 */
+	@RequestMapping(value = "/free_board_delete.do", method=RequestMethod.GET)
+	public String free_board_delete(HttpServletRequest request, String fid) {
+		String old_bsfile = communityService.getFileResult(fid);
+		
+		String root_path = request.getSession().getServletContext().getRealPath("/");
+		String attach_path = "\\resources\\upload\\";
+		
+		File old_file = new File(root_path+attach_path+old_bsfile);
+		if ( old_file.exists()) {
+			old_file.delete();
+		}
+		
+		boolean result = communityService.getFreeBoardDelete(fid);
+		
+		return "redirect:/free_board.do";
+	}
+	
+	
+		
 
 }

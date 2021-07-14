@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,13 +18,45 @@ $(document).ready(function() {
 	$("#con_textarea").css("height", $("textarea").prop('scrollHeight')+5);
 	
 	$(".re_comment").click(function() {
-		$(".re_box").css("display","block");		
+		$(".re_box").css("display","block");
 	});
 	
 	$("#close").click(function() {
 		$(".re_box").css("display","none");	
 	});
 	
+	  $(function(){
+		  $("#up").on("click", comment);
+	    });	  	   
+	  function comment() {	
+        var content = $("#comment").val();
+        var fid = $("#fid").val();
+        $.ajax({
+            type: "post",
+            url: "comment_up.do",
+            data : {content: content, fid: fid} ,
+            dataType: 'json',
+            success: function (result) {
+                location.reload();
+            },
+        });
+	  }
+        
+  	  $(function(){
+		  $(".com_delete").on("click", com_delete);
+	    });	  	   
+	  function com_delete() {	
+        var cid = $(this).attr("id");
+       $.ajax({
+            type: "post",
+            url: "comment_delete.do",
+            data:{cid:cid} ,
+            dataType: 'json',
+            success: function (result) {
+                location.reload();
+            },
+        });
+	  }
 });
 </script>
 </head>
@@ -34,7 +67,7 @@ $(document).ready(function() {
 <section>
 <div class="content_box">
 	<div class="box">
-		<p class="info">${vo.id } | <span class="date">${vo.fdate }</span></p>
+		<p class="info">${vo.id } | <span class="date">${vo.fdate }</span><input type="hidden" value="${vo.fid }" id="fid"></p>
 		<table class="table">
 				<tr>
 					<th class="title">${vo.ftitle }</th>
@@ -49,44 +82,59 @@ $(document).ready(function() {
 				</tr>
 		</table>
 		<a class="btn" href="free_board.do" id="list">목록</a>	
-		<%-- <% if (vo.getId().equals( session.getAttribute("signedUser"))) { %>
-		<a class="btn btn-primary"  id="delete" >삭제</a>
-		<% } %> --%>
+		<c:if test="${vo.id eq session_id}">
+			<a href="free_board_delete.do?fid=${vo.fid }" class="btn btn-primary"  id="delete" >삭제</a>
+			<a href="free_board_update.do?fid=${vo.fid }" class="btn btn-primary"  id="update" >수정</a>
+		</c:if>
 		<div class="comment_box">
 		<p class="text">댓글</p><br>
 			<ul>
 				<li>
-					<div class="com_box">
-						<p>닉네임(아이디)</p>
-						<p>댓글 내용</p>
-						<%-- <%if (cvo.getId().equals(session.getAttribute("signedUser"))) { %>
-						<p class="date"><%= cvo.getCdate() %><a class="re_comment"">답글</a><a class="com_delete" id="<%= cvo.getCid() %>">삭제</a></p>
-						<% } else { %>
-						<% } %> --%>
-						<p class="date">2021-07-01 22:15:11<a class="re_comment">답글</a></p>
-						<div class="re_box">
+					<c:forEach var = "vo"  items="${list}" varStatus="status">				
+						<div class="com_box">
+							<p>${vo.id }</p>
+							<p>${vo.ccomment }</p>
+							<c:if test="${vo.id eq session_id}">
+								<p class="date">${vo.cdate }
+									<%-- <a class="re_comment " id="${vo.cid }">답글</a> --%>
+									<a class="com_delete" id="${vo.cid }" >삭제</a>
+								</p>
+							</c:if>
+							<c:if test="${vo.id ne session_id}">
+								<p class="date">${vo.cdate }
+									<%-- <a class="re_comment" id="${vo.cid }">답글</a> --%>
+								</p>
+							</c:if>
+						</div>	
+						<%-- <div class="re_box" id="${vo.cid }" >
 							<textarea id="re_comment" class="form-control" style="resize: none;"></textarea>
 							<button class="btn btn-outline-secondary" id="close">취소</button>
 							<button class="btn btn-outline-secondary" id="re_up">등록</button>
-							<%-- <input type="hidden" value="<%= cvo.getCid()%>" class="cid"> --%>
-						</div>
-					</div>
-					<div class="com_subbox" >
-						<img src="http://localhost:9000/myjeju/images/community/arrow.png" width=25 height=25>
-						<div class="rebox">
-							<p>닉네임(아이디)</p>
-							<p>대댓글내용</p>
-							<%--<%if (re_list.get(i).getId().equals(session.getAttribute("signedUser"))) { %>
-							<p class="date"><%= re_list.get(i).getRdate() %><a class="recom_delete" id="<%= re_list.get(i).getRid() %>">삭제</a></p>
-							<% } else { %> --%>
-							<p class="date">2021-07-01 23:00:14</p>
-							
-						</div>
-					</div>		
+							<input type="hidden" value="<%= cvo.getCid()%>" class="cid">
+						</div> --%>
+						</c:forEach>					
+						<%-- <div class="com_subbox" >
+							<img src="http://localhost:9000/myjeju/images/community/arrow.png" width=25 height=25>
+							<div class="rebox">
+								<p>닉네임(아이디)</p>
+								<p>대댓글내용</p>
+								<%if (re_list.get(i).getId().equals(session.getAttribute("signedUser"))) { %>
+								<p class="date"><%= re_list.get(i).getRdate() %><a class="recom_delete" id="<%= re_list.get(i).getRid() %>">삭제</a></p>
+								<% } else { %>
+								<p class="date">2021-07-01 23:00:14</p>
+								
+							</div>
+						</div> --%>		
+				
 				</li>
 				<li>
 					<div class="rewrite_box">
+					<c:if test = "${empty session_id }">
+						<textarea id="comment" class="form-control" placeholder="로그인 후 이용 부탁드립니다" style="resize: none;" disabled></textarea>
+					</c:if>
+					<c:if test = "${!empty session_id }">
 						<textarea id="comment" class="form-control" style="resize: none;"></textarea>
+					</c:if>
 						<button class="btn btn-outline-secondary" role="button" id="up">등록</button>
 					</div>
 				</li>

@@ -5,7 +5,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 public class CommunityVO {
 
 	CommonsMultipartFile file1;
-	String id, fid, ftitle, fcontent,  ffile, fsfile, fdate;
+	String id, fid, ftitle, fcontent,  ffile, fsfile, fdate, cid, ccomment, cdate, comment_id;
 	int rno, fhit;
 	
 	public CommonsMultipartFile getFile1() {
@@ -67,6 +67,30 @@ public class CommunityVO {
 	}
 	public void setFhit(int fhit) {
 		this.fhit = fhit;
+	}
+	public String getCid() {
+		return cid;
+	}
+	public void setCid(String cid) {
+		this.cid = cid;
+	}
+	public String getCcomment() {
+		return ccomment;
+	}
+	public void setCcomment(String ccomment) {
+		this.ccomment = ccomment;
+	}
+	public String getCdate() {
+		return cdate;
+	}
+	public void setCdate(String cdate) {
+		this.cdate = cdate;
+	}
+	public String getComment_id() {
+		return comment_id;
+	}
+	public void setComment_id(String comment_id) {
+		this.comment_id = comment_id;
 	}
 	
 	
