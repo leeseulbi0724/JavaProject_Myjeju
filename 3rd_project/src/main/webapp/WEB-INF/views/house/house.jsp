@@ -22,41 +22,22 @@
 		<section class="recommend_zone">
 			<div class="travel_title">추천 숙소</div>
 			<div class="travel_spot">
+			<c:forEach var="toplist" items="${toplist}">
 				<article class="travel_spot1">
-					<a href="http://localhost:9000/myjeju/house_detail.do"><img src="http://localhost:9000/myjeju/images/no1.jpg"></a>
+					<a href="http://localhost:9000/myjeju/house_detail.do?hid=${toplist.hid }"><img src="http://localhost:9000/myjeju/images/house/${toplist.h_img}"></a>
 					<div class="spot_infor">
-						<p class="spot_name">스테이라움 <span>전망좋은숙소</span></p>
-						<p class="spot_tag">#일출봉 #비경감상소 #경관/포토 #일몰 #전망</p>
+						<p class="spot_name">${toplist.h_name} <span>${toplist.h_infor}</span></p>
+						<p class="spot_tag">${toplist.h_tag}</p>
 						<button type="button" class="btn_style" id="heart_btn">
-							<img src="http://localhost:9000/myjeju/images/travel/empty_heart.png">81
+							<img src="http://localhost:9000/myjeju/images/travel/empty_heart.png">${toplist.h_like}
 						</button>
 						<img src="http://localhost:9000/myjeju/images/travel/star.png"><span class="star_score">4.9 (82)</span>
 					</div>
 				</article>
-				<article class="travel_spot2">
-					<a href="http://localhost:9000/myjeju/house_detail.do"><img src="http://localhost:9000/myjeju/images/no2.jpg"></a>
-					<div class="spot_infor">
-						<p class="spot_name">한동지몽동 <span>펜션</span></p>
-						<p class="spot_tag">#바다 #한동지 #경관 #언덕위</p>
-						<button type="button" class="btn_style" id="heart_btn">
-							<img src="http://localhost:9000/myjeju/images/travel/empty_heart.png">38
-						</button>
-						<img src="http://localhost:9000/myjeju/images/travel/star.png"><span class="star_score">4.8 (17)</span>
-					</div>
-				</article>
-				<article class="travel_spot3">
-					<a href="http://localhost:9000/myjeju/house_detail.do"><img src="http://localhost:9000/myjeju/images/no3.jpg"></a>
-					<div class="spot_infor">
-						<p class="spot_name">자운 <span>게스트하우스</span></p>
-						<p class="spot_tag">#자운 #게하 #제주 #전통 #고즈넉</p>
-						<button type="button" class="btn_style" id="heart_btn">
-							<img src="http://localhost:9000/myjeju/images/travel/empty_heart.png">227
-						</button>
-						<img src="http://localhost:9000/myjeju/images/travel/star.png"><span class="star_score">4.7 (15)</span>
-					</div>
-				</article>
+				</c:forEach>
 			</div>
 		</section>
+		
 		<section class="map_zone">
 			<div class="travel_title">숙소 찾기</div>
 			<div id="map" style="width:100%;height:500px;"></div>
@@ -72,98 +53,16 @@
 		 	
 			// 마커를 표시할 위치와 title 객체 배열입니다 
 			var positions = [
+				<c:forEach var="vo" items="${list}">
 		    	{	
-		    		title : '자운게스트하우스',
-		    		addr : '제주특별자치도 서귀포시 대정읍 하모리 818-8',
-		    		tel : '064-794-2415',
-		        	latlng: new kakao.maps.LatLng(33.22677759096375, 126.25531933528)
+		    		title : '${vo.h_name}',
+		    		addr : '${vo.h_addr}',
+		    		tel : '${vo.h_hp}',
+		    		img : '${vo.h_img}',
+		        	latlng: new kakao.maps.LatLng(${vo.h_vpoint}, ${vo.h_hpoint})
 		    	},
-		    	{	
-		    		title : '스테이라움',
-		    		addr : '제주특별자치도 서귀포시 성산읍 오조리 570-1',
-		    		tel : '010-7495-9910',
-		        	latlng: new kakao.maps.LatLng(33.46824947997743, 126.91558647663133)
-		    	},
-		    	{	
-		    		title : '한동지몽동',
-		    		addr : '제주특별자치도 제주시 구좌읍 한동로1길',
-		    		tel : '010-8810 7588',
-		        	latlng: new kakao.maps.LatLng(33.538067745363335, 126.82689008525008)
-		    	},
-		    	{	
-		    		title : '제주센트럴파크레지던스',
-		    		addr : '제주특별자치도 제주시 연동 292-40',
-		    		tel : '010-9983-0083',
-		        	latlng: new kakao.maps.LatLng(33.48899088840315, 126.49520037084571)
-		    	},
-		    	{	
-		    		title : '태흥예술극장',
-		    		addr : '제주특별자치도 서귀포시 남원읍 태위로912번길 28',
-		    		tel : '064-901-8738',
-		        	latlng: new kakao.maps.LatLng(33.28455123295662, 126.74477008247413)
-		    	},
-		    	{	
-		    		title : '당당하우스',
-		    		addr : '제주특별자치도 제주시 구좌읍 송당리 1916-5',
-		    		tel : '010-3249-7277',
-		        	latlng: new kakao.maps.LatLng(33.46607756747349, 126.78261816217112)
-		    	},
-		    	{	
-		    		title : '뚜르드제주',
-		    		addr : '제주특별자치도 제주시 구좌읍 종달로1길',
-		    		tel : '010-5007-5012',
-		        	latlng: new kakao.maps.LatLng(33.49617928584109, 126.90002638433614)
-		    	},
-		    	{	
-		    		title : '서귀포 Apro',
-		    		addr : '제주특별자치도 서귀포시 표선면 토산리 1481-1',
-		    		tel : '010-4157-9960',
-		        	latlng: new kakao.maps.LatLng(33.328524652551685, 126.76570541316822)
-		    	},
-		    	{
-		    		title : '팀버하우스',
-		    		addr : '제주특별자치도 제주시 애월읍 곽지리 1624',
-		    		tel : '010-9679-4241',
-		        	latlng: new kakao.maps.LatLng(33.45119013793356, 126.30791458247862)
-		    	},
-		    	{
-		    		title : '하랑게스트하우스',
-		    		addr : '제주특별자치도 서귀포시 대정읍 일과로13번길 1',
-		    		tel : '010-4404-5585',
-		        	latlng: new kakao.maps.LatLng(33.23301495999036, 126.24381841502205)
-		    	},
-		    	{
-		    		title : '디스이스핫(THISISHOT_EL)',
-		    		addr : '제주특별자치도 제주시 구좌읍 하도리 59-1',
-		    		tel : '064-784-4447',
-		        	latlng: new kakao.maps.LatLng(33.5133628857966, 126.89734854015344)
-		    	},
-		    	{
-		    		title : '하이레지던스',
-		    		addr : '제주특별자치도 제주시 은남1길 46',
-		    		tel : '064-743-1300',
-		        	latlng: new kakao.maps.LatLng(33.4900513123438, 126.49112769416554)
-		    	},
-		    	{
-		    		title : '그린나래',
-		    		addr : '제주특별자치도 서귀포시 성산읍 서성일로 615',
-		    		tel : '064-782-7071',
-		        	latlng: new kakao.maps.LatLng(33.42822222927255, 126.85087311131457)
-		    	},
-		    	{
-		    		title : '달다하우스',
-		    		addr : '제주특별자치도 제주시 구좌읍 김녕리 1607',
-		    		tel : '010-2695-7737',
-		        	latlng: new kakao.maps.LatLng(33.55652291888224, 126.74883349597148)
-		    	},
-		    	{
-		    		title : '더하도스파빌라',
-		    		addr : '제주특별자치도 제주시 구좌읍 하도리 53-37',
-		    		tel : '010-2696-0201',
-		        	latlng: new kakao.maps.LatLng(33.51064209142311, 126.89294542480685)
-		    	}
-		    	
-			];
+		    	</c:forEach>
+			]
 			
 			for(let i=0; i < positions.length; i++){
 			    var data = positions[i];
@@ -208,54 +107,24 @@
 			</div>
 			<table class="travel_list">
 				<tbody>
+				<c:forEach var="vo" items="${list}">
 					<tr class="travel_list1">
 						<td class="travel_list_pic">
-							<img src="http://localhost:9000/myjeju/images/house/그린나래.jpg">
+							<img src="http://localhost:9000/myjeju/images/house/${vo.h_img}">
 						</td>
 						<td>
-							<p class="spot_name">그린나래 <span>2성급 호텔</span></p>
-							<p class="spot_addr">제주특별자치도 서귀포시 성산읍 서성일로 615</p>
+							<p class="spot_name">${vo.h_name} <span>${vo.h_infor}</span></p>
+							<p class="spot_addr">${vo.h_addr}</p>
 							<div>
 								<img src="http://localhost:9000/myjeju/images/travel/star.png"><span class="star_score">4.4 (268)</span>
 							</div>
 						</td>
 						<td>
-							<button type="button" class="btn_style" id="heart_btn"><img src="http://localhost:9000/myjeju/images/travel/empty_heart.png">1,674</button>
-							<button type="button" class="btn_style4" id="more_infor" onclick="location.href='http://localhost:9000/myjeju/house_detail.do'">상세정보</button>
+							<button type="button" class="btn_style" id="heart_btn"><img src="http://localhost:9000/myjeju/images/travel/empty_heart.png">${vo.h_like}</button>
+							<button type="button" class="btn_style4" id="more_infor" onclick="location.href='http://localhost:9000/myjeju/house_detail.do?hid=${vo.hid}'">상세정보</button>
 						</td>
 					</tr>
-					<tr class="travel_list2">
-						<td class="travel_list_pic">
-							<img src="http://localhost:9000/myjeju/images/house/당당하우스.jpg">
-						</td>
-						<td>
-							<p class="spot_name">당당하우스 <span>펜션</span></p>
-							<p class="spot_addr">제주특별자치도 제주시 구좌읍 송당리 1916-5</p>
-							<div>
-								<img src="http://localhost:9000/myjeju/images/travel/star.png"><span class="star_score">4.1 (683)</span>
-							</div>
-						</td>
-						<td>
-							<button type="button" class="btn_style" id="heart_btn"><img src="http://localhost:9000/myjeju/images/travel/empty_heart.png">354</button>
-							<button type="button" class="btn_style4" id="more_infor" onclick="location.href='http://localhost:9000/myjeju/house_detail.do'">상세정보</button>
-						</td>
-					</tr>
-					<tr class="travel_list3">
-						<td class="travel_list_pic">
-							<img src="http://localhost:9000/myjeju/images/house/동행게스트하우스.jpg">
-						</td>
-						<td>
-							<p class="spot_name">동행 <span>게스트하우스</span></p>
-							<p class="spot_addr">제주특별자치도 제주시 한림읍 한림해안로 590</p>
-							<div>
-								<img src="http://localhost:9000/myjeju/images/travel/star.png"><span class="star_score">4.3 (433)</span>
-							</div>
-						</td>
-						<td>
-							<button type="button" class="btn_style" id="heart_btn"><img src="http://localhost:9000/myjeju/images/travel/empty_heart.png">287</button>
-							<button type="button" class="btn_style4" id="more_infor" onclick="location.href='http://localhost:9000/myjeju/house_detail.do'">상세정보</button>
-						</td>
-					</tr>
+					</c:forEach>
 				</tbody>
 			</table>
 		</section>

@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -49,16 +49,16 @@
 	
 	<!-- content -->
 	<div class="food_detail_top">
-		<img src="http://localhost:9000/myjeju/images/house/house_detail/스테이라움.jpg">
+		<img src="http://localhost:9000/myjeju/images/house/house_detail/${vo.h_img }">
 		<div>
-			<h1>스테이라움</h1>
-			<h3>전망좋은숙소</h3>
+			<h1>${vo.h_name}</h1>
+			<h3>${vo.h_infor}</h3>
 			<p>
-				제주특별자치도 서귀포시 성산읍 오조리 570-1<br>
-				(+82) 010-7495-9910
+				${vo.h_addr}<br>
+				${vo.h_hp}
 			</p>
 			<div>
-				<button type="button" class="btn_style" id="heart_btn"><img src="http://localhost:9000/myjeju/images/travel/empty_heart.png">675</button>
+				<button type="button" class="btn_style" id="heart_btn"><img src="http://localhost:9000/myjeju/images/travel/empty_heart.png">${vo.h_like}</button>
 				<img src="http://localhost:9000/myjeju/images/travel/star.png"><span class="star_score">4.8 (223)</span>
 			</div>
 		</div>
@@ -66,20 +66,29 @@
 	<div class="food_detail_content">
 		<section class="detail_infor">
 			<p class="infor_content" >
-				성산일출봉 근처에 위치한 숙소로 성산일출봉의 근사한 바다 전망을 볼 수 있습니다.<br>
+				${infor2}
 			</p>
 			<div></div>
-			<p>
-				객실 정보 : 2인실 전용 숙소
-			</p>
+			
+		
 			
 		</section>
 		
 		<section class="detail_image">
 			<div class="detail_image2">
-	 			<img src="http://localhost:9000/myjeju/images/house/house_detail/스테이라움1.jpg">
+				<div class="room_text">객실정보</div>
+	 			<c:forEach var="vo" items="${list}">
+				<div class="detail_image3">
+					<div class="detail_roominfo">
+						<div class="room_main"><a href="http://localhost:9000/myjeju/calendar.do?hdid=${vo.hdid}"><img src="http://localhost:9000/myjeju/images/house/house_detail/${vo.hd_img }"></a></div>
+						<p class="detail_roominfo2">객실이름 : ${vo.hd_name}</p>
+						<p class="detail_roominfo2">객실가격 : ${vo.hd_price}</p>
+						<p class="detail_roominfo2">최대숙박인원 : ${vo.hd_people}명</p>
+					</div>
+				</div>
+				</c:forEach>
 	 		</div>
-	 		<div class="detail_image2">
+	 		<!-- <div class="detail_image2">
 	 			<img src="http://localhost:9000/myjeju/images/house/house_detail/스테이라움2.jpg">
 	 		</div>
 	 		<div class="detail_image2">
@@ -87,7 +96,7 @@
 	 		</div>
 	 		<div class="detail_image2">
 	 			<img src="http://localhost:9000/myjeju/images/house/house_detail/스테이라움4.jpg">
-	 		</div>
+	 		</div> -->
 		</section>
 		
 		<section class="detail_review">
@@ -168,7 +177,7 @@
 				<img src="http://localhost:9000/myjeju/images/travel/bill_list_btn.png">
 			</button>
 		</section>
-		<button type="button" class="btn_style2" id="reserve_btn" onclick="location.href='http://localhost:9000/myjeju/calendar.do?hid=1&hdid=hd_1'">예약하기</button>
+		<button type="button" class="btn_style2" id="reserve_btn" onclick="location.href='http://localhost:9000/myjeju/calendar.do'">예약하기</button>
 	</div>
 	<!-- footer -->
 	<jsp:include page="../footer.jsp"></jsp:include>
