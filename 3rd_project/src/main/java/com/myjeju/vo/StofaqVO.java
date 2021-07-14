@@ -1,10 +1,8 @@
 package com.myjeju.vo;
 
 public class StofaqVO {
-	String id, sid, st_id, st_content, st_time;
+	String id, sid, st_id, st_content, st_time, re_content, re_time;
 
-	
-	
 	
 	public String getId() {
 		return id;
@@ -46,10 +44,21 @@ public class StofaqVO {
 		this.st_time = st_time;
 	}
 
-	
+	public String getRe_content() {
+		return re_content;
+	}
+
+	public void setRe_content(String re_content) {
+		this.re_content = re_content;
+	}
+
+	public String getRe_time() {
+		return re_time;
+	}
+
+	public void setRe_time(String re_time) {
+		this.re_time = re_time;
+	}
 
 	
-	
-
-
 }

@@ -407,11 +407,11 @@
 		border-collapse : collapse;
 	}
 	
-	.store_product_faq_table tr {
+	.store_product_faq_table tr:nth-child(2n) {
 		/* border : 1px solid red; */
 	}
 	
-	.store_product_faq_table tr:first-child th {
+	.store_product_faq_table tr:nth-child(2n-1) th {
 		/* border : 1px solid yellow; */
 		width : 100px;
 		color : white;
@@ -420,7 +420,7 @@
 		padding : 5px;
 	}
 	
-	.store_product_faq_table tr:last-child th {
+	.store_product_faq_table tr:nth-child(2n) th {
 		/* border : 1px solid yellow; */
 		width : 100px;
 		color : white;

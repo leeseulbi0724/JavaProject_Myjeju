@@ -13,14 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.myjeju.dao.StofaqDAO;
-import com.myjeju.dao.StorepDAO;
 import com.myjeju.service.StofaqService;
 import com.myjeju.service.StoreService;
-import com.myjeju.service.StorepService;
 import com.myjeju.vo.StofaqVO;
 import com.myjeju.vo.StoreVO;
-import com.myjeju.vo.StorepVO;
 
 @Controller
 
@@ -30,8 +26,7 @@ public class StoreController {
 	private StoreService storeService;
 	@Autowired
 	private StofaqService stofaqService;
-	@Autowired
-	private StorepService storepService;
+
 	
 	/**
 	 * store.do : 스토어 메인 상품 출력
@@ -112,33 +107,18 @@ public class StoreController {
 		
 		String user_id = (String) session.getAttribute("session_id");
 		
-		System.out.print(sid);
 		//상품 상세정보 가져오기
-		//StoreDAO dao = new StoreDAO();
 		StoreVO vo = storeService.getContent(sid);
 		
-		//문의 리스트
-		//StofaqDAO fdao = new StofaqDAO();
-		ArrayList<StofaqVO> flist = stofaqService.getContent(sid);
-		
-		
-		//답변 리스트
-		//StorepDAO rdao = new StorepDAO();
-		ArrayList<StorepVO> rlist = storepService.getContent(sid);
-		
-		StofaqVO fvo = stofaqService.getStid(sid);
-		
+		//문의/답변 리스트
+		ArrayList<StofaqVO> flist = stofaqService.getList(sid);
 		
 		mv.setViewName("store/store_content");
 		
 		mv.addObject("vo", vo);
 		mv.addObject("flist", flist);
-		mv.addObject("rlist", rlist);
 		
 		mv.addObject("sid", sid);
-		
-		mv.addObject("fvo", fvo);
-		
 		mv.addObject("id", user_id);
 		
 		return mv;
@@ -155,21 +135,15 @@ public class StoreController {
 	
 	
 	/**
-	 * store_faq_proc.do : 스토어 문의하기 처리
+	 * store_faq_proc.do : 스토어 문의 -> 문의 처리
 	 */
 	@RequestMapping(value = "/store_faq_proc.do", method = RequestMethod.GET)
-	//public ModelAndView store_faq_proc(StofaqVO vo) {
-	public ModelAndView store_faq_proc(StofaqVO fvo) {
+	public ModelAndView store_faq_proc(StofaqVO vo) {
 		ModelAndView mv = new ModelAndView();
-		
-		//StofaqDAO dao = new StofaqDAO();
-		boolean result = stofaqService.getInsertResult(fvo);
-		
+		boolean result = stofaqService.getInsertResult(vo);
 		if(result) {
 			mv.setViewName("redirect:/store_content.do");
-			mv.addObject("sid", fvo.getSid());
-			
-			
+			mv.addObject("sid", vo.getSid());
 		}
 		return mv;
 	}
@@ -179,15 +153,13 @@ public class StoreController {
 	 * store_faq_reply_proc.do : 스토어 문의 -> 답변 처리
 	 */
 	@RequestMapping(value = "/store_faq_reply_proc.do", method = RequestMethod.GET)
-	public ModelAndView store_faq_reply_proc(StorepVO rvo) {
+	public ModelAndView store_faq_reply_proc(StofaqVO vo) {
 		ModelAndView mv = new ModelAndView();
-		
-		//StorepDAO dao = new StorepDAO();
-		boolean result = storepService.getInsertResult(rvo);
+		boolean result = stofaqService.getReplyResult(vo);
 		
 		if(result) {
 			mv.setViewName("redirect:/store_content.do");
-			mv.addObject("sid", rvo.getSid());
+			mv.addObject("sid", vo.getSid());
 		}
 		
 		return mv;

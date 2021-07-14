@@ -101,21 +101,26 @@
 		/* 답변하기 버튼 클릭시 모달창 */
 		$('#storereplyBtn').click(function(e){
 			e.preventDefault();
+			
+			var st_value = $("#st_id1").val();
+			$("#st_id2").val(st_value);
+
+			var content = $("#st_content1").val();
+			$("#st_content2").val(content);
+			
 			$('#replyModal').modal("show");
 		});
 		
 		/* 문의하기 모달에서 문의하기 버튼 */
 		$("#modalY1").click(function() {
-			//var st_content = $("#st_content").val();
 			stofaq_form.submit();
 		});
 		
 		/* 답변하기 모달에서 답변하기 버튼 */
 		$("#modalY2").click(function(){
 			storep_form.submit();
-n		});
-		
-		
+		});
+
 		
 	});
 
@@ -217,9 +222,6 @@ n		});
 										</div>
 										
 										<div class="modal-footer">
-											<%-- <a href = "store_content.do?sid=${sid}"><button class="btn" id="modalY1">문의하기</button></a> --%>
-											<%-- <a class="btn" id="modalY1" href="store_content.do?sid=${sid}">문의하기</a> --%>
-											<%-- <a type = "button" class = "btn" id = "modalY1" href = "store_content.do?sid=${sid}">문의하기</a> --%>
 											<button class="btn" type="button" id = "modalY1">문의하기</button>
 											<button class="btn" type="button" data-dismiss="modal">닫기</button>
 										</div>
@@ -232,21 +234,23 @@ n		});
 					<div class = "store_product_faq_content">
 						<table class = "store_product_faq_table">
 							<c:forEach var = "flist" items = "${flist}">
-							<tr>
-								<th>질문</th>
-								<td>${id} ${flist.sid} ${flist.st_id}</td>
-								<td>${flist.st_content}</td>
-								<td>${flist.st_time}</td>
-								<td><button type = "button" id = "storereplyBtn" class = "replyBtn">답변하기</button></td>
-							</tr>
-							</c:forEach>	
-							
-							<c:forEach var = "rlist" items = "${rlist}">
+								<input type = "hidden" id = "st_id1" value = "${flist.st_id}">
+								<input type = "hidden" id = "st_content1" value = "${flist.st_content}">
 								<tr>
-									<th>┖─답변</th>
-									<td>${rlist.st_id} ${rlist.str_id}</td>
-									<td colspan = "2">${rlist.str_content}</td>
-									<td>${rlist.str_time}</td>
+									<th>질문</th>
+									<td>${id} ${flist.sid} ${flist.st_id}</td>
+									<td>${flist.st_content}</td>
+									<td>${flist.st_time}</td>
+									<td><button type = "button" id = "storereplyBtn" class = "replyBtn">답변하기</button></td>
+								</tr>
+								
+								<tr>
+									<c:if test = "${!empty flist.re_content}">
+										<th>┖─답변</th>
+										<td>제주아일랜드 관리자</td>
+										<td colspan = "2">${flist.re_content}</td>
+										<td>${flist.re_time}</td>
+									</c:if>
 								</tr>
 							</c:forEach>
 							
@@ -268,9 +272,9 @@ n		});
 										<div class="modal-body">
 											<input type = "text" value = "${id}" name = "id" id = "id" readonly>
 											<input type = "text" value = "${sid}" name = "sid" id = "sid" readonly>
-											<input type = "text" value = "${fvo.st_id}" name = "st_id" id = "st_id" readonly>
-											<input type = "text" value = "${fvo.st_content}" name = "st_content" id = "st_content" readonly>
-											<div><input type = "text" placeholder = "답변할 내용을 입력해주세요" name = "str_content" id = "str_content"></input></div>
+											<input type = "text" name = "st_id" id = "st_id2" readonly>
+											<input type = "text" name = "st_content" id = "st_content2" readonly>
+											<div><input type = "text" placeholder = "답변할 내용을 입력해주세요" name = "re_content" id = "re_content"></input></div>
 										</div>
 										
 										<div class="modal-footer">

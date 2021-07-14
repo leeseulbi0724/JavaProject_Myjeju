@@ -15,13 +15,18 @@ public class StofaqServiceImpl implements StofaqService {
 	private StofaqDAO stofaqDAO;
 	
 	@Override
-	public ArrayList<StofaqVO> getContent(String sid) {
-		return stofaqDAO.getContent(sid);
+	public ArrayList<StofaqVO> getList(String sid) {
+		return stofaqDAO.getList(sid);
 	}
 
 	@Override
 	public boolean getInsertResult(StofaqVO vo) {
 		return stofaqDAO.getInsertResult(vo);
+	}
+
+	@Override
+	public boolean getReplyResult(StofaqVO vo) {
+		return stofaqDAO.getReplyResult(vo);
 	}
 
 	@Override

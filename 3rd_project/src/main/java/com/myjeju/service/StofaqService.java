@@ -6,8 +6,9 @@ import com.myjeju.vo.StofaqVO;
 
 public interface StofaqService {
 
-	ArrayList<StofaqVO> getContent(String sid);
+	ArrayList<StofaqVO> getList(String sid);
 	boolean getInsertResult(StofaqVO vo);
+	boolean getReplyResult(StofaqVO vo);
 	StofaqVO getStid(String sid);
 	
 }
