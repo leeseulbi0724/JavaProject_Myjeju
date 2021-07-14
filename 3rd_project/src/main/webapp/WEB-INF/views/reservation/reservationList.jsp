@@ -7,7 +7,6 @@
 	String f_value = request.getParameter("preday");
 	String s_value = request.getParameter("presday");
 	String year = request.getParameter("preyear");
-	System.out.println(year);
 	
 	String[] f_array = f_value.split("/");
 	String[] s_array = s_value.split("/");
@@ -44,8 +43,6 @@
 	f_day = year + "-" + f_month + "-" + f_day;
 	s_day = year + "-" + s_month + "-" + s_day;
 	
-	System.out.println(f_day);
-	System.out.println(s_day);
 	
 %>
 <!DOCTYPE html>
