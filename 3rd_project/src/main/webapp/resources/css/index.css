@@ -298,11 +298,11 @@ div.travel_pic{
 	overflow:hidden; 
 	margin:0 auto;
 }
-div.travel_pic img{
+div.travel_pic>img{
 	transform:scale(1); 
 	transition:transform 0.5s linear;
 }
-div.travel_pic img:hover{
+div.travel_pic>img:hover{
 	filter:brightness(50%);
 	transform:scale(1.1);
 }
@@ -318,12 +318,13 @@ div.other_pic{
 	overflow:hidden; 
 	margin:0 auto;
 }
-div.other_pic>img{
+div.other_pic>a>img{
 	transform:scale(1); 
 	transition:transform 0.5s linear;
 }
-div.other_pic>img:hover{
+div.other_pic>a>img:hover{
 	transform:scale(1.1);
+	filter:brightness(50%);
 }
 
 div.other_infor{

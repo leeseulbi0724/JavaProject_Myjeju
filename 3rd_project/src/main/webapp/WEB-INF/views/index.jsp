@@ -141,21 +141,21 @@
 	 			<button type="button" class="btn_style2" id="more_btn" onclick="location.href='http://localhost:9000/myjeju/travel.do'" style="width:110px">자세히보기</button>
 	 		</div>
 	 		<div class="travel_pic">
-	 			<a href="#"><img src="http://localhost:9000/myjeju/images/index/photospot3.jpg" class="photospot"></a>
+	 			<img src="http://localhost:9000/myjeju/images/index/photospot3.jpg" class="photospot">
 	 		</div>
 	 	</section>
 	 	<section class="other_zone">
 	 		<div class="other_pic">
-	 			<img src="http://localhost:9000/myjeju/images/index/food1.jpg">
+	 			<a href="http://localhost:9000/myjeju/cafe.do"><img src="http://localhost:9000/myjeju/images/index/food1.jpg"></a>
 	 		</div>
 	 		<div class="other_pic">
-	 			<img src="http://localhost:9000/myjeju/images/index/food7.jpg">
+	 			<a href="http://localhost:9000/myjeju/food.do"><img src="http://localhost:9000/myjeju/images/index/food7.jpg"></a>
 	 		</div>
 	 		<div class="other_pic">
-	 			<img src="http://localhost:9000/myjeju/images/index/car4.jpg">
+	 			<a href="http://localhost:9000/myjeju/travel.do"><img src="http://localhost:9000/myjeju/images/index/car4.jpg"></a>
 	 		</div>
 	 		<div class="other_pic">
-	 			<img src="http://localhost:9000/myjeju/images/index/goods1.jpg">
+	 			<a href="http://localhost:9000/myjeju/store.do"><img src="http://localhost:9000/myjeju/images/index/goods1.jpg"></a>
 	 		</div>
 	 		<div class="other_infor">
 	 			<p>	
