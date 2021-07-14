@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="mapper.community">
+
+	<!-- 자유게시판 글쓰기 -->
+	<insert id="free_write" parameterType="com.myjeju.vo.CommunityVO">
+	<choose>
+		<when test = "ffile == null">
+			insert into myjeju_free_board values('f_'||sequ_myjeju_free_board.nextval, #{id}, #{ftitle}, #{fcontent}, 0, null, null, sysdate )			
+		</when>
+		<otherwise>
+			insert into myjeju_free_board values('f_'||sequ_myjeju_free_board.nextval, #{id}, #{ftitle}, #{fcontent}, 0, #{ffile}, #{fsfile}, sysdate )
+		</otherwise>
+	</choose>
+	</insert>
+	
+	<!-- 자유게시판  총 게시글 수-->
+	<select id="free_total_count" resultType="java.lang.Integer">
+		select count(*) from myjeju_free_board
+	</select>
+	
+	<!-- 전체리스트 -->
+	<select id="free_list" parameterType="map" resultType="com.myjeju.vo.CommunityVO"  >
+	select rno, fid, id, ftitle, fhit, fdate 
+		from (select rownum rno, fid, id, ftitle, fhit, fdate 
+			from (select rownum rno, fid, id, ftitle, fhit, to_char(fdate, 'yyyy-mm-dd') fdate 
+				from (select fid, id, ftitle, fhit, fdate from myjeju_free_board order by fdate) order by rno)
+					order by rno desc) where rno between #{start} and #{end}
+	</select>
+	
+	<!-- 자유게시판 글 내용 가져오기 -->
+	<select id="free_content" parameterType="java.lang.String" resultType="com.myjeju.vo.CommunityVO">
+		select fid, id, ftitle, fcontent, fdate, ffile, fsfile from myjeju_free_board where fid=#{fid}
+	</select>
+</mapper>

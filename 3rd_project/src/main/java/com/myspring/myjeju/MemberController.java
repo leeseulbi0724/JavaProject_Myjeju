@@ -89,7 +89,7 @@ public class MemberController {
 		//로그인 처리
 		if (svo != null) {
 			/* svo.setId(vo.getId()); */				
-			result = "mypage/mypage";
+			result = "index";
 		} 
 		return result;
 	}

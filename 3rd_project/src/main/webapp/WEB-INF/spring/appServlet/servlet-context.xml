@@ -31,8 +31,7 @@
 	
 	<!-- DAO Object -->
 	<!-- <beans:bean id="accomodationDAO" class="com.myjeju.dao.AcoomodationDAO"></beans:bean>
-	<beans:bean id="adminDAO" class="com.myjeju.dao.AdminDAO"></beans:bean>
-	<beans:bean id="communityDAO" class="com.myjeju.dao.CommunityDAO"></beans:bean>
+	<beans:bean id="adminDAO" class="com.myjeju.dao.AdminDAO"></beans:bean>	
 	<beans:bean id="foodDAO" class="com.myjeju.dao.FoodDAO"></beans:bean>
 	<beans:bean id="houseDAO" class="com.myjeju.dao.HouseDAO"></beans:bean>
 	<beans:bean id="indexDAO" class="com.myjeju.dao.IndexDAO"></beans:bean>		
@@ -44,11 +43,11 @@
 	<beans:bean id="storepDAO" class="com.myjeju.dao.StorepDAO"></beans:bean>
 	<beans:bean id="memberAO" class="com.myjeju.dao.MemberDAO"></beans:bean>
 	<beans:bean id="mypageDAO" class="com.myjeju.dao.MypageDAO"></beans:bean>
+	<beans:bean id="communityDAO" class="com.myjeju.dao.CommunityDAO"></beans:bean>
 	
 	<!-- Service Object -->
 	<!-- <beans:bean id="accomodationService" class="com.myjeju.service.AccomodationServiceImpl"></beans:bean>
-	<beans:bean id="adminService" class="com.myjeju.service.AdminServiceImpl"></beans:bean>
-	<beans:bean id="communityService" class="com.myjeju.service.CommunityServiceImpl"></beans:bean>
+	<beans:bean id="adminService" class="com.myjeju.service.AdminServiceImpl"></beans:bean>	
 	<beans:bean id="foodService" class="com.myjeju.service.FoodServiceImpl"></beans:bean>
 	<beans:bean id="houseService" class="com.myjeju.service.HouseServiceImpl"></beans:bean>
 	<beans:bean id="indexService" class="com.myjeju.service.IndexServiceImpl"></beans:bean>		
@@ -61,6 +60,7 @@
 	<beans:bean id="MessageService" class="com.myjeju.service.MessageServiceImpl"></beans:bean>
 	<beans:bean id="MemberService" class="com.myjeju.service.MemberServiceImpl"></beans:bean>
 	<beans:bean id="MypageService" class="com.myjeju.service.MypageServiceImpl"></beans:bean>
+	<beans:bean id="CommunityService" class="com.myjeju.service.CommunityServiceImpl"></beans:bean>
 	
 	
 	<context:component-scan base-package="com.myspring.myjeju" />

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,6 +12,34 @@
 <link rel="stylesheet" href="http://localhost:9000/myjeju/css/index.css">
 <link rel="stylesheet" href="http://localhost:9000/myjeju/css/community/board.css">
 <script src="http://localhost:9000/myjeju/js/jquery-3.6.0.min.js"></script>
+<script src="http://localhost:9000/myjeju/js/am-pagination.js"></script>
+<link rel="stylesheet" href="http://localhost:9000/myjeju/css/am-pagination.css">
+ <script>
+$(document).ready(function(){
+	
+	var pager = jQuery('#ampaginationsm').pagination({
+	
+	    maxSize: 7,	    		// max page size
+	    totals: ${dbcount},	// total pages	
+	    page: ${rpage},		// initial page	
+	    pageSize: ${pagesize},			// max number items per page
+	
+	    // custom labels		
+	    lastText: '&raquo;&raquo;', 		
+	    firstText: '&laquo;&laquo;',		
+	    prevText: '&laquo;',		
+	    nextText: '&raquo;',
+			     
+	    btnSize:'sm'	// 'sm'  or 'lg'		
+	});
+	
+	jQuery('#ampaginationsm').on('am.pagination.change',function(e){
+		   jQuery('.showlabelsm').text('The selected page no: '+e.page);
+           $(location).attr('href', "http://localhost:9000/myjeju/free_board.do?rpage="+e.page);         
+    });
+	
+});
+</script>
 </head>
 <body>
 <jsp:include page="../header.jsp"></jsp:include>
@@ -60,106 +89,18 @@
 				</tr>			
 			</tbody>
 			<tbody>
+				<c:forEach var = "vo"  items="${list}">
 				<tr>
-					<td>1</td>
-					<td><a href="free_board_content.do">제목[0]</a></td>
-					<td>이슬비</td>
-					<td>2021.07.01</td>
-					<td>25</td>
-				</tr>	
-				<tr>
-					<td>1</td>
-					<td><a href="#">제목[0]</a></td>
-					<td>이슬비</td>
-					<td>2021.07.01</td>
-					<td>25</td>
-				</tr>	
-				<tr>
-					<td>1</td>
-					<td><a href="#">제목[0]</a></td>
-					<td>이슬비</td>
-					<td>2021.07.01</td>
-					<td>25</td>
-				</tr>	
-				<tr>
-					<td>1</td>
-					<td><a href="#">제목[0]</a></td>
-					<td>이슬비</td>
-					<td>2021.07.01</td>
-					<td>25</td>
-				</tr>	
-				<tr>
-					<td>1</td>
-					<td><a href="#">제목[0]</a></td>
-					<td>이슬비</td>
-					<td>2021.07.01</td>
-					<td>25</td>
-				</tr>	
-				<tr>
-					<td>1</td>
-					<td><a href="#">제목[0]</a></td>
-					<td>이슬비</td>
-					<td>2021.07.01</td>
-					<td>25</td>
-				</tr>	
-				<tr>
-					<td>1</td>
-					<td><a href="#">제목[0]</a></td>
-					<td>이슬비</td>
-					<td>2021.07.01</td>
-					<td>25</td>
-				</tr>	
-				<tr>
-					<td>1</td>
-					<td><a href="#">제목[0]</a></td>
-					<td>이슬비</td>
-					<td>2021.07.01</td>
-					<td>25</td>
-				</tr>	
-				<tr>
-					<td>1</td>
-					<td><a href="#">제목[0]</a></td>
-					<td>이슬비</td>
-					<td>2021.07.01</td>
-					<td>25</td>
-				</tr>	
-				<tr>
-					<td>1</td>
-					<td><a href="#">제목[0]</a></td>
-					<td>이슬비</td>
-					<td>2021.07.01</td>
-					<td>25</td>
-				</tr>	
-				<tr>
-					<td>1</td>
-					<td><a href="#">제목[0]</a></td>
-					<td>이슬비</td>
-					<td>2021.07.01</td>
-					<td>25</td>
-				</tr>	
-				<tr>
-					<td>1</td>
-					<td><a href="#">제목[0]</a></td>
-					<td>이슬비</td>
-					<td>2021.07.01</td>
-					<td>25</td>
-				</tr>	
-				<tr>
-					<td>1</td>
-					<td><a href="#">제목[0]</a></td>
-					<td>이슬비</td>
-					<td>2021.07.01</td>
-					<td>25</td>
-				</tr>	
-				<tr>
-					<td>1</td>
-					<td><a href="#">제목[0]</a></td>
-					<td>이슬비</td>
-					<td>2021.07.01</td>
-					<td>25</td>
-				</tr>	
+					<td>${vo.rno }</td>
+					<td><a href="http://localhost:9000/myjeju/free_board_content.do?fid=${vo.fid }&rno=${vo.rno}">${vo.ftitle }</a></td>
+					<td>${vo.id }</td>
+					<td>${vo.fdate }</td>
+					<td>${vo.fhit }</td>
+				</tr>
+				</c:forEach>
 			</tbody>
-		</table>
+		</table>	
+		<div id="ampaginationsm"></div>	
 	</div>
 	
 	<jsp:include page="../footer.jsp"></jsp:include>

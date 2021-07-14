@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,8 +20,14 @@
 			<nav>
 				<a href="http://localhost:9000/myjeju/index.do"><img src="http://localhost:9000/myjeju/images/index/logo3.png"></a>
 				<ul>
+				<c:if test= "${empty session_id}">
 					<li><a href="http://localhost:9000/myjeju/login.do">LOGIN </a><div></div></li>
 					<li><a href="http://localhost:9000/myjeju/join.do">JOIN</a></li>
+				</c:if>
+				<c:if test= "${!empty session_id}">
+					<li><a href="http://localhost:9000/myjeju/mypage.do">마이페이지 </a><div></div></li>
+					<li><a href="logout.do">로그아웃</a></li>
+				</c:if>
 				</ul>
 			</nav>
 		</div>

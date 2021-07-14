@@ -28,7 +28,9 @@ public class StoreController {
 	
 	@Autowired
 	private StoreService storeService;
+	@Autowired
 	private StofaqService stofaqService;
+	@Autowired
 	private StorepService storepService;
 	
 	/**
@@ -110,6 +112,7 @@ public class StoreController {
 		
 		String user_id = (String) session.getAttribute("session_id");
 		
+		System.out.print(sid);
 		//상품 상세정보 가져오기
 		//StoreDAO dao = new StoreDAO();
 		StoreVO vo = storeService.getContent(sid);
