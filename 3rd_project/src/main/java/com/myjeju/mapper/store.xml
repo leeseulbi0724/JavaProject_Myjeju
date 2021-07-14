@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="mapper.store">
+
+	<!-- BEST MENU 3개 -->
+	<select id = "best3list" resultType = "com.myjeju.vo.StoreVO">
+		<![CDATA[ select sid, s_category, s_name, s_price, s_image, s_sfile, s_content, s_ssfile
+		from myjeju_store where rownum <= 3 order by sid ]]>
+	</select>
+
+	<!-- EAT MENU 3개 -->
+	<select id = "eat3list" resultType = "com.myjeju.vo.StoreVO">
+		<![CDATA[ select sid, s_category, s_name, s_price, s_image, s_sfile, s_content, s_ssfile
+					from myjeju_store where rownum <= 3 and s_category = '식품' ]]>
+	</select>
+	
+	<!-- EAT 화면 -->
+	<select id = "eatlist" resultType = "com.myjeju.vo.StoreVO">
+		select sid, s_category, s_name, s_price, s_image, s_sfile, s_content, s_ssfile
+			from myjeju_store where s_category = '식품'
+	</select>
+
+	<!-- SOUVE MENU 3개 -->
+	<select id = "souve3list" resultType = "com.myjeju.vo.StoreVO">
+		<![CDATA[ select sid, s_category, s_name, s_price, s_image, s_sfile, s_content, s_ssfile
+					from myjeju_store where rownum <= 3 and s_category = '기념품' ]]>
+	</select>
+	
+	<!-- SOUVE 화면 -->
+	<select id = "souvelist" resultType = "com.myjeju.vo.StoreVO">
+		select sid, s_category, s_name, s_price, s_image, s_sfile, s_content, s_ssfile
+			from myjeju_store where s_category = '기념품'
+	</select>
+
+	<!-- ETC MENU 3개 -->
+	<select id = "etc3list" resultType = "com.myjeju.vo.StoreVO">
+		<![CDATA[ select sid, s_category, s_name, s_price, s_image, s_sfile, s_content, s_ssfile
+					from myjeju_store where rownum <= 3 and s_category = '잡화' ]]>
+	</select>
+
+	<!-- ETC 화면 -->
+	<select id = "etclist" resultType = "com.myjeju.vo.StoreVO">
+		select sid, s_category, s_name, s_price, s_image, s_sfile, s_content, s_ssfile
+			from myjeju_store where s_category = '잡화'
+	</select>
+
+	<!-- 스토어 상품 등록 (관리자쪽에 갈수도있음) -->
+	<insert id = "storeInsert" parameterType = "com.myjeju.vo.StoreVO">
+		insert into myjeju_store values('s_'||sequ_myjeju_store.nextval, #{s_category}, #{s_name}, #{s_price}, #{s_image}, #{s_content}, #{s_sfile}, #{s_ssfile})
+	</insert>
+	
+	<!-- 스토어 상품 상세 화면 -->
+	<select id = "content" parameterType = "java.lang.String" resultType = "com.myjeju.vo.StoreVO">
+		select sid, s_category, s_name, s_price, s_image, s_content, s_sfile, s_ssfile
+			from myjeju_store where sid = #{sid}
+	</select>
+
+
+</mapper>    

@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,7 +7,7 @@
 <link rel="shortcut icon" type="image⁄x-icon" href="http://localhost:9000/myjeju/images/index/icon.png">
 <title>스토어 | JEJU ISLAND</title>
 <link rel = "stylesheet" href = "http://localhost:9000/myjeju/css/index.css">
-<link rel = "stylesheet" href = "http://localhost:9000/myjeju/css/store.css">
+<link rel = "stylesheet" href = "http://localhost:9000/myjeju/css/store/store.css">
 <script src="http://localhost:9000/myjeju/js/jquery-3.6.0.min.js"></script>
 <link rel="stylesheet" href="css/admincss/bootstrap.css">
 <link rel="stylesheet" href="css/admincss/bootstrap.min.css">
@@ -80,9 +81,9 @@
 		
 		/* 수량 유효성 검사 */
 		$("#store_buy").click(function() {
-			if($("#product_amount").val() == 0) {
+			if($("#b_count").val() == 0) {
 				alert("수량을 입력해주세요");
-				$("#product_amount").focus();
+				$("#b_count").focus();
 				return false;
 			} else {
 				store_form.submit();
@@ -103,409 +104,24 @@
 			$('#replyModal').modal("show");
 		});
 		
+		/* 문의하기 모달에서 문의하기 버튼 */
+		$("#modalY1").click(function() {
+			//var st_content = $("#st_content").val();
+			stofaq_form.submit();
+		});
+		
+		/* 답변하기 모달에서 답변하기 버튼 */
+		$("#modalY2").click(function(){
+			storep_form.submit();
+n		});
+		
+		
 		
 	});
 
 </script>
 <style>
-	/******** STORE_CONTENT ********/
-	.store_content {
-		/* border : 1px solid red; */
-		width : 1100px;
-		margin : auto;
-		margin-top  : 80px;
-		text-align : center;
-	}
 	
-	.store_content_1 {
-		/* border : 1px solid lightgray; */
-	}
-	
-	/* STORE_CONTENT_TOP */
-	.store_content_top {
-		/* border : 1px solid blue; */
-		text-align : left;
-	}
-	
-	/* form */
-	.store_content_form {
-		/* border : 1px solid green; */
-		margin-bottom : 50px;
-	}
-	
-	.store_content_form>div.img_area {
-		/* border : 1px solid blue; */
-		width: 380px;
-		display : table-cell;
-		text-align : center;
-		padding : 15px 20px 0 20px;
-	}
-	
-	.store_content_form>div.img_area>img {
-		width : 100%;
-	}
-	
-	.store_content_form>div.text_area {
-		/* border : 1px solid yellow; */
-		width: 435px;
-		display: table-cell;
-		vertical-align: top;
-    	word-wrap: break-word;
-    	letter-spacing: -0.5px;
-    	padding-left : 20px;
-	}
-	
-	.title-box {
-		padding: 28px 0 28px;
-		position: relative;
-		word-wrap: break-word;
-		letter-spacing: -0.5px;
-	}
-	
-	.store_content_title {
-		font-size: 24px;
-		line-height: 26px;
-		color: #333333;
-		font-weight : 700;
-		word-wrap: break-word;
-		letter-spacing: -0.5px;
-		margin-left : 5px;
-	}
-	
-	.store_content_price {
-		font-size: 22px;
-		line-height: 26px;
-		color: #333333;
-		font-weight : 500;
-		word-wrap: break-word;
-		letter-spacing: -0.5px;
-		margin-top : 15px;
-		margin-left : 5px;
-	}
-	
-	/* 수량 */
-	.option-box {
-		padding: 28px 0 28px;
-		position: relative;
-		word-wrap: break-word;
-		letter-spacing: -0.5px;
-	}
-	
-	.option-box>div {
-		margin: 5px 0;
-		font-size : 20px;
-		font-weight : 500;
-	}
-	
-	.option-box>div>input {
-		border : 1px solid #444;
-		height : 25px;
-		width : 170px;
-		font-size : 16px;
-	}
-	
-	
-	/* 장바구니, 주문하기 버튼 */
-	.store_btn_style1 {
-		width:150px;
-		background-color:dimgray;
-		border:1px solid dimgray;
-		padding:10px;
-		color:white;
-		font-size:16px;
-		font-weight:bold;
-		text-align:center;
-		margin-top:20px;
-		margin-right : -5px;
-		cursor:pointer;
-	}
-	
-	.store_btn_style2 {
-		width:200px;
-		background-color:#4fa9de;
-		border:1px solid #4fa9de;
-		padding:10px;
-		color:white;
-		font-size:16px;
-		font-weight:bold;
-		text-align:center;
-		margin-top:20px;
-		cursor:pointer;
-	}
-	
-	.store_btn_style1:hover{
-		background-color:#595959;
-		border:1px solid #595959;
-	}
-	
-	.store_btn_style2:hover {
-		background-color:#268ecc;
-		border:1px solid #268ecc;
-	}
-	
-	hr {
-		margin-top : 50px;
-		border : 1px solid lightgray;
-	}
-	
-	
-	/* STORE_CONTENT_MIDDLE */
-	.store_content_middle {
-		/* border : 1px solid red; */
-		margin-bottom : 50px;
-	}
-	
-	/* STORE_CONTENT_SCROLL */
-	.store_content_category {
-		/* border : 1px solid red; */
-		width : 100%;
-		height : 40px;
-		margin-bottom : 30px;
-		cursor : pointer;
-	}
-	
-	.content_category_btn {
-		color : #999;
-		border : 1px solid lightgray;
-		font-size : 16px;
-		font-weight : 600;
-		width : 220px;
-		height : 40px;
-		background-color : hsl(160, 0, 235);
-		margin-left : -6px;
-		cursor : pointer;
-	}
-	
-	.content_category_btn:hover {
-		background-color : #e6e6e6;
-	}
-	
-	
-	/* Jquery 기능 */
-	/* .selected {
-		background-color : #4fa9de;
-		color : white;
-	} */
-	
-	.menu-fixed {
-	  position: fixed;
-	  top: 0px;
-	  left:0px;
-
-	}
-	
-	/******* 상품평 ********/
-	.store_product_review {
-		/* border : 1px solid red; */
-		padding-top : 40px;
-	}
-	
-	.store_product_review>div:first-child {
-		text-align : left;
-		font-size : 24px;
-		font-weight : 600;
-		margin : 20px 0 15px;
-		padding : 10px 0;
-		border-bottom : 3px solid #595959;
-	}
-	
-	
-	.store_product_review>article {
-		/* border : 1px solid purple; */
-		border-bottom : 2px solid gray;
-		margin-bottom : 20px;
-		padding  : 0 0 10px 15px;
-	}
-	
-	.store_product_review>article>div {
-		/* border : 1px solid green; */
-		margin : 8px 0 10px 8px;
-		text-align : left;
-		font-size : 18px;
-	}
-
-	.store_product_review>article>div:first-child {
-		font-weight : 700;
-	}
-	
-	.store_product_review>article>div:nth-child(2)>span {
-		margin-right : 20px;
-	}
-	
-	.store_product_review>article>div:nth-child(3) {
-		color : #595959;
-	}
-	
-	.store_product_review>article>div:nth-child(4)>span:first-child {
-		display: inline-block;
-		width : 8%;
-		font-weight : 700;
-	}
-	
-	
-	/****** 상품문의 ********/
-	.store_product_faq {
-		margin : 20px 0;
-		padding : 30px 0;
-	}
-	
-	.store_product_faq_top {
-		border-bottom : 3px solid #595959;
-	} 
-	
-	.store_product_faq_top>div:first-child {
-		/* border : 1px solid purple; */
-		display : inline-block;
-		text-align : left;
-		width : 90%;
-		font-size : 24px;
-		font-weight : 600;
-		margin : 20px 0 15px;
-		padding : 10px 0;
-	}
-	
-	.store_product_faq_top>button {
-		background-color : #4fa9de;
-		border : 1px solid #4fa9de;
-		border-radius : 10px;
-		padding : 10px;
-		color : white;
-		font-size : 15px;
-		font-weight : bold;
-		text-align : center;
-		cursor : pointer;
-	}
-	
-	.store_product_faq_top>button:hover {
-		background-color:#268ecc;
-		border:1px solid #268ecc;
-	}
-
-	
-	/* 상품문의 - 본문 */
-	.store_product_faq_content {
-		/* border : 1px solid purple; */
-		padding : 20px 0 20px 10px;
-		text-align : left;
-	}
-	
-	.store_product_faq_content>article {
-		/* border : 1px solid green; */
-		/* position : relative; */
-		padding : 20px 0;
-		border-bottom : 1px solid #777777;
-	}
-	
-	/* 질문이모티콘 */
-	.store_product_faq_content>article button {
-		background-color : #777777;
-		display : inline-block;
-		padding : 4px;
-		font-size : 12px;
-		font-weight : 700;
-		color : white;
-		border : 1px solid #777777;
-	}
-	
-	.store_product_faq_content>article strong {
-		margin-left : 5px;
-	}
-	
-	.store_product_faq_content>article>div>div {
-		margin-bottom : 10px;
-	}
-	
-	/* 답변하기 버튼 */
-	.store_product_faq_content>article>div>div:nth-child(3) {
-		text-align : right;
-		margin-right : 10px;
-	}
-	
-	.store_product_faq_content>article>div>div:nth-child(3)>button {
-		background-color : #4fa9de;
-		padding : 4px;
-		font-size : 14px;
-		font-weight : 700;
-		color : white;
-		border : 1px solid #4fa9de;
-		border-radius : 10px;
-		cursor : pointer;
-	}
-	
-	.store_product_faq_content>article>div>div:nth-child(3)>button:hover {
-		background-color:#268ecc;
-		border:1px solid #268ecc;
-	}
-	
-	
-	
-	/* 문의하기 - 답변 */
-	.store_product_faq_content>article:nth-child(2) {
-		/* border : 1px solid green; */
-		padding : 20px 0;
-		border-bottom : 1px solid #777777;
-	}
-	
-	
-	/***** 배송 / 교환 / 반품 안내 *****/
-	 .store_product_ship {
-	 	/* margin : 20px 0; */
-		padding : 30px 0;
-		/* border : 1px solid purple; */
-	 }
-	
-	.store_product_ship>div:first-child {
-		text-align : left;
-		font-size : 24px;
-		font-weight : 600;
-		margin : 20px 0 15px;
-		padding : 10px 0;
-		border-bottom : 3px solid #595959;
-	}
-	
-	.store_product_ship_content>div, .store_product_ship_content>table {
-		text-align : left;
-		margin : 5px 0 15px 10px;
-		/* border : 1px solid purple; */
-	}
-	
-	.store_product_ship_content>table {
-		width : 100%;
-		border-collapse: collapse;
-	}
-	
-	.store_product_ship_content>table tr, .store_product_ship_content>table td {
-		border : 1px solid lightgray;
-		border-collapse: collapse;
-	}
-	
-	.store_product_ship_content>table td:nth-child(2n-1) {
-		width : 18%;
-		background-color : #f2f2f2;
-		text-align : center;
-		padding : 10px;
-	}
-	
-	.store_product_ship_content>table td:nth-child(2n) {
-		padding-left : 10px;
-	}
-	
-	
-	/******* 모달창 *******/
-	.modal-title {
-		text-align : left;
-		font-weight : 700;
-	}
-	
-	.modal-body input{
-		display : inline-block;
-		width : 90%;
-		margin : 5px 0;
-	}
-	
-	.modal-body>input:first-child {
-		border : none;
-	}
 	
 </style>
 
@@ -535,10 +151,10 @@
 						</div>
 						
 						<div class = "option-box">
-							<div>수량　　<input type = "number" min = "0" max = "10" id = "product_amount" name = "product_amount"></div>
+							<div>수량　　<input type = "number" min = "0" max = "10" id = "b_count" name = "b_count"></div>
 						</div>						
 						
-						<button type = "button" class = "store_btn_style1" id = "storeBasket">장바구니</button>
+						<a href = "mybasket.do?sid=${sid}"><button type = "button" class = "store_btn_style1" id = "storeBasket">장바구니</button></a>
 						<button type = "submit" class = "store_btn_style2" id = "store_buy">바로구매</button>
 					</div>
 
@@ -575,13 +191,6 @@
 						<div>제주도 오메기떡</div>
 						<div><span>한줄평</span><span>맛있어요 짱</span></div>
 					</article>
-					
-					<article>
-						<div>이진옥</div>
-						<div><span>별점</span><span>2021.07.06</span></div>
-						<div>제주도 오메기떡</div>
-						<div><span>한줄평</span><span>맛있어요 짱</span></div>
-					</article>
 				</div>
 				
 				<div class = "store_product_faq" id = "here3">
@@ -599,36 +208,51 @@
 										<span aria-hidden="true">&times;</span></button>
 										<h3 class="modal-title" id="exampleModalLabel">문의하기</h3>
 									</div>
-									<div class="modal-body">
-										<input type = "text" value = "상품명 vo.stname" readonly>
-										<div><input type = "text" placeholder = "문의할 내용을 입력해주세요"></input></div>
-									</div>
-									<div class="modal-footer">
-										<a class="btn" id="modalY" href="store_faq_proc.do">문의하기</a>
-										<button class="btn" type="button" data-dismiss="modal">닫기</button>
-									</div>
+									
+									<form name = "stofaq_form" action = "store_faq_proc.do" method = "GET" class = "stofaq_form">
+										<div class="modal-body">
+											<input type = "text" value = "${id}" name = "id" id = "id" readonly>
+											<input type = "text" value = "${sid}" name = "sid" id = "sid" readonly>
+											<div><input type = "text" placeholder = "문의할 내용을 입력해주세요" name = "st_content" id = "st_content"></div>
+										</div>
+										
+										<div class="modal-footer">
+											<%-- <a href = "store_content.do?sid=${sid}"><button class="btn" id="modalY1">문의하기</button></a> --%>
+											<%-- <a class="btn" id="modalY1" href="store_content.do?sid=${sid}">문의하기</a> --%>
+											<%-- <a type = "button" class = "btn" id = "modalY1" href = "store_content.do?sid=${sid}">문의하기</a> --%>
+											<button class="btn" type="button" id = "modalY1">문의하기</button>
+											<button class="btn" type="button" data-dismiss="modal">닫기</button>
+										</div>
+									</form>
+									
 								</div>
 							</div>
 						</div>
 					
-					
 					<div class = "store_product_faq_content">
-						<article>
-							<div>
-								<div><button>질문</button><strong>이진*</strong>&emsp;&emsp;<span> vo.문의시간 </span></div>
-								<div>상품문의 합니다. 이거 이렇게 하는거 맞나요? 오메기떡 맛있나요?</div>
-								<div><button type = "button" id = "storereplyBtn">답변하기</button></div>
-							</div>
-						</article>
-						
-						<article>
-							<div>
-								<div><button>답변</button><strong>판매자</strong>&emsp;&emsp;<span> vo.답변시간 </span></div>
-								<div>안녕하세요 이용해주셔서 감사합니다. 네 맛있습니다.</div>
-							</div>
-						</article>
-						
+						<table class = "store_product_faq_table">
+							<c:forEach var = "flist" items = "${flist}">
+							<tr>
+								<th>질문</th>
+								<td>${id} ${flist.sid} ${flist.st_id}</td>
+								<td>${flist.st_content}</td>
+								<td>${flist.st_time}</td>
+								<td><button type = "button" id = "storereplyBtn" class = "replyBtn">답변하기</button></td>
+							</tr>
+							</c:forEach>	
+							
+							<c:forEach var = "rlist" items = "${rlist}">
+								<tr>
+									<th>┖─답변</th>
+									<td>${rlist.st_id} ${rlist.str_id}</td>
+									<td colspan = "2">${rlist.str_content}</td>
+									<td>${rlist.str_time}</td>
+								</tr>
+							</c:forEach>
+							
+						</table>
 					</div>
+
 					
 					<!-- 답변하기 Modal-->
 						<div class="modal fade" id="replyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -637,16 +261,24 @@
 									<div class="modal-header">
 										<button class="close" type="button" data-dismiss="modal" aria-label="Close">
 										<span aria-hidden="true">&times;</span></button>
-										<h3 class="modal-title" id="exampleModalLabel">문의하기</h3>
+										<h3 class="modal-title" id="exampleModalLabel">답변하기</h3>
 									</div>
-									<div class="modal-body">
-										<input type = "text" value = "사용자명 vo.name" readonly>
-										<div><input type = "text" placeholder = "답변할 내용을 입력해주세요"></input></div>
-									</div>
-									<div class="modal-footer">
-										<a class="btn" id="modalY" href="store_faq_reply_proc.do">답변하기</a>
-										<button class="btn" type="button" data-dismiss="modal">닫기</button>
-									</div>
+									
+									<form name = "storep_form" action = "store_faq_reply_proc.do" method = "GET" class = "storep_form">
+										<div class="modal-body">
+											<input type = "text" value = "${id}" name = "id" id = "id" readonly>
+											<input type = "text" value = "${sid}" name = "sid" id = "sid" readonly>
+											<input type = "text" value = "${fvo.st_id}" name = "st_id" id = "st_id" readonly>
+											<input type = "text" value = "${fvo.st_content}" name = "st_content" id = "st_content" readonly>
+											<div><input type = "text" placeholder = "답변할 내용을 입력해주세요" name = "str_content" id = "str_content"></input></div>
+										</div>
+										
+										<div class="modal-footer">
+											<%-- <a class="btn" id="modalY2" href="store_faq_reply_proc.do?sid=${sid}">답변하기</a> --%>
+											<button class="btn" type="button" id = "modalY2">답변하기</button>
+											<button class="btn" type="button" data-dismiss="modal">닫기</button>
+										</div>
+									</form>	
 								</div>
 							</div>
 						</div>
@@ -769,15 +401,8 @@
 	</div>
 	
 	
-	
-	
-	
 	<!-- Footer -->
 	<jsp:include page = "../footer.jsp"></jsp:include>
 
 </body>
 </html>
-
-
-				
-				

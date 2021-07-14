@@ -5,19 +5,31 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.myjeju.dao.StoreDAO;
+import com.myjeju.dao.StofaqDAO;
+import com.myjeju.dao.StorepDAO;
+import com.myjeju.service.StofaqService;
+import com.myjeju.service.StoreService;
+import com.myjeju.service.StorepService;
+import com.myjeju.vo.StofaqVO;
 import com.myjeju.vo.StoreVO;
-import com.myjeju.vo.vo;
+import com.myjeju.vo.StorepVO;
 
 @Controller
 
 public class StoreController {
+	
+	@Autowired
+	private StoreService storeService;
+	private StofaqService stofaqService;
+	private StorepService storepService;
 	
 	/**
 	 * store.do : 스토어 메인 상품 출력
@@ -26,11 +38,11 @@ public class StoreController {
 	public ModelAndView store() {
 		ModelAndView mv = new ModelAndView();
 		
-		StoreDAO dao = new StoreDAO();
-		ArrayList<StoreVO> bestlist = dao.getBestList();
-		ArrayList<StoreVO> eatlist = dao.getEatList();
-		ArrayList<StoreVO> souvelist = dao.getSouveList();
-		ArrayList<StoreVO> etclist = dao.getEtcList();
+		//StoreDAO dao = new StoreDAO();
+		ArrayList<StoreVO> bestlist = storeService.getBestList();
+		ArrayList<StoreVO> eatlist = storeService.getEatList();
+		ArrayList<StoreVO> souvelist = storeService.getSouveList();
+		ArrayList<StoreVO> etclist = storeService.getEtcList();
 		
 		mv.setViewName("store/store");
 		
@@ -47,16 +59,30 @@ public class StoreController {
 	 * store_eat.do : 스토어 식품 화면
 	 */
 	@RequestMapping(value = "/store_eat.do", method = RequestMethod.GET)
-	public String store_eat() {
-		return "store/storeeat";
+	public ModelAndView store_eat() {
+		ModelAndView mv = new ModelAndView();
+		//StoreDAO dao = new StoreDAO();
+		ArrayList<StoreVO> list = storeService.getEatList2();
+		
+		mv.setViewName("store/storeeat");
+		mv.addObject("eatlist", list);
+		
+		return mv;
 	}
 	
 	/**
 	 * store_souve.do : 스토어 기념품 화면
 	 */
 	@RequestMapping(value = "/store_souve.do", method = RequestMethod.GET)
-	public String store_souve() {
-		return "store/storesouve";
+	public ModelAndView store_souve() {
+		ModelAndView mv = new ModelAndView();
+		//StoreDAO dao = new StoreDAO();
+		ArrayList<StoreVO> list = storeService.getSouveList2();
+		
+		mv.setViewName("store/storesouve");
+		mv.addObject("souvelist", list);
+		
+		return mv;
 	}
 	
 	/**
@@ -65,8 +91,8 @@ public class StoreController {
 	@RequestMapping(value = "/store_etc.do", method = RequestMethod.GET)
 	public ModelAndView store_etc() {
 		ModelAndView mv = new ModelAndView();
-		StoreDAO dao = new StoreDAO();
-		ArrayList<StoreVO> list = dao.getEtcList2();
+		//StoreDAO dao = new StoreDAO();
+		ArrayList<StoreVO> list = storeService.getEtcList2();
 		
 		mv.setViewName("store/storeetc");
 		mv.addObject("etclist", list);
@@ -74,20 +100,47 @@ public class StoreController {
 		return mv;
 	}
 	
+	
 	/**
 	 * store_content.do : 스토어 상품 상세화면
 	 */
 	@RequestMapping(value = "/store_content.do", method = RequestMethod.GET)
-	public ModelAndView store_content(String sid) {
+	public ModelAndView store_content(String id, String sid, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
-		StoreDAO dao = new StoreDAO();
-		StoreVO vo = dao.getContent(sid);
+		
+		String user_id = (String) session.getAttribute("session_id");
+		
+		//상품 상세정보 가져오기
+		//StoreDAO dao = new StoreDAO();
+		StoreVO vo = storeService.getContent(sid);
+		
+		//문의 리스트
+		//StofaqDAO fdao = new StofaqDAO();
+		ArrayList<StofaqVO> flist = stofaqService.getContent(sid);
+		
+		
+		//답변 리스트
+		//StorepDAO rdao = new StorepDAO();
+		ArrayList<StorepVO> rlist = storepService.getContent(sid);
+		
+		StofaqVO fvo = stofaqService.getStid(sid);
+		
 		
 		mv.setViewName("store/store_content");
+		
 		mv.addObject("vo", vo);
+		mv.addObject("flist", flist);
+		mv.addObject("rlist", rlist);
+		
+		mv.addObject("sid", sid);
+		
+		mv.addObject("fvo", fvo);
+		
+		mv.addObject("id", user_id);
 		
 		return mv;
 	}
+	
 
 	/**
 	 * store_buy.do : 스토어 구매 화면
@@ -97,12 +150,25 @@ public class StoreController {
 		return "store/storebuy";
 	}
 	
+	
 	/**
 	 * store_faq_proc.do : 스토어 문의하기 처리
 	 */
 	@RequestMapping(value = "/store_faq_proc.do", method = RequestMethod.GET)
-	public String store_faq_proc() {
-		return "store/store_content";
+	//public ModelAndView store_faq_proc(StofaqVO vo) {
+	public ModelAndView store_faq_proc(StofaqVO fvo) {
+		ModelAndView mv = new ModelAndView();
+		
+		//StofaqDAO dao = new StofaqDAO();
+		boolean result = stofaqService.getInsertResult(fvo);
+		
+		if(result) {
+			mv.setViewName("redirect:/store_content.do");
+			mv.addObject("sid", fvo.getSid());
+			
+			
+		}
+		return mv;
 	}
 	
 	
@@ -110,8 +176,18 @@ public class StoreController {
 	 * store_faq_reply_proc.do : 스토어 문의 -> 답변 처리
 	 */
 	@RequestMapping(value = "/store_faq_reply_proc.do", method = RequestMethod.GET)
-	public String store_faq_reply_proc() {
-		return "store/store_content";
+	public ModelAndView store_faq_reply_proc(StorepVO rvo) {
+		ModelAndView mv = new ModelAndView();
+		
+		//StorepDAO dao = new StorepDAO();
+		boolean result = storepService.getInsertResult(rvo);
+		
+		if(result) {
+			mv.setViewName("redirect:/store_content.do");
+			mv.addObject("sid", rvo.getSid());
+		}
+		
+		return mv;
 	}
 	
 	/**
@@ -150,8 +226,8 @@ public class StoreController {
 		}
 			
 		// 3. DB연동
-		StoreDAO dao = new StoreDAO();
-		boolean result = dao.getInsertResult(vo);
+		//StoreDAO dao = new StoreDAO();
+		boolean result = storeService.getInsertResult(vo);
 		
 		if(result) {
 			

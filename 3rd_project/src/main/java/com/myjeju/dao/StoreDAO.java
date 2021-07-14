@@ -1,15 +1,26 @@
 package com.myjeju.dao;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.myjeju.vo.StoreVO;
 
+@Repository
 public class StoreDAO extends DBConn {
 
+	@Autowired
+	private SqlSessionTemplate sqlSession;
+	private static String namespace = "mapper.store";
+	
 	//SELECT --> 전체리스트
+	/*
 	public ArrayList<StoreVO> getList() {
 		ArrayList<StoreVO> list = new ArrayList<StoreVO>();
-		String sql = " select * from myjeju_store ";
+		String sql = " select sid, s_category, s_name, s_price, s_image, s_sfile, s_content, s_ssfile from myjeju_store ";
 		getPreparedStatement(sql);
 		
 		try {
@@ -32,9 +43,14 @@ public class StoreDAO extends DBConn {
 		
 		return list;
 	}
+	*/
 	
 	//SELECT.BEST --> BEST MENU (베스트 메뉴 상위 세개) [메인화면]
 	public ArrayList<StoreVO> getBestList() {
+		List<StoreVO> list =  sqlSession.selectList(namespace + ".best3list");
+		return (ArrayList<StoreVO>) list;
+		
+		/*
 		ArrayList<StoreVO> list = new ArrayList<StoreVO>();
 		String sql = " select sid, s_category, s_name, s_price, s_image, s_sfile, s_content, s_ssfile "
 					+ " from myjeju_store where rownum <= 3 order by sid ";
@@ -59,10 +75,15 @@ public class StoreDAO extends DBConn {
 		}
 		
 		return list;
+		*/
 	}
 	
 	//SELECT.EAT --> 카테고리-식품 (상위 세개) [메인화면]
 	public ArrayList<StoreVO> getEatList() {
+		List<StoreVO> list = sqlSession.selectList(namespace + ".eat3list");
+		return (ArrayList<StoreVO>) list;
+		
+		/*
 		ArrayList<StoreVO> list = new ArrayList<StoreVO>();
 		String sql = " select sid, s_category, s_name, s_price, s_image, s_sfile, s_content, s_ssfile "
 					+ " from myjeju_store where rownum <= 3 and s_category = '식품' ";
@@ -87,10 +108,48 @@ public class StoreDAO extends DBConn {
 		}
 		
 		return list;
+		*/
+	}
+	
+	//SELECT.EAT --> 카테고리-식품 [식품 상세화면]
+	public ArrayList<StoreVO> getEatList2() {
+		List<StoreVO> list = sqlSession.selectList(namespace + ".eatlist");
+		return (ArrayList<StoreVO>) list;
+		
+		/*
+		ArrayList<StoreVO> list = new ArrayList<StoreVO>();
+		String sql = " select sid, s_category, s_name, s_price, s_image, s_sfile, s_content, s_ssfile "
+					+ " from myjeju_store where s_category = '식품' ";
+		getPreparedStatement(sql);
+		
+		try {
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				StoreVO vo = new StoreVO();
+				vo.setSid(rs.getString(1));
+				vo.setS_category(rs.getString(2));
+				vo.setS_name(rs.getString(3));
+				vo.setS_price(rs.getInt(4));
+				vo.setS_image(rs.getString(5));
+				vo.setS_sfile(rs.getString(6));
+				
+				list.add(vo);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+		*/
 	}
 	
 	//SELECT.SOUVE --> 카테고리-기념품 (상위 세개) [메인화면]
 	public ArrayList<StoreVO> getSouveList() {
+		List<StoreVO> list = sqlSession.selectList(namespace + ".souve3list");
+		return (ArrayList<StoreVO>) list;
+		
+		/*
 		ArrayList<StoreVO> list = new ArrayList<StoreVO>();
 		String sql = " select sid, s_category, s_name, s_price, s_image, s_sfile, s_content, s_ssfile "
 					+ " from myjeju_store where rownum <= 3 and s_category = '기념품' ";
@@ -115,10 +174,48 @@ public class StoreDAO extends DBConn {
 		}
 		
 		return list;
+		*/
+	}
+	
+	//SELECT.SOUVE --> 카테고리-기념품 [기념품 상세화면]
+	public ArrayList<StoreVO> getSouveList2() {
+		List<StoreVO> list = sqlSession.selectList(namespace + ".souvelist");
+		return (ArrayList<StoreVO>) list;
+		
+		/*
+		ArrayList<StoreVO> list = new ArrayList<StoreVO>();
+		String sql = " select sid, s_category, s_name, s_price, s_image, s_sfile, s_content, s_ssfile "
+					+ " from myjeju_store where s_category = '기념품' ";
+		getPreparedStatement(sql);
+		
+		try {
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				StoreVO vo = new StoreVO();
+				vo.setSid(rs.getString(1));
+				vo.setS_category(rs.getString(2));
+				vo.setS_name(rs.getString(3));
+				vo.setS_price(rs.getInt(4));
+				vo.setS_image(rs.getString(5));
+				vo.setS_sfile(rs.getString(6));
+				
+				list.add(vo);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+		*/
 	}
 		
 	//SELECT.ETC --> 카테고리-잡화 (상위 세개) [메인화면]
 	public ArrayList<StoreVO> getEtcList() {
+		List<StoreVO> list = sqlSession.selectList(namespace + ".etc3list");
+		return (ArrayList<StoreVO>) list;
+		
+		/*
 		ArrayList<StoreVO> list = new ArrayList<StoreVO>();
 		String sql = " select sid, s_category, s_name, s_price, s_image, s_sfile, s_content, s_ssfile "
 					+ " from myjeju_store where rownum <= 3 and s_category = '잡화' ";
@@ -143,40 +240,51 @@ public class StoreDAO extends DBConn {
 		}
 		
 		return list;
+		*/
 	}
 	
-	//SELECT.ETC --> 카테고리-잡화 (상위 세개) [메인화면]
-		public ArrayList<StoreVO> getEtcList2() {
-			ArrayList<StoreVO> list = new ArrayList<StoreVO>();
-			String sql = " select sid, s_category, s_name, s_price, s_image, s_sfile, s_content, s_ssfile "
-						+ " from myjeju_store where s_category = '잡화' ";
-			getPreparedStatement(sql);
+	//SELECT.ETC --> 카테고리-잡화 [잡화 상세화면]
+	public ArrayList<StoreVO> getEtcList2() {
+		List<StoreVO> list = sqlSession.selectList(namespace + ".etclist");
+		return (ArrayList<StoreVO>) list;
+		
+		/*
+		ArrayList<StoreVO> list = new ArrayList<StoreVO>();
+		String sql = " select sid, s_category, s_name, s_price, s_image, s_sfile, s_content, s_ssfile "
+					+ " from myjeju_store where s_category = '잡화' ";
+		getPreparedStatement(sql);
+		
+		try {
+			rs = pstmt.executeQuery();
 			
-			try {
-				rs = pstmt.executeQuery();
+			while(rs.next()) {
+				StoreVO vo = new StoreVO();
+				vo.setSid(rs.getString(1));
+				vo.setS_category(rs.getString(2));
+				vo.setS_name(rs.getString(3));
+				vo.setS_price(rs.getInt(4));
+				vo.setS_image(rs.getString(5));
+				vo.setS_sfile(rs.getString(6));
 				
-				while(rs.next()) {
-					StoreVO vo = new StoreVO();
-					vo.setSid(rs.getString(1));
-					vo.setS_category(rs.getString(2));
-					vo.setS_name(rs.getString(3));
-					vo.setS_price(rs.getInt(4));
-					vo.setS_image(rs.getString(5));
-					vo.setS_sfile(rs.getString(6));
-					
-					list.add(vo);
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
+				list.add(vo);
 			}
-			
-			return list;
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
+		
+		return list;
+		*/
+	}
 		
 	
 	//INSERT --> 스토어 상품 등록 (일단 메인 이미지만)
 	public boolean getInsertResult(StoreVO vo) {
 		boolean result = false;
+		int value = sqlSession.insert(namespace + ".storeInsert", vo);
+		if(value != 0) result = true;
+		return result;
+		
+		/*
 		String sql = " insert into myjeju_store values('s_'||sequ_myjeju_store.nextval, ?, ?, ?, ?, ?, ?, ?) ";	
 		getPreparedStatement(sql);
 		
@@ -198,11 +306,14 @@ public class StoreDAO extends DBConn {
 		}
 		
 		return result;
+		*/
 		
 	}
 	
 	//SELECT --> 스토어 상품 상세 화면
 	public StoreVO getContent(String sid) {
+		return sqlSession.selectOne(namespace + ".content", sid);
+		/*
 		StoreVO vo = new StoreVO();
 		
 		String sql = " select sid, s_category, s_name, s_price, s_image, s_content, s_sfile, s_ssfile "
@@ -228,6 +339,7 @@ public class StoreDAO extends DBConn {
 			e.printStackTrace();
 		}
 		return vo;
+		*/
 	}
 		
 	
