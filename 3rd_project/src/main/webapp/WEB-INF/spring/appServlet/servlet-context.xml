@@ -36,8 +36,8 @@
 	<beans:bean id="houseDAO" class="com.myjeju.dao.HouseDAO"></beans:bean>
 	<beans:bean id="indexDAO" class="com.myjeju.dao.IndexDAO"></beans:bean>		
 	<beans:bean id="payDAO" class="com.myjeju.dao.PayDAO"></beans:bean>
-	<beans:bean id="reservationDAO" class="com.myjeju.dao.ReservationDAO"></beans:bean>
 	<beans:bean id="travelDAO" class="com.myjeju.dao.TravelDAO"></beans:bean> -->
+	<beans:bean id="reservationDAO" class="com.myjeju.dao.ReservationDAO"></beans:bean>
 	<beans:bean id="storeDAO" class="com.myjeju.dao.StoreDAO"></beans:bean>
 	<beans:bean id="stofaqDAO" class="com.myjeju.dao.StofaqDAO"></beans:bean>
 	<beans:bean id="memberAO" class="com.myjeju.dao.MemberDAO"></beans:bean>
@@ -51,8 +51,8 @@
 	<beans:bean id="houseService" class="com.myjeju.service.HouseServiceImpl"></beans:bean>
 	<beans:bean id="indexService" class="com.myjeju.service.IndexServiceImpl"></beans:bean>		
 	<beans:bean id="payService" class="com.myjeju.service.PayServiceImpl"></beans:bean>
-	<beans:bean id="reservationService" class="com.myjeju.service.ReservationServiceImpl"></beans:bean>
 	<beans:bean id="travelService" class="com.myjeju.service.TravelServiceImpl"></beans:bean> -->
+	<beans:bean id="reservationService" class="com.myjeju.service.ReservationServiceImpl"></beans:bean>
 	<beans:bean id="storeService" class="com.myjeju.service.StoreServiceImpl"></beans:bean>
 	<beans:bean id="stofaqService" class="com.myjeju.service.StofaqServiceImpl"></beans:bean>
 	<beans:bean id="MessageService" class="com.myjeju.service.MessageServiceImpl"></beans:bean>
