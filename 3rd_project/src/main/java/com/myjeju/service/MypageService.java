@@ -3,6 +3,7 @@ package com.myjeju.service;
 import java.util.ArrayList;
 
 import com.myjeju.vo.BasketVO;
+import com.myjeju.vo.CommunityVO;
 import com.myjeju.vo.MemberVO;
 import com.myjeju.vo.StoreVO;
 
@@ -17,5 +18,8 @@ public interface MypageService {
 	ArrayList<BasketVO> getSid(String id);
 	BasketVO getSid2(String id);
 	ArrayList<StoreVO> getBcontent(String sid);
+	ArrayList<CommunityVO> getFreeBoardResult(String id);
+	ArrayList<CommunityVO> getRequestBoardResult(String id);
+	ArrayList<CommunityVO> getCommentResult(String id);
 
 }

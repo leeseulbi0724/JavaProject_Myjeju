@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.myjeju.service.MemberService;
 import com.myjeju.service.MypageService;
 import com.myjeju.vo.BasketVO;
+import com.myjeju.vo.CommunityVO;
 import com.myjeju.vo.MemberVO;
 import com.myjeju.vo.StoreVO;
 
@@ -159,8 +160,19 @@ public class MypageController {
 	 * 나의 게시글
 	 */
 	@RequestMapping(value = "/myboard.do", method=RequestMethod.GET)
-	public String myboard() {
-		return "mypage/myrecord/myboard";
+	public ModelAndView myboard(HttpSession session) {
+		ModelAndView mv = new ModelAndView();
+		
+		ArrayList<CommunityVO> list1 = MypageService.getFreeBoardResult((String)session.getAttribute("session_id"));
+		ArrayList<CommunityVO> list2 = MypageService.getRequestBoardResult((String)session.getAttribute("session_id"));
+		ArrayList<CommunityVO> list3 = MypageService.getCommentResult((String)session.getAttribute("session_id"));
+		
+		mv.addObject("list1", list1);
+		mv.addObject("list2", list2);
+		mv.addObject("list3", list3);
+		mv.setViewName("mypage/myrecord/myboard");
+		
+		return mv;
 	}
 	
 	/**

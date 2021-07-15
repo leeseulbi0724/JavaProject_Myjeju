@@ -33,7 +33,7 @@
 	.com_box p:first-child, .com_subbox p:first-child { font-weight:bold; }
 	.com_box p, .com_subbox p { margin:5px 0; }
 	div.re_box { display:none; margin-left:10px; } 
-	#comment, #re_comment { width:630px; display:inline-block; }
+	#comment, #re_comment { width:630px; display:inline-block; font-size:14px; }
 	p.text { float:left; font-size:18px; display:inline-block; margin-left:10px; font-weight:bold; }
 	#list, #delete, #update { float:right; margin:0 5px; background-color:#4fa9de; border:none; color:white; font-size:13px; }
 	#ok{ margin:10px 5px; background-color:#4fa9de; border:none; color:white; font-size:13px; }

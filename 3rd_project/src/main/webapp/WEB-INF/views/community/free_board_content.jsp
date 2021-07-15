@@ -45,7 +45,7 @@ $(document).ready(function() {
   	  $(function(){
 		  $(".com_delete").on("click", com_delete);
 	    });	  	   
-	  function com_delete() {	
+	  function com_delete() {			  
         var cid = $(this).attr("id");
        $.ajax({
             type: "post",
@@ -57,6 +57,13 @@ $(document).ready(function() {
             },
         });
 	  }
+	  
+	  $("#delete").click(function() {
+		  var con_test = confirm("게시글을 삭제하시겠습니까?");   /* 문자를 보낼껀지 물어본다 */          
+        	if(con_test == true){   
+        		location.replace("free_board_delete.do?fid=${vo.fid}");
+        	}
+	  });
 });
 </script>
 </head>
@@ -83,7 +90,7 @@ $(document).ready(function() {
 		</table>
 		<a class="btn" href="free_board.do" id="list">목록</a>	
 		<c:if test="${vo.id eq session_id}">
-			<a href="free_board_delete.do?fid=${vo.fid }" class="btn btn-primary"  id="delete" >삭제</a>
+			<a class="btn btn-primary"  id="delete" >삭제</a>
 			<a href="free_board_update.do?fid=${vo.fid }" class="btn btn-primary"  id="update" >수정</a>
 		</c:if>
 		<div class="comment_box">

@@ -47,13 +47,7 @@ $(document).ready(function(){
 <h3>요청게시판</h3>
 		<div class="container">
 		<div class="search">
-		<a class="btn btn-primary"  id="write" href="request_board_write.do">글쓰기</a>
-			<select class="form-select" id="select">
-				<option value="user">작성자</option>
-				<option value="title">제목</option>
-			</select>
-			<input type="text" class="form-control" id="search_input">
-			<a class="btn btn-outline-secondary" id="search" >검색</a>			
+		<a class="btn btn-primary"  id="write" href="request_board_write.do">글쓰기</a>			
 		</div>
 		<table class="table " >
 			<thead>

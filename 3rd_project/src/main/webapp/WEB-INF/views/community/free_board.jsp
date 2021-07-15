@@ -38,6 +38,20 @@ $(document).ready(function(){
            $(location).attr('href', "http://localhost:9000/myjeju/free_board.do?rpage="+e.page);         
     });
 	
+	  $("#search").click (function() {	
+	        var value = $("#search_input").val().toLowerCase();
+	        $(".free_tr").hide();
+	        var select = $("#select").val();
+		 	if (select == "user") {
+		 		var value = $(".tbody td:nth-child(5n+3):contains('" + value + "') ");
+		 		$(value).parent().show();
+		 	} else if ( select == "title") {
+		 		var value = $(".tbody td:nth-child(5n+2):contains('" + value + "') ");
+		 		$(value).parent().show();
+		 	} 
+	        
+	    });
+	
 });
 </script>
 </head>
@@ -88,11 +102,11 @@ $(document).ready(function(){
 					<td>254</td>
 				</tr>			
 			</tbody>
-			<tbody>
+			<tbody class="tbody">
 				<c:forEach var = "vo"  items="${list}">
-				<tr>
+				<tr class="free_tr">
 					<td>${vo.rno }</td>
-					<td><a href="http://localhost:9000/myjeju/free_board_content.do?fid=${vo.fid }&rno=${vo.rno}">${vo.ftitle }</a></td>
+					<td><a href="http://localhost:9000/myjeju/free_board_content.do?fid=${vo.fid }">${vo.ftitle }</a></td>
 					<td>${vo.id }</td>
 					<td>${vo.fdate }</td>
 					<td>${vo.fhit }</td>

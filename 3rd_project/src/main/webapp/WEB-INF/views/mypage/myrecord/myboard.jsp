@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,6 +28,7 @@
 			$(this).css("color","rgb(3,199,90)")
 			$("#comment").css("color","black");
 		});
+		
 	});
 </script>
 <body>
@@ -38,48 +40,53 @@
 		<a href="#" id="comment">작성 댓글</a>
 		<a href="#"  id="delete">삭제</a>
 		<div class="table_div">
-			<table class="table board_table">
+			<table class="table board_table free_table">
 				<tr>
-					<th><input type="checkbox"></th>
-					<th>분류</th>
+					<th></th>
+					<th><strong>자유게시판</strong></th>
 					<th>제목</th>
 					<th>작성일</th>
-					<th>조회수</th>
 				</tr>
+				<c:forEach var = "vo"  items="${list1}">
+					<tr class="free_tr">
+						<td><input type="checkbox" value=${vo.fid }></td>
+						<td>자유</td>
+						<td><a href="http://localhost:9000/myjeju/free_board_content.do?fid=${vo.fid }">${vo.ftitle }</a></td>
+						<td>${vo.fdate }</td>
+					</tr>
+				</c:forEach>
+			</table>
+			<table class="table board_table request_table">
 				<tr>
-					<td><input type="checkbox"></td>
-					<td>자유</td>
-					<td>게시글 제목</td>
-					<td>2021-07-06</td>
-					<td>125</td>
+					<th></th>
+					<th><strong>요청게시판</strong></th>
+					<th>제목</th>
+					<th>작성일</th>
 				</tr>
-				<tr>
-					<td><input type="checkbox"></td>
-					<td>요청</td>
-					<td>게시글 제목</td>
-					<td>2021-07-06</td>
-					<td>125</td>
-				</tr>
+				<c:forEach var = "vo"  items="${list2}">
+					<tr class="request_tr">
+						<td><input type="checkbox" value=${vo.rid }></td>
+						<td>요청</td>
+						<td><a href="http://localhost:9000/myjeju/request_board_number.do?rid=${vo.rid }">${vo.rtitle }</a></td>
+						<td>${vo.rdate }</td>
+					</tr>
+				</c:forEach>
 			</table>
 			
 			<table class="table comment_table">
 				<tr>
-					<th><input type="checkbox"></th>
+					<th></th>
 					<th colspan="2">댓글</th>
 					<th>작성일</th>
 				</tr>
-				<tr>
-					<td><input type="checkbox"></td>
-					<td>감사합니당~</td>
-					<td><a href="#">게시글보기▶</a></td>
-					<td>2021-07-06</td>
-				</tr>
-				<tr>
-					<td><input type="checkbox"></td>
-					<td>감사합니당~</td>
-					<td>삭제된 게시글</td>
-					<td>2021-07-06</td>
-				</tr>
+				<c:forEach var = "vo"  items="${list3}">
+					<tr>
+						<td><input type="checkbox"></td>
+						<td>${vo.ccomment }</td>
+						<td><a href="http://localhost:9000/myjeju/free_board_content.do?fid=${vo.fid}"}>게시글보기▶</a></td>
+						<td>${vo.cdate }</td>
+					</tr>
+				</c:forEach>
 			</table>
 		</div>
 	</div>

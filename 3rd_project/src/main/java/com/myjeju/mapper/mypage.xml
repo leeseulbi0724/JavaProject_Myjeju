@@ -26,6 +26,21 @@
 			delete from myjeju_member where id=#{id}
 		</delete>
 		
+		<!-- 자유게시판 불러오기 -->
+		<select id="user_free_list" parameterType="java.lang.String" resultType="com.myjeju.vo.CommunityVO">
+			select fid, ftitle, to_char(fdate,'yyyy-mm-dd') fdate , fhit from myjeju_free_board where id=#{id} order by fdate desc	
+		</select>
+		
+		<!-- 요청게시판 불러오기 -->
+		<select id="user_request_list" parameterType="java.lang.String" resultType="com.myjeju.vo.CommunityVO">
+			select rid, rtitle, to_char(rdate,'yyyy-mm-dd') rdate from myjeju_request_board where id=#{id} order by rdate desc	
+		</select>
+		
+		<!-- 자유게시판 댓글 가져오기 -->
+		<select id="user_comment_list" parameterType="java.lang.String" resultType="com.myjeju.vo.CommunityVO">
+			select fid, cid, ccomment, to_char(cdate,'yyyy-mm-dd') cdate from myjeju_free_comment where id=#{id}
+		</select>
+		
 		<!-- 장바구니 추가 -->
 		<insert id = "basket" parameterType = "com.myjeju.vo.BasketVO">
 			insert into myjeju_basket values (#{id}, #{sid}, #{b_count})

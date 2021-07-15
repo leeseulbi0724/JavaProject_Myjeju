@@ -1,9 +1,13 @@
 package com.myjeju.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.myjeju.vo.CommunityVO;
 import com.myjeju.vo.MemberVO;
 
 @Repository
@@ -32,6 +36,24 @@ public class MypageDAO {
 	/** 회원탈퇴 **/
 	public int getInfoOut(String id) {
 		return sqlSession.delete(namespace+".info_out", id);
+	}
+	
+	/** 자유게시판 게시글 불러오기 **/
+	public ArrayList<CommunityVO> getFreeBoardResult(String id) {
+		List<CommunityVO> list = sqlSession.selectList(namespace+".user_free_list",id);		
+		return (ArrayList<CommunityVO>)list;
+	}
+	
+	/** 자유게시판 게시글 불러오기 **/
+	public ArrayList<CommunityVO> getRequestBoardResult(String id) {
+		List<CommunityVO> list = sqlSession.selectList(namespace+".user_request_list",id);		
+		return (ArrayList<CommunityVO>)list;
+	}
+	
+	/** 자유게시판 댓글 불러오기 **/
+	public ArrayList<CommunityVO> getCommentResult(String id) {
+		List<CommunityVO> list = sqlSession.selectList(namespace+".user_comment_list",id);		
+		return (ArrayList<CommunityVO>)list;
 	}
 	
 	

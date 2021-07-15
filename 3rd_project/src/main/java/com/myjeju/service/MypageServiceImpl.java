@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.myjeju.dao.BasketDAO;
 import com.myjeju.dao.MypageDAO;
 import com.myjeju.vo.BasketVO;
+import com.myjeju.vo.CommunityVO;
 import com.myjeju.vo.MemberVO;
 import com.myjeju.vo.StoreVO;
 
@@ -69,6 +70,21 @@ public class MypageServiceImpl implements MypageService {
 	@Override
 	public ArrayList<StoreVO> getBcontent(String sid) {
 		return basketDAO.getBcontent(sid);
+	}
+	
+	@Override
+	public ArrayList<CommunityVO> getFreeBoardResult(String id) {
+		return mypageDAO.getFreeBoardResult(id);
+	}
+	
+	@Override
+	public ArrayList<CommunityVO> getRequestBoardResult(String id) {
+		return mypageDAO.getRequestBoardResult(id);
+	}
+	
+	@Override
+	public ArrayList<CommunityVO> getCommentResult(String id) {
+		return mypageDAO.getCommentResult(id);
 	}
 	
 	

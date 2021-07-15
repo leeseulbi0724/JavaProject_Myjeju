@@ -27,8 +27,8 @@
 	
 	.table { font-size:14px; width:100%; }
 	.table tr:first-child th { background-color:rgb(247,248,249); border-top:1px solid lightgray; }
-	.board_table tr:first-child th:nth-child(2) { width:85px; }
-	.board_table tr:first-child th:nth-child(3) { width:638px; }
+	.board_table tr:first-child th:nth-child(2) { width:125px; }
+	.board_table tr:first-child th:nth-child(3) { width:655px; }
 	
 	.comment_table { display:none; }
 	.comment_table td:nth-child(2) { width:600px; }
@@ -36,3 +36,6 @@
 	.comment_table td:last-child { width:120px; }
 	
 	.table_div { margin-top:40px; text-align:center; }
+	
+	.board_table td>a { color:black; text-decoration:none; }
+	.board_table td>a:hover { text-decoration:underline; }
