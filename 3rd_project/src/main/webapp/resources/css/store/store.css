@@ -112,6 +112,13 @@
 		background-color : #f2f2f2;
 	}
 
+	img {
+		border: 3px solid white;
+		border-radius: 7px;
+		-moz-border-radius: 7px;
+		-khtml-border-radius: 7px;
+		-webkit-border-radius: 7px;
+	}
 	
 	
 	
