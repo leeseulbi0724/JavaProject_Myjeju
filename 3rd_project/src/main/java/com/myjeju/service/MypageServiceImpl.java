@@ -58,8 +58,8 @@ public class MypageServiceImpl implements MypageService {
 	}
 
 	@Override
-	public ArrayList<BasketVO> getSid(String id) {
-		return basketDAO.getSid(id);
+	public ArrayList<BasketVO> getBasketContent(String id) {
+		return basketDAO.getBasketContent(id);
 	}
 
 	@Override
@@ -67,10 +67,7 @@ public class MypageServiceImpl implements MypageService {
 		return basketDAO.getSid2(id);
 	}
 
-	@Override
-	public ArrayList<StoreVO> getBcontent(String sid) {
-		return basketDAO.getBcontent(sid);
-	}
+
 	
 	@Override
 	public ArrayList<CommunityVO> getFreeBoardResult(String id) {

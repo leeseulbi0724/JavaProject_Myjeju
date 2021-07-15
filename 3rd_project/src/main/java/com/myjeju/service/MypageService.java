@@ -15,9 +15,9 @@ public interface MypageService {
 	boolean getInfoOut(String id);
 	
 	boolean getInsertResult(BasketVO vo);
-	ArrayList<BasketVO> getSid(String id);
+	ArrayList<BasketVO> getBasketContent(String id);
 	BasketVO getSid2(String id);
-	ArrayList<StoreVO> getBcontent(String sid);
+	
 	ArrayList<CommunityVO> getFreeBoardResult(String id);
 	ArrayList<CommunityVO> getRequestBoardResult(String id);
 	ArrayList<CommunityVO> getCommentResult(String id);

@@ -27,34 +27,20 @@
 				<th>판매가</th>
 				<th></th>
 			</tr>
-			<tr>
-				<td><input type="checkbox" checked></td>
-				<td>
-					<img src="http://localhost:9000/myjeju/upload/${svo.s_sfile}" width=50 height=30>
-					<a href="#">${svo.s_name}</a>
-				</td>
-				<td>
-					<input class="form-control" type="number" value="${vo.b_count}">
-				</td>
-				<td class="price">${svo.s_price}원</td>
-				<td><a href="#" class="btn delete">삭제</a></td>
-			</tr>	
 			
-			<c:forEach var = "slist" items = "${slist}">			
-			<c:forEach var = "blist" items = "${blist}">			
+			<c:forEach var = "list" items = "${list}">			
 				<tr>
 					<td><input type="checkbox" checked></td>
 					<td>
-						<img src="http://localhost:9000/myjeju/upload/${slist.s_sfile}" width=50 height=30>
-						<a href="#">${slist.s_name}</a>
+						<img src="http://localhost:9000/myjeju/images/store/${list.s_image}" width=50 height=30>
+						<a href="#">${list.s_name}</a>
 					</td>
 					<td>
-						<input class="form-control" type="number" value="${blist.b_count }">
+						<input class="form-control" type="number" value="${list.b_count }">
 					</td>
-					<td class="price">${slist.s_price}원</td>
+					<td class="price">${list.s_price}원</td>
 					<td><a href="#" class="btn delete">삭제</a></td>
 				</tr>	
-			</c:forEach>		
 			</c:forEach>
 		</table>
 		<div class="coin_box">

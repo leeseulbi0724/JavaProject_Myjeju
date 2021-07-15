@@ -96,56 +96,103 @@ public class MypageController {
 	}
 	
 	/**
-	 * 장바구니
+	 * 마이페이지 -> 장바구니
 	 */
-	@RequestMapping(value = "/mybasket.do", method=RequestMethod.GET)
+	@RequestMapping(value = "/mybasket.do", method=RequestMethod.POST)
 	public ModelAndView mybaskit(BasketVO vo, HttpSession session, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView();
 		
 		String id = (String) session.getAttribute("session_id");
-		String sid = request.getParameter("sid");
-		System.out.println(sid);
-		System.out.println(id);
 
-		//BasketVO vo = MypageService.getSid2(user_id);			//sid, b_count
-		//StoreVO svo = MypageService.getBcontent(vo.getSid());		//s_name, s_price, s_sfile
-		
-		vo.setId(id);
-		
-		ArrayList<BasketVO> blist = MypageService.getSid(id);				//sid랑 b_count 가져오기
-		ArrayList<StoreVO> slist = MypageService.getBcontent(vo.getSid());		//s_name, s_price, s_sfile 가져오기
-		
-		//System.out.println(vo.getSid());
-		//System.out.println(svo.getS_name());
-		//System.out.println(svo.getS_price());
-		//System.out.println(vo.getB_count());
+		ArrayList<BasketVO> list = MypageService.getBasketContent(id);
 		
 		mv.setViewName("mypage/mystore/mybasket");
 		
-		mv.addObject("blist", blist);
-		mv.addObject("slist", slist);
+		mv.addObject("list", list);
 		
 		return mv;
 	}
 
-	/* 장바구니 추가 처리 */
-	@RequestMapping(value = "/mybasket_proc.do", method=RequestMethod.GET)
-	public ModelAndView mybasket_proc(BasketVO vo, HttpSession session, HttpServletRequest request) {
-		ModelAndView mv = new ModelAndView();
 
+	/**
+	 *  장바구니 추가 처리 - 장바구니 화면으로 
+	 */
+	@RequestMapping(value = "/mybasket_proc1.do", method=RequestMethod.POST)
+	public ModelAndView mybasket_proc1(BasketVO vo, HttpSession session, HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView();
+		
+		String id = (String) session.getAttribute("session_id");
+		String sid = request.getParameter("sid");
 		String name = request.getParameter("s_name");
+		String s_image = request.getParameter("s_image");
+		String s_sfile = request.getParameter("s_sfile");
+		
 		String count = request.getParameter("b_count");
 		if(count == null) {
 			count = "0";
 		}
 		int b_count = Integer.parseInt(count);
-		String id = (String) session.getAttribute("session_id");
-		String sid = request.getParameter("sid");
+		
+		String price = request.getParameter("s_price");
+		if(price == null) {
+			price = "0";
+		}
+		int s_price = Integer.parseInt(price);
 		
 		vo.setId(id);
 		vo.setSid(sid);
+		vo.setS_name(name);
 		vo.setB_count(b_count);
+		vo.setS_price(s_price);
+		vo.setS_image(s_image);
+		vo.setS_sfile(s_sfile);
+
+		boolean result = MypageService.getInsertResult(vo);
 		
+		ArrayList<BasketVO> list = MypageService.getBasketContent(id);		//
+		
+		if(result) {
+			mv.setViewName("mypage/mystore/mybasket");
+			mv.addObject("list", list);		//
+			mv.addObject("sid", sid);
+		}
+
+		return mv;
+	}
+	
+	/**
+	 *  장바구니 추가 처리 - 상품 상세 화면으로 (이전페이지) 
+	 */
+	@RequestMapping(value = "/mybasket_proc2.do", method=RequestMethod.POST)
+	public ModelAndView mybasket_proc2(BasketVO vo, HttpSession session, HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView();
+		
+		String id = (String) session.getAttribute("session_id");
+		String sid = request.getParameter("sid");
+		String name = request.getParameter("s_name");
+		String s_image = request.getParameter("s_image");
+		String s_sfile = request.getParameter("s_sfile");
+		
+		String count = request.getParameter("b_count");
+		if(count == null) {
+			count = "0";
+		}
+		int b_count = Integer.parseInt(count);
+		
+		String price = request.getParameter("s_price");
+		if(price == null) {
+			price = "0";
+		}
+		int s_price = Integer.parseInt(price);
+		
+		vo.setId(id);
+		vo.setSid(sid);
+		vo.setS_name(name);
+		vo.setB_count(b_count);
+		vo.setS_price(s_price);
+		vo.setS_image(s_image);
+		vo.setS_sfile(s_sfile);
+
 		boolean result = MypageService.getInsertResult(vo);
 		
 		if(result) {
