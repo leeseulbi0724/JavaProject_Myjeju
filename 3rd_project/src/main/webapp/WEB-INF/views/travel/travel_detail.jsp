@@ -101,46 +101,85 @@
 		
 		<section class="detail_spot">
 			<div class="detail_photo_spot">
-				<div class="detail_spot_pic">
-		 			<img src="http://localhost:9000/myjeju/images/travel/travel_detail/photospot1.jpg">
-		 		</div>
-				<div class="spot_choice">
-					<h3 class="photo_spot_btn" style="border:2px solid #4fa9de; color:#4fa9de;">포토스팟</h3>
-					<h3 class="car_spot_btn" style="border:2px solid lightgray; color:lightgray;">차박스팟</h3>
-				</div>
-				<div class="detail_spot_infor">
-		 			<p class="spot_title">	
-						윗세오름 코스<br> 
-		 			</p>
-		 			<p class="spot_infor">	
-						윗세오름 올라가는 중반에 위치한 휴식 공간으로,
-						한라산의 절경을 배경으로 기념 사진을 찍을 수 있다.
-		 			</p>
-		 		</div>
+				<c:choose>
+					<c:when test="${!empty photovo.ps_psfile && !empty carvo.cs_csfile}" > <!-- 포토스팟 ㅇ, 차박스팟 ㅇ -->
+						<div class="detail_spot_pic">
+				 			<img src="http://localhost:9000/myjeju/images/spot/photo/${photovo.ps_psfile}">
+				 		</div>
+						<div class="spot_choice">
+							<h3 class="photo_spot_btn" style="border:2px solid #4fa9de; color:#4fa9de;">포토스팟</h3>
+							<h3 class="car_spot_btn" style="border:2px solid lightgray; color:lightgray;">차박스팟</h3>
+						</div>
+						<div class="detail_spot_infor">
+				 			<p class="spot_title">	
+								${photovo.ps_name}<br> 
+				 			</p>
+				 			<p class="spot_infor">	
+								${photovo.ps_infor}
+				 			</p>
+				 		</div>
+					</c:when>
+					<c:when test="${!empty photovo.ps_psfile && empty carvo.cs_csfile}"> <!-- 포토스팟 ㅇ, 차박스팟 x -->
+						<div class="detail_spot_pic">
+				 			<img src="http://localhost:9000/myjeju/images/spot/photo/${photovo.ps_psfile}">
+				 		</div>
+						<div class="spot_choice">
+							<h3 class="photo_spot_btn" style="border:2px solid #4fa9de; color:#4fa9de; margin-left:130px;">포토스팟</h3>
+							<h3 class="car_spot_btn" style="border:2px solid lightgray; color:lightgray; display:none;">차박스팟</h3>
+						</div>
+						<div class="detail_spot_infor">
+				 			<p class="spot_title">	
+								${photovo.ps_name}<br> 
+				 			</p>
+				 			<p class="spot_infor">	
+								${photovo.ps_infor}
+				 			</p>
+				 		</div>
+					</c:when>
+		 		</c:choose>
 			</div>
 			<div class="detail_car_spot" style="display:none;">
-				<div class="detail_spot_pic">
-		 			<img src="http://localhost:9000/myjeju/images/travel/광치기해변.jpg">
-		 		</div>
-				<div class="spot_choice">
-					<h3 class="photo_spot_btn" style="border:2px solid lightgray; color:lightgray;">포토스팟</h3>
-					<h3 class="car_spot_btn" style="border:2px solid #4fa9de; color:#4fa9de;">차박스팟</h3>
-				</div>
-				<div class="detail_spot_infor">
-		 			<p class="spot_title">	
-						광치기해변(차박장소 있을때만 보이기)<br> 
-		 			</p>
-		 			<p class="spot_infor">	
-		 				성산일출봉에서 섭지코지로 향하는 위치에 있고,
-						광치기 해변 주차장과 입구 쪽에 차박이 가능하다.
-						성산일출봉의 일출과 일몰 모습을 볼 수 있어 인기 많은 차박스팟이다. 
-		 			</p>
-		 		</div>
+				<c:choose>
+					<c:when test="${!empty carvo.cs_csfile && !empty photovo.ps_psfile}"> <!-- 차박스팟 ㅇ, 포토스팟 ㅇ,  -->
+						<div class="detail_spot_pic">
+				 			<img src="http://localhost:9000/myjeju/images/spot/car/${carvo.cs_csfile}">
+				 		</div>
+						<div class="spot_choice">
+							<h3 class="photo_spot_btn" style="border:2px solid lightgray; color:lightgray;">포토스팟</h3>
+							<h3 class="car_spot_btn" style="border:2px solid #4fa9de; color:#4fa9de;">차박스팟</h3>
+						</div>
+						<div class="detail_spot_infor">
+				 			<p class="spot_title">	
+								${carvo.cs_name}<br> 
+				 			</p>
+				 			<p class="spot_infor">	
+				 				${carvo.cs_infor}
+				 			</p>
+				 		</div>
+					</c:when>
+					<c:when test="${!empty carvo.cs_csfile && empty photovo.ps_psfile}"> <!-- 차박스팟 ㅇ, 포토스팟 x,  -->
+						<div class="detail_spot_pic">
+				 			<img src="http://localhost:9000/myjeju/images/spot/car/${carvo.cs_csfile}">
+				 		</div>
+						<div class="spot_choice">
+							<h3 class="photo_spot_btn" style="border:2px solid lightgray; color:lightgray; display:none;">포토스팟</h3>
+							<h3 class="car_spot_btn" style="border:2px solid #4fa9de; color:#4fa9de;">차박스팟</h3>
+						</div>
+						<div class="detail_spot_infor">
+				 			<p class="spot_title">	
+								${carvo.cs_name}<br> 
+				 			</p>
+				 			<p class="spot_infor">	
+				 				${carvo.cs_infor}
+				 			</p>
+				 		</div>
+					</c:when>
+		 		</c:choose>
 			</div>
 		</section>
 		
 		<section class="detail_review">
-			<!-- <h3>리뷰</h3> --> 
+			<h3>리뷰</h3> 
 			<div class="travel_review_zone">
 				<dl>
 					<dt>
@@ -172,7 +211,7 @@
 					<dd>
 						<img src="http://localhost:9000/myjeju/images/travel/star5.png" class="review_star">
 					</dd>
-					<dd>한라산 정말 멋있어요! 올라가기 전에 김밥이나 간단한 초콜렛 꼭 챙겨가세요~ 많이 힘드네요</dd>
+					<dd>정말 멋있어요! 다음에도 또 방문할거에요!</dd>
 					<dd>
 						<img src="http://localhost:9000/myjeju/images/travel/travel_detail/like_finger.png" class="like_finger">
 						<div class="like_score">14</div>
@@ -188,7 +227,7 @@
 					<dd>
 						<img src="http://localhost:9000/myjeju/images/travel/star3.png"class="review_star">
 					</dd>
-					<dd>한라산 강추입니다!</dd>
+					<dd>이곳은 정말 강추입니다!</dd>
 					<dd>
 						<img src="http://localhost:9000/myjeju/images/travel/travel_detail/like_finger.png" class="like_finger">
 						<div class="like_score">2</div>
@@ -204,7 +243,7 @@
 					<dd>
 						<img src="http://localhost:9000/myjeju/images/travel/star4.png"class="review_star">
 					</dd>
-					<dd>올라가는 건 힘들었지만 경치가 대박이에요!!!</dd>
+					<dd>경치가 대박이에요!!!</dd>
 					<dd>
 						<img src="http://localhost:9000/myjeju/images/travel/travel_detail/like_finger.png" class="like_finger">
 						<div class="like_score">8</div>

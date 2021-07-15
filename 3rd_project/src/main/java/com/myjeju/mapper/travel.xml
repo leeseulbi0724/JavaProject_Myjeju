@@ -31,11 +31,18 @@
 	</select>
 	
 	<!-- 포토 스팟 -->
-	<select id="photospot">
-		
+	<select id="photospot" parameterType="java.lang.String" resultType="com.myjeju.vo.PhotoSpotVO">
+		select myjeju_travel.t_name, myjeju_photo_spot.tid, myjeju_photo_spot.ps_name, myjeju_photo_spot.ps_infor, 
+			   myjeju_photo_spot.ps_psfile
+		from myjeju_travel, myjeju_photo_spot 
+		where myjeju_travel.tid = myjeju_photo_spot.tid and myjeju_travel.tid=#{tid}
 	</select>
+	
 	<!-- 차박 스팟 -->
-	<select id="carspot">
-		
+	<select id="carspot" parameterType="java.lang.String" resultType="com.myjeju.vo.CarSpotVO">
+		select myjeju_travel.t_name, myjeju_car_spot.tid, myjeju_car_spot.cs_name, myjeju_car_spot.cs_infor, 
+			   myjeju_car_spot.cs_csfile
+		from myjeju_travel, myjeju_car_spot 
+		where myjeju_travel.tid = myjeju_car_spot.tid and myjeju_travel.tid=#{tid}
 	</select>
 </mapper>

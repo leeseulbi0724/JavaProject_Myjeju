@@ -19,24 +19,6 @@ public class TravelController {
 	@Autowired
 	private TravelService travelService;
 	
-	
-	/**
-	 * travel.do : 여행지 메인페이지
-	 */
-	/*
-	@RequestMapping(value="/travel.do", method=RequestMethod.GET)
-	public ModelAndView travel() {
-		ModelAndView mv = new ModelAndView();
-		
-		ArrayList<TravelVO> list = travelService.getList();
-		
-		mv.setViewName("travel/travel");
-		mv.addObject("list",list);
-		
-		return mv;
-	}
-	*/
-	
 	/**
 	 * travel.do : 여행지 메인페이지
 	 */
@@ -71,7 +53,6 @@ public class TravelController {
 		mv.addObject("photovo",photovo);
 		mv.addObject("carvo",carvo);
 		mv.addObject("infor2",infor2);
-		
 		return mv;
 	}
 }

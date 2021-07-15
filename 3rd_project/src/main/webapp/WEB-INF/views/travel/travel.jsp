@@ -30,7 +30,7 @@
 			<div class="travel_spot">
 			<c:forEach var="toplist" items="${toplist}">
 				<article class="travel_spot1">
-					<a href="http://localhost:9000/myjeju/travel_detail.do?tid=${toplist.tid }"><img src="http://localhost:9000/myjeju/images/travel/${toplist.t_image1}"></a>
+					<a href="http://localhost:9000/myjeju/travel_detail.do?tid=${toplist.tid}"><img src="http://localhost:9000/myjeju/images/travel/${toplist.t_image1}"></a>
 					<div class="spot_infor">
 						<p class="spot_name">${toplist.t_name} <span>${toplist.t_infor}</span></p>
 						<p class="spot_tag">${toplist.t_tag}</p>

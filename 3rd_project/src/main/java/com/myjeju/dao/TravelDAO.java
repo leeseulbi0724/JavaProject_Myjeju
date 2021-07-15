@@ -49,6 +49,5 @@ public class TravelDAO extends DBConn {
 	//Â÷¹Ú ½ºÆÌ
 	public CarSpotVO getCarSpot(String tid) {
 		return sqlSession.selectOne(namespace+".carspot", tid);
-		
 	}
 }

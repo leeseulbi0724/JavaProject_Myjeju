@@ -89,7 +89,7 @@
 		</section>
 		
 		<section class="detail_review">
-			<!-- <h3>리뷰</h3> --> 
+			<h3>리뷰</h3>
 			<div class="food_review_zone">
 				<dl>
 					<dt>
