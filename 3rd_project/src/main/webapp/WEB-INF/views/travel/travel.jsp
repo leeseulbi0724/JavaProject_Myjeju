@@ -10,6 +10,13 @@
 	<link rel="stylesheet" href="http://localhost:9000/myjeju/css/index.css">
 	<link rel="stylesheet" href="http://localhost:9000/myjeju/css/travel/travel.css">
 	<script src="http://localhost:9000/myjeju/js/jquery-3.6.0.min.js"></script>
+	<script>
+		$(document).ready(function(){
+			$("#more_btn").click(function(){
+				alert("더보기");
+			});
+		});
+	</script>
 </head>
 <body>
 	<!-- header -->

@@ -29,5 +29,13 @@
 		select tid, t_name, t_tag, t_infor, t_infor2, t_addr, t_hp, t_like,
 			   t_image1, t_image2, t_image3, t_image4, t_image5 from myjeju_travel where tid=#{tid}
 	</select>
-
+	
+	<!-- 포토 스팟 -->
+	<select id="photospot">
+		
+	</select>
+	<!-- 차박 스팟 -->
+	<select id="carspot">
+		
+	</select>
 </mapper>
