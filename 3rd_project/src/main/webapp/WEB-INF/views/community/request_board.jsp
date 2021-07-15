@@ -12,7 +12,35 @@
 <link rel="stylesheet" href="http://localhost:9000/myjeju/css/index.css">
 <link rel="stylesheet" href="http://localhost:9000/myjeju/css/community/board.css">
 <script src="http://localhost:9000/myjeju/js/jquery-3.6.0.min.js"></script>
+<script src="http://localhost:9000/myjeju/js/am-pagination.js"></script>
+<link rel="stylesheet" href="http://localhost:9000/myjeju/css/am-pagination.css">
 </head>
+<script>
+$(document).ready(function(){
+	
+	var pager = jQuery('#ampaginationsm').pagination({
+	
+	    maxSize: 7,	    		// max page size
+	    totals: ${dbcount},	// total pages	
+	    page: ${rpage},		// initial page	
+	    pageSize: ${pagesize},			// max number items per page
+	
+	    // custom labels		
+	    lastText: '&raquo;&raquo;', 		
+	    firstText: '&laquo;&laquo;',		
+	    prevText: '&laquo;',		
+	    nextText: '&raquo;',
+			     
+	    btnSize:'sm'	// 'sm'  or 'lg'		
+	});
+	
+	jQuery('#ampaginationsm').on('am.pagination.change',function(e){
+		   jQuery('.showlabelsm').text('The selected page no: '+e.page);
+           $(location).attr('href', "http://localhost:9000/myjeju/request_board.do?rpage="+e.page);         
+    });
+	
+});
+</script>
 <body>
 <jsp:include page="../header.jsp"></jsp:include>
 
@@ -56,6 +84,7 @@
 				</c:forEach>
 			</tbody>
 		</table>		
+		<div id="ampaginationsm"></div>	
 	</div>
 	
 	<jsp:include page="../footer.jsp"></jsp:include>
