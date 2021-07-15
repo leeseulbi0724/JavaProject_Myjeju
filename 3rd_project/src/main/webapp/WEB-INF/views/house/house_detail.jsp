@@ -80,7 +80,7 @@
 	 			<c:forEach var="vo" items="${list}">
 				<div class="detail_image3">
 					<div class="detail_roominfo">
-						<div class="room_main"><a href="http://localhost:9000/myjeju/calendar.do?hdid=${vo.hdid}"><img src="http://localhost:9000/myjeju/images/house/house_detail/${vo.hd_img }"></a></div>
+						<div class="room_main"><a href="http://localhost:9000/myjeju/calendar.do?hid=1&hdid=${vo.hdid}"><img src="http://localhost:9000/myjeju/images/house/house_detail/${vo.hd_img }"></a></div>
 						<p class="detail_roominfo2">객실이름 : ${vo.hd_name}</p>
 						<p class="detail_roominfo2">객실가격 : ${vo.hd_price}</p>
 						<p class="detail_roominfo2">최대숙박인원 : ${vo.hd_people}명</p>
