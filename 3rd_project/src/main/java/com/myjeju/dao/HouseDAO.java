@@ -69,7 +69,9 @@ public class HouseDAO extends DBConn {
 	//¼÷¼Ò »óÀ§3°³
 	public ArrayList<HouseVO> getHouseListTop3(){
 		ArrayList<HouseVO> list = new ArrayList<HouseVO>();
-		String sql = "select hid, h_name, h_tag, h_infor, h_like, h_img from myjeju_house where rownum <= 3 order by h_like desc";
+		String sql = " select hid, h_name, h_tag, h_infor, h_like, h_img from( " +
+				" select hid, h_name, h_tag, h_infor, h_like, h_img from myjeju_house order by h_like desc) " +
+				" where rownum <= 3 ";
 		getPreparedStatement(sql);
 		
 		try {

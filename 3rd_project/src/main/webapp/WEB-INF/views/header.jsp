@@ -17,8 +17,12 @@
 					<li><a href="http://localhost:9000/myjeju/login.do">LOGIN </a><div></div></li>
 					<li><a href="http://localhost:9000/myjeju/join.do">JOIN</a></li>
 				</c:if>
-				<c:if test= "${!empty session_id}">
-					<li><a href="http://localhost:9000/myjeju/mypage.do">마이페이지 </a><div></div></li>
+				<c:if test= "${!empty session_id && session_id ne 'admin'}">
+					<li><a href="http://localhost:9000/myjeju/mypage.do">마이페이지</a><div></div></li>
+					<li><a href="logout.do">로그아웃</a></li>
+				</c:if>
+				<c:if test= "${session_id eq 'admin'}">
+					<li><a href="http://localhost:9000/myjeju/adminindex.do">관리메뉴 </a><div></div></li>
 					<li><a href="logout.do">로그아웃</a></li>
 				</c:if>
 				</ul>

@@ -7,7 +7,7 @@
 	<link rel="shortcut icon" type="image⁄x-icon" href="http://localhost:9000/myjeju/images/index/icon.png">
 	<title>숙소 | JEJU ISLAND</title>
 	<link rel="stylesheet" href="http://localhost:9000/myjeju/css/index.css">
-	<link rel="stylesheet" href="http://localhost:9000/myjeju/css/food/house_detail.css">
+	<link rel="stylesheet" href="http://localhost:9000/myjeju/css/house/house_detail.css">
 	<script src="http://localhost:9000/myjeju/js/jquery-3.6.0.min.js"></script>
 	<script>
 		$(document).ready(function(){
@@ -80,7 +80,7 @@
 	 			<c:forEach var="vo" items="${list}">
 				<div class="detail_image3">
 					<div class="detail_roominfo">
-						<div class="room_main"><a href="http://localhost:9000/myjeju/calendar.do?hid=1&hdid=${vo.hdid}"><img src="http://localhost:9000/myjeju/images/house/house_detail/${vo.hd_img }"></a></div>
+						<div class="room_main"><a href="http://localhost:9000/myjeju/calendar.do?hid=h_1&hdid=${vo.hdid}"><img src="http://localhost:9000/myjeju/images/house/house_detail/${vo.hd_img }"></a></div>
 						<p class="detail_roominfo2">객실이름 : ${vo.hd_name}</p>
 						<p class="detail_roominfo2">객실가격 : ${vo.hd_price}</p>
 						<p class="detail_roominfo2">최대숙박인원 : ${vo.hd_people}명</p>

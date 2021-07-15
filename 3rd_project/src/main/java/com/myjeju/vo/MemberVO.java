@@ -2,8 +2,14 @@ package com.myjeju.vo;
 
 public class MemberVO {
 	
-	String id, pass, cpass, name, birth, email1, email2, email, hp1, hp2, hp3, hp, addr1, addr2, date;
-	int point;
+	String id, pass, cpass, name, birth, email1, email2, email, hp1, hp2, hp3, hp, addr1, addr2, mdate;
+	int point, rno;
+	public int getRno() {
+		return rno;
+	}
+	public void setRno(int rno) {
+		this.rno = rno;
+	}
 	public String getId() {
 		return id;
 	}
@@ -99,11 +105,11 @@ public class MemberVO {
 	public void setAddr2(String addr2) {
 		this.addr2 = addr2;
 	}
-	public String getDate() {
-		return date;
+	public String getMdate() {
+		return mdate;
 	}
-	public void setDate(String date) {
-		this.date = date;
+	public void setMdate(String date) {
+		this.mdate = date;
 	}
 	public int getPoint() {
 		return point;

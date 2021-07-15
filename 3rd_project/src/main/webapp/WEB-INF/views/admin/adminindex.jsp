@@ -1,12 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-	<%
-		String userID = null;
-		if(session.getAttribute("userID") != null){
-			userID = (String) session.getAttribute("userID");
-		}
-	%>
 <head>
 	<meta http-equiv="Content-Type" content="test/html; charset=UTF-8">
 	<meta name ="viewport" content="width=device-width, initial-scale=1">
@@ -16,30 +10,6 @@
 	<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="js/bootstrap.js"></script>
 	<script type="text/javascript">
-		function getUnread() {
-			$.ajax({
-				type: "POST",
-				url: "./chatUnread",
-				data: {
-					userID: encodeURIComponent('<%= userID %>'),
-				},
-				success: function(result) {
-					if(result >= 1) {
-						showUnread(result);
-					} else {
-						showUnread('');
-					}				
-				}
-			});
-		}
-		function getInfiniteUnread() {
-			setInterval(function() {
-				getUnread();
-			}, 4000);
-		}
-		function showUnread(result) {
-			$('#unread').html(result);
-		}
 	</script>
 </head>
 <body>
@@ -52,47 +22,25 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="index.jsp">Myjeju 관리자 메뉴</a>
+			<a class="navbar-brand" href="http://localhost:9000/myjeju/adminindex.do">Myjeju 관리자 메뉴</a>
 		</div>
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
-					<li class="active"><a href="index.jsp">메인</a>
-					<li><a href="find.jsp">게시판관리</a></li>
-					<li><a href="box.jsp">회원관리<span id="unread" class="label label-info"></span></a></li>
-					<li><a href="boardView.jsp">정보관리</a></li>
+					<li class="active"><a href="#">메인</a>
+					<li><a href="#">게시판관리</a></li>
+					<li><a href="http://localhost:9000/myjeju/admember.do">회원관리<span id="unread" class="label label-info"></span></a></li>
+					<li><a href="#">정보관리</a></li>
 				</ul>
-			<%
-				if(userID == null){
-			%>
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown">
-					<a href="#" class="dropdown-toogle"
-						data-toggle="dropdown" role="buton" aria-haspopup="true"
-						aria-expanded="false">메인으로</span>
-					</a>
+					<a href="http://localhost:9000/myjeju/index.do">메인으로</a>
 				</li>
 			</ul>						
-			<%
-				}else{
-			%>
-			<ul class="nav navbar-nav navbar-right">
-				<li class="dropdown">
-					<a href="#" class="dropdown-toogle"
-						data-toggle="dropdown" role="buton" aria-haspopup="true"
-						aria-expanded="false">회원관리<span class="caret"></span>
-					</a>
-					<ul class="dropdown-menu">
-							<li><a href="update.jsp">회원정보수정</a></li>
-							<li><a href="profileUpdate.jsp">프로필수정</a></li>
-							<li><a href="logoutAction.jsp">로그아웃</a></li>
-					</ul>
-				</li>
-			</ul>						
-			<%
-				}
-			%>
 			</div>
 		</nav>
+		
+		
+		
 		<%
 			String messageContent = null;
 			if(session.getAttribute("messageContent") != null) {
@@ -134,18 +82,6 @@
 		<%
 			session.removeAttribute("messageContent");
 			session.removeAttribute("messageType");
-			}
-		%>
-		<%
-			if(userID != null) {
-		%>
-			<script type="text/javascript">
-				$(document).ready(function () {
-					getUnread();
-					getInfiniteUnread();
-				});
-			</script>		
-		<%
 			}
 		%>
 </body>

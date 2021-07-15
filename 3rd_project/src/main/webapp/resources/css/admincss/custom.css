@@ -225,7 +225,6 @@ height:40px;
 .text-red {
     color: #e74c3c;
 }  
-/* �쟾泥� 留곹겕 愿��젴 �쁺�뿭 */
 a {
 	color: #000000;
 	text-decoration: none;
@@ -235,15 +234,14 @@ a:hover {
 	text-decoration: none;
 	cursor: pointer;
 }                        
-/* �꽕鍮꾧쾶�씠�뀡�쁺�뿭 */
-.navbar-default { /* �꽕鍮꾧쾶�씠�뀡 諛� 諛곌꼍 �깋�긽*/
+.navbar-default { 
 	background-color: #006DCC;
 	border-color: #006DCC;
 	border-bottom-color: #dddddd;
 	border-bottom-width: 3px;
 	border-radius: 0px;
 }
-.navbar-default .navbar-brand {/* �꽕鍮꾧쾶�씠�뀡 �젣紐� �깋�긽 */
+.navbar-default .navbar-brand {
 	color: #ffffff;
 	padding-top: 25px;
 }

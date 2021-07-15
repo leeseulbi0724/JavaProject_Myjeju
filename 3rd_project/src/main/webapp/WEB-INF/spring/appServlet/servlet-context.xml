@@ -31,11 +31,11 @@
 	
 	<!-- DAO Object -->
 	<!-- <beans:bean id="accomodationDAO" class="com.myjeju.dao.AcoomodationDAO"></beans:bean>
-	<beans:bean id="adminDAO" class="com.myjeju.dao.AdminDAO"></beans:bean>	
 	<beans:bean id="foodDAO" class="com.myjeju.dao.FoodDAO"></beans:bean>
 	<beans:bean id="houseDAO" class="com.myjeju.dao.HouseDAO"></beans:bean>
 	<beans:bean id="indexDAO" class="com.myjeju.dao.IndexDAO"></beans:bean>		
 	<beans:bean id="payDAO" class="com.myjeju.dao.PayDAO"></beans:bean>-->
+	<beans:bean id="adminDAO" class="com.myjeju.dao.AdminDAO"></beans:bean>	
 	<beans:bean id="travelDAO" class="com.myjeju.dao.TravelDAO"></beans:bean> 
 	<beans:bean id="foodDAO" class="com.myjeju.dao.FoodDAO"></beans:bean>
 	<beans:bean id="cafeDAO" class="com.myjeju.dao.CafeDAO"></beans:bean>
@@ -49,11 +49,11 @@
 	
 	<!-- Service Object -->
 	<!-- <beans:bean id="accomodationService" class="com.myjeju.service.AccomodationServiceImpl"></beans:bean>
-	<beans:bean id="adminService" class="com.myjeju.service.AdminServiceImpl"></beans:bean>	
 	<beans:bean id="foodService" class="com.myjeju.service.FoodServiceImpl"></beans:bean>
 	<beans:bean id="houseService" class="com.myjeju.service.HouseServiceImpl"></beans:bean>
 	<beans:bean id="indexService" class="com.myjeju.service.IndexServiceImpl"></beans:bean>		
 	<beans:bean id="payService" class="com.myjeju.service.PayServiceImpl"></beans:bean>-->
+	<beans:bean id="adminService" class="com.myjeju.service.AdminServiceImpl"></beans:bean>	
 	<beans:bean id="travelService" class="com.myjeju.service.TravelServiceImpl"></beans:bean> 
 	<beans:bean id="foodService" class="com.myjeju.service.FoodServiceImpl"></beans:bean>
 	<beans:bean id="cafeService" class="com.myjeju.service.CafeServiceImpl"></beans:bean>

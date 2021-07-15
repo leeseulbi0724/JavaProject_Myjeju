@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="mapper.admin">
+		<select id="listnum" parameterType="map" resultType="com.myjeju.vo.MemberVO">
+			select rno, id, pass, name, birth, email, hp, addr1, addr2, mdate, point 
+             from(select rownum rno, id, pass, name, birth, email, hp, addr1, addr2, mdate, point
+				     from(select * from myjeju_member order by mdate desc))
+				     where rno between #{start} and #{end}
+		</select>
+		<select id="listsearch" parameterType="java.util.Map" resultType="com.myjeju.vo.MemberVO">
+			<choose>
+				<when test='search.equals("name")'>
+				select rno, id, pass, name, birth, email, hp, addr1, addr2, mdate, point
+				     from(select rownum rno,id, pass, name, birth, email, hp, addr1, addr2, mdate, point
+				     from(select * from MYJEJU_member order by mdate desc) where name like '%'||#search_text||'%')
+				     where rno between #{start} and #{end}
+				</when>
+				<otherwise>
+				select rno, id, pass, name, birth, email, hp, addr1, addr2, mdate, point
+				     from(select rownum rno,id, pass, name, birth, email, hp, addr1, addr2, mdate, point
+				     from(select * from MYJEJU_member order by mdate desc) where id like '%'||#{search_text}||'%' )
+				     where rno between #{start} and #{end}
+				</otherwise>
+			</choose>
+		</select>
+		<select id="target" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+			select count(num) from(select rownum num from MYJEJU_member) where num >= #{pageNumber}
+		</select>
+		<select id="searchtarget" parameterType="java.util.Map" resultType="java.lang.Integer">
+			<choose>
+				<when test='search.equals("name")'>
+				select count(num) from(select rownum num from myjeju_member where name like '%'||#{search_text}||'%') where num >= #{pageNumber}
+				</when>
+				<otherwise>
+				select count(num) from(select rownum num from myjeju_member where id like '%'||#{search_text}||'%') where num >= #{pageNumber}
+				</otherwise>
+			</choose>
+		</select>
+</mapper>
