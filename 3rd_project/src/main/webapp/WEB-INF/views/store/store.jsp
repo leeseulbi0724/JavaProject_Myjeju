@@ -37,7 +37,7 @@
 				<ul>
 					<li>
 						<a href = "store_content.do?sid=${best.sid}">
-							<img src = "http://localhost:9000/myjeju/upload/${best.s_sfile}" width = "260"><p>[${best.s_category}] ${best.s_name}</p>
+							<img src = "http://localhost:9000/myjeju/images/store/${best.s_image}" width = "260"><p>[${best.s_category}] ${best.s_name}</p>
 						</a>
 					</li>
 				</ul>
@@ -53,7 +53,7 @@
 				<ul>
 					<li>
 						<a href = "store_content.do?sid=${eat.sid}">
-							<img src = "http://localhost:9000/myjeju/upload/${eat.s_sfile}" width = "260"><p>[${eat.s_category}] ${eat.s_name}</p>
+							<img src = "http://localhost:9000/myjeju/images/store/${eat.s_image}" width = "260"><p>[${eat.s_category}] ${eat.s_name}</p>
 						</a>
 					</li>
 				</ul>
@@ -69,7 +69,7 @@
 				<ul>
 					<li>
 						<a href = "store_content.do?sid=${souve.sid}">
-							<img src = "http://localhost:9000/myjeju/upload/${souve.s_sfile}" width = "260"><p>[${souve.s_category}] ${souve.s_name}</p>
+							<img src = "http://localhost:9000/myjeju/images/store/${souve.s_image}" width = "260"><p>[${souve.s_category}] ${souve.s_name}</p>
 						</a>
 					</li>
 				</ul>
@@ -85,7 +85,7 @@
 				<ul>
 					<li>
 						<a href = "store_content.do?sid=${etc.sid}">
-							<img src = "http://localhost:9000/myjeju/upload/${etc.s_sfile}" width = "260"><p>[${etc.s_category}] ${etc.s_name}</p>
+							<img src = "http://localhost:9000/myjeju/images/store/${etc.s_image}" width = "260"><p>[${etc.s_category}] ${etc.s_name}</p>
 						</a>
 					</li>
 				</ul>

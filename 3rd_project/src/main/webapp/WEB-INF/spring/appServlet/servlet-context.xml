@@ -42,6 +42,7 @@
 	<beans:bean id="stofaqDAO" class="com.myjeju.dao.StofaqDAO"></beans:bean>
 	<beans:bean id="memberAO" class="com.myjeju.dao.MemberDAO"></beans:bean>
 	<beans:bean id="mypageDAO" class="com.myjeju.dao.MypageDAO"></beans:bean>
+	<beans:bean id="basketDAO" class="com.myjeju.dao.BasketDAO"></beans:bean>
 	<beans:bean id="communityDAO" class="com.myjeju.dao.CommunityDAO"></beans:bean>
 	
 	<!-- Service Object -->

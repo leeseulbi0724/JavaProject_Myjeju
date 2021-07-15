@@ -1,5 +1,7 @@
 package com.myspring.myjeju;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -12,7 +14,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.myjeju.service.MemberService;
 import com.myjeju.service.MypageService;
+import com.myjeju.vo.BasketVO;
 import com.myjeju.vo.MemberVO;
+import com.myjeju.vo.StoreVO;
 
 @Controller
 public class MypageController {
@@ -94,8 +98,61 @@ public class MypageController {
 	 * 장바구니
 	 */
 	@RequestMapping(value = "/mybasket.do", method=RequestMethod.GET)
-	public String mybaskit() {
-		return "mypage/mystore/mybasket";
+	public ModelAndView mybaskit(BasketVO vo, HttpSession session, HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView();
+		
+		String id = (String) session.getAttribute("session_id");
+		String sid = request.getParameter("sid");
+		System.out.println(sid);
+		System.out.println(id);
+
+		//BasketVO vo = MypageService.getSid2(user_id);			//sid, b_count
+		//StoreVO svo = MypageService.getBcontent(vo.getSid());		//s_name, s_price, s_sfile
+		
+		vo.setId(id);
+		
+		ArrayList<BasketVO> blist = MypageService.getSid(id);				//sid랑 b_count 가져오기
+		ArrayList<StoreVO> slist = MypageService.getBcontent(vo.getSid());		//s_name, s_price, s_sfile 가져오기
+		
+		//System.out.println(vo.getSid());
+		//System.out.println(svo.getS_name());
+		//System.out.println(svo.getS_price());
+		//System.out.println(vo.getB_count());
+		
+		mv.setViewName("mypage/mystore/mybasket");
+		
+		mv.addObject("blist", blist);
+		mv.addObject("slist", slist);
+		
+		return mv;
+	}
+
+	/* 장바구니 추가 처리 */
+	@RequestMapping(value = "/mybasket_proc.do", method=RequestMethod.GET)
+	public ModelAndView mybasket_proc(BasketVO vo, HttpSession session, HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView();
+
+		String name = request.getParameter("s_name");
+		String count = request.getParameter("b_count");
+		if(count == null) {
+			count = "0";
+		}
+		int b_count = Integer.parseInt(count);
+		String id = (String) session.getAttribute("session_id");
+		String sid = request.getParameter("sid");
+		
+		vo.setId(id);
+		vo.setSid(sid);
+		vo.setB_count(b_count);
+		
+		boolean result = MypageService.getInsertResult(vo);
+		
+		if(result) {
+			mv.setViewName("redirect:/store_content.do");
+			mv.addObject("sid", sid);
+		}
+
+		return mv;
 	}
 	
 	/**

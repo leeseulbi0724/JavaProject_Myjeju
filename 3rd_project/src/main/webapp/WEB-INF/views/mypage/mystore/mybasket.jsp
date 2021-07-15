@@ -30,27 +30,32 @@
 			<tr>
 				<td><input type="checkbox" checked></td>
 				<td>
-					<img src="http://localhost:9000/myjeju/images/store/store2.png" width=50 height=30>
-					<a href="#">오메기떡</a>
+					<img src="http://localhost:9000/myjeju/upload/${svo.s_sfile}" width=50 height=30>
+					<a href="#">${svo.s_name}</a>
 				</td>
 				<td>
-					<input class="form-control" type="number" value="1">
+					<input class="form-control" type="number" value="${vo.b_count}">
 				</td>
-				<td class="price">25,000원</td>
+				<td class="price">${svo.s_price}원</td>
 				<td><a href="#" class="btn delete">삭제</a></td>
-			</tr>				
-			<tr>
-				<td><input type="checkbox" checked></td>
-				<td>
-					<img src="http://localhost:9000/myjeju/images/store/store3.png" width=50 height=30>
-					<a href="#">제주도 한라봉</a>
-				</td>
-				<td>
-					<input class="form-control" type="number" value="1">
-				</td>
-				<td class="price">25,000원</td>
-				<td><a href="#" class="btn delete">삭제</a></td>
-			</tr>			
+			</tr>	
+			
+			<c:forEach var = "slist" items = "${slist}">			
+			<c:forEach var = "blist" items = "${blist}">			
+				<tr>
+					<td><input type="checkbox" checked></td>
+					<td>
+						<img src="http://localhost:9000/myjeju/upload/${slist.s_sfile}" width=50 height=30>
+						<a href="#">${slist.s_name}</a>
+					</td>
+					<td>
+						<input class="form-control" type="number" value="${blist.b_count }">
+					</td>
+					<td class="price">${slist.s_price}원</td>
+					<td><a href="#" class="btn delete">삭제</a></td>
+				</tr>	
+			</c:forEach>		
+			</c:forEach>
 		</table>
 		<div class="coin_box">
 			<p>총 결제 금액 : <span>50,000원</span></p>

@@ -26,4 +26,23 @@
 			delete from myjeju_member where id=#{id}
 		</delete>
 		
+		<!-- 장바구니 추가 -->
+		<insert id = "basket" parameterType = "com.myjeju.vo.BasketVO">
+			insert into myjeju_basket values (#{id}, #{sid}, #{b_count})
+		</insert>
+		
+		<!-- id비교해서 상품 sid 불러오기 -->
+		<select id = "getsid" parameterType = "java.lang.String" resultType = "com.myjeju.vo.BasketVO">
+			select sid, b_count from myjeju_basket where id = #{id}
+		</select>
+		
+		<!-- VO에서 sid만 불러오기 -->
+		<select id = "getVOsid" parameterType = "java.lang.String" resultType = "com.myjeju.vo.BasketVO">
+			select sid, b_count from myjeju_basket where id = #{id}
+		</select>
+		
+		<!-- 장바구니 상품 값 불러오기 -->
+		<select id = "basket_content" parameterType = "java.lang.String" resultType = "com.myjeju.vo.StoreVO">
+			select s_name, s_price, s_sfile from myjeju_store where sid = #{sid}
+		</select>
     </mapper>

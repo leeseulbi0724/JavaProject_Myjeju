@@ -33,7 +33,7 @@
 				<ul>
 					<li>
 						<a href = "store_content.do?sid=${souve.sid}">
-						<img src = "http://localhost:9000/myjeju/upload/${souve.s_sfile}" width = "260"><p>[${souve.s_category}] ${souve.s_name}</p>
+						<img src = "http://localhost:9000/myjeju/images/store/${souve.s_image}" width = "260"><p>[${souve.s_category}] ${souve.s_name}</p>
 						</a>
 					</li>
 				</ul>

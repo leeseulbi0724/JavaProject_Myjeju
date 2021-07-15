@@ -66,6 +66,8 @@
 	        	$(".store_content_category>button").css("background", "hsl(160, 0, 235)");
 	        }
 	      }); */
+	      
+	      
 		
 		/* 메뉴바 상단 고정 */
 		var menu = $(".store_content_category").offset();
@@ -79,7 +81,30 @@
 		});
 		
 		
-		/* 수량 유효성 검사 */
+		/* 장바구니 클릭시 
+		$("#storeBasket").click(function() {
+			if($("#b_count").val() == 0) {
+				alert("수량을 입력해주세요");
+				$("#b_count").focus();
+				return false;
+			} else {
+				//$("#store_form").attr("action", "mybasket_proc.do");
+				store_form.submit();
+				alert("장바구니에 추가되었습니다.");
+				
+				var result = confirm("장바구니페이지로 이동하시겠습니까??");
+				if(result) {
+					location.replace("mybasket.do?id=${id}");
+				} else {
+					window.location.reload();
+				}
+				
+				return true;
+			}
+		}); */
+
+		
+		/* 구매하기 버튼 클릭시
 		$("#store_buy").click(function() {
 			if($("#b_count").val() == 0) {
 				alert("수량을 입력해주세요");
@@ -89,6 +114,36 @@
 				store_form.submit();
 			}
 			
+		});*/
+		
+		$("#storeBasket").click(function() {
+			if($("#b_count").val() == 0) {
+				alert("수량을 입력해주세요");
+				$("#b_count").focus();
+				return false;
+			} else {
+				$("#store_form").attr("action", "mybasket_proc.do").submit();
+				//store_form.submit();
+				alert("장바구니에 추가되었습니다.");
+				
+				var result = confirm("장바구니페이지로 이동하시겠습니까??");
+				
+				if(result != 0) {
+					window.location.href = "mybasket.do?id=${id}";
+				} else {
+					window.location.reload();
+				}
+			}
+			});
+			
+		$("#store_buy").click(function() {
+			if($("#b_count").val() == 0) {
+				alert("수량을 입력해주세요");
+				$("#b_count").focus();
+				return false;
+			} else {
+				store_form.submit();
+			}
 		});
 		
 		
@@ -124,11 +179,32 @@
 		
 	});
 
+	
+	
 </script>
-<style>
-	
-	
-</style>
+<script type = "text/javascript">
+	/* function Bsubmit() {
+		var form = document.store_form;
+		if(!form.b_count.value) {
+			alert("수량이 비어있습니다.");
+			form.b_count.focus();
+			return false;
+		} else {
+			alert("장바구니에 추가되었습니다.");
+			//form.action = "mybasket_proc.do";
+			window.location.replace("mybasket_proc.do?id=${id}");
+			form.submit();
+			
+			var result = confirm("장바구니 페이지로 이동하시겠습니까??");
+			if(result) {
+				window.location.replace("mybasket.do?id=${id}");
+			} else {
+				window.location.reload(true);
+			}
+			return true;
+		}
+	} */
+</script>
 
 
 </head>
@@ -143,27 +219,28 @@
 		
 		<div class = "store_content_1">
 			<div class = "store_content_top">
-				<form name = "store_form" action = "store_buy.do" method = "get" class = "store_content_form">
-				
+				<form name = "store_form" action = "store_buy.do" method = "get" class = "store_content_form" id = "store_form">					
 					<div class = "img_area">
-						<img src = "http://localhost:9000/myjeju/upload/${vo.s_sfile}">
+						<img src = "http://localhost:9000/myjeju/images/store/${vo.s_image}">
 					</div>
 					
 					<div class = "text_area">
 						<div class = "title-box">
 							<div class = "store_content_title">[${vo.s_category}] ${vo.s_name}</div>
 							<div class = "store_content_price">가격　　　　　　${vo.s_price}원</div>
+							상품명  <input type = "text" name = "s_name" value = "${vo.s_name}">
+							가격   <input type = "text" name = "s_price" value = "${vo.s_price}">
 						</div>
 						
 						<div class = "option-box">
 							<div>수량　　<input type = "number" min = "0" max = "10" id = "b_count" name = "b_count"></div>
 						</div>						
-						
-						<a href = "mybasket.do?sid=${sid}"><button type = "button" class = "store_btn_style1" id = "storeBasket">장바구니</button></a>
+						<input type = "hidden" value = "${id}" name = "id"  id = "id">
+						<input type = "hidden" value = "${sid}" name = "sid"  id = "sid">
+						<button type = "submit" class = "store_btn_style1" id = "storeBasket">장바구니</button>
+						<%-- <a href = "mybasket_proc.do?id=${id}"><button type = "button" class = "store_btn_style1" id = "storeBasket">장바구니</button></a> --%>
 						<button type = "submit" class = "store_btn_style2" id = "store_buy">바로구매</button>
 					</div>
-
-						
 				</form>
 	
 			</div>
@@ -178,7 +255,7 @@
 				</div>
 			
 				<div class = "content_area">
-					<img src = "http://localhost:9000/myjeju/upload/${vo.s_ssfile}" id = "here1">
+					<img src = "http://localhost:9000/myjeju/images/store/${vo.s_content}" id = "here1">
 				</div>
 				
 				<div class = "store_product_review" id = "here2">
