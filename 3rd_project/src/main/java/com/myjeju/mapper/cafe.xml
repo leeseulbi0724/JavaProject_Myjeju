@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="mapper.cafe">
+
+	<!-- 지도 리스트 -->
+	<select id="maplist" resultType="com.myjeju.vo.CafeVO">
+		select ca_vpoint, ca_hpoint, ca_name, ca_addr, ca_hp , ca_image1 from myjeju_cafe
+	</select>
+	
+	<!-- 카페 전체 리스트 -->
+	<select id="cafelist" resultType="com.myjeju.vo.CafeVO">
+		select caid, ca_name, ca_tag, ca_infor, ca_infor2, ca_addr, ca_vpoint, ca_hpoint, ca_hp, ca_like,
+			   ca_image1, ca_image2, ca_image3, ca_image4, ca_image5 from myjeju_cafe
+	</select>
+	
+	<!-- 카페 상위3 -->
+	<select id="cafetop3" resultType="com.myjeju.vo.CafeVO">
+		<![CDATA[ select caid, ca_name, ca_tag, ca_infor, ca_like, ca_image1 from 
+				   (select caid, ca_name, ca_tag, ca_infor, ca_like, ca_image1 from myjeju_cafe order by ca_like desc)
+				   where rownum <= 3 ]]>
+	</select>
+	
+	<!-- 카페 상세 정보 -->
+	<select id="cafedetail" parameterType="java.lang.String" resultType="com.myjeju.vo.CafeVO">
+		select caid, ca_name, ca_tag, ca_infor, ca_infor2, ca_addr, ca_hp, ca_like,
+			   ca_image1, ca_image2, ca_image3, ca_image4, ca_image5 from myjeju_cafe where caid=#{caid}
+	</select>
+
+</mapper>

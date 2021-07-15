@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="mapper.travel">
+
+	<!-- 지도 리스트 -->
+	<select id="maplist" resultType="com.myjeju.vo.TravelVO">
+		select t_vpoint, t_hpoint, t_name, t_addr, t_hp, t_image1 from myjeju_travel
+	</select>
+	
+	<!-- 여행지 전체 리스트 -->
+	<select id="travellist" resultType="com.myjeju.vo.TravelVO">
+		select tid, t_name, t_tag, t_infor, t_infor2, t_addr, t_vpoint, t_hpoint, t_hp, t_like,
+			   t_image1, t_image2, t_image3, t_image4, t_image5 from myjeju_travel
+	</select>
+	
+	<!-- 여행지 상위3 -->
+	<select id="traveltop3" resultType="com.myjeju.vo.TravelVO">
+		<![CDATA[ select tid, t_name, t_tag, t_infor, t_like, t_image1 from 
+				   (select tid, t_name, t_tag, t_infor, t_like, t_image1 from myjeju_travel order by t_like desc)
+				   where rownum <= 3 ]]>
+	</select>
+	
+	<!-- 여행지 상세 정보 -->
+	<select id="traveldetail" parameterType="java.lang.String" resultType="com.myjeju.vo.TravelVO">
+		select tid, t_name, t_tag, t_infor, t_infor2, t_addr, t_hp, t_like,
+			   t_image1, t_image2, t_image3, t_image4, t_image5 from myjeju_travel where tid=#{tid}
+	</select>
+
+</mapper>

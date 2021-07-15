@@ -1,14 +1,26 @@
 package com.myjeju.dao;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.myjeju.vo.CafeVO;
 
-
+@Repository
 public class CafeDAO extends DBConn {
+	
+	@Autowired
+	private SqlSessionTemplate sqlSession;
+	private static String namespace = "mapper.cafe";
 	
 	//Select --> 전체 리스트
 	public ArrayList<CafeVO> getList(){
+		List<CafeVO> list = sqlSession.selectList(namespace+".maplist");
+		return (ArrayList<CafeVO>)list;
+		/*
 		ArrayList<CafeVO> list = new ArrayList<CafeVO>();
 		String sql = " select ca_vpoint, ca_hpoint, ca_name, ca_addr, ca_hp from myjeju_cafe ";
 		getPreparedStatement(sql);
@@ -29,10 +41,14 @@ public class CafeDAO extends DBConn {
 		}
 		
 		return list;
+		*/
 	}
 	
 	//카페 전체 리스트
 	public ArrayList<CafeVO> getCafeList(){
+		List<CafeVO> list = sqlSession.selectList(namespace+".cafelist");
+		return (ArrayList<CafeVO>)list;
+		/*
 		ArrayList<CafeVO> list = new ArrayList<CafeVO>();
 		String sql = " select caid, ca_name, ca_tag, ca_infor, ca_infor2, ca_addr, ca_vpoint, ca_hpoint, ca_hp, ca_like,"
 				   + " ca_image1, ca_image2, ca_image3, ca_image4, ca_image5 from myjeju_cafe";
@@ -64,12 +80,18 @@ public class CafeDAO extends DBConn {
 		}
 		
 		return list;
+		*/
 	}
 	
 	//카페 상위3
 	public ArrayList<CafeVO> getCafeListTop3(){
+		List<CafeVO> list = sqlSession.selectList(namespace+".cafetop3");
+		return (ArrayList<CafeVO>)list;
+		/*
 		ArrayList<CafeVO> list = new ArrayList<CafeVO>();
-		String sql = "select caid, ca_name, ca_tag, ca_infor, ca_like, ca_image1 from myjeju_cafe where rownum <= 3 order by ca_like desc";
+		String sql = " select caid, ca_name, ca_tag, ca_infor, ca_like, ca_image1 from("
+				   + " select caid, ca_name, ca_tag, ca_infor, ca_like, ca_image1 from myjeju_cafe order by ca_like desc)"
+				   + " where rownum <= 3";
 		getPreparedStatement(sql);
 		
 		try {
@@ -89,9 +111,12 @@ public class CafeDAO extends DBConn {
 		}
 		
 		return list;
+		*/
 	}
 	//카페 상세 정보
 	public CafeVO getCafeDetail(String caid) {
+		return sqlSession.selectOne(namespace+".cafedetail", caid);
+		/*
 		CafeVO vo = new CafeVO();
 		String sql = " select caid, ca_name, ca_tag, ca_infor, ca_infor2, ca_addr, ca_hp, ca_like,"
 				   + " ca_image1, ca_image2, ca_image3, ca_image4, ca_image5 from myjeju_cafe where caid=?";
@@ -122,5 +147,6 @@ public class CafeDAO extends DBConn {
 		}
 		
 		return vo;
+		*/
 	}
 }

@@ -2,17 +2,23 @@ package com.myspring.myjeju;
 
 import java.util.ArrayList;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.myjeju.dao.TravelDAO;
+import com.myjeju.service.TravelService;
 import com.myjeju.vo.TravelVO;
 
 @Controller
 public class TravelController {
-
+	
+	@Autowired
+	private TravelService travelService;
+	
+	
 	/**
 	 * travel.do : 여행지 메인페이지
 	 */
@@ -21,8 +27,7 @@ public class TravelController {
 	public ModelAndView travel() {
 		ModelAndView mv = new ModelAndView();
 		
-		TravelDAO tdao = new TravelDAO();
-		ArrayList<TravelVO> list = tdao.getList();
+		ArrayList<TravelVO> list = travelService.getList();
 		
 		mv.setViewName("travel/travel");
 		mv.addObject("list",list);
@@ -38,9 +43,8 @@ public class TravelController {
 	public ModelAndView travel() {
 		ModelAndView mv = new ModelAndView();
 		
-		TravelDAO dao = new TravelDAO();
-		ArrayList<TravelVO> list = dao.getTravelList();
-		ArrayList<TravelVO> toplist = dao.getTravelListTop3();
+		ArrayList<TravelVO> list = travelService.getTravelList();
+		ArrayList<TravelVO> toplist = travelService.getTravelListTop3();
 		
 		mv.setViewName("travel/travel");
 		mv.addObject("list",list);
@@ -56,8 +60,7 @@ public class TravelController {
 	public ModelAndView travel_detail(String tid) {
 		ModelAndView mv = new ModelAndView();
 		
-		TravelDAO dao = new TravelDAO();
-		TravelVO vo = dao.getTravelDetail(tid);
+		TravelVO vo = travelService.getTravelDetail(tid);
 		String infor2 = vo.getT_infor2().replace("\r\n", "<br>");
 		
 		mv.setViewName("travel/travel_detail");
