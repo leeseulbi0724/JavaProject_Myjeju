@@ -19,9 +19,12 @@ public class Commons {
 			int pageCount = 1;	//전체 페이지 수
 			int dbCount = 0;	//DB에서 가져온 전체 행수
 			
-			if (name.equals("Community")) {
+			if (name.equals("Free")) {
 				CommunityService communityService = (CommunityService)obj;
 				dbCount = communityService.getFreeTotalCount();
+			} else if (name.equals("Request")) {
+				CommunityService communityService = (CommunityService)obj;
+				dbCount = communityService.getRequestTotalCount();
 			}
 			
 			//총 페이지 수 계산

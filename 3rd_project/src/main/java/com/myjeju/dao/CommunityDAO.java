@@ -81,4 +81,36 @@ public class CommunityDAO {
 	public int getFreeBoardDelete(String fid) {
 		return sqlSession.delete(namespace+".free_board_delete", fid);
 	}
+	
+	
+	///////////////////////////////////////////////////////////////////////
+	
+	//요청게시판 글쓰기
+	public int getRequestWrite(CommunityVO vo) {
+		return sqlSession.insert(namespace+".request_write", vo);
+	}
+	//요청게시판 총 게시글 수
+		public int getRequestTotalCount() {
+			return sqlSession.selectOne(namespace+".request_total_count");
+	}		
+	//요청게시판 페이징 처리
+	public ArrayList<CommunityVO> getRequestList(int start, int end){
+		Map<String, String> param = new HashMap<String, String>();
+		param.put("start", String.valueOf(start));
+		param.put("end", String.valueOf(end));
+		List<CommunityVO> list = sqlSession.selectList(namespace+".request_list", param);
+		
+		return (ArrayList<CommunityVO>)list;
+	}	
+	//요청게시판 비밀번호 확인
+	public int getBoardPass(String rid, String pass){
+		Map<String, String> param = new HashMap<String, String>();
+		param.put("rid", rid);
+		param.put("pass", pass);
+		return sqlSession.selectOne(namespace+".board_pass", param);
+	}	
+	//요청게시판 상세보기
+	public CommunityVO getRequestContent(String rid) {
+		return sqlSession.selectOne(namespace+".request_content", rid);
+	}
 }

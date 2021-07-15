@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,115 +34,26 @@
 					<th>제목</th>
 					<th>작성자</th>
 					<th>날짜</th>
-					<th>조회수</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td>1</td>
-					<td><img src="http://localhost:9000/myjeju/images/community/sky_lock.png" width=15 height=15><a href="request_board_content.do">제목</a></td>
-					<td>이슬비</td>
-					<td>2021.07.01</td>
-					<td>25</td>
-				</tr>	
-				<tr>
-					<td></td>
-					<td><img src="http://localhost:9000/myjeju/images/community/blue_arrow.png" width=15 height=15 style="margin-left:10px"><a href="#">답글</a></td>
-					<td>이슬비</td>
-					<td>2021.07.01</td>
-					<td>25</td>
-				</tr>	
-				<tr>
-					<td>1</td>
-					<td><img src="http://localhost:9000/myjeju/images/community/sky_lock.png" width=15 height=15><a href="#">제목</a></td>
-					<td>이슬비</td>
-					<td>2021.07.01</td>
-					<td>25</td>
-				</tr>	
-				<tr>
-					<td>1</td>
-					<td><img src="http://localhost:9000/myjeju/images/community/sky_lock.png" width=15 height=15><a href="#">제목</a></td>
-					<td>이슬비</td>
-					<td>2021.07.01</td>
-					<td>25</td>
-				</tr>	
-				<tr>
-					<td>1</td>
-					<td><img src="http://localhost:9000/myjeju/images/community/sky_lock.png" width=15 height=15><a href="#">제목</a></td>
-					<td>이슬비</td>
-					<td>2021.07.01</td>
-					<td>25</td>
-				</tr>	
-				<tr>
-					<td>1</td>
-					<td><img src="http://localhost:9000/myjeju/images/community/sky_lock.png" width=15 height=15><a href="#">제목</a></td>
-					<td>이슬비</td>
-					<td>2021.07.01</td>
-					<td>25</td>
-				</tr>	
-				<tr>
-					<td>1</td>
-					<td><img src="http://localhost:9000/myjeju/images/community/sky_lock.png" width=15 height=15><a href="#">제목</a></td>
-					<td>이슬비</td>
-					<td>2021.07.01</td>
-					<td>25</td>
-				</tr>	
-				<tr>
-					<td>1</td>
-					<td><img src="http://localhost:9000/myjeju/images/community/sky_lock.png" width=15 height=15><a href="#">제목</a></td>
-					<td>이슬비</td>
-					<td>2021.07.01</td>
-					<td>25</td>
-				</tr>	
-				<tr>
-					<td>1</td>
-					<td><img src="http://localhost:9000/myjeju/images/community/sky_lock.png" width=15 height=15><a href="#">제목</a></td>
-					<td>이슬비</td>
-					<td>2021.07.01</td>
-					<td>25</td>
-				</tr>	
-				<tr>
-					<td>1</td>
-					<td><img src="http://localhost:9000/myjeju/images/community/sky_lock.png" width=15 height=15><a href="#">제목</a></td>
-					<td>이슬비</td>
-					<td>2021.07.01</td>
-					<td>25</td>
-				</tr>	
-				<tr>
-					<td>1</td>
-					<td><img src="http://localhost:9000/myjeju/images/community/sky_lock.png" width=15 height=15><a href="#">제목</a></td>
-					<td>이슬비</td>
-					<td>2021.07.01</td>
-					<td>25</td>
-				</tr>	
-				<tr>
-					<td>1</td>
-					<td><img src="http://localhost:9000/myjeju/images/community/sky_lock.png" width=15 height=15><a href="#">제목</a></td>
-					<td>이슬비</td>
-					<td>2021.07.01</td>
-					<td>25</td>
-				</tr>	
-				<tr>
-					<td>1</td>
-					<td><img src="http://localhost:9000/myjeju/images/community/sky_lock.png" width=15 height=15><a href="#">제목</a></td>
-					<td>이슬비</td>
-					<td>2021.07.01</td>
-					<td>25</td>
-				</tr>	
-				<tr>
-					<td>1</td>
-					<td><img src="http://localhost:9000/myjeju/images/community/sky_lock.png" width=15 height=15><a href="#">제목</a></td>
-					<td>이슬비</td>
-					<td>2021.07.01</td>
-					<td>25</td>
-				</tr>	
-				<tr>
-					<td>1</td>
-					<td><img src="http://localhost:9000/myjeju/images/community/sky_lock.png" width=15 height=15><a href="#">제목</a></td>
-					<td>이슬비</td>
-					<td>2021.07.01</td>
-					<td>25</td>
-				</tr>	
+				<c:forEach var = "vo"  items="${list}">
+					<tr>
+						<td>${vo.rno }</td>
+						<td>
+							<img src="http://localhost:9000/myjeju/images/community/sky_lock.png" width=15 height=15 style="margin-left:10px">
+							<a href="http://localhost:9000/myjeju/request_board_number.do?rid=${vo.rid }">${vo.rtitle }</a>
+						</td>
+						<td>${vo.id }</td>
+						<td>${vo.rdate }</td>
+					</tr>
+					<tr>
+						<td></td>
+						<td>　<img src="http://localhost:9000/myjeju/images/community/blue_arrow.png" width=15 height=15 style="margin-left:10px"><a href="#"> 답글</a></td>
+						<td>관리자</td>
+						<td>2021.07.01</td>
+					</tr>					
+				</c:forEach>
 			</tbody>
 		</table>		
 	</div>

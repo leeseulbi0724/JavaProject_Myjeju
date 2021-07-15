@@ -33,7 +33,7 @@ public class CommunityController {
 		ModelAndView mv = new ModelAndView();
 		
 		Commons commons = new Commons();
-		HashMap map = commons.getPage(rpage, communityService, "Community");
+		HashMap map = commons.getPage(rpage, communityService, "Free");
 		int start = (Integer)map.get("start");
 		int end = (Integer)map.get("end");
 		ArrayList<CommunityVO> list = communityService.getFreeList(start, end);
@@ -92,66 +92,42 @@ public class CommunityController {
 	}
 	
 	/**
-	 * 요청게시판 리스트
-	 */
-	@RequestMapping(value = "/request_board.do", method=RequestMethod.GET )
-	public String request_board() {
-		return "community/request_board";
-	}
-	
-	/**
-	 * 요청게시판 상세보기
-	 */
-	@RequestMapping(value = "/request_board_content.do", method=RequestMethod.GET)
-	public String request_board_content() {
-		return "community/request_board_content";
-	}
-	
-	/**
-	 * 요청게시판 글쓰기
-	 */
-	@RequestMapping(value="/request_board_write.do", method=RequestMethod.GET)
-	public String request_board_write() {
-		return "community/request_board_write";
-	}
-	
-	/**
 	 * 자유게시판 글쓰기 DB
 	 */
 	@RequestMapping(value = "/free_write_proc.do", method=RequestMethod.POST)
 	public ModelAndView free_write_proc(HttpServletRequest request, CommunityVO vo, HttpSession session) throws Exception {
-			ModelAndView mv = new ModelAndView();
-			//파일 존재
-			String root_path = request.getSession().getServletContext().getRealPath("/");
-			String attach_path = "\\resources\\upload\\";
-				
-			//rfname 중복방지 처리			
-			UUID uuid = UUID.randomUUID();
-			System.out.println((vo.getFile1().getOriginalFilename()));
-			System.out.println((uuid +"_"+vo.getFile1().getOriginalFilename()));	
-				
-			if (vo.getFile1().getOriginalFilename() != "") {
-				//DB저장
-				vo.setFfile(vo.getFile1().getOriginalFilename());
-				vo.setFsfile(uuid+ "_"+vo.getFile1().getOriginalFilename());
-			}
-	
-			//로그인 회원정보 가져오기
-			String id = (String) session.getAttribute("session_id");
-			vo.setId(id);
-			//BoardDAO dao = new BoardDAO();
-			boolean result = communityService.getFreeWrite(vo);
+		ModelAndView mv = new ModelAndView();
+		//파일 존재
+		String root_path = request.getSession().getServletContext().getRealPath("/");
+		String attach_path = "\\resources\\upload\\";
+		
+		//rfname 중복방지 처리			
+		UUID uuid = UUID.randomUUID();
+		System.out.println((vo.getFile1().getOriginalFilename()));
+		System.out.println((uuid +"_"+vo.getFile1().getOriginalFilename()));	
+		
+		if (vo.getFile1().getOriginalFilename() != "") {
+			//DB저장
+			vo.setFfile(vo.getFile1().getOriginalFilename());
+			vo.setFsfile(uuid+ "_"+vo.getFile1().getOriginalFilename());
+		}
+		
+		//로그인 회원정보 가져오기
+		String id = (String) session.getAttribute("session_id");
+		vo.setId(id);
+		//BoardDAO dao = new BoardDAO();
+		boolean result = communityService.getFreeWrite(vo);
+		
+		//DB저장 완료 후 폴더에 저장하기
+		if (result) {
+			System.out.println(root_path + attach_path + uuid +"_"+vo.getFile1().getOriginalFilename());
 			
-			//DB저장 완료 후 폴더에 저장하기
-			if (result) {
-				System.out.println(root_path + attach_path + uuid +"_"+vo.getFile1().getOriginalFilename());
-				
-				if (vo.getFile1().getOriginalFilename() != "") {
-					 File file = new File(root_path + attach_path + uuid
-					 +"_"+vo.getFile1().getOriginalFilename()); vo.getFile1().transferTo(file);
-				}
-			}			
-	
+			if (vo.getFile1().getOriginalFilename() != "") {
+				File file = new File(root_path + attach_path + uuid
+						+"_"+vo.getFile1().getOriginalFilename()); vo.getFile1().transferTo(file);
+			}
+		}			
+		
 		mv.setViewName("redirect:/free_board.do");
 		return mv;
 		
@@ -256,6 +232,127 @@ public class CommunityController {
 		
 		return "redirect:/free_board.do";
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	/**
+	 * 요청게시판 리스트
+	 */
+	@RequestMapping(value = "/request_board.do", method=RequestMethod.GET )
+	public ModelAndView request_board(String rpage) {
+		ModelAndView mv = new ModelAndView();
+		
+		Commons commons = new Commons();
+		HashMap map = commons.getPage(rpage, communityService, "Request");
+		int start = (Integer)map.get("start");
+		int end = (Integer)map.get("end");
+		ArrayList<CommunityVO> list = communityService.getRequestList(start, end);
+		
+		mv.setViewName("community/request_board");
+		mv.addObject("list", list);	
+		mv.addObject("dbcount", map.get("dbCount"));
+		mv.addObject("rpage", map.get("rpage"));
+		mv.addObject("pagesize", map.get("pageSize"));		
+		
+		return mv;
+	}
+	
+	/**
+	 * 요청게시판 상세보기 전 비밀번호입력
+	 */
+	@RequestMapping(value = "/request_board_number.do", method=RequestMethod.GET)
+	public ModelAndView request_board_number(String rid) {
+		ModelAndView mv = new ModelAndView();
+		
+		mv.addObject("rid", rid);
+		mv.setViewName("community/request_board_number");
+		return mv;
+	}
+	
+	/**
+	 * 비밀번호 확인
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/board_pass_check.do", method=RequestMethod.POST)
+	public boolean board_pass_check(HttpServletRequest request) {
+		boolean result = communityService.getBoardPass(request.getParameter("rid"), request.getParameter("pass"));
+		
+		return result;
+	}
+	
+	/**
+	 * 요청게시판 상세보기
+	 */
+	@RequestMapping(value = "/request_board_content.do", method=RequestMethod.GET) 
+	public ModelAndView request_board_content(String rid) {
+		ModelAndView mv = new ModelAndView();
+		
+		//게시물 내용
+		CommunityVO vo = communityService.getRequestContent(rid);
+		
+		mv.addObject("vo", vo);
+		mv.setViewName("community/request_board_content");
+		
+		return mv;
+	}
+	
+	/**
+	 * 요청게시판 글쓰기
+	 */
+	@RequestMapping(value="/request_board_write.do", method=RequestMethod.GET)
+	public String request_board_write() {
+		return "community/request_board_write";
+	}
+	
+	/**
+	 * 요청게시판 글쓰기 DB
+	 */
+	@RequestMapping(value = "/request_write_proc.do", method=RequestMethod.POST)
+	public ModelAndView request_write_proc(HttpServletRequest request, CommunityVO vo, HttpSession session) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		//파일 존재
+		String root_path = request.getSession().getServletContext().getRealPath("/");
+		String attach_path = "\\resources\\upload\\";
+		
+		//rfname 중복방지 처리			
+		UUID uuid = UUID.randomUUID();
+		System.out.println((vo.getFile1().getOriginalFilename()));
+		System.out.println((uuid +"_"+vo.getFile1().getOriginalFilename()));	
+		
+		if (vo.getFile1().getOriginalFilename() != "") {
+			//DB저장
+			vo.setRfile(vo.getFile1().getOriginalFilename());
+			vo.setRsfile(uuid+ "_"+vo.getFile1().getOriginalFilename());
+		}
+		
+		//로그인 회원정보 가져오기
+		String id = (String) session.getAttribute("session_id");
+		vo.setId(id);
+		//BoardDAO dao = new BoardDAO();
+		boolean result = communityService.getRequestWrite(vo);
+		
+		//DB저장 완료 후 폴더에 저장하기
+		if (result) {
+			System.out.println(root_path + attach_path + uuid +"_"+vo.getFile1().getOriginalFilename());
+			
+			if (vo.getFile1().getOriginalFilename() != "") {
+				File file = new File(root_path + attach_path + uuid
+						+"_"+vo.getFile1().getOriginalFilename()); vo.getFile1().transferTo(file);
+			}
+		}			
+		
+		mv.setViewName("redirect:/request_board.do");
+		return mv;
+		
+	}
+	
+	
+
 	
 	
 		

@@ -71,4 +71,49 @@
 	<delete id="free_board_delete" parameterType="java.lang.String">
 		delete from myjeju_free_board where fid=#{fid}
 	</delete>
+	
+	
+	
+	<!--  -->
+	
+	
+	
+	<!-- 요청게시판 글쓰기 -->
+	<insert id="request_write" parameterType="com.myjeju.vo.CommunityVO">
+	<choose>
+		<when test = "rfile == null">
+			insert into myjeju_request_board 
+				values('r_'||sequ_myjeju_request_board.nextval, #{id}, #{rcategory}, #{rtitle}, #{rcontent}, null, null, #{rnumber}, sysdate )			
+		</when>
+		<otherwise>
+			insert into myjeju_request_board 
+				values('r_'||sequ_myjeju_request_board.nextval, #{id}, #{rcategory}, #{rtitle}, #{rcontent}, #{rfile}, #{rsfile}, #{rnumber}, sysdate )	
+		</otherwise>
+	</choose>
+	</insert>
+	
+	<!-- 요청게시판  총 게시글 수-->
+	<select id="request_total_count" resultType="java.lang.Integer">
+		select count(*) from myjeju_request_board
+	</select>
+	
+	<!-- 전체리스트 -->
+	<select id="request_list" parameterType="map" resultType="com.myjeju.vo.CommunityVO"  >
+	select rno, rid, id, rtitle, rdate 
+		from (select rownum rno, rid, id, rtitle, rdate 
+			from (select rownum rno, rid, id, rtitle, to_char(rdate, 'yyyy-mm-dd') rdate 
+				from (select rid, id, rtitle, rdate from myjeju_request_board order by rdate) order by rno)
+					order by rno desc) where rno between #{start} and #{end}
+	</select>
+	
+	<!-- 비밀번호체크 -->
+	<select id="board_pass" parameterType="map"  resultType="java.lang.Integer">
+		select count(*) from myjeju_request_board where rid=#{rid} and rnumber=#{pass}
+	</select>
+	
+	<!-- 요청게시판 상세보기 -->
+	<select id="request_content" parameterType="java.lang.String" resultType="com.myjeju.vo.CommunityVO">
+		select rid, id, rcategory, rtitle, rcontent, rdate, rfile, rsfile from myjeju_request_board where rid=#{rid}
+	</select>
+	
 </mapper>

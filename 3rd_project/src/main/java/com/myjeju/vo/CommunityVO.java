@@ -8,6 +8,59 @@ public class CommunityVO {
 	String id, fid, ftitle, fcontent,  ffile, fsfile, fdate, cid, ccomment, cdate, comment_id;
 	int rno, fhit;
 	
+	String rid, rtitle, rcategory, rcontent,  rfile, rsfile, rdate;
+	int rnumber;
+	
+	
+	
+	public String getRcategory() {
+		return rcategory;
+	}
+	public void setRcategory(String rcategory) {
+		this.rcategory = rcategory;
+	}
+	public String getRid() {
+		return rid;
+	}
+	public void setRid(String rid) {
+		this.rid = rid;
+	}
+	public String getRtitle() {
+		return rtitle;
+	}
+	public void setRtitle(String rtitle) {
+		this.rtitle = rtitle;
+	}
+	public String getRcontent() {
+		return rcontent;
+	}
+	public void setRcontent(String rcontent) {
+		this.rcontent = rcontent;
+	}
+	public String getRfile() {
+		return rfile;
+	}
+	public void setRfile(String rfile) {
+		this.rfile = rfile;
+	}
+	public String getRsfile() {
+		return rsfile;
+	}
+	public void setRsfile(String rsfile) {
+		this.rsfile = rsfile;
+	}
+	public String getRdate() {
+		return rdate;
+	}
+	public void setRdate(String rdate) {
+		this.rdate = rdate;
+	}
+	public int getRnumber() {
+		return rnumber;
+	}
+	public void setRnumber(int rnumber) {
+		this.rnumber = rnumber;
+	}
 	public CommonsMultipartFile getFile1() {
 		return file1;
 	}

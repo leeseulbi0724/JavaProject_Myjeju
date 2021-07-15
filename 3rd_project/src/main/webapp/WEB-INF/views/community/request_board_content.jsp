@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,14 +25,17 @@ $(document).ready(function() {
 <section>
 <div class="content_box">
 	<div class="box">
-		<p class="info">닉네임(아이디) | <span class="date">2021-07-01 21:29:12</span></p>
+		<p class="info">${vo.rcategory } | ${vo.id } | <span class="date">${vo.rdate }</span></p>
 		<table class="table">
 				<tr>
-					<th class="title">제목</th>
+					<th class="title">${vo.rtitle }</th>
 				</tr>
 				<tr>
 					<td>					 	
-						<textarea class="form-control"  disabled style="resize: none;" id="con_textarea">내용</textarea>						
+						<textarea class="form-control"  disabled style="resize: none;" id="con_textarea">${vo.rcontent }</textarea>
+						<c:if test = "${!empty vo.rsfile}">
+							<img src="http://localhost:9000/myjeju/upload/${vo.rsfile }" width=100% height=300px>
+						</c:if>								
 					</td>
 				</tr>
 		</table>

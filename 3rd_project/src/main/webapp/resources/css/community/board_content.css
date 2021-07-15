@@ -36,6 +36,7 @@
 	#comment, #re_comment { width:630px; display:inline-block; }
 	p.text { float:left; font-size:18px; display:inline-block; margin-left:10px; font-weight:bold; }
 	#list, #delete, #update { float:right; margin:0 5px; background-color:#4fa9de; border:none; color:white; font-size:13px; }
+	#ok{ margin:10px 5px; background-color:#4fa9de; border:none; color:white; font-size:13px; }
 	#list:hover { background-color:rgb(23,86,123); }
 	#up { display:inline-block; clear:left; float:right; font-size:13px; margin-top:15px; }
 	#re_up, #close { display:inline-block; float:right; font-size:13px; padding:0 15px; }
@@ -43,3 +44,5 @@
 	#re_up { margin-top:-35px; }
 	
 	th.title { background-color:rgb(247,248,249); }
+	
+	.number { width:200px; display:inline-block; font-size:13px; height:30px; }
