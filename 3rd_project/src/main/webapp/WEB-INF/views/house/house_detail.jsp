@@ -7,7 +7,7 @@
 	<link rel="shortcut icon" type="image⁄x-icon" href="http://localhost:9000/myjeju/images/index/icon.png">
 	<title>숙소 | JEJU ISLAND</title>
 	<link rel="stylesheet" href="http://localhost:9000/myjeju/css/index.css">
-	<link rel="stylesheet" href="http://localhost:9000/myjeju/css/food/food_detail.css">
+	<link rel="stylesheet" href="http://localhost:9000/myjeju/css/food/house_detail.css">
 	<script src="http://localhost:9000/myjeju/js/jquery-3.6.0.min.js"></script>
 	<script>
 		$(document).ready(function(){
