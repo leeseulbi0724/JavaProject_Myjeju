@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.myjeju.vo.CommunityVO;
 import com.myjeju.vo.MemberVO;
+import com.myjeju.vo.OrderVO;
 
 @Repository
 public class MypageDAO {
@@ -60,6 +61,12 @@ public class MypageDAO {
 	/** 포인트 **/
 	public int getPoint(String id) {
 		return sqlSession.selectOne(namespace2+".point", id);
+	}
+	
+	/** 주문내역 가져오기 **/
+	public ArrayList<OrderVO> getOrderList(String id) {
+		List<OrderVO> list = sqlSession.selectList(namespace+".order_list",id);		
+		return (ArrayList<OrderVO>)list;
 	}
 	
 	

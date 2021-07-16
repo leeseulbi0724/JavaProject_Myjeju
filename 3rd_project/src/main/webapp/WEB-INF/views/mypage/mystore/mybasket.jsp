@@ -122,7 +122,7 @@
 			<p>총 결제 금액 : <span class="total">${price_total }원</span></p>
 		</div>		
 		<a href="store.do" class="btn store">계속 쇼핑하기</a>
-		<a href="#" class="btn pay">결제하기</a>		
+		<a class="btn pay">결제하기</a>		
 	</div>
 </section>
 

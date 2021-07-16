@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -104,16 +105,13 @@
 		</div>
 		<div class="content store_content">
 			<p>2021.07</p>
-			<div class="box">
-				<img src="http://localhost:9000/myjeju/images/store/store2.png" width=100 height=80>
-				<p class="info">2021.07.10 14:57:24<br><a href="#">오메기 떡</a><br><span>1개</span></p>
-				<p class="price">4,800원</p>
-			</div>
-			<div class="box">
-				<img src="http://localhost:9000/myjeju/images/store/store2.png" width=100 height=80>
-				<p class="info">2021.07.10 14:57:24<br><a href="#">오메기 떡</a><br><span>1개</span></p>
-				<p class="price">4,800원</p>
-			</div>
+			<c:forEach var = "vo"  items="${list}">
+				<div class="box">
+					<img src="http://localhost:9000/myjeju/images/store/${vo.o_file }" width=100 height=80>
+					<p class="info">${vo.o_date }<br>${vo.o_name }<br><span>총 ${vo.o_count }개</span></p>
+					<p class="price">${vo.o_price }원</p>
+				</div>
+			</c:forEach>			
 		</div>
 		
 		<div class="content reservation_content">

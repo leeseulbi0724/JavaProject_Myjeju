@@ -142,8 +142,7 @@ public class StoreController {
 		 String type = request.getParameter("type");
 		 
 		 ArrayList<List<BasketVO>> basket_list = null;
-		 
-		 if (type.equals("mypage")) {
+
 			 String list = request.getParameter("list");
 			 String sids[] = null;
 			 
@@ -153,18 +152,22 @@ public class StoreController {
 				 for(int i = 0; i <basket_list.size(); i++){ 
 					 System.out.print(basket_list.get(i).get(0).getS_name()); 
 					 mv.addObject("type", "many");
-					 mv.addObject("list", basket_list);
+					 mv.addObject("option", "mypage");
+					 mv.addObject("list", basket_list);					
+					 mv.addObject("size", basket_list.size());
 				 }		 
 			 } else {
 				 ArrayList<BasketVO> basket_one_list = storeService.getBuyContent(list, id);
 				 System.out.print(basket_one_list.get(0).getS_name());
 				 mv.addObject("type", "one");
 				 mv.addObject("list", basket_one_list);
+				 mv.addObject("option", "mypage");
+				 mv.addObject("size", basket_one_list.size());
 			 }
-		 } 
+		 
 		 
 		MemberVO vo = mypageService.getMemberContent(id);	
-		mv.addObject("size", basket_list.size());
+		
 		mv.addObject("vo", vo);
 		mv.setViewName("store/storebuy");
 		
@@ -192,6 +195,7 @@ public class StoreController {
 		 
 		 mv.addObject("size", 1);
 		 mv.addObject("type", "one");
+		 mv.addObject("option", "store");
 		 mv.addObject("list", basket_one_list);
 
 		 

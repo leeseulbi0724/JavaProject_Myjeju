@@ -17,7 +17,7 @@ import com.myjeju.service.MypageService;
 import com.myjeju.vo.BasketVO;
 import com.myjeju.vo.CommunityVO;
 import com.myjeju.vo.MemberVO;
-import com.myjeju.vo.StoreVO;
+import com.myjeju.vo.OrderVO;
 
 @Controller
 public class MypageController {
@@ -102,8 +102,16 @@ public class MypageController {
 	 * 주문내역
 	 */
 	@RequestMapping(value = "/myorder.do", method = RequestMethod.GET)
-	public String myorder() {
-		return "mypage/mystore/myorder";
+	public ModelAndView myorder(HttpSession session) {
+		ModelAndView mv = new ModelAndView();
+		String id = (String) session.getAttribute("session_id");
+		
+		ArrayList<OrderVO> list = MypageService.getOrderList(id);
+		
+		mv.setViewName("mypage/mystore/myorder");
+		mv.addObject("list", list);
+		
+		return mv;
 	}
 
 	/**

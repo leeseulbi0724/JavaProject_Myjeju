@@ -123,6 +123,20 @@
 			}			
 		});
 		
+	    $(".self").click(function() {		    	
+	    	sidList();
+	    });
+		function sidList() {
+			var count = $("input[id=sid]").length;
+			var list = [];
+	    	var total = $("#total").val();
+	    	var c = $("#store_count").val();
+		    for(var i=0; i < count; i++ ) {
+ 		    	 list.push($("input[id=sid]")[i].name);
+ 		    	 location.replace("payment.do?list="+list+"&total="+total+"&option=${option}&c="+c);
+			}
+		}
+		
 	});
 </script>
 <body>
@@ -144,15 +158,16 @@
 						<a>${vo.s_name }</a>
 					</td>
 					<td>
-						<input class="form-control number" type="number" value="${vo.b_count }" disabled>
+						<input class="form-control number" type="number" value="${vo.b_count }" disabled id="store_count">
 					</td>
 					<td><strong>${vo.s_price * vo.b_count }원</strong></td>	
 					<c:set var= "price_total" value="${price_total + vo.s_price * vo.b_count  }"/>
 				</tr>
+				<input type="hidden" name="${vo.sid }" id="sid">		
 				</c:forEach>
 			</c:if>			
 			<c:if test = "${type eq 'many' }">
-				<c:forEach var = "sub_list"  items="${list}">
+				<c:forEach var = "sub_list"  items="${list}" >
 					<c:forEach var = "vo"  items="${sub_list}">
 					<tr>
 						<td>
@@ -165,6 +180,7 @@
 						<td><strong>${vo.s_price * vo.b_count }원</strong></td>	
 						<c:set var= "price_total" value="${price_total + vo.s_price * vo.b_count  }"/>
 					</tr>
+					<input type="hidden" name="${vo.sid }" id="sid">					
 					</c:forEach>
 				</c:forEach>
 			</c:if>
@@ -184,6 +200,7 @@
 				<input type="text" class="form-control text">
 			</div>
 		</div>
+		<input type="hidden" value="${price_total }" id="total">
 		<div class="price">
 			<p>결제금액</p>
 			<div>
@@ -212,7 +229,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <a href="payment.do" class="self">
+        <a class="self" style="cursor:pointer">
         	<img src="http://localhost:9000/myjeju/images/store/card.png" width=100% height=100% >
         </a>
         <a href="kakaopay.do" class="kakao">

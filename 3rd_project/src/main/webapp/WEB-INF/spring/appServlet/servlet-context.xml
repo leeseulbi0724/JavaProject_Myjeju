@@ -51,8 +51,7 @@
 	<!-- <beans:bean id="accomodationService" class="com.myjeju.service.AccomodationServiceImpl"></beans:bean>
 	<beans:bean id="foodService" class="com.myjeju.service.FoodServiceImpl"></beans:bean>
 	<beans:bean id="houseService" class="com.myjeju.service.HouseServiceImpl"></beans:bean>
-	<beans:bean id="indexService" class="com.myjeju.service.IndexServiceImpl"></beans:bean>		
-	<beans:bean id="payService" class="com.myjeju.service.PayServiceImpl"></beans:bean>-->
+	<beans:bean id="indexService" class="com.myjeju.service.IndexServiceImpl"></beans:bean>-->
 	<beans:bean id="adminService" class="com.myjeju.service.AdminServiceImpl"></beans:bean>	
 	<beans:bean id="travelService" class="com.myjeju.service.TravelServiceImpl"></beans:bean> 
 	<beans:bean id="foodService" class="com.myjeju.service.FoodServiceImpl"></beans:bean>
@@ -64,6 +63,7 @@
 	<beans:bean id="MemberService" class="com.myjeju.service.MemberServiceImpl"></beans:bean>
 	<beans:bean id="MypageService" class="com.myjeju.service.MypageServiceImpl"></beans:bean>
 	<beans:bean id="CommunityService" class="com.myjeju.service.CommunityServiceImpl"></beans:bean>
+	<beans:bean id="payService" class="com.myjeju.service.PayServiceImpl"></beans:bean>
 	
 	<!-- Interceptor Object -->
 	<beans:bean id="authInterceptor" class="com.myjeju.interceptor.AuthInterceptor"></beans:bean>

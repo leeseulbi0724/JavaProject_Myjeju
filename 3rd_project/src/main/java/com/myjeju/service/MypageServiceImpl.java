@@ -10,6 +10,7 @@ import com.myjeju.dao.MypageDAO;
 import com.myjeju.vo.BasketVO;
 import com.myjeju.vo.CommunityVO;
 import com.myjeju.vo.MemberVO;
+import com.myjeju.vo.OrderVO;
 import com.myjeju.vo.StoreVO;
 
 @Service("MypageService")
@@ -122,6 +123,13 @@ public class MypageServiceImpl implements MypageService {
 	@Override
 	public ArrayList<CommunityVO> getCommentResult(String id) {
 		return mypageDAO.getCommentResult(id);
+	}
+	
+	
+	
+	@Override
+	public ArrayList<OrderVO> getOrderList(String id) {
+		return mypageDAO.getOrderList(id);
 	}
 	
 	
