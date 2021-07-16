@@ -257,10 +257,10 @@
 			</button>
 		</section>
 		
-		<section class="detail_recommend">
+		<!-- <section class="detail_recommend">
 			<h3>근처 추천 숙소</h3>
 			
-		</section>
+		</section> -->
 	</div>
 	<!-- footer -->
 	<jsp:include page="../footer.jsp"></jsp:include>
