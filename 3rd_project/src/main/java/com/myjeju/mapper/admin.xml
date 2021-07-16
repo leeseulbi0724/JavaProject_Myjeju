@@ -16,7 +16,7 @@
 				<when test='search.equals("name")'>
 				select rno, id, pass, name, birth, email, hp, addr1, addr2, mdate, point
 				     from(select rownum rno,id, pass, name, birth, email, hp, addr1, addr2, mdate, point
-				     from(select * from MYJEJU_member order by mdate desc) where name like '%'||#search_text||'%')
+				     from(select * from MYJEJU_member order by mdate desc) where name like '%'||#{search_text}||'%')
 				     where rno between #{start} and #{end}
 				</when>
 				<otherwise>
