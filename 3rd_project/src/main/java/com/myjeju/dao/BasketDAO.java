@@ -1,7 +1,9 @@
 package com.myjeju.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,18 +48,6 @@ public class BasketDAO {
 		return sqlSession.update(namespace+".already_count", vo);
 	}
 	
-	//장바구니 전체가격
-	public int getTotalCount(String id) {
-		int result = 0;
-		Integer val = sqlSession.selectOne(namespace+".total_count", id);
-		if ( val == null ) {
-			
-		} else {
-			result = val;
-		}
-		return result;
-	}
-	
 	//장바구니 삭제
 	public int getBasketDelete(String sid) {
 		return sqlSession.delete(namespace+".basket_delete", sid);
@@ -66,6 +56,34 @@ public class BasketDAO {
 	//장바구니 컬럼수
 	public int getColumn(String id) {
 		return sqlSession.selectOne(namespace+".column", id);
+	}
+	
+	//주문내역에 필요한 내용 -- 여러개
+	public ArrayList<List<BasketVO>> getBuyContent(String[] list, String id) {
+		/* HashMap map1= new HashMap<String, List<BasketVO>>(); */
+		ArrayList<List<BasketVO>> result_list = new ArrayList<List<BasketVO>>();
+		
+		for (int i=0; i<list.length; i++) {
+			Map<String, String> param = new HashMap<String, String>();
+			param.put("sid",list[i]);
+			param.put("id", id);
+			
+			List<BasketVO> value_list = sqlSession.selectList(namespace+".buy_content",param);	
+			result_list.add(value_list);
+		}
+		return result_list;
+	}
+	
+	//주문내역에 필요한 내용 -- 한개
+	public ArrayList<BasketVO> getBuyContent(String sid, String id) {	
+		
+			Map<String, String> param = new HashMap<String, String>();
+			param.put("sid",sid);
+			param.put("id", id);
+			
+			List<BasketVO> list = sqlSession.selectList(namespace+".buy_content",param);	
+
+		return (ArrayList<BasketVO>)list;
 	}
 
 }

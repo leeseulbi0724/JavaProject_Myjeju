@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<c:set var = "price_total" value = "0" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,6 +36,8 @@
 		width:500px;
 	}
 	.table tr:last-child td:first-child { text-align:left; }
+	.table td:first-child { text-align:left; }
+	
 	.number { display:inline-block; width:100px; height:25px; }
 		
 	.addr { 
@@ -117,6 +122,7 @@
 				$(".text").attr("type","hidden");
 			}			
 		});
+		
 	});
 </script>
 <body>
@@ -130,22 +136,45 @@
 				<th>수량</th>
 				<th>가격</th>
 			</tr>
-			<tr>
-				<td>
-					<img src="http://localhost:9000/myjeju/images/store/store2.png" width=50 height=30>
-					<a>오메기떡</a>
-				</td>
-				<td>
-					<input class="form-control number" type="number" value="1" disabled>
-				</td>
-				<td><strong>25,000원</strong></td>			
+			<c:if test = "${type eq 'one' }">
+				<c:forEach var = "vo"  items="${list}">
+				<tr>
+					<td>
+						<img src="http://localhost:9000/myjeju/images/store/${vo.s_image }" width=50 height=30>
+						<a>${vo.s_name }</a>
+					</td>
+					<td>
+						<input class="form-control number" type="number" value="${vo.b_count }" disabled>
+					</td>
+					<td><strong>${vo.s_price * vo.b_count }원</strong></td>	
+					<c:set var= "price_total" value="${price_total + vo.s_price * vo.b_count  }"/>
+				</tr>
+				</c:forEach>
+			</c:if>			
+			<c:if test = "${type eq 'many' }">
+				<c:forEach var = "sub_list"  items="${list}">
+					<c:forEach var = "vo"  items="${sub_list}">
+					<tr>
+						<td>
+							<img src="http://localhost:9000/myjeju/images/store/${vo.s_image }" width=50 height=30>
+							<a>${vo.s_name }</a>
+						</td>
+						<td>
+							<input class="form-control number" type="number" value="${vo.b_count }" disabled>
+						</td>
+						<td><strong>${vo.s_price * vo.b_count }원</strong></td>	
+						<c:set var= "price_total" value="${price_total + vo.s_price * vo.b_count  }"/>
+					</tr>
+					</c:forEach>
+				</c:forEach>
+			</c:if>
 		</table>		
 		<div class="addr">
 			<p>배송정보</p>
 			<div>
 				<img src="http://localhost:9000/myjeju/images/store/pin.png" width=30 height=30><span class="one">배송지</span>
-				<p>경기도 수원시 영통구 **** 204호<br>
-				<span class="two">이슬비 | 010-9369-2489</span></p>
+				<p>${vo.addr1} ${vo.addr2 }<br>
+				<span class="two">${vo.name } | ${vo.hp }</span></p>
 				<select class="form-select">
 					<option value="msg0">직접 입력
 					<option value="msg1">집 앞에 놔주세요.
@@ -158,15 +187,16 @@
 		<div class="price">
 			<p>결제금액</p>
 			<div>
-				<div>상품금액<strong>25,500원</strong></div>
+				<div>상품금액<strong>${price_total }원</strong></div>
 				<div>포인트 사용
 					<span><input type="text" class="form-control">
 					<button>전체 사용</button>	</span>					
-					<span class="">총 보유 포인트 152p</span>
+					<span class="">총 보유 포인트 ${vo.point }p</span>
 				</div>
-				<div class="discount">할인금액<strong>152원</strong></div>
-				<div>결제금액<strong>25,348원</strong></div>
-				<span class="point_text">적립 예정 포인트 1267p
+				<div class="discount">할인금액<strong>0원</strong></div>
+				<div>결제금액<strong>${price_total }원</strong></div>
+				<c:set var="num" value="${price_total * 0.02 }"  />
+				<span class="point_text">적립 예정 포인트 <fmt:formatNumber type="number" pattern="###,###,###,###,###,###" value="${num+(100-(num%100))%100 }" />p
 				<a href="#" class="btn pay" data-bs-toggle="modal" data-bs-target="#staticBackdrop">결제하기</a></span>	
 			</div>
 		</div>		

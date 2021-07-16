@@ -25,7 +25,7 @@ public interface MypageService {
 	boolean getAlready(BasketVO vo);
 	boolean getAlreadyCount(BasketVO vo);
 	
-	int getTotalCount(String id);
 	boolean getBasketDelete(String sid);
-	 int getColumn(String id);
+	int getColumn(String id);
+	int getPoint(String id);
 }

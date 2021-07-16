@@ -50,6 +50,11 @@ public class MypageServiceImpl implements MypageService {
 		}
 		return result;
 	}
+	
+	@Override
+	public int getPoint(String id) {
+		return mypageDAO.getPoint(id);
+	}
 
 	//장바구니 연동
 	@Override
@@ -86,12 +91,7 @@ public class MypageServiceImpl implements MypageService {
 		}
 		return result;
 	}
-	
-	@Override
-	public int getTotalCount(String id) {
-		return basketDAO.getTotalCount(id);
-	}
-	
+		
 	@Override
 	public  boolean getBasketDelete(String sid) {
 		int val = basketDAO.getBasketDelete(sid);

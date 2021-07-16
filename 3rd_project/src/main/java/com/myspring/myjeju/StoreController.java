@@ -2,6 +2,7 @@ package com.myspring.myjeju;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,8 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.myjeju.service.MypageService;
 import com.myjeju.service.StofaqService;
 import com.myjeju.service.StoreService;
+import com.myjeju.vo.BasketVO;
+import com.myjeju.vo.MemberVO;
 import com.myjeju.vo.StofaqVO;
 import com.myjeju.vo.StoreVO;
 
@@ -24,8 +28,10 @@ public class StoreController {
 	
 	@Autowired
 	private StoreService storeService;
+	@Autowired	
+	private StofaqService stofaqService;	
 	@Autowired
-	private StofaqService stofaqService;
+	private MypageService mypageService;	
 
 	
 	/**
@@ -126,11 +132,70 @@ public class StoreController {
 	
 
 	/**
-	 * store_buy.do : 스토어 구매 화면
+	 * store_buy.do : 스토어 구매 화면 -- 장바구니에서
 	 */
 	@RequestMapping(value = "/store_buy.do", method = RequestMethod.GET)
-	public String store_buy() {
-		return "store/storebuy";
+	public ModelAndView store_buy(HttpServletRequest request, HttpSession session) {
+		ModelAndView mv = new ModelAndView();
+		
+		 String id = (String) session.getAttribute("session_id");
+		 String type = request.getParameter("type");
+		 
+		 if (type.equals("mypage")) {
+			 String list = request.getParameter("list");
+			 String sids[] = null;
+			 
+			 if ( list.contains(",")) {
+				 sids = list.split(",");			 
+				 ArrayList<List<BasketVO>> basket_list = storeService.getBuyContent(sids, id);		
+				 for(int i = 0; i <basket_list.size(); i++){ 
+					 System.out.print(basket_list.get(i).get(0).getS_name()); 
+					 mv.addObject("type", "many");
+					 mv.addObject("list", basket_list);
+				 }		 
+			 } else {
+				 ArrayList<BasketVO> basket_one_list = storeService.getBuyContent(list, id);
+				 System.out.print(basket_one_list.get(0).getS_name());
+				 mv.addObject("type", "one");
+				 mv.addObject("list", basket_one_list);
+			 }
+		 } 
+		 
+		MemberVO vo = mypageService.getMemberContent(id);		
+		mv.addObject("vo", vo);
+		mv.setViewName("store/storebuy");
+		
+		return mv;
+	}
+	
+	/**
+	 * store_buy.do : 스토어 구매 화면 -- 상품페이지에서
+	 */
+	@RequestMapping(value = "/store_buy2.do", method = RequestMethod.POST)
+	public ModelAndView store_buy2(HttpServletRequest request, HttpSession session) {
+		ModelAndView mv = new ModelAndView();
+		
+		 String id = (String) session.getAttribute("session_id");
+		
+		 ArrayList<BasketVO> basket_one_list = new ArrayList<BasketVO>();
+		 BasketVO bvo = new BasketVO();
+		 bvo.setB_count(Integer.parseInt(request.getParameter("b_count")));
+		 bvo.setS_image(request.getParameter("s_image"));
+		 bvo.setS_name(request.getParameter("s_name"));
+		 bvo.setS_price(Integer.parseInt(request.getParameter("s_price")));
+		 bvo.setS_sfile(request.getParameter("s_sfile"));
+		 bvo.setSid(request.getParameter("sid"));		 
+		 basket_one_list.add(bvo);
+		 
+		 mv.addObject("type", "one");
+		 mv.addObject("list", basket_one_list);
+
+		 
+		MemberVO vo = mypageService.getMemberContent(id);		
+		mv.addObject("vo", vo);
+		mv.setViewName("store/storebuy");
+		
+		return mv;
 	}
 	
 	

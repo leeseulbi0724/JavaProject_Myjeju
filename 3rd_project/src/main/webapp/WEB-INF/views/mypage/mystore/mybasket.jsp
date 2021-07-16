@@ -51,20 +51,34 @@
 		    
 		    $("input[id=check]").click(function() {
 		    	itemSum();
-		    });
-		    
+		    });		    
 		    function itemSum(){
 		 	   var str = "";
 		 	   var sum = 0;
 		 	   var count = $("input[id=check]").length;
 		 	   for(var i=0; i < count; i++ ){
 		 	       if( $("input[id=check]")[i].checked == true ){
-		 		    sum += parseInt($("input[id=check]")[i].value);
+		 		    sum += parseInt($("input[id=check]")[i].value);		 		
 		 	       }
 		 	   }
 		 	   $(".total").html(sum+" 원");
 		 	}		   
-				
+		    
+		    /* store_buy.do */
+		    $(".pay").click(function() {		    	
+		    	sidList();
+		    });
+			function sidList() {
+				var count = $("input[id=check]").length;
+				var list = [];
+			    for(var i=0; i < count; i++ ){
+		 	       if( $("input[id=check]")[i].checked == true ){
+		 		    	list.push($("input[id=check]")[i].name);
+		 		    	 location.replace("store_buy.do?list="+list+"&type=mypage");
+		 	       }
+				}
+			}
+		    
 		
 	});
 </script>
@@ -88,7 +102,7 @@
 			<tbody>			
 			<c:forEach var = "list" items = "${list}">		
 				<tr>
-					<td><input type="checkbox" checked id="check" value="${list.s_price * list.b_count }"></td>
+					<td><input type="checkbox" checked id="check" value="${list.s_price * list.b_count }" name="${list.sid }"></td>
 					<td>
 						<img src="http://localhost:9000/myjeju/images/store/${list.s_image}" width=50 height=30>
 						<a href="#">${list.s_name}</a>
@@ -108,7 +122,7 @@
 			<p>총 결제 금액 : <span class="total">${price_total }원</span></p>
 		</div>		
 		<a href="store.do" class="btn store">계속 쇼핑하기</a>
-		<a href="store_buy.do" class="btn pay">결제하기</a>		
+		<a href="#" class="btn pay">결제하기</a>		
 	</div>
 </section>
 

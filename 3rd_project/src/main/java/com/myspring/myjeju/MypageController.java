@@ -32,8 +32,19 @@ public class MypageController {
 	 * 마이페이지 메인
 	 */
 	@RequestMapping(value = "/mypage.do", method = RequestMethod.GET)
-	public String mypage() {
-		return "mypage/mypage";
+	public ModelAndView mypage(HttpSession session) {
+		ModelAndView mv = new ModelAndView();
+		// 로그인 회원정보 가져오기
+		String id = (String) session.getAttribute("session_id");
+				
+		//포인트 
+		int point = MypageService.getPoint(id);
+		
+		mv.setViewName("mypage/mypage");
+		mv.addObject("point", point);
+		
+		
+		return mv;
 	}
 
 	/**
@@ -105,11 +116,9 @@ public class MypageController {
 		String id = (String) session.getAttribute("session_id");
 
 		ArrayList<BasketVO> list = MypageService.getBasketContent(id);
-		int total = MypageService.getTotalCount(id);		
 		int column = MypageService.getColumn(id);
 
 		mv.setViewName("mypage/mystore/mybasket");
-		mv.addObject("total", total);
 		mv.addObject("list", list);
 		mv.addObject("column", column);
 

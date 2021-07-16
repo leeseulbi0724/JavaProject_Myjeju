@@ -18,7 +18,7 @@
 	<div class="left">
 		<p>${session_name }<span>님의 마이페이지</span></p>
 		<div class="img_div"><img src="http://localhost:9000/myjeju/images/mypage/human.png" width=300 height=300 ></div>
-		<div class="point_div">총 보유 포인트 <strong>152</strong>p</div>
+		<div class="point_div">총 보유 포인트 <strong>${point }</strong>p</div>
 		<a href="mypoint.do">포인트 내역보기</a>
 	</div>
 	

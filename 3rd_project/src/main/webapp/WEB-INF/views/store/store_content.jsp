@@ -166,7 +166,7 @@
 		
 		<div class = "store_content_1">
 			<div class = "store_content_top">
-				<form name = "store_form" action = "store_buy.do" method = "POST" class = "store_content_form" id = "store_form">					
+				<form name = "store_form" action = "store_buy2.do" method = "POST" class = "store_content_form" id = "store_form">					
 					<div class = "img_area">
 						<img src = "http://localhost:9000/myjeju/images/store/${vo.s_image}">
 					</div>

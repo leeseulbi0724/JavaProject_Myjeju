@@ -17,6 +17,7 @@ public class MypageDAO {
 	private SqlSessionTemplate sqlSession;
 	
 	private static String namespace = "mapper.mypage";
+	private static String namespace2 = "mapper.member";
 	
 	/** 패스워드 체크 **/
 	public int getPassCheckResult(MemberVO vo) {
@@ -54,6 +55,11 @@ public class MypageDAO {
 	public ArrayList<CommunityVO> getCommentResult(String id) {
 		List<CommunityVO> list = sqlSession.selectList(namespace+".user_comment_list",id);		
 		return (ArrayList<CommunityVO>)list;
+	}
+	
+	/** 포인트 **/
+	public int getPoint(String id) {
+		return sqlSession.selectOne(namespace2+".point", id);
 	}
 	
 	

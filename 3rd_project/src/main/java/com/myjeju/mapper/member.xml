@@ -36,6 +36,11 @@
 			select count(*) from myjeju_member where id =#{id}
 		</select>
 		
+		<!-- 포인트 -->
+		<select id="point" parameterType="java.lang.String" resultType="java.lang.Integer">
+			select point from myjeju_member where id=#{id}
+		</select>
+		
 		
 
 </mapper>
