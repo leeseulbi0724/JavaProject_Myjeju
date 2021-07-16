@@ -93,8 +93,13 @@ public class MypageServiceImpl implements MypageService {
 	}
 	
 	@Override
-	public  int getBasketDelete(String sid) {
-		return basketDAO.getBasketDelete(sid);
+	public  boolean getBasketDelete(String sid) {
+		int val = basketDAO.getBasketDelete(sid);
+		boolean result = false;
+		if ( val != 0 ) {
+			result = true;
+		}
+		return result;
 	}
 	
 	@Override

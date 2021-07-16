@@ -168,14 +168,11 @@ public class MypageController {
 	 * 장바구니 삭제
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/basket_delete.do", method=RequestMethod.GET)
-	public ModelAndView getBasketDelete(String sid) {
-		MypageService.getBasketDelete(sid);
-		ModelAndView mv = new ModelAndView();
+	@RequestMapping(value = "/basket_delete.do", method=RequestMethod.POST)
+	public boolean getBasketDelete(HttpServletRequest request) {
+		boolean result = MypageService.getBasketDelete(request.getParameter("sid"));
 		
-		mv.setViewName("mypage/mystore/mybasket");
-		
-		return mv;
+		return result;
 	}
 	
 

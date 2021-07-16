@@ -26,6 +26,6 @@ public interface MypageService {
 	boolean getAlreadyCount(BasketVO vo);
 	
 	int getTotalCount(String id);
-	 int getBasketDelete(String sid);
+	boolean getBasketDelete(String sid);
 	 int getColumn(String id);
 }

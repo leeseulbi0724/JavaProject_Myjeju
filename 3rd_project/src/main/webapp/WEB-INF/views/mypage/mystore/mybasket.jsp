@@ -20,6 +20,24 @@
 			  $('input[id=check]').prop('checked', this.checked);
 			});
 		
+		$(function(){
+			  $("button[id='delete']").on("click", drop);
+		    });		  
+		    function drop() {
+		    	var sid = $(this).attr("name");
+		      $.ajax({
+		                type: "post",
+		                url: "basket_delete.do",
+		                data:{sid:sid},
+		                dataType: 'json',
+		                success: function (result) {
+		                    location.reload();
+		                },
+
+		            });
+		    };
+				
+		
 	});
 </script>
 <body>
@@ -51,7 +69,7 @@
 						<input class="form-control" type="number" value="${list.b_count }" disabled>
 					</td>
 					<td class="price">${list.s_price * list.b_count }원</td>
-					<td><a href="basket_delete.do?sid=${list.sid }" class="btn delete">삭제</a></td>
+					<td><button name="${list.sid }" class="btn delete" id="delete">삭제</button></td>
 				</tr>	
 			</c:forEach>
 			</tbody>	
