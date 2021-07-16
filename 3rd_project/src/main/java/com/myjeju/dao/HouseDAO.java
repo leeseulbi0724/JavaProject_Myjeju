@@ -124,7 +124,7 @@ public class HouseDAO extends DBConn {
 	//¼÷¼Ò °´½Ç Á¤º¸
 	public ArrayList<HDetailVO> getHDetail(String hid){
 		ArrayList<HDetailVO> list = new ArrayList<HDetailVO>();
-		String sql = "select hd_name, hd_price, hd_people, hd_img, hdid from myjeju_hdetail where hid = ? ";
+		String sql = "select hd_name, hd_price, hd_people, hd_img, hdid, hid from myjeju_hdetail where hid = ? ";
 		getPreparedStatement(sql);
 		
 		try {
@@ -138,6 +138,7 @@ public class HouseDAO extends DBConn {
 				hvo.setHd_people(rs.getInt(3));
 				hvo.setHd_img(rs.getString(4));
 				hvo.setHdid(rs.getString(5));
+				hvo.setHid(rs.getString(6));
 				list.add(hvo);
 			}
 			
