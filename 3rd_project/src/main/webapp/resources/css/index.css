@@ -148,10 +148,13 @@ ul.drop_menu{
 	display:none;
 	position:absolute;
 }
-ul.menu_list>li:hover ul.drop_menu{
+div.main_header ul.menu_list>li:hover ul.drop_menu{
+	display:block;
+	padding-top:20px;
+}
+header ul.menu_list>li:hover ul.drop_menu{
 	display:block;
 	padding-top:40px;
-	/* margin-left:30px; */
 }
 header ul.drop_menu a{
 	text-decoration:none;
