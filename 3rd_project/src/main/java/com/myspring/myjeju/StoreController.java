@@ -141,13 +141,15 @@ public class StoreController {
 		 String id = (String) session.getAttribute("session_id");
 		 String type = request.getParameter("type");
 		 
+		 ArrayList<List<BasketVO>> basket_list = null;
+		 
 		 if (type.equals("mypage")) {
 			 String list = request.getParameter("list");
 			 String sids[] = null;
 			 
 			 if ( list.contains(",")) {
 				 sids = list.split(",");			 
-				 ArrayList<List<BasketVO>> basket_list = storeService.getBuyContent(sids, id);		
+				 basket_list = storeService.getBuyContent(sids, id);		
 				 for(int i = 0; i <basket_list.size(); i++){ 
 					 System.out.print(basket_list.get(i).get(0).getS_name()); 
 					 mv.addObject("type", "many");
@@ -161,7 +163,8 @@ public class StoreController {
 			 }
 		 } 
 		 
-		MemberVO vo = mypageService.getMemberContent(id);		
+		MemberVO vo = mypageService.getMemberContent(id);	
+		mv.addObject("size", basket_list.size());
 		mv.addObject("vo", vo);
 		mv.setViewName("store/storebuy");
 		
@@ -187,6 +190,7 @@ public class StoreController {
 		 bvo.setSid(request.getParameter("sid"));		 
 		 basket_one_list.add(bvo);
 		 
+		 mv.addObject("size", 1);
 		 mv.addObject("type", "one");
 		 mv.addObject("list", basket_one_list);
 

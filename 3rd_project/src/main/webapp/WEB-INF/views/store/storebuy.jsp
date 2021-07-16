@@ -132,7 +132,7 @@
 	<div class="center">
 		<table class="table">		
 			<tr>
-				<th>주문상품 1개</th>
+				<th>주문상품 ${size }개</th>
 				<th>수량</th>
 				<th>가격</th>
 			</tr>
