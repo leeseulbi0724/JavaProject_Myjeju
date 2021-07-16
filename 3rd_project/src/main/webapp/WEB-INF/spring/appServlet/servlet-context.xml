@@ -65,6 +65,31 @@
 	<beans:bean id="MypageService" class="com.myjeju.service.MypageServiceImpl"></beans:bean>
 	<beans:bean id="CommunityService" class="com.myjeju.service.CommunityServiceImpl"></beans:bean>
 	
+	<!-- Interceptor Object -->
+	<beans:bean id="authInterceptor" class="com.myjeju.interceptor.AuthInterceptor"></beans:bean>
+	
+	<interceptors>
+		<interceptor>
+			<mapping path="/adminindex*"/>
+			<beans:ref bean="authInterceptor"/>
+		</interceptor>
+		<interceptor>
+			<mapping path="/mypage*"/>
+			<beans:ref bean="authInterceptor"/>
+		</interceptor>
+		<interceptor>
+			<mapping path="/free_board_write*"/>
+			<beans:ref bean="authInterceptor"/>
+		</interceptor>
+				<interceptor>
+			<mapping path="/request_board_write*"/>
+			<beans:ref bean="authInterceptor"/>
+		</interceptor>
+		<interceptor>
+			<mapping path="/calendar*"/>
+			<beans:ref bean="authInterceptor"/>
+		</interceptor>
+	</interceptors>
 	
 	<context:component-scan base-package="com.myspring.myjeju" />
 	 <context:component-scan base-package="com.myjeju.dao" />

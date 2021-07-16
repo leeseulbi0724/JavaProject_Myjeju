@@ -2,6 +2,9 @@ package com.myspring.myjeju;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +21,11 @@ public class AdminController {
 	private AdminService adminService;
 	
 	@RequestMapping(value="/adminindex.do", method=RequestMethod.GET)
-	public String main() {
+	public String main(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		
+		session.setAttribute("session_id", "admin");
+		
 		return "/admin/adminindex";
 	}
 	@RequestMapping(value="/admember.do",method= {RequestMethod.GET,RequestMethod.POST})
