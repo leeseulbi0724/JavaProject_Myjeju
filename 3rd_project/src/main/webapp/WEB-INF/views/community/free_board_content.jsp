@@ -59,9 +59,9 @@ $(document).ready(function() {
 	  }
 	  
 	  $("#delete").click(function() {
-		  var con_test = confirm("게시글을 삭제하시겠습니까?");   /* 문자를 보낼껀지 물어본다 */          
+		  var con_test = confirm("게시글을 삭제하시겠습니까?"); 
         	if(con_test == true){   
-        		location.replace("free_board_delete.do?fid=${vo.fid}");
+        		location.replace("free_board_delete.do?fid=${vo.fid}&type=board");
         	}
 	  });
 });

@@ -29,6 +29,15 @@
 			$("#comment").css("color","black");
 		});
 		
+		$("button[id=free_delete]").click(function() {
+			var fid = $(this).attr("name");
+			var con_test = confirm("게시글을 삭제하시겠습니까?"); 
+        	if(con_test == true){   
+        		location.replace("free_board_delete.do?fid="+fid+"&type=mypage");
+        	}
+		});		
+				
+		
 	});
 </script>
 <body>
@@ -37,51 +46,48 @@
 <section>
 	<div class="center">
 		<a href="#" id="board">작성 글</a>
-		<a href="#" id="comment">작성 댓글</a>
-		<a href="#"  id="delete">삭제</a>
+		<a href="#" id="comment">작성 댓글</a>		
 		<div class="table_div">
 			<table class="table board_table free_table">
 				<tr>
-					<th></th>
 					<th><strong>자유게시판</strong></th>
 					<th>제목</th>
 					<th>작성일</th>
+					<th></th>
 				</tr>
 				<c:forEach var = "vo"  items="${list1}">
 					<tr class="free_tr">
-						<td><input type="checkbox" value=${vo.fid }></td>
 						<td>자유</td>
 						<td><a href="http://localhost:9000/myjeju/free_board_content.do?fid=${vo.fid }">${vo.ftitle }</a></td>
 						<td>${vo.fdate }</td>
+						<td><button id="free_delete"  type="button" name="${vo.fid }" >삭제</button></td>
 					</tr>
 				</c:forEach>
 			</table>
 			<table class="table board_table request_table">
 				<tr>
-					<th></th>
 					<th><strong>요청게시판</strong></th>
 					<th>제목</th>
 					<th>작성일</th>
+					<th></th>
 				</tr>
 				<c:forEach var = "vo"  items="${list2}">
 					<tr class="request_tr">
-						<td><input type="checkbox" value=${vo.rid }></td>
 						<td>요청</td>
 						<td><a href="http://localhost:9000/myjeju/request_board_number.do?rid=${vo.rid }">${vo.rtitle }</a></td>
 						<td>${vo.rdate }</td>
+						<td></td>
 					</tr>
 				</c:forEach>
 			</table>
 			
 			<table class="table comment_table">
 				<tr>
-					<th></th>
 					<th colspan="2">댓글</th>
 					<th>작성일</th>
 				</tr>
 				<c:forEach var = "vo"  items="${list3}">
 					<tr>
-						<td><input type="checkbox"></td>
 						<td>${vo.ccomment }</td>
 						<td><a href="http://localhost:9000/myjeju/free_board_content.do?fid=${vo.fid}"}>게시글보기▶</a></td>
 						<td>${vo.cdate }</td>

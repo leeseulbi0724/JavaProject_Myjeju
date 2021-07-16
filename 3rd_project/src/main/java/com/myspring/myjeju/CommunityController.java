@@ -217,7 +217,10 @@ public class CommunityController {
 	 * 자유게시판 게시글 삭제하기
 	 */
 	@RequestMapping(value = "/free_board_delete.do", method=RequestMethod.GET)
-	public String free_board_delete(HttpServletRequest request, String fid) {
+	public ModelAndView free_board_delete(HttpServletRequest request, String fid, String type) {
+		
+		ModelAndView mv = new ModelAndView();
+		
 		String old_bsfile = communityService.getFileResult(fid);
 		
 		String root_path = request.getSession().getServletContext().getRealPath("/");
@@ -230,7 +233,13 @@ public class CommunityController {
 		
 		boolean result = communityService.getFreeBoardDelete(fid);
 		
-		return "redirect:/free_board.do";
+		if (type.equals("board")) {
+			mv.setViewName("redirect:/free_board.do");			
+		} else if (type.equals("mypage")) {
+			mv.setViewName("redirect:/myboard.do");		
+		}
+		
+		return mv;
 	}
 	
 	

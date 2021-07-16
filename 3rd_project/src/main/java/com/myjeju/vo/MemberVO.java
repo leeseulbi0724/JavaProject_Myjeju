@@ -1,7 +1,6 @@
 package com.myjeju.vo;
 
 public class MemberVO {
-	
 	String id, pass, cpass, name, birth, email1, email2, email, hp1, hp2, hp3, hp, addr1, addr2, mdate;
 	int point, rno;
 	public int getRno() {
@@ -117,7 +116,4 @@ public class MemberVO {
 	public void setPoint(int point) {
 		this.point = point;
 	}
-	
-	
-
 }

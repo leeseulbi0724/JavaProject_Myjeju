@@ -74,7 +74,51 @@
 			<beans:ref bean="authInterceptor"/>
 		</interceptor>
 		<interceptor>
+			<mapping path="/admember*"/>
+			<beans:ref bean="authInterceptor"/>
+		</interceptor>
+		<interceptor>
 			<mapping path="/mypage*"/>
+			<beans:ref bean="authInterceptor"/>
+		</interceptor>
+		<interceptor>
+			<mapping path="/myinfo*"/>
+			<beans:ref bean="authInterceptor"/>
+		</interceptor>
+		<interceptor>
+			<mapping path="/myinfo_request*"/>
+			<beans:ref bean="authInterceptor"/>
+		</interceptor>
+		<interceptor>
+			<mapping path="/myinfo_pass*"/>
+			<beans:ref bean="authInterceptor"/>
+		</interceptor>
+		<interceptor>
+			<mapping path="/myinfo_out*"/>
+			<beans:ref bean="authInterceptor"/>
+		</interceptor>
+		<interceptor>
+			<mapping path="/myorder*"/>
+			<beans:ref bean="authInterceptor"/>
+		</interceptor>
+		<interceptor>
+			<mapping path="/mybasket*"/>
+			<beans:ref bean="authInterceptor"/>
+		</interceptor>
+		<interceptor>
+			<mapping path="/myboard*"/>
+			<beans:ref bean="authInterceptor"/>
+		</interceptor>
+		<interceptor>
+			<mapping path="/myreview*"/>
+			<beans:ref bean="authInterceptor"/>
+		</interceptor>
+		<interceptor>
+			<mapping path="/myheart*"/>
+			<beans:ref bean="authInterceptor"/>
+		</interceptor>
+		<interceptor>
+			<mapping path="/mypoint*"/>
 			<beans:ref bean="authInterceptor"/>
 		</interceptor>
 		<interceptor>
@@ -88,7 +132,7 @@
 		<interceptor>
 			<mapping path="/calendar*"/>
 			<beans:ref bean="authInterceptor"/>
-		</interceptor>
+		</interceptor>		
 	</interceptors>
 	
 	<context:component-scan base-package="com.myspring.myjeju" />

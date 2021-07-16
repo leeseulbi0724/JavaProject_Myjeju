@@ -98,7 +98,7 @@ public class MypageController {
 	/**
 	 * 마이페이지 -> 장바구니
 	 */
-	@RequestMapping(value = "/mybasket.do", method=RequestMethod.POST)
+	@RequestMapping(value = "/mybasket.do", method=RequestMethod.GET)
 	public ModelAndView mybaskit(BasketVO vo, HttpSession session, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView();
 		
@@ -149,11 +149,11 @@ public class MypageController {
 
 		boolean result = MypageService.getInsertResult(vo);
 		
-		ArrayList<BasketVO> list = MypageService.getBasketContent(id);		//
+		ArrayList<BasketVO> list = MypageService.getBasketContent(id);
 		
 		if(result) {
-			mv.setViewName("mypage/mystore/mybasket");
-			mv.addObject("list", list);		//
+			mv.setViewName("redirect:/mypage/mystore/mybasket");
+			mv.addObject("list", list);
 			mv.addObject("sid", sid);
 		}
 
