@@ -117,6 +117,11 @@ public class CommunityServiceImpl implements CommunityService {
 		return result;
 	}
 	
+	//자유게시판 조회수
+	public  int getHitUp(String fid) {
+		return communityDAO.getHitUp(fid);
+	}
+	
 	
 	
 	

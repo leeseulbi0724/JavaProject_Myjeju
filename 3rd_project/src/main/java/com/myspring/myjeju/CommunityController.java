@@ -60,6 +60,9 @@ public class CommunityController {
 		//댓글 정보
 		ArrayList<CommunityVO> list = communityService.getFreeComment(fid);
 		
+		//조회수
+		communityService.getHitUp(fid);
+		
 		mv.addObject("vo", vo);
 		mv.addObject("list", list);
 		mv.setViewName("community/free_board_content");

@@ -18,6 +18,7 @@ public interface CommunityService {
 	boolean getFileNoUpdate(CommunityVO vo);
 	boolean getCommentDelete(String cid);
 	boolean getFreeBoardDelete(String fid);
+	 int getHitUp(String fid);
 	
 	
 	

@@ -67,12 +67,15 @@
 		delete from myjeju_free_comment where cid=#{cid}
 	</delete>
 	
-		<!-- 자유게시판 삭제하기 -->
+	<!-- 자유게시판 삭제하기 -->
 	<delete id="free_board_delete" parameterType="java.lang.String">
 		delete from myjeju_free_board where fid=#{fid}
 	</delete>
 	
-	
+	<!-- 자유게시판 조회수 -->
+	<update id="hit" parameterType="java.lang.String">
+		update myjeju_free_board set fhit=fhit+1 where fid=#{fid}
+	</update>
 	
 	<!--  -->
 	

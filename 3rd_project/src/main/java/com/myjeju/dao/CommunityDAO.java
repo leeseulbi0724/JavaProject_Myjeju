@@ -82,6 +82,10 @@ public class CommunityDAO {
 		return sqlSession.delete(namespace+".free_board_delete", fid);
 	}
 	
+	//자유게시판 조회수
+	public int getHitUp(String fid) {
+		return sqlSession.update(namespace+".hit", fid);
+	}
 	
 	///////////////////////////////////////////////////////////////////////
 	
