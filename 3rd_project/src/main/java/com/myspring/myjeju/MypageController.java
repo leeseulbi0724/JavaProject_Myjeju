@@ -106,6 +106,7 @@ public class MypageController {
 
 		ArrayList<BasketVO> list = MypageService.getBasketContent(id);
 		int total = MypageService.getTotalCount(id);
+		
 		int column = MypageService.getColumn(id);
 
 		mv.setViewName("mypage/mystore/mybasket");

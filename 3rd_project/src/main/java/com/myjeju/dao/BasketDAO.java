@@ -48,7 +48,14 @@ public class BasketDAO {
 	
 	//장바구니 전체가격
 	public int getTotalCount(String id) {
-		return sqlSession.selectOne(namespace+".total_count", id);
+		int result = 0;
+		Integer val = sqlSession.selectOne(namespace+".total_count", id);
+		if ( val == null ) {
+			
+		} else {
+			result = val;
+		}
+		return result;
 	}
 	
 	//장바구니 삭제
