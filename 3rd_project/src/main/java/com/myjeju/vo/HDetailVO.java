@@ -1,8 +1,8 @@
 package com.myjeju.vo;
 
 public class HDetailVO {
-	String hid, hdid, hd_name, hd_price,hd_img;
-	int hd_people;
+	String hid, hdid, hd_name, hd_img;
+	int hd_price,hd_people;
 
 	public String getHid() {
 		return hid;
@@ -28,11 +28,11 @@ public class HDetailVO {
 		this.hd_name = hd_name;
 	}
 
-	public String getHd_price() {
+	public int getHd_price() {
 		return hd_price;
 	}
 
-	public void setHd_price(String hd_price) {
+	public void setHd_price(int hd_price) {
 		this.hd_price = hd_price;
 	}
 

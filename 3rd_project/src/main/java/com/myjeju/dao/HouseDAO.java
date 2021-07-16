@@ -134,7 +134,7 @@ public class HouseDAO extends DBConn {
 			while(rs.next()) {
 				HDetailVO hvo = new HDetailVO();
 				hvo.setHd_name(rs.getString(1));
-				hvo.setHd_price(rs.getString(2));
+				hvo.setHd_price(rs.getInt(2));
 				hvo.setHd_people(rs.getInt(3));
 				hvo.setHd_img(rs.getString(4));
 				hvo.setHdid(rs.getString(5));
