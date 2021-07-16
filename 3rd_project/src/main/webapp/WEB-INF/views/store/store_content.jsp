@@ -87,31 +87,21 @@
 				alert("수량을 입력해주세요");
 				$("#b_count").focus();
 				return false;
-			} else {
-				alert("장바구니에 추가되었습니다/");
-				var result = confirm("장바구니페이지로 이동하시겠습니까??");
-
-			
-				if(result) {
-					$("#store_form").attr("action", "mybasket_proc1.do");
-					//$("#store_form").attr("action", "mybasket_proc.do");
-					//window.location.reload;
-					//location.href("mybasket.do?id=${id}");		//데이터가 들어는 가는데 페이지 이동을 안함
-					//alert("장바구니에 들어가긴 감 근데 페이지 이동을 안해 페이지 이동 확인인데");
-					//location.replace("mypage/mystore/mybasket.do");
-					//$("#store_form").attr("action", "mybasket.do").attr("method", "get");
-					
-					/* $.get("mybasket.do",
-					    {
-					      id : "${id}",
-					      sid : "${sid}"
-					    }); */
-					
-					
-				} else {
-					$("#store_form").attr("action", "mybasket_proc2.do");
-				}
-		
+			} else {				
+					var form1 = $("#store_form").serialize();
+					 $.ajax({
+					        url:"mybasket_proc1.do",
+					        type:"post",
+					        data: form1, 
+					        dataType: "json",
+					      success:function(result){
+					       		if ( result ) {
+					       		 location.replace("mybasket.do");
+					       		} else {
+					       			alert("장바구니 담기 실패");
+					       		}
+					       	},		
+					    });
 			}
 		});	
 
@@ -196,7 +186,7 @@
 						</div>						
 						<input type = "hidden" value = "${id}" name = "id"  id = "id">
 						<input type = "hidden" value = "${sid}" name = "sid"  id = "sid">
-						<button type = "submit" class = "store_btn_style1" id = "storeBasket">장바구니</button>
+						<button type = "button" class = "store_btn_style1" id = "storeBasket">장바구니</button>
 						<%-- <a href = "mybasket_proc.do?id=${id}"><button type = "button" class = "store_btn_style1" id = "storeBasket">장바구니</button></a> --%>
 						<button type = "submit" class = "store_btn_style2" id = "store_buy">바로구매</button>
 					</div>

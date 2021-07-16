@@ -35,6 +35,31 @@ public class BasketDAO {
 	public BasketVO getSid2(String id) {
 		return sqlSession.selectOne(namespace + ".getVOsid" , id);
 	}
+	
+	//상품이 이미 등록이 되어있는 없는지 확인하기
+	public int getAlready(BasketVO vo) {
+		return sqlSession.selectOne(namespace+".already", vo);
+	}
+	
+	//상품이 있으면 -> 수량 업데이트
+	public int getAlreadyCount(BasketVO vo) {
+		return sqlSession.update(namespace+".already_count", vo);
+	}
+	
+	//장바구니 전체가격
+	public int getTotalCount(String id) {
+		return sqlSession.selectOne(namespace+".total_count", id);
+	}
+	
+	//장바구니 삭제
+	public int getBasketDelete(String sid) {
+		return sqlSession.delete(namespace+".basket_delete", sid);
+	}
+	
+	//장바구니 컬럼수
+	public int getColumn(String id) {
+		return sqlSession.selectOne(namespace+".column", id);
+	}
 
 }
 

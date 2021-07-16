@@ -56,4 +56,28 @@
 			select sid, b_count from myjeju_basket where id = #{id}
 		</select>
 		
+		<!-- 상품이 이미 등록이 되어있는지 확인 -->
+		<select id="already" parameterType="com.myjeju.vo.BasketVO" resultType="java.lang.Integer">
+			select count(*) from myjeju_basket where id=#{id} and sid=#{sid}
+		</select>
+		
+		<!-- 상품이 이미 있으면 -> 수량만 -->
+		<update id="already_count" parameterType="com.myjeju.vo.BasketVO">
+			update myjeju_basket set b_count = b_count+#{b_count} where id=#{id} and sid=#{sid}
+		</update>
+		
+		<!-- 상품 전체 토탈 금액 -->
+		<select id="total_count" parameterType="java.lang.String" resultType="java.lang.Integer">
+			select sum(b_count*s_price) from myjeju_basket where id=#{id}		
+		</select>
+		
+		<!-- 장바구니 삭제 -->
+		<delete id="basket_delete" parameterType="java.lang.String">
+			delete from myjeju_basket where sid=#{sid}
+		</delete>
+		
+		<!--  장바구니 컬럼 -->
+		<select id="column" parameterType="java.lang.String" resultType="java.lang.Integer">
+			select count(*) from myjeju_basket where id=#{id}
+		</select>
     </mapper>

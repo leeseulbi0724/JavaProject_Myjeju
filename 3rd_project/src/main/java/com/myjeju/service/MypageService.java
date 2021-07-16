@@ -21,5 +21,11 @@ public interface MypageService {
 	ArrayList<CommunityVO> getFreeBoardResult(String id);
 	ArrayList<CommunityVO> getRequestBoardResult(String id);
 	ArrayList<CommunityVO> getCommentResult(String id);
-
+	
+	boolean getAlready(BasketVO vo);
+	boolean getAlreadyCount(BasketVO vo);
+	
+	int getTotalCount(String id);
+	 int getBasketDelete(String sid);
+	 int getColumn(String id);
 }

@@ -66,6 +66,41 @@ public class MypageServiceImpl implements MypageService {
 	public BasketVO getSid2(String id) {
 		return basketDAO.getSid2(id);
 	}
+	
+	@Override
+	public boolean getAlready(BasketVO vo) {
+		int val = basketDAO.getAlready(vo);
+		boolean result = false;
+		if ( val == 0 ) {
+			result = true;
+		}
+		return result;
+	}
+	
+	@Override
+	public boolean getAlreadyCount(BasketVO vo) {
+		int val = basketDAO.getAlreadyCount(vo);
+		boolean result = false;
+		if ( val != 0 ) {
+			result = true;
+		}
+		return result;
+	}
+	
+	@Override
+	public int getTotalCount(String id) {
+		return basketDAO.getTotalCount(id);
+	}
+	
+	@Override
+	public  int getBasketDelete(String sid) {
+		return basketDAO.getBasketDelete(sid);
+	}
+	
+	@Override
+	public int getColumn(String id) {
+		return basketDAO.getColumn(id);
+	}
 
 
 	
