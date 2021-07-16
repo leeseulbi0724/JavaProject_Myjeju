@@ -7,6 +7,16 @@
 <meta charset="UTF-8">
 	<link rel="shortcut icon" type="image⁄x-icon" href="http://localhost:9000/myjeju/images/index/icon.png">
 	<title>여행지 | JEJU ISLAND</title>
+	<style>
+		.overlay{width: 370px; height:132px;}
+		.content{ border-radius:10px; width: 370px; height:120px; margin-bottom:30px;}
+		.addr{font-size:12px; font-weight:bold; margin-top:10px;  display:inline-block; margin-left:5px; }
+		.tel{font-size:12px; font-weight:bold; color:#4fa9de; display:inline-block; margin-left:5px;}
+		.title{background:#4fa9de; color:white; font-weight:bold; padding: 5px 10px;}
+		.body a{text-decoration:none; margin-left:5px; margin-top:5px; font-size:13px; font-weight:bold;}
+		.img{float:left; display:inline-block; margin-left:5px; border:3px solid #eee; margin-top:8px;}
+		.img>img {width:75px; height:75px; object-fit:cover; vertical-align:top; }
+	</style>
 	<link rel="stylesheet" href="http://localhost:9000/myjeju/css/index.css">
 	<link rel="stylesheet" href="http://localhost:9000/myjeju/css/travel/travel.css">
 	<script src="http://localhost:9000/myjeju/js/jquery-3.6.0.min.js"></script>
@@ -70,6 +80,7 @@
 			addr : '${vo.t_addr}',
 			tel : '${vo.t_hp}',
 			img : '${vo.t_image1}',
+			idx : '${vo.tid}',
 			latlng:	new kakao.maps.LatLng(${vo.t_vpoint}, ${vo.t_hpoint})
 		},
 		</c:forEach>
@@ -92,12 +103,22 @@
 	    });
 	    
     	var content = document.createElement('div');
-  	    content.innerHTML =  "<div style='background-color:#4fa9de; color:white; font-weight:bold; padding:10px;'>" + data.title + "</div>" + "<div style='font-weight:bold; padding:10px;'>" + data.addr + "</div>" + "<div style='padding:10px; color:#4fa9de; '>" + data.tel +  "</div>" + "<div>" + "<a href='http://localhost:9000/myjeju/travel_detail.do' style='text-decoration:none; padding:10px;'>상세보기</a> </div>";
-  	    content.style.cssText = 'background: white; border-radius:10px; margin:0; padding:0; ';
+  	    content.innerHTML =  "<div class='overlay'>" 
+	    	+ "<div class='content'>"
+    		+ "<div class='title'>" + data.title + "</div>"
+    			+ "<div class='body'>"
+    				+ "<div class='img'>" + "<img src=" + "http://localhost:9000/myjeju/images/travel/"+data.img + ">" + "</div>" 
+    				+ "<div class='addr'>" + data.addr + "</div>" + "<br>" 
+    				+ "<div class='tel'>" + data.tel +  "</div>" + "<br>"
+    				+ "<a href="+"http://localhost:9000/myjeju/travel_detail.do?tid=" + data.idx + ">상세보기</a>"
+    			+ "</div>"
+    		+ "</div>"
+    	+ "</div>";
+    	 content.style.cssText = 'background: white; border-radius:10px; margin:0; padding:0; ';
 	
 	    var closeBtn = document.createElement('button');
 	    closeBtn.innerHTML = '닫기';
-	    closeBtn.style.cssText = 'background: white; border: 1px solid white; float:right; margin-top:-145px; color:black; font-weight:bold; padding:3px;';
+	    closeBtn.style.cssText = 'background:white; border: 1px solid white; float:right; margin-top:-132px; color:black; font-weight:bold; padding:5.5px;';
 	    closeBtn.onclick = function () {
 	        overlay.setMap(null);
 	    };
