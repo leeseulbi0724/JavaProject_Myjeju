@@ -8,7 +8,7 @@
 	
 	<!-- 스토어 상품문의 (문의, 답변) 리스트 -->
 	<select id = "faqlist" parameterType = "java.lang.String" resultType = "com.myjeju.vo.StofaqVO">
-		select id, sid, st_id, st_content, to_char(st_time, 'yy-mm-dd hh:mm:ss') st_time, re_content, re_time from myjeju_stofaq where sid = #{sid}
+		select id, sid, st_id, st_content, st_time, re_content, re_time from myjeju_stofaq where sid = #{sid} order by st_time
 	</select>
 
 	<!--  스토어 상품문의 - 문의 등록 -->

@@ -1,11 +1,11 @@
 package com.myjeju.service;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import com.myjeju.vo.BasketVO;
 import com.myjeju.vo.StoreVO;
+import com.myjeju.vo.StorevVO;
 
 public interface StoreService {
 
@@ -21,4 +21,9 @@ public interface StoreService {
 	
 	ArrayList<List<BasketVO>> getBuyContent(String[] list, String id);
 	ArrayList<BasketVO> getBuyContent(String sid, String id);
+	
+	
+	//ªÛ«∞∆Ú
+	boolean getInsertResult(StorevVO vo);
+	ArrayList<StorevVO> getStoreReview(String sid);
 }

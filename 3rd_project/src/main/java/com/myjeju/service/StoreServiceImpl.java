@@ -1,7 +1,6 @@
 package com.myjeju.service;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,14 +8,19 @@ import org.springframework.stereotype.Service;
 
 import com.myjeju.dao.BasketDAO;
 import com.myjeju.dao.StoreDAO;
+import com.myjeju.dao.StorevDAO;
 import com.myjeju.vo.BasketVO;
 import com.myjeju.vo.StoreVO;
+import com.myjeju.vo.StorevVO;
 
 @Service("storeService")
 public class StoreServiceImpl implements StoreService {
 
 	@Autowired
 	private StoreDAO storeDAO;
+	
+	@Autowired
+	private StorevDAO storevDAO;
 	
 	@Autowired
 	private BasketDAO BasketDAO;
@@ -76,6 +80,17 @@ public class StoreServiceImpl implements StoreService {
 		return BasketDAO.getBuyContent(sid, id);
 	}
 
+	
+	//ªÛ«∞∆Ú
+	@Override
+	public boolean getInsertResult(StorevVO vo) {
+		return storevDAO.getInsertResult(vo);
+	}
+
+	@Override
+	public ArrayList<StorevVO> getStoreReview(String sid) {
+		return storevDAO.getStoreReview(sid);
+	}
 	
 	
 }

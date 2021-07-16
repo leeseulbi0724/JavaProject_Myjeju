@@ -123,13 +123,17 @@
 			e.preventDefault();
 			$('#faqModal').modal("show");
 		});
+
+		
 		
 		/* 답변하기 버튼 클릭시 모달창 */
-		$('#storereplyBtn').click(function(e){
+		//$('#storereplyBtn').click(function(e){
+		$("button[id^='storereplyBtn']").click(function(e) {
 			e.preventDefault();
 			
-			var st_value = $("#st_id1").val();
-			$("#st_id2").val(st_value);
+			var st_value = $("input[name^='st_id1']").val();
+			//$("#st_id2").val(st_value);
+			$("input[name='st_id']").val(st_value);
 
 			var content = $("#st_content1").val();
 			$("#st_content2").val(content);
@@ -137,13 +141,15 @@
 			$('#replyModal').modal("show");
 		});
 		
+		
 		/* 문의하기 모달에서 문의하기 버튼 */
 		$("#modalY1").click(function() {
 			stofaq_form.submit();
 		});
 		
 		/* 답변하기 모달에서 답변하기 버튼 */
-		$("#modalY2").click(function(){
+		//$("#modalY2").click(function(){
+		$("button[id^='modalY2']").click(function() {	
 			storep_form.submit();
 		});
 
@@ -209,19 +215,53 @@
 				
 				<div class = "store_product_review" id = "here2">
 					<div>상품평</div>
-					<article>
-						<div>이진옥</div>
-						<div><span>별점</span><span>2021.07.06</span></div>
-						<div>제주도 오메기떡</div>
-						<div><span>한줄평</span><span>맛있어요 짱</span></div>
+					
+					<article class = "store_review_write">
+						<form name = "store_review_form" action = "store_review_proc.do" method = "GET">
+							<input type = "hidden" name = "id" value = "${id}">
+							<input type = "hidden" name = "sid" value = "${sid}">
+							<select name="sr_star" id="sr_star">
+								<option id="star5" value="5">★★★★★</option>
+								<option id="star4" value="4">★★★★☆</option>
+								<option id="star3" value="3">★★★☆☆</option>
+								<option id="star2" value="2">★★☆☆☆</option>
+								<option id="star1" value="1">★☆☆☆☆</option>
+							</select>
+							<span>상품평</span><input type = "text" name = "sr_review">
+							<button type = "submit" class = "StoreReviewBtn">등록</button>
+						</form>
 					</article>
 					
-					<article>
-						<div>이진옥</div>
-						<div><span>별점</span><span>2021.07.06</span></div>
-						<div>제주도 오메기떡</div>
-						<div><span>한줄평</span><span>맛있어요 짱</span></div>
-					</article>
+					<c:forEach var = "rlist" items = "${rlist}">
+						<article class = "store_review_list">
+							<div>
+								<img src="http://localhost:9000/myjeju/images/travel/travel_detail/human.png" width = "40">
+								&nbsp;&nbsp;ID&emsp;<span>${rlist.id}</span>
+							</div>
+							<div><span>
+								<c:choose>
+									<c:when test="${rlist.sr_star == 1}">
+										★☆☆☆☆
+									</c:when>
+									<c:when test="${rlist.sr_star == 2}">
+										★★☆☆☆
+									</c:when>
+									<c:when test="${rlist.sr_star == 3}">
+										★★★☆☆
+									</c:when>
+									<c:when test="${rlist.sr_star == 4}">
+										★★★★☆
+									</c:when>
+									<c:otherwise>
+										★★★★★
+									</c:otherwise>
+								</c:choose>
+							</span></div>
+							<div><span>${rlist.sr_review}</span></div>
+							<div><span>${rlist.sr_time}</span></div>
+						</article>
+					</c:forEach>
+
 				</div>
 				
 				<div class = "store_product_faq" id = "here3">
@@ -242,9 +282,10 @@
 									
 									<form name = "stofaq_form" action = "store_faq_proc.do" method = "GET" class = "stofaq_form">
 										<div class="modal-body">
-											<input type = "text" value = "${id}" name = "id" id = "id" readonly>
-											<input type = "text" value = "${sid}" name = "sid" id = "sid" readonly>
-											<div><input type = "text" placeholder = "문의할 내용을 입력해주세요" name = "st_content" id = "st_content"></div>
+											<input type = "hidden" value = "${id}" name = "id" id = "id">
+											<input type = "hidden" value = "${sid}" name = "sid" id = "sid">
+											<input type = "text" value = "${vo.s_name}" readonly>
+											<div><input type = "text" placeholder = "문의할 내용을 입력해주세요" name = "st_content" id = "st_content1"></div>
 										</div>
 										
 										<div class="modal-footer">
@@ -258,31 +299,35 @@
 						</div>
 					
 					<div class = "store_product_faq_content">
-						<table class = "store_product_faq_table">
-							<c:forEach var = "flist" items = "${flist}">
-								<input type = "hidden" id = "st_id1" value = "${flist.st_id}">
-								<input type = "hidden" id = "st_content1" value = "${flist.st_content}">
-								<tr>
-									<th>질문</th>
-									<td>${id} ${flist.sid} ${flist.st_id}</td>
-									<td>${flist.st_content}</td>
-									<td>${flist.st_time}</td>
-									<td><button type = "button" id = "storereplyBtn" class = "replyBtn">답변하기</button></td>
-								</tr>
-								
-								<tr>
-									<c:if test = "${!empty flist.re_content}">
-										<th>┖─답변</th>
-										<td>제주아일랜드 관리자</td>
-										<td colspan = "2">${flist.re_content}</td>
-										<td>${flist.re_time}</td>
-									</c:if>
-								</tr>
-							</c:forEach>
-							
-						</table>
+						<ul>
+							<li>
+								<c:forEach var = "flist" items = "${flist}" varStatus = "status">
+									<div class = "store_faq_all">
+										<div class = "store_faq_list">
+											<img src="http://localhost:9000/myjeju/images/store/question.png" width = "20">
+											<span>${flist.id}</span>
+											<span>${flist.st_content}</span>
+											<span>${flist.st_time}</span>
+											<input type = "hidden" value = "${sid}" name = "sid"  id = "sid">
+											<input type = "hidden" id = "st_id1" name = "st_id1" value = "${flist.st_id}">
+											<button type = "button" id = "storereplyBtn" class = "btn">답변하기</button>
+										</div>
+										
+										<div class = "store_ans_list">
+											<c:if test = "${!empty flist.re_content}">
+												<img src="http://localhost:9000/myjeju/images/store/answer1.png" width = "15">
+												<span>제주아일랜드 관리자</span>
+												<span>${flist.re_content}</span>
+												<span>${flist.re_time }</span>
+											</c:if>
+										</div>
+									</div>
+								</c:forEach>
+							</li>
+						</ul>
+						
 					</div>
-
+						
 					
 					<!-- 답변하기 Modal-->
 						<div class="modal fade" id="replyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -296,16 +341,15 @@
 									
 									<form name = "storep_form" action = "store_faq_reply_proc.do" method = "GET" class = "storep_form">
 										<div class="modal-body">
-											<input type = "text" value = "${id}" name = "id" id = "id" readonly>
-											<input type = "text" value = "${sid}" name = "sid" id = "sid" readonly>
-											<input type = "text" name = "st_id" id = "st_id2" readonly>
-											<input type = "text" name = "st_content" id = "st_content2" readonly>
+											<input type = "hidden" value = "${id}" name = "id" id = "id">
+											<input type = "hidden" value = "${sid}" name = "sid" id = "sid">
+											<input type = "text" name = "st_id" id = "st_id2" value = "" readonly>
 											<div><input type = "text" placeholder = "답변할 내용을 입력해주세요" name = "re_content" id = "re_content"></input></div>
 										</div>
 										
 										<div class="modal-footer">
 											<%-- <a class="btn" id="modalY2" href="store_faq_reply_proc.do?sid=${sid}">답변하기</a> --%>
-											<button class="btn" type="button" id = "modalY2">답변하기</button>
+											<button class="btn" type="submit" id = "modalY2">답변하기</button>
 											<button class="btn" type="button" data-dismiss="modal">닫기</button>
 										</div>
 									</form>	

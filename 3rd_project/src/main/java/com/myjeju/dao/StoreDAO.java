@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.myjeju.vo.StoreVO;
 
 @Repository
-public class StoreDAO extends DBConn {
+public class StoreDAO {
 
 	@Autowired
 	private SqlSessionTemplate sqlSession;
