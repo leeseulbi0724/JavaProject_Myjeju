@@ -40,4 +40,47 @@
 				</otherwise>
 			</choose>
 		</select>
+		
+		
+		<!-- 관리자 게시판 -->
+		<select id="board_list" parameterType="map" resultType="com.myjeju.vo.CommunityVO">
+			select rno, fid, id, ftitle, fhit, fdate 
+             from(select rownum rno, fid, id, ftitle, fhit, fdate 
+				     from(select * from myjeju_free_board order by fdate desc))
+				     where rno between #{start} and #{end}
+		</select>
+		
+		<select id="board_count" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+			select count(num) from(select rownum num from MYJEJU_free_board) where num >= #{pageNumber}
+		</select>
+		
+		<select id="board_search" parameterType="java.util.Map" resultType="com.myjeju.vo.CommunityVO">
+			<choose>
+				<when test='search.equals("name")'>
+				select rno, fid, id, ftitle, fhit, fdate
+				     from(select rownum rno, fid, id, ftitle, fhit, fdate
+				     from(select * from MYJEJU_free_board order by fdate desc) where ftitle like '%'||#{search_text}||'%')
+				     where rno between #{start} and #{end}
+				</when>
+				<otherwise>
+				select rno, fid, id, ftitle, fhit, fdate
+				     from(select rownum rno, fid, id, ftitle, fhit, fdate
+				     from(select * from MYJEJU_free_board order by fdate desc) where id like '%'||#{search_text}||'%' )
+				     where rno between #{start} and #{end}
+				</otherwise>
+			</choose>
+		</select>
+		
+		<select id="board_searchpage" parameterType="java.util.Map" resultType="java.lang.Integer">
+			<choose>
+				<when test='search.equals("name")'>
+				select count(num) from(select rownum num from myjeju_free_board where ftitle like '%'||#{search_text}||'%') where num >= #{pageNumber}
+				</when>
+				<otherwise>
+				select count(num) from(select rownum num from myjeju_free_board where id like '%'||#{search_text}||'%') where num >= #{pageNumber}
+				</otherwise>
+			</choose>
+		</select>
+		
+		
 </mapper>
