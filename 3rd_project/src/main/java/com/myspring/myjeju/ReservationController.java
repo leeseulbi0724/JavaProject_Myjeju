@@ -13,6 +13,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.myjeju.service.ReservationService;
 import com.myjeju.vo.DateVO;
+import com.myjeju.vo.HDetailVO;
+import com.myjeju.vo.HouseVO;
 import com.myjeju.vo.RoomVO;
 
 @Controller
@@ -246,11 +248,6 @@ public class ReservationController {
 		return mv;
 	}
 	
-	@RequestMapping(value="/reservationDetail.do", method=RequestMethod.POST)
-	public String index() {
-		return "reservation/reservationDetail";
-	}
-	
 	@RequestMapping(value="/availcheck", method=RequestMethod.POST)
 	@ResponseBody
 	public String availcheck(int startvalue, int year, int month ,String hdid) {
@@ -388,5 +385,64 @@ public class ReservationController {
 		int value = (month*100)+day;
 		return value;
 	}
+	
+
+	@RequestMapping(value="/reservationDetail.do", method=RequestMethod.POST)
+	public ModelAndView reservationDetail(String hid, String hdid, String targetroom, String preday,String presday,String preyear,String roomid) {
+		ModelAndView mv = new ModelAndView();
+		
+		HouseVO house = ReservationService.gethouse(hid);
+		HDetailVO detail = ReservationService.getdetail(hdid);
+		String f_value = preday;
+		String s_value = presday;
+		String year = preyear;
+		
+		String[] f_array = f_value.split("/");
+		String[] s_array = s_value.split("/");
+		
+		String f_month = "";
+		String f_day = "";
+		
+		if(f_array[0].length()==1){
+			f_month = "0" + f_array[0];
+		}else{
+			f_month = f_array[0];
+		}
+		if(f_array[1].length()==1){
+			f_day = "0" + f_array[1];
+		}else{
+			f_day = f_array[1];
+		}
+		
+		String s_month = "";
+		String s_day = "";
+		
+		if(s_array[0].length()==1){
+			s_month = "0" + s_array[0];
+		}else {
+			s_month = s_array[0];
+		}
+		if(s_array[1].length()==1){
+			s_day = "0" + s_array[1];
+		}else {
+			s_day = s_array[1];
+		}
+		
+		f_day = year + "-" + f_month + "-" + f_day;
+		s_day = year + "-" + s_month + "-" + s_day;
+		
+		
+		
+		mv.setViewName("reservation/reservationDetail");
+		mv.addObject("houseVO",house);
+		mv.addObject("hdetailVO",detail);
+		mv.addObject("f_day",f_day);
+		mv.addObject("s_day",s_day);
+		mv.addObject("year",year);
+		mv.addObject("roomid",roomid);
+		
+		return mv;
+	}
+	
 	
 }

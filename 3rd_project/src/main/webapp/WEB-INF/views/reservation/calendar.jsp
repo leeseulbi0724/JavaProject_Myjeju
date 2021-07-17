@@ -441,7 +441,7 @@ $(document).ready(function(){
 			<input type = "hidden" name="currenthome" value= "${currentname}">
 			<input type = "hidden" name="hid" value=<%= hid %>>
 			<input type = "hidden" name="hdid" value=<%= hdid %>>
-			<input type = "hidden" class="targetroom" name="targetroom">
+			<input type = "hidden" class="targetroom" name="roomid">
 			<button class="search_btn" type="submit">예약하기</button>
 			</form>
 		</div>

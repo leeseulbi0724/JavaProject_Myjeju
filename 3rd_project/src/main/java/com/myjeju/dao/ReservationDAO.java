@@ -8,6 +8,8 @@ import java.util.Map;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.myjeju.vo.HDetailVO;
+import com.myjeju.vo.HouseVO;
 import com.myjeju.vo.RoomVO;
 
 public class ReservationDAO {
@@ -28,6 +30,12 @@ public class ReservationDAO {
 		
 		List<RoomVO> list = sqlSession.selectList(namespace+".searchroom", se);
 		return (ArrayList<RoomVO>)list;
+	}
+	public HouseVO gethouse(String hid) {
+		return sqlSession.selectOne(namespace+".gethouse", hid);
+	}
+	public HDetailVO getdetail(String hdid) {
+		return sqlSession.selectOne(namespace+".gethdetail", hdid);
 	}
 	
 }
