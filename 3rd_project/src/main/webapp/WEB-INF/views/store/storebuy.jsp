@@ -129,13 +129,28 @@
 		function sidList() {
 			var count = $("input[id=sid]").length;
 			var list = [];
-	    	var total = $("#total").val();
+	    	var total = $("#total_input").val();
+	    	var discount = $("#point_input").val();
 	    	var c = $("#store_count").val();
+	    	var point = $("#point").val();
 		    for(var i=0; i < count; i++ ) {
  		    	 list.push($("input[id=sid]")[i].name);
- 		    	 location.replace("payment.do?list="+list+"&total="+total+"&option=${option}&c="+c);
+ 		    	 location.replace("payment.do?list="+list+"&total="+total+"&dis="+discount+"&option=${option}&c="+c+"&point="+point);
 			}
 		}
+		
+		$(".all").click(function() {
+			$("#point_input").val(${vo.point});
+			$(".discount_text").text($("#point_input").val()+"원");
+			var total = $("#total_input").val();
+			$(".total_text").text(total-$("#point_input").val()+"원");
+		});
+		
+		$("#point_input").on("propertychange change keyup paste input", function() {
+			$(".discount_text").text($("#point_input").val()+"원");
+			var total = $("#total_input").val();
+			$(".total_text").text(total-$("#point_input").val()+"원");
+		});
 		
 	});
 </script>
@@ -206,15 +221,18 @@
 			<div>
 				<div>상품금액<strong>${price_total }원</strong></div>
 				<div>포인트 사용
-					<span><input type="text" class="form-control">
-					<button>전체 사용</button>	</span>					
+					<span><input type="text" class="form-control" id="point_input">
+					<button class="all">전체 사용</button>	</span>					
 					<span class="">총 보유 포인트 ${vo.point }p</span>
 				</div>
-				<div class="discount">할인금액<strong>0원</strong></div>
-				<div>결제금액<strong>${price_total }원</strong></div>
+				<div class="discount">할인금액<strong class="discount_text">0원</strong></div>
+				<div>결제금액<strong class="total_text">${price_total }원</strong></div>
 				<c:set var="num" value="${price_total * 0.02 }"  />
-				<span class="point_text">적립 예정 포인트 <fmt:formatNumber type="number" pattern="###,###,###,###,###,###" value="${num+(100-(num%100))%100 }" />p
+				<fmt:formatNumber type="number"  pattern="###,###,###,###,###,###" value="${num+(100-(num%100))%100 }"  var="point"/>				
+				<span class="point_text">적립 예정 포인트 ${point }p
 				<a href="#" class="btn pay" data-bs-toggle="modal" data-bs-target="#staticBackdrop">결제하기</a></span>	
+				<input type="hidden" value="${point }" id="point">
+				<input type="hidden" value="${price_total }" id="total_input">
 			</div>
 		</div>		
 	</div>

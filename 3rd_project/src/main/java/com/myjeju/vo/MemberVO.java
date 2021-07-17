@@ -1,8 +1,16 @@
 package com.myjeju.vo;
 
 public class MemberVO {
-	String id, pass, cpass, name, birth, email1, email2, email, hp1, hp2, hp3, hp, addr1, addr2, mdate;
+	String id, pass, cpass, name, birth, email1, email2, email, hp1, hp2, hp3, hp, addr1, addr2, mdate, type;
 	int point, rno;
+	
+	
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
 	public int getRno() {
 		return rno;
 	}

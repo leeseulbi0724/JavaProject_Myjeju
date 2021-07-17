@@ -106,9 +106,11 @@
 			                url: "payment_proc.do",
 			                data:{
 			                	list:"${list}",
-			                	total:"${total}",
+			                	total:"${total-dis}",
+			                	dis:"${dis}",
 			                	option:"${option}",
-			                	count:"${c}"
+			                	count:"${c}",
+			                	point:"${point}"
 			                	},
 			                dataType: 'json',
 			                success: function (result) {
@@ -134,10 +136,10 @@
 			<p>총 상품 금액<br><strong>${total }</strong>원	</p>
 		</div>
 		<div>
-			<p>할인 금액<br><strong style="color:red">0</strong>원	</p>
+			<p>할인 금액<br><strong style="color:red">${dis }</strong>원	</p>
 		</div>
 		<div>
-			<p>총 결제 금액<br><strong style="color:red">${total }</strong>원</p>
+			<p>총 결제 금액<br><strong style="color:red">${total-dis }</strong>원</p>
 		</div>
 	</div>
 	<div class="card">

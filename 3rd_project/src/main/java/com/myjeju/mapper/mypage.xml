@@ -83,6 +83,11 @@
 		
 		<!-- 주문내역 가져오기 -->
 		<select id="order_list" parameterType="java.lang.String" resultType="com.myjeju.vo.OrderVO">
-			select id, o_name, o_price, o_count, o_file, o_sfile, o_date from myjeju_order where id=#{id}
+			select id, o_name, o_price, o_count, o_file, o_sfile, o_date from myjeju_order where id=#{id} order by o_date desc
+		</select>
+		
+		<!-- 포인트 내역가져오기 -->
+		<select id="point_list" parameterType="java.lang.String" resultType="com.myjeju.vo.PointVO">
+			select id, type, point, pdate from myjeju_point where id=#{id} order by pdate desc
 		</select>
     </mapper>

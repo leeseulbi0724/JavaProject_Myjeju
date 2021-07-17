@@ -85,7 +85,7 @@
 						</tr>
 						<tr>
 							<td style="text-align : left" colspan="2">
-							<input class="btn btn-primary pull-right" type="submit" value="비밀번호찾기"  id="search" style="margin-right: 10px; background-color:#4fa9de; border-color:#4fa9de;" >
+							<input class="btn btn-primary pull-right" type="submit" value="비밀번호찾기"  id="search" style="margin-right: 10px; background-color:#4fa9de; border-color:#4fa9de;" disabled>
 							</td>
 						</tr>
 					</tbody>

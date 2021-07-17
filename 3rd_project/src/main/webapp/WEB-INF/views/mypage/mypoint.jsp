@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -75,20 +76,24 @@
 	<div class="center">
 		<div class="title">
 			<p>총 보유 포인트<br>
-			<strong>125</strong>p</p>
+			<strong>${point }</strong>p</p>
 		</div>
 		<div class="content">
 			<p>2021.07</p>
-			<div class="box">
-				<div class="plus">적립</div>
-				<p class="info">2021.07.10 14:57:24<br><span>상품 구매 적립</span></p>
-				<p class="price_plus">+1,247원</p>
-			</div>
-			<div class="box">
-				<div class="minus">사용</div>
-				<p class="info">2021.07.10 14:57:24<br><span>상품 구매 사용</span></p>
-				<p class="price_minus">-1,247원</p>
-			</div>
+			<c:forEach var = "vo"  items="${list}">
+				<div class="box">
+				<c:if test = "${vo.type eq 'plus' }">
+					<div class="plus">적립</div>
+					<p class="info">${vo.pdate }<br><span>상품 구매 적립</span></p>
+					<p class="price_plus">+${vo.point }원</p>
+				</c:if>
+				<c:if test = "${vo.type eq 'minus' }">
+					<div class="minus">사용</div>
+					<p class="info">${vo.pdate }<br><span>상품 구매 사용</span></p>
+					<p class="price_minus">-${vo.point }원</p>
+				</c:if>
+				</div>
+			</c:forEach>
 		</div>
 		<div class="more">
 			<div class="img"></div><span>더보기</span>

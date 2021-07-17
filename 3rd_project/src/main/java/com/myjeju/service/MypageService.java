@@ -6,6 +6,7 @@ import com.myjeju.vo.BasketVO;
 import com.myjeju.vo.CommunityVO;
 import com.myjeju.vo.MemberVO;
 import com.myjeju.vo.OrderVO;
+import com.myjeju.vo.PointVO;
 import com.myjeju.vo.StoreVO;
 
 public interface MypageService {
@@ -31,4 +32,5 @@ public interface MypageService {
 	int getPoint(String id);
 	
 	ArrayList<OrderVO> getOrderList(String id);
+	 ArrayList<PointVO> getPointList(String id);
 }

@@ -11,6 +11,7 @@ import com.myjeju.vo.BasketVO;
 import com.myjeju.vo.CommunityVO;
 import com.myjeju.vo.MemberVO;
 import com.myjeju.vo.OrderVO;
+import com.myjeju.vo.PointVO;
 import com.myjeju.vo.StoreVO;
 
 @Service("MypageService")
@@ -130,6 +131,11 @@ public class MypageServiceImpl implements MypageService {
 	@Override
 	public ArrayList<OrderVO> getOrderList(String id) {
 		return mypageDAO.getOrderList(id);
+	}
+	
+	@Override
+	public  ArrayList<PointVO> getPointList(String id) {
+		return mypageDAO.getPointList(id);
 	}
 	
 	

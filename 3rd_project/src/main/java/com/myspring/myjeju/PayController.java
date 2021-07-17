@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.myjeju.service.MypageService;
 import com.myjeju.service.PayService;
 import com.myjeju.service.StoreService;
 import com.myjeju.vo.BasketVO;
+import com.myjeju.vo.MemberVO;
 import com.myjeju.vo.StoreVO;
 
 @Controller
@@ -26,6 +28,9 @@ public class PayController {
 	
 	@Autowired
 	private PayService payService;
+	
+	@Autowired
+	private MypageService mypageService;
 	
 	
 	/**
@@ -41,6 +46,8 @@ public class PayController {
 		 mv.addObject("list", request.getParameter("list"));
 		 mv.addObject("option", request.getParameter("option"));
 		 mv.addObject("c", request.getParameter("c"));
+		 mv.addObject("point", request.getParameter("point"));
+		 mv.addObject("dis", request.getParameter("dis"));
 		 mv.setViewName("pay/payment");
 		 
 		return mv;
@@ -59,16 +66,20 @@ public class PayController {
 			String list = request.getParameter("list");
 			String total = request.getParameter("total");
 			String count = request.getParameter("count");
+			String point = request.getParameter("point");
+			String dis = request.getParameter("dis");
+			
+			System.out.print(total+dis+point);
+			
 			String sids[] = null;
 			ArrayList<List<BasketVO>> basket_list = null;
-			
+			 BasketVO vo = new BasketVO();
 			System.out.print(count);
 			
 			 if ( list.contains(",")) {
 				 sids = list.split(",");			 
 				 basket_list = storeService.getBuyContent(sids, id);		 
 				 
-				 BasketVO vo = new BasketVO();
 				 vo.setS_price(Integer.parseInt(total));
 				 vo.setId(id);
 				 vo.setS_name("");
@@ -79,17 +90,15 @@ public class PayController {
 					 vo.setB_count(vo.getB_count() + basket_list.get(i).get(0).getB_count());
 				 }		 
 				 System.out.print(vo.getS_name()); 
-				 System.out.print(vo.getB_count());
-				 result = payService.getOrderResult(vo);				 
+				 System.out.print(vo.getB_count());			 
 				
-			 } else {
-				 BasketVO vo = new BasketVO();
+			 } else {				
 				 ArrayList<BasketVO> basket_one_list = new ArrayList<BasketVO>();
 				 if (request.getParameter("option").equals("mypage")) {
 					 basket_one_list = storeService.getBuyContent(list, id);					 
 					 vo.setId(id);
 					 vo.setS_name(basket_one_list.get(0).getS_name());
-					 vo.setS_price(basket_one_list.get(0).getS_price());
+					 vo.setS_price(Integer.parseInt(total));
 					 vo.setB_count(basket_one_list.get(0).getB_count());
 					 vo.setS_sfile(basket_one_list.get(0).getS_sfile());
 					 vo.setS_image(basket_one_list.get(0).getS_image());
@@ -98,20 +107,46 @@ public class PayController {
 					 vo.setId(id);
 					 vo.setS_name(svo.getS_name());
 					 vo.setB_count(Integer.parseInt(count));
-					 vo.setS_price(svo.getS_price()*vo.getB_count());
+					 vo.setS_price(svo.getS_price()*vo.getB_count()-Integer.parseInt(dis));
 					 vo.setS_sfile(svo.getS_sfile());
 					 vo.setS_image(svo.getS_image());
+				 }				 			
+			 } 				 
+			 result = payService.getOrderResult(vo);
+			 
+			 //포인트 적립
+			 MemberVO mvo = new MemberVO();
+			 mvo.setId(id);
+			 mvo.setPoint(Integer.parseInt(point));
+			 boolean point_result = payService.getPointInsert(mvo);
+			 if (point_result) {
+				 mvo.setType("plus");
+				 boolean point_plus = payService.getPointPlus(mvo);
+			 }
+			 
+			 //사용 포인트삭제
+			 if (!dis.equals("0")) {
+				 mvo.setPoint(Integer.parseInt(dis));
+				 boolean point_delete = payService.getPointDelete(mvo);
+				 if (point_delete) {
+					 mvo.setType("minus");
+					 boolean point_minus = payService.getPointMinus(mvo);
 				 }
-				 
-				 //장바구니 삭제
-				 if (result) {
-					 if (request.getParameter("option").equals("mypage")) {
-						 
+			 }
+			 
+			 //장바구니 삭제
+			 if (result) {
+				 if (request.getParameter("option").equals("mypage")) {
+					 if ( list.contains(",")) {
+						 sids = list.split(",");	
+						 for (int i = 0; i<sids.length; i++) {
+							 mypageService.getBasketDelete(sids[i]);
+						 }
+					 } else {
+						  mypageService.getBasketDelete(list);						 
 					 }
 				 }
-				 
-				 result = payService.getOrderResult(vo);
-			 } 
+			 }
 			 
 			 return result;
 	

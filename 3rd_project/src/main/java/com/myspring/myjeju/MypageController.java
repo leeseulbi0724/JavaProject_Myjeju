@@ -18,6 +18,7 @@ import com.myjeju.vo.BasketVO;
 import com.myjeju.vo.CommunityVO;
 import com.myjeju.vo.MemberVO;
 import com.myjeju.vo.OrderVO;
+import com.myjeju.vo.PointVO;
 
 @Controller
 public class MypageController {
@@ -232,8 +233,19 @@ public class MypageController {
 	 * 나의 포인트
 	 */
 	@RequestMapping(value = "/mypoint.do", method = RequestMethod.GET)
-	public String mypoint() {
-		return "mypage/mypoint";
+	public ModelAndView mypoint(HttpSession session) {
+		ModelAndView mv = new ModelAndView();
+		// 로그인 회원정보 가져오기
+		String id = (String) session.getAttribute("session_id");
+		//포인트 
+		int point = MypageService.getPoint(id);
+		
+		ArrayList<PointVO> list = MypageService.getPointList(id);
+		mv.addObject("list", list);
+		mv.addObject("point", point);
+		mv.setViewName("mypage/mypoint");
+		
+		return mv;
 	}
 
 	/**
