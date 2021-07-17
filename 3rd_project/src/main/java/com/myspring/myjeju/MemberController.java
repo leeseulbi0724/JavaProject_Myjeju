@@ -119,7 +119,7 @@ public class MemberController {
 		
 		String id = memberService.getIdSearchResult(vo);  	
 		
-		mv.setViewName("member/success");
+		mv.setViewName("member/search_success");
 		mv.addObject("type", "id");
 		mv.addObject("id", id);
 		

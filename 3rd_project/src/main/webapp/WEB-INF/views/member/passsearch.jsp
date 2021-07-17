@@ -53,7 +53,7 @@
 						<tr>
 							<td style="width: 110px;"><h5>이메일</h5></td>
 							<td colspan="2">
-							<input class="form-control pull-left" id="userEmail1" type="text" name="email" maxlength="20" placeholder="이메일을 입력하세요." style="width:42%;">
+							<input class="form-control pull-left" id="userEmail1" type="text" name="email1" maxlength="20" placeholder="이메일을 입력하세요." style="width:42%;">
 							<span class="pull-left" style="background-color: rgba(0,0,0,0); font-color:black; font-size: 17px; margin: 4px 10px;">@</span>
 							<input class="form-control pull-left" id="userEmail2" type="text" name="email2" maxlength="20" placeholder="이메일주소을 입력하세요." style="width:42%;">
 							<div class="dropdown pull-left" style="width:10%; margin-left:10px;">
@@ -85,7 +85,7 @@
 						</tr>
 						<tr>
 							<td style="text-align : left" colspan="2">
-							<input class="btn btn-primary pull-right" type="submit" value="비밀번호찾기"  id="search" style="margin-right: 10px; background-color:#4fa9de; border-color:#4fa9de;" disabled>
+							<input class="btn btn-primary pull-right" type="submit" value="비밀번호찾기"  id="search" style="margin-right: 10px; background-color:#4fa9de; border-color:#4fa9de;" >
 							</td>
 						</tr>
 					</tbody>
