@@ -15,6 +15,7 @@ import com.myjeju.service.ReservationService;
 import com.myjeju.vo.DateVO;
 import com.myjeju.vo.HDetailVO;
 import com.myjeju.vo.HouseVO;
+import com.myjeju.vo.MReservationVO;
 import com.myjeju.vo.RoomImgVO;
 import com.myjeju.vo.RoomVO;
 
@@ -290,6 +291,7 @@ public class ReservationController {
 	            if(!arrayList.contains(name))
 	                arrayList.add(name);
 	    }
+		
 		ArrayList<Integer> sequenceday = new ArrayList<Integer>();
 		ArrayList<String> sequenceroom = new ArrayList<String>();
 		StringBuffer f_compare = new StringBuffer(); 
@@ -326,15 +328,11 @@ public class ReservationController {
 				i = sequenceroom.size();
 			}
 		}
-		
 		int curday = comparedateplus(f_compare.toString(),1);
 		int targetday = comparedateplus(f_compare.toString(),max);
 		int curday2 = comparedateplus(f_compare.toString(),0);
 		int targetday2 = comparedateplus(f_compare.toString(),max+1);
 		String maxs=curday+"/"+targetday+"/"+curday2+"/"+targetday2+"/" + targetroom;
-		
-		
-		
 		return maxs;
 	}
 	
@@ -356,6 +354,37 @@ public class ReservationController {
 		
 		int value = (month*monthDay(cur_year,cur_month)) + day;
 		
+		return value;
+	}
+	public static String comparedateminus(String curdate, int minus) {
+		int cur_year = Integer.parseInt(curdate.substring(0,4));
+		
+		int cur_month = Integer.parseInt(curdate.substring(5,7));
+		
+		int cur_day = Integer.parseInt(curdate.substring(8,10));
+		
+		int day = cur_day - minus;
+		
+		if(day <= 0) {
+			cur_month -= 1;
+			if(cur_month == 12) {
+				day += monthDay(cur_year-1,cur_month);
+			}else {
+				day += monthDay(cur_year,cur_month);
+			}
+		}
+		
+		String month = String.valueOf(cur_month);
+		if(month.length()==1) {
+			month = "0" + month;
+		}
+		String day1 = String.valueOf(day);
+		if(day1.length()==1) {
+			day1 = "0" + day1;
+		}
+		
+		
+		String value = String.valueOf(cur_year) + "-" + month + "-" + day1 + " 00:00:00"; 
 		return value;
 	}
 	public static int comparedateplus(String curdate, int max) {
@@ -444,6 +473,33 @@ public class ReservationController {
 		mv.addObject("himg",himg);
 		return mv;
 	}
-	
-	
+	@RequestMapping(value="/resersuccess.do", method=RequestMethod.POST)
+	public String resersuccess(String hid, String hdid, String roomid, String sessionid, String f_day, String s_day) {
+		
+		MReservationVO vo = new MReservationVO();
+		vo.setId(sessionid);
+		vo.setHid(hid);
+		vo.setHdid(hdid);
+		vo.setRoomid(roomid);
+		String f_dated = f_day + " 00:00:00";
+		String s_dated = s_day + " 00:00:00";
+		vo.setFirstday(f_dated);
+		vo.setLastday(s_dated);
+		
+		boolean result = ReservationService.setreservation(vo);
+		
+		if(result) {
+			boolean updateresult = ReservationService.updateavail(roomid,f_dated,comparedateminus(s_day,1)); 
+			
+			if(updateresult) {
+				return "reservation/success";
+			} else {
+				return "reservation/fail";
+			}
+		}else {
+			return "reservation/fail";
+		}
+		
+		
+	}
 }

@@ -161,7 +161,7 @@ public class HouseDAO extends DBConn {
 			
 			while(rs.next()) {
 				RoomImgVO rvo = new RoomImgVO();
-				rvo.setHd_img(rs.getString(1));
+				rvo.setR_img(rs.getString(1));
 				list.add(rvo);
 			}
 			

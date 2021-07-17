@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.myjeju.dao.ReservationDAO;
 import com.myjeju.vo.HDetailVO;
 import com.myjeju.vo.HouseVO;
+import com.myjeju.vo.MReservationVO;
 import com.myjeju.vo.RoomImgVO;
 import com.myjeju.vo.RoomVO;
 
@@ -37,5 +38,13 @@ public class ReservationServiceImpl implements ReservationService{
 	@Override
 	public ArrayList<RoomImgVO> gethimg(String hdid) {
 		return reservationDAO.gethimg(hdid);
+	}
+	@Override
+	public boolean setreservation(MReservationVO vo) {
+		return reservationDAO.setreservation(vo);
+	}
+	@Override
+	public boolean updateavail(String roomid,String f_dated,String s_dated) {
+		return reservationDAO.updateavail(roomid,f_dated,s_dated);
 	}
 }

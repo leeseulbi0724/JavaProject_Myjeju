@@ -75,7 +75,7 @@
 			<input type="hidden" name="premonth" value='${premonth}'>
 			<button class="search_btn" type="submit">일정변경</button>			
 			</form>
-			<form action="#" method="post">
+			<form action="http://localhost:9000/myjeju/resersuccess.do" method="post">
 			<input type="hidden" name="hid" value='${hid}'>
 			<input type="hidden" name="hdid" value='${hdid}'>
 			<input type="hidden" name="roomid" value='${roomid}'>

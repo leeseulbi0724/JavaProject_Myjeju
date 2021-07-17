@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.myjeju.vo.HDetailVO;
 import com.myjeju.vo.HouseVO;
+import com.myjeju.vo.MReservationVO;
 import com.myjeju.vo.RoomImgVO;
 import com.myjeju.vo.RoomVO;
 
@@ -14,4 +15,6 @@ public interface ReservationService {
 	HouseVO gethouse(String hid);
 	HDetailVO getdetail(String hdid);
 	ArrayList<RoomImgVO> gethimg(String hdid);
+	boolean setreservation(MReservationVO vo);
+	boolean updateavail(String roomid,String f_dated,String s_dated);
 }

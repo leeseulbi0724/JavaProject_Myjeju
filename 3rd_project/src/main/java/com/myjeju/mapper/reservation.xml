@@ -13,18 +13,26 @@
 	<select id="searchroom" parameterType="map" resultType="com.myjeju.vo.RoomVO">
 		select roomid, rdate, available from  
 			(select MYJEJU_reservation.roomid, rdate, available from MYJEJU_reservation,MYJEJU_HDROOM where myjeju_reservation.roomid = myjeju_hdroom.roomid and hdid=#{hdid})
-		where rdate between to_date(#{start},'YYYYMMDD') and to_date(#{end},'YYYYMMDD') and available = 0
+		where rdate between to_date(#{start},'YYYYMMDD') and to_date(#{end},'YYYYMMDD') and available = 0 order by roomid,rdate
 	</select>
 	
 	<select id="gethouse" parameterType="String" resultType="com.myjeju.vo.HouseVO">
 		select * from myjeju_house where hid = #{hid}
 	</select>
+	
 	<select id="gethdetail" parameterType="String" resultType="com.myjeju.vo.HDetailVO">
 		select * from myjeju_hdetail where hdid = #{hdid}
 	</select>
+	
 	<select id="searchimg" parameterType="String" resultType="com.myjeju.vo.RoomImgVO">
 		select * from myjeju_rimg where hdid = #{hdid}
 	</select>
-		
-
+	
+	<insert id="inserreservation" parameterType="com.myjeju.vo.MReservationVO">
+		insert into myjeju_member_reservation values(#{id},#{hid},#{hdid},#{roomid},TO_DATE(#{firstday},'YYYY-MM-DD hh24:mi:ss'),TO_DATE(#{lastday},'YYYY-MM-DD hh24:mi:ss'))
+	</insert>
+	
+	<update id="updateavail" parameterType="map">
+		update myjeju_reservation set available=1 where roomid=#{roomid} and rdate between TO_DATE(#{f_dated},'YYYY-MM-DD hh24:mi:ss') and TO_DATE(#{s_dated},'YYYY-MM-DD hh24:mi:ss')
+	</update>
 </mapper>
