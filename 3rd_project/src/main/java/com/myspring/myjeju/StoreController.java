@@ -21,6 +21,7 @@ import com.myjeju.vo.BasketVO;
 import com.myjeju.vo.MemberVO;
 import com.myjeju.vo.StofaqVO;
 import com.myjeju.vo.StoreVO;
+import com.myjeju.vo.StorevVO;
 
 @Controller
 
@@ -119,10 +120,14 @@ public class StoreController {
 		//문의/답변 리스트
 		ArrayList<StofaqVO> flist = stofaqService.getList(sid);
 		
+		//상품평 리스트
+		ArrayList<StorevVO> rlist = storeService.getStoreReview(sid);
+		
 		mv.setViewName("store/store_content");
 		
 		mv.addObject("vo", vo);
 		mv.addObject("flist", flist);
+		mv.addObject("rlist", rlist);
 		
 		mv.addObject("sid", sid);
 		mv.addObject("id", user_id);
@@ -205,6 +210,24 @@ public class StoreController {
 		
 		return mv;
 	}
+	
+	/**
+	 * store_review_proc.do : 스토어 상품평 등록 처리
+	 */
+	@RequestMapping(value = "/store_review_proc.do", method = RequestMethod.GET)
+	public ModelAndView store_review_proc(StorevVO vo) {
+		ModelAndView mv = new ModelAndView();
+		
+		boolean result = storeService.getInsertResult(vo);
+		
+		if(result) {
+			mv.setViewName("redirect:/store_content.do");
+			mv.addObject("sid", vo.getSid());
+		}
+		return mv;
+	}
+	
+	
 	
 	
 	/**

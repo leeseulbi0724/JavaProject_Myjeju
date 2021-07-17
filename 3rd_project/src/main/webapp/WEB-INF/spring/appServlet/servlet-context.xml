@@ -42,6 +42,7 @@
 	<beans:bean id="reservationDAO" class="com.myjeju.dao.ReservationDAO"></beans:bean>
 	<beans:bean id="storeDAO" class="com.myjeju.dao.StoreDAO"></beans:bean>
 	<beans:bean id="stofaqDAO" class="com.myjeju.dao.StofaqDAO"></beans:bean>
+	<beans:bean id="storevDAO" class="com.myjeju.dao.StorevDAO"></beans:bean>
 	<beans:bean id="memberAO" class="com.myjeju.dao.MemberDAO"></beans:bean>
 	<beans:bean id="mypageDAO" class="com.myjeju.dao.MypageDAO"></beans:bean>
 	<beans:bean id="basketDAO" class="com.myjeju.dao.BasketDAO"></beans:bean>

@@ -118,6 +118,17 @@
 		});
 		
 		
+		$("#reviewModifyBtn").click(function() {
+			var modify = confirm("수정하시겠습니ㅏㄲ?");
+			if(modify) {
+				location.replace("review_modify.do");
+			}
+		});		
+	
+		
+		
+		
+		
 		/* 문의하기 버튼 클릭시 모달창*/
 		$('#storefaqBtn').click(function(e){
 			e.preventDefault();
@@ -131,12 +142,9 @@
 		$("button[id^='storereplyBtn']").click(function(e) {
 			e.preventDefault();
 			
-			var st_value = $("input[name^='st_id1']").val();
-			//$("#st_id2").val(st_value);
-			$("input[name='st_id']").val(st_value);
+			var st_id = $(this).attr("name");
+			$("#st_id2").val(st_id);
 
-			var content = $("#st_content1").val();
-			$("#st_content2").val(content);
 			
 			$('#replyModal').modal("show");
 		});
@@ -259,6 +267,8 @@
 							</span></div>
 							<div><span>${rlist.sr_review}</span></div>
 							<div><span>${rlist.sr_time}</span></div>
+							<button type = "button" id = "reviewModifyBtn">수정</button>
+							<button type = "button" id = "reviewDeleteBtn">삭제</button>
 						</article>
 					</c:forEach>
 
@@ -310,7 +320,7 @@
 											<span>${flist.st_time}</span>
 											<input type = "hidden" value = "${sid}" name = "sid"  id = "sid">
 											<input type = "hidden" id = "st_id1" name = "st_id1" value = "${flist.st_id}">
-											<button type = "button" id = "storereplyBtn" class = "btn">답변하기</button>
+											<button type = "button" id = "storereplyBtn" name = "${flist.st_id}" class = "btn">답변하기</button>
 										</div>
 										
 										<div class = "store_ans_list">
@@ -343,7 +353,7 @@
 										<div class="modal-body">
 											<input type = "hidden" value = "${id}" name = "id" id = "id">
 											<input type = "hidden" value = "${sid}" name = "sid" id = "sid">
-											<input type = "text" name = "st_id" id = "st_id2" value = "" readonly>
+											<input type = "hidden" name = "st_id" id = "st_id2" value = "" readonly>
 											<div><input type = "text" placeholder = "답변할 내용을 입력해주세요" name = "re_content" id = "re_content"></input></div>
 										</div>
 										
