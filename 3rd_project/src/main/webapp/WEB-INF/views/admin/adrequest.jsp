@@ -34,9 +34,9 @@
 				<ul class="nav navbar-nav">
 					<li><a href="http://localhost:9000/myjeju/adminindex.do">메인</a>
 					<li><a href="adnotice.do">공지사항관리</a></li>
-					<li><a href="adboard.do">게시판관리</a></li>
-					<li><a href="adrequest.do">요청관리</a></li>
-					<li class="active"><a href="admember.do">회원관리<span id="unread" class="label label-info"></span></a></li>
+					<li ><a href="adboard.do">게시판관리</a></li>
+					<li  class="active"><a href="adrequest.do">요청관리</a></li>
+					<li><a href="admember.do">회원관리<span id="unread" class="label label-info"></span></a></li>
 					<li><a href="#">정보관리</a></li>
 				</ul>
 			<ul class="nav navbar-nav navbar-right">
@@ -51,7 +51,7 @@
 	
 		<section class = "section_setup_faq">
 			<div></div>
-			<div> 회원관리 </div>
+			<div> 요청관리 </div>
 			<div></div>
 		</section>
 	
@@ -59,20 +59,16 @@
 			<table class = "content_layout_setup_faq">
 				<tr>
 					<th> 번호 </th>
+					<th> 제목 </th>
 					<th> 아이디 </th>
-					<th> 이름 </th>
-					<th> 이메일 </th>
-					<th> 가입날짜 </th>
-				</tr>
-			 	<c:forEach var="vo" items="${list}">
+					<th> 날짜 </th>
+				</tr>			 	
 				<tr>
-					<td>${vo.rno}</td>
-					<td>${vo.id}</td>
-					<td>${vo.name}</td>
-					<td>${vo.email}</td>
-					<td>${vo.mdate}</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
 				</tr>
-				</c:forEach>
 				<tr>
 					<td colspan="6">
 						<ul class = "pagination" style="margin: 0 auto;">
@@ -126,7 +122,7 @@
 			<form name = "setup_counsel_form" action ="admember.do" method = "post">
 				<select class = "search" name = "search" style = "width: 70px; height: 27px">
 					<option value = "id">아이디</option>
-					<option value = "name">이름</option>
+					<option value = "name">제목</option>
 				</select>
 				<input type = "text" name = "search_text" class = "search_text" style = "width: 300px; margin: 0 10px;">
 				<button type = "submit" class = "btn_search">검색</button>

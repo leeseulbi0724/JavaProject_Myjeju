@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -63,6 +64,7 @@
 		display:inline-block; 
 		width:100%; height:50px; 
 		margin-top:10px;
+		cursor:pointer;
 	}
 	.more .img { 
 		display:inline-block; width:10px; height:10px; border:1px solid gray; 
@@ -72,6 +74,8 @@
 		
 	}
 	.more span { font-size:14px; margin-left:5px; }
+	
+	.more_box { display:none; }
 </style>
 </head>
 <script>
@@ -90,6 +94,10 @@
 			$(this).css({"color":"white", "background-color":"rgb(175,182,196)"});
 			$(".reservation").css({"color":"rgb(175,182,196)", "background-color":"rgb(248,249,251)"});
 		});
+		
+		$(".more").click(function() {
+			$(".more_box").css("display","inline-block");
+		});
 	});
 </script>
 <body>
@@ -105,13 +113,20 @@
 		</div>
 		<div class="content store_content">
 			<p>2021.07</p>
-			<c:forEach var = "vo"  items="${list}">
+			<c:forEach var = "vo"  items="${list}" begin="0" end="3">
 				<div class="box">
 					<img src="http://localhost:9000/myjeju/images/store/${vo.o_file }" width=100 height=80>
 					<p class="info">${vo.o_date }<br>${vo.o_name }<br><span>총 ${vo.o_count }개</span></p>
 					<p class="price">${vo.o_price }원</p>
 				</div>
-			</c:forEach>			
+			</c:forEach>
+				<c:forEach var = "vo"  items="${list}" begin="4" end="${fn:length(list)-1}" >					
+					<div class="box more_box">
+						<img src="http://localhost:9000/myjeju/images/store/${vo.o_file }" width=100 height=80>
+						<p class="info">${vo.o_date }<br>${vo.o_name }<br><span>총 ${vo.o_count }개</span></p>
+						<p class="price">${vo.o_price }원</p>
+					</div>
+				</c:forEach>		
 		</div>
 		
 		<div class="content reservation_content">

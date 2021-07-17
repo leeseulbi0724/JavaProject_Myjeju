@@ -33,7 +33,9 @@
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
 					<li><a href="http://localhost:9000/myjeju/adminindex.do">메인</a>
+					<li><a href="adnotice.do">공지사항관리</a></li>
 					<li  class="active"><a href="adboard.do">게시판관리</a></li>
+					<li><a href="adrequest.do">요청관리</a></li>
 					<li><a href="admember.do">회원관리<span id="unread" class="label label-info"></span></a></li>
 					<li><a href="#">정보관리</a></li>
 				</ul>

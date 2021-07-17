@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
      <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+      <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,6 +11,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" ></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" >
 <link rel="stylesheet" href="http://localhost:9000/myjeju/css/index.css">
+<script src="http://localhost:9000/myjeju/js/jquery-3.6.0.min.js"></script>
 <style>
 	section { text-align:center; margin-bottom:50px; }
 	.center { 
@@ -58,6 +60,7 @@
 		display:inline-block; 
 		width:100%; height:50px; 
 		margin-top:10px;
+		cursor:pointer;
 	}
 	.more .img { 
 		display:inline-block; width:10px; height:10px; border:1px solid gray; 
@@ -67,8 +70,16 @@
 		
 	}
 	.more span { font-size:14px; margin-left:5px; }
+	.more_box { display:none; }
 </style>
 </head>
+<script>
+	$(document).ready(function() {
+		$(".more").click(function() {
+			$(".more_box").css("display","inline-block");
+		});
+	});
+</script>
 <body>
 <jsp:include page="../header.jsp"></jsp:include>
 
@@ -80,8 +91,22 @@
 		</div>
 		<div class="content">
 			<p>2021.07</p>
-			<c:forEach var = "vo"  items="${list}">
+			<c:forEach var = "vo"  items="${list}" begin="0" end="3">
 				<div class="box">
+				<c:if test = "${vo.type eq 'plus' }">
+					<div class="plus">적립</div>
+					<p class="info">${vo.pdate }<br><span>상품 구매 적립</span></p>
+					<p class="price_plus">+${vo.point }원</p>
+				</c:if>
+				<c:if test = "${vo.type eq 'minus' }">
+					<div class="minus">사용</div>
+					<p class="info">${vo.pdate }<br><span>상품 구매 사용</span></p>
+					<p class="price_minus">-${vo.point }원</p>
+				</c:if>
+				</div>
+			</c:forEach>
+			<c:forEach var = "vo"  items="${list}" begin="3" end="${fn:length(list)-1}">
+				<div class="box more_box">
 				<c:if test = "${vo.type eq 'plus' }">
 					<div class="plus">적립</div>
 					<p class="info">${vo.pdate }<br><span>상품 구매 적립</span></p>

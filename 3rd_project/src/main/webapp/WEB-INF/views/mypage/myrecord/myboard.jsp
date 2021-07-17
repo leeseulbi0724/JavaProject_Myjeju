@@ -55,6 +55,14 @@
 					<th>작성일</th>
 					<th></th>
 				</tr>
+				<c:if test = "${empty list1}">
+					<tr>
+						<td  style="width:150px"></td>
+						<td style="width:1330px">작성된 글이 없습니다</a></td>
+						<td style="width:10px"></td>
+						<td style="width:5px"></td>
+					</tr>
+				</c:if>
 				<c:forEach var = "vo"  items="${list1}">
 					<tr class="free_tr">
 						<td>자유</td>
@@ -71,6 +79,14 @@
 					<th>작성일</th>
 					<th></th>
 				</tr>
+				<c:if test = "${empty list2}">
+					<tr>
+						<td  style="width:150px"></td>
+						<td style="width:1330px">작성된 글이 없습니다</a></td>
+						<td style="width:10px"></td>
+						<td style="width:5px"></td>
+					</tr>
+				</c:if>
 				<c:forEach var = "vo"  items="${list2}">
 					<tr class="request_tr">
 						<td>요청</td>
@@ -86,12 +102,21 @@
 					<th colspan="2">댓글</th>
 					<th>작성일</th>
 				</tr>
+				<c:if test = "${empty list3}">
+					<tr>
+						<td style="width:1000px">작성된 댓글이 없습니다</td>
+						<td style="width:10px"></td>
+						<td style="width:100px"></td>
+					</tr>
+				</c:if>
 				<c:forEach var = "vo"  items="${list3}">
+				<c:if test = "${not empty vo.ccomment}">
 					<tr>
 						<td>${vo.ccomment }</td>
 						<td><a href="http://localhost:9000/myjeju/free_board_content.do?fid=${vo.fid}"}>게시글보기▶</a></td>
 						<td>${vo.cdate }</td>
 					</tr>
+				</c:if>
 				</c:forEach>
 			</table>
 		</div>
