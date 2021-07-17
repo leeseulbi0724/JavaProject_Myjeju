@@ -22,6 +22,9 @@
 	<select id="gethdetail" parameterType="String" resultType="com.myjeju.vo.HDetailVO">
 		select * from myjeju_hdetail where hdid = #{hdid}
 	</select>
+	<select id="searchimg" parameterType="String" resultType="com.myjeju.vo.RoomImgVO">
+		select * from myjeju_rimg where hdid = #{hdid}
+	</select>
 		
 
 </mapper>

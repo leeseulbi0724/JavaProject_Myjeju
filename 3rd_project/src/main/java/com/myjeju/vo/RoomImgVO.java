@@ -1,7 +1,7 @@
 package com.myjeju.vo;
 
 public class RoomImgVO {
-	String hdid,hd_img;
+	String hdid,r_img;
 
 	public String getHdid() {
 		return hdid;
@@ -11,12 +11,13 @@ public class RoomImgVO {
 		this.hdid = hdid;
 	}
 
-	public String getHd_img() {
-		return hd_img;
+	public String getR_img() {
+		return r_img;
 	}
 
-	public void setHd_img(String hd_img) {
-		this.hd_img = hd_img;
+	public void setR_img(String r_img) {
+		this.r_img = r_img;
 	}
+
 	
 }

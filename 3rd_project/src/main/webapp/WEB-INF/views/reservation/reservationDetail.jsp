@@ -17,7 +17,6 @@
 <body>
 	<!-- header -->
 	<jsp:include page="../header.jsp"></jsp:include>
-	
 	<!-- content -->
 	<section class="reservationDetail">
 		<div class="content">
@@ -31,19 +30,14 @@
 					<!-- The slideshow -->
 					<div class="carousel-inner">
 						<div class="carousel-item active">
-					    	<img src="http://localhost:9000/myjeju/images/index/main1.jpg" width="100%">
+					    	<img src="http://localhost:9000/myjeju/images/house/house_detail/${himg[0].r_img}" width="100%">
 					    </div>
-					    <div class="carousel-item">
-					    	<img src="http://localhost:9000/myjeju/images/index/main2.jpg" width="100%">
+						<c:forEach var="list" items="${himg}" varStatus="status" begin="1">
+						<div class="carousel-item">
+					    	<img src="http://localhost:9000/myjeju/images/house/house_detail/${list.r_img}" width="100%">
 					    </div>
-					    <div class="carousel-item">
-					    	<img src="http://localhost:9000/myjeju/images/index/main3.jpeg" width="100%">
-					    </div>
-					    <div class="carousel-item">
-					    	<img src="http://localhost:9000/myjeju/images/index/main4.jpeg" width="100%">
-					    </div>
+					 	</c:forEach>
 					</div>
-					  
 					<!-- Left and right controls -->
 					<a class="carousel-control-prev" href="#demo" data-slide="prev">
 						<span class="carousel-control-prev-icon"></span>
@@ -64,19 +58,21 @@
 				<div class="f_day">${f_day}</div> ~ <div class="s_day">${s_day}</div>
 			</div>
 			<div class= "price_section">
-				<div class="price">${hdetailVO.hd_price*2}원</div>
+				<div class="price">${fullprice}원</div>
 				<div class="seperate"></div>
 				<div class="price_cal">${hdetailVO.hd_price}</div>
 				<div class="x">x</div>
-				<div class="night">2박</div>
+				<div class="night">${night}박</div>
 			</div>
-			<form action="#" method="post">
+			<form action="http://localhost:9000/myjeju/calendar.do" method="post">
 			<input type="hidden" name="hid" value='${hid}'>
 			<input type="hidden" name="hdid" value='${hdid}'>
 			<input type="hidden" name="roomid" value='${roomid}'>
 			<input type="hidden" name="sessionid" value='${session_id}'>
 			<input type="hidden" name="f_day" value='${f_day}'>
 			<input type="hidden" name="s_day" value='${s_day}'>
+			<input type="hidden" name="preyear" value='${preyear}'>
+			<input type="hidden" name="premonth" value='${premonth}'>
 			<button class="search_btn" type="submit">일정변경</button>			
 			</form>
 			<form action="#" method="post">

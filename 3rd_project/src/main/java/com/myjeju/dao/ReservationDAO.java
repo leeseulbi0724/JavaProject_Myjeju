@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.myjeju.vo.HDetailVO;
 import com.myjeju.vo.HouseVO;
+import com.myjeju.vo.RoomImgVO;
 import com.myjeju.vo.RoomVO;
 
 public class ReservationDAO {
@@ -36,6 +37,10 @@ public class ReservationDAO {
 	}
 	public HDetailVO getdetail(String hdid) {
 		return sqlSession.selectOne(namespace+".gethdetail", hdid);
+	}
+	public ArrayList<RoomImgVO> gethimg(String hdid) {
+		List<RoomImgVO> list = sqlSession.selectList(namespace+".searchimg", hdid);
+		return (ArrayList<RoomImgVO>)list;
 	}
 	
 }

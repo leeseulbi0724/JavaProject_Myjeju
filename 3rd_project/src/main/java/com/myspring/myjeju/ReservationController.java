@@ -15,6 +15,7 @@ import com.myjeju.service.ReservationService;
 import com.myjeju.vo.DateVO;
 import com.myjeju.vo.HDetailVO;
 import com.myjeju.vo.HouseVO;
+import com.myjeju.vo.RoomImgVO;
 import com.myjeju.vo.RoomVO;
 
 @Controller
@@ -316,11 +317,6 @@ public class ReservationController {
 			ff_compare = f_compare.toString();
 		}
 		
-		for(int i = 0; i<sequenceday.size();i++) {
-			System.out.println(sequenceday.get(i));
-			System.out.println(sequenceroom.get(i));
-		}
-		
 		int max=Collections.max(sequenceday);
 		String targetroom = "";
 		
@@ -336,7 +332,6 @@ public class ReservationController {
 		int curday2 = comparedateplus(f_compare.toString(),0);
 		int targetday2 = comparedateplus(f_compare.toString(),max+1);
 		String maxs=curday+"/"+targetday+"/"+curday2+"/"+targetday2+"/" + targetroom;
-		System.out.println(maxs);
 		
 		
 		
@@ -344,7 +339,6 @@ public class ReservationController {
 	}
 	
 	public static int comparedate(String curdate, String nextdate) {
-		
 		int cur_year = Integer.parseInt(curdate.substring(0,4));
 		int next_year = Integer.parseInt(nextdate.substring(0,4));
 		
@@ -393,6 +387,7 @@ public class ReservationController {
 		
 		HouseVO house = ReservationService.gethouse(hid);
 		HDetailVO detail = ReservationService.getdetail(hdid);
+		ArrayList<RoomImgVO> himg = ReservationService.gethimg(hdid);
 		String f_value = preday;
 		String s_value = presday;
 		String year = preyear;
@@ -431,8 +426,8 @@ public class ReservationController {
 		f_day = year + "-" + f_month + "-" + f_day;
 		s_day = year + "-" + s_month + "-" + s_day;
 		
-		
-		
+		int night = comparedate(f_day,s_day);
+		int fullprice = night * detail.getHd_price();
 		mv.setViewName("reservation/reservationDetail");
 		mv.addObject("houseVO",house);
 		mv.addObject("hdetailVO",detail);
@@ -440,7 +435,13 @@ public class ReservationController {
 		mv.addObject("s_day",s_day);
 		mv.addObject("year",year);
 		mv.addObject("roomid",roomid);
-		
+		mv.addObject("night",night);
+		mv.addObject("fullprice",fullprice);
+		mv.addObject("preyear",preyear);
+		mv.addObject("premonth",f_month);
+		mv.addObject("hid",hid);
+		mv.addObject("hdid",hdid);
+		mv.addObject("himg",himg);
 		return mv;
 	}
 	

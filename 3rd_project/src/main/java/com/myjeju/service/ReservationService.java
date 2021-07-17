@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.myjeju.vo.HDetailVO;
 import com.myjeju.vo.HouseVO;
+import com.myjeju.vo.RoomImgVO;
 import com.myjeju.vo.RoomVO;
 
 public interface ReservationService {
@@ -12,4 +13,5 @@ public interface ReservationService {
 	ArrayList<RoomVO> searchroom(String start, String end ,String hdid);
 	HouseVO gethouse(String hid);
 	HDetailVO getdetail(String hdid);
+	ArrayList<RoomImgVO> gethimg(String hdid);
 }
