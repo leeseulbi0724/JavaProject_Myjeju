@@ -81,7 +81,7 @@
 			$(".hp li").click(function() {				
 				var hp = $(".hp1").text($(this).text())
 				$("#hp1").val($(".hp1").text());
-			})
+			});
 
 			
 			/** 휴대폰 인증 문자 보내기 **/
