@@ -104,7 +104,8 @@
 					    });
 			}
 		});	
-
+		
+		
 			
 		/* 구매하기 버튼 클릭 시 */
 		$("#store_buy").click(function() {
@@ -144,6 +145,49 @@
 				});
 			}
 		});
+		
+		/* 상품평 유효성 체크 */
+		$("#reviewInsert").click(function() {
+			if($("#sr_review").val() == "") {
+				alert("상품평을 입력해주세요");
+				$("#sr_review").focus();
+				return false;
+			} else {
+				store_review_form.submit();	
+			}
+		});
+		
+		/* 상품평 더보기 */
+		$("#less_review").hide();
+		
+		$("#more_review").click(function() {
+			$(this).next("div").toggleClass("hide");
+			$(this).hide();
+			$("#less_review").show();
+		});
+		
+		$("#less_review").click(function(){
+			$(this).prev("div").toggleClass("hide");
+			$(this).hide();
+			$("#more_review").show();
+		});
+		
+		/* 상품문의 더보기 */
+		$("#less_faq").hide();
+		
+		$("#more_faq").click(function() {
+			$(this).next("div").toggleClass("hide");
+			$(this).hide();
+			$("#less_faq").show();
+		});
+		
+		$("#less_faq").click(function(){
+			$(this).prev("div").toggleClass("hide");
+			$(this).hide();
+			$("#more_faq").show();
+		});
+		
+
 		
 		
 		
@@ -255,44 +299,87 @@
 								<option id="star2" value="2">★★☆☆☆</option>
 								<option id="star1" value="1">★☆☆☆☆</option>
 							</select>
-							<span>상품평</span><input type = "text" name = "sr_review">
-							<button type = "submit" class = "StoreReviewBtn">등록</button>
+							<span>상품평</span><input type = "text" name = "sr_review" id = "sr_review">
+							<button type = "submit" id = "reviewInsert" class = "StoreReviewBtn">등록</button>
 						</form>
 					</article>
 					
-					<c:forEach var = "rlist" items = "${rlist}">
-						<article class = "store_review_list">
-							<div>
-								<img src="http://localhost:9000/myjeju/images/travel/travel_detail/human.png" width = "40">
-								&nbsp;&nbsp;ID&emsp;<span>${rlist.id}</span>
-							</div>
-							<div><span>
-								<c:choose>
-									<c:when test="${rlist.sr_star == 1}">
-										★☆☆☆☆
-									</c:when>
-									<c:when test="${rlist.sr_star == 2}">
-										★★☆☆☆
-									</c:when>
-									<c:when test="${rlist.sr_star == 3}">
-										★★★☆☆
-									</c:when>
-									<c:when test="${rlist.sr_star == 4}">
-										★★★★☆
-									</c:when>
-									<c:otherwise>
-										★★★★★
-									</c:otherwise>
-								</c:choose>
-							</span></div>
-							<div><span>${rlist.sr_review}</span></div>
-							<div><span>${rlist.sr_time}</span></div>
-							<c:if test = "${rlist.id eq session_id}">
-							<button type = "button" id = "reviewUpdateBtn">수정</button>
-							<button type = "button" name = "${rlist.srid}" id = "reviewDeleteBtn">삭제</button>
-							</c:if>
-						</article>
-					</c:forEach>
+					
+				
+						<c:forEach var = "rlist" items = "${rlist}" begin="0" end="2">
+							<article class = "store_review_list">
+								<div>
+									<img src="http://localhost:9000/myjeju/images/travel/travel_detail/human.png" width = "40">
+									&nbsp;&nbsp;ID&emsp;<span>${rlist.id}</span>
+								</div>
+								<div><span>
+									<c:choose>
+										<c:when test="${rlist.sr_star == 1}">
+											★☆☆☆☆
+										</c:when>
+										<c:when test="${rlist.sr_star == 2}">
+											★★☆☆☆
+										</c:when>
+										<c:when test="${rlist.sr_star == 3}">
+											★★★☆☆
+										</c:when>
+										<c:when test="${rlist.sr_star == 4}">
+											★★★★☆
+										</c:when>
+										<c:otherwise>
+											★★★★★
+										</c:otherwise>
+									</c:choose>
+								</span></div>
+								<div><span>${rlist.sr_review}</span></div>
+								<div><span>${rlist.sr_time}</span></div>
+								<c:if test = "${rlist.id eq session_id}">
+								<button type = "button" id = "reviewUpdateBtn">수정</button>
+								<button type = "button" name = "${rlist.srid}" id = "reviewDeleteBtn">삭제</button>
+								</c:if>
+							</article>
+						</c:forEach>
+						
+						<img src = "http://localhost:9000/myjeju/images/travel/bill_list_btn2.png" id = "more_review" class = "more_review">
+						
+						<div class = "hide">
+							<c:forEach var = "rlist" items = "${rlist}" begin="3">
+								<article class = "store_review_list">
+									<div>
+										<img src="http://localhost:9000/myjeju/images/travel/travel_detail/human.png" width = "40">
+										&nbsp;&nbsp;ID&emsp;<span>${rlist.id}</span>
+									</div>
+									<div><span>
+										<c:choose>
+											<c:when test="${rlist.sr_star == 1}">
+												★☆☆☆☆
+											</c:when>
+											<c:when test="${rlist.sr_star == 2}">
+												★★☆☆☆
+											</c:when>
+											<c:when test="${rlist.sr_star == 3}">
+												★★★☆☆
+											</c:when>
+											<c:when test="${rlist.sr_star == 4}">
+												★★★★☆
+											</c:when>
+											<c:otherwise>
+												★★★★★
+											</c:otherwise>
+										</c:choose>
+									</span></div>
+									<div><span>${rlist.sr_review}</span></div>
+									<div><span>${rlist.sr_time}</span></div>
+									<c:if test = "${rlist.id eq session_id}">
+									<button type = "button" id = "reviewUpdateBtn">수정</button>
+									<button type = "button" name = "${rlist.srid}" id = "reviewDeleteBtn">삭제</button>
+									</c:if>
+								</article>
+							</c:forEach>
+						</div>
+						
+						<img src = "http://localhost:9000/myjeju/images/travel/bill_list_btn4.png" id = "less_review" class = "less_review">	
+				
 
 				</div>
 				
@@ -331,9 +418,10 @@
 						</div>
 					
 					<div class = "store_product_faq_content">
+						
 						<ul>
 							<li>
-								<c:forEach var = "flist" items = "${flist}" varStatus = "status">
+								<c:forEach var = "flist" items = "${flist}" begin = "0" end = "2">
 									<div class = "store_faq_all">
 										<div class = "store_faq_list">
 											<img src="http://localhost:9000/myjeju/images/store/question.png" width = "20">
@@ -360,7 +448,42 @@
 							</li>
 						</ul>
 						
+						<img src = "http://localhost:9000/myjeju/images/travel/bill_list_btn2.png" id = "more_faq" class = "more_faq">
+						
+						<div class = "hide">
+							<ul>
+								<li>
+									<c:forEach var = "flist" items = "${flist}" begin = "3">
+										<div class = "store_faq_all">
+											<div class = "store_faq_list">
+												<img src="http://localhost:9000/myjeju/images/store/question.png" width = "20">
+												<span>${flist.id}</span>
+												<span>${flist.st_content}</span>
+												<span>${flist.st_time}</span>
+												<input type = "hidden" value = "${sid}" name = "sid"  id = "sid">
+												<input type = "hidden" id = "st_id1" name = "st_id1" value = "${flist.st_id}">
+												<c:if test = "${session_id eq 'admin'}">
+													<button type = "button" id = "storereplyBtn" name = "${flist.st_id}" class = "btn">답변하기</button>
+												</c:if>
+											</div>
+											
+											<div class = "store_ans_list">
+												<c:if test = "${!empty flist.re_content}">
+													<img src="http://localhost:9000/myjeju/images/store/answer1.png" width = "15">
+													<span>제주아일랜드 관리자</span>
+													<span>${flist.re_content}</span>
+													<span>${flist.re_time }</span>
+												</c:if>
+											</div>
+										</div>
+									</c:forEach>
+								</li>
+							</ul>
+						</div>
+						
+						<img src = "http://localhost:9000/myjeju/images/travel/bill_list_btn4.png" id = "less_faq" class = "less_faq">
 					</div>
+					
 						
 					
 					<!-- 답변하기 Modal-->

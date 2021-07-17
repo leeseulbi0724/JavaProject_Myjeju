@@ -31,4 +31,5 @@ public interface StoreService {
 	 * getStoreReviewUpdate(StorevVO vo);
 	 */
 	boolean getReviewDelete(String srid);
+	boolean getReviewCount(StorevVO vo);
 }

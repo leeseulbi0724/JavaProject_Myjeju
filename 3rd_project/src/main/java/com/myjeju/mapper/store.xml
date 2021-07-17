@@ -86,4 +86,9 @@
 	<delete id = "reviewDelete" parameterType = "com.myjeju.vo.StorevVO">
 		delete from myjeju_storev where srid = #{srid}
 	</delete>
+	
+	<!-- 스토어 상품평 하나만 -->
+	<select id = "reviewCount" parameterType = "com.myjeju.vo.StorevVO" resultType = "int">
+		select count(*) from myjeju_storev where id = #{id} and sid = #{sid}
+	</select>
 </mapper>    

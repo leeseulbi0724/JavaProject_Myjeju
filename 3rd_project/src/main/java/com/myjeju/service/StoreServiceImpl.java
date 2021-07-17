@@ -102,6 +102,18 @@ public class StoreServiceImpl implements StoreService {
 		return result;
 	}
 
+	@Override
+	public boolean getReviewCount(StorevVO vo) {
+		int value = storevDAO.getReviewCount(vo);
+		
+		boolean result = false;
+		if(value != 0) result = true;
+		
+		return result;
+	}
+	
+	
+
 	/*
 	 * @Override public StorevVO getStoreReviewOne(String srid) { return
 	 * storevDAO.getStoreReviewOne(srid); }

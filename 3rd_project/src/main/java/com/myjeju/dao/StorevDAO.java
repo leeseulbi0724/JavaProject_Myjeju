@@ -45,4 +45,9 @@ public class StorevDAO {
 	public int getReviewDelete(String srid) {
 		return sqlSession.delete(namespace + ".reviewDelete", srid);
 	}
+	
+	// 스토어 상품평 하나만
+	public int getReviewCount(StorevVO vo) {
+		return sqlSession.selectOne(namespace + ".reviewCount", vo);
+	}
 }

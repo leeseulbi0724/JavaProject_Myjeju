@@ -240,6 +240,18 @@ public class StoreController {
 		return result;
 	}
 
+	/**
+	 * review_count.do : 상품평 하나만
+	 */
+	/*
+	@ResponseBody
+	@RequestMapping(value = "/review_count.do", method = RequestMethod.POST)
+	public boolean review_count(StorevVO vo, HttpServletRequest request) {
+		boolean result = storeService.getReviewCount(vo);
+		
+		return result;
+	}
+	*/
 	
 	
 	/**
