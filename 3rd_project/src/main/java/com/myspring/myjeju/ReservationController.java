@@ -246,9 +246,9 @@ public class ReservationController {
 		return mv;
 	}
 	
-	@RequestMapping(value="/reservationList.do", method=RequestMethod.POST)
+	@RequestMapping(value="/reservationDetail.do", method=RequestMethod.POST)
 	public String index() {
-		return "reservation/reservationList";
+		return "reservation/reservationDetail";
 	}
 	
 	@RequestMapping(value="/availcheck", method=RequestMethod.POST)
@@ -293,6 +293,7 @@ public class ReservationController {
 	                arrayList.add(name);
 	    }
 		ArrayList<Integer> sequenceday = new ArrayList<Integer>();
+		ArrayList<String> sequenceroom = new ArrayList<String>();
 		StringBuffer f_compare = new StringBuffer(); 
 		f_compare.append(String.valueOf(startvalue));
 		f_compare.insert(4, "-");	
@@ -314,15 +315,34 @@ public class ReservationController {
 				}
 			}
 			sequenceday.add(val);
+			sequenceroom.add(arrayList.get(i));
 			ff_compare = f_compare.toString();
 		}
 		
+		for(int i = 0; i<sequenceday.size();i++) {
+			System.out.println(sequenceday.get(i));
+			System.out.println(sequenceroom.get(i));
+		}
+		
 		int max=Collections.max(sequenceday);
+		String targetroom = "";
+		
+		for(int i = 0;i<sequenceroom.size();i++) {
+			if(sequenceday.get(i) == max) {
+				targetroom = sequenceroom.get(i);
+				i = sequenceroom.size();
+			}
+		}
+		
 		int curday = comparedateplus(f_compare.toString(),1);
 		int targetday = comparedateplus(f_compare.toString(),max);
 		int curday2 = comparedateplus(f_compare.toString(),0);
 		int targetday2 = comparedateplus(f_compare.toString(),max+1);
-		String maxs=curday+"/"+targetday+"/"+curday2+"/"+targetday2;
+		String maxs=curday+"/"+targetday+"/"+curday2+"/"+targetday2+"/" + targetroom;
+		System.out.println(maxs);
+		
+		
+		
 		return maxs;
 	}
 	

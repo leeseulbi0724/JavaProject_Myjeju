@@ -5,6 +5,9 @@
 	
 	String preday = request.getParameter("preday");
 	String presday = request.getParameter("presday");
+	String hid = request.getParameter("hid");
+	String hdid = request.getParameter("hdid");
+	
 	String month = "0"; 
 	String day = "0";
 	String smonth = "0"; 
@@ -200,6 +203,7 @@ $(document).ready(function(){
     	end = Number(value[1]);
     	start2 = Number(value[2]);
     	end2 = Number(value[3]);
+    	$('.targetroom').val(value[4]);
     	for(var i=start; i<=end; i++) {
         	$('[value='+ i +']').parent().children("div").css({"background-color":"#87ff87","color":"white"});
         }
@@ -430,12 +434,15 @@ $(document).ready(function(){
 		<br>
 		<div class="date">
 			<div class="firstday"></div> <div class="middleday" style="display: inline-block;"></div> <div class="secondday"></div>
-			<form class="search_form"action = "http://localhost:9000/myjeju/reservationList.do" method="post">
+			<form class="search_form"action = "http://localhost:9000/myjeju/reservationDetail.do" method="post">
 			<input type = "hidden" class="preyear" name = "preyear" value="${year}">
 			<input type = "hidden" class="preday" name = "preday">
 			<input type = "hidden" class="presday" name = "presday">
 			<input type = "hidden" name="currenthome" value= "${currentname}">
-			<button class="search_btn" type="submit">검색하기</button>
+			<input type = "hidden" name="hid" value=<%= hid %>>
+			<input type = "hidden" name="hdid" value=<%= hdid %>>
+			<input type = "hidden" class="targetroom" name="targetroom">
+			<button class="search_btn" type="submit">예약하기</button>
 			</form>
 		</div>
 	</div>

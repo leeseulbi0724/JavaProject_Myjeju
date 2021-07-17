@@ -7,6 +7,9 @@
 	String f_value = request.getParameter("preday");
 	String s_value = request.getParameter("presday");
 	String year = request.getParameter("preyear");
+	String hid = request.getParameter("hid");
+	String hdid = request.getParameter("hdid");
+	String roomid = request.getParameter("targetroom");
 	
 	String[] f_array = f_value.split("/");
 	String[] s_array = s_value.split("/");
@@ -44,6 +47,7 @@
 	s_day = year + "-" + s_month + "-" + s_day;
 	
 	
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -52,7 +56,7 @@
 <link rel="shortcut icon" type="image⁄x-icon" href="http://localhost:9000/myjeju/images/index/icon.png">
 <title>예약하기 | JEJU ISLAND</title>
 <link rel="stylesheet" href="http://localhost:9000/myjeju/css/index.css">
-<link rel="stylesheet" href="http://localhost:9000/myjeju/css/reservation/reserList.css">
+<link rel="stylesheet" href="http://localhost:9000/myjeju/css/reservation/reserDetail.css">
 <script src="http://localhost:9000/myjeju/js/jquery-3.6.0.min.js"></script>
 </head>
 <body>
@@ -60,31 +64,15 @@
 	<jsp:include page="../header.jsp"></jsp:include>
 	
 	<!-- content -->
-	<section class="reservationList">
+	<section class="reservationDetail">
 		<div class="reservation_content">
-			<h3 style="margin-bottom: 10px;">예약리스트</h3><br>
+			<h3 style="margin-bottom: 10px;">예약상세</h3><br>
 		</div>
-		<div class="search">
-			<div class="search_detail">
-				<h2>상세검색</h2><br>
-				<label>체크인</label><br>
-				<input type="date" value='<%= f_day %>'><br>
-				<label>체크아웃</label><br>
-				<input type="date" value='<%= s_day %>'><br>
-				<label>인원</label><br>
-				<input type="number"><br>
-				<button class="search_btn" type="submit">검색하기</button>
-			</div>
-			<div class="search_label">
-				<h2><%= currenthome %></h2><span>20개의 숙소</span>
-			</div>
-			<div class="search_category">
-				<p>정렬기준</p>
-				<div class="standard">
-				<span>요금</span><div class="partition"></div><span>고객평점</span>
-				</div>
-			</div>
-		</div>
+		<h3><%= hid %></h3>
+		<h3><%= hdid %></h3>
+		<h3><%= f_day %></h3>
+		<h3><%= s_day %></h3>
+		<h3><%= roomid %></h3>
 	</section>
 	<!-- footer -->
 	<jsp:include page="../footer.jsp"></jsp:include>
