@@ -91,6 +91,24 @@ public class StoreServiceImpl implements StoreService {
 	public ArrayList<StorevVO> getStoreReview(String sid) {
 		return storevDAO.getStoreReview(sid);
 	}
+
+	@Override
+	public boolean getReviewDelete(String srid) {
+		int value = storevDAO.getReviewDelete(srid);
+		
+		boolean result = false;
+		if(value != 0) result = true;
+		
+		return result;
+	}
+
+	/*
+	 * @Override public StorevVO getStoreReviewOne(String srid) { return
+	 * storevDAO.getStoreReviewOne(srid); }
+	 * 
+	 * @Override public boolean getStoreReviewUpdate(StorevVO vo) { return
+	 * storevDAO.getStoreReviewUpdate(vo); }
+	 */
 	
 	
 }

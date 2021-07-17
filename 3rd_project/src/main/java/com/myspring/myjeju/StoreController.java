@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.myjeju.service.MypageService;
@@ -227,7 +228,18 @@ public class StoreController {
 		return mv;
 	}
 	
-	
+	/**
+	 * review_delete.do : 상품평 삭제
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/review_delete.do", method=RequestMethod.POST)
+	public boolean comment_delete(HttpServletRequest request) {
+		//boolean result = communityService.getCommentDelete(request.getParameter("cid"));
+		boolean result = storeService.getReviewDelete(request.getParameter("srid"));
+		
+		return result;
+	}
+
 	
 	
 	/**

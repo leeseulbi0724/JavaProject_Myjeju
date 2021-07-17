@@ -26,4 +26,9 @@ public interface StoreService {
 	//ªÛ«∞∆Ú
 	boolean getInsertResult(StorevVO vo);
 	ArrayList<StorevVO> getStoreReview(String sid);
+	/*
+	 * StorevVO getStoreReviewOne(String srid); boolean
+	 * getStoreReviewUpdate(StorevVO vo);
+	 */
+	boolean getReviewDelete(String srid);
 }

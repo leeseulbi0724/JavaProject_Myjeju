@@ -117,14 +117,34 @@
 			}
 		});
 		
-		
-		$("#reviewModifyBtn").click(function() {
+		/* 상품평 수정 */
+		/* $("#reviewUpdateBtn").click(function() {
 			var modify = confirm("수정하시겠습니ㅏㄲ?");
 			if(modify) {
-				location.replace("review_modify.do");
+				location.replace("store_review_update.do");
 			}
-		});		
+		});	 */	
 	
+		/* 상품평 삭제 */
+		//$("#reviewDeleteBtn").click(function() {
+		$("button[id^=reviewDeleteBtn]").click(function() {
+			var reviewdelete = confirm("삭제하시겠습니까??");
+			
+			if(reviewdelete) {
+				var srid = $(this).attr("name");
+				
+				$.ajax({
+					type : "post",
+					url : "review_delete.do",
+					data : {srid : srid},
+					dataType : 'json',
+					success : function(result) {
+						location.reload();
+					},
+				});
+			}
+		});
+		
 		
 		
 		
@@ -267,8 +287,10 @@
 							</span></div>
 							<div><span>${rlist.sr_review}</span></div>
 							<div><span>${rlist.sr_time}</span></div>
-							<button type = "button" id = "reviewModifyBtn">수정</button>
-							<button type = "button" id = "reviewDeleteBtn">삭제</button>
+							<c:if test = "${rlist.id eq session_id}">
+							<button type = "button" id = "reviewUpdateBtn">수정</button>
+							<button type = "button" name = "${rlist.srid}" id = "reviewDeleteBtn">삭제</button>
+							</c:if>
 						</article>
 					</c:forEach>
 
@@ -320,7 +342,9 @@
 											<span>${flist.st_time}</span>
 											<input type = "hidden" value = "${sid}" name = "sid"  id = "sid">
 											<input type = "hidden" id = "st_id1" name = "st_id1" value = "${flist.st_id}">
-											<button type = "button" id = "storereplyBtn" name = "${flist.st_id}" class = "btn">답변하기</button>
+											<c:if test = "${session_id eq 'admin'}">
+												<button type = "button" id = "storereplyBtn" name = "${flist.st_id}" class = "btn">답변하기</button>
+											</c:if>
 										</div>
 										
 										<div class = "store_ans_list">
