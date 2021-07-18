@@ -384,6 +384,8 @@ public class CommunityController {
 		ModelAndView mv = new ModelAndView();
 		
 		NoticeVO vo = adminService.getNoticeContent(nid);
+		//Á¶È¸¼ö
+		noticeService.getNoticeCount(nid);
 		
 		mv.addObject("vo", vo);
 		mv.setViewName("community/notice_content");

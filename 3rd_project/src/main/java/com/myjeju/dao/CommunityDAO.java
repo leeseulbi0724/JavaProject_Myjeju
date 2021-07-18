@@ -124,4 +124,8 @@ public class CommunityDAO {
 		List<NoticeVO> list = sqlSession.selectList(namespace+".notice_list");		
 		return (ArrayList<NoticeVO>)list;
 	}
+	//공지사항 조회수
+	public int getNoticeCount(String nid) {
+		return sqlSession.update(namespace+".notice_count", nid);
+	}
 }

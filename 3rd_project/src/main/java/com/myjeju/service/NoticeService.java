@@ -10,5 +10,6 @@ import com.myjeju.vo.NoticeVO;
 public interface NoticeService {
 	
 	ArrayList<NoticeVO> getNoticeList();
+	 int getNoticeCount(String nid);
 
 }

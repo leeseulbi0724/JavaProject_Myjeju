@@ -19,5 +19,10 @@ public class NoticeServiceImpl implements NoticeService {
 		return communityDAO.getNoticeList();
 		
 	}
+	
+	@Override
+	public  int getNoticeCount(String nid) {
+		return communityDAO.getNoticeCount(nid);
+	}
 
 }

@@ -124,4 +124,8 @@
 		select nid, ntitle, to_char(ndate, 'yyyy-mm-dd') ndate, ncount from myjeju_notice order by ndate desc
 	</select>
 	
+	<update id="notice_count" parameterType="java.lang.String">
+		update myjeju_notice set ncount=ncount+1 where nid=#{nid}
+	</update>
+	
 </mapper>
