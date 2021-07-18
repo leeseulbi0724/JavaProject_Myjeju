@@ -53,6 +53,9 @@ public class StofaqDAO extends DBConn {
 		return sqlSession.selectOne(namespace + ".getSt_id", sid);
 	}
 	
-	
+	// 스토어 상품문의 삭제
+		public int getFaqDelete(String st_id) {
+			return sqlSession.delete(namespace + ".faqDelete", st_id);
+		}
 	
 }

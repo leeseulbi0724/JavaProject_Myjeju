@@ -233,25 +233,53 @@ public class StoreController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/review_delete.do", method=RequestMethod.POST)
-	public boolean comment_delete(HttpServletRequest request) {
-		//boolean result = communityService.getCommentDelete(request.getParameter("cid"));
+	public boolean review_delete(HttpServletRequest request) {
 		boolean result = storeService.getReviewDelete(request.getParameter("srid"));
 		
 		return result;
 	}
 
+	
 	/**
-	 * review_count.do : 상품평 하나만
+	 * review_update.do : 상품평 수정
 	 */
-	/*
-	@ResponseBody
-	@RequestMapping(value = "/review_count.do", method = RequestMethod.POST)
-	public boolean review_count(StorevVO vo, HttpServletRequest request) {
-		boolean result = storeService.getReviewCount(vo);
+	@RequestMapping(value = "/review_update.do", method=RequestMethod.GET)
+	public ModelAndView review_update(String srid, HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView();
 		
-		return result;
+		StorevVO rvo = storeService.getStoreReviewOne(srid);
+		String review = rvo.getSr_review();
+		
+		mv.setViewName("redirect:/store_content");
+		mv.addObject("rvo", rvo);
+		mv.addObject("real_review", review);
+		
+		return mv;
 	}
-	*/
+	
+	/**
+	 * reviewUpdate_proc.do : 상품평 수정 처리
+	 */
+	@RequestMapping(value = "/reviewUpdate_proc.do", method = RequestMethod.GET)
+	public ModelAndView reviewUpdate_proc(StorevVO vo, HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView();
+		
+		String srid = request.getParameter("srid2");
+		int sr_star = (Integer.parseInt(request.getParameter("sr_star2")));
+		String sr_review = request.getParameter("sr_review2");
+		
+		vo.setSrid(srid);
+		vo.setSr_star(sr_star);
+		vo.setSr_review(sr_review);
+		
+		boolean result = storeService.getReviewUpdate(vo);
+		
+		if(result) {
+			mv.setViewName("redirect:/store_content.do");
+			mv.addObject("sid", vo.getSid());
+		}
+		return mv;
+	}
 	
 	
 	/**
@@ -283,6 +311,17 @@ public class StoreController {
 		}
 		
 		return mv;
+	}
+	
+	/**
+	 * faq_delete.do : 스토어 상품문의 삭제
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/faq_delete.do", method=RequestMethod.POST)
+	public boolean faq_delete(String st_id, HttpServletRequest request) {
+		boolean result = stofaqService.getFaqDelete(st_id);
+		
+		return result;
 	}
 	
 	/**

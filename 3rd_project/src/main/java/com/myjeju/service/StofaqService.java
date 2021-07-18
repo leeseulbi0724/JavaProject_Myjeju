@@ -11,4 +11,6 @@ public interface StofaqService {
 	boolean getReplyResult(StofaqVO vo);
 	StofaqVO getStid(String sid);
 	
+	boolean getFaqDelete(String st_id);
+	
 }

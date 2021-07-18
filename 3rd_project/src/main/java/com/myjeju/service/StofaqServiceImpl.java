@@ -34,6 +34,18 @@ public class StofaqServiceImpl implements StofaqService {
 		return stofaqDAO.getStid(sid);
 	}
 
+	@Override
+	public boolean getFaqDelete(String st_id) {
+		int value = stofaqDAO.getFaqDelete(st_id);
+		
+		boolean result = false;
+		if(value != 0) result = true;
+		
+		return result;
+	}
+
+	
+	
 	
 	
 }

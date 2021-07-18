@@ -26,7 +26,10 @@
 		select id, sid, st_id, st_content from myjeju_stofaq where sid = #{sid}
 	</select>
 	
-	
+	<!-- 스토어 상품문의 삭제 -->
+	<delete id = "faqDelete" parameterType = "java.lang.String">
+		delete from myjeju_stofaq where st_id = #{st_id}
+	</delete>
 	
 	
 	

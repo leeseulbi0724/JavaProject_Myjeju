@@ -72,20 +72,20 @@
 	</select>
 	
 	
-	<!-- 스토어 상품평 하나 가져오기 (수정 처리)
-	<select id = "StoreReviewOne" parameterType = "java.lang.String" resultType = "com.myjeju.vo.StorevVO">
+	<!-- 스토어 상품평 하나 가져오기 (수정 처리) -->
+	<select id = "reviewOne" parameterType = "java.lang.String" resultType = "com.myjeju.vo.StorevVO">
 		select sid, id, srid, sr_review, sr_star, to_char(sr_time, 'YY-MM-DD HH24:MI:SS') sr_time from myjeju_storev where srid = #{srid}
 	</select>
-	
-	스토어 상품평 수정
-	<update id = "reviewUpdate" parameterType = "com.myjeju.vo.StorevVO">
-		update myjeju_storev set sr_review = #{sr_review}, sr_time = sysdate, sr_star = #{sr_star} where sid = #{sid}, srid = #{srid}
-	</update> -->
 
 	<!-- 스토어 상품평 삭제 -->
 	<delete id = "reviewDelete" parameterType = "com.myjeju.vo.StorevVO">
 		delete from myjeju_storev where srid = #{srid}
 	</delete>
+	
+	<!-- 스토어 상품평 수정 -->
+	<update id = "reviewUpdate" parameterType = "com.myjeju.vo.StorevVO">
+		update myjeju_storev set sr_review = #{sr_review}, sr_star = #{sr_star} where srid = #{srid}
+	</update>
 	
 	<!-- 스토어 상품평 하나만 -->
 	<select id = "reviewCount" parameterType = "com.myjeju.vo.StorevVO" resultType = "int">

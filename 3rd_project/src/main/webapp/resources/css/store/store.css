@@ -416,6 +416,16 @@
 		color : gold;
 	}
 	
+	/* 상품평 수정 모달 */
+	form.reviewUpdate_form>div>select, form.reviewUpdate_form>div>select>option {
+		color : gold;
+	}
+	
+	form.reviewUpdate_form>div>div {
+		display : inline-block;
+		width : 80%;
+	}
+
 	
 	
 	/****** 상품문의 ********/

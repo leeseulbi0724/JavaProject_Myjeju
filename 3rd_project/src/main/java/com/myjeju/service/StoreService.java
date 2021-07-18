@@ -30,6 +30,9 @@ public interface StoreService {
 	 * StorevVO getStoreReviewOne(String srid); boolean
 	 * getStoreReviewUpdate(StorevVO vo);
 	 */
+	
+	StorevVO getStoreReviewOne(String srid);
+	boolean getReviewUpdate(StorevVO vo);
 	boolean getReviewDelete(String srid);
 	boolean getReviewCount(StorevVO vo);
 }

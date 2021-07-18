@@ -118,18 +118,29 @@
 			}
 		});
 		
-		/* 상품평 수정 */
-		/* $("#reviewUpdateBtn").click(function() {
-			var modify = confirm("수정하시겠습니ㅏㄲ?");
-			if(modify) {
-				location.replace("store_review_update.do");
+		
+		/* 상품평 수정 - 내용 가져오기 - 모달 띄우기 */
+		$("button[id^=reviewUpdateBtn]").click(function() {
+			var update = confirm("수정하시겠습니까??");
+			
+			if(update) {
+				var srid = $(this).attr("name");
+				$("#srid2").val(srid);
+				
+				$('#reviewUpdateModal').modal("show");
 			}
-		});	 */	
+		});
+		
+		/* 상품평 수정 모달에서 수정하기 버튼 */
+		$("#modalY3").click(function() {
+			reviewUpdate_form.submit();
+		});
 	
+		
 		/* 상품평 삭제 */
 		//$("#reviewDeleteBtn").click(function() {
 		$("button[id^=reviewDeleteBtn]").click(function() {
-			var reviewdelete = confirm("삭제하시겠습니까??");
+			var reviewdelete = confirm("상품평을 삭제하시겠습니까??");
 			
 			if(reviewdelete) {
 				var srid = $(this).attr("name");
@@ -146,6 +157,7 @@
 			}
 		});
 		
+		
 		/* 상품평 유효성 체크 */
 		$("#reviewInsert").click(function() {
 			if($("#sr_review").val() == "") {
@@ -156,6 +168,7 @@
 				store_review_form.submit();	
 			}
 		});
+		
 		
 		/* 상품평 더보기 */
 		$("#less_review").hide();
@@ -190,16 +203,11 @@
 
 		
 		
-		
-		
-		
 		/* 문의하기 버튼 클릭시 모달창*/
 		$('#storefaqBtn').click(function(e){
 			e.preventDefault();
 			$('#faqModal').modal("show");
 		});
-
-		
 		
 		/* 답변하기 버튼 클릭시 모달창 */
 		//$('#storereplyBtn').click(function(e){
@@ -223,6 +231,25 @@
 		//$("#modalY2").click(function(){
 		$("button[id^='modalY2']").click(function() {	
 			storep_form.submit();
+		});
+		
+		/* 상품문의 삭제 */
+		$("button[id^='faqDeleteBtn']").click(function() {
+			var faqdelete = confirm("상품문의를 삭제하시겠습니까??");
+			
+			if(faqdelete) {
+				var st_id = $(this).attr("name");
+				
+				$.ajax({
+					type : "post",
+					url : "faq_delete.do",
+					data : {st_id : st_id},
+					dataType : 'json',
+					success : function(result) {
+						location.reload();
+					}
+				});
+			}
 		});
 
 		
@@ -304,9 +331,81 @@
 						</form>
 					</article>
 					
-					
+					<!-- 상품평 수정 Modal-->
+					<div class="modal fade" id="reviewUpdateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button class="close" type="button" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span></button>
+									<h3 class="modal-title" id="exampleModalLabel">상품평 수정하기</h3>
+								</div>
+								
+								<form name = "reviewUpdate_form" action = "reviewUpdate_proc.do" method = "GET" class = "reviewUpdate_form">
+									<div class="modal-body">
+										<input type = "hidden" value = "${id}" name = "id" id = "id">
+										<input type = "hidden" value = "${sid}" name = "sid" id = "sid">
+										<select name="sr_star2" id="sr_star2">
+											<option id="star5" value="5">★★★★★</option>
+											<option id="star4" value="4">★★★★☆</option>
+											<option id="star3" value="3">★★★☆☆</option>
+											<option id="star2" value="2">★★☆☆☆</option>
+											<option id="star1" value="1">★☆☆☆☆</option>
+										</select>
+										<input type = "hidden" value = "" name = "srid2" id = "srid2">
+										<div><input type = "text" placeholder = "수정할 상품평을 입력해주세요." name = "sr_review2" id = "sr_review2" width = "100px"></div>
+									</div>
+									
+									<div class="modal-footer">
+										<button class="btn" type="button" id = "modalY3">수정하기</button>
+										<button class="btn" type="button" data-dismiss="modal">닫기</button>
+									</div>
+								</form>
+								
+							</div>
+						</div>
+					</div>
 				
-						<c:forEach var = "rlist" items = "${rlist}" begin="0" end="2">
+					<c:forEach var = "rlist" items = "${rlist}" begin="0" end="2">
+						<article class = "store_review_list">
+							<div>
+								<img src="http://localhost:9000/myjeju/images/travel/travel_detail/human.png" width = "40">
+								&nbsp;&nbsp;ID&emsp;<span>${rlist.id}</span>
+							</div>
+							<div><span>
+								<c:choose>
+									<c:when test="${rlist.sr_star == 1}">
+										★☆☆☆☆
+									</c:when>
+									<c:when test="${rlist.sr_star == 2}">
+										★★☆☆☆
+									</c:when>
+									<c:when test="${rlist.sr_star == 3}">
+										★★★☆☆
+									</c:when>
+									<c:when test="${rlist.sr_star == 4}">
+										★★★★☆
+									</c:when>
+									<c:otherwise>
+										★★★★★
+									</c:otherwise>
+								</c:choose>
+							</span></div>
+							<div><span>${rlist.sr_review}</span></div>
+							<div><span>${rlist.sr_time}</span></div>
+							
+							<c:if test = "${rlist.id eq session_id}">
+								<button type = "button" name = "${rlist.srid}" id = "reviewUpdateBtn" class = "reviewBtn">수정</button>
+								<button type = "button" name = "${rlist.srid}" id = "reviewDeleteBtn" class = "reviewBtn">삭제</button>
+							</c:if>
+							
+						</article>
+					</c:forEach>
+					
+					<img src = "http://localhost:9000/myjeju/images/travel/bill_list_btn2.png" id = "more_review" class = "more_review">
+					
+					<div class = "hide">
+						<c:forEach var = "rlist" items = "${rlist}" begin="3">
 							<article class = "store_review_list">
 								<div>
 									<img src="http://localhost:9000/myjeju/images/travel/travel_detail/human.png" width = "40">
@@ -334,51 +433,14 @@
 								<div><span>${rlist.sr_review}</span></div>
 								<div><span>${rlist.sr_time}</span></div>
 								<c:if test = "${rlist.id eq session_id}">
-								<button type = "button" id = "reviewUpdateBtn">수정</button>
-								<button type = "button" name = "${rlist.srid}" id = "reviewDeleteBtn">삭제</button>
+									<button type = "button" name = "${rlist.srid}" id = "reviewUpdateBtn" class = "reviewBtn">수정</button>
+									<button type = "button" name = "${rlist.srid}" id = "reviewDeleteBtn" class = "reviewBtn">삭제</button>
 								</c:if>
 							</article>
 						</c:forEach>
-						
-						<img src = "http://localhost:9000/myjeju/images/travel/bill_list_btn2.png" id = "more_review" class = "more_review">
-						
-						<div class = "hide">
-							<c:forEach var = "rlist" items = "${rlist}" begin="3">
-								<article class = "store_review_list">
-									<div>
-										<img src="http://localhost:9000/myjeju/images/travel/travel_detail/human.png" width = "40">
-										&nbsp;&nbsp;ID&emsp;<span>${rlist.id}</span>
-									</div>
-									<div><span>
-										<c:choose>
-											<c:when test="${rlist.sr_star == 1}">
-												★☆☆☆☆
-											</c:when>
-											<c:when test="${rlist.sr_star == 2}">
-												★★☆☆☆
-											</c:when>
-											<c:when test="${rlist.sr_star == 3}">
-												★★★☆☆
-											</c:when>
-											<c:when test="${rlist.sr_star == 4}">
-												★★★★☆
-											</c:when>
-											<c:otherwise>
-												★★★★★
-											</c:otherwise>
-										</c:choose>
-									</span></div>
-									<div><span>${rlist.sr_review}</span></div>
-									<div><span>${rlist.sr_time}</span></div>
-									<c:if test = "${rlist.id eq session_id}">
-									<button type = "button" id = "reviewUpdateBtn">수정</button>
-									<button type = "button" name = "${rlist.srid}" id = "reviewDeleteBtn">삭제</button>
-									</c:if>
-								</article>
-							</c:forEach>
-						</div>
-						
-						<img src = "http://localhost:9000/myjeju/images/travel/bill_list_btn4.png" id = "less_review" class = "less_review">	
+					</div>
+					
+					<img src = "http://localhost:9000/myjeju/images/travel/bill_list_btn4.png" id = "less_review" class = "less_review">	
 				
 
 				</div>
@@ -430,9 +492,17 @@
 											<span>${flist.st_time}</span>
 											<input type = "hidden" value = "${sid}" name = "sid"  id = "sid">
 											<input type = "hidden" id = "st_id1" name = "st_id1" value = "${flist.st_id}">
-											<c:if test = "${session_id eq 'admin'}">
-												<button type = "button" id = "storereplyBtn" name = "${flist.st_id}" class = "btn">답변하기</button>
-											</c:if>
+											
+											<c:choose>
+												<c:when test = "${session_id eq 'admin'}">
+													<button type = "button" id = "storereplyBtn" name = "${flist.st_id}" class = "btn">답변하기</button>
+												</c:when>
+												
+												<c:when test = "${session_id eq flist.id}">
+													<button type = "button" id = "faqDeleteBtn" name = "${flist.st_id}" class = "btn">삭제</button>
+												</c:when>
+											</c:choose>
+										
 										</div>
 										
 										<div class = "store_ans_list">
@@ -462,9 +532,16 @@
 												<span>${flist.st_time}</span>
 												<input type = "hidden" value = "${sid}" name = "sid"  id = "sid">
 												<input type = "hidden" id = "st_id1" name = "st_id1" value = "${flist.st_id}">
-												<c:if test = "${session_id eq 'admin'}">
-													<button type = "button" id = "storereplyBtn" name = "${flist.st_id}" class = "btn">답변하기</button>
-												</c:if>
+												
+												<c:choose>
+													<c:when test = "${session_id eq 'admin'}">
+														<button type = "button" id = "storereplyBtn" name = "${flist.st_id}" class = "btn">답변하기</button>
+													</c:when>
+													
+													<c:when test = "${session_id eq flist.id}">
+														<button type = "button" id = "faqDeleteBtn" name = "${flist.st_id}" class = "btn">삭제</button>
+													</c:when>
+												</c:choose>
 											</div>
 											
 											<div class = "store_ans_list">

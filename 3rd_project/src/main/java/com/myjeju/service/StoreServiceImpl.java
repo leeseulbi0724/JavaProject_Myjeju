@@ -91,6 +91,11 @@ public class StoreServiceImpl implements StoreService {
 	public ArrayList<StorevVO> getStoreReview(String sid) {
 		return storevDAO.getStoreReview(sid);
 	}
+	
+	@Override
+	public StorevVO getStoreReviewOne(String srid) {
+		return storevDAO.getStoreReviewOne(srid);
+	}
 
 	@Override
 	public boolean getReviewDelete(String srid) {
@@ -111,16 +116,17 @@ public class StoreServiceImpl implements StoreService {
 		
 		return result;
 	}
-	
-	
 
-	/*
-	 * @Override public StorevVO getStoreReviewOne(String srid) { return
-	 * storevDAO.getStoreReviewOne(srid); }
-	 * 
-	 * @Override public boolean getStoreReviewUpdate(StorevVO vo) { return
-	 * storevDAO.getStoreReviewUpdate(vo); }
-	 */
-	
+
+	@Override
+	public boolean getReviewUpdate(StorevVO vo) {
+		int value = storevDAO.getReviewUpdate(vo);
+		
+		boolean result = false;
+		if(value != 0) result = true;
+		
+		return result;
+	}
+
 	
 }
