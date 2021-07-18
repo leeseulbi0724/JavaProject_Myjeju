@@ -16,6 +16,7 @@ import com.myjeju.service.MemberService;
 import com.myjeju.service.MypageService;
 import com.myjeju.vo.BasketVO;
 import com.myjeju.vo.CommunityVO;
+import com.myjeju.vo.MReservationVO;
 import com.myjeju.vo.MemberVO;
 import com.myjeju.vo.OrderVO;
 import com.myjeju.vo.PointVO;
@@ -104,13 +105,31 @@ public class MypageController {
 	 */
 	@RequestMapping(value = "/myorder.do", method = RequestMethod.GET)
 	public ModelAndView myorder(HttpSession session) {
+		ArrayList<String> hid = new ArrayList<String>();
+		
 		ModelAndView mv = new ModelAndView();
 		String id = (String) session.getAttribute("session_id");
 		
+		//상품주문내역
 		ArrayList<OrderVO> list = MypageService.getOrderList(id);
+		
+		//숙소예약내역
+		ArrayList<OrderVO> mlist = MypageService.getMReservation(id);
+		for (int i=0; i<mlist.size(); i++) {
+			//숙소이름가져오기
+			OrderVO vo = MypageService.getHouseName(mlist.get(i).getHid());
+			mlist.get(i).setH_name(vo.getH_name());
+			mlist.get(i).setH_img(vo.getH_img());
+			
+			//방이름가져오기
+			OrderVO ovo = MypageService.getRommName(mlist.get(i).getHdid());
+			mlist.get(i).setHd_name(ovo.getHd_name());
+			mlist.get(i).setHd_price(ovo.getHd_price());
+		}			
 		
 		mv.setViewName("mypage/mystore/myorder");
 		mv.addObject("list", list);
+		mv.addObject("mlist", mlist);
 		
 		return mv;
 	}

@@ -3,6 +3,90 @@ package com.myjeju.vo;
 public class OrderVO {
 	
 	String o_name, o_price, o_count, o_file, o_sfile, o_date, id;
+	
+	String hid, h_name, hdid, hd_name, roomid, firstday, lastday, rdate, h_img;
+	int hd_price;
+	
+	
+	public int getHd_price() {
+		return hd_price;
+	}
+
+	public void setHd_price(int hd_price) {
+		this.hd_price = hd_price;
+	}
+
+	public String getH_img() {
+		return h_img;
+	}
+
+	public void setH_img(String h_img) {
+		this.h_img = h_img;
+	}
+
+	public String getHid() {
+		return hid;
+	}
+
+	public void setHid(String hid) {
+		this.hid = hid;
+	}
+
+	public String getH_name() {
+		return h_name;
+	}
+
+	public void setH_name(String h_name) {
+		this.h_name = h_name;
+	}
+
+	public String getHdid() {
+		return hdid;
+	}
+
+	public void setHdid(String hdid) {
+		this.hdid = hdid;
+	}
+
+	public String getHd_name() {
+		return hd_name;
+	}
+
+	public void setHd_name(String hd_name) {
+		this.hd_name = hd_name;
+	}
+
+	public String getRoomid() {
+		return roomid;
+	}
+
+	public void setRoomid(String roomid) {
+		this.roomid = roomid;
+	}
+
+	public String getFirstday() {
+		return firstday;
+	}
+
+	public void setFirstday(String firstday) {
+		this.firstday = firstday;
+	}
+
+	public String getLastday() {
+		return lastday;
+	}
+
+	public void setLastday(String lastday) {
+		this.lastday = lastday;
+	}
+
+	public String getRdate() {
+		return rdate;
+	}
+
+	public void setRdate(String rdate) {
+		this.rdate = rdate;
+	}
 
 	public String getO_name() {
 		return o_name;

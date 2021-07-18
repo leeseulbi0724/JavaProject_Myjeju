@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.myjeju.vo.BasketVO;
 import com.myjeju.vo.CommunityVO;
+import com.myjeju.vo.MReservationVO;
 import com.myjeju.vo.MemberVO;
 import com.myjeju.vo.OrderVO;
 import com.myjeju.vo.PointVO;
@@ -32,5 +33,8 @@ public interface MypageService {
 	int getPoint(String id);
 	
 	ArrayList<OrderVO> getOrderList(String id);
-	 ArrayList<PointVO> getPointList(String id);
+	ArrayList<PointVO> getPointList(String id);
+	ArrayList<OrderVO> getMReservation(String id);
+	OrderVO getHouseName(String hid);
+	OrderVO getRommName(String hdid);
 }

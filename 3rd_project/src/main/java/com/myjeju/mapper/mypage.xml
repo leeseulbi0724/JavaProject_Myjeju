@@ -90,4 +90,19 @@
 		<select id="point_list" parameterType="java.lang.String" resultType="com.myjeju.vo.PointVO">
 			select id, type, point, pdate from myjeju_point where id=#{id} order by pdate desc
 		</select>
+		
+		<!-- 회원 예약내역 -->
+		<select id="mreservation_list" parameterType="java.lang.String" resultType="com.myjeju.vo.OrderVO">
+			select id, hid, hdid, roomid, to_char(firstday, 'yyyy-mm-dd') firstday, to_char(lastday, 'yyyy-mm-dd') lastday, rdate from myjeju_member_reservation where id=#{id} order by rdate desc
+		</select>
+		
+		<!-- 숙소이름 가져오기 -->
+		<select id="housename" parameterType="java.lang.String" resultType="com.myjeju.vo.OrderVO">
+			select h_name, h_img from myjeju_house where hid=#{hid}
+		</select>
+		
+		<!-- 방이름 가져오기 -->
+		<select id="roomname" parameterType="java.lang.String" resultType="com.myjeju.vo.OrderVO">
+			select hd_name, hd_price from myjeju_hdetail where hdid=#{hdid}
+		</select>
     </mapper>

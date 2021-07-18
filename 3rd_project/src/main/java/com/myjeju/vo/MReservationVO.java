@@ -1,7 +1,17 @@
 package com.myjeju.vo;
 
 public class MReservationVO {
-	String id, hid, hdid, roomid, firstday, lastday;
+	String id, hid, hdid, roomid, firstday, lastday, date;
+
+	
+	
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
+	}
 
 	public String getId() {
 		return id;

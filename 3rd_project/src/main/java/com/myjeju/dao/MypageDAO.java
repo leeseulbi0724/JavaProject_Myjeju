@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.myjeju.vo.CommunityVO;
+import com.myjeju.vo.MReservationVO;
 import com.myjeju.vo.MemberVO;
 import com.myjeju.vo.OrderVO;
 import com.myjeju.vo.PointVO;
@@ -74,6 +75,22 @@ public class MypageDAO {
 	public ArrayList<PointVO> getPointList(String id) {
 		List<PointVO> list = sqlSession.selectList(namespace+".point_list",id);		
 		return (ArrayList<PointVO>)list;
+	}
+	
+	/** 숙소예약내역 - 시퀀테이블 **/
+	public ArrayList<OrderVO> getMReservation(String id) {
+		List<OrderVO> list = sqlSession.selectList(namespace+".mreservation_list",id);		
+		return (ArrayList<OrderVO>)list;
+	}
+	
+	/** 숙소이름 + 이미지 가져오기 **/
+	public OrderVO getHouseName(String hid) {
+		return sqlSession.selectOne(namespace+".housename", hid);
+	}
+	
+	/**방이름 가져오기 **/
+	public OrderVO getRommName(String hdid) {
+		return sqlSession.selectOne(namespace+".roomname", hdid);
 	}
 	
 	

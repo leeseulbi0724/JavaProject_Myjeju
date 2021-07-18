@@ -9,6 +9,7 @@ import com.myjeju.dao.BasketDAO;
 import com.myjeju.dao.MypageDAO;
 import com.myjeju.vo.BasketVO;
 import com.myjeju.vo.CommunityVO;
+import com.myjeju.vo.MReservationVO;
 import com.myjeju.vo.MemberVO;
 import com.myjeju.vo.OrderVO;
 import com.myjeju.vo.PointVO;
@@ -138,6 +139,21 @@ public class MypageServiceImpl implements MypageService {
 		return mypageDAO.getPointList(id);
 	}
 	
+	
+	@Override
+	public  ArrayList<OrderVO> getMReservation(String id) {
+		return mypageDAO.getMReservation(id);
+	}
+	
+	@Override
+	public OrderVO getHouseName(String hid) {
+		return mypageDAO.getHouseName(hid);
+	}
+	
+	@Override
+	public OrderVO getRommName(String hdid) {
+		return mypageDAO.getRommName(hdid);
+	}
 	
 	
 	
