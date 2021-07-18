@@ -119,4 +119,9 @@
 		select rid, id, rcategory, rtitle, rcontent, rdate, rfile, rsfile from myjeju_request_board where rid=#{rid}
 	</select>
 	
+	<!-- 공지사항리스트 -->
+	<select id="notice_list" resultType="com.myjeju.vo.NoticeVO">
+		select nid, ntitle, to_char(ndate, 'yyyy-mm-dd') ndate, ncount from myjeju_notice order by ndate desc
+	</select>
+	
 </mapper>

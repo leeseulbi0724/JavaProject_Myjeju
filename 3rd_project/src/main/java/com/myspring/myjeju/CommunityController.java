@@ -16,14 +16,21 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.myjeju.commons.Commons;
+import com.myjeju.service.AdminService;
 import com.myjeju.service.CommunityService;
+import com.myjeju.service.NoticeService;
 import com.myjeju.vo.CommunityVO;
+import com.myjeju.vo.NoticeVO;
 
 @Controller
 public class CommunityController {
 	
 	@Autowired
 	private CommunityService communityService;
+	@Autowired
+	private NoticeService noticeService;
+	@Autowired
+	private AdminService adminService;
 	
 	/**
 	 * 자유게시판 리스트
@@ -37,9 +44,12 @@ public class CommunityController {
 		int start = (Integer)map.get("start");
 		int end = (Integer)map.get("end");
 		ArrayList<CommunityVO> list = communityService.getFreeList(start, end);
+		//공지사항
+		ArrayList<NoticeVO> nlist = noticeService.getNoticeList();
 		
 		mv.setViewName("community/free_board");
 		mv.addObject("list", list);	
+		mv.addObject("nlist", nlist);
 		mv.addObject("dbcount", map.get("dbCount"));
 		mv.addObject("rpage", map.get("rpage"));
 		mv.addObject("pagesize", map.get("pageSize"));		
@@ -361,6 +371,20 @@ public class CommunityController {
 		mv.setViewName("redirect:/request_board.do");
 		return mv;
 		
+	}
+	
+	/**
+	 * 공지사항 상세보기
+	 */
+	@RequestMapping(value="notice_content.do", method=RequestMethod.GET)
+	public ModelAndView notice_content(String nid) {
+		ModelAndView mv = new ModelAndView();
+		
+		NoticeVO vo = adminService.getNoticeContent(nid);
+		
+		mv.addObject("vo", vo);
+		mv.setViewName("community/notice_content");
+		return mv;
 	}
 	
 	

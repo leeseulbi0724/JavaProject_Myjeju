@@ -83,4 +83,63 @@
 		</select>
 		
 		
+		<!-- 관리자 공지사항 -->
+		<insert id="notice_write" parameterType="com.myjeju.vo.NoticeVO">
+		<choose>
+			<when test = "nfile == null">
+				insert into myjeju_notice values('n_'||sequ_myjeju_notice.nextval,#{ntitle}, #{ncontent}, sysdate, 0, null, null)
+			</when>
+			<otherwise>
+					insert into myjeju_notice values('n_'||sequ_myjeju_notice.nextval,#{ntitle}, #{ncontent}, sysdate, 0, #{nfile}, #{nsfile})
+			</otherwise>
+		</choose>		
+		</insert>
+		
+		<select id="notice_list" parameterType="map" resultType="com.myjeju.vo.NoticeVO">
+			select rno, nid, ntitle, ncontent, nfile, nsfile, ndate 
+             from(select rownum  rno, nid, ntitle, ncontent, nfile, nsfile, ndate 
+				     from(select * from myjeju_notice order by ndate desc))
+				     where rno between #{start} and #{end}
+		</select>
+		
+		<select id="notice_count" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+			select count(num) from(select rownum num from MYJEJU_notice) where num >= #{pageNumber}
+		</select>
+		
+		<select id="notice_search" parameterType="java.util.Map" resultType="com.myjeju.vo.NoticeVO">			
+			select rno, nid, ntitle, ncontent, nfile, nsfile, ndate 
+			     from(select rownum rno, nid, ntitle, ncontent, nfile, nsfile, ndate 
+			     from(select * from MYJEJU_notice order by ndate desc) where ntitle like '%'||#{search_text}||'%')
+			     where rno between #{start} and #{end}
+		</select>
+		
+		<select id="notice_searchpage" parameterType="java.util.Map" resultType="java.lang.Integer">			
+			select count(num) from(select rownum num from myjeju_notice where ntitle like '%'||#{search_text}||'%') where num >= #{pageNumber}
+		</select>
+		
+		<select id="notice_content" parameterType="java.lang.String" resultType="com.myjeju.vo.NoticeVO">			
+			select nid, ntitle, ncontent, nfile, nsfile, ndate from myjeju_notice where nid=#{nid}
+		</select>
+		
+		<!-- 파일 포함 업데이트 -->
+		<update id="yes_update" parameterType="com.myjeju.vo.NoticeVO">
+			update myjeju_notice set ntitle=#{ntitle}, ncontent=#{ncontent}, nfile=#{nfile}, nsfile=#{nsfile} where nid=#{nid}
+		</update>
+		
+		<!-- 파일 미포함 업데이트 -->
+		<update id="no_update" parameterType="com.myjeju.vo.NoticeVO">
+			update myjeju_notice set ntitle=#{ntitle}, ncontent=#{ncontent} where nid=#{nid}
+		</update>
+		
+		<!-- 기존 파일 가져오기 -->
+		<select id="oldfile" parameterType="java.lang.String" resultType="java.lang.String">
+			select nsfile from myjeju_notice where nid=#{nid}
+		</select>
+		
+		<!-- 공지사항 삭제 -->
+		<delete id="notice_delete" parameterType="java.lang.String">
+			delete from myjeju_notice where nid=#{nid}
+		</delete>
+		
+		
 </mapper>

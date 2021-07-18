@@ -18,6 +18,17 @@
 	<script src="js/bootstrap.js"></script>
 	<script type="text/javascript"></script>
 </head>
+<style>
+	.write { 
+		background-color:rgb(20,86,184); 
+		color:white; 
+		padding:5px 10px;
+		border-radius:4px;
+		float:right;
+		margin-bottom:10px;
+	}
+	td>a { text-decoration:none; color:black; }
+</style>
 <body>
 	<nav class="navbar navbar-default">
 		<div class ="navbar-header">
@@ -56,19 +67,22 @@
 		</section>
 	
 		<section class ="setup_faq_list">
+		<a href="adnotice_write.do" class="write" >글쓰기</a>
 			<table class = "content_layout_setup_faq">
 				<tr>
 					<th> 번호 </th>
-					<th> 제목 </th>
-					<th> 아이디 </th>
+					<th style="width:800px;"> 제목 </th>
+					<th> 조회수 </th>
 					<th> 날짜 </th>
 				</tr>			 	
+				<c:forEach var="vo" items="${list}">
 				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
+					<td>${vo.rno }</td>
+					<td><a href="adnotice_content.do?nid=${vo.nid }">${vo.ntitle }</a></td>
+					<td>${vo.ncount}</td>
+					<td>${vo.ndate }</td>
 				</tr>
+				</c:forEach>
 				<tr>
 					<td colspan="6">
 						<ul class = "pagination" style="margin: 0 auto;">
@@ -81,7 +95,7 @@
 						String search_text = String.valueOf(pageContext.getAttribute("search_text"));
 						if(startPage != 1) {
 					%>
-						<li><a href="admember.do?pnum=<%= startPage -1 %>&search=<%= search %>&search_text=<%= search_text %>"><span><</span></a></li>
+						<li><a href="adnotice.do?pnum=<%= startPage -1 %>&search=<%= search %>&search_text=<%= search_text %>"><span><</span></a></li>
 					<%
 						} else {
 					%>
@@ -90,22 +104,22 @@
 						}
 						for(int i = startPage; i < Integer.parseInt(pageNumber); i++) {
 					%>
-						<li><a href="admember.do?pnum=<%= i %>&search=<%= search %>&search_text=<%= search_text %>" style="color: #000000;"><%= i %></a></li>
+						<li><a href="adnotice.do?pnum=<%= i %>&search=<%= search %>&search_text=<%= search_text %>" style="color: #000000;"><%= i %></a></li>
 					<%
 						}
 					%>
-						<li class="active_page" ><a href="admember.do?pnum=<%= pageNumber %>&search=<%= search %>&search_text=<%= search_text %>" style="background-color: #3d2520;color: #ffffff;"><%= pageNumber %></a></li>
+						<li class="active_page" ><a href="adnotice.do?pnum=<%= pageNumber %>&search=<%= search %>&search_text=<%= search_text %>" style="background-color: #3d2520;color: #ffffff;"><%= pageNumber %></a></li>
 					<%
 						for(int i = Integer.parseInt(pageNumber) + 1; i <= targetPage + Integer.parseInt(pageNumber); i++) {
 							if(i < startPage +10) {
 					%>
-						<li><a href="admember.do?pnum=<%= i %>&search=<%= search %>&search_text=<%= search_text %>" style="color: #000000;"><%= i %></a></li>
+						<li><a href="adnotice.do?pnum=<%= i %>&search=<%= search %>&search_text=<%= search_text %>" style="color: #000000;"><%= i %></a></li>
 					<%
 							}
 						}
 						if(targetPage + Integer.parseInt(pageNumber) > startPage + 9){
 					%>
-						<li><a href="admember.do?pnum=<%= startPage + 10 %>&search=<%= search %>&search_text=<%= search_text %>"color: #000000;"><span>></span></a></li>
+						<li><a href="adnotice.do?pnum=<%= startPage + 10 %>&search=<%= search %>&search_text=<%= search_text %>"color: #000000;"><span>></span></a></li>
 					<%
 						} else {
 					%>
@@ -119,9 +133,8 @@
 			</table>
 		</section>
 		<section class = "setup_faq_search">
-			<form name = "setup_counsel_form" action ="admember.do" method = "post">
+			<form name = "setup_counsel_form" action ="adnotice.do" method = "post">
 				<select class = "search" name = "search" style = "width: 70px; height: 27px">
-					<option value = "id">아이디</option>
 					<option value = "name">제목</option>
 				</select>
 				<input type = "text" name = "search_text" class = "search_text" style = "width: 300px; margin: 0 10px;">

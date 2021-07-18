@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="http://localhost:9000/myjeju/css/index.css">
 <link rel="stylesheet" href="http://localhost:9000/myjeju/css/community/board_content.css">
 <script src="http://localhost:9000/myjeju/js/jquery-3.6.0.min.js"></script>
+<script src="http://rawgit.com/jackmoored/autosize/master/dist/autosize.min.js"></script>
 <script>
 $(document).ready(function() {		
 	$("#con_textarea").css("height", $("textarea").prop('scrollHeight')+5);

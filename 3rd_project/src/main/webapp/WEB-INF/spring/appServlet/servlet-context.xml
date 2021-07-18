@@ -65,6 +65,7 @@
 	<beans:bean id="MypageService" class="com.myjeju.service.MypageServiceImpl"></beans:bean>
 	<beans:bean id="CommunityService" class="com.myjeju.service.CommunityServiceImpl"></beans:bean>
 	<beans:bean id="payService" class="com.myjeju.service.PayServiceImpl"></beans:bean>
+	<beans:bean id="NoticeService" class="com.myjeju.service.NoticeServiceImpl"></beans:bean>
 	
 	<!-- Interceptor Object -->
 	<beans:bean id="authInterceptor" class="com.myjeju.interceptor.AuthInterceptor"></beans:bean>

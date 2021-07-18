@@ -80,27 +80,15 @@ $(document).ready(function(){
 				</tr>
 			</thead>
 			<tbody class="notice_tbody" >			
+			<c:forEach var = "vo"  items="${nlist}">
 				<tr>
 					<td><a class="noticeBtn">공지</a></td>
-					<td><a href="#" class="notice_title">공지사항 제목</a></td>
+					<td><a href="notice_content.do?nid=${vo.nid }" class="notice_title">${vo.ntitle }</a></td>
 					<td>관리자</td>
-					<td>2021-07-06</td>
-					<td>254</td>
+					<td>${vo.ndate }</td>
+					<td>${vo.ncount }</td>
 				</tr>			
-				<tr>
-					<td><a class="noticeBtn">공지</a></td>
-					<td><a href="#" class="notice_title">공지사항 제목</a></td>
-					<td>관리자</td>
-					<td>2021-07-06</td>
-					<td>254</td>
-				</tr>			
-				<tr>
-					<td><a class="noticeBtn">공지</a></td>
-					<td><a href="#" class="notice_title">공지사항 제목</a></td>
-					<td>관리자</td>
-					<td>2021-07-06</td>
-					<td>254</td>
-				</tr>			
+			</c:forEach>					
 			</tbody>
 			<tbody class="tbody">
 				<c:forEach var = "vo"  items="${list}">

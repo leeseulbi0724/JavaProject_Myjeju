@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.myjeju.vo.CommunityVO;
+import com.myjeju.vo.NoticeVO;
 
 @Repository
 public class CommunityDAO {
@@ -116,5 +117,11 @@ public class CommunityDAO {
 	//요청게시판 상세보기
 	public CommunityVO getRequestContent(String rid) {
 		return sqlSession.selectOne(namespace+".request_content", rid);
+	}
+	
+	//공지사항 리스트
+	public ArrayList<NoticeVO> getNoticeList() {
+		List<NoticeVO> list = sqlSession.selectList(namespace+".notice_list");		
+		return (ArrayList<NoticeVO>)list;
 	}
 }
