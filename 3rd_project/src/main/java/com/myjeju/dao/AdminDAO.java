@@ -138,4 +138,51 @@ public class AdminDAO {
 	public int getNoticeDelete(String nid) {
 		return sqlSession.delete(namespace+".notice_delete", nid);
 	}
+	
+	//관리자 요청 리스트
+	public ArrayList<CommunityVO> getRequestList(int startnum, int endnum) {
+		Map<String,String> se = new HashMap<String,String>();
+		se.put("start", String.valueOf(startnum));
+		se.put("end", String.valueOf(endnum));
+		
+		List<CommunityVO> list = sqlSession.selectList(namespace+".request_list",se);
+		return (ArrayList<CommunityVO>)list;
+	}
+	//요청 총 갯수
+	public int getRequestPage(int pageNumber) {
+		return sqlSession.selectOne(namespace+".request_count", pageNumber);
+	}
+	public ArrayList<CommunityVO> getRequestList(int startnum, int end, String search, String search_text) {
+		Map<String,String> se = new HashMap<String,String>();
+		se.put("start", String.valueOf(startnum));
+		se.put("end", String.valueOf(end));
+		se.put("search", search);
+		se.put("search_text", search_text);
+		
+		List<CommunityVO> list = sqlSession.selectList(namespace+".request_search",se);
+		return (ArrayList<CommunityVO>)list;
+	}
+	public int getRequestPage(int pageNumber,String search,String search_text) {
+		Map<String,String> se = new HashMap<String,String>();
+		se.put("pageNumber", String.valueOf(pageNumber));
+		se.put("search", search);
+		se.put("search_text", search_text);
+		return sqlSession.selectOne(namespace+".request_searchpage", se);
+	}
+	//상세보기
+	public CommunityVO getRequestContent(String rid) {
+		return sqlSession.selectOne(namespace+".request_content", rid);
+	}
+	//댓글달기
+	public int getRequestComment(CommunityVO vo) {
+		return sqlSession.insert(namespace+".request_comment", vo);
+	}
+	//답변내용 가져오기
+	public CommunityVO getRequestCommentResult(String rid) {
+		return sqlSession.selectOne(namespace+".request_comment_result", rid);
+	}
+	//삭제하기
+	public int getRequestDelete(String rid) {
+		return sqlSession.delete(namespace+".request_delete", rid);
+	}
 }

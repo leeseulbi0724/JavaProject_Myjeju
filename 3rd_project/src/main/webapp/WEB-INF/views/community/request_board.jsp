@@ -68,13 +68,7 @@ $(document).ready(function(){
 						</td>
 						<td>${vo.id }</td>
 						<td>${vo.rdate }</td>
-					</tr>
-					<tr>
-						<td></td>
-						<td>　<img src="http://localhost:9000/myjeju/images/community/blue_arrow.png" width=15 height=15 style="margin-left:10px"><a href="#"> 답글</a></td>
-						<td>관리자</td>
-						<td>2021.07.01</td>
-					</tr>					
+					</tr>							
 				</c:forEach>
 			</tbody>
 		</table>		

@@ -112,5 +112,49 @@ public class AdminServiceImpl implements AdminService {
 		}
 		return result;
 	}
+	
+	//관리자 요청
+	@Override
+	public ArrayList<CommunityVO> getRequestList(int startnum,int endnum) {
+		return adminDAO.getRequestList(startnum, endnum);
+	}
+	@Override
+	public int RequestPage(int pageNumber) {
+		return adminDAO.getRequestPage(pageNumber);
+	}
+	@Override
+	public int RequestPage(int pageNumber,String search,String search_text){
+		return adminDAO.getRequestPage(pageNumber,search,search_text);
+	}
+	@Override
+	public ArrayList<CommunityVO> getRequestList(int startnum,int endnum,String search,String search_text){
+		return adminDAO.getRequestList(startnum,endnum,search,search_text);
+	}
+	@Override
+	public CommunityVO getRequestContent(String rid) {
+		return adminDAO.getRequestContent(rid);
+	}
+	@Override
+	public boolean getRequestComment(CommunityVO vo) {
+		int val = adminDAO.getRequestComment(vo);
+		boolean result = false;
+		if (val!=0) {
+			result = true;
+		}
+		return result;
+	}
+	@Override
+	public CommunityVO getRequestCommentResult(String rid) {
+		return adminDAO.getRequestCommentResult(rid);
+	}
+	@Override
+	public boolean getRequestDelete(String rid) {
+		int val = adminDAO.getRequestDelete(rid);
+		boolean result = false;
+		if (val!=0) {
+			result = true;
+		}
+		return result;
+	}
 
 }

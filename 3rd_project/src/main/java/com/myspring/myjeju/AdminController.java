@@ -355,14 +355,14 @@ public class AdminController {
 		int endnum = pageNumber*10; 
 		int pagenum = (pageNumber -1) * 10;
 		int target = 0;
-		/*
-		 * ArrayList<MemberVO> list = new ArrayList<MemberVO>(); if(search_text == null
-		 * || search_text.equals("") || search_text.equals("null")) { list =
-		 * adminService.getlist(startnum,endnum); target =
-		 * adminService.targetPage(pagenum); } else { list =
-		 * adminService.getlist(startnum,endnum,search,search_text); target =
-		 * adminService.targetPage(pagenum,search,search_text); }
-		 */
+		ArrayList<CommunityVO> list = new ArrayList<CommunityVO>();
+		if(search_text == null || search_text.equals("") || search_text.equals("null")) {
+	  		list = adminService.getRequestList(startnum,endnum);
+	  		target = adminService.RequestPage(pagenum);
+	  	} else {
+	  		list = adminService.getRequestList(startnum,endnum,search,search_text);
+	  		target = adminService.RequestPage(pagenum,search,search_text);
+	  	}
 			
 		int targetpage = 0;
 		if(pageNumber != 1 ) {
@@ -371,12 +371,60 @@ public class AdminController {
 			targetpage = (target-1) / 10 ;
 			}
 		mv.setViewName("admin/adrequest");
-		/* mv.addObject("list", list); */
+		mv.addObject("list", list);
 		mv.addObject("targetpage", String.valueOf(targetpage));
 		mv.addObject("pageNumber", String.valueOf(pageNumber));
 		mv.addObject("search", search);
 		mv.addObject("search_text", search_text);
 		
 		return mv;
+	}
+	
+	//관리자 답변하기
+	@RequestMapping (value = "/adrequest_re.do", method=RequestMethod.GET)
+	public ModelAndView adrequest_re(String rid) {
+		ModelAndView mv = new ModelAndView();
+		
+		CommunityVO vo = adminService.getRequestContent(rid);
+		//답변내용 가져오기
+		CommunityVO rvo = adminService.getRequestCommentResult(rid);
+		
+		mv.addObject("vo", vo);
+		mv.addObject("rvo", rvo);
+		mv.setViewName("admin/adrequest_re");
+		return mv;
+	}
+	
+	//관리자 답변하기
+	@ResponseBody
+	@RequestMapping(value="/adrequest_comment.do", method=RequestMethod.POST)
+	public boolean adrequest_comment(HttpServletRequest request) {
+		CommunityVO vo = new CommunityVO();
+		vo.setRid(request.getParameter("rid"));
+		vo.setRcontent(request.getParameter("textarea"));
+		
+		boolean result = adminService.getRequestComment(vo);
+		
+		return result;
+		
+	}
+	
+	//관리자 요청삭제하기
+	@ResponseBody
+	@RequestMapping(value="/admin_request_delete.do", method=RequestMethod.POST)
+	public boolean admin_request_delete(HttpServletRequest request) {
+		boolean result = adminService.getRequestDelete(request.getParameter("rid"));
+		
+		String old_bsfile = adminService.getOldFile(request.getParameter("rid"));
+		
+		String root_path = request.getSession().getServletContext().getRealPath("/");
+		String attach_path = "\\resources\\upload\\";
+		
+		File old_file = new File(root_path+attach_path+old_bsfile);
+		if ( old_file.exists()) {
+			old_file.delete();
+		}
+		
+		return result;
 	}
 }

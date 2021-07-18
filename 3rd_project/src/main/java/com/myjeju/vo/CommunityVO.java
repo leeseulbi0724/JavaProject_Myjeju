@@ -8,11 +8,17 @@ public class CommunityVO {
 	String id, fid, ftitle, fcontent,  ffile, fsfile, fdate, cid, ccomment, cdate, comment_id;
 	int rno, fhit;
 	
-	String rid, rtitle, rcategory, rcontent,  rfile, rsfile, rdate;
+	String rid, rtitle, rcategory, rcontent,  rfile, rsfile, rdate, rrdate;
 	int rnumber;
 	
 	
 	
+	public String getRrdate() {
+		return rrdate;
+	}
+	public void setRrdate(String rrdate) {
+		this.rrdate = rrdate;
+	}
 	public String getRcategory() {
 		return rcategory;
 	}

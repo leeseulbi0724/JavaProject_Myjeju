@@ -142,4 +142,55 @@
 		</delete>
 		
 		
+		
+		<!-- 관리자 요청 -->
+		<select id="request_list" parameterType="map" resultType="com.myjeju.vo.CommunityVO">
+			select rno, rid, id, rcategory, rtitle, rcontent, rfile, rsfile, rdate
+             from(select rownum  rno, rid, id, rcategory, rtitle, rcontent, rfile, rsfile, rdate
+				     from(select * from myjeju_request_board order by rdate desc))
+				     where rno between #{start} and #{end}
+		</select>
+		<select id="request_count" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+			select count(num) from(select rownum num from MYJEJU_request_board) where num >= #{pageNumber}
+		</select>
+		<select id="request_search" parameterType="java.util.Map" resultType="com.myjeju.vo.CommunityVO">
+			<choose>
+				<when test='search.equals("id")'>
+				select rno, rid, id, rcategory, rtitle, rcontent, rfile, rsfile, rdate
+				     from(select rownum rno, rid, id, rcategory, rtitle, rcontent, rfile, rsfile, rdate
+				     from(select * from MYJEJU_request_board order by rdate desc) where id like '%'||#{search_text}||'%')
+				     where rno between #{start} and #{end}
+				</when>
+				<otherwise>
+				select rno, rid, id, rcategory, rtitle, rcontent, rfile, rsfile, rdate
+				     from(select rownum rno, rid, id, rcategory, rtitle, rcontent, rfile, rsfile, rdate
+				     from(select * from MYJEJU_request_board order by fdate desc) where ntitle like '%'||#{search_text}||'%' )
+				     where rno between #{start} and #{end}
+				</otherwise>
+			</choose>
+		</select>
+		<select id="request_searchpage" parameterType="java.util.Map" resultType="java.lang.Integer">
+			<choose>
+				<when test='search.equals("name")'>
+				select count(num) from(select rownum num from myjeju_request_board where ntitle like '%'||#{search_text}||'%') where num >= #{pageNumber}
+				</when>
+				<otherwise>
+				select count(num) from(select rownum num from myjeju_request_board where id like '%'||#{search_text}||'%') where num >= #{pageNumber}
+				</otherwise>
+			</choose>
+		</select>
+		<select id="request_content" parameterType="java.lang.String" resultType="com.myjeju.vo.CommunityVO">
+			select id, rid, rcategory, rtitle, rcontent, rdate, rfile, rsfile from myjeju_request_board where rid=#{rid}
+		</select>
+		<insert id="request_comment" parameterType="com.myjeju.vo.CommunityVO">
+			insert into myjeju_request_re values(#{rid}, #{rcontent}, sysdate)
+		</insert>
+		<select id="request_comment_result" parameterType="java.lang.String" resultType="com.myjeju.vo.CommunityVO">
+			select rid, rcontent, rrdate from myjeju_request_re where rid=#{rid}
+		</select>
+		<delete id="request_delete" parameterType="java.lang.String">
+			delete from myjeju_request_board where rid=#{rid}
+		</delete>
+		
+		
 </mapper>

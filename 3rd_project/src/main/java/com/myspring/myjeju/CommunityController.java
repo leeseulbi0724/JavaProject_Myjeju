@@ -316,8 +316,11 @@ public class CommunityController {
 		
 		//게시물 내용
 		CommunityVO vo = communityService.getRequestContent(rid);
+		//답변 내용
+		CommunityVO rvo = adminService.getRequestCommentResult(rid);
 		
 		mv.addObject("vo", vo);
+		mv.addObject("rvo", rvo);
 		mv.setViewName("community/request_board_content");
 		
 		return mv;

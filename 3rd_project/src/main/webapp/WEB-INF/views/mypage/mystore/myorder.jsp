@@ -118,20 +118,22 @@
 		</div>
 		<div class="content store_content">
 			<p>2021.07</p>
-			<c:forEach var = "vo"  items="${list}" begin="0" end="3">
-				<div class="box">
-					<img src="http://localhost:9000/myjeju/images/store/${vo.o_file }" width=100 height=80>
-					<p class="info">${vo.o_date }<br>${vo.o_name }<br><span>총 ${vo.o_count }개</span></p>
-					<p class="price"><fmt:formatNumber value="${vo.o_price }" pattern="#,###" />원</p>
-				</div>
-			</c:forEach>
-			<c:forEach var = "vo"  items="${list}" begin="4" end="${fn:length(list)-1}" >					
-				<div class="box more_box store_more_box">
-					<img src="http://localhost:9000/myjeju/images/store/${vo.o_file }" width=100 height=80>
-					<p class="info">${vo.o_date }<br>${vo.o_name }<br><span>총 ${vo.o_count }개</span></p>
-					<p class="price"><fmt:formatNumber value="${vo.o_price }" pattern="#,###" />원</p>
-				</div>
-			</c:forEach>	
+			<c:if test="${not empty list }">
+				<c:forEach var = "vo"  items="${list}" begin="0" end="3">
+					<div class="box">
+						<img src="http://localhost:9000/myjeju/images/store/${vo.o_file }" width=100 height=80>
+						<p class="info">${vo.o_date }<br>${vo.o_name }<br><span>총 ${vo.o_count }개</span></p>
+						<p class="price"><fmt:formatNumber value="${vo.o_price }" pattern="#,###" />원</p>
+					</div>
+				</c:forEach>
+				<c:forEach var = "vo"  items="${list}" begin="4" end="${fn:length(list)-1}" >					
+					<div class="box more_box store_more_box">
+						<img src="http://localhost:9000/myjeju/images/store/${vo.o_file }" width=100 height=80>
+						<p class="info">${vo.o_date }<br>${vo.o_name }<br><span>총 ${vo.o_count }개</span></p>
+						<p class="price"><fmt:formatNumber value="${vo.o_price }" pattern="#,###" />원</p>
+					</div>
+				</c:forEach>	
+			</c:if>
 			<div class="more store_more">
 				<div class="img"></div><span>더보기</span>
 			</div>	
@@ -139,30 +141,32 @@
 		
 		<div class="content reservation_content">
 			<p>2021.07</p>
-			<c:forEach var = "vo"  items="${mlist}" begin="0" end="3">
-			<fmt:parseDate value="${vo.firstday }" var="strPlanDate" pattern="yyyy-MM-dd"/>
-			<fmt:parseNumber value="${strPlanDate.time / (1000*60*60*24)}" integerOnly="true" var="strDate"></fmt:parseNumber>
-			<fmt:parseDate value="${vo.lastday }" var="endPlanDate" pattern="yyyy-MM-dd"/>
-			<fmt:parseNumber value="${endPlanDate.time / (1000*60*60*24)}" integerOnly="true" var="endDate"></fmt:parseNumber>
-				<div class="box">
-					<img src="http://localhost:9000/myjeju/images/house/${vo.h_img }" width=100 height=80>
-					<p class="info">${vo.rdate }<br><a href="house_detail.do?hid=${vo.hid }">${vo.h_name }</a><br><span>${vo.hd_name }</span></p>
-					<p class="date"><strong>예약일</strong> <br><strong>입실</strong> ${vo.firstday }<br><strong>퇴실</strong> ${vo.lastday }</p>
-					<p class="price"><fmt:formatNumber value="${ (endDate - strDate)*vo.hd_price }" pattern="#,###" />원</p>
-				</div>
-			</c:forEach>
-			<c:forEach var = "vo"  items="${mlist}" begin="4" end="${fn:length(mlist)-1}" >		
-			<fmt:parseDate value="${vo.firstday }" var="strPlanDate" pattern="yyyy-MM-dd"/>
-			<fmt:parseNumber value="${strPlanDate.time / (1000*60*60*24)}" integerOnly="true" var="strDate"></fmt:parseNumber>
-			<fmt:parseDate value="${vo.lastday }" var="endPlanDate" pattern="yyyy-MM-dd"/>
-			<fmt:parseNumber value="${endPlanDate.time / (1000*60*60*24)}" integerOnly="true" var="endDate"></fmt:parseNumber>		
-				<div class="box more_box reservation_more_box">
-					<img src="http://localhost:9000/myjeju/images/house/${vo.h_img }" width=100 height=80>
-					<p class="info">${vo.rdate }<br><a href="house_detail.do?hid=${vo.hid }">${vo.h_name }</a><br><span>${vo.hd_name }</span></p>
-					<p class="date"><strong>예약일</strong> <br><strong>입실</strong> ${vo.firstday }<br><strong>퇴실</strong> ${vo.lastday }</p>
-					<p class="price"><fmt:formatNumber value="${ (endDate - strDate)*vo.hd_price }" pattern="#,###" />원</p>
-				</div>
-			</c:forEach>		
+			<c:if test="${not empty mlist }">
+				<c:forEach var = "vo"  items="${mlist}" begin="0" end="3">
+				<fmt:parseDate value="${vo.firstday }" var="strPlanDate" pattern="yyyy-MM-dd"/>
+				<fmt:parseNumber value="${strPlanDate.time / (1000*60*60*24)}" integerOnly="true" var="strDate"></fmt:parseNumber>
+				<fmt:parseDate value="${vo.lastday }" var="endPlanDate" pattern="yyyy-MM-dd"/>
+				<fmt:parseNumber value="${endPlanDate.time / (1000*60*60*24)}" integerOnly="true" var="endDate"></fmt:parseNumber>
+					<div class="box">
+						<img src="http://localhost:9000/myjeju/images/house/${vo.h_img }" width=100 height=80>
+						<p class="info">${vo.rdate }<br><a href="house_detail.do?hid=${vo.hid }">${vo.h_name }</a><br><span>${vo.hd_name }</span></p>
+						<p class="date"><strong>예약일</strong> <br><strong>입실</strong> ${vo.firstday }<br><strong>퇴실</strong> ${vo.lastday }</p>
+						<p class="price"><fmt:formatNumber value="${ (endDate - strDate)*vo.hd_price }" pattern="#,###" />원</p>
+					</div>
+				</c:forEach>
+				<c:forEach var = "vo"  items="${mlist}" begin="4" end="${fn:length(mlist)-1}" >		
+				<fmt:parseDate value="${vo.firstday }" var="strPlanDate" pattern="yyyy-MM-dd"/>
+				<fmt:parseNumber value="${strPlanDate.time / (1000*60*60*24)}" integerOnly="true" var="strDate"></fmt:parseNumber>
+				<fmt:parseDate value="${vo.lastday }" var="endPlanDate" pattern="yyyy-MM-dd"/>
+				<fmt:parseNumber value="${endPlanDate.time / (1000*60*60*24)}" integerOnly="true" var="endDate"></fmt:parseNumber>		
+					<div class="box more_box reservation_more_box">
+						<img src="http://localhost:9000/myjeju/images/house/${vo.h_img }" width=100 height=80>
+						<p class="info">${vo.rdate }<br><a href="house_detail.do?hid=${vo.hid }">${vo.h_name }</a><br><span>${vo.hd_name }</span></p>
+						<p class="date"><strong>예약일</strong> <br><strong>입실</strong> ${vo.firstday }<br><strong>퇴실</strong> ${vo.lastday }</p>
+						<p class="price"><fmt:formatNumber value="${ (endDate - strDate)*vo.hd_price }" pattern="#,###" />원</p>
+					</div>
+				</c:forEach>
+				</c:if>	
 			<div class="more reservation_more">
 				<div class="img"></div><span>더보기</span>
 			</div>

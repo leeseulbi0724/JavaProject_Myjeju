@@ -91,34 +91,36 @@
 		</div>
 		<div class="content">
 			<p>2021.07</p>
-			<c:forEach var = "vo"  items="${list}" begin="0" end="3">
-				<div class="box">
-				<c:if test = "${vo.type eq 'plus' }">
-					<div class="plus">적립</div>
-					<p class="info">${vo.pdate }<br><span>상품 구매 적립</span></p>
-					<p class="price_plus">+${vo.point }원</p>
-				</c:if>
-				<c:if test = "${vo.type eq 'minus' }">
-					<div class="minus">사용</div>
-					<p class="info">${vo.pdate }<br><span>상품 구매 사용</span></p>
-					<p class="price_minus">-${vo.point }원</p>
-				</c:if>
-				</div>
-			</c:forEach>
-			<c:forEach var = "vo"  items="${list}" begin="3" end="${fn:length(list)-1}">
-				<div class="box more_box">
-				<c:if test = "${vo.type eq 'plus' }">
-					<div class="plus">적립</div>
-					<p class="info">${vo.pdate }<br><span>상품 구매 적립</span></p>
-					<p class="price_plus">+${vo.point }원</p>
-				</c:if>
-				<c:if test = "${vo.type eq 'minus' }">
-					<div class="minus">사용</div>
-					<p class="info">${vo.pdate }<br><span>상품 구매 사용</span></p>
-					<p class="price_minus">-${vo.point }원</p>
-				</c:if>
-				</div>
-			</c:forEach>
+			<c:if test = "${not empty list }">
+				<c:forEach var = "vo"  items="${list}" begin="0" end="3">
+					<div class="box">
+					<c:if test = "${vo.type eq 'plus' }">
+						<div class="plus">적립</div>
+						<p class="info">${vo.pdate }<br><span>상품 구매 적립</span></p>
+						<p class="price_plus">+${vo.point }원</p>
+					</c:if>
+					<c:if test = "${vo.type eq 'minus' }">
+						<div class="minus">사용</div>
+						<p class="info">${vo.pdate }<br><span>상품 구매 사용</span></p>
+						<p class="price_minus">-${vo.point }원</p>
+					</c:if>
+					</div>
+				</c:forEach>
+				<c:forEach var = "vo"  items="${list}" begin="3" end="${fn:length(list)-1}">
+					<div class="box more_box">
+					<c:if test = "${vo.type eq 'plus' }">
+						<div class="plus">적립</div>
+						<p class="info">${vo.pdate }<br><span>상품 구매 적립</span></p>
+						<p class="price_plus">+${vo.point }원</p>
+					</c:if>
+					<c:if test = "${vo.type eq 'minus' }">
+						<div class="minus">사용</div>
+						<p class="info">${vo.pdate }<br><span>상품 구매 사용</span></p>
+						<p class="price_minus">-${vo.point }원</p>
+					</c:if>
+					</div>
+				</c:forEach>
+			</c:if>
 		</div>
 		<div class="more">
 			<div class="img"></div><span>더보기</span>

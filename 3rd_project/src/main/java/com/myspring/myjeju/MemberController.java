@@ -67,7 +67,7 @@ public class MemberController {
 		boolean join_result = memberService.getJoinResult(vo);
     	
     	if (join_result == true ) {
-    		result = "index";
+    		result = "member/join_success";
     	} else {
 			/* result = "errorPage"; */
     	}

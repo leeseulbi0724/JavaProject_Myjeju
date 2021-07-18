@@ -40,9 +40,21 @@ $(document).ready(function() {
 				</tr>
 		</table>
 		<a class="btn" href="request_board.do" id="list">목록</a>	
-		<%-- <% if (vo.getId().equals( session.getAttribute("signedUser"))) { %>
-		<a class="btn btn-primary"  id="delete" >삭제</a>
-		<% } %> --%>
+		<div class="comment_box" style="display:inline-block; width:100%">
+		<p class="text">답변</p><br>	
+			<c:if test = "${empty rvo.rcontent }">
+			<div class="com_box"  style="border:none">
+					아직 답변이 달리지 않았습니다
+			</div>
+			</c:if>		
+			<c:if test = "${not empty rvo.rcontent }">
+				<div class="com_box">
+					<p>관리자</p>
+					<p>${rvo.rcontent }</p>
+					<p class="date">${rvo.rrdate }</p>
+				</div>
+			</c:if>
+		</div>
 	</div>
 </div>
 </section>

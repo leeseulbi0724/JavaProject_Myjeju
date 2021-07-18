@@ -30,4 +30,14 @@ public interface AdminService {
 	boolean getFileNoUpdate(NoticeVO vo);
 	String getOldFile(String nid);
 	boolean getNoticeDelete(String nid);
+	
+	//관리자 요청
+	ArrayList<CommunityVO> getRequestList(int startnum,int endnum,String search,String search_text);
+	ArrayList<CommunityVO> getRequestList(int startnum, int endnum);
+	int RequestPage(int pageNumber);
+	int RequestPage(int pageNumber,String search,String search_text);
+	CommunityVO getRequestContent(String rid);
+	boolean getRequestComment(CommunityVO vo);
+	CommunityVO getRequestCommentResult(String rid);
+	boolean getRequestDelete(String rid);
 }
