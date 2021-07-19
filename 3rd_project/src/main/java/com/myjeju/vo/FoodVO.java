@@ -3,8 +3,14 @@ package com.myjeju.vo;
 public class FoodVO {
 	String fid, f_name, f_tag, f_infor, f_infor2, f_addr, f_vpoint, f_hpoint, f_hp, 
 	f_image1, f_image2, f_image3, f_image4, f_image5;
-	int f_like;
+	int rno, f_like;
 	
+	public int getRno() {
+		return rno;
+	}
+	public void setRno(int rno) {
+		this.rno = rno;
+	}
 	public String getFid() {
 		return fid;
 	}

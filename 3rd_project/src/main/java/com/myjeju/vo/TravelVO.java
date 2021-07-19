@@ -3,8 +3,14 @@ package com.myjeju.vo;
 public class TravelVO {
 	String tid, t_name, t_tag, t_infor, t_infor2, t_addr, t_vpoint, t_hpoint, t_hp, 
 			t_image1, t_image2, t_image3, t_image4, t_image5;
-	int t_like;
+	int rno, t_like;
 	
+	public int getRno() {
+		return rno;
+	}
+	public void setRno(int rno) {
+		this.rno = rno;
+	}
 	public String getTid() {
 		return tid;
 	}
