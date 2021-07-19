@@ -107,7 +107,7 @@
 					<%
 						}
 					%>
-						<li class="active_page" ><a href="adrequest.do?pnum=<%= pageNumber %>&search=<%= search %>&search_text=<%= search_text %>" style="background-color: #3d2520;color: #ffffff;"><%= pageNumber %></a></li>
+						<li class="active_page" ><a href="adrequest.do?pnum=<%= pageNumber %>&search=<%= search %>&search_text=<%= search_text %>" style="background-color: #337ab7;color: #ffffff;"><%= pageNumber %></a></li>
 					<%
 						for(int i = Integer.parseInt(pageNumber) + 1; i <= targetPage + Integer.parseInt(pageNumber); i++) {
 							if(i < startPage +10) {
@@ -118,7 +118,7 @@
 						}
 						if(targetPage + Integer.parseInt(pageNumber) > startPage + 9){
 					%>
-						<li><a href="adrequest.do?pnum=<%= startPage + 10 %>&search=<%= search %>&search_text=<%= search_text %>"color: #000000;"><span>></span></a></li>
+						<li><a href="adrequest.do?pnum=<%= startPage + 10 %>&search=<%= search %>&search_text=<%= search_text %>"style="color: #000000;"><span>></span></a></li>
 					<%
 						} else {
 					%>
