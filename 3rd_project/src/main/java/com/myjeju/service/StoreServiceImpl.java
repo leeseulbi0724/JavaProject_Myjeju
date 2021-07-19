@@ -61,11 +61,6 @@ public class StoreServiceImpl implements StoreService {
 	}
 
 	@Override
-	public boolean getInsertResult(StoreVO vo) {
-		return storeDAO.getInsertResult(vo);
-	}
-
-	@Override
 	public StoreVO getContent(String sid) {
 		return storeDAO.getContent(sid);
 	}

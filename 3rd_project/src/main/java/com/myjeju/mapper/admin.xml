@@ -239,4 +239,35 @@
 			</choose>
 		</select>
 		
+		<!-- 스토어 상품 상세 화면 -->
+		<select id = "store_content" parameterType = "java.lang.String" resultType = "com.myjeju.vo.StoreVO">
+			select sid, s_category, s_name, s_price, s_image, s_content, s_sfile, s_ssfile
+				from myjeju_store where sid = #{sid}
+		</select>
+		
+		<!-- 파일 포함 업데이트 -->
+		<update id="store_update_file" parameterType="com.myjeju.vo.StoreVO">
+			update myjeju_store set s_category = #{s_category}, s_name = #{s_name}, s_price = #{s_price}, s_image = #{s_image}, s_content = #{s_content}, s_sfile = #{s_sfile}, s_ssfile = #{s_ssfile} where sid = #{sid}
+		</update>
+		
+		<!-- 파일 미포함 업데이트 -->
+		<update id="store_update_no_file" parameterType="com.myjeju.vo.StoreVO">
+			update myjeju_store set s_category = #{s_category}, s_name = #{s_name}, s_price = #{s_price} where sid = #{sid}
+		</update>
+		
+		<!-- 스토어 - 기존 파일 가져오기 -->
+		<select id="store_oldfile" parameterType="java.lang.String" resultType="java.lang.String">
+			select s_sfile, s_ssfile from myjeju_store where sid = #{sid}
+		</select>
+		
+		<!-- 스토어 상품 등록 -->
+		<insert id = "storeInsert" parameterType = "com.myjeju.vo.StoreVO">
+			insert into myjeju_store values('s_'||sequ_myjeju_store.nextval, #{s_category}, #{s_name}, #{s_price}, #{s_image}, #{s_content}, #{s_sfile}, #{s_ssfile})
+		</insert>
+		
+		<!-- 스토어 상품 삭제 -->
+		<delete id="store_delete" parameterType="java.lang.String">
+			delete from myjeju_store where sid = #{sid}
+		</delete>
+		
 </mapper>

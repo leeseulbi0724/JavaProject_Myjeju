@@ -31,26 +31,17 @@
 	.table td>textarea { width:100%; background-color:white; border:none; }
 </style>
 <script>
-/* $(document).ready(function() {
-	$(".write").click(function() {
-		if ($("#title").val() == "") {
-			alert("제목을 입력해주세요");
-			$("#title").focus();		
-		} else if ($("#content").val() == "") {
-			alert("내용을 입력해주세요");
-			$("#content").focus();		
-		} else {
-			 admin_notice.submit();
-		}
+	$(document).ready(function() {
+		
+		$(".delete").click(function() {
+			var del = confirm("해당 상품을 삭제하시겠습니까?");
+			
+			if(del) {
+				location.replace("adstore_delete_proc.do?sid=${vo.sid}");
+			}
+		});
 	});
 	
-	 $(".delete").click(function() {
-		  var con_test = confirm("게시글을 삭제하시겠습니까?"); 
-       	if(con_test == true){   
-       		location.replace("adnotice_delete_proc.do?sid=${vo.sid}");
-       	}
-	  });
-}); */
 </script>
 <body style="height:700px">
 	<nav class="navbar navbar-default">
@@ -116,9 +107,9 @@
 		 			</td>
 		 		</tr>
 		 	</table>
-		 	<a href="adstore.do" class="list">목록</a>
-		 	<a href="adstore_update.do?sid=${vo.sid}" class="update">수정</a>
-		 	<a class="delete">삭제</a>
+		 	<a href = "adstore.do" class="list">목록</a>
+		 	<a href = "adstore_update.do?sid=${vo.sid}" class="update">수정</a>
+		 	<a class = "delete">삭제</a>
 			</div>
 		<section class ="setup_faq_list">
 		

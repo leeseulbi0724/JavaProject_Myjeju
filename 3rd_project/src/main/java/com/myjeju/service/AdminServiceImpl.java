@@ -177,5 +177,40 @@ public class AdminServiceImpl implements AdminService {
 	public int StorePage(int pageNumber, String search, String search_text) {
 		return adminDAO.getStorePage(pageNumber, search, search_text);
 	}
+	@Override
+	public StoreVO getStoreContent(String sid) {
+		return adminDAO.getStoreContent(sid);
+	}
+	@Override
+	public boolean getStoreUpdateFile(StoreVO vo) {
+		boolean result = false;
+		int value = adminDAO.getStoreUpdateFile(vo);
+		if (value != 0) {
+			result = true;
+		}
+		return result;
+	}
+	@Override
+	public boolean getStoreUpdateNoFile(StoreVO vo) {
+		boolean result = false;
+		int value = adminDAO.getStoreUpdateNoFile(vo);
+		if (value != 0) {
+			result = true;
+		}
+		return result;
+	}
+	@Override
+	public String getStoreOldFile(String sid) {
+		return adminDAO.getStoreOldFile(sid);
+	}
+	@Override
+	public boolean getStoreInsertResult(StoreVO vo) {
+		return adminDAO.getStoreInsertResult(vo);
+	}
+	@Override
+	public boolean getStoreDelete(String sid) {
+		return adminDAO.getStoreDelete(sid);
+	}
+	
 
 }

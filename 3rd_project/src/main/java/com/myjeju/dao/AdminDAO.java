@@ -223,6 +223,41 @@ public class AdminDAO {
 		return sqlSession.selectOne(namespace+".store_searchpage", se);
 	}
 	
+	//SELECT --> 스토어 상품 상세 화면
+	public StoreVO getStoreContent(String sid) {
+		return sqlSession.selectOne(namespace + ".store_content", sid);
+	}
 	
+	//관리자 - 스토어 UPDATE 파일 포함
+	public int getStoreUpdateFile(StoreVO vo) {
+		return sqlSession.update(namespace + ".store_update_file", vo);
+	}	
 	
+	//관리자 - 스토어 UPDATE 파일 미 포함
+	public int getStoreUpdateNoFile(StoreVO vo) {
+		return sqlSession.update(namespace + ".store_update_no_file", vo);
+	}
+	
+	//관리자 - 스토어 오래된 이미지 찾기
+	public String getStoreOldFile(String sid) {
+		return sqlSession.selectOne(namespace+".store_oldfile", sid);
+	}
+	
+	//INSERT --> 스토어 상품 등록
+	public boolean getStoreInsertResult(StoreVO vo) {
+		boolean result = false;
+		int value = sqlSession.insert(namespace + ".storeInsert", vo);
+		if(value != 0) result = true;
+		return result;
+	}
+	
+	//스토어 상품 삭제
+	public boolean getStoreDelete(String sid) {
+		boolean result = false;
+		int value = sqlSession.delete(namespace+".store_delete", sid);
+		if(value != 0) result = true;
+		return result;
+	}
+
+
 }

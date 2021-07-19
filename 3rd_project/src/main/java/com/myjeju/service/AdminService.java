@@ -49,4 +49,10 @@ public interface AdminService {
 	ArrayList<StoreVO> getStoreList(int startnum, int endnum, String search, String search_text);
 	int StorePage(int pageNumber);
 	int StorePage(int pageNumber,String search,String search_text);
+	StoreVO getStoreContent(String sid);
+	boolean getStoreUpdateFile(StoreVO vo);
+	boolean getStoreUpdateNoFile(StoreVO vo);
+	String getStoreOldFile(String sid);
+	boolean getStoreInsertResult(StoreVO vo);
+	boolean getStoreDelete(String sid);
 }

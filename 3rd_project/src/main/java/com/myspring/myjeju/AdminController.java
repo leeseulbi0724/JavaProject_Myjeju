@@ -30,10 +30,7 @@ public class AdminController {
 	
 	@Autowired
 	private CommunityService communityService;
-	
-	@Autowired
-	private StoreService storeService;
-	
+
 	
 	@RequestMapping(value="/adminindex.do", method=RequestMethod.GET)
 	public String main(HttpServletRequest request) {
@@ -434,6 +431,7 @@ public class AdminController {
 		return result;
 	}
 	
+	// 스토어 스토어 스토어
 	
 	// 관리자 스토어창
 	@RequestMapping(value="/adstore.do",method= {RequestMethod.GET,RequestMethod.POST})
@@ -480,7 +478,7 @@ public class AdminController {
 	public ModelAndView adstore_content(String sid) {
 		ModelAndView mv = new ModelAndView();
 		
-		StoreVO vo = storeService.getContent(sid);
+		StoreVO vo = adminService.getStoreContent(sid);
 		
 		mv.setViewName("admin/adstore_content");
 		mv.addObject("vo", vo);
@@ -488,12 +486,12 @@ public class AdminController {
 		return mv;
 	}
 	
-	//공지사항 수정하기
+	//스토어 수정 화면
 	@RequestMapping(value = "/adstore_update.do", method=RequestMethod.GET)
 	public ModelAndView adstore_update(String sid) {
 		ModelAndView mv = new ModelAndView();
 		
-		StoreVO vo = storeService.getContent(sid);
+		StoreVO vo = adminService.getStoreContent(sid);
 		
 		mv.addObject("vo", vo);
 		mv.setViewName("admin/adstore_update");
@@ -501,4 +499,150 @@ public class AdminController {
 		return mv;
 	}
 	
+	//스토어 수정 처리
+	@RequestMapping(value = "/adstore_update_proc.do", method=RequestMethod.POST)
+	public ModelAndView adstore_update_proc(HttpServletRequest request, StoreVO vo) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		String sid = vo.getSid();
+		
+		boolean result = false;
+		
+		if (vo.getSfile1().getOriginalFilename() != "") {
+			//파일 존재
+			String root_path = request.getSession().getServletContext().getRealPath("/");
+			String attach_path = "\\resources\\upload\\";
+			//System.out.print(root_path);
+			
+			//rfname 중복방지 처리			
+			UUID uuid = UUID.randomUUID();
+			//System.out.println((vo.getSfile1().getOriginalFilename()));
+			//System.out.println((uuid +"_"+vo.getSfile1().getOriginalFilename()));	
+				
+			//DB저장
+			vo.setS_image(vo.getSfile1().getOriginalFilename());
+			vo.setS_sfile(uuid + "_" + vo.getSfile1().getOriginalFilename());
+			
+			vo.setS_content(vo.getSfile2().getOriginalFilename());
+			vo.setS_ssfile(uuid + "_" + vo.getSfile2().getOriginalFilename());
+	
+			//BoardDAO dao = new BoardDAO();
+			//String old_bsfile = adminService.getOldFile(vo.getSid());
+			String old_sfile1 = adminService.getStoreOldFile(vo.getSid());
+			
+			result = adminService.getStoreUpdateFile(vo);
+			
+			//DB저장 완료 후 폴더에 저장하기
+			if (result) {
+				File file1 = new File(root_path + attach_path + vo.getS_sfile());
+				vo.getSfile1().transferTo(file1);
+				
+				File file2 = new File(root_path + attach_path + vo.getS_ssfile());
+				vo.getSfile2().transferTo(file2);
+				
+				//기존 upload 폴더에 존재하는 파일 삭제
+				File old_file = new File(root_path + attach_path + old_sfile1);
+				if ( old_file.exists()) {
+					old_file.delete();
+				}
+			}
+			
+		} else {
+			//파일 미포함 업데이트
+			result = adminService.getStoreUpdateNoFile(vo);
+		}
+		mv.setViewName("redirect:/adstore_content.do?sid=" + sid);
+		return mv;
+	}
+	
+	
+
+	//스토어 상품등록 화면
+	@RequestMapping(value = "/adstore_write.do", method = RequestMethod.GET)
+	public String adstore_write() {
+		return "admin/adstore_write";
+	}
+	
+
+	//store_write_proc.do : 스토어 상품 등록 처리
+	@RequestMapping(value = "/adstore_write_proc.do", method = RequestMethod.POST)
+	public ModelAndView adstore_write_proc(StoreVO vo, HttpServletRequest request) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		String root_path = "";
+		String attach_path = "";
+		
+		if(vo.getSfile1().getSize() != 0) {
+			// 1. 파일 저장 위치
+			root_path = request.getSession().getServletContext().getRealPath("/");
+			attach_path = "\\resources\\upload\\";
+			
+			// 2. 파일 이름 --> vo에 저장
+			//rfname 중복방지 처리
+			UUID uuid = UUID.randomUUID();
+			
+			//DB저장
+			vo.setS_image(vo.getSfile1().getOriginalFilename());
+			vo.setS_sfile(uuid + "_" + vo.getSfile1().getOriginalFilename());
+			
+			vo.setS_content(vo.getSfile2().getOriginalFilename());
+			vo.setS_ssfile(uuid + "_" + vo.getSfile2().getOriginalFilename());
+		
+		}
+			
+		// 3. DB연동
+		boolean result = adminService.getStoreInsertResult(vo);
+		
+		if(result) {
+			
+			// 4. DB 연동 성공 --> upload 폴더에 저장			//DB저장 완료 후 폴더에 저장하기
+			File file = new File(root_path + attach_path + vo.getS_sfile());
+			vo.getSfile1().transferTo(file);
+			
+			File file2 = new File(root_path + attach_path + vo.getS_ssfile());
+			vo.getSfile2().transferTo(file2);
+			
+			mv.setViewName("redirect:/adstore.do");
+		}
+			
+		return mv;
+	}
+	
+	
+	//관리자 상품 삭제
+	@RequestMapping(value = "/adstore_delete_proc.do", method=RequestMethod.GET)
+	public ModelAndView adstore_delete_proc(HttpServletRequest request, String sid) {
+		ModelAndView mv = new ModelAndView();
+		
+		//String old_bsfile = adminService.getOldFile(nid);
+		String old_sfile = adminService.getStoreOldFile(sid);
+		
+		String root_path = request.getSession().getServletContext().getRealPath("/");
+		String attach_path = "\\resources\\upload\\";
+		
+		File old_file = new File(root_path + attach_path + old_sfile);
+		
+		if ( old_file.exists()) {
+			old_file.delete();
+		}
+		
+		//boolean result = adminService.getNoticeDelete(nid);
+		boolean result = adminService.getStoreDelete(sid);
+		
+		if(result) {
+			mv.setViewName("redirect:/adstore.do");
+		}
+		
+		return mv;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
+
+

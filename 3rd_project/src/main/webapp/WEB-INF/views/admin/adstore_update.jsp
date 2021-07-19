@@ -35,14 +35,21 @@
 <script>
 $(document).ready(function() {
 	$(".write").click(function() {
-		if ($("#title").val() == "") {
-			alert("제목을 입력해주세요");
-			$("#title").focus();		
-		} else if ($("#content").val() == "") {
-			alert("내용을 입력해주세요");
-			$("#content").focus();		
-		} else {
-           adnotice_update.submit();
+			
+		if($("#s_category").val() == "choice") {
+			alert("카테고리를 입력해주세요");
+			$("#s_category").focus();
+			return false;
+		} else if ($("#s_name").val() == "") {
+			alert("상품명을 입력해주세요");
+			$("#s_name").focus();
+			return false;
+		} else if ($("#s_price").val() == "") {
+			alert("가격을 입력해주세요");
+			$("#s_price").focus();
+			return false;
+		} else {	
+           adstore_update.submit();
 		}
 	});
 	
@@ -92,16 +99,22 @@ $(document).ready(function() {
 			<div></div>
 		</section>
 			<div style="width:1000px; display:inline-block;">
-			<form name="adnotice_update" action="adnotice_update_proc.do" method="post" enctype="multipart/form-data">
+			<form name="adstore_update" action="adstore_update_proc.do" method="post" enctype="multipart/form-data">
 				<input type="hidden" value="${vo.sid }" name="sid">
-				<input type="text" class="form-control"style="margin-bottom:5px; width:100%" name="s_category" id="s_category" value="${vo.s_category }">
-				<input type="text" class="form-control"style="margin-bottom:5px; width:100%" name="s_name" id="s_name" value="${vo.s_name }">
-				<textarea class="form-control" style="height:500px; margin-bottom:5px; " name="s_price" id="s_price">${vo.s_price}</textarea>
+				<%-- <input type="text" class="form-control"style="margin-bottom:5px; width:100%" name="s_category" id="s_category" value="${vo.s_category}"> --%>
+				<select name = "s_category" id = "s_category" style = "display : inline-block; width : 15%;  margin-right : 10px;" class = "form-control">
+					<option value = "${vo.s_category}">${vo.s_category}</option>
+					<option value = "식품">식품</option>
+					<option value = "기념품">기념품</option>
+					<option value = "잡화">잡화</option>
+				</select>
+				<input type="text" class="form-control"style="display : inline-block; margin-bottom:20px; width:83%" name="s_name" id="s_name" value="${vo.s_name }">
+				<input type = "text" class="form-control" style=" margin-bottom:20px; " name="s_price" id="s_price" value = "${vo.s_price}">
 				<input type="file" class="form-control" name="sfile1" style="margin-bottom:20px;" id="file1">
 				<div class="file_name">${vo.s_sfile}</div>
 				<input type="file" class="form-control" name="sfile2" style="margin-bottom:20px;" id="file2">
 				<div class="file_name">${vo.s_ssfile}</div>
-				<a href="adnotice_content.do?sid=${vo.sid}" class="list" >취소</a>
+				<a href="adstore_content.do?sid=${vo.sid}" class="list" >취소</a>
 				<a class="write" >수정</a>
 			</form>
 			</div>

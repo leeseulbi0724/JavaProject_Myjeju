@@ -58,16 +58,7 @@ public class StoreDAO {
 		List<StoreVO> list = sqlSession.selectList(namespace + ".etclist");
 		return (ArrayList<StoreVO>) list;
 	}
-		
-	
-	//INSERT --> 스토어 상품 등록
-	public boolean getInsertResult(StoreVO vo) {
-		boolean result = false;
-		int value = sqlSession.insert(namespace + ".storeInsert", vo);
-		if(value != 0) result = true;
-		return result;
-	}
-	
+			
 	//SELECT --> 스토어 상품 상세 화면
 	public StoreVO getContent(String sid) {
 		return sqlSession.selectOne(namespace + ".content", sid);
