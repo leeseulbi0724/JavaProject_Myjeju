@@ -8,6 +8,25 @@
 <title>스토어 | JEJU ISLAND</title>
 <link rel = "stylesheet" href = "http://localhost:9000/myjeju/css/index.css">
 <link rel = "stylesheet" href = "http://localhost:9000/myjeju/css/store/store.css">
+<script src="http://localhost:9000/myjeju/js/jquery-3.6.0.min.js"></script>
+<style>
+	.store_nav>ul>li>a {
+		border : 1px solid lightgray;
+	}
+	
+	.store_nav a.on {
+		border-bottom : 2px solid #4fa9de;
+	}
+
+</style>
+<script>
+	$(document).ready(function() {
+		$('.store_nav a').click(function() {
+			$('.store_nav li').removeClass()
+				$(this).addClass('on')
+		});
+	});
+</script>
 </head>
 <body>
 	<!-- Header -->

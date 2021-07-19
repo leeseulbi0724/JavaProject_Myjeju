@@ -49,6 +49,13 @@ public class StoreController {
 		ArrayList<StoreVO> souvelist = storeService.getSouveList();
 		ArrayList<StoreVO> etclist = storeService.getEtcList();
 		
+		String sid = null;
+		
+		for(int i = 0; i<bestlist.size(); i++) {
+			sid = bestlist.get(i).getSid();
+			mv.addObject("sid", sid);
+		}
+		
 		mv.setViewName("store/store");
 		
 		mv.addObject("bestlist", bestlist);
@@ -110,7 +117,7 @@ public class StoreController {
 	 * store_content.do : 스토어 상품 상세화면
 	 */
 	@RequestMapping(value = "/store_content.do", method = RequestMethod.GET)
-	public ModelAndView store_content(String id, String sid, HttpSession session) {
+	public ModelAndView store_content(String sid, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		
 		String user_id = (String) session.getAttribute("session_id");
@@ -125,12 +132,18 @@ public class StoreController {
 		ArrayList<StorevVO> rlist = storeService.getStoreReview(sid);
 		boolean result = false;
 		//회원 주문여부확인
-		if (id!= null) {
+		if (user_id!= null) {
 			BasketVO bvo = new BasketVO();
 			bvo.setId(user_id);
 			bvo.setSid(sid);
 			result = storeService.getOrderResult(bvo);
 		}
+		
+		/*
+		 * //별점 보이기 int star = storeService.getReviewAvg(sid); int reviewCount =
+		 * storeService.getReviewCount(sid);
+		 */
+				
 		
 		mv.setViewName("store/store_content");
 		
@@ -141,6 +154,9 @@ public class StoreController {
 		
 		mv.addObject("sid", sid);
 		mv.addObject("id", user_id);
+		/*
+		 * mv.addObject("star", star); mv.addObject("reviewCount", reviewCount);
+		 */
 		
 		return mv;
 	}

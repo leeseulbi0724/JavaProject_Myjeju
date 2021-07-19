@@ -103,13 +103,8 @@ public class StoreServiceImpl implements StoreService {
 	}
 
 	@Override
-	public boolean getReviewCount(StorevVO vo) {
-		int value = storevDAO.getReviewCount(vo);
-		
-		boolean result = false;
-		if(value != 0) result = true;
-		
-		return result;
+	public int getReviewCount(String sid) {
+		return storevDAO.getReviewCount(sid);
 	}
 
 
@@ -123,6 +118,11 @@ public class StoreServiceImpl implements StoreService {
 		return result;
 	}
 	
+	@Override
+	public int getReviewAvg(String sid) {
+		return storevDAO.getReviewAvg(sid);
+	}
+
 	@Override
 	public boolean getOrderResult(BasketVO vo) {
 		int val = storeDAO.getOrderResult(vo);

@@ -46,7 +46,12 @@ public class StorevDAO {
 	}
 	
 	// 스토어 상품평 하나만
-	public int getReviewCount(StorevVO vo) {
-		return sqlSession.selectOne(namespace + ".reviewCount", vo);
+	public int getReviewCount(String sid) {
+		return sqlSession.selectOne(namespace + ".reviewCount", sid);
+	}
+	
+	// 스토어 상품평 별점 평균
+	public int getReviewAvg(String sid) {
+		return sqlSession.selectOne(namespace + ".reviewAvg", sid);
 	}
 }

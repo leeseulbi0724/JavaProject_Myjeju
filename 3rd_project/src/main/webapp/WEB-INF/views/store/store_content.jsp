@@ -38,37 +38,6 @@
 		});
 		
 		
-		/* 버튼 색상 변경
-		$(".store_content_category>button").each(function() {
-			$(this).click(function() {
-				$(this).addClass("selected");
-				$(this).siblings().removeClass("selected");
-			});
-		}); */
-		
-		/* window 스크롤 시 메뉴바 색상 변경 */
-		/* $(window).scroll(function(){
-	        var scroll = $(window).scrollTop();
-	        var move1 = $("#move1").scrollTop();
-	        var move2 = $("#move2").scrollTop();
-	        var move3 = $("#move3").scrollTop();
-	        var move4 = $("#move4").scrollTop();
-	        
-	        if (scroll > move1) {
-				$("#move1").css("background" , "#4fa9de");
-	        } else if (scroll > move2){
-				$("#move2").css("background" , "#4fa9de");   
-	        } else if (scroll > move3) {
-	        	$("#move3").css("background" , "#4fa9de");
-	        } else if (scroll > move4) {
-	        	$("#move4").css("background", "#4fa9de");
-	        } else {
-	        	$(".store_content_category>button").css("background", "hsl(160, 0, 235)");
-	        }
-	      }); */
-	      
-	      
-		
 		/* 메뉴바 상단 고정 */
 		var menu = $(".store_content_category").offset();
 		
@@ -284,6 +253,9 @@
 							<input type = "hidden" name = "s_price" value = "${vo.s_price}">
 							<input type = "hidden" name = "s_image" value = "${vo.s_image}">
 							<input type = "hidden" name = "s_sfile" value = "${vo.s_sfile}">
+							
+							<%-- <div>${star} [${reviewCount}]</div> --%>
+							
 						</div>
 						
 						<div class = "option-box">
