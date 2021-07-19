@@ -61,8 +61,8 @@
 					//data:{"startNum":startNum},
 					//contentType: 'application/x-www-form-urlencoded; charset=euc-kr',
 					success:function(result){
-						alert(startNum);
-						
+						//alert(startNum);
+						$("#list_body").empty();
 						var jdata = JSON.parse(result);
 							
 						for(var i in jdata.jlist){
@@ -91,7 +91,8 @@
 							addListHtml += "</tr>";
 						}
 						$("#list_body").append(addListHtml);
-						alert("jdata.jlist.length:"+jdata.jlist.length);
+						//alert("jdata.jlist.length:"+jdata.jlist.length);
+						$("#more_btn").remove();
 					}
 				});
 			}
@@ -105,6 +106,8 @@
 					}else{
 						var category = $("#category").val();
 						var tname = $("#travel_search").val();
+						$("#list_body").empty();
+						$("#more_btn").remove();
 						moreList(category, tname);
 					}
 				}else if($("#category").val() == "t_addr"){
@@ -115,6 +118,8 @@
 					}else{
 						var category = $("#category").val();
 						var tname = $("#travel_search").val();
+						$("#list_body").empty();
+						$("#more_btn").remove();
 						moreList(category, tname);
 					}
 				}
@@ -252,7 +257,7 @@
 								<img src="http://localhost:9000/myjeju/images/travel/${vo.t_image1}">
 							</td>
 							<td>
-								<p class="spot_name">${vo.t_name} <span>${vo.t_infor}</span></p>
+								<p class="spot_name">${vo.t_name}<span>${vo.t_infor}</span></p>
 								<p class="spot_addr">${vo.t_addr}</p>
 								<div>
 									<img src="http://localhost:9000/myjeju/images/travel/star.png"><span class="star_score">4.4 (268)</span>

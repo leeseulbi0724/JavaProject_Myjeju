@@ -50,7 +50,8 @@
 	
 	<!-- 여행지 리스트 처리 -->
 	<select id="ajaxlist" parameterType="map" resultType="com.myjeju.vo.TravelVO">
-		select tid, t_name, t_tag, t_infor, t_addr, t_like, t_image1 from myjeju_travel
+		select tid, t_name, t_tag, t_infor, t_infor2, t_addr, t_vpoint, t_hpoint, t_hp, t_like, 
+			   t_image1, t_image2, t_image3, t_image4, t_image5 from myjeju_travel order by t_like desc
 		
 		<choose>
 			<when test="category eq't_name'">

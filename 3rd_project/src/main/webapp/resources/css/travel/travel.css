@@ -260,6 +260,7 @@ table.travel_list p.spot_name>span{
 	font-size:14px;
 	font-weight:bold;
 	color:gray;
+	margin-left:5px;
 }
 table.travel_list p.spot_addr{
 	font-size:14px;
