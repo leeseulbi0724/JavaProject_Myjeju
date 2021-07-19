@@ -107,12 +107,32 @@ public class PayController {
 					 vo.setId(id);
 					 vo.setS_name(svo.getS_name());
 					 vo.setB_count(Integer.parseInt(count));
-					 vo.setS_price(svo.getS_price()*vo.getB_count()-Integer.parseInt(dis));
+					 if (dis == "") {
+						 vo.setS_price(svo.getS_price()*vo.getB_count());						 
+					 } else {
+						 vo.setS_price(svo.getS_price()*vo.getB_count()-Integer.parseInt(dis));
+					 }
 					 vo.setS_sfile(svo.getS_sfile());
 					 vo.setS_image(svo.getS_image());
 				 }				 			
 			 } 				 
 			 result = payService.getOrderResult(vo);
+			 //주문 시퀀스 테이블 저장
+			 if (result) {
+				 if ( list.contains(",")) {
+					 BasketVO bvo = new BasketVO();
+					 sids = list.split(",");
+					 bvo.setId(id);	
+					 for (int i=0; i<list.length(); i++) {
+						bvo.setSid(sids[i]);
+						mypageService.getOrderSequ(bvo);
+					 }
+				 } else {
+					 BasketVO bvo = new BasketVO();
+					 bvo.setId(id);	bvo.setSid(list);
+					 mypageService.getOrderSequ(bvo);
+				 }
+			 }
 			 
 			 //포인트 적립
 			 MemberVO mvo = new MemberVO();
@@ -125,7 +145,7 @@ public class PayController {
 			 }
 			 
 			 //사용 포인트삭제
-			 if (!dis.equals("0")) {
+			 if (!dis.equals("")) {
 				 mvo.setPoint(Integer.parseInt(dis));
 				 boolean point_delete = payService.getPointDelete(mvo);
 				 if (point_delete) {

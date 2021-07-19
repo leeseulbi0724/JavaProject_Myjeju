@@ -326,8 +326,15 @@
 								<option id="star2" value="2">★★☆☆☆</option>
 								<option id="star1" value="1">★☆☆☆☆</option>
 							</select>
-							<span>상품평</span><input type = "text" name = "sr_review" id = "sr_review">
-							<button type = "submit" id = "reviewInsert" class = "StoreReviewBtn">등록</button>
+							<span>상품평</span>
+							<c:if test ="${result eq 'true' }">
+								<input type = "text" name = "sr_review" id = "sr_review">
+								<button type = "submit" id = "reviewInsert" class = "StoreReviewBtn">등록</button>
+							</c:if>
+							<c:if test ="${result eq 'false' }">
+								<input type = "text" name = "sr_review" id = "sr_review" disabled placeholder="주문 후 이용 가능합니다">
+								<button type = "submit" id = "reviewInsert" class = "StoreReviewBtn" disabled>등록</button>
+							</c:if>
 						</form>
 					</article>
 					

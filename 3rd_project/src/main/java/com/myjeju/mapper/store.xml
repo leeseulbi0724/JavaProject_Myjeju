@@ -91,4 +91,9 @@
 	<select id = "reviewCount" parameterType = "com.myjeju.vo.StorevVO" resultType = "int">
 		select count(*) from myjeju_storev where id = #{id} and sid = #{sid}
 	</select>
+	
+	<!-- 주문여부확인 -->
+	<select id="order_result" parameterType="com.myjeju.vo.BasketVO" resultType="java.lang.Integer">
+		select count(*) from myjeju_order_sequ where id=#{id} and sid=#{sid}
+	</select>
 </mapper>    

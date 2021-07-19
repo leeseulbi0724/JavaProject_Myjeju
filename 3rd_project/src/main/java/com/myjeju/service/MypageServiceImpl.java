@@ -155,6 +155,16 @@ public class MypageServiceImpl implements MypageService {
 		return mypageDAO.getRommName(hdid);
 	}
 	
+	@Override
+	public boolean getOrderSequ(BasketVO vo) {
+		int val = mypageDAO.getOrderSequ(vo);
+		boolean result = false;
+		if ( val!=0) {
+			result = true;
+		}
+		return result;
+	}
+	
 	
 	
 	

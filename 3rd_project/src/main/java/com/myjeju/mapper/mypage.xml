@@ -105,4 +105,9 @@
 		<select id="roomname" parameterType="java.lang.String" resultType="com.myjeju.vo.OrderVO">
 			select hd_name, hd_price from myjeju_hdetail where hdid=#{hdid}
 		</select>
+		
+		<!-- 주문시퀀스 -->
+		<insert id="order_sequ" parameterType="com.myjeju.vo.BasketVO">
+			insert into myjeju_order_sequ values(#{id}, #{sid})
+		</insert>
     </mapper>

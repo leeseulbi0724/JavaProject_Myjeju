@@ -124,11 +124,18 @@ public class StoreController {
 		//상품평 리스트
 		ArrayList<StorevVO> rlist = storeService.getStoreReview(sid);
 		
+		//회원 주문여부확인
+		BasketVO bvo = new BasketVO();
+		bvo.setId(user_id);
+		bvo.setSid(sid);
+		boolean result = storeService.getOrderResult(bvo);
+		
 		mv.setViewName("store/store_content");
 		
 		mv.addObject("vo", vo);
 		mv.addObject("flist", flist);
 		mv.addObject("rlist", rlist);
+		mv.addObject("result", result);
 		
 		mv.addObject("sid", sid);
 		mv.addObject("id", user_id);

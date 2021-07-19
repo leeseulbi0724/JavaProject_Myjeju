@@ -37,4 +37,5 @@ public interface MypageService {
 	ArrayList<OrderVO> getMReservation(String id);
 	OrderVO getHouseName(String hid);
 	OrderVO getRommName(String hdid);
+	boolean getOrderSequ(BasketVO vo);
 }

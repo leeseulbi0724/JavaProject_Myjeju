@@ -1,14 +1,13 @@
 package com.myjeju.dao;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.myjeju.vo.BasketVO;
 import com.myjeju.vo.StoreVO;
 
 @Repository
@@ -72,6 +71,11 @@ public class StoreDAO {
 	//SELECT --> 스토어 상품 상세 화면
 	public StoreVO getContent(String sid) {
 		return sqlSession.selectOne(namespace + ".content", sid);
+	}
+	
+	//주문 여부확인
+	public int getOrderResult(BasketVO vo) {
+		return sqlSession.selectOne(namespace+".order_result", vo);
 	}
 		
 	

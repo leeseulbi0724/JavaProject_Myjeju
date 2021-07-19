@@ -7,8 +7,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.myjeju.vo.BasketVO;
 import com.myjeju.vo.CommunityVO;
-import com.myjeju.vo.MReservationVO;
 import com.myjeju.vo.MemberVO;
 import com.myjeju.vo.OrderVO;
 import com.myjeju.vo.PointVO;
@@ -91,6 +91,11 @@ public class MypageDAO {
 	/**방이름 가져오기 **/
 	public OrderVO getRommName(String hdid) {
 		return sqlSession.selectOne(namespace+".roomname", hdid);
+	}
+	
+	/** 주문 시퀀스 넣기 **/
+	public int getOrderSequ(BasketVO vo) {
+		return sqlSession.insert(namespace+".order_sequ", vo);
 	}
 	
 	

@@ -127,6 +127,17 @@ public class StoreServiceImpl implements StoreService {
 		
 		return result;
 	}
+	
+	@Override
+	public boolean getOrderResult(BasketVO vo) {
+		int val = storeDAO.getOrderResult(vo);
+		boolean result = false;
+		
+		if (val!=0) {
+			result = true;
+		}
+		return result;
+	}
 
 	
 }
