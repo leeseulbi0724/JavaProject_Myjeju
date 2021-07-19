@@ -55,13 +55,13 @@
 				<when test='search.equals("name")'>
 				select rno, hid, h_name, h_infor, h_infor2, h_tag, h_addr, h_vpoint, h_hpoint, h_hp, h_img, h_like
 				     from(select rownum rno, hid, h_name, h_infor, h_infor2, h_tag, h_addr, h_vpoint, h_hpoint, h_hp, h_img, h_like
-				     from(select * from MYJEJU_house order by rownum desc) where name like '%'||#{search_text}||'%')
+				     from(select * from MYJEJU_house order by rownum desc) where h_name like '%'||#{search_text}||'%')
 				     where rno between #{start} and #{end}
 				</when>
 				<otherwise>
 				select rno, hid, h_name, h_infor, h_infor2, h_tag, h_addr, h_vpoint, h_hpoint, h_hp, h_img, h_like
 				     from(select rownum rno, hid, h_name, h_infor, h_infor2, h_tag, h_addr, h_vpoint, h_hpoint, h_hp, h_img, h_like
-				     from(select * from MYJEJU_member order by rownum desc) where hid like '%'||#{search_text}||'%' )
+				     from(select * from MYJEJU_house order by rownum desc) where hid like '%'||#{search_text}||'%' )
 				     where rno between #{start} and #{end}
 				</otherwise>
 			</choose>
@@ -72,7 +72,7 @@
 		<select id="searchtargethouse" parameterType="java.util.Map" resultType="java.lang.Integer">
 			<choose>
 				<when test='search.equals("name")'>
-				select count(num) from(select rownum num from myjeju_house where name like '%'||#{search_text}||'%') where num >= #{pageNumber}
+				select count(num) from(select rownum num from myjeju_house where h_name like '%'||#{search_text}||'%') where num >= #{pageNumber}
 				</when>
 				<otherwise>
 				select count(num) from(select rownum num from myjeju_house where hid like '%'||#{search_text}||'%') where num >= #{pageNumber}

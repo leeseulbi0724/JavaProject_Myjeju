@@ -78,7 +78,7 @@ function deleteFunction() {
 				<button type = "button" class = "btn_setup_faq" onclick="#">수정</button>
 				<button type = "button" class = "btn_setup_faq" onclick="#">삭제</button>
 				
-				<a href = "menuList.jsp"><button type = "button" class = "btn_setup_faq">목록</button></a>
+				<a href = "adhouse.do"><button type = "button" class = "btn_setup_faq">목록</button></a>
 				<a href = "http://localhost:9000/myjeju/admin/adminindex.jsp"><button type = "button" class = "btn_setup_faq">홈으로</button></a>
 			</form>	
 		</section>
