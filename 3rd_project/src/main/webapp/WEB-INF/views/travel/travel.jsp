@@ -19,13 +19,114 @@
 	</style>
 	<link rel="stylesheet" href="http://localhost:9000/myjeju/css/index.css">
 	<link rel="stylesheet" href="http://localhost:9000/myjeju/css/travel/travel.css">
+	<link rel="stylesheet" href="http://localhost:9000/myjeju/css/am-pagination.css">
 	<script src="http://localhost:9000/myjeju/js/jquery-3.6.0.min.js"></script>
+	<script src="http://localhost:9000/myjeju/js/am-pagination.js"></script>
 	<script>
-		$(document).ready(function(){
-			$("#more_btn").click(function(){
-				alert("더보기");
+		$(document).ready(function(){ 
+			
+			/* var pager = jQuery('#ampaginationsm').pagination({
+				maxSize: 5,	    		// max page size
+			    totals:${dbcount},	// total pages	
+			    page:${rpage},		// initial page		
+			    pageSize:${pageSize},			// max number items per page
+			
+			    // custom labels		
+			    lastText: '&raquo;&raquo;', 		
+			    firstText: '&laquo;&laquo;',		
+			    prevText: '&laquo;',		
+			    nextText: '&raquo;',
+					     
+			    btnSize:'sm'	// 'sm'  or 'lg'	
 			});
+			
+			jQuery('#ampaginationsm').on('am.pagination.change',function(e){
+				   jQuery('.showlabelsm').text('The selected page no: '+e.page);
+		           $(location).attr('href', "http://localhost:9000/myjeju/travel.do?rpage="+e.page);         
+		    }); */ 
+			
+		    var pageNo = 0;
+			$("#more_btn").on("click", function(){
+				moreList();
+			}); 
+			
+			
+			//moreList(); //더보기 버튼 호출
+			function moreList(category, tname){
+				var startNum = $("#list_body").children("tr").length;
+				var addListHtml="";
+				
+				$.ajax({
+					url:"travel_proc.do?category="+category+"&tname="+tname,
+					//data:{"startNum":startNum},
+					//contentType: 'application/x-www-form-urlencoded; charset=euc-kr',
+					success:function(result){
+						alert(startNum);
+						
+						var jdata = JSON.parse(result);
+							
+						for(var i in jdata.jlist){
+							addListHtml += "<tr class='travel_list1'>";
+							addListHtml += "<td class='travel_list_pic'>";
+							addListHtml += "<img src='http://localhost:9000/myjeju/images/travel/" + jdata.jlist[i].t_image1 + "'>";
+							addListHtml += "</td>";
+							addListHtml += "<td>";
+							addListHtml += "<p class='spot_name'>" + jdata.jlist[i].t_name;
+							addListHtml += "<span>" + jdata.jlist[i].t_infor + "</span>";
+							addListHtml += "</p>";
+							addListHtml += "<p class='spot_addr'>" + jdata.jlist[i].t_addr + "</p>";
+							addListHtml += "<div>";
+							addListHtml += "<img src='http://localhost:9000/myjeju/images/travel/star.png'>";
+							addListHtml += "<span class='star_score'>4.4 (268)</span>";
+							addListHtml += "</div>";
+							addListHtml += "</td>";
+							addListHtml += "<td>";
+							addListHtml += "<button type='button' class='btn_style' id='heart_btn'>"
+							addListHtml += "<img src='http://localhost:9000/myjeju/images/travel/empty_heart.png'>" + jdata.jlist[i].t_like;
+							addListHtml += "</button>";
+							addListHtml += "<a href='http://localhost:9000/myjeju/travel_detail.do?tid=" + jdata.jlist[i].tid + "'>";
+							addListHtml += "<button type='button' class='btn_style4' id='more_infor'>상세정보</button>";
+							addListHtml += "</a>";
+							addListHtml += "</td>";
+							addListHtml += "</tr>";
+						}
+						$("#list_body").append(addListHtml);
+						alert("jdata.jlist.length:"+jdata.jlist.length);
+					}
+				});
+			}
+			
+			$("#travel_search_btn").click(function(){
+				if($("#category").val() == "t_name"){
+					if($("#travel_search").val() == ""){
+						alert("검색할 여행지명을 입력해주세요.");
+						$(this).focus();
+						return false;
+					}else{
+						var category = $("#category").val();
+						var tname = $("#travel_search").val();
+						moreList(category, tname);
+					}
+				}else if($("#category").val() == "t_addr"){
+					if($("#travel_search").val() == ""){
+						alert("검색할 지역명을 입력해주세요.");
+						$(this).focus();
+						return false;
+					}else{
+						var category = $("#category").val();
+						var tname = $("#travel_search").val();
+						moreList(category, tname);
+					}
+				}
+				
+			});
+			
+			$("#category").change(function(){
+				$("#travel_search").val("");
+			});
+			
 		});
+		
 	</script>
 </head>
 <body>
@@ -134,32 +235,42 @@
 		<section class="list_zone">
 			<div class="travel_title">여행지 리스트</div>
 			<div class="travel_search_zone">
-				<input type="text" name="travel_search" id="travel_search" placeholder="여행지를 검색하세요.">
-				<button type="button" class="btn_style3" id="travel_search_btn">검색</button>
+				<!-- <form name="search_form" action="travel.do" method="get"> -->
+					<select name="search" class="search" id="category">
+						<option value="t_name">여행지</option>
+						<option value="t_addr">지역명</option>
+					</select>
+					<input type="text" name="search_text" id="travel_search" placeholder="여행지를 검색하세요.">
+					<button type="submit" class="btn_style3" id="travel_search_btn">검색</button>
+				<!-- </form> -->
 			</div>
-			<table class="travel_list">
-				<tbody>
-				<c:forEach var="vo" items="${list}">
-					<tr class="travel_list1">
-						<td class="travel_list_pic">
-							<img src="http://localhost:9000/myjeju/images/travel/${vo.t_image1}">
-						</td>
-						<td>
-							<p class="spot_name">${vo.t_name} <span>${vo.t_infor}</span></p>
-							<p class="spot_addr">${vo.t_addr}</p>
-							<div>
-								<img src="http://localhost:9000/myjeju/images/travel/star.png"><span class="star_score">4.4 (268)</span>
-							</div>
-						</td>
-						<td>
-							<button type="button" class="btn_style" id="heart_btn"><img src="http://localhost:9000/myjeju/images/travel/empty_heart.png">${vo.t_like}</button>
-							<button type="button" class="btn_style4" id="more_infor" onclick="location.href='http://localhost:9000/myjeju/travel_detail.do?tid=${vo.tid }'">상세정보</button>
-						</td>
-					</tr>
-				</c:forEach>
+			<table id="travel_list_table" class="travel_list">
+				<tbody id="list_body">
+					<c:forEach var="vo" items="${list}">
+						<tr class="travel_list1">
+							<td class="travel_list_pic">
+								<img src="http://localhost:9000/myjeju/images/travel/${vo.t_image1}">
+							</td>
+							<td>
+								<p class="spot_name">${vo.t_name} <span>${vo.t_infor}</span></p>
+								<p class="spot_addr">${vo.t_addr}</p>
+								<div>
+									<img src="http://localhost:9000/myjeju/images/travel/star.png"><span class="star_score">4.4 (268)</span>
+								</div>
+							</td>
+							<td>
+								<button type="button" class="btn_style" id="heart_btn"><img src="http://localhost:9000/myjeju/images/travel/empty_heart.png">${vo.t_like}</button>
+								<a href="http://localhost:9000/myjeju/travel_detail.do?tid=${vo.tid }">
+									<button type="button" class="btn_style4" id="more_infor">상세정보</button>
+								</a>
+							</td>
+						</tr>
+					</c:forEach>
 				</tbody>
 			</table>
+			<!-- <div id="ampaginationsm" style="text-align:center;"></div> -->
 		</section>
+
 		<button type="button" class="btn_style5" id="more_btn">more
 			<img src="http://localhost:9000/myjeju/images/travel/bill_list_btn2.png">
 			<img src="http://localhost:9000/myjeju/images/travel/bill_list_btn.png">

@@ -21,10 +21,10 @@
 				if(content_txt.length >= 100){
 		               content.html(content_txt_short);
 				}else{
-		        	$("#more_btn").hide();
+		        	$("#more_infor_btn").hide();
 		        }
 				
-				 $("#more_btn").click(toggle_content);
+				 $("#more_infor_btn").click(toggle_content);
 				 
 				 function toggle_content(){
 					 if($(this).hasClass('short')){
@@ -78,7 +78,7 @@
 			<p class="infor_content" >
 				${infor2}
 			</p>
-			<button type="button" class="btn_style6" id="more_btn">
+			<button type="button" class="btn_style6" id="more_infor_btn">
 				<img src="http://localhost:9000/myjeju/images/travel/bill_list_btn2.png" class="more_img1">
 				<img src="http://localhost:9000/myjeju/images/travel/bill_list_btn4.png" class="more_img2">
 			</button>

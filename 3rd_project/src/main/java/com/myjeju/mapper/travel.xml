@@ -12,9 +12,11 @@
 	</select>
 	
 	<!-- 여행지 전체 리스트 -->
-	<select id="travellist" resultType="com.myjeju.vo.TravelVO">
-		select tid, t_name, t_tag, t_infor, t_infor2, t_addr, t_vpoint, t_hpoint, t_hp, t_like,
-			   t_image1, t_image2, t_image3, t_image4, t_image5 from myjeju_travel
+	<select id="travellist" parameterType="map" resultType="com.myjeju.vo.TravelVO">
+		select rno, tid, t_name, t_tag, t_infor, t_infor2, t_addr, t_vpoint, t_hpoint, t_hp, t_like, t_image1, t_image2, t_image3, t_image4, t_image5
+  			from(select rownum rno, tid, t_name, t_tag, t_infor, t_infor2, t_addr, t_vpoint, t_hpoint, t_hp, t_like, t_image1, t_image2, t_image3, t_image4, t_image5
+    		from(select tid, t_name, t_tag, t_infor, t_infor2, t_addr, t_vpoint, t_hpoint, t_hp, t_like, t_image1, t_image2, t_image3, t_image4, t_image5 
+    		from myjeju_travel order by t_like desc)) where rno between #{start} and #{end}
 	</select>
 	
 	<!-- 여행지 상위3 -->
@@ -45,4 +47,42 @@
 		from myjeju_travel, myjeju_car_spot 
 		where myjeju_travel.tid = myjeju_car_spot.tid and myjeju_travel.tid=#{tid}
 	</select>
+	
+	<!-- 여행지 리스트 처리 -->
+	<select id="ajaxlist" parameterType="map" resultType="com.myjeju.vo.TravelVO">
+		select tid, t_name, t_tag, t_infor, t_addr, t_like, t_image1 from myjeju_travel
+		
+		<choose>
+			<when test="category eq't_name'">
+				where t_name=#{tname}
+			</when>
+			<when test="category eq't_addr'">
+				where t_addr=#{tname}
+			</when>
+		</choose>
+	</select>
+	
+	<!-- 카운트 -->
+	<select id="travel_count" resultType="java.lang.Integer">
+		select count(*) from myjeju_travel	
+	</select>
+	
+	<!-- 여행지 검색 -->
+	<!-- <select id="listsearch" parameterType="" resultType="com.myjeju.vo.TravelVO">
+		<choose>
+			<when test='search.equals("t_name")'>
+				select tid, t_name, t_infor, t_addr, t_like, t_image1
+					from(select rownum tid, t_name, t_infor, t_addr, t_like, t_image1
+       				from(select * from myjeju_travel order by t_like desc) where t_name like '%'||#{search_text}||'%');
+			</when>
+			<when test='search.equals("t_addr")'>
+				select tid, t_name, t_infor, t_addr, t_like, t_image1
+					from(select rownum tid, t_name, t_infor, t_addr, t_like, t_image1
+   			  	  from(select * from myjeju_travel order by t_like desc) where t_addr like '%'||#{search_text}||'%');
+			</when>
+		</choose>
+	</select> -->
+	
+	
+	
 </mapper>

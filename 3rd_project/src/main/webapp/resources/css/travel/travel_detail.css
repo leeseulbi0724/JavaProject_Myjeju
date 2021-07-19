@@ -96,18 +96,29 @@
 	margin-top:20px;
 	cursor:pointer;
 }
+
+/**여행지 정보 더보기 버튼**/
+button#more_infor_btn>img{
+	width:18px;
+}
+button#more_infor_btn>img:last-child{
+	display:none;
+}
+
+/**여행지 리스트 더보기 버튼**/
 button#more_btn>img{
 	width:18px;
 }
 button#more_btn>img:last-child{
 	display:none;
 }
-/* button#more_btn:hover img:first-child{
+
+button#more_btn:hover img:first-child{
 	display:none;
 }
 button#more_btn:hover img:nth-child(2){
 	display:inline-block;
-} */
+}
 
 /**
 *	travel_detail_top

@@ -1,7 +1,9 @@
 package com.myjeju.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,11 +27,34 @@ public class TravelDAO extends DBConn {
 	}
 		
 	//여행지 전체 리스트
-	public ArrayList<TravelVO> getTravelList(){
-		List<TravelVO> list = sqlSession.selectList(namespace+".travellist");
+	public ArrayList<TravelVO> getTravelList(int start, int end){
+		Map<String,String> param = new HashMap<String,String>();
+		
+		param.put("start", String.valueOf(start));
+		param.put("end", String.valueOf(end));
+		
+		List<TravelVO> list = sqlSession.selectList(namespace+".travellist",param);
+		
 		return (ArrayList<TravelVO>)list;
 	}
+	
+	//여행지 전체 리스트
+	public ArrayList<TravelVO> getTravelList(String category, String tname){
+		Map<String,String> param = new HashMap<String,String>();
 		
+		param.put("category", category);
+		param.put("tname", tname);
+		
+		List<TravelVO> list = sqlSession.selectList(namespace+".ajaxlist",param);
+		
+		return (ArrayList<TravelVO>)list;
+	}
+	
+	//카운트
+	public int execTotalCount() {
+		return sqlSession.selectOne(namespace+".travel_count");
+	}
+	
 	//여행지 상위3
 	public ArrayList<TravelVO> getTravelListTop3(){
 		List<TravelVO> list = sqlSession.selectList(namespace+".traveltop3");

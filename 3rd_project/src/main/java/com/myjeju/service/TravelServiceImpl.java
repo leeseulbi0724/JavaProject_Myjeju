@@ -22,8 +22,13 @@ public class TravelServiceImpl implements TravelService{
 	}
 	
 	@Override
-	public ArrayList<TravelVO> getTravelList(){
-		return travelDAO.getTravelList();
+	public ArrayList<TravelVO> getTravelList(int start, int end){
+		return travelDAO.getTravelList(start,end);
+	}
+	
+	@Override
+	public ArrayList<TravelVO> getTravelList(String category, String tname){
+		return travelDAO.getTravelList(category,tname);
 	}
 	
 	@Override
@@ -44,6 +49,11 @@ public class TravelServiceImpl implements TravelService{
 	@Override
 	public CarSpotVO getCarSpot(String tid) {
 		return travelDAO.getCarSpot(tid);
+	}
+	
+	@Override
+	public int execTotalCount() {
+		return travelDAO.execTotalCount();
 	}
 	
 }
