@@ -54,7 +54,7 @@
 	
 		<section class = "section_setup_faq">
 			<div></div>
-			<div> 여행지관리 </div>
+			<div>여행지관리</div>
 			<div></div>
 		</section>
 	
