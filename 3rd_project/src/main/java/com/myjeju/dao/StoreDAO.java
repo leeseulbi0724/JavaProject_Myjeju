@@ -1,7 +1,9 @@
 package com.myjeju.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +17,6 @@ public class StoreDAO {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	private static String namespace = "mapper.store";
-	
 	
 	//SELECT.BEST --> BEST MENU (베스트 메뉴 상위 세개) [메인화면]
 	public ArrayList<StoreVO> getBestList() {

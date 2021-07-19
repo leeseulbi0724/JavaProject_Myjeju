@@ -4,7 +4,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 public class StoreVO {
 	String sid, s_category, s_name, s_image, s_sfile, s_content, s_ssfile;
-	int s_price;
+	int s_price, rno;
 	CommonsMultipartFile sfile1, sfile2;
 	
 	public String getSid() {
@@ -54,6 +54,12 @@ public class StoreVO {
 	}
 	public void setS_price(int s_price) {
 		this.s_price = s_price;
+	}
+	public int getRno() {
+		return rno;
+	}
+	public void setRno(int rno) {
+		this.rno = rno;
 	}
 	
 	

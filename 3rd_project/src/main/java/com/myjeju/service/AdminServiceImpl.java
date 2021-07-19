@@ -9,6 +9,7 @@ import com.myjeju.dao.AdminDAO;
 import com.myjeju.vo.CommunityVO;
 import com.myjeju.vo.MemberVO;
 import com.myjeju.vo.NoticeVO;
+import com.myjeju.vo.StoreVO;
 
 @Service("AdminService")
 public class AdminServiceImpl implements AdminService {
@@ -155,6 +156,26 @@ public class AdminServiceImpl implements AdminService {
 			result = true;
 		}
 		return result;
+	}
+	
+	
+	
+	//관리자 - 스토어
+	@Override
+	public ArrayList<StoreVO> getStoreList(int startnum, int endnum) {
+		return adminDAO.getStoreList(startnum, endnum);
+	}
+	@Override
+	public ArrayList<StoreVO> getStoreList(int startnum, int endnum, String search, String search_text) {
+		return adminDAO.getStoreList(startnum, endnum, search, search_text);
+	}
+	@Override
+	public int StorePage(int pageNumber) {
+		return adminDAO.getStorePage(pageNumber);
+	}
+	@Override
+	public int StorePage(int pageNumber, String search, String search_text) {
+		return adminDAO.getStorePage(pageNumber, search, search_text);
 	}
 
 }

@@ -193,4 +193,50 @@
 		</delete>
 		
 		
+		
+		<!-- 스토어 스토어 스토어 -->
+		
+		<!-- 관리자 - 스토어 list -->
+		<select id = "store_list" parameterType="map" resultType="com.myjeju.vo.StoreVO">
+			select rno, sid, s_category, s_name, s_price, s_image, s_content, s_sfile, s_ssfile
+				from(select rownum rno, sid, s_category, s_name, s_price, s_image, s_content, s_sfile, s_ssfile
+				     from(select * from myjeju_store order by sid desc))
+				     where rno between #{start} and #{end}
+		</select>
+		
+		<!-- 관리자 - 스토어 list search -->
+		<select id = "store_search" parameterType = "java.util.Map" resultType = "com.myjeju.vo.StoreVO">
+				<choose>
+				<when test='search.equals("s_name")'>
+				select rno, sid, s_category, s_name, s_price, s_image, s_content, s_sfile, s_ssfile
+					from(select rownum rno, sid, s_category, s_name, s_price, s_image, s_content, s_sfile, s_ssfile
+						from(select * from myjeju_store order by sid desc) where s_name like '%'||#{search_text}||'%')
+						where rno between #{start} and #{end}
+				</when>
+				<otherwise>
+				select rno, sid, s_category, s_name, s_price, s_image, s_content, s_sfile, s_ssfile
+					from(select rownum rno, sid, s_category, s_name, s_price, s_image, s_content, s_sfile, s_ssfile
+						from(select * from myjeju_store order by sid desc) where s_category like '%'||#{search_text}||'%')
+						where rno between #{start} and #{end}
+				</otherwise>
+			</choose>
+		</select>
+		
+		<!-- 관리자 - 스토어 페이지 -->
+		<select id = "store_count" parameterType = "java.lang.Integer" resultType = "java.lang.Integer">
+			select count(num) from(select rownum num from myjeju_store) where num >=#{pageNumber}
+		</select>
+		
+		<!-- 관리자 - 스토어 검색 -->
+		<select id = "store_searchpage" parameterType = "java.util.Map" resultType = "java.lang.Integer">
+			<choose>
+				<when test='search.equals("s_name")'>
+				select count(num) from(select rownum num from myjeju_store where s_name like '%'||#{search_text}||'%') where num >= #{pageNumber}
+				</when>
+				<otherwise>
+				select count(num) from(select rownum num from myjeju_store where s_category like '%'||#{search_text}||'%') where num >= #{pageNumber}
+				</otherwise>
+			</choose>
+		</select>
+		
 </mapper>

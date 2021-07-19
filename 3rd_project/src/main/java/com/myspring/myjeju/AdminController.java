@@ -16,9 +16,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.myjeju.service.AdminService;
 import com.myjeju.service.CommunityService;
+import com.myjeju.service.StoreService;
 import com.myjeju.vo.CommunityVO;
 import com.myjeju.vo.MemberVO;
 import com.myjeju.vo.NoticeVO;
+import com.myjeju.vo.StoreVO;
 
 @Controller
 public class AdminController {
@@ -28,6 +30,10 @@ public class AdminController {
 	
 	@Autowired
 	private CommunityService communityService;
+	
+	@Autowired
+	private StoreService storeService;
+	
 	
 	@RequestMapping(value="/adminindex.do", method=RequestMethod.GET)
 	public String main(HttpServletRequest request) {
@@ -427,4 +433,72 @@ public class AdminController {
 		
 		return result;
 	}
+	
+	
+	// 관리자 스토어창
+	@RequestMapping(value="/adstore.do",method= {RequestMethod.GET,RequestMethod.POST})
+	public ModelAndView tostore(String pnum, String search, String search_text) {
+		ModelAndView mv = new ModelAndView();
+		
+		int pageNumber = 1;
+		 
+		if(pnum != null) {
+	  		pageNumber = Integer.parseInt(pnum);
+	  	}
+		
+		int startnum = ((pageNumber-1)*10) +1;
+		int endnum = pageNumber*10; 
+		int pagenum = (pageNumber -1) * 10;
+		int target = 0;
+		ArrayList<StoreVO> list = new ArrayList<StoreVO>();
+		if(search_text == null || search_text.equals("") || search_text.equals("null")) {
+	  		list = adminService.getStoreList(startnum, endnum);
+	  		target = adminService.StorePage(pageNumber);
+	  	} else {
+	  		list = adminService.getStoreList(startnum,endnum,search,search_text);
+	  		target = adminService.StorePage(pagenum,search,search_text);
+	  	}
+			
+		int targetpage = 0;
+		if(pageNumber != 1 ) {
+			targetpage = (target-2) / 10 ;
+			} else {
+			targetpage = (target-1) / 10 ;
+			}
+		mv.setViewName("admin/adstore");
+		mv.addObject("list", list);
+		mv.addObject("targetpage", String.valueOf(targetpage));
+		mv.addObject("pageNumber", String.valueOf(pageNumber));
+		mv.addObject("search", search);
+		mv.addObject("search_text", search_text);
+		
+		return mv;
+	}
+	
+	//스토어 상세보기
+	@RequestMapping(value = "/adstore_content.do", method=RequestMethod.GET)
+	public ModelAndView adstore_content(String sid) {
+		ModelAndView mv = new ModelAndView();
+		
+		StoreVO vo = storeService.getContent(sid);
+		
+		mv.setViewName("admin/adstore_content");
+		mv.addObject("vo", vo);
+		
+		return mv;
+	}
+	
+	//공지사항 수정하기
+	@RequestMapping(value = "/adstore_update.do", method=RequestMethod.GET)
+	public ModelAndView adstore_update(String sid) {
+		ModelAndView mv = new ModelAndView();
+		
+		StoreVO vo = storeService.getContent(sid);
+		
+		mv.addObject("vo", vo);
+		mv.setViewName("admin/adstore_update");
+		
+		return mv;
+	}
+	
 }

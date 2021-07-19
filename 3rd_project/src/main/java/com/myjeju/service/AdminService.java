@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.myjeju.vo.CommunityVO;
 import com.myjeju.vo.MemberVO;
 import com.myjeju.vo.NoticeVO;
+import com.myjeju.vo.StoreVO;
 
 public interface AdminService {
 	//관리자 회원
@@ -40,4 +41,12 @@ public interface AdminService {
 	boolean getRequestComment(CommunityVO vo);
 	CommunityVO getRequestCommentResult(String rid);
 	boolean getRequestDelete(String rid);
+	
+	
+	
+	//관리자 스토어
+	ArrayList<StoreVO> getStoreList(int startnum, int endnum);
+	ArrayList<StoreVO> getStoreList(int startnum, int endnum, String search, String search_text);
+	int StorePage(int pageNumber);
+	int StorePage(int pageNumber,String search,String search_text);
 }

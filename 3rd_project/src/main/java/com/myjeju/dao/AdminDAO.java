@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import com.myjeju.vo.CommunityVO;
 import com.myjeju.vo.MemberVO;
 import com.myjeju.vo.NoticeVO;
+import com.myjeju.vo.StoreVO;
 
 @Repository
 public class AdminDAO {
@@ -185,4 +186,43 @@ public class AdminDAO {
 	public int getRequestDelete(String rid) {
 		return sqlSession.delete(namespace+".request_delete", rid);
 	}
+	
+	
+	//관리자 스토어
+	//관리자 - 스토어 상품 전체 리스트
+	public ArrayList<StoreVO> getStoreList(int startnum, int endnum) {
+		Map<String, String> se = new HashMap<String, String>();
+		se.put("start", String.valueOf(startnum));
+		se.put("end", String.valueOf(endnum));
+		
+		List<StoreVO> list = sqlSession.selectList(namespace + ".store_list", se);
+		return (ArrayList<StoreVO>) list;
+	}
+	
+	//관리자 - 스토어 상품 전체 리스트
+	public ArrayList<StoreVO> getStoreList(int startnum, int end, String search, String search_text) {
+		Map<String,String> se = new HashMap<String,String>();
+		se.put("start", String.valueOf(startnum));
+		se.put("end", String.valueOf(end));
+		se.put("search", search);
+		se.put("search_text", search_text);
+		
+		List<StoreVO> list = sqlSession.selectList(namespace+".store_search",se);
+		return (ArrayList<StoreVO>) list;
+	}
+	
+	//관리자 - 스토어 총 개수
+	public int getStorePage(int pageNumber) {
+		return sqlSession.selectOne(namespace+".store_count", pageNumber);
+	}
+	public int getStorePage(int pageNumber,String search,String search_text) {
+		Map<String,String> se = new HashMap<String,String>();
+		se.put("pageNumber", String.valueOf(pageNumber));
+		se.put("search", search);
+		se.put("search_text", search_text);
+		return sqlSession.selectOne(namespace+".store_searchpage", se);
+	}
+	
+	
+	
 }
