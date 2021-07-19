@@ -176,8 +176,20 @@ public class PayController {
 	 * 카카오페이 결제
 	 */
 	@RequestMapping(value="/kakaopay.do", method=RequestMethod.GET)
-	public String kakaopay() {
-		return "pay/kakaopay";
+	public ModelAndView kakaopay(HttpServletRequest request, HttpSession session) {
+		ModelAndView mv = new ModelAndView();		
+		String id = (String) session.getAttribute("session_id");
+		
+		 mv.addObject("id", id);
+		 mv.addObject("total", request.getParameter("total"));
+		 mv.addObject("list", request.getParameter("list"));
+		 mv.addObject("option", request.getParameter("option"));
+		 mv.addObject("c", request.getParameter("c"));
+		 mv.addObject("point", request.getParameter("point"));
+		 mv.addObject("dis", request.getParameter("dis"));
+		mv.setViewName("pay/kakaopay");
+		 
+		return mv;
 	
 	}
 

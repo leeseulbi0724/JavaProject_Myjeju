@@ -139,6 +139,22 @@
 			}
 		}
 		
+		 $(".kakao").click(function() {		    	
+		    	sidList();
+		    });
+			function sidList() {
+				var count = $("input[id=sid]").length;
+				var list = [];
+		    	var total = $("#total_input").val();
+		    	var discount = $("#point_input").val();
+		    	var c = $("#store_count").val();
+		    	var point = $("#point").val();
+			    for(var i=0; i < count; i++ ) {
+	 		    	 list.push($("input[id=sid]")[i].name);
+	 		    	 location.replace("kakaopay.do?list="+list+"&total="+total+"&dis="+discount+"&option=${option}&c="+c+"&point="+point);
+				}
+			}
+		
 		$(".all").click(function() {
 			$("#point_input").val(${vo.point});
 			$(".discount_text").text($("#point_input").val()+"원");
@@ -250,7 +266,7 @@
         <a class="self" style="cursor:pointer">
         	<img src="http://localhost:9000/myjeju/images/store/card.png" width=100% height=100% >
         </a>
-        <a href="kakaopay.do" class="kakao">
+        <a class="kakao">
         	<img src="http://localhost:9000/myjeju/images/store/pay.jpg" width=100% height=100% >
         </a>
       </div>      

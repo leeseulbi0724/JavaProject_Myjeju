@@ -21,7 +21,7 @@
             pay_method : 'card',
             merchant_uid : 'merchant_' + new Date().getTime(),
             name : 'JEJU ISLAND 상품구매',
-            amount : '1',
+            amount : '${total-dis}',
             buyer_email : 'tmfql4428@naver.com',
             buyer_name : '이슬비',
             buyer_tel : '01093692489',
@@ -54,9 +54,26 @@
                         //[4] 결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.
                     }
                 });
-                //성공시 이동할 페이지
-                alert("결제가 완료되었습니다");
-                location.href='<%=request.getContextPath()%>/myorder.do';
+                $.ajax({
+	                type: "post",
+	                url: "payment_proc.do",
+	                data:{
+	                	list:"${list}",
+	                	total:"${total-dis}",
+	                	dis:"${dis}",
+	                	option:"${option}",
+	                	count:"${c}",
+	                	point:"${point}"
+	                	},
+	                dataType: 'json',
+	                success: function (result) {
+	                	if (result) {
+		                    alert("결제가 완료되었습니다");
+		                    location.replace("myorder.do");
+	                	}
+	                },
+
+	            });
             } 
            <%--  else {
                 msg = '결제에 실패하였습니다.';
