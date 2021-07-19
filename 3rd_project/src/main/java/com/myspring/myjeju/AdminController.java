@@ -443,7 +443,6 @@ public class AdminController {
 		if(pnum != null) {
 	  		pageNumber = Integer.parseInt(pnum);
 	  	}
-		
 		int startnum = ((pageNumber-1)*10) +1;
 		int endnum = pageNumber*10; 
 		int pagenum = (pageNumber -1) * 10;
@@ -451,7 +450,7 @@ public class AdminController {
 		ArrayList<StoreVO> list = new ArrayList<StoreVO>();
 		if(search_text == null || search_text.equals("") || search_text.equals("null")) {
 	  		list = adminService.getStoreList(startnum, endnum);
-	  		target = adminService.StorePage(pageNumber);
+	  		target = adminService.StorePage(pagenum);
 	  	} else {
 	  		list = adminService.getStoreList(startnum,endnum,search,search_text);
 	  		target = adminService.StorePage(pagenum,search,search_text);
