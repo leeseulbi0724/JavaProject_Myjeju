@@ -70,9 +70,9 @@
 			 	<c:forEach var="vo" items="${list}">
 				<tr>
 					<td>${vo.rno}</td>
-					<td>${vo.hid}</td>
-					<td>${vo.h_name}</td>
-					<td>${vo.h_hp}</td>
+					<td onclick="location.href='adhouse_content.do?hid=${vo.hid}'">${vo.hid}</td>
+					<td onclick="location.href='adhouse_content.do?hid=${vo.hid}'">${vo.h_name}</td>
+					<td onclick="location.href='adhouse_content.do?hid=${vo.hid}'">${vo.h_hp}</td>
 					<td>${vo.h_like}</td>
 				</tr>
 				</c:forEach>

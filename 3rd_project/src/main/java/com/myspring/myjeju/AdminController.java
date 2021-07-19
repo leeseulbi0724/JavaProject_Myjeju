@@ -120,6 +120,17 @@ public class AdminController {
 			
 			return mv;
 		}
+		//槛家包府 惑技其捞瘤
+		@RequestMapping(value="/adhouse_content.do",method= {RequestMethod.GET,RequestMethod.POST})
+		public ModelAndView tohouse(String hid) {
+			ModelAndView mv = new ModelAndView();
+			
+			HouseVO vo = new HouseVO();
+			vo = adminService.gethouse(hid);
+			mv.setViewName("admin/adhouse_content");
+			mv.addObject("vo", vo);
+			return mv;
+		}
 		//咐笼包府 府胶飘
 		@RequestMapping(value="/adfood.do",method= {RequestMethod.GET,RequestMethod.POST})
 		public ModelAndView tofood(String pnum, String search, String search_text) {

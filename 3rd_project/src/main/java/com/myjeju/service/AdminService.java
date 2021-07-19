@@ -18,6 +18,7 @@ public interface AdminService {
 	int targetPage(int pageNumber,String search,String search_text);
 	
 	//°ü¸®ÀÚ ¼÷¼Ò
+	HouseVO gethouse(String hid);
 	ArrayList<HouseVO> getlisthouse(int startnum,int endnum);
 	ArrayList<HouseVO> getlisthouse(int startnum,int endnum,String search,String search_text);
 	int targethousePage(int pageNumber);

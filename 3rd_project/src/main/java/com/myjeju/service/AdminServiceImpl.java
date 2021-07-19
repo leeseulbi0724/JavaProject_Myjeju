@@ -53,6 +53,10 @@ public class AdminServiceImpl implements AdminService {
 	public int targethousePage(int pageNumber,String search,String search_text){
 		return adminDAO.targethousePage(pageNumber,search,search_text);
 	}
+	@Override
+	public HouseVO gethouse(String hid){
+		return adminDAO.gethouse(hid);
+	}
 	//°ü¸®ÀÚ ¸ÀÁı
 	@Override
 	public ArrayList<FoodVO> getlistfood(int startnum,int endnum){

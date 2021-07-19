@@ -83,6 +83,9 @@ public class AdminDAO {
 		se.put("search_text", search_text);
 		return sqlSession.selectOne(namespace+".searchtargethouse", se);
 	}
+	public HouseVO gethouse(String hid) {
+		return sqlSession.selectOne(namespace+".gethouse", hid);
+	}
 	//맛집 리스트 가져오기
 	public ArrayList<FoodVO> getlistfood(int startnum, int endnum) {
 		Map<String,String> se = new HashMap<String,String>();

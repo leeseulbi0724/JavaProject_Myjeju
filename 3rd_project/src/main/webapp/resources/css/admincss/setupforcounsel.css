@@ -1013,11 +1013,11 @@ setup_faq_write, setup_faq_update
 	
 	.btn_setup_faq {
 		margin : 15px 2px;
-		background-color : rgb(56, 54, 50);
-		width : 14%;
-		font-size : 16px;
+		background-color : #006DCC;
+		width : 12%;
+		font-size : 17px;
 		font-weight : 700;
-		border : 1px solid rgb(56, 54, 50);
+		border : 1px solid #006DCC;
 		border-radius : 7px;
 		color : white;
 		height : 40px;
