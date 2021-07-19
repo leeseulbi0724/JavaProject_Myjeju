@@ -102,7 +102,8 @@
 		
 		$(".reservation_more").click(function() {
 			$(".reservation_more_box").css("display","inline-block");
-		});
+		});		
+		
 	});
 </script>
 <body>
@@ -112,9 +113,7 @@
 	<div class="center">
 		<div class="title">
 			<button class="store">스토어 구매내역</button>
-			<button class="reservation">예약 내역</button>
-			<input type="date" class="form-control" value='2021-07-10'> ~ <input type="date" class="form-control" value='2021-07-10'>
-			<button class="select">조회</button>
+			<button class="reservation">예약 내역</button>			
 		</div>
 		<div class="content store_content">
 			<p>2021.07</p>

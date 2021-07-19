@@ -111,6 +111,7 @@
 	 }
 	 .modal-title { font-weight:bold; }
 	 .self { background-color:rgb(245,245,245); }
+	 .kakao { cursor:pointer; }
 </style>
 </head>
 <script>
@@ -124,9 +125,9 @@
 		});
 		
 	    $(".self").click(function() {		    	
-	    	sidList();
+	    	self_sidList();
 	    });
-		function sidList() {
+		function self_sidList() {
 			var count = $("input[id=sid]").length;
 			var list = [];
 	    	var total = $("#total_input").val();
@@ -140,9 +141,9 @@
 		}
 		
 		 $(".kakao").click(function() {		    	
-		    	sidList();
+		    	kakao_sidList();
 		    });
-			function sidList() {
+			function kakao_sidList() {
 				var count = $("input[id=sid]").length;
 				var list = [];
 		    	var total = $("#total_input").val();
