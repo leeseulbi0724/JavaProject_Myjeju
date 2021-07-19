@@ -113,7 +113,8 @@
 	<div class="center">
 		<div class="title">
 			<button class="store">스토어 구매내역</button>
-			<button class="reservation">예약 내역</button>			
+			<button class="reservation">예약 내역</button>		
+		
 		</div>
 		<div class="content store_content">
 			<p>2021.07</p>
