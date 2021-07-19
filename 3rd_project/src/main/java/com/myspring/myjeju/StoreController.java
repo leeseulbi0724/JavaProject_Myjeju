@@ -123,12 +123,14 @@ public class StoreController {
 		
 		//상품평 리스트
 		ArrayList<StorevVO> rlist = storeService.getStoreReview(sid);
-		
+		boolean result = false;
 		//회원 주문여부확인
-		BasketVO bvo = new BasketVO();
-		bvo.setId(user_id);
-		bvo.setSid(sid);
-		boolean result = storeService.getOrderResult(bvo);
+		if (id!= null) {
+			BasketVO bvo = new BasketVO();
+			bvo.setId(user_id);
+			bvo.setSid(sid);
+			result = storeService.getOrderResult(bvo);
+		}
 		
 		mv.setViewName("store/store_content");
 		
