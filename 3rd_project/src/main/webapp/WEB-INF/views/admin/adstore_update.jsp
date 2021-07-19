@@ -80,7 +80,9 @@ $(document).ready(function() {
 					<li><a href="adboard.do">게시판관리</a></li>
 					<li><a href="adrequest.do">요청관리</a></li>
 					<li><a href="admember.do">회원관리<span id="unread" class="label label-info"></span></a></li>
-					<li><a href="#">정보관리</a></li>
+					<li><a href="adhouse.do">숙소관리</a></li>
+					<li><a href="adfood.do">맛집관리</a></li>
+					<li><a href="adtravel.do">여행지관리</a></li>
 					<li class="active"><a href="adstore.do">상품관리</a>
 				</ul>
 			<ul class="nav navbar-nav navbar-right">
