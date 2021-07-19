@@ -62,7 +62,10 @@ function deleteFunction() {
 				<h3>${vo.h_name}</h3>
 				<div>${vo.h_infor}</div>
 				<hr style="display: inline-block; width:100%; border-top:1px solid #006DCC; opacity:0.5;">
-				<div class="counsel_content">
+				<div class="content" style="text-align:left; padding-left:300px;">
+					<div style="margin-bottom: 30px;margin-top: 5px; padding-left:197px;">
+						<img src="http://localhost:9000/myjeju/resources/images/house/${vo.h_img}" style ="width:200px; height:200px;">
+					</div>
 					<div style="margin-bottom: 30px">설명 : ${vo.h_infor2}</div>
 					<div style="margin-bottom: 30px">태그정보 : ${vo.h_tag}</div>
 					<div style="margin-bottom: 30px">주소 : ${vo.h_addr}</div>
@@ -70,7 +73,6 @@ function deleteFunction() {
 					<div style="margin-bottom: 30px">위도 : ${vo.h_hpoint}</div>
 					<div style="margin-bottom: 30px">HP : ${vo.h_hp}</div>
 					<div style="margin-bottom: 30px">좋아요 : ${vo.h_like}</div>
-					<div style="margin-bottom: 30px"><img src="http://localhost:9000/myjeju/resources/images/house/${vo.h_img}" style ="width:200px; height:200px;"></div>
 				</div>
 				<hr style="border-top:1px solid #006DCC; opacity:0.5;">
 				<button type = "button" class = "btn_setup_faq" onclick="#">수정</button>
