@@ -33,6 +33,7 @@
 					<li><a href="http://localhost:9000/myjeju/admember.do">회원관리<span id="unread" class="label label-info"></span></a></li>
 					<li><a href="#">정보관리</a></li>
 					<li><a href="adstore.do">상품관리</a>
+					<li><a href="adstore.do">상품관리</a>
 				</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown">
