@@ -5,6 +5,8 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
     
 <mapper namespace="mapper.admin">
+
+	<!-- 관리자 멤버 -->
 		<select id="listnum" parameterType="map" resultType="com.myjeju.vo.MemberVO">
 			select rno, id, pass, name, birth, email, hp, addr1, addr2, mdate, point 
              from(select rownum rno, id, pass, name, birth, email, hp, addr1, addr2, mdate, point
@@ -30,7 +32,7 @@
 		<select id="target" parameterType="java.lang.Integer" resultType="java.lang.Integer">
 			select count(num) from(select rownum num from MYJEJU_member) where num >= #{pageNumber}
 		</select>
-		<select id="searchtarget" parameterType="java.util.Map" resultType="java.lang.Integer">
+		<select id="searchtarget1" parameterType="java.util.Map" resultType="java.lang.Integer">
 			<choose>
 				<when test='search.equals("name")'>
 				select count(num) from(select rownum num from myjeju_member where name like '%'||#{search_text}||'%') where num >= #{pageNumber}
@@ -40,7 +42,115 @@
 				</otherwise>
 			</choose>
 		</select>
-		
+	
+	<!-- 관리자 숙소 -->
+		<select id="listnumhouse" parameterType="map" resultType="com.myjeju.vo.HouseVO">
+			select rno, hid, h_name, h_infor, h_infor2, h_tag, h_addr, h_vpoint, h_hpoint, h_hp, h_img, h_like
+             from(select rownum rno, hid, h_name, h_infor, h_infor2, h_tag, h_addr, h_vpoint, h_hpoint, h_hp, h_img, h_like
+				     from(select * from myjeju_house order by rownum desc))
+				     where rno between #{start} and #{end}
+		</select>
+		<select id="listsearchhouse" parameterType="java.util.Map" resultType="com.myjeju.vo.HouseVO">
+			<choose>
+				<when test='search.equals("name")'>
+				select rno, hid, h_name, h_infor, h_infor2, h_tag, h_addr, h_vpoint, h_hpoint, h_hp, h_img, h_like
+				     from(select rownum rno, hid, h_name, h_infor, h_infor2, h_tag, h_addr, h_vpoint, h_hpoint, h_hp, h_img, h_like
+				     from(select * from MYJEJU_house order by rownum desc) where name like '%'||#{search_text}||'%')
+				     where rno between #{start} and #{end}
+				</when>
+				<otherwise>
+				select rno, hid, h_name, h_infor, h_infor2, h_tag, h_addr, h_vpoint, h_hpoint, h_hp, h_img, h_like
+				     from(select rownum rno, hid, h_name, h_infor, h_infor2, h_tag, h_addr, h_vpoint, h_hpoint, h_hp, h_img, h_like
+				     from(select * from MYJEJU_member order by rownum desc) where hid like '%'||#{search_text}||'%' )
+				     where rno between #{start} and #{end}
+				</otherwise>
+			</choose>
+		</select>
+		<select id="targethouse" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+			select count(num) from(select rownum num from MYJEJU_house) where num >= #{pageNumber}
+		</select>
+		<select id="searchtargethouse" parameterType="java.util.Map" resultType="java.lang.Integer">
+			<choose>
+				<when test='search.equals("name")'>
+				select count(num) from(select rownum num from myjeju_house where name like '%'||#{search_text}||'%') where num >= #{pageNumber}
+				</when>
+				<otherwise>
+				select count(num) from(select rownum num from myjeju_house where hid like '%'||#{search_text}||'%') where num >= #{pageNumber}
+				</otherwise>
+			</choose>
+		</select>
+	<!-- 관리자 맛집 -->
+		<select id="listnumfood" parameterType="map" resultType="com.myjeju.vo.FoodVO">
+			select rno, fid, f_name, f_tag, f_infor, f_infor2, f_addr, f_vpoint, f_hpoint, f_hp, f_like, f_image1, f_image2, f_image3, f_image4, f_image5
+             from(select rownum rno, f_name, fid, f_tag, f_infor, f_infor2, f_addr, f_vpoint, f_hpoint, f_hp, f_like, f_image1, f_image2, f_image3, f_image4, f_image5
+				     from(select * from myjeju_food order by rownum desc))
+				     where rno between #{start} and #{end}
+		</select>
+		<select id="listsearchfood" parameterType="java.util.Map" resultType="com.myjeju.vo.FoodVO">
+			<choose>
+				<when test='search.equals("name")'>
+				select rno, fid, f_name, f_tag, f_infor, f_infor2, f_addr, f_vpoint, f_hpoint, f_hp, f_like, f_image1, f_image2, f_image3, f_image4, f_image5
+				     from(select rownum rno, fid, f_name, f_tag, f_infor, f_infor2, f_addr, f_vpoint, f_hpoint, f_hp, f_like, f_image1, f_image2, f_image3, f_image4, f_image5
+				     from(select * from MYJEJU_food order by rownum desc) where name like '%'||#{search_text}||'%')
+				     where rno between #{start} and #{end}
+				</when>
+				<otherwise>
+				select rno, fid, f_name, f_tag, f_infor, f_infor2, f_addr, f_vpoint, f_hpoint, f_hp, f_like, f_image1, f_image2, f_image3, f_image4, f_image5
+				     from(select rownum rno, fid, f_name, f_tag, f_infor, f_infor2, f_addr, f_vpoint, f_hpoint, f_hp, f_like, f_image1, f_image2, f_image3, f_image4, f_image5
+				     from(select * from MYJEJU_food order by rownum desc) where id like '%'||#{search_text}||'%' )
+				     where rno between #{start} and #{end}
+				</otherwise>
+			</choose>
+		</select>
+		<select id="targetfood" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+			select count(num) from(select rownum num from MYJEJU_food) where num >= #{pageNumber}
+		</select>
+		<select id="searchtargetfood" parameterType="java.util.Map" resultType="java.lang.Integer">
+			<choose>
+				<when test='search.equals("name")'>
+				select count(num) from(select rownum num from myjeju_food where name like '%'||#{search_text}||'%') where num >= #{pageNumber}
+				</when>
+				<otherwise>
+				select count(num) from(select rownum num from myjeju_food where id like '%'||#{search_text}||'%') where num >= #{pageNumber}
+				</otherwise>
+			</choose>
+		</select>
+		<!-- 관리자 여행지 -->
+		<select id="listnumtravel" parameterType="map" resultType="com.myjeju.vo.TravelVO">
+			select rno, tid, t_name, t_tag, t_infor, t_infor2, t_addr, t_vpoint, t_hpoint, t_hp, t_like, t_image1, t_image2, t_image3, t_image4, t_image5
+             from(select rownum rno, tid, t_name, t_tag, t_infor, t_infor2, t_addr, t_vpoint, t_hpoint, t_hp, t_like, t_image1, t_image2, t_image3, t_image4, t_image5
+				     from(select * from myjeju_travel order by rownum desc))
+				     where rno between #{start} and #{end}
+		</select>
+		<select id="listsearchtravel" parameterType="java.util.Map" resultType="com.myjeju.vo.TravelVO">
+			<choose>
+				<when test='search.equals("name")'>
+				select rno, tid, t_name, t_tag, t_infor, t_infor2, t_addr, t_vpoint, t_hpoint, t_hp, t_like, t_image1, t_image2, t_image3, t_image4, t_image5
+				     from(select rownum rno, tid, t_name, t_tag, t_infor, t_infor2, t_addr, t_vpoint, t_hpoint, t_hp, t_like, t_image1, t_image2, t_image3, t_image4, t_image5
+				     from(select * from MYJEJU_travel order by rownum desc) where name like '%'||#{search_text}||'%')
+				     where rno between #{start} and #{end}
+				</when>
+				<otherwise>
+				select rno, tid, t_name, t_tag, t_infor, t_infor2, t_addr, t_vpoint, t_hpoint, t_hp, t_like, t_image1, t_image2, t_image3, t_image4, t_image5
+				     from(select rownum rno, tid, t_name, t_tag, t_infor, t_infor2, t_addr, t_vpoint, t_hpoint, t_hp, t_like, t_image1, t_image2, t_image3, t_image4, t_image5
+				     from(select * from MYJEJU_travel order by rownum desc) where id like '%'||#{search_text}||'%' )
+				     where rno between #{start} and #{end}
+				</otherwise>
+			</choose>
+		</select>
+		<select id="targettravel" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+			select count(num) from(select rownum num from MYJEJU_travel) where num >= #{pageNumber}
+		</select>
+		<select id="searchtargettravel" parameterType="java.util.Map" resultType="java.lang.Integer">
+			<choose>
+				<when test='search.equals("name")'>
+				select count(num) from(select rownum num from myjeju_travel where name like '%'||#{search_text}||'%') where num >= #{pageNumber}
+				</when>
+				<otherwise>
+				select count(num) from(select rownum num from myjeju_travel where id like '%'||#{search_text}||'%') where num >= #{pageNumber}
+				</otherwise>
+			</choose>
+		</select>
 		
 		<!-- 관리자 게시판 -->
 		<select id="board_list" parameterType="map" resultType="com.myjeju.vo.CommunityVO">

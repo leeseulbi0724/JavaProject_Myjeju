@@ -3,9 +3,12 @@ package com.myjeju.service;
 import java.util.ArrayList;
 
 import com.myjeju.vo.CommunityVO;
+import com.myjeju.vo.FoodVO;
+import com.myjeju.vo.HouseVO;
 import com.myjeju.vo.MemberVO;
 import com.myjeju.vo.NoticeVO;
 import com.myjeju.vo.StoreVO;
+import com.myjeju.vo.TravelVO;
 
 public interface AdminService {
 	//관리자 회원
@@ -13,6 +16,24 @@ public interface AdminService {
 	ArrayList<MemberVO> getlist(int startnum,int endnum,String search,String search_text);
 	int targetPage(int pageNumber);
 	int targetPage(int pageNumber,String search,String search_text);
+	
+	//관리자 숙소
+	ArrayList<HouseVO> getlisthouse(int startnum,int endnum);
+	ArrayList<HouseVO> getlisthouse(int startnum,int endnum,String search,String search_text);
+	int targethousePage(int pageNumber);
+	int targethousePage(int pageNumber,String search,String search_text);
+	
+	//관리자 맛집
+	ArrayList<FoodVO> getlistfood(int startnum,int endnum);
+	ArrayList<FoodVO> getlistfood(int startnum,int endnum,String search,String search_text);
+	int targetfoodPage(int pageNumber);
+	int targetfoodPage(int pageNumber,String search,String search_text);
+	
+	//관리자 여행지
+	ArrayList<TravelVO> getlisttravel(int startnum,int endnum);
+	ArrayList<TravelVO> getlisttravel(int startnum,int endnum,String search,String search_text);
+	int targettravelPage(int pageNumber);
+	int targettravelPage(int pageNumber,String search,String search_text);
 	
 	//관리자 게시판
 	ArrayList<CommunityVO> getBoardList(int startnum,int endnum);

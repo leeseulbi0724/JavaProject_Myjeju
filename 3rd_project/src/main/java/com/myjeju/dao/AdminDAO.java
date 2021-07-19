@@ -10,9 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.myjeju.vo.CommunityVO;
+import com.myjeju.vo.FoodVO;
+import com.myjeju.vo.HouseVO;
 import com.myjeju.vo.MemberVO;
 import com.myjeju.vo.NoticeVO;
 import com.myjeju.vo.StoreVO;
+import com.myjeju.vo.TravelVO;
 
 @Repository
 public class AdminDAO {
@@ -22,7 +25,7 @@ public class AdminDAO {
 	
 	private static String namespace = "mapper.admin";
 	
-	//리스트 가져오기
+	//멤버 리스트 가져오기
 	public ArrayList<MemberVO> getlist(int startnum, int endnum) {
 		Map<String,String> se = new HashMap<String,String>();
 		se.put("start", String.valueOf(startnum));
@@ -49,7 +52,94 @@ public class AdminDAO {
 		se.put("pageNumber", String.valueOf(pageNumber));
 		se.put("search", search);
 		se.put("search_text", search_text);
-		return sqlSession.selectOne(namespace+".searchtarget", se);
+		return sqlSession.selectOne(namespace+".searchtarget1", se);
+	}
+	//숙소 리스트 가져오기
+	public ArrayList<HouseVO> getlisthouse(int startnum, int endnum) {
+		Map<String,String> se = new HashMap<String,String>();
+		se.put("start", String.valueOf(startnum));
+		se.put("end", String.valueOf(endnum));
+		
+		List<HouseVO> list = sqlSession.selectList(namespace+".listnumhouse",se);
+		return (ArrayList<HouseVO>)list;
+	}
+	public ArrayList<HouseVO> getlisthouse(int startnum, int end, String search, String search_text) {
+		Map<String,String> se = new HashMap<String,String>();
+		se.put("start", String.valueOf(startnum));
+		se.put("end", String.valueOf(end));
+		se.put("search", search);
+		se.put("search_text", search_text);
+		
+		List<HouseVO> list = sqlSession.selectList(namespace+".listsearchhouse",se);
+		return (ArrayList<HouseVO>)list;
+	}
+	public int targethousePage(int pageNumber) {
+		return sqlSession.selectOne(namespace+".targethouse", pageNumber);
+	}
+	public int targethousePage(int pageNumber,String search,String search_text) {
+		Map<String,String> se = new HashMap<String,String>();
+		se.put("pageNumber", String.valueOf(pageNumber));
+		se.put("search", search);
+		se.put("search_text", search_text);
+		return sqlSession.selectOne(namespace+".searchtargethouse", se);
+	}
+	//맛집 리스트 가져오기
+	public ArrayList<FoodVO> getlistfood(int startnum, int endnum) {
+		Map<String,String> se = new HashMap<String,String>();
+		se.put("start", String.valueOf(startnum));
+		se.put("end", String.valueOf(endnum));
+		
+		List<FoodVO> list = sqlSession.selectList(namespace+".listnumfood",se);
+		return (ArrayList<FoodVO>)list;
+	}
+	public ArrayList<FoodVO> getlistfood(int startnum, int end, String search, String search_text) {
+		Map<String,String> se = new HashMap<String,String>();
+		se.put("start", String.valueOf(startnum));
+		se.put("end", String.valueOf(end));
+		se.put("search", search);
+		se.put("search_text", search_text);
+		
+		List<FoodVO> list = sqlSession.selectList(namespace+".listsearchfood",se);
+		return (ArrayList<FoodVO>)list;
+	}
+	public int targetfoodPage(int pageNumber) {
+		return sqlSession.selectOne(namespace+".targetfood", pageNumber);
+	}
+	public int targetfoodPage(int pageNumber,String search,String search_text) {
+		Map<String,String> se = new HashMap<String,String>();
+		se.put("pageNumber", String.valueOf(pageNumber));
+		se.put("search", search);
+		se.put("search_text", search_text);
+		return sqlSession.selectOne(namespace+".searchtargetfood", se);
+	}
+	//여행지 리스트 가져오기
+	public ArrayList<TravelVO> getlisttravel(int startnum, int endnum) {
+		Map<String,String> se = new HashMap<String,String>();
+		se.put("start", String.valueOf(startnum));
+		se.put("end", String.valueOf(endnum));
+		
+		List<TravelVO> list = sqlSession.selectList(namespace+".listnumtravel",se);
+		return (ArrayList<TravelVO>)list;
+	}
+	public ArrayList<TravelVO> getlisttravel(int startnum, int end, String search, String search_text) {
+		Map<String,String> se = new HashMap<String,String>();
+		se.put("start", String.valueOf(startnum));
+		se.put("end", String.valueOf(end));
+		se.put("search", search);
+		se.put("search_text", search_text);
+		
+		List<TravelVO> list = sqlSession.selectList(namespace+".listsearchtravel",se);
+		return (ArrayList<TravelVO>)list;
+	}
+	public int targettravelPage(int pageNumber) {
+		return sqlSession.selectOne(namespace+".targettravel", pageNumber);
+	}
+	public int targettravelPage(int pageNumber,String search,String search_text) {
+		Map<String,String> se = new HashMap<String,String>();
+		se.put("pageNumber", String.valueOf(pageNumber));
+		se.put("search", search);
+		se.put("search_text", search_text);
+		return sqlSession.selectOne(namespace+".searchtargettravel", se);
 	}
 	
 	
