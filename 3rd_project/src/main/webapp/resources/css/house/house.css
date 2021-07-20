@@ -9,14 +9,16 @@
 	background-color:#4fa9de;
 	border:1px solid #4fa9de;
 	border-radius:10px;
-	padding:10px;
+	padding:8px;
 	color:white;
-	font-size:15px;
+	font-size:18px;
 	font-weight:bold;
 	text-align:center;
 	margin-top:20px;
 	cursor:pointer;
+	vertical-align:top;
 }
+
 .btn_style:hover{
 	background-color:#268ecc;
 	border:1px solid #268ecc;

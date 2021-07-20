@@ -42,11 +42,22 @@ public class HouseController {
 				int status = houseService.getHeartInfoResult(vo);
 				toplist.get(i).setStatus(status);				 
 			}
+			for (int i=0; i<list.size(); i++) {
+				HeartVO vo = new HeartVO();		
+				vo.setId(id); vo.setHid(list.get(i).getHid());
+				int status = houseService.getHeartInfoResult(vo);
+				list.get(i).setStatus(status);				 
+			}
 		} else {
 			for (int i=0; i<toplist.size(); i++) {
 				toplist.get(i).setStatus(0);
 			}
+			for (int i=0; i<list.size(); i++) {
+				list.get(i).setStatus(0);
+			}
 		}
+		
+		
 		mv.setViewName("house/house");
 		mv.addObject("list",list);
 		mv.addObject("toplist",toplist);

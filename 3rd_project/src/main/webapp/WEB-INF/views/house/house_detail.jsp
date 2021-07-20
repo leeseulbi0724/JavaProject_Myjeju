@@ -212,7 +212,6 @@
 				<img src="http://localhost:9000/myjeju/images/travel/bill_list_btn.png">
 			</button>
 		</section>
-		<button type="button" class="btn_style2" id="reserve_btn" onclick="location.href='http://localhost:9000/myjeju/calendar.do'">예약하기</button>
 	</div>
 	<!-- footer -->
 	<jsp:include page="../footer.jsp"></jsp:include>

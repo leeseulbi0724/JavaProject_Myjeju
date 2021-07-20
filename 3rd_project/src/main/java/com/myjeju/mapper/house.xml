@@ -30,17 +30,17 @@
 	
 	<!-- 하트 테이블 + -->
 	<insert id="heart_plus" parameterType="com.myjeju.vo.HeartVO">
-		insert into myjeju_heart values(#{id}, #{hid})
+		insert into myjeju_h_heart values(#{id}, #{hid})
 	</insert>
 
 	<!-- 하트 테이블 - -->
 	<insert id="heart_minus" parameterType="com.myjeju.vo.HeartVO">
-		delete from myjeju_heart where id=#{id} and hid=#{hid}
+		delete from myjeju_h_heart where id=#{id} and hid=#{hid}
 	</insert>
 	
 	<!-- 하트정보가져오기 -->
 	<select id="hearrt_info_result" parameterType="com.myjeju.vo.HeartVO" resultType="java.lang.Integer">
-		select count(*) from myjeju_heart where id=#{id} and hid=#{hid}
+		select count(*) from myjeju_h_heart where id=#{id} and hid=#{hid}
 	</select>
 	
 	<!-- 숙소 테이블에 하트 추가 -->

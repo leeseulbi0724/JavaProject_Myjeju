@@ -28,7 +28,6 @@
 				if ("${session_id}"=="") {
 					alert("로그인 후 이용바랍니다");
 				} else if ($(this).attr("id") == 1) {
-					alert("마이너스");
 					$.ajax({
 				                type: "post",
 				                url: "heart_minus.do",
@@ -39,7 +38,6 @@
 				                },
 				           }); 
 					} else {
-					 alert("플러스");						
 						$.ajax({
 				                type: "post",
 				               	url: "heart_plus.do",
@@ -74,7 +72,7 @@
 						<p class="spot_tag">${toplist.h_tag}</p>
 						<button type="button" class="btn_style" id="${toplist.status }" name="${toplist.hid }">
 						<c:if test = "${toplist.status eq 0 }">
-							<img src="http://localhost:9000/myjeju/images/house/empty_heart.png" width=30 height=30 class="heart_img" >${toplist.h_like }
+							<img src="http://localhost:9000/myjeju/images/house/empty_heart.png" width=25 height=25 class="heart_img" >${toplist.h_like }
 						</c:if>
 						<c:if test = "${toplist.status eq 1 }">
 							<img src="http://localhost:9000/myjeju/images/house/heart_after.png"  width=25 height=25 class="heart_img" >${toplist.h_like }
@@ -183,9 +181,15 @@
 							</div>
 						</td>
 						<td>
-							<button type="button" class="btn_style" id="heart_btn">
-							<img src="http://localhost:9000/myjeju/images/travel/empty_heart.png">${vo.h_like}</button>
-							<button type="button" class="btn_style4" id="more_infor" onclick="location.href='http://localhost:9000/myjeju/house_detail.do?hid=${vo.hid}'">상세정보</button>
+						<button type="button" class="btn_style" id="${vo.status }" name="${vo.hid }">
+							<c:if test = "${vo.status eq 0 }">
+								<img src="http://localhost:9000/myjeju/images/house/empty_heart.png" width=25 height=25 class="heart_img" >${vo.h_like }
+							</c:if>
+							<c:if test = "${vo.status eq 1 }">
+								<img src="http://localhost:9000/myjeju/images/house/heart_after.png"  width=25 height=25 class="heart_img" >${vo.h_like }
+							</c:if>
+						</button>
+						<button type="button" class="btn_style4" id="more_infor" onclick="location.href='http://localhost:9000/myjeju/house_detail.do?hid=${vo.hid}'">상세정보</button>
 						</td>
 					</tr>
 					</c:forEach>
