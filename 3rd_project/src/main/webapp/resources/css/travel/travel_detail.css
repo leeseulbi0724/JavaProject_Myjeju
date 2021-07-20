@@ -327,7 +327,7 @@ div.travel_review_zone dl{
 div.travel_review_zone dt{
 	text-align:left;
 }
-input#travel_review{
+input#t_review{
 	width:620px;
 	height:40px;
 	margin-top:10px;
@@ -335,7 +335,7 @@ input#travel_review{
 	border:1px solid #a1a1a1;
 	border-radius:4px;
 }
-input#travel_review::placeholder{
+input#t_review::placeholder{
 	font-size:15px;
 }
 button#travel_review_btn{
@@ -414,7 +414,7 @@ img.btn_alert{
 	float:right;
 	margin-top:-30px;
 }
-select#star{
+select#t_star{
 	width:110px;
 	height:40px;
 	font-size:15px;
@@ -424,7 +424,7 @@ select#star{
 	margin-top:10px;
 	margin-left:-5px;
 }
-select#star option{
+select#t_star option{
 	font-size:15px;
 	color:#face49;
 }

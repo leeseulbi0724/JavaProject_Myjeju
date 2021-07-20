@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.myjeju.vo.CarSpotVO;
 import com.myjeju.vo.PhotoSpotVO;
+import com.myjeju.vo.ReviewVO;
 import com.myjeju.vo.TravelVO;
 
 @Repository
@@ -58,7 +59,6 @@ public class TravelDAO extends DBConn {
 		return (ArrayList<TravelVO>)list;
 	}
 	
-	
 	//여행지 상위3
 	public ArrayList<TravelVO> getTravelListTop3(){
 		List<TravelVO> list = sqlSession.selectList(namespace+".traveltop3");
@@ -79,4 +79,22 @@ public class TravelDAO extends DBConn {
 	public CarSpotVO getCarSpot(String tid) {
 		return sqlSession.selectOne(namespace+".carspot", tid);
 	}
+	
+	//리뷰 쓰기
+	public boolean getInsertResult(ReviewVO vo) {
+		boolean result = false;
+		
+		int value = sqlSession.insert(namespace+".insert_review", vo);
+		if(value != 0) result = true;
+		
+		return result;
+	}
+	
+	//리뷰 리스트
+	public ArrayList<ReviewVO> getTravelReview(String id){
+		List<ReviewVO> list = sqlSession.selectList(namespace+".review_list", id);
+		return (ArrayList<ReviewVO>)list;
+	}
+	
+	
 }

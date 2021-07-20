@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.myjeju.dao.TravelDAO;
 import com.myjeju.vo.CarSpotVO;
 import com.myjeju.vo.PhotoSpotVO;
+import com.myjeju.vo.ReviewVO;
 import com.myjeju.vo.TravelVO;
 
 @Service("travelService")
@@ -56,5 +57,14 @@ public class TravelServiceImpl implements TravelService{
 		return travelDAO.getCarSpot(tid);
 	}
 	
+	@Override
+	public boolean getInsertResult(ReviewVO vo) {
+		return travelDAO.getInsertResult(vo);
+	}
+	
+	@Override
+	public ArrayList<ReviewVO> getTravelReview(String id){
+		return travelDAO.getTravelReview(id);
+	}
 	
 }

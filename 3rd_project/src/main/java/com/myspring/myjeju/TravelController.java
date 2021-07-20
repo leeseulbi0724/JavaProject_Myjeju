@@ -1,7 +1,8 @@
 package com.myspring.myjeju;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,7 @@ import com.google.gson.JsonObject;
 import com.myjeju.service.TravelService;
 import com.myjeju.vo.CarSpotVO;
 import com.myjeju.vo.PhotoSpotVO;
+import com.myjeju.vo.ReviewVO;
 import com.myjeju.vo.TravelVO;
 
 @Controller
@@ -140,7 +142,7 @@ public class TravelController {
 	 * travel_detail.do : 여행지 상세페이지
 	 */
 	@RequestMapping(value="/travel_detail.do", method=RequestMethod.GET)
-	public ModelAndView travel_detail(String tid) {
+	public ModelAndView travel_detail(String tid, String id, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		
 		TravelVO vo = travelService.getTravelDetail(tid);
@@ -148,11 +150,38 @@ public class TravelController {
 		CarSpotVO carvo = travelService.getCarSpot(tid); 
 		String infor2 = vo.getT_infor2().replace("\r\n", "<br>");
 		
+		String user_id = (String) session.getAttribute("session_id");
+System.out.println(user_id);
+
+		ArrayList<ReviewVO> revo = travelService.getTravelReview(id);
+		
 		mv.setViewName("travel/travel_detail");
 		mv.addObject("vo",vo);
 		mv.addObject("photovo",photovo);
 		mv.addObject("carvo",carvo);
 		mv.addObject("infor2",infor2);
+		mv.addObject("revo", revo);
+		mv.addObject("user_id", user_id);
+		return mv;
+	}
+	
+	/**
+	 * travel_review_proc.do : 여행지 리뷰 등록 처리
+	 */
+	@RequestMapping(value="/travel_review_proc.do", method=RequestMethod.GET)
+	public ModelAndView travel_review_proc(ReviewVO vo, HttpSession session) {
+		ModelAndView mv = new ModelAndView();
+		
+		String id = (String) session.getAttribute("session_id");
+		vo.setId(id);
+System.out.println(id);
+		boolean result = travelService.getInsertResult(vo);
+		
+		if(result) {
+			mv.setViewName("redirect:/travel_detail.do");
+			mv.addObject("tid", vo.getTid());
+			mv.addObject("id", vo.getId());
+		}
 		return mv;
 	}
 }

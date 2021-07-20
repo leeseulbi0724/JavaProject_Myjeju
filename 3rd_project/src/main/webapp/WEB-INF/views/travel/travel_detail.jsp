@@ -51,6 +51,18 @@
 				$(".detail_photo_spot").hide();
 				$(".detail_car_spot").show();
 			});
+			
+			$("#travel_review_btn").on("click", function(){
+				if($("#t_review").val() == ""){
+					alert("리뷰를 입력해주세요.");
+					$("#t_review").focus();
+					return false;
+				}else{
+					travel_review_form.submit();
+				}
+			});
+			
+			
 		});
 	</script>
 </head>
@@ -181,44 +193,72 @@
 		<section class="detail_review">
 			<h3>리뷰</h3> 
 			<div class="travel_review_zone">
-				<dl>
-					<dt>
-						<img src="http://localhost:9000/myjeju/images/travel/travel_detail/human.png">
-						<div class="user_name">사용자</div>
-					</dt>
-					<dd>
-						<select name="star" id="star">
-							<option id="star5" value="star5">★★★★★</option>
-							<option id="star4" value="star4">★★★★☆</option>
-							<option id="star3" value="star3">★★★☆☆</option>
-							<option id="star2" value="star2">★★☆☆☆</option>
-							<option id="star1" value="star1">★☆☆☆☆</option>
-						</select>
-					</dd>
-					<dd><input type="text" name="travel_review" id="travel_review" placeholder="여행지가 어떠셨나요? 리뷰를 남겨주세요."></dd>
-					<dd>
-						<button type="button" class="btn_style3" id="travel_review_btn">등록</button>
-					</dd>
-				</dl>
+				<form name="travel_review_form" action="travel_review_proc.do" method="GET">
+					<dl>
+						<dt>
+							<img src="http://localhost:9000/myjeju/images/travel/travel_detail/human.png">
+							<div class="user_name">${user_id}</div>
+						</dt>
+						<dd>
+							<select name="t_star" id="t_star">
+								<option id="star5" value="5">★★★★★</option>
+								<option id="star4" value="4">★★★★☆</option>
+								<option id="star3" value="3">★★★☆☆</option>
+								<option id="star2" value="2">★★☆☆☆</option>
+								<option id="star1" value="1">★☆☆☆☆</option>
+							</select>
+						</dd>
+						<dd><input type="text" name="t_review" id="t_review" placeholder="여행지가 어떠셨나요? 리뷰를 남겨주세요."></dd>
+						<dd>
+							<button type="submit" class="btn_style3" id="travel_review_btn">등록</button>
+						</dd>
+					</dl>
+				</form>
 			</div>
 			<div class="travel_review_zone2">
-				<div class="review_date">2021-07-09</div>
-				<dl>
-					<dt>
-						<img src="http://localhost:9000/myjeju/images/travel/travel_detail/human.png">
-						<div class="user_name">장희수</div>
-					</dt>
-					<dd>
-						<img src="http://localhost:9000/myjeju/images/travel/star5.png" class="review_star">
-					</dd>
-					<dd>정말 멋있어요! 다음에도 또 방문할거에요!</dd>
-					<dd>
-						<img src="http://localhost:9000/myjeju/images/travel/travel_detail/like_finger.png" class="like_finger">
-						<div class="like_score">14</div>
-						<img src="http://localhost:9000/myjeju/images/travel/travel_detail/btn-alert.png" class="btn_alert">
-					</dd>
-				</dl>
-				<div class="review_date">2021-07-09</div>
+				<c:forEach var="revo" items="${revo}">
+					<div class="review_date" id="t_time">${revo.t_time}</div>
+					<dl>
+							<dt>
+								<img src="http://localhost:9000/myjeju/images/travel/travel_detail/human.png">
+								<div class="user_name">${revo.id}</div>
+							</dt>
+							<c:choose>
+								<c:when test="${revo.t_star == 5}" >
+									<dd>
+										<img src="http://localhost:9000/myjeju/images/travel/star5.png" class="review_star">
+									</dd>
+								</c:when>
+								<c:when test="${revo.t_star == 4}" >
+									<dd>
+										<img src="http://localhost:9000/myjeju/images/travel/star4.png" class="review_star">
+									</dd>
+								</c:when>
+								<c:when test="${revo.t_star == 3}" >
+									<dd>
+										<img src="http://localhost:9000/myjeju/images/travel/star3.png" class="review_star">
+									</dd>
+								</c:when>
+								<c:when test="${revo.t_star == 2}" >
+									<dd>
+										<img src="http://localhost:9000/myjeju/images/travel/star2.png" class="review_star">
+									</dd>
+								</c:when>
+								<c:when test="${revo.t_star == 1}" >
+									<dd>
+										<img src="http://localhost:9000/myjeju/images/travel/star1.png" class="review_star">
+									</dd>
+								</c:when>
+							</c:choose>
+							<dd>${revo.t_review}</dd>
+							<dd>
+								<img src="http://localhost:9000/myjeju/images/travel/travel_detail/like_finger.png" class="like_finger">
+								<div class="like_score">14</div>
+								<img src="http://localhost:9000/myjeju/images/travel/travel_detail/btn-alert.png" class="btn_alert">
+							</dd>
+					</dl>
+				</c:forEach>
+				<!-- <div class="review_date">2021-07-09</div>
 				<dl>
 					<dt>
 						<img src="http://localhost:9000/myjeju/images/travel/travel_detail/human.png">
@@ -249,7 +289,7 @@
 						<div class="like_score">8</div>
 						<img src="http://localhost:9000/myjeju/images/travel/travel_detail/btn-alert.png" class="btn_alert">
 					</dd>
-				</dl>
+				</dl> -->
 			</div>
 			<button type="button" class="btn_style6" id="more_btn">
 				<img src="http://localhost:9000/myjeju/images/travel/bill_list_btn2.png">
