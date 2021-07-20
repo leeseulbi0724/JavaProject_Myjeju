@@ -74,15 +74,13 @@
 					<th style="width:600px"> 제목 </th>
 					<th> 아이디 </th>
 					<th> 날짜 </th>
-					<th></th>
 				</tr>			 
 				<c:forEach var="vo" items="${list}">	
 					<tr>
 						<td>${vo.rno }</td>
-						<td>${vo.rtitle }</td>
+						<td><a href="adrequest_re.do?rid=${vo.rid }" id="r">${vo.rtitle }</a></td>
 						<td>${vo.id }</td>
 						<td>${vo.rdate }</td>
-						<td><a href="adrequest_re.do?rid=${vo.rid }" id="re">내용보기</a></td>
 					</tr>
 				</c:forEach>
 				<tr>
