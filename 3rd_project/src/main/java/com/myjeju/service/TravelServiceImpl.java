@@ -22,13 +22,18 @@ public class TravelServiceImpl implements TravelService{
 	}
 	
 	@Override
-	public ArrayList<TravelVO> getTravelList(int start, int end){
-		return travelDAO.getTravelList(start,end);
+	public ArrayList<TravelVO> getTravelList(){
+		return travelDAO.getTravelList();
 	}
 	
 	@Override
-	public ArrayList<TravelVO> getTravelList(String category, String tname){
-		return travelDAO.getTravelList(category,tname);
+	public ArrayList<TravelVO> getTravelList(int startnum, int endnum){
+		return travelDAO.getTravelList(startnum, endnum);
+	}
+	
+	@Override
+	public ArrayList<TravelVO> getTravelList(int startnum, int end, String search, String search_text){
+		return travelDAO.getTravelList(startnum, end, search, search_text);
 	}
 	
 	@Override

@@ -25,44 +25,24 @@
 	<script>
 		$(document).ready(function(){ 
 			
-			/* var pager = jQuery('#ampaginationsm').pagination({
-				maxSize: 5,	    		// max page size
-			    totals:${dbcount},	// total pages	
-			    page:${rpage},		// initial page		
-			    pageSize:${pageSize},			// max number items per page
+			var pnum=$(".pnum").val();
+
+			moreList(pnum); 
 			
-			    // custom labels		
-			    lastText: '&raquo;&raquo;', 		
-			    firstText: '&laquo;&laquo;',		
-			    prevText: '&laquo;',		
-			    nextText: '&raquo;',
-					     
-			    btnSize:'sm'	// 'sm'  or 'lg'	
-			});
-			
-			jQuery('#ampaginationsm').on('am.pagination.change',function(e){
-				   jQuery('.showlabelsm').text('The selected page no: '+e.page);
-		           $(location).attr('href', "http://localhost:9000/myjeju/travel.do?rpage="+e.page);         
-		    }); */ 
-			
-		    var pageNo = 0;
-			$("#more_btn").on("click", function(){
-				moreList();
-			}); 
-			
-			
-			//moreList(); //더보기 버튼 호출
-			function moreList(category, tname){
+			function moreList(pnum, search, search_text){
 				var startNum = $("#list_body").children("tr").length;
 				var addListHtml="";
 				
 				$.ajax({
-					url:"travel_proc.do?category="+category+"&tname="+tname,
-					//data:{"startNum":startNum},
-					//contentType: 'application/x-www-form-urlencoded; charset=euc-kr',
+					type:"GET",
+					url:"travel_proc.do",
+					data:{
+						pnum:pnum,
+						search:search,
+						search_text:search_text
+					},
 					success:function(result){
-						//alert(startNum);
-						$("#list_body").empty();
+						//$("#list_body").empty();
 						var jdata = JSON.parse(result);
 							
 						for(var i in jdata.jlist){
@@ -90,37 +70,45 @@
 							addListHtml += "</td>";
 							addListHtml += "</tr>";
 						}
-						$("#list_body").append(addListHtml);
-						//alert("jdata.jlist.length:"+jdata.jlist.length);
-						$("#more_btn").remove();
+						$(".pnum").val(jdata.jlist[0].pnum);
+		                $("#list_body").append(addListHtml);
+		                //$("#more_btn").remove();
+		                //alert("jdata.jlist.length:"+jdata.jlist.length);
 					}
 				});
 			}
 			
+	        $("#more_btn").on("click", function(){
+	            var pnum=$(".pnum").val();
+	            moreList(pnum);
+				alert(pnum);
+	        }); 
+
 			$("#travel_search_btn").click(function(){
-				if($("#category").val() == "t_name"){
-					if($("#travel_search").val() == ""){
+				if($("#search").val() == "t_name"){
+					if($("#search_text").val() == ""){
 						alert("검색할 여행지명을 입력해주세요.");
 						$(this).focus();
 						return false;
 					}else{
-						var category = $("#category").val();
-						var tname = $("#travel_search").val();
+						var search = $("#search").val();
+						var search_text = $("#search_text").val();
 						$("#list_body").empty();
 						$("#more_btn").remove();
-						moreList(category, tname);
-					}
-				}else if($("#category").val() == "t_addr"){
-					if($("#travel_search").val() == ""){
+						alert(search+search_text);
+						moreList(pnum, search, search_text);
+					} 
+				}else if($("#search").val() == "t_addr"){
+					if($("#search_text").val() == ""){
 						alert("검색할 지역명을 입력해주세요.");
 						$(this).focus();
 						return false;
 					}else{
-						var category = $("#category").val();
-						var tname = $("#travel_search").val();
+						var search = $("#search").val();
+						var search_text = $("#search_text").val();
 						$("#list_body").empty();
 						$("#more_btn").remove();
-						moreList(category, tname);
+						moreList(pnum, search, search_text);
 					}
 				}
 				
@@ -128,7 +116,7 @@
 			
 			$("#category").change(function(){
 				$("#travel_search").val("");
-			});
+			}); 
 			
 		});
 		
@@ -241,17 +229,17 @@
 			<div class="travel_title">여행지 리스트</div>
 			<div class="travel_search_zone">
 				<!-- <form name="search_form" action="travel.do" method="get"> -->
-					<select name="search" class="search" id="category">
+					<select name="search" class="search" id="search">
 						<option value="t_name">여행지</option>
 						<option value="t_addr">지역명</option>
 					</select>
-					<input type="text" name="search_text" id="travel_search" placeholder="여행지를 검색하세요.">
+					<input type="text" name="search_text" id="search_text" placeholder="여행지를 검색하세요.">
 					<button type="submit" class="btn_style3" id="travel_search_btn">검색</button>
 				<!-- </form> -->
 			</div>
 			<table id="travel_list_table" class="travel_list">
 				<tbody id="list_body">
-					<c:forEach var="vo" items="${list}">
+					<%-- <c:forEach var="vo" items="${list}">
 						<tr class="travel_list1">
 							<td class="travel_list_pic">
 								<img src="http://localhost:9000/myjeju/images/travel/${vo.t_image1}">
@@ -270,16 +258,17 @@
 								</a>
 							</td>
 						</tr>
-					</c:forEach>
+					</c:forEach> --%>
 				</tbody>
 			</table>
-			<!-- <div id="ampaginationsm" style="text-align:center;"></div> -->
 		</section>
 
 		<button type="button" class="btn_style5" id="more_btn">more
 			<img src="http://localhost:9000/myjeju/images/travel/bill_list_btn2.png">
 			<img src="http://localhost:9000/myjeju/images/travel/bill_list_btn.png">
 		</button>
+		<input type="hidden" class="pnum" name="pnum">
+		
 	</div>
 	<!-- footer -->
 	<jsp:include page="../footer.jsp"></jsp:include>

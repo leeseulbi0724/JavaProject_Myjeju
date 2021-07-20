@@ -13,7 +13,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.myjeju.commons.Commons_travel;
 import com.myjeju.service.TravelService;
 import com.myjeju.vo.CarSpotVO;
 import com.myjeju.vo.PhotoSpotVO;
@@ -29,23 +28,15 @@ public class TravelController {
 	 * travel.do : 여행지 메인페이지
 	 */
 	@RequestMapping(value="/travel.do", method=RequestMethod.GET)
-	public ModelAndView travel(String rpage) {
+	public ModelAndView travel() {
 		ModelAndView mv = new ModelAndView();
 		
-		Commons_travel commons = new Commons_travel();
-		HashMap map = commons.getPage(rpage, travelService, "travel");
-		
-		int start = (Integer)map.get("start");
-		int end = (Integer)map.get("end");
-		ArrayList<TravelVO> list = travelService.getTravelList(start, end);
+		ArrayList<TravelVO> list = travelService.getTravelList();
 		ArrayList<TravelVO> toplist = travelService.getTravelListTop3();
 		
 		mv.setViewName("travel/travel");
 		mv.addObject("list",list);
 		mv.addObject("toplist",toplist);
-		mv.addObject("dbcount",map.get("dbCount"));
-		mv.addObject("rpage",map.get("rpage"));
-		mv.addObject("pageSize",map.get("pageSize"));
 		
 		return mv;
 	}
@@ -55,9 +46,31 @@ public class TravelController {
 	 */
 	@ResponseBody
 	@RequestMapping(value="/travel_proc.do", produces = "application/text; charset=utf8", method=RequestMethod.GET)
-	public String travel_proc(String category, String tname) {
-		ArrayList<TravelVO> list = travelService.getTravelList(category, tname);
+	public String travel_proc(String pnum, String search, String search_text) {
+		ArrayList<TravelVO> list = travelService.getTravelList();
+		//ArrayList<TravelVO> list = new ArrayList<TravelVO>();
 		
+		int pageNumber = 1;
+	      
+System.out.println("pnum = "+pnum);
+
+		if(!pnum.equals("")) { 
+			pageNumber = Integer.parseInt(pnum) +1;
+		}
+		
+		
+		int startnum = ((pageNumber-1)*5) +1;
+		int endnum = pageNumber*5; 
+		//int pagenum = (pageNumber -1) * 5;
+
+		if(search_text == null || search_text.equals("") || search_text.equals("null")) {
+			list = travelService.getTravelList(startnum, endnum);
+		}else {
+			list = travelService.getTravelList(startnum, endnum, search, search_text);
+		}
+		
+System.out.println(search+search_text);
+
 		JsonObject jdata = new JsonObject();
 		JsonArray jlist = new JsonArray();
 		Gson gson = new Gson();
@@ -71,12 +84,15 @@ public class TravelController {
 			jobj.addProperty("t_addr", vo.getT_addr());
 			jobj.addProperty("t_like", vo.getT_like());
 			jobj.addProperty("t_image1", vo.getT_image1());
+			jobj.addProperty("pnum", String.valueOf(pageNumber));
+			jobj.addProperty("search", search);
+			jobj.addProperty("search_text", search_text);
 			
 			jlist.add(jobj);
 		}
 		
 		jdata.add("jlist", jlist);
-		
+
 		return gson.toJson(jdata);
 	}
 	

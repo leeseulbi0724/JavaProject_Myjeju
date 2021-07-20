@@ -27,25 +27,33 @@ public class TravelDAO extends DBConn {
 	}
 		
 	//여행지 전체 리스트
-	public ArrayList<TravelVO> getTravelList(int start, int end){
+	public ArrayList<TravelVO> getTravelList(){
+		List<TravelVO> list = sqlSession.selectList(namespace+".travellist");
+		return (ArrayList<TravelVO>)list;
+	}
+	
+	//여행지 전체 리스트
+	public ArrayList<TravelVO> getTravelList(int startnum, int endnum){
 		Map<String,String> param = new HashMap<String,String>();
 		
-		param.put("start", String.valueOf(start));
-		param.put("end", String.valueOf(end));
+		param.put("start", String.valueOf(startnum));
+		param.put("end", String.valueOf(endnum));
 		
-		List<TravelVO> list = sqlSession.selectList(namespace+".travellist",param);
+		List<TravelVO> list = sqlSession.selectList(namespace+".ajaxlistnum",param);
 		
 		return (ArrayList<TravelVO>)list;
 	}
 	
 	//여행지 전체 리스트
-	public ArrayList<TravelVO> getTravelList(String category, String tname){
+	public ArrayList<TravelVO> getTravelList(int startnum, int end, String search, String search_text){
 		Map<String,String> param = new HashMap<String,String>();
 		
-		param.put("category", category);
-		param.put("tname", tname);
+		param.put("start", String.valueOf(startnum));
+		param.put("end", String.valueOf(end));
+		param.put("search", search);
+		param.put("search_text", search_text);
 		
-		List<TravelVO> list = sqlSession.selectList(namespace+".ajaxlist",param);
+		List<TravelVO> list = sqlSession.selectList(namespace+".ajaxlistsearch",param);
 		
 		return (ArrayList<TravelVO>)list;
 	}
