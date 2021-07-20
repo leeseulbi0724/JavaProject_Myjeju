@@ -11,9 +11,17 @@ public interface HouseService{
 	ArrayList<HouseVO> getHouseListTop3();
 	HouseVO getHouseDetail(String hid);
 	ArrayList<HDetailVO> getHDetail(String hid);
-	void getUpdateHeart(String hid);
-	boolean getHeartPlus(HeartVO vo);
+
+	/*
+	 *
+	 */
+	/*
+	 *   boolean
+	 * getHeartResult(HeartVO vo);
+	 */
+	int getHeartInfoResult(HeartVO vo);
 	boolean getHeartMinus(HeartVO vo);
-	boolean getHeartResult(HeartVO vo);
-	void getUpdateHeart(HeartVO vo);
+	boolean getUpdateHeart(String hid);
+	boolean getUpdateMinusHeart(String hid);
+	boolean getHeartPlus(HeartVO vo);
 }

@@ -22,32 +22,38 @@
 	<link rel="stylesheet" href="http://localhost:9000/myjeju/css/house/map.css">
 	<script src="http://localhost:9000/myjeju/js/jquery-3.6.0.min.js"></script>
 	<script>
-		$(document.ready(function(){
+		$(document).ready(function(){
 			$(".btn_style").click(function(){
-				var hid = "${vo.hid}";
-				if ("${session_id}" == "") {
-				location.replace("login.do");
-				} else if (${h_result}) {
-				$.ajax({
-			                type: "post",
-			                url: "heart_minus.do",
-			                data:{hid:hid},
-			                dataType: 'json',
-			                success: function (result) {
-			                    location.reload();
-			                },
-			            });
-				} else {
-				$.ajax({
-			                type: "post",
-			               	url: "heart_plus.do",
-			                data:{hid:hid},
-			                dataType: 'json',
-			                success: function (result) {
-			                    location.reload();
-			               	 },
+				var hid = $(this).attr("name");				
+				if ("${session_id}"=="") {
+					alert("로그인 후 이용바랍니다");
+				} else if ($(this).attr("id") == 1) {
+					alert("마이너스");
+					$.ajax({
+				                type: "post",
+				                url: "heart_minus.do",
+				                data:{hid:hid},
+				                dataType: 'json',
+				                success: function (result) {
+				                    location.reload();
+				                },
+				           }); 
+					} else {
+					 alert("플러스");						
+						$.ajax({
+				                type: "post",
+				               	url: "heart_plus.do",
+				                data:{hid:hid},
+				                dataType: 'json',
+				                success: function (result) {
+				                    location.reload();
+				               	 },
+						});
+					}
 			});
-		});         
+		});    
+
+     
 	</script>
 </head>
 <body>
@@ -66,14 +72,14 @@
 					<div class="spot_infor">
 						<p class="spot_name">${toplist.h_name} <span>${toplist.h_infor}</span></p>
 						<p class="spot_tag">${toplist.h_tag}</p>
-				<button type="button" class="btn_style" id="heart_btn">
-				<c:if test = "${h_result eq 'false' }">
-					<img src="http://localhost:9000/myjeju/images/empty_heart.png" class="heart_img">
-				</c:if>
-				<c:if test = "${h_result eq 'true' }">
-					<img src="http://localhost:9000/mybook/images/full_heart.png" class="heart_img">
-				</c:if>
-				</button>
+						<button type="button" class="btn_style" id="${toplist.status }" name="${toplist.hid }">
+						<c:if test = "${toplist.status eq 0 }">
+							<img src="http://localhost:9000/myjeju/images/house/empty_heart.png" width=30 height=30 class="heart_img" >${toplist.h_like }
+						</c:if>
+						<c:if test = "${toplist.status eq 1 }">
+							<img src="http://localhost:9000/myjeju/images/house/heart_after.png"  width=25 height=25 class="heart_img" >${toplist.h_like }
+						</c:if>
+						</button>
 				</div>
 				</article>
 			</c:forEach>

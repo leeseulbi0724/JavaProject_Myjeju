@@ -29,12 +29,27 @@
 	</select>
 	
 	<!-- 하트 테이블 + -->
-	<insert id="heart_plus" parameterType="com.mybook.vo.BookVO">
+	<insert id="heart_plus" parameterType="com.myjeju.vo.HeartVO">
 		insert into myjeju_heart values(#{id}, #{hid})
 	</insert>
 
 	<!-- 하트 테이블 - -->
-	<insert id="heart_minus" parameterType="com.mybook.vo.BookVO">
-		delete myjeju_heart where id=#{id} and bid=#{hid}
+	<insert id="heart_minus" parameterType="com.myjeju.vo.HeartVO">
+		delete from myjeju_heart where id=#{id} and hid=#{hid}
 	</insert>
+	
+	<!-- 하트정보가져오기 -->
+	<select id="hearrt_info_result" parameterType="com.myjeju.vo.HeartVO" resultType="java.lang.Integer">
+		select count(*) from myjeju_heart where id=#{id} and hid=#{hid}
+	</select>
+	
+	<!-- 숙소 테이블에 하트 추가 -->
+	<update id="updateheart" parameterType="java.lang.String" >
+		update myjeju_house set h_like = h_like+1 where hid=#{hid}
+	</update>
+	
+	<!-- 숙소 테이블에 하트 마이너스 -->
+	<update id="updateminusheart" parameterType="java.lang.String" >
+		update myjeju_house set h_like = h_like-1 where hid=#{hid}
+	</update>
 </mapper>

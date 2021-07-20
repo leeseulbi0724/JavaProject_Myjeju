@@ -43,8 +43,13 @@ public class HouseDAO extends DBConn {
 	}
 	
 	//Update ---> 하트 업데이트
-	public void getUpdateHeart(HeartVO vo) {
-		sqlSession.update(namespace+".updateheart");
+	public int getUpdateHeart(String hid) {
+		return sqlSession.update(namespace+".updateheart", hid);
+	}
+	
+	//Update ---> 하트 업데이트 마이너스
+	public int getUpdateMinusHeart(String hid) {
+		return sqlSession.update(namespace+".updateminusheart", hid);
 	}
 	
 	//하트 테이블 추가
@@ -55,6 +60,11 @@ public class HouseDAO extends DBConn {
 	//하트 테이블 삭제
 	public int getHeartMinus(HeartVO vo) {
 		return sqlSession.delete(namespace+".heart_minus", vo);
+	}
+	
+	//하트정보가져오기
+	public int getHeartInfoResult(HeartVO vo) {
+		return sqlSession.selectOne(namespace+".hearrt_info_result", vo);
 	}
 	
 }

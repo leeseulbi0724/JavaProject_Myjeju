@@ -2,7 +2,17 @@ package com.myjeju.vo;
 
 public class HouseVO {
 	String hid, h_name, h_infor, h_infor2, h_tag, h_addr, h_vpoint, h_hpoint, h_hp, h_img;
-	int  rno, h_like;
+	int  rno, h_like, status;
+
+	
+	
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
 
 	public int getRno() {
 		return rno;

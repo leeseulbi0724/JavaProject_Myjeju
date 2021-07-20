@@ -26,16 +26,27 @@ public class HouseController {
 	 * house.do : 숙소 메인페이지
 	 */
 	@RequestMapping(value="/house.do", method=RequestMethod.GET)
-	public ModelAndView house() {
+	public ModelAndView house(HttpSession session) {
 		ModelAndView mv = new ModelAndView();
+		//로그인 회원정보 가져오기
+		String id = (String) session.getAttribute("session_id");	
+
 		
-		HeartVO vo = new HeartVO();
-		vo.setId(id);
-		vo.setHid(hid);
-		boolean h_result = houseService.getHeartResult(vo);
-		
-		ArrayList<HouseVO> list = houseService.getHouseList();
+		ArrayList<HouseVO> list = houseService.getHouseList();		
 		ArrayList<HouseVO> toplist = houseService.getHouseListTop3();
+		
+		if (id != null) {
+			for (int i=0; i<toplist.size(); i++) {
+				HeartVO vo = new HeartVO();		
+				vo.setId(id); vo.setHid(toplist.get(i).getHid());
+				int status = houseService.getHeartInfoResult(vo);
+				toplist.get(i).setStatus(status);				 
+			}
+		} else {
+			for (int i=0; i<toplist.size(); i++) {
+				toplist.get(i).setStatus(0);
+			}
+		}
 		mv.setViewName("house/house");
 		mv.addObject("list",list);
 		mv.addObject("toplist",toplist);
@@ -77,12 +88,12 @@ public class HouseController {
 		HeartVO vo = new HeartVO();
 		vo.setId(id);
 		vo.setHid(hid);		
-
 		//heart 테이블 추가
-		if (result) {
-			total = houseService.getHeartPlus(vo);
+		total = houseService.getHeartPlus(vo);
+		//hous테이블 하트+
+		if (total) {
+			boolean result = houseService.getUpdateHeart(hid);
 		}
-	
 		return total;
 	}
 
@@ -95,14 +106,15 @@ public class HouseController {
 		boolean total = false;
 		//로그인 회원정보 가져오기
 		String id = (String) session.getAttribute("session_id");
-		String hid = request.getParameter("bhd");
+		String hid = request.getParameter("hid");
 		HeartVO vo = new HeartVO();
 		vo.setId(id);
-		vo.setHid(hid);
-
-		//heart 테이블 삭제
-		if (result) {
-			total = houseService.getHeartMinus(vo);
+		vo.setHid(hid);		
+		//heart 테이블 삭제 
+		total = houseService.getHeartMinus(vo);
+		//hous테이블 하트-
+		if (total) {
+			boolean result = houseService.getUpdateMinusHeart(hid);
 		}
 
 		return total;

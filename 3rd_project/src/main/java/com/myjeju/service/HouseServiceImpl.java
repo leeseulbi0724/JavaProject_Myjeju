@@ -37,9 +37,51 @@ public class HouseServiceImpl implements HouseService {
 	}
 	
 	@Override
-	public void getUpdateHeart(HeartVO vo) {
-		houseDAO.getUpdateHeart(vo);
+	public boolean getUpdateHeart(String hid) {
+		int val = houseDAO.getUpdateHeart(hid);
+		boolean result = false;
+		if ( val!= 0) {
+			result = true;
+		}
+		return result;
 	}
+	
+	@Override
+	public boolean getUpdateMinusHeart(String hid) {
+		int val = houseDAO.getUpdateMinusHeart(hid);
+		boolean result = false;
+		if ( val!= 0) {
+			result = true;
+		}
+		return result;
+	}
+	
+	@Override
+	public int getHeartInfoResult(HeartVO vo) {
+		return houseDAO.getHeartInfoResult(vo);
+	}
+	
+	@Override
+	public boolean getHeartMinus(HeartVO vo) {
+		int val = houseDAO.getHeartMinus(vo);
+		boolean result = false;
+		if ( val!= 0) {
+			result = true;
+		}
+		return result;
+	}
+	
+	@Override
+	public boolean getHeartPlus(HeartVO vo) {
+		int val = houseDAO.getHeartPlus(vo);
+		boolean result = false;
+		if ( val!= 0) {
+			result = true;
+		}
+		return result;
+	}
+	
+	
 	
 	
 }
