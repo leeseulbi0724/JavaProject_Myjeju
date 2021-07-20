@@ -25,6 +25,16 @@ public class FoodServiceImpl implements FoodService {
 	}
 	
 	@Override
+	public ArrayList<FoodVO> getFoodList(int startnum, int endnum){
+		return foodDAO.getFoodList(startnum, endnum);
+	}
+	
+	@Override
+	public ArrayList<FoodVO> getFoodList(int startnum, int end, String search, String search_text){
+		return foodDAO.getFoodList(startnum, end, search, search_text);
+	}
+
+	@Override
 	public ArrayList<FoodVO> getFoodListTop3(){
 		return foodDAO.getFoodListTop3();
 	}
@@ -33,4 +43,5 @@ public class FoodServiceImpl implements FoodService {
 	public FoodVO getFoodDetail(String fid) {
 		return foodDAO.getFoodDetail(fid);
 	}
+	
 }

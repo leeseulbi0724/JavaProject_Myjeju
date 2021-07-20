@@ -23,6 +23,16 @@ public class CafeServiceImpl implements CafeService{
 	public ArrayList<CafeVO> getCafeList(){
 		return cafeDAO.getCafeList();
 	}
+
+	@Override
+	public ArrayList<CafeVO> getCafeList(int startnum, int endnum){
+		return cafeDAO.getCafeList(startnum, endnum);
+	}
+	
+	@Override
+	public ArrayList<CafeVO> getCafeList(int startnum, int end, String search, String search_text){
+		return cafeDAO.getCafeList(startnum, end, search, search_text);
+	}
 	
 	@Override
 	public ArrayList<CafeVO> getCafeListTop3(){
@@ -33,4 +43,5 @@ public class CafeServiceImpl implements CafeService{
 	public CafeVO getCafeDetail(String caid) {
 		return cafeDAO.getCafeDetail(caid);
 	}
+	
 }

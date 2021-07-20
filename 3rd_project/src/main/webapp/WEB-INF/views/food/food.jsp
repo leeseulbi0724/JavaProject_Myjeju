@@ -20,6 +20,105 @@
 	<link rel="stylesheet" href="http://localhost:9000/myjeju/css/index.css">
 	<link rel="stylesheet" href="http://localhost:9000/myjeju/css/travel/travel.css">
 	<script src="http://localhost:9000/myjeju/js/jquery-3.6.0.min.js"></script>
+	<script>
+		$(document).ready(function(){ 
+			
+			var pnum=$(".pnum").val();
+	
+			moreList(pnum); 
+			
+			function moreList(pnum, search, search_text){
+				var addListHtml="";
+				
+				$.ajax({
+					type:"GET",
+					url:"food_proc.do",
+					data:{
+						pnum:pnum,
+						search:search,
+						search_text:search_text
+					},
+					success:function(result){
+						
+						var jdata = JSON.parse(result);
+						
+						if(jdata.jlist == null){
+							$("#more_btn").remove();
+						}
+						for(var i in jdata.jlist){
+							addListHtml += "<tr class='travel_list1'>";
+							addListHtml += "<td class='travel_list_pic'>";
+							addListHtml += "<img src='http://localhost:9000/myjeju/images/food/" + jdata.jlist[i].f_image1 + "'>";
+							addListHtml += "</td>";
+							addListHtml += "<td>";
+							addListHtml += "<p class='spot_name'>" + jdata.jlist[i].f_name;
+							addListHtml += "<span>" + jdata.jlist[i].f_infor + "</span>";
+							addListHtml += "</p>";
+							addListHtml += "<p class='spot_addr'>" + jdata.jlist[i].f_addr + "</p>";
+							addListHtml += "<div>";
+							addListHtml += "<img src='http://localhost:9000/myjeju/images/travel/star.png'>";
+							addListHtml += "<span class='star_score'>4.4 (268)</span>";
+							addListHtml += "</div>";
+							addListHtml += "</td>";
+							addListHtml += "<td>";
+							addListHtml += "<button type='button' class='btn_style' id='heart_btn'>"
+							addListHtml += "<img src='http://localhost:9000/myjeju/images/travel/empty_heart.png'>" + jdata.jlist[i].f_like;
+							addListHtml += "</button>";
+							addListHtml += "<a href='http://localhost:9000/myjeju/food_detail.do?fid=" + jdata.jlist[i].fid + "'>";
+							addListHtml += "<button type='button' class='btn_style4' id='more_infor'>상세정보</button>";
+							addListHtml += "</a>";
+							addListHtml += "</td>";
+							addListHtml += "</tr>";
+						}
+						$(".pnum").val(jdata.jlist[0].pnum);
+		                $("#list_body").append(addListHtml);
+					}
+				});
+			}
+			
+	        $("#more_btn").on("click", function(){
+	            var pnum=$(".pnum").val();
+	            moreList(pnum);
+	        }); 
+	        
+	        /** 검색 **/
+			$("#travel_search_btn").click(function(){
+				if($("#search").val() == "f_name"){
+					if($("#search_text").val() == ""){
+						alert("검색할 가게명을 입력해주세요.");
+						$(this).focus();
+						return false;
+					}else{
+						var search = $("#search").val();
+						var search_text = $("#search_text").val();
+						$("#list_body").empty();
+						$("#more_btn").remove();
+						moreList(pnum, search, search_text);
+					} 
+				}else if($("#search").val() == "f_addr"){
+					if($("#search_text").val() == ""){
+						alert("검색할 지역명을 입력해주세요.");
+						$(this).focus();
+						return false;
+					}else{
+						var search = $("#search").val();
+						var search_text = $("#search_text").val();
+						$("#list_body").empty();
+						$("#more_btn").remove();
+						moreList(pnum, search, search_text);
+					}
+				}
+				
+			});
+			
+			/** 옵션 변경시 호출 **/
+			$("#search").change(function(){
+				$("#search_text").val("");
+			}); 
+			
+		});
+	
+	</script>
 </head>
 <body>
 	<!-- header -->
@@ -120,12 +219,16 @@
 		<section class="list_zone">
 			<div class="travel_title">음식점 리스트</div>
 			<div class="travel_search_zone">
-				<input type="text" name="travel_search" id="travel_search" placeholder="음식점을 검색하세요.">
-				<button type="button" class="btn_style3" id="travel_search_btn">검색</button>
+				<select name="search" class="search" id="search">
+					<option value="f_name">가게명</option>
+					<option value="f_addr">지역명</option>
+				</select>
+				<input type="text" name="search_text" id="search_text" placeholder="음식점을 검색하세요.">
+				<button type="submit" class="btn_style3" id="travel_search_btn">검색</button>
 			</div>
-			<table class="travel_list">
-				<tbody>
-				<c:forEach var="vo" items="${list}">
+			<table id="travel_list_table" class="travel_list">
+				<tbody id="list_body">
+				<%-- <c:forEach var="vo" items="${list}">
 					<tr class="travel_list1">
 						<td class="travel_list_pic">
 							<img src="http://localhost:9000/myjeju/images/food/${vo.f_image1}">
@@ -142,14 +245,16 @@
 							<button type="button" class="btn_style4" id="more_infor" onclick="location.href='http://localhost:9000/myjeju/food_detail.do?fid=${vo.fid}'">상세정보</button>
 						</td>
 					</tr>
-				</c:forEach>
+				</c:forEach> --%>
 				</tbody>
 			</table>
 		</section>
+		
 		<button type="button" class="btn_style5" id="more_btn">more
 			<img src="http://localhost:9000/myjeju/images/travel/bill_list_btn2.png">
 			<img src="http://localhost:9000/myjeju/images/travel/bill_list_btn.png">
 		</button>
+		<input type="hidden" class="pnum" name="pnum">
 	</div>
 	<!-- footer -->
 	<jsp:include page="../footer.jsp"></jsp:include>

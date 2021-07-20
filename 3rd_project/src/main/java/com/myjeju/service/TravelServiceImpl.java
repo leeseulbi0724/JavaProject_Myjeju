@@ -56,9 +56,5 @@ public class TravelServiceImpl implements TravelService{
 		return travelDAO.getCarSpot(tid);
 	}
 	
-	@Override
-	public int execTotalCount() {
-		return travelDAO.execTotalCount();
-	}
 	
 }

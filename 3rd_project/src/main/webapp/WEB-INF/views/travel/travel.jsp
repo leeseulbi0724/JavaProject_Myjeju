@@ -21,7 +21,6 @@
 	<link rel="stylesheet" href="http://localhost:9000/myjeju/css/travel/travel.css">
 	<link rel="stylesheet" href="http://localhost:9000/myjeju/css/am-pagination.css">
 	<script src="http://localhost:9000/myjeju/js/jquery-3.6.0.min.js"></script>
-	<script src="http://localhost:9000/myjeju/js/am-pagination.js"></script>
 	<script>
 		$(document).ready(function(){ 
 			
@@ -30,7 +29,6 @@
 			moreList(pnum); 
 			
 			function moreList(pnum, search, search_text){
-				var startNum = $("#list_body").children("tr").length;
 				var addListHtml="";
 				
 				$.ajax({
@@ -42,9 +40,12 @@
 						search_text:search_text
 					},
 					success:function(result){
-						//$("#list_body").empty();
+						
 						var jdata = JSON.parse(result);
-							
+						
+						if(jdata.jlist == null){
+							$("#more_btn").remove();
+						}
 						for(var i in jdata.jlist){
 							addListHtml += "<tr class='travel_list1'>";
 							addListHtml += "<td class='travel_list_pic'>";
@@ -72,8 +73,6 @@
 						}
 						$(".pnum").val(jdata.jlist[0].pnum);
 		                $("#list_body").append(addListHtml);
-		                //$("#more_btn").remove();
-		                //alert("jdata.jlist.length:"+jdata.jlist.length);
 					}
 				});
 			}
@@ -81,9 +80,9 @@
 	        $("#more_btn").on("click", function(){
 	            var pnum=$(".pnum").val();
 	            moreList(pnum);
-				alert(pnum);
 	        }); 
-
+	        
+	        /** 검색 **/
 			$("#travel_search_btn").click(function(){
 				if($("#search").val() == "t_name"){
 					if($("#search_text").val() == ""){
@@ -95,7 +94,6 @@
 						var search_text = $("#search_text").val();
 						$("#list_body").empty();
 						$("#more_btn").remove();
-						alert(search+search_text);
 						moreList(pnum, search, search_text);
 					} 
 				}else if($("#search").val() == "t_addr"){
@@ -114,8 +112,9 @@
 				
 			});
 			
-			$("#category").change(function(){
-				$("#travel_search").val("");
+			/** 옵션 변경시 호출 **/
+			$("#search").change(function(){
+				$("#search_text").val("");
 			}); 
 			
 		});
@@ -228,14 +227,12 @@
 		<section class="list_zone">
 			<div class="travel_title">여행지 리스트</div>
 			<div class="travel_search_zone">
-				<!-- <form name="search_form" action="travel.do" method="get"> -->
-					<select name="search" class="search" id="search">
-						<option value="t_name">여행지</option>
-						<option value="t_addr">지역명</option>
-					</select>
-					<input type="text" name="search_text" id="search_text" placeholder="여행지를 검색하세요.">
-					<button type="submit" class="btn_style3" id="travel_search_btn">검색</button>
-				<!-- </form> -->
+				<select name="search" class="search" id="search">
+					<option value="t_name">여행지</option>
+					<option value="t_addr">지역명</option>
+				</select>
+				<input type="text" name="search_text" id="search_text" placeholder="여행지를 검색하세요.">
+				<button type="button" class="btn_style3" id="travel_search_btn">검색</button>
 			</div>
 			<table id="travel_list_table" class="travel_list">
 				<tbody id="list_body">

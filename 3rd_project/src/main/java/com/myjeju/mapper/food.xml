@@ -13,8 +13,38 @@
 	
 	<!-- 음식점 전체 리스트 -->
 	<select id="foodlist" resultType="com.myjeju.vo.FoodVO">
-		select fid, f_name, f_tag, f_infor, f_infor2, f_addr, f_vpoint, f_hpoint, f_hp, f_like,
-			   f_image1, f_image2, f_image3, f_image4, f_image5 from myjeju_food
+		select rno, fid, f_name, f_tag, f_infor, f_infor2, f_addr, f_vpoint, f_hpoint, f_hp, f_like, f_image1, f_image2, f_image3, f_image4, f_image5
+  			from(select rownum rno, fid, f_name, f_tag, f_infor, f_infor2, f_addr, f_vpoint, f_hpoint, f_hp, f_like, f_image1, f_image2, f_image3, f_image4, f_image5
+    		from(select fid, f_name, f_tag, f_infor, f_infor2, f_addr, f_vpoint, f_hpoint, f_hp, f_like, f_image1, f_image2, f_image3, f_image4, f_image5
+    		from myjeju_food order by f_like desc))
+	</select>
+	
+	<!-- 음식점 리스트 처리 -->
+	<select id="ajaxfoodlistnum" parameterType="map" resultType="com.myjeju.vo.FoodVO">
+		select rno, fid, f_name, f_tag, f_infor, f_infor2, f_addr, f_vpoint, f_hpoint, f_hp, f_like, f_image1, f_image2, f_image3, f_image4, f_image5
+			from(select rownum rno, fid, f_name, f_tag, f_infor, f_infor2, f_addr, f_vpoint, f_hpoint, f_hp, f_like, f_image1, f_image2, f_image3, f_image4, f_image5
+    		from(select fid, f_name, f_tag, f_infor, f_infor2, f_addr, f_vpoint, f_hpoint, f_hp, f_like, f_image1, f_image2, f_image3, f_image4, f_image5 from myjeju_food order by f_like desc)) 
+    		where rno between #{start} and #{end}
+	</select>
+	
+	<!-- 음식점 리스트 검색 처리 -->
+	<select id="ajaxfoodlistsearch" parameterType="java.util.Map" resultType="com.myjeju.vo.FoodVO">
+		<choose>
+			<when test="search.equals('f_name')">
+				select rno, fid, f_name, f_tag, f_infor, f_infor2, f_addr, f_vpoint, f_hpoint, f_hp, f_like, f_image1, f_image2, f_image3, f_image4, f_image5
+					from(select rownum rno, fid, f_name, f_tag, f_infor, f_infor2, f_addr, f_vpoint, f_hpoint, f_hp, f_like, f_image1, f_image2, f_image3, f_image4, f_image5
+	    			from(select fid, f_name, f_tag, f_infor, f_infor2, f_addr, f_vpoint, f_hpoint, f_hp, f_like, f_image1, f_image2, f_image3, f_image4, f_image5 from myjeju_food order by f_like desc)
+	    			where f_name like '%'||#{search_text}||'%') 
+	    			where rno between #{start} and #{end}
+			</when>
+			<when test="search.equals('f_addr')">
+				select rno, fid, f_name, f_tag, f_infor, f_infor2, f_addr, f_vpoint, f_hpoint, f_hp, f_like, f_image1, f_image2, f_image3, f_image4, f_image5
+					from(select rownum rno, fid, f_name, f_tag, f_infor, f_infor2, f_addr, f_vpoint, f_hpoint, f_hp, f_like, f_image1, f_image2, f_image3, f_image4, f_image5
+	    			from(select fid, f_name, f_tag, f_infor, f_infor2, f_addr, f_vpoint, f_hpoint, f_hp, f_like, f_image1, f_image2, f_image3, f_image4, f_image5 from myjeju_food order by f_like desc)
+	    			where f_addr like '%'||#{search_text}||'%') 
+	    			where rno between #{start} and #{end}
+			</when>
+		</choose>
 	</select>
 	
 	<!-- 음식점 상위3 -->

@@ -58,10 +58,6 @@ public class TravelDAO extends DBConn {
 		return (ArrayList<TravelVO>)list;
 	}
 	
-	//카운트
-	public int execTotalCount() {
-		return sqlSession.selectOne(namespace+".travel_count");
-	}
 	
 	//여행지 상위3
 	public ArrayList<TravelVO> getTravelListTop3(){

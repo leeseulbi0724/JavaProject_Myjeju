@@ -15,5 +15,4 @@ public interface TravelService {
 	TravelVO getTravelDetail(String tid);
 	PhotoSpotVO getPhotoSpot(String tid);
 	CarSpotVO getCarSpot(String tid);
-	int execTotalCount();
 }

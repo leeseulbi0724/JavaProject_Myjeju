@@ -51,13 +51,10 @@ public class TravelController {
 		//ArrayList<TravelVO> list = new ArrayList<TravelVO>();
 		
 		int pageNumber = 1;
-	      
-System.out.println("pnum = "+pnum);
 
 		if(!pnum.equals("")) { 
 			pageNumber = Integer.parseInt(pnum) +1;
 		}
-		
 		
 		int startnum = ((pageNumber-1)*5) +1;
 		int endnum = pageNumber*5; 
@@ -69,7 +66,6 @@ System.out.println("pnum = "+pnum);
 			list = travelService.getTravelList(startnum, endnum, search, search_text);
 		}
 		
-System.out.println(search+search_text);
 
 		JsonObject jdata = new JsonObject();
 		JsonArray jlist = new JsonArray();
