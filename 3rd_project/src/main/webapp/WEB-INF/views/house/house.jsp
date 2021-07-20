@@ -18,9 +18,37 @@
 		.img>img {width:75px; height:75px; object-fit:cover; vertical-align:top; }
 	</style>
 	<link rel="stylesheet" href="http://localhost:9000/myjeju/css/index.css">
-	<link rel="stylesheet" href="http://localhost:9000/myjeju/css/travel/travel.css">
-	<link rel="stylesheet" href="http://localhost:9000/myjeju/css/travel/map.css">
+	<link rel="stylesheet" href="http://localhost:9000/myjeju/css/house/house.css">
+	<link rel="stylesheet" href="http://localhost:9000/myjeju/css/house/map.css">
 	<script src="http://localhost:9000/myjeju/js/jquery-3.6.0.min.js"></script>
+	<script>
+		$(document.ready(function(){
+			$(".btn_style").click(function(){
+				var hid = "${vo.hid}";
+				if ("${session_id}" == "") {
+				location.replace("login.do");
+				} else if (${h_result}) {
+				$.ajax({
+			                type: "post",
+			                url: "heart_minus.do",
+			                data:{hid:hid},
+			                dataType: 'json',
+			                success: function (result) {
+			                    location.reload();
+			                },
+			            });
+				} else {
+				$.ajax({
+			                type: "post",
+			               	url: "heart_plus.do",
+			                data:{hid:hid},
+			                dataType: 'json',
+			                success: function (result) {
+			                    location.reload();
+			               	 },
+			});
+		});         
+	</script>
 </head>
 <body>
 	<!-- header -->
@@ -38,13 +66,19 @@
 					<div class="spot_infor">
 						<p class="spot_name">${toplist.h_name} <span>${toplist.h_infor}</span></p>
 						<p class="spot_tag">${toplist.h_tag}</p>
-						<button type="button" class="btn_style" id="heart_btn">
-							<img src="http://localhost:9000/myjeju/images/travel/empty_heart.png">${toplist.h_like}
-						</button>
-						<img src="http://localhost:9000/myjeju/images/travel/star.png"><span class="star_score">4.9 (82)</span>
-					</div>
+				<button type="button" class="btn_style" id="heart_btn">
+				<c:if test = "${h_result eq 'false' }">
+					<img src="http://localhost:9000/myjeju/images/empty_heart.png" class="heart_img">
+				</c:if>
+				<c:if test = "${h_result eq 'true' }">
+					<img src="http://localhost:9000/mybook/images/full_heart.png" class="heart_img">
+				</c:if>
+				</button>
+				</div>
 				</article>
-				</c:forEach>
+			</c:forEach>
+				<%-- <img src="http://localhost:9000/myjeju/images/travel/empty_heart.png">${toplist.h_like} --%>
+				<img src="http://localhost:9000/myjeju/images/travel/star.png"><span class="star_score">4.9 (82)</span>
 			</div>
 		</section>
 		
@@ -143,7 +177,8 @@
 							</div>
 						</td>
 						<td>
-							<button type="button" class="btn_style" id="heart_btn"><img src="http://localhost:9000/myjeju/images/travel/empty_heart.png">${vo.h_like}</button>
+							<button type="button" class="btn_style" id="heart_btn">
+							<img src="http://localhost:9000/myjeju/images/travel/empty_heart.png">${vo.h_like}</button>
 							<button type="button" class="btn_style4" id="more_infor" onclick="location.href='http://localhost:9000/myjeju/house_detail.do?hid=${vo.hid}'">상세정보</button>
 						</td>
 					</tr>
