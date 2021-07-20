@@ -31,7 +31,7 @@ public class TravelController {
 	public ModelAndView travel() {
 		ModelAndView mv = new ModelAndView();
 		
-		ArrayList<TravelVO> list = travelService.getTravelList();
+		ArrayList<TravelVO> list = travelService.getTravelList(1, 5);
 		ArrayList<TravelVO> toplist = travelService.getTravelListTop3();
 		
 		mv.setViewName("travel/travel");
@@ -90,6 +90,50 @@ public class TravelController {
 		jdata.add("jlist", jlist);
 
 		return gson.toJson(jdata);
+	}
+	
+	/**
+	 * 여행지 리스트 추가분 ajax 처리
+	 */
+	@ResponseBody
+	@RequestMapping(value="/travel_proc_add.do", produces = "application/text; charset=utf8", method=RequestMethod.GET)
+	public String travel_proc(String pnum) {
+		
+		int pageNumber = 1;
+		
+		if(!pnum.equals("")) { 
+			pageNumber = Integer.parseInt(pnum) +1;
+		}
+		
+		int startnum = ((pageNumber-1)*5) +1;
+		int endnum = pageNumber*5; 
+		
+		
+		ArrayList<TravelVO> list = travelService.getTravelList(startnum, endnum);
+		
+		JsonObject jdata = new JsonObject();
+		JsonArray jlist = new JsonArray();
+		Gson gson = new Gson();
+		
+		for(TravelVO vo : list) {
+			JsonObject jobj = new JsonObject();
+			jobj.addProperty("tid", vo.getTid());
+			jobj.addProperty("t_name", vo.getT_name());
+			jobj.addProperty("t_addr", vo.getT_addr());
+			jobj.addProperty("t_hp", vo.getT_hp());
+			jobj.addProperty("t_image", vo.getT_image1());
+			jobj.addProperty("t_vpoint", vo.getT_vpoint());
+			jobj.addProperty("t_hpoint", vo.getT_hpoint());
+			
+			jlist.add(jobj);
+		}
+		
+		jdata.add("jlist", jlist);
+
+		return gson.toJson(jdata);
+		
+		
+		//return "{\"title\":\"이호테우 해변\",\"addr\":\"제주특별자치도 제주시 도리로 20\",\"tel\":\"(+82) 064-728-3993\",\"img\":\"이호테우.jpg\",\"idx\":\"5\",\"latlng\":{\"La\":126.45318694807267,\"Ma\":33.49796826011083}}";
 	}
 	
 	/**
