@@ -59,10 +59,22 @@ public class HouseController {
 	 * house_detail.do : 숙소 상세페이지
 	 */
 	@RequestMapping(value="/house_detail.do", method=RequestMethod.GET)
-	public ModelAndView house_detail(String hid) {
+	public ModelAndView house_detail(HttpSession session, String hid) {
+		//로그인 회원정보 가져오기
+		String id = (String) session.getAttribute("session_id");	
+
 		ModelAndView mv = new ModelAndView();
 		
 		HouseVO vo = houseService.getHouseDetail(hid);
+		if (id!= null) {
+			HeartVO hvo = new HeartVO();
+			hvo.setId(id);  hvo.setHid(hid);
+			int status = houseService.getHeartInfoResult(hvo);		
+			vo.setStatus(status);
+		} else {
+			vo.setStatus(0);
+		}
+		
 		String infor2 = vo.getH_infor2().replace("\r\n", "<br>");
 		ArrayList<HDetailVO> list = houseService.getHDetail(hid);
 		

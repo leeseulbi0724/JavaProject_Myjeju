@@ -40,6 +40,34 @@
 		                }
 				 }
 			}); */
+			$(".btn_style").click(function(){
+				var hid = $(this).attr("name");				
+				if ("${session_id}"=="") {
+					alert("로그인 후 이용바랍니다");
+				} else if ($(this).attr("id") == 1) {
+					alert("마이너스");
+					$.ajax({
+				                type: "post",
+				                url: "heart_minus.do",
+				                data:{hid:hid},
+				                dataType: 'json',
+				                success: function (result) {
+				                    location.reload();
+				                },
+				           }); 
+					} else {
+					 alert("플러스");						
+						$.ajax({
+				                type: "post",
+				               	url: "heart_plus.do",
+				                data:{hid:hid},
+				                dataType: 'json',
+				                success: function (result) {
+				                    location.reload();
+				               	 },
+						});
+					}
+			});
 		});
 	</script>
 </head>
@@ -58,7 +86,14 @@
 				${vo.h_hp}
 			</p>
 			<div>
-				<button type="button" class="btn_style" id="heart_btn"><img src="http://localhost:9000/myjeju/images/travel/empty_heart.png">${vo.h_like}</button>
+				<button type="button" class="btn_style" id="${vo.status }" name="${vo.hid }">
+				<c:if test="${vo.status eq 0 }">
+					<img src="http://localhost:9000/myjeju/images/house/empty_heart.png" >${vo.h_like}
+				</c:if>
+				<c:if test = "${vo.status eq 1 }">
+					<img src="http://localhost:9000/myjeju/images/house/heart_after.png" width=25 height=25>${vo.h_like}
+				</c:if>
+				</button>
 				<img src="http://localhost:9000/myjeju/images/travel/star.png"><span class="star_score">4.8 (223)</span>
 			</div>
 		</div>
