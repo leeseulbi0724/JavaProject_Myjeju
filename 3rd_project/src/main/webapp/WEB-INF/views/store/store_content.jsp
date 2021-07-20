@@ -12,6 +12,22 @@
 <link rel="stylesheet" href="css/admincss/bootstrap.css">
 <link rel="stylesheet" href="css/admincss/bootstrap.min.css">
 <script src="http://localhost:9000/myjeju/js/bootstrap.min.js"></script>
+<style>
+	
+	.star_img {
+		vertical-align : bottom;
+		margin-top : 15px;
+	}
+	
+	.star_avg {
+		vertical-align : bottom;
+		margin-left : 5px;
+		font-size : 20px;
+		font-weight : 500;
+		margin-top : 15px;
+	}
+
+</style>
 <script>
 
 	$(document).ready(function() {
@@ -254,7 +270,32 @@
 							<input type = "hidden" name = "s_image" value = "${vo.s_image}">
 							<input type = "hidden" name = "s_sfile" value = "${vo.s_sfile}">
 							
-							<%-- <div>${star} [${reviewCount}]</div> --%>
+							<c:choose>
+								<c:when test = "${vo.star_avg <= 1}">
+									<img src = "http://localhost:9000/myjeju/images/travel/star.png" class = "star_img">
+									<span class = "star_avg">${vo.star_avg}</span>
+								</c:when>
+								<c:when test = "${vo.star_avg <= 1.5}">
+									<img src = "http://localhost:9000/myjeju/images/travel/star1.png" class = "star_img">
+									<span class = "star_avg">${vo.star_avg}</span>
+								</c:when>
+								<c:when test = "${vo.star_avg <= 2.5}">
+									<img src = "http://localhost:9000/myjeju/images/travel/star2.png" class = "star_img">
+									<span class = "star_avg">${vo.star_avg}</span>
+								</c:when>
+								<c:when test = "${vo.star_avg <= 3.5}">
+									<img src = "http://localhost:9000/myjeju/images/travel/star3.png" class = "star_img">
+									<span class = "star_avg">${vo.star_avg}</span>
+								</c:when>
+								<c:when test = "${vo.star_avg <= 4.5}">
+									<img src = "http://localhost:9000/myjeju/images/travel/star4.png" class = "star_img">
+									<span class = "star_avg">${vo.star_avg}</span>
+								</c:when>
+								<c:when test = "${vo.star_avg <= 5}">
+									<img src = "http://localhost:9000/myjeju/images/travel/star5.png" class = "star_img">
+									<span class = "star_avg">${vo.star_avg}</span>
+								</c:when>
+							</c:choose>
 							
 						</div>
 						

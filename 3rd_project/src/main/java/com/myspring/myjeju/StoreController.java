@@ -49,13 +49,6 @@ public class StoreController {
 		ArrayList<StoreVO> souvelist = storeService.getSouveList();
 		ArrayList<StoreVO> etclist = storeService.getEtcList();
 		
-		String sid = null;
-		
-		for(int i = 0; i<bestlist.size(); i++) {
-			sid = bestlist.get(i).getSid();
-			mv.addObject("sid", sid);
-		}
-		
 		mv.setViewName("store/store");
 		
 		mv.addObject("bestlist", bestlist);

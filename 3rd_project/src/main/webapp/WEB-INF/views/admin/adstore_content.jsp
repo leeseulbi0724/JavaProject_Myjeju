@@ -83,6 +83,20 @@
 			<div></div>
 		</section>
 			<div style="width:1000px; display:inline-block; margin-bottom:30px;">
+				<%-- <section>
+					<div style="margin-bottom: 30px"">카테고리 : ${vo.s_category}</div>
+					<div style="margin-bottom: 30px">상품명 : ${vo.s_name}</div>
+					<div style="margin-bottom: 30px">가격 : ${vo.s_price}</div>
+					<c:if test = "${!empty vo.s_sfile}">
+						<img src="http://localhost:9000/myjeju/upload/${vo.s_sfile}" width=50% height=500px >
+					</c:if>		
+					<br>
+					<hr style="border : 1px solid lightgray;">
+					
+					<br>
+					<img src="http://localhost:9000/myjeju/upload/${vo.s_ssfile}" width=50% >
+				</section> --%>
+				
 			<table class="table">
 		 		<tr>
 		 			<td colspan="2">카테고리&emsp;:&emsp;<strong>${vo.s_category}</strong></td>
@@ -97,7 +111,6 @@
 		 		</tr>
 		 		<tr>
 		 			<td colspan="2">
-		 				<%-- <textarea disabled style="resize: none;">${vo.s_price}</textarea> --%>
 		 				<c:if test = "${!empty vo.s_sfile}">
 							<img src="http://localhost:9000/myjeju/upload/${vo.s_sfile}" width=50% height=500px >
 						</c:if>		

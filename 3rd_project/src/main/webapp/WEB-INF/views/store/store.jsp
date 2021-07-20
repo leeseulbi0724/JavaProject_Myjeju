@@ -18,7 +18,18 @@
 	.store_nav a.on {
 		border-bottom : 2px solid #4fa9de;
 	}
-
+	
+	.star_img {
+		vertical-align : bottom;
+	}
+	
+	.star_avg {
+		vertical-align : bottom;
+		margin-left : 5px;
+		font-size : 20px;
+		font-weight : 500;
+	}
+	
 </style>
 <script>
 	$(document).ready(function() {
@@ -62,7 +73,33 @@
 						<a href = "store_content.do?sid=${best.sid}" class = "click">
 							<img src = "http://localhost:9000/myjeju/images/store/${best.s_image}" width = "260">
 							<p>[${best.s_category}] ${best.s_name}</p>
-							<p>${sid}</p>
+
+							<c:choose>
+								<c:when test = "${best.star_avg <= 1}">
+									<img src = "http://localhost:9000/myjeju/images/travel/star.png" class = "star_img">
+									<span class = "star_avg">${best.star_avg}</span>
+								</c:when>
+								<c:when test = "${best.star_avg <= 1.5}">
+									<img src = "http://localhost:9000/myjeju/images/travel/star1.png" class = "star_img">
+									<span class = "star_avg">${best.star_avg}</span>
+								</c:when>
+								<c:when test = "${best.star_avg <= 2.5}">
+									<img src = "http://localhost:9000/myjeju/images/travel/star2.png" class = "star_img">
+									<span class = "star_avg">${best.star_avg}</span>
+								</c:when>
+								<c:when test = "${best.star_avg <= 3.5}">
+									<img src = "http://localhost:9000/myjeju/images/travel/star3.png" class = "star_img">
+									<span class = "star_avg">${best.star_avg}</span>
+								</c:when>
+								<c:when test = "${best.star_avg <= 4.5}">
+									<img src = "http://localhost:9000/myjeju/images/travel/star4.png" class = "star_img">
+									<span class = "star_avg">${best.star_avg}</span>
+								</c:when>
+								<c:when test = "${best.star_avg <= 5}">
+									<img src = "http://localhost:9000/myjeju/images/travel/star5.png" class = "star_img">
+									<span class = "star_avg">${best.star_avg}</span>
+								</c:when>
+							</c:choose>
 						</a>
 					</li>
 				</ul>
@@ -78,7 +115,35 @@
 				<ul>
 					<li>
 						<a href = "store_content.do?sid=${eat.sid}">
-							<img src = "http://localhost:9000/myjeju/images/store/${eat.s_image}" width = "260"><p>[${eat.s_category}] ${eat.s_name}</p>
+							<img src = "http://localhost:9000/myjeju/images/store/${eat.s_image}" width = "260">
+							<p>[${eat.s_category}] ${eat.s_name}</p>
+							
+							<c:choose>
+								<c:when test = "${eat.star_avg <= 1}">
+									<img src = "http://localhost:9000/myjeju/images/travel/star.png" class = "star_img">
+									<span class = "star_avg">${eat.star_avg}</span>
+								</c:when>
+								<c:when test = "${eat.star_avg <= 1.5}">
+									<img src = "http://localhost:9000/myjeju/images/travel/star1.png" class = "star_img">
+									<span class = "star_avg">${eat.star_avg}</span>
+								</c:when>
+								<c:when test = "${eat.star_avg <= 2.5}">
+									<img src = "http://localhost:9000/myjeju/images/travel/star2.png" class = "star_img">
+									<span class = "star_avg">${eat.star_avg}</span>
+								</c:when>
+								<c:when test = "${eat.star_avg <= 3.5}">
+									<img src = "http://localhost:9000/myjeju/images/travel/star3.png" class = "star_img">
+									<span class = "star_avg">${eat.star_avg}</span>
+								</c:when>
+								<c:when test = "${eat.star_avg <= 4.5}">
+									<img src = "http://localhost:9000/myjeju/images/travel/star4.png" class = "star_img">
+									<span class = "star_avg">${eat.star_avg}</span>
+								</c:when>
+								<c:when test = "${eat.star_avg <= 5}">
+									<img src = "http://localhost:9000/myjeju/images/travel/star5.png" class = "star_img">
+									<span class = "star_avg">${eat.star_avg}</span>
+								</c:when>
+							</c:choose>
 						</a>
 					</li>
 				</ul>
@@ -94,7 +159,35 @@
 				<ul>
 					<li>
 						<a href = "store_content.do?sid=${souve.sid}">
-							<img src = "http://localhost:9000/myjeju/images/store/${souve.s_image}" width = "260"><p>[${souve.s_category}] ${souve.s_name}</p>
+							<img src = "http://localhost:9000/myjeju/images/store/${souve.s_image}" width = "260">
+							<p>[${souve.s_category}] ${souve.s_name}</p>
+							
+							<c:choose>
+								<c:when test = "${souve.star_avg <= 1}">
+									<img src = "http://localhost:9000/myjeju/images/travel/star.png" class = "star_img">
+									<span class = "star_avg">${souve.star_avg}</span>
+								</c:when>
+								<c:when test = "${souve.star_avg <= 1.5}">
+									<img src = "http://localhost:9000/myjeju/images/travel/star1.png" class = "star_img">
+									<span class = "star_avg">${souve.star_avg}</span>
+								</c:when>
+								<c:when test = "${souve.star_avg <= 2.5}">
+									<img src = "http://localhost:9000/myjeju/images/travel/star2.png" class = "star_img">
+									<span class = "star_avg">${souve.star_avg}</span>
+								</c:when>
+								<c:when test = "${souve.star_avg <= 3.5}">
+									<img src = "http://localhost:9000/myjeju/images/travel/star3.png" class = "star_img">
+									<span class = "star_avg">${souve.star_avg}</span>
+								</c:when>
+								<c:when test = "${souve.star_avg <= 4.5}">
+									<img src = "http://localhost:9000/myjeju/images/travel/star4.png" class = "star_img">
+									<span class = "star_avg">${souve.star_avg}</span>
+								</c:when>
+								<c:when test = "${souve.star_avg <= 5}">
+									<img src = "http://localhost:9000/myjeju/images/travel/star5.png" class = "star_img">
+									<span class = "star_avg">${souve.star_avg}</span>
+								</c:when>
+							</c:choose>
 						</a>
 					</li>
 				</ul>
@@ -110,7 +203,35 @@
 				<ul>
 					<li>
 						<a href = "store_content.do?sid=${etc.sid}">
-							<img src = "http://localhost:9000/myjeju/images/store/${etc.s_image}" width = "260"><p>[${etc.s_category}] ${etc.s_name}</p>
+							<img src = "http://localhost:9000/myjeju/images/store/${etc.s_image}" width = "260">
+							<p>[${etc.s_category}] ${etc.s_name}</p>
+							
+							<c:choose>
+								<c:when test = "${etc.star_avg <= 1}">
+									<img src = "http://localhost:9000/myjeju/images/travel/star.png" class = "star_img">
+									<span class = "star_avg">${etc.star_avg}</span>
+								</c:when>
+								<c:when test = "${etc.star_avg <= 1.5}">
+									<img src = "http://localhost:9000/myjeju/images/travel/star1.png" class = "star_img">
+									<span class = "star_avg">${etc.star_avg}</span>
+								</c:when>
+								<c:when test = "${etc.star_avg <= 2.5}">
+									<img src = "http://localhost:9000/myjeju/images/travel/star2.png" class = "star_img">
+									<span class = "star_avg">${etc.star_avg}</span>
+								</c:when>
+								<c:when test = "${etc.star_avg <= 3.5}">
+									<img src = "http://localhost:9000/myjeju/images/travel/star3.png" class = "star_img">
+									<span class = "star_avg">${etc.star_avg}</span>
+								</c:when>
+								<c:when test = "${etc.star_avg <= 4.5}">
+									<img src = "http://localhost:9000/myjeju/images/travel/star4.png" class = "star_img">
+									<span class = "star_avg">${etc.star_avg}</span>
+								</c:when>
+								<c:when test = "${etc.star_avg <= 5}">
+									<img src = "http://localhost:9000/myjeju/images/travel/star5.png" class = "star_img">
+									<span class = "star_avg">${etc.star_avg}</span>
+								</c:when>
+							</c:choose>
 						</a>
 					</li>
 				</ul>
