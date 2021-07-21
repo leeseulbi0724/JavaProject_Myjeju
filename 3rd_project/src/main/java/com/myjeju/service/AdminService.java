@@ -28,6 +28,7 @@ public interface AdminService {
 	//包府磊 按角
 	ArrayList<HDetailVO> gethousede(String hid);
 	HDetailVO gethousedecontent(String hdid);
+	boolean getHdetailUpload(HDetailVO vo);
 	
 	//包府磊 咐笼
 	ArrayList<FoodVO> getlistfood(int startnum,int endnum);

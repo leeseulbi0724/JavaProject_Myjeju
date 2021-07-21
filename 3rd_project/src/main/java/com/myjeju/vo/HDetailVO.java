@@ -1,8 +1,18 @@
 package com.myjeju.vo;
 
 public class HDetailVO {
-	String hid, hdid, hd_name, hd_img;
+	String hid, hdid, hd_name, hd_img, hd_file;
 	int hd_price,hd_people,rno;
+
+	
+	
+	public String getHd_file() {
+		return hd_file;
+	}
+
+	public void setHd_file(String hd_file) {
+		this.hd_file = hd_file;
+	}
 
 	public int getRno() {
 		return rno;

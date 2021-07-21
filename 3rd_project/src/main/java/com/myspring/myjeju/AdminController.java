@@ -1,6 +1,7 @@
 package com.myspring.myjeju;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -11,13 +12,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.myjeju.service.AdminService;
 import com.myjeju.service.CommunityService;
 import com.myjeju.vo.CommunityVO;
 import com.myjeju.vo.FoodVO;
+import com.myjeju.vo.HDetailVO;
 import com.myjeju.vo.HouseVO;
 import com.myjeju.vo.MemberVO;
 import com.myjeju.vo.NoticeVO;
@@ -132,6 +137,60 @@ public class AdminController {
 			mv.addObject("hid", hid);
 			return mv;
 		}
+		
+		//¼÷¼Ò -> °´½Ç µî·ÏÇÏ±â
+		@RequestMapping(value="/adhouse_de_write.do", method=RequestMethod.GET)
+		public ModelAndView adhouse_de_write(String hid) {
+			ModelAndView mv = new ModelAndView();
+			
+			mv.addObject("hid", hid);
+			mv.setViewName("admin/adhouse_de_write");
+			
+			return mv;
+		}
+		
+		//¼÷¼Ò --> °´½Ç µî·Ï DB
+		@RequestMapping(value = "/adhouse_de_write_proc.do", method=RequestMethod.POST)
+		public ModelAndView adhouse_de_write(MultipartHttpServletRequest request, @RequestParam("file") MultipartFile[] file) throws Exception {
+			ModelAndView mv = new ModelAndView();			
+			
+			String root_path = request.getSession().getServletContext().getRealPath("/");
+			System.out.print(root_path);
+			String attach_path = "\\resources\\upload\\";
+			String fileOriginName = ""; 
+			String fileMultiName = "";
+			String fileMultiUplodaName= "";
+			
+			UUID uuid = UUID.randomUUID();
+			for(int i=0; i<file.length; i++) { 
+				fileOriginName = file[i].getOriginalFilename(); 
+				System.out.println("±âÁ¸ ÆÄÀÏ¸í : "+fileOriginName); 
+				File f = new File(root_path + attach_path + uuid +"_"+ fileOriginName); 
+				file[i].transferTo(f);
+				if(i==0) { 
+					fileMultiName += fileOriginName; 
+					fileMultiUplodaName += uuid +"_"+fileOriginName;
+				} else { 
+					fileMultiName += ","+fileOriginName; 
+					fileMultiUplodaName += "," + uuid +"_"+fileOriginName;
+					} 
+			}
+			HDetailVO vo = new HDetailVO();
+			vo.setHd_img(fileMultiName);
+			vo.setHd_file(fileMultiUplodaName);
+			vo.setHid(request.getParameter("hid"));
+			vo.setHd_name(request.getParameter("hd_name"));
+			vo.setHd_price(Integer.parseInt(request.getParameter("hd_price")));
+			vo.setHd_people(Integer.parseInt(request.getParameter("hd_people")));
+			
+			boolean result = adminService.getHdetailUpload(vo);
+			
+			mv.setViewName("redirect:/adhouse_de.do?hid="+request.getParameter("hid"));
+			return mv;
+			
+		}
+		
+		
 		//¸ÀÁý°ü¸® ¸®½ºÆ®
 		@RequestMapping(value="/adfood.do",method= {RequestMethod.GET,RequestMethod.POST})
 		public ModelAndView tofood(String pnum, String search, String search_text) {

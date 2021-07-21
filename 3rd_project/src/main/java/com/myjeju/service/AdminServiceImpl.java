@@ -65,6 +65,14 @@ public class AdminServiceImpl implements AdminService {
 	public HDetailVO gethousedecontent(String hdid) {
 		return adminDAO.gethousedecontent(hdid);
 	}
+	public boolean getHdetailUpload(HDetailVO vo) {
+		int val = adminDAO.getHdetailUpload(vo);
+		boolean result = false;
+		if (val!=0) {
+			result = true;
+		}
+		return result;
+	}
 	//°ü¸®ÀÚ ¸ÀÁı
 	@Override
 	public ArrayList<FoodVO> getlistfood(int startnum,int endnum){

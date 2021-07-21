@@ -216,8 +216,8 @@
 		</insert>
 		
 		<select id="notice_list" parameterType="map" resultType="com.myjeju.vo.NoticeVO">
-			select rno, nid, ntitle, ncontent, nfile, nsfile, ndate 
-             from(select rownum  rno, nid, ntitle, ncontent, nfile, nsfile, ndate 
+			select rno, nid, ntitle, ncontent, nfile, nsfile, ndate, ncount
+             from(select rownum  rno, nid, ntitle, ncontent, nfile, nsfile, ndate, ncount
 				     from(select * from myjeju_notice order by ndate desc))
 				     where rno between #{start} and #{end}
 		</select>
@@ -389,5 +389,12 @@
 		<delete id="store_delete" parameterType="java.lang.String">
 			delete from myjeju_store where sid = #{sid}
 		</delete>
+		
+		
+		
+		<!-- 객실 추가 -->
+		<insert id = "hdetail_upload" parameterType="com.myjeju.vo.HDetailVO">
+			insert into myjeju_hdetail values(#{hid}, 'hd_'||sequ_myjeju_hdetail.nextval, #{hd_name}, #{hd_price}, #{hd_people}, #{hd_img}, #{hd_file})
+		</insert>
 		
 </mapper>

@@ -15,16 +15,40 @@
 	<script type="text/javascript"></script>
 </head>
 <style>
-	.write { 
-		background-color:rgb(20,86,184); 
-		color:white; 
+	.write, .list { 				
 		padding:5px 10px;
 		border-radius:4px;
-		float:right;
-		margin:10px 0;
+		margin:10px 0; 
 	}
+	.write { background-color:rgb(20,86,184); color:white;  }
+	.list { background-color:rgb(228,228,228); color:black; }
+	
+	.table tr { border-bottom:1px solid lightgray; }
+	.table .title {
+		background-color:rgb(248,248,248);
+		vertical-align : middle;		
+	}
+	.table #hid { width:60px; display:inline-block; }
 </style>
-<body>
+<script>
+$(document).ready(function() {
+	$(".write").click(function() {
+		if ($("#name").val() == "") {
+			alert("객실 이름을 입력해주세요");
+			$("#name").focus();		
+		} else if ($("#price").val() == "") {
+			alert("가격을 입력해주세요");
+			$("#price").focus();		
+		} else if ($("#count").val() == "") {
+			alert("명수를 선택해주세요");
+			$("#count").focus();		
+		} else {
+			 admin_house.submit();
+		}
+	});
+});
+</script>
+<body style="height:900px">
 	<nav class="navbar navbar-default">
 		<div class ="navbar-header">
 			<button type="button" class="navbar-toggle collapsed"
@@ -40,7 +64,7 @@
 				<ul class="nav navbar-nav">
 					<li><a href="http://localhost:9000/myjeju/adminindex.do">메인</a>
 					<li><a href="adnotice.do">공지사항관리</a></li>
-					<li><a href="adboard.do">게시판관리</a></li>
+					<li ><a href="adboard.do">게시판관리</a></li>
 					<li><a href="adrequest.do">요청관리</a></li>
 					<li><a href="admember.do">회원관리<span id="unread" class="label label-info"></span></a></li>
 					<li class="active"><a href="adhouse.do">숙소관리</a></li>
@@ -63,38 +87,40 @@
 			<div> 숙소관리 </div>
 			<div></div>
 		</section>
-	
-		<section class ="setup_faq_list">
-			<a href="adhouse_de_write.do?hid=${list.get(0).hid }" class="write" >글쓰기</a>
-			<table class = "content_layout_setup_faq">
-				<tr>
-					<th> 번호 </th>
-					<th> 숙소아이디 </th>
-					<th> 이름 </th>
-					<th> 객실아이디 </th>
-					<th> 가격 </th>
-				</tr>
-			 	<c:forEach var="vo" items="${list}">
-				<tr>
-					<td>${vo.rno}</td>
-					<td onclick="location.href='adhouse_de_content.do?hdid=${vo.hdid}'">${vo.hid}</td>
-					<td onclick="location.href='adhouse_de_content.do?hdid=${vo.hdid}'">${vo.hd_name}</td>
-					<td onclick="location.href='adhouse_de_content.do?hdid=${vo.hdid}'">${vo.hdid}</td>
-					<td>${vo.hd_price}</td>
-				</tr>
-				</c:forEach>
-			</table>			
-		</section>
-		<section class = "setup_faq_search">
-			<form name = "setup_counsel_form" action ="adhouse.do" method = "post">
-				<select class = "search" name = "search" style = "width: 70px; height: 27px">
-					<option value = "id">아이디</option>
-					<option value = "name">이름</option>
-				</select>
-				<input type = "text" name = "search_text" class = "search_text" style = "width: 300px; margin: 0 10px;">
-				<button type = "submit" class = "btn_search">검색</button>
+			<div style="width:1000px; display:inline-block;">
+			<form name="admin_house" action="adhouse_de_write_proc.do" method="post" enctype= "multipart/form-data">
+			<table class="table">
+		 		<tr>
+		 			<th class="title">숙소 아이디</th>
+		 			<th><input type="text" class="form-control" value="${hid }" readonly id="hid" name="hid"></th>
+		 			<th class="title">객실 이름</th>
+		 			<th><input type="text" class="form-control" placeholder="객실 이름을 입력해주세요" id="name" name="hd_name"></th>
+		 			<th class="title">가격</th>
+		 			<th><input type="text" class="form-control" placeholder="(1박기준)가격을 입력해주세요" id="price" name="hd_price"></th>
+		 			<th class="title">최대 숙박 명수</th>
+		 			<th>
+		 				<select class="form-control" id="count" name="hd_people">
+		 					<option value="">선택
+							<option value="1">1명
+							<option value="2">2명
+							<option value="3">3명
+							<option value="4">4명					
+						</select>
+		 			</th>
+		 		</tr>		
+		 		<tr>
+		 			<th class="title">객실 사진 (여러장 가능)</th>
+		 			<th colspan="7"><input type="file" class="form-control" multiple="multiple" name="file"></th>
+		 		</tr> 		
+		 	</table>
+				<a href="adhouse_de.do?hid=${hid }" class="list" >취소</a>
+				<a class="write" >등록</a>
 			</form>
+			</div>
+		<section class ="setup_faq_list">
+		
 		</section>
+		
 	</div>
 </body>
 </html>

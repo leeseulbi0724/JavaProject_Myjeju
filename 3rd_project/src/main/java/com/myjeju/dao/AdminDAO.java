@@ -360,6 +360,12 @@ public class AdminDAO {
 		if(value != 0) result = true;
 		return result;
 	}
+	
+	
+	//¼÷¼Ò -- °´½ÇÃß°¡
+	public int getHdetailUpload(HDetailVO vo) {
+		return sqlSession.insert(namespace+".hdetail_upload", vo);
+	}
 
 
 }

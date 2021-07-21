@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
 	request.setCharacterEncoding("utf-8");
 %>
@@ -62,8 +63,10 @@ function deleteFunction() {
 				<h3>${vo.hd_name}</h3>
 				<hr style="display: inline-block; width:100%; border-top:1px solid #006DCC; opacity:0.5;">
 				<div class="content" style="text-align:left; padding-left:300px;">
-					<div style="margin-bottom: 30px;margin-top: 5px; padding-left:197px;">
-						<img src="http://localhost:9000/myjeju/resources/images/house/house_detail/${vo.hd_img}" style ="width:200px; height:200px;">
+					<div style="margin-bottom: 30px;margin-top: 5px; ">
+					<c:forEach var="img" items="${img}">
+						<img src="http://localhost:9000/myjeju/upload/${img }" style ="width:200px; height:200px;">
+					</c:forEach>
 					</div>
 					<div style="margin-bottom: 30px">숙소 아이디 : ${vo.hid}</div>
 					<div style="margin-bottom: 30px">객실 이름 : ${vo.hd_name}</div>

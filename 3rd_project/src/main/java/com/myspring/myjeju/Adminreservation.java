@@ -32,10 +32,13 @@ public class Adminreservation {
 	@RequestMapping(value="/adhouse_de_content.do",method= {RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView tode(String hdid) {
 		ModelAndView mv = new ModelAndView();
-		HDetailVO vo = adminService.gethousedecontent(hdid);
+		HDetailVO vo = adminService.gethousedecontent(hdid);		
+		
+		String img[] = vo.getHd_file().split(",");		
 		
 		mv.setViewName("admin/adhouse_de_content");
 		mv.addObject("vo", vo);
+		mv.addObject("img", img);
 		mv.addObject("hid", vo.getHid());
 		return mv;
 	}
