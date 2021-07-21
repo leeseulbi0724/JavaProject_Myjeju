@@ -98,6 +98,16 @@
 		<delete id="hdetail_delete" parameterType="java.lang.String">
 			delete from myjeju_hdetail where hdid=#{hdid}
 		</delete>
+	<!-- 관리자 객실 룸 -->	
+		<select id="listdehouseroom" parameterType="java.lang.String" resultType="com.myjeju.vo.RoomdeVO">
+			select rownum rno,hdid,roomid,room_name from myjeju_hdroom where hdid = #{hdid}
+		</select>
+		<select id="getmonthcheck" parameterType="java.lang.String" resultType="com.myjeju.vo.RoomVO">
+			select * from myjeju_reservation where rdate like '%'||#{month}||'%'
+		</select>
+		<insert id = "insertres" parameterType="com.myjeju.vo.RoomVO">
+			insert into myjeju_reservation values(#{roomid},#{rdate},#{available})
+		</insert>
 	<!-- 관리자 맛집 -->
 		<select id="listnumfood" parameterType="map" resultType="com.myjeju.vo.FoodVO">
 			select rno, fid, f_name, f_tag, f_infor, f_infor2, f_addr, f_vpoint, f_hpoint, f_hp, f_like, f_image1, f_image2, f_image3, f_image4, f_image5

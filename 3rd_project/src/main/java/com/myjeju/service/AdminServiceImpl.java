@@ -12,6 +12,8 @@ import com.myjeju.vo.HDetailVO;
 import com.myjeju.vo.HouseVO;
 import com.myjeju.vo.MemberVO;
 import com.myjeju.vo.NoticeVO;
+import com.myjeju.vo.RoomVO;
+import com.myjeju.vo.RoomdeVO;
 import com.myjeju.vo.StoreVO;
 import com.myjeju.vo.TravelVO;
 
@@ -58,6 +60,22 @@ public class AdminServiceImpl implements AdminService {
 	public HouseVO gethouse(String hid){
 		return adminDAO.gethouse(hid);
 	}
+	//包府磊 冯
+	public ArrayList<RoomdeVO> gethousederoom(String hdid){
+		return adminDAO.gethousederoom(hdid);
+	}
+	public ArrayList<RoomVO> getmonthcheck(String month) {
+		return adminDAO.getmonthcheck(month);
+	}
+	public boolean insertres(RoomVO vo) {
+		int val = adminDAO.insertres(vo);
+		boolean result = false;
+		if (val!=0) {
+			result = true;
+		}
+		return result;
+	}
+	
 	//包府磊 按角
 	public ArrayList<HDetailVO> gethousede(String hid){
 		return adminDAO.gethousede(hid);

@@ -14,6 +14,35 @@
 	<script src="js/bootstrap.js"></script>
 	<script type="text/javascript"></script>
 </head>
+<script>
+	$(document).ready(function() {
+		var result = ${result};
+		if(result == "1"){
+			alert("일괄예약에 성공했습니다.");
+		}else if (result=="2") {
+			alert("일괄예약에 실패했습니다.\n상세예약 또는 방별 일괄 예약을 진행해 주십시오.");
+		}
+		
+		var hdid = $(".hdid").val();
+		
+		$("#btn_res_all").click(function() {
+			var year = $("#countyear").val();
+			var month = $("#countmonth").val();
+			if($("#countyear").val() == "") {
+				alert("년도를 입력해주세요");
+				$("#countyear").focus();
+				return false;
+			}else if($("#countmonth").val() == "") {
+				alert("월을 입력해주세요");
+				$("#countmonth").focus();
+				return false;
+			}else {
+				location.href = "adhouse_res_all.do?hdid="+hdid+"&month="+month+"&year="+year;
+			}
+		});
+	});
+
+</script>
 <style>
 	.write { 
 		background-color:rgb(20,86,184); 
@@ -60,39 +89,60 @@
 	
 		<section class = "section_setup_faq">
 			<div></div>
-			<div> 객실관리 </div>
+			<div> 방관리 </div>
 			<div></div>
 		</section>
 	
 		<section class ="setup_faq_list">
-			<a href="adhouse_de_write.do?hid=${list.get(0).hid }" class="write" >객실추가</a>
+			<a href="#" class="write" >방추가</a>
 			<table class = "content_layout_setup_faq">
 				<tr>
 					<th> 번호 </th>
-					<th> 숙소아이디 </th>
-					<th> 이름 </th>
 					<th> 객실아이디 </th>
-					<th> 가격 </th>
+					<th> 방아이디 </th>
+					<th> 방이름 </th>
+					<th> 예약처리 </th>
 				</tr>
 			 	<c:forEach var="vo" items="${list}">
 				<tr>
 					<td>${vo.rno}</td>
-					<td onclick="location.href='adhouse_de_content.do?hdid=${vo.hdid}'">${vo.hid}</td>
-					<td onclick="location.href='adhouse_de_content.do?hdid=${vo.hdid}'">${vo.hd_name}</td>
-					<td onclick="location.href='adhouse_de_content.do?hdid=${vo.hdid}'">${vo.hdid}</td>
-					<td>${vo.hd_price}</td>
+					<td onclick="#'">${vo.hdid}</td>
+					<td onclick="#'">${vo.roomid}</td>
+					<td onclick="#'">${vo.room_name}</td>
+					<td style="width:200px;">
+						<button>상세예약</button>
+						<button>일괄예약</button>
+					</td>
 				</tr>
 				</c:forEach>
 			</table>			
 		</section>
 		<section class = "setup_faq_search">
 			<form name = "setup_counsel_form" action ="adhouse.do" method = "post">
-				<select class = "search" name = "search" style = "width: 70px; height: 27px">
-					<option value = "id">아이디</option>
-					<option value = "name">이름</option>
+			<input type="hidden" class="hdid" value = '${hdid}'>
+				<div style="display:inline-block;">
+					<select class="form-control" id="countyear" name="room_year" style="width:150px; display:inline-block;">
+			 					<option value="">연도 선택
+								<option value="2021">2021년
+								<option value="2022">2022년
+					</select>
+				</div>
+				<select class="form-control" id="countmonth" name="room_month" style="width:150px; display:inline-block;margin:0 10px;">
+		 					<option value="">월 선택
+							<option value="1">1 월
+							<option value="2">2 월
+							<option value="3">3 월
+							<option value="4">4 월					
+							<option value="5">5 월					
+							<option value="6">6 월					
+							<option value="7">7 월					
+							<option value="8">8 월					
+							<option value="9">9 월					
+							<option value="10">10 월					
+							<option value="11">11 월					
+							<option value="12">12 월					
 				</select>
-				<input type = "text" name = "search_text" class = "search_text" style = "width: 300px; margin: 0 10px;">
-				<button type = "submit" class = "btn_search">검색</button>
+				<button type = "button" class = "btn_search" id="btn_res_all" style="width:100px;">일괄 예약</button>
 			</form>
 		</section>
 	</div>

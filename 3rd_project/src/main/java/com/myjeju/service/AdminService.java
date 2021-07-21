@@ -8,6 +8,8 @@ import com.myjeju.vo.HDetailVO;
 import com.myjeju.vo.HouseVO;
 import com.myjeju.vo.MemberVO;
 import com.myjeju.vo.NoticeVO;
+import com.myjeju.vo.RoomVO;
+import com.myjeju.vo.RoomdeVO;
 import com.myjeju.vo.StoreVO;
 import com.myjeju.vo.TravelVO;
 
@@ -31,6 +33,11 @@ public interface AdminService {
 	boolean getHdetailUpload(HDetailVO vo);
 	boolean getHdetailUpdate(HDetailVO vo);
 	boolean getHdetailDelete(String hdid);
+	
+	//包府磊 冯
+	ArrayList<RoomdeVO> gethousederoom(String hdid);
+	ArrayList<RoomVO> getmonthcheck(String month);
+	boolean insertres(RoomVO vo);
 	
 	//包府磊 咐笼
 	ArrayList<FoodVO> getlistfood(int startnum,int endnum);

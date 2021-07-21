@@ -21,6 +21,7 @@ import com.myjeju.vo.RoomVO;
 
 @Controller
 public class ReservationController {
+	
 	public static int monthDay(int year, int month) {
 		if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12) {
 			return 31;
@@ -109,6 +110,81 @@ public class ReservationController {
 		}
 		return calv;
 	}
+	
+	public static int comparedate(String curdate, String nextdate) {
+		int cur_year = Integer.parseInt(curdate.substring(0,4));
+		int next_year = Integer.parseInt(nextdate.substring(0,4));
+		
+		int cur_month = Integer.parseInt(curdate.substring(5,7));
+		int naxt_month = Integer.parseInt(nextdate.substring(5,7));
+		
+		int cur_day = Integer.parseInt(curdate.substring(8,10));
+		int next_day = Integer.parseInt(nextdate.substring(8,10));
+		
+		int month = naxt_month - cur_month;
+		if(month < 0) {
+			month = 1;
+		}
+		int day = next_day - cur_day;
+		
+		int value = (month*monthDay(cur_year,cur_month)) + day;
+		
+		return value;
+	}
+	
+	public static String comparedateminus(String curdate, int minus) {
+		int cur_year = Integer.parseInt(curdate.substring(0,4));
+		
+		int cur_month = Integer.parseInt(curdate.substring(5,7));
+		
+		int cur_day = Integer.parseInt(curdate.substring(8,10));
+		
+		int day = cur_day - minus;
+		
+		if(day <= 0) {
+			cur_month -= 1;
+			if(cur_month == 12) {
+				day += monthDay(cur_year-1,cur_month);
+			}else {
+				day += monthDay(cur_year,cur_month);
+			}
+		}
+		
+		String month = String.valueOf(cur_month);
+		if(month.length()==1) {
+			month = "0" + month;
+		}
+		String day1 = String.valueOf(day);
+		if(day1.length()==1) {
+			day1 = "0" + day1;
+		}
+		
+		
+		String value = String.valueOf(cur_year) + "-" + month + "-" + day1 + " 00:00:00"; 
+		return value;
+	}
+	public static int comparedateplus(String curdate, int max) {
+		
+		int cur_year = Integer.parseInt(curdate.substring(0,4));
+		
+		int cur_month = Integer.parseInt(curdate.substring(5,7));
+		
+		int cur_day = Integer.parseInt(curdate.substring(8,10));
+		
+		int day = cur_day+max;
+		int month = cur_month;
+		if(day>monthDay(cur_year,cur_month)){
+			day -= monthDay(cur_year,cur_month);
+			month += 1;
+			if(month>12) {
+				month -=12;
+			}
+		}
+		
+		int value = (month*100)+day;
+		return value;
+	}
+	
 	@Autowired
 	private ReservationService ReservationService;
 	/**
@@ -336,78 +412,7 @@ public class ReservationController {
 		return maxs;
 	}
 	
-	public static int comparedate(String curdate, String nextdate) {
-		int cur_year = Integer.parseInt(curdate.substring(0,4));
-		int next_year = Integer.parseInt(nextdate.substring(0,4));
-		
-		int cur_month = Integer.parseInt(curdate.substring(5,7));
-		int naxt_month = Integer.parseInt(nextdate.substring(5,7));
-		
-		int cur_day = Integer.parseInt(curdate.substring(8,10));
-		int next_day = Integer.parseInt(nextdate.substring(8,10));
-		
-		int month = naxt_month - cur_month;
-		if(month < 0) {
-			month = 1;
-		}
-		int day = next_day - cur_day;
-		
-		int value = (month*monthDay(cur_year,cur_month)) + day;
-		
-		return value;
-	}
-	public static String comparedateminus(String curdate, int minus) {
-		int cur_year = Integer.parseInt(curdate.substring(0,4));
-		
-		int cur_month = Integer.parseInt(curdate.substring(5,7));
-		
-		int cur_day = Integer.parseInt(curdate.substring(8,10));
-		
-		int day = cur_day - minus;
-		
-		if(day <= 0) {
-			cur_month -= 1;
-			if(cur_month == 12) {
-				day += monthDay(cur_year-1,cur_month);
-			}else {
-				day += monthDay(cur_year,cur_month);
-			}
-		}
-		
-		String month = String.valueOf(cur_month);
-		if(month.length()==1) {
-			month = "0" + month;
-		}
-		String day1 = String.valueOf(day);
-		if(day1.length()==1) {
-			day1 = "0" + day1;
-		}
-		
-		
-		String value = String.valueOf(cur_year) + "-" + month + "-" + day1 + " 00:00:00"; 
-		return value;
-	}
-	public static int comparedateplus(String curdate, int max) {
-		
-		int cur_year = Integer.parseInt(curdate.substring(0,4));
-		
-		int cur_month = Integer.parseInt(curdate.substring(5,7));
-		
-		int cur_day = Integer.parseInt(curdate.substring(8,10));
-		
-		int day = cur_day+max;
-		int month = cur_month;
-		if(day>monthDay(cur_year,cur_month)){
-			day -= monthDay(cur_year,cur_month);
-			month += 1;
-			if(month>12) {
-				month -=12;
-			}
-		}
-		
-		int value = (month*100)+day;
-		return value;
-	}
+	
 	
 
 	@RequestMapping(value="/reservationDetail.do", method=RequestMethod.POST)

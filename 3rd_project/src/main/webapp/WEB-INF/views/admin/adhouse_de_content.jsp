@@ -94,7 +94,7 @@ $(document).ready(function() {
 				<hr style="border-top:1px solid #006DCC; opacity:0.5;">
 				<button type = "button" class = "btn_setup_faq" onclick="location.href='adhouse_de_update.do?hdid=${vo.hdid}'">수정</button>
 				<button type = "button" class = "btn_setup_faq" id="delete">삭제</button>
-				<button type = "button" class = "btn_setup_faq" onclick="location.href='#'">예약관리</button>
+				<button type = "button" class = "btn_setup_faq" onclick="location.href='adhouse_de_room.do?hdid=${vo.hdid}'">예약관리</button>
 				
 				<a href = "adhouse_de.do?hid=${hid}"><button type = "button" class = "btn_setup_faq">목록</button></a>
 				<a href = "http://localhost:9000/myjeju/admin/adminindex.jsp"><button type = "button" class = "btn_setup_faq">홈으로</button></a>

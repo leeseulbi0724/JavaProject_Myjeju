@@ -15,6 +15,8 @@ import com.myjeju.vo.HDetailVO;
 import com.myjeju.vo.HouseVO;
 import com.myjeju.vo.MemberVO;
 import com.myjeju.vo.NoticeVO;
+import com.myjeju.vo.RoomVO;
+import com.myjeju.vo.RoomdeVO;
 import com.myjeju.vo.StoreVO;
 import com.myjeju.vo.TravelVO;
 
@@ -95,6 +97,19 @@ public class AdminDAO {
 	public HDetailVO gethousedecontent(String hdid) {
 		return sqlSession.selectOne(namespace+".getdehousecontent", hdid);
 	}
+	//°´½Ç ·ë ¸®½ºÆ® °¡Á®¿À±â
+	public ArrayList<RoomdeVO> gethousederoom(String hdid) {
+		List<RoomdeVO> list = sqlSession.selectList(namespace+".listdehouseroom",hdid);
+		return (ArrayList<RoomdeVO>)list;
+	}
+	public ArrayList<RoomVO> getmonthcheck(String month) {
+		List<RoomVO> list = sqlSession.selectList(namespace+".getmonthcheck",month);
+		return (ArrayList<RoomVO>)list;
+	}
+	public int insertres(RoomVO vo) {
+		return sqlSession.insert(namespace+".insertres", vo);
+	}
+	
 	//¼÷¼Ò -- °´½ÇÃß°¡
 	public int getHdetailUpload(HDetailVO vo) {
 		return sqlSession.insert(namespace+".hdetail_upload", vo);
