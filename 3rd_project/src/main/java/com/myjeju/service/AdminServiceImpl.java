@@ -73,6 +73,14 @@ public class AdminServiceImpl implements AdminService {
 		}
 		return result;
 	}
+	public boolean getHdetailUpdate(HDetailVO vo) {
+		int val = adminDAO.getHdetailUpdate(vo);
+		boolean result = false;
+		if (val!=0) {
+			result = true;
+		}
+		return result;
+	}
 	//°ü¸®ÀÚ ¸ÀÁı
 	@Override
 	public ArrayList<FoodVO> getlistfood(int startnum,int endnum){

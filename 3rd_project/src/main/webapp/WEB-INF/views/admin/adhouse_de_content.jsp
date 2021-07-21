@@ -64,8 +64,8 @@ function deleteFunction() {
 				<hr style="display: inline-block; width:100%; border-top:1px solid #006DCC; opacity:0.5;">
 				<div class="content" style="text-align:left; padding-left:300px;">
 					<div style="margin-bottom: 30px;margin-top: 5px; ">
-					<c:forEach var="img" items="${img}">
-						<img src="http://localhost:9000/myjeju/upload/${img }" style ="width:200px; height:200px;">
+					<c:forEach var="img_name" items="${img}">
+						<img src="http://localhost:9000/myjeju/upload/${img_name}" style ="width:200px; height:200px;">
 					</c:forEach>
 					</div>
 					<div style="margin-bottom: 30px">숙소 아이디 : ${vo.hid}</div>

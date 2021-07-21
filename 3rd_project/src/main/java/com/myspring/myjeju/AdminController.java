@@ -196,10 +196,86 @@ public class AdminController {
 			ModelAndView mv = new ModelAndView();
 			HDetailVO vo = adminService.gethousedecontent(hdid);				
 			String img[] = vo.getHd_img().split(",");	
+			String file[] = vo.getHd_file().split(",");
+			ArrayList<HDetailVO> list = new ArrayList<HDetailVO>();
+			for (int i=0; i<img.length; i++) {
+				HDetailVO hvo = new HDetailVO();
+				hvo.setHd_img(img[i]);
+				hvo.setHd_file(file[i]);
+				
+				list.add(hvo);
+				
+			}
 			
 			mv.setViewName("admin/adhouse_de_update");
 			mv.addObject("vo", vo);
-			mv.addObject("img", img);
+			mv.addObject("list", list);
+			return mv;
+		}
+		
+		//숙소 --> 객실 수정하기 DB
+		@RequestMapping(value="/adhouse_de_update_proc.do", method= {RequestMethod.GET,RequestMethod.POST})
+		public ModelAndView adhouse_de_update_proc(MultipartHttpServletRequest request, @RequestParam("file") MultipartFile[] file) throws Exception {
+			ModelAndView mv = new ModelAndView();
+			
+			System.out.println("파일이름" + request.getParameter("hd_img"));
+			System.out.print("파일경로" + request.getParameter("hd_file"));
+			
+			String fileOldName=request.getParameter("hd_img");
+			String OldName[] = fileOldName.split(",");
+			for (int i=0; i<OldName.length; i++) {
+				if (OldName.length == 1) {
+					fileOldName= OldName[i];
+				} 
+			}
+			String fileOldRoot = request.getParameter("hd_file");
+			System.out.print(fileOldRoot);
+			String RootName[] = fileOldRoot.split(",");
+			for (int i=0; i<RootName.length; i++) {
+				if (RootName.length == 1) {
+					fileOldRoot= RootName[i];					
+				} 
+			}
+			
+			String root_path = request.getSession().getServletContext().getRealPath("/");
+			System.out.print(root_path);
+			String attach_path = "\\resources\\upload\\";
+			String fileOriginName = ""; 
+			String fileMultiName = "";
+			String fileMultiUplodaName= "";
+			
+			UUID uuid = UUID.randomUUID();
+			
+			System.out.print(file.length);
+
+			for(int i=0; i<file.length; i++) { 
+				fileOriginName = file[i].getOriginalFilename(); 
+				System.out.println("기존 파일명 : "+fileOriginName); 
+				File f = new File(root_path + attach_path + uuid +"_"+ fileOriginName); 
+				file[i].transferTo(f);
+				if (fileOriginName != "") {
+					if(i==0) { 
+						fileMultiName += fileOriginName; 
+						fileMultiUplodaName += uuid +"_"+fileOriginName;
+					} else { 
+						fileMultiName += ","+fileOriginName; 
+						fileMultiUplodaName += "," + uuid +"_"+fileOriginName;
+					} 
+				}
+			}
+
+			HDetailVO vo = new HDetailVO();
+			vo.setHd_img(fileOldName+fileMultiName);
+			vo.setHd_file(fileOldRoot+fileMultiUplodaName);
+			vo.setHid(request.getParameter("hid"));
+			vo.setHdid(request.getParameter("hdid"));
+			vo.setHd_name(request.getParameter("hd_name"));
+			vo.setHd_price(Integer.parseInt(request.getParameter("hd_price")));
+			vo.setHd_people(Integer.parseInt(request.getParameter("hd_people")));
+			
+			boolean result = adminService.getHdetailUpdate(vo);
+			
+			mv.setViewName("redirect:/adhouse_de_content.do?hdid="+vo.getHdid());
 			return mv;
 		}
 		

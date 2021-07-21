@@ -99,6 +99,10 @@ public class AdminDAO {
 	public int getHdetailUpload(HDetailVO vo) {
 		return sqlSession.insert(namespace+".hdetail_upload", vo);
 	}
+	//숙소 -- 객실수정
+	public int getHdetailUpdate(HDetailVO vo) {
+		return sqlSession.update(namespace+".hdetail_update", vo);
+	}
 	
 	//맛집 리스트 가져오기
 	public ArrayList<FoodVO> getlistfood(int startnum, int endnum) {

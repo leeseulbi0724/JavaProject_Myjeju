@@ -89,6 +89,12 @@
 		<select id="getdehousecontent" parameterType="java.lang.String" resultType="com.myjeju.vo.HDetailVO">
 			select * from myjeju_hdetail where hdid = #{hdid}
 		</select>
+		<insert id = "hdetail_upload" parameterType="com.myjeju.vo.HDetailVO">
+			insert into myjeju_hdetail values(#{hid}, 'hd_'||sequ_myjeju_hdetail.nextval, #{hd_name}, #{hd_price}, #{hd_people}, #{hd_img}, #{hd_file})
+		</insert>
+		<update id="hdetail_update" parameterType="com.myjeju.vo.HDetailVO">
+			update myjeju_hdetail set hd_name = #{hd_name}, hd_price=#{hd_price}, hd_people=#{hd_people}, hd_img = #{hd_img}, hd_file=#{hd_file} where hid=#{hid} and hdid=#{hdid}
+		</update>
 	<!-- 관리자 맛집 -->
 		<select id="listnumfood" parameterType="map" resultType="com.myjeju.vo.FoodVO">
 			select rno, fid, f_name, f_tag, f_infor, f_infor2, f_addr, f_vpoint, f_hpoint, f_hp, f_like, f_image1, f_image2, f_image3, f_image4, f_image5
@@ -388,13 +394,8 @@
 		<!-- 스토어 상품 삭제 -->
 		<delete id="store_delete" parameterType="java.lang.String">
 			delete from myjeju_store where sid = #{sid}
-		</delete>
+		</delete>	
 		
-		
-		
-		<!-- 객실 추가 -->
-		<insert id = "hdetail_upload" parameterType="com.myjeju.vo.HDetailVO">
-			insert into myjeju_hdetail values(#{hid}, 'hd_'||sequ_myjeju_hdetail.nextval, #{hd_name}, #{hd_price}, #{hd_people}, #{hd_img}, #{hd_file})
-		</insert>
+	
 		
 </mapper>

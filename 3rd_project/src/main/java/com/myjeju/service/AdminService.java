@@ -29,6 +29,7 @@ public interface AdminService {
 	ArrayList<HDetailVO> gethousede(String hid);
 	HDetailVO gethousedecontent(String hdid);
 	boolean getHdetailUpload(HDetailVO vo);
+	boolean getHdetailUpdate(HDetailVO vo);
 	
 	//관리자 맛집
 	ArrayList<FoodVO> getlistfood(int startnum,int endnum);
