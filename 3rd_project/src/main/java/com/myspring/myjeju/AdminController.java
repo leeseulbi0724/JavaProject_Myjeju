@@ -266,6 +266,16 @@ public class AdminController {
 			return mv;
 		}
 		
+		@ResponseBody
+		@RequestMapping(value = "/adhouse_de_delete.do", method=RequestMethod.POST)
+		public boolean adhous_de_delete(HttpServletRequest request) {
+			String hdid = request.getParameter("hdid");
+			boolean result = adminService.getHdetailDelete(hdid);
+			
+			return result;
+		}
+		
+		
 		
 		//맛집관리 리스트
 		@RequestMapping(value="/adfood.do",method= {RequestMethod.GET,RequestMethod.POST})

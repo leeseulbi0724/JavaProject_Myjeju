@@ -21,8 +21,25 @@ function deleteFunction() {
 		faq_content.submit();         
     } else {
     	alert("삭제을 취소했습니다.");
-    }
+    }	
 }
+$(document).ready(function() {
+	$("#delete").click(function() {
+		if (confirm("해당 객실을 삭제하시겠습니까?")) {	
+			$.ajax({
+                type: "post",
+                url: "adhouse_de_delete.do",             
+                data:{hdid:"${vo.hdid}"},
+                dataType: 'json',
+                success: function (result) {
+                	location.replace("adhouse_de.do?hid=${vo.hid}");
+                },
+           }); 
+		} else {
+
+		}		
+	});
+});
 </script>
 </head>
 <body>
@@ -76,7 +93,7 @@ function deleteFunction() {
 				</div>
 				<hr style="border-top:1px solid #006DCC; opacity:0.5;">
 				<button type = "button" class = "btn_setup_faq" onclick="location.href='adhouse_de_update.do?hdid=${vo.hdid}'">수정</button>
-				<button type = "button" class = "btn_setup_faq" onclick="#">삭제</button>
+				<button type = "button" class = "btn_setup_faq" id="delete">삭제</button>
 				<button type = "button" class = "btn_setup_faq" onclick="location.href='#'">예약관리</button>
 				
 				<a href = "adhouse_de.do?hid=${hid}"><button type = "button" class = "btn_setup_faq">목록</button></a>

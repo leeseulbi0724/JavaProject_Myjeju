@@ -103,6 +103,10 @@ public class AdminDAO {
 	public int getHdetailUpdate(HDetailVO vo) {
 		return sqlSession.update(namespace+".hdetail_update", vo);
 	}
+	//숙소 -- 객실삭제
+	public int getHdetailDelete(String hdid) {
+		return sqlSession.delete(namespace+".hdetail_delete", hdid);
+	}
 	
 	//맛집 리스트 가져오기
 	public ArrayList<FoodVO> getlistfood(int startnum, int endnum) {
