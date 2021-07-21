@@ -23,8 +23,9 @@
 	<script>
 		$(document).ready(function(){ 
 			
-			 $(".btn_style").click(function(){
+			 /*$(".btn_style").click(function(){
 				var fid = $(this).attr("name");				
+				alert("11");
 				if ("${session_id}"=="") {
 					alert("로그인 후 이용바랍니다");
 				} else if ($(this).attr("id") == 1) {
@@ -48,7 +49,7 @@
 				               	 },
 						});
 					}
-			}); 
+			}); */
 			
 			var pnum=$(".pnum").val();
 	
@@ -88,8 +89,12 @@
 							addListHtml += "</div>";
 							addListHtml += "</td>";
 							addListHtml += "<td>";
-							addListHtml += "<button type='button' class='btn_style' id='heart_btn'>"
-							addListHtml += "<img src='http://localhost:9000/myjeju/images/travel/empty_heart.png'>" + jdata.jlist[i].f_like;
+							addListHtml += "<button type='button' class='btn_style'  id='"+ jdata.jlist[i].status + "'" + " name= '"+ jdata.jlist[i].fid +"'>";
+							if (jdata.jlist[i].status == 0) {
+								addListHtml += "<img src='http://localhost:9000/myjeju/images/house/empty_heart.png'>" + jdata.jlist[i].f_like;
+							} else {
+								addListHtml += "<img src='http://localhost:9000/myjeju/images/house/red_heart.png'>" + jdata.jlist[i].f_like;
+							}
 							addListHtml += "</button>";
 							addListHtml += "<a href='http://localhost:9000/myjeju/food_detail.do?fid=" + jdata.jlist[i].fid + "'>";
 							addListHtml += "<button type='button' class='btn_style4' id='more_infor'>상세정보</button>";
@@ -99,6 +104,32 @@
 						}
 						$(".pnum").val(jdata.jlist[0].pnum);
 		                $("#list_body").append(addListHtml);
+			   			 $(".btn_style").click(function(){
+			 				var fid = $(this).attr("name");			
+			 				if ("${session_id}"=="") {
+			 					alert("로그인 후 이용바랍니다");
+			 				} else if ($(this).attr("id") == 1) {
+			 					$.ajax({
+			 				                type: "post",
+			 				                url: "heart_food_minus.do",
+			 				                data:{fid:fid},
+			 				                dataType: 'json',
+			 				                success: function (result) {
+			 				                location.reload();
+			 				                },
+			 				           }); 
+			 					} else {
+			 						$.ajax({
+			 				                type: "post",
+			 				               	url: "heart_food_plus.do",
+			 				                data:{fid:fid},
+			 				                dataType: 'json',
+			 				                success: function (result) {
+			 				                location.reload();
+			 				               	 },
+			 						});
+			 					}
+			 			}); 
 		              
 					}
 				});

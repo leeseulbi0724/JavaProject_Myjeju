@@ -75,7 +75,7 @@ function deleteFunction() {
 					<div style="margin-bottom: 30px">숙박인수 : ${vo.hd_people}</div>
 				</div>
 				<hr style="border-top:1px solid #006DCC; opacity:0.5;">
-				<button type = "button" class = "btn_setup_faq" onclick="#">수정</button>
+				<button type = "button" class = "btn_setup_faq" onclick="location.href='adhouse_de_update.do?hdid=${vo.hdid}'">수정</button>
 				<button type = "button" class = "btn_setup_faq" onclick="#">삭제</button>
 				<button type = "button" class = "btn_setup_faq" onclick="location.href='#'">예약관리</button>
 				

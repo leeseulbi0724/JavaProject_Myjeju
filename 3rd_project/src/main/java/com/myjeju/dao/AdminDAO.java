@@ -95,6 +95,11 @@ public class AdminDAO {
 	public HDetailVO gethousedecontent(String hdid) {
 		return sqlSession.selectOne(namespace+".getdehousecontent", hdid);
 	}
+	//¼÷¼Ò -- °´½ÇÃß°¡
+	public int getHdetailUpload(HDetailVO vo) {
+		return sqlSession.insert(namespace+".hdetail_upload", vo);
+	}
+	
 	//¸ÀÁý ¸®½ºÆ® °¡Á®¿À±â
 	public ArrayList<FoodVO> getlistfood(int startnum, int endnum) {
 		Map<String,String> se = new HashMap<String,String>();
@@ -362,10 +367,7 @@ public class AdminDAO {
 	}
 	
 	
-	//¼÷¼Ò -- °´½ÇÃß°¡
-	public int getHdetailUpload(HDetailVO vo) {
-		return sqlSession.insert(namespace+".hdetail_upload", vo);
-	}
+	
 
 
 }

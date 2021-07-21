@@ -190,6 +190,19 @@ public class AdminController {
 			
 		}
 		
+		//¼÷¼Ò -> °´½Ç ¼öÁ¤ÇÏ±â
+		@RequestMapping(value="/adhouse_de_update.do", method=RequestMethod.GET)
+		public ModelAndView adhouse_de_update(String hdid) {
+			ModelAndView mv = new ModelAndView();
+			HDetailVO vo = adminService.gethousedecontent(hdid);				
+			String img[] = vo.getHd_img().split(",");	
+			
+			mv.setViewName("admin/adhouse_de_update");
+			mv.addObject("vo", vo);
+			mv.addObject("img", img);
+			return mv;
+		}
+		
 		
 		//¸ÀÁý°ü¸® ¸®½ºÆ®
 		@RequestMapping(value="/adfood.do",method= {RequestMethod.GET,RequestMethod.POST})

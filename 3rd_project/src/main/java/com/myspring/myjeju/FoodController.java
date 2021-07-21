@@ -72,8 +72,11 @@ public class FoodController {
 	 */
 	@ResponseBody
 	@RequestMapping(value="/food_proc.do", produces = "application/text; charset=utf8", method=RequestMethod.GET)
-	public String travel_proc(String pnum, String search, String search_text) {
+	public String travel_proc(String pnum, String search, String search_text, HttpSession session) {
 		ArrayList<FoodVO> list = foodService.getFoodList();
+		
+		//로그인 회원정보 가져오기
+		String id = (String) session.getAttribute("session_id");	
 		
 		int pageNumber = 1;
 
@@ -90,10 +93,27 @@ public class FoodController {
 			list = foodService.getFoodList(startnum, endnum, search, search_text);
 		}
 		
+		if (id != null) {
+			for (int i=0; i<list.size(); i++) {
+				HeartVO vo = new HeartVO();		
+				vo.setId(id); vo.setFid(list.get(i).getFid());
+				int status = foodService.getHeartInfoResult(vo);
+				list.get(i).setStatus(status);				 
+			}
+			for (int i=0; i<list.size(); i++) {
+				HeartVO vo = new HeartVO();		
+				vo.setId(id); vo.setFid(list.get(i).getFid());
+				int status = foodService.getHeartInfoResult(vo);
+				list.get(i).setStatus(status);				 
+			}
+		} 		
 
 		JsonObject jdata = new JsonObject();
 		JsonArray jlist = new JsonArray();
 		Gson gson = new Gson();
+		
+		
+		
 		
 		for(FoodVO vo : list) {
 			JsonObject jobj = new JsonObject();
@@ -103,6 +123,7 @@ public class FoodController {
 			jobj.addProperty("f_infor", vo.getF_infor());
 			jobj.addProperty("f_addr", vo.getF_addr());
 			jobj.addProperty("f_like", vo.getF_like());
+			jobj.addProperty("status", vo.getStatus());
 			jobj.addProperty("f_image1", vo.getF_image1());
 			jobj.addProperty("pnum", String.valueOf(pageNumber));
 			jobj.addProperty("search", search);
