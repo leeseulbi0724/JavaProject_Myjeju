@@ -1,11 +1,19 @@
 package com.myjeju.vo;
 
 public class HDetailVO {
-	String hid, hdid, hd_name, hd_img, hd_file;
+	String hid, hdid, hd_name, hd_img, hd_file, old_name;
 	int hd_price,hd_people,rno;
 
 	
 	
+	public String getOld_name() {
+		return old_name;
+	}
+
+	public void setOld_name(String old_name) {
+		this.old_name = old_name;
+	}
+
 	public String getHd_file() {
 		return hd_file;
 	}

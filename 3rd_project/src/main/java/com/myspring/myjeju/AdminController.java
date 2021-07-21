@@ -156,7 +156,7 @@ public class AdminController {
 			
 			String root_path = request.getSession().getServletContext().getRealPath("/");
 			System.out.print(root_path);
-			String attach_path = "\\resources\\upload\\";
+			String attach_path = "\\resources\\images\\house\\house_detail\\";
 			String fileOriginName = ""; 
 			String fileMultiName = "";
 			String fileMultiUplodaName= "";
@@ -226,7 +226,7 @@ public class AdminController {
 			
 			String root_path = request.getSession().getServletContext().getRealPath("/");
 			System.out.print(root_path);
-			String attach_path = "\\resources\\upload\\";
+			String attach_path = "\\resources\\images\\house\\house_detail\\";
 			String fileOriginName = ""; 
 			String fileMultiName = "";
 			String fileMultiUplodaName= "";
@@ -250,6 +250,15 @@ public class AdminController {
 					} 
 				}
 			}
+			
+			String old_name = request.getParameter("old_name");
+			String old[] = old_name.split(",");
+			for (int i=0; i<old.length; i++) {
+				File old_file = new File(root_path+attach_path+old[i]);
+				if ( old_file.exists()) {
+					old_file.delete();
+				}
+			}
 
 			HDetailVO vo = new HDetailVO();
 			vo.setHd_img(fileOldName+fileMultiName);
@@ -266,10 +275,25 @@ public class AdminController {
 			return mv;
 		}
 		
+		//°´½Ç »èÁ¦
 		@ResponseBody
 		@RequestMapping(value = "/adhouse_de_delete.do", method=RequestMethod.POST)
 		public boolean adhous_de_delete(HttpServletRequest request) {
-			String hdid = request.getParameter("hdid");
+			String hdid = request.getParameter("hdid");			
+			String root_path = request.getSession().getServletContext().getRealPath("/");
+			String attach_path = "\\resources\\images\\house\\house_detail\\";
+			
+			HDetailVO vo = adminService.gethousedecontent(hdid);
+			
+			String old_name = vo.getHd_file();
+			String old[] = old_name.split(",");
+			for (int i=0; i<old.length; i++) {
+				File old_file = new File(root_path+attach_path+old[i]);
+				if ( old_file.exists()) {
+					old_file.delete();
+				}
+			}
+			
 			boolean result = adminService.getHdetailDelete(hdid);
 			
 			return result;

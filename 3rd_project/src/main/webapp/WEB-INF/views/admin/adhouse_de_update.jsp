@@ -30,7 +30,7 @@
 	}
 	.table #hid { width:60px; display:inline-block; }
 	
-	.img_name, .file_name { display:none; }
+	.img_name, .file_name, .old_name { display:none; }
 	th>div>button { display:inline-block; margin-left:5px; }
 	#file { width:600px; display:inline-block; }
 </style>
@@ -77,6 +77,9 @@ $(document).ready(function() {
 		
 		$("#img_name").val($(".img_name").text());
 		$("#file_name").val($(".file_name").text());
+		
+		$(".old_name").append($(this).prev().attr("name")+",");
+		$("#old_name").val($(".old_name").text());
 	});
 });
 </script>
@@ -172,7 +175,7 @@ $(document).ready(function() {
 		 			<th colspan="7">
 				 		<c:forEach var="vo"  items="${list}">
 			 				<div>
-			 					<input type="text" class="form-control"  id="file" readonly value="${vo.hd_img }">
+			 					<input type="text" class="form-control"  id="file" readonly value="${vo.hd_img }" name="${vo.hd_file }">
 			 					<button type="button" class="minus">-</button>
 			 				</div>
 		 					<span class="img_name">${vo.hd_img},</span>
@@ -184,6 +187,8 @@ $(document).ready(function() {
 		 		<input type="hidden" name="hdid" value="${vo.hdid }">
 		 		<input  id="img_name"  type="hidden" name="hd_img">
 		 		<input  id="file_name" type="hidden" name="hd_file">
+		 		<input  id="old_name" type="hidden" name="old_name">
+		 		<span class="old_name"></span>
 				<a href="adhouse_de.do?hid=${hid }" class="list" >취소</a>
 				<a class="write" >수정</a>
 			</form>

@@ -82,7 +82,7 @@ $(document).ready(function() {
 				<div class="content" style="text-align:left; padding-left:300px;">
 					<div style="margin-bottom: 30px;margin-top: 5px; ">
 					<c:forEach var="img_name" items="${img}">
-						<img src="http://localhost:9000/myjeju/upload/${img_name}" style ="width:200px; height:200px;">
+						<img src="http://localhost:9000/myjeju/images/house/house_detail/${img_name}" style ="width:200px; height:200px;">
 					</c:forEach>
 					</div>
 					<div style="margin-bottom: 30px">숙소 아이디 : ${vo.hid}</div>
