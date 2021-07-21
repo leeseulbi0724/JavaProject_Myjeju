@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.myjeju.dao.AdminDAO;
 import com.myjeju.vo.CommunityVO;
 import com.myjeju.vo.FoodVO;
+import com.myjeju.vo.HDetailVO;
 import com.myjeju.vo.HouseVO;
 import com.myjeju.vo.MemberVO;
 import com.myjeju.vo.NoticeVO;
@@ -56,6 +57,13 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public HouseVO gethouse(String hid){
 		return adminDAO.gethouse(hid);
+	}
+	//包府磊 按角
+	public ArrayList<HDetailVO> gethousede(String hid){
+		return adminDAO.gethousede(hid);
+	}
+	public HDetailVO gethousedecontent(String hdid) {
+		return adminDAO.gethousedecontent(hdid);
 	}
 	//包府磊 咐笼
 	@Override

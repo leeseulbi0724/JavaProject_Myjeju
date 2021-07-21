@@ -129,6 +129,7 @@ public class AdminController {
 			vo = adminService.gethouse(hid);
 			mv.setViewName("admin/adhouse_content");
 			mv.addObject("vo", vo);
+			mv.addObject("hid", hid);
 			return mv;
 		}
 		//맛집관리 리스트

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.myjeju.vo.CommunityVO;
 import com.myjeju.vo.FoodVO;
+import com.myjeju.vo.HDetailVO;
 import com.myjeju.vo.HouseVO;
 import com.myjeju.vo.MemberVO;
 import com.myjeju.vo.NoticeVO;
@@ -24,6 +25,10 @@ public interface AdminService {
 	int targethousePage(int pageNumber);
 	int targethousePage(int pageNumber,String search,String search_text);
 	
+	//관리자 객실
+	ArrayList<HDetailVO> gethousede(String hid);
+	HDetailVO gethousedecontent(String hdid);
+	
 	//관리자 맛집
 	ArrayList<FoodVO> getlistfood(int startnum,int endnum);
 	ArrayList<FoodVO> getlistfood(int startnum,int endnum,String search,String search_text);
@@ -35,6 +40,7 @@ public interface AdminService {
 	ArrayList<TravelVO> getlisttravel(int startnum,int endnum,String search,String search_text);
 	int targettravelPage(int pageNumber);
 	int targettravelPage(int pageNumber,String search,String search_text);
+	
 	
 	//관리자 게시판
 	ArrayList<CommunityVO> getBoardList(int startnum,int endnum);

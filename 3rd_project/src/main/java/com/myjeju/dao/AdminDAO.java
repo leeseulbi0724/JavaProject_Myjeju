@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.myjeju.vo.CommunityVO;
 import com.myjeju.vo.FoodVO;
+import com.myjeju.vo.HDetailVO;
 import com.myjeju.vo.HouseVO;
 import com.myjeju.vo.MemberVO;
 import com.myjeju.vo.NoticeVO;
@@ -85,6 +86,14 @@ public class AdminDAO {
 	}
 	public HouseVO gethouse(String hid) {
 		return sqlSession.selectOne(namespace+".gethouse", hid);
+	}
+	//숙소 객실 리스트 가져오기
+	public ArrayList<HDetailVO> gethousede(String hid) {
+		List<HDetailVO> list = sqlSession.selectList(namespace+".listdehouse",hid);
+		return (ArrayList<HDetailVO>)list;
+	}
+	public HDetailVO gethousedecontent(String hdid) {
+		return sqlSession.selectOne(namespace+".getdehousecontent", hdid);
 	}
 	//맛집 리스트 가져오기
 	public ArrayList<FoodVO> getlistfood(int startnum, int endnum) {

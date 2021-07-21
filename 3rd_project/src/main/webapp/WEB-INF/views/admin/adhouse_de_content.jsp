@@ -58,28 +58,25 @@ function deleteFunction() {
 	<div class = "content_setup_faq" style="margin-top:45px;">
 		<section>
 			<form name = "faq_content" action = "../../MenuDeleteServlet" method = "post">
-				<input type="hidden" name="hid" value="${vo.hid}">
-				<h3>${vo.h_name}</h3>
-				<div>${vo.h_infor}</div>
+				<input type="hidden" name="hid" value="${vo.hdid}">
+				<h3>${vo.hd_name}</h3>
 				<hr style="display: inline-block; width:100%; border-top:1px solid #006DCC; opacity:0.5;">
 				<div class="content" style="text-align:left; padding-left:300px;">
 					<div style="margin-bottom: 30px;margin-top: 5px; padding-left:197px;">
-						<img src="http://localhost:9000/myjeju/resources/images/house/${vo.h_img}" style ="width:200px; height:200px;">
+						<img src="http://localhost:9000/myjeju/resources/images/house/house_detail/${vo.hd_img}" style ="width:200px; height:200px;">
 					</div>
-					<div style="margin-bottom: 30px">설명 : ${vo.h_infor2}</div>
-					<div style="margin-bottom: 30px">태그정보 : ${vo.h_tag}</div>
-					<div style="margin-bottom: 30px">주소 : ${vo.h_addr}</div>
-					<div style="margin-bottom: 30px">경도 : ${vo.h_vpoint}</div>
-					<div style="margin-bottom: 30px">위도 : ${vo.h_hpoint}</div>
-					<div style="margin-bottom: 30px">HP : ${vo.h_hp}</div>
-					<div style="margin-bottom: 30px">좋아요 : ${vo.h_like}</div>
+					<div style="margin-bottom: 30px">숙소 아이디 : ${vo.hid}</div>
+					<div style="margin-bottom: 30px">객실 이름 : ${vo.hd_name}</div>
+					<div style="margin-bottom: 30px">객실 아이디 : ${vo.hdid}</div>
+					<div style="margin-bottom: 30px">가격 : ${vo.hd_price}</div>
+					<div style="margin-bottom: 30px">숙박인수 : ${vo.hd_people}</div>
 				</div>
 				<hr style="border-top:1px solid #006DCC; opacity:0.5;">
 				<button type = "button" class = "btn_setup_faq" onclick="#">수정</button>
 				<button type = "button" class = "btn_setup_faq" onclick="#">삭제</button>
-				<button type = "button" class = "btn_setup_faq" onclick="location.href='adhouse_de.do?hid=${hid}'">객실정보</button>
+				<button type = "button" class = "btn_setup_faq" onclick="location.href='#'">예약관리</button>
 				
-				<a href = "adhouse.do"><button type = "button" class = "btn_setup_faq">목록</button></a>
+				<a href = "adhouse_de.do?hid=${hid}"><button type = "button" class = "btn_setup_faq">목록</button></a>
 				<a href = "http://localhost:9000/myjeju/admin/adminindex.jsp"><button type = "button" class = "btn_setup_faq">홈으로</button></a>
 			</form>	
 		</section>

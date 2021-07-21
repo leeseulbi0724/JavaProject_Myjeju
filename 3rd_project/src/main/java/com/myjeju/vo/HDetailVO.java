@@ -2,7 +2,15 @@ package com.myjeju.vo;
 
 public class HDetailVO {
 	String hid, hdid, hd_name, hd_img;
-	int hd_price,hd_people;
+	int hd_price,hd_people,rno;
+
+	public int getRno() {
+		return rno;
+	}
+
+	public void setRno(int rno) {
+		this.rno = rno;
+	}
 
 	public String getHid() {
 		return hid;

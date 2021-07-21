@@ -82,6 +82,13 @@
 		<select id="gethouse" parameterType="java.lang.String" resultType="com.myjeju.vo.HouseVO">
 			select * from myjeju_house where hid = #{hid}
 		</select>
+	<!-- 관리자 객실 -->	
+		<select id="listdehouse" parameterType="java.lang.String" resultType="com.myjeju.vo.HDetailVO">
+			select rownum rno,hid,hdid,hd_name,hd_price,hd_people,hd_img from myjeju_hdetail where hid = #{hid}
+		</select>
+		<select id="getdehousecontent" parameterType="java.lang.String" resultType="com.myjeju.vo.HDetailVO">
+			select * from myjeju_hdetail where hdid = #{hdid}
+		</select>
 	<!-- 관리자 맛집 -->
 		<select id="listnumfood" parameterType="map" resultType="com.myjeju.vo.FoodVO">
 			select rno, fid, f_name, f_tag, f_infor, f_infor2, f_addr, f_vpoint, f_hpoint, f_hp, f_like, f_image1, f_image2, f_image3, f_image4, f_image5
