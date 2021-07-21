@@ -253,7 +253,7 @@
 							<dd>${revo.t_review}</dd>
 							<dd>
 								<img src="http://localhost:9000/myjeju/images/travel/travel_detail/like_finger.png" class="like_finger">
-								<div class="like_score">14</div>
+								<div class="like_score">0</div>
 								<img src="http://localhost:9000/myjeju/images/travel/travel_detail/btn-alert.png" class="btn_alert">
 							</dd>
 					</dl>
