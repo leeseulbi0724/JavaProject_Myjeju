@@ -222,20 +222,7 @@ public class AdminController {
 			System.out.print("파일경로" + request.getParameter("hd_file"));
 			
 			String fileOldName=request.getParameter("hd_img");
-			String OldName[] = fileOldName.split(",");
-			for (int i=0; i<OldName.length; i++) {
-				if (OldName.length == 1) {
-					fileOldName= OldName[i];
-				} 
-			}
 			String fileOldRoot = request.getParameter("hd_file");
-			System.out.print(fileOldRoot);
-			String RootName[] = fileOldRoot.split(",");
-			for (int i=0; i<RootName.length; i++) {
-				if (RootName.length == 1) {
-					fileOldRoot= RootName[i];					
-				} 
-			}
 			
 			String root_path = request.getSession().getServletContext().getRealPath("/");
 			System.out.print(root_path);
