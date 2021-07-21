@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.myjeju.dao.HouseDAO;
 import com.myjeju.vo.HDetailVO;
 import com.myjeju.vo.HeartVO;
+import com.myjeju.vo.HouseReviewVO;
 import com.myjeju.vo.HouseVO;
 
 @Service("houseService")
@@ -19,6 +20,16 @@ public class HouseServiceImpl implements HouseService {
 	@Override
 	public ArrayList<HouseVO> getHouseList(){
 		return houseDAO.getHouseList();
+	}
+	
+	@Override
+	public ArrayList<HouseVO> getHouseList(int startnum, int endnum){
+		return houseDAO.getHouseList(startnum, endnum);
+	}
+	
+	@Override
+	public ArrayList<HouseVO> getHouseList(int startnum, int end, String search, String search_text){
+		return houseDAO.getHouseList(startnum, end, search, search_text);
 	}
 	
 	@Override
@@ -81,7 +92,14 @@ public class HouseServiceImpl implements HouseService {
 		return result;
 	}
 	
+	@Override
+	public boolean getInsertResult(HouseReviewVO vo) {
+		return houseDAO.getInsertResult(vo);
+	}
 	
-	
+	@Override
+	public ArrayList<HouseReviewVO> getTravelReview(String hid){
+		return houseDAO.getTravelReview(hid);
+	}
 	
 }

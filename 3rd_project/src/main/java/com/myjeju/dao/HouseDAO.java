@@ -1,7 +1,9 @@
 package com.myjeju.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import com.myjeju.vo.HDetailVO;
 import com.myjeju.vo.HeartVO;
 import com.myjeju.vo.HouseVO;
+import com.myjeju.vo.HouseReviewVO;
 
 
 @Repository
@@ -22,6 +25,32 @@ public class HouseDAO extends DBConn {
 	//숙소 전체리스트
 	public ArrayList<HouseVO> getHouseList(){
 		List<HouseVO> list = sqlSession.selectList(namespace+".houselist");
+		return (ArrayList<HouseVO>)list;
+	}
+	
+	//숙소 전체 리스트
+	public ArrayList<HouseVO> getHouseList(int startnum, int endnum){
+		Map<String,String> param = new HashMap<String,String>();
+		
+		param.put("start", String.valueOf(startnum));
+		param.put("end", String.valueOf(endnum));
+		
+		List<HouseVO> list = sqlSession.selectList(namespace+".ajax_house_list_num",param);
+		
+		return (ArrayList<HouseVO>)list;
+	}
+	
+	//숙소 전체 리스트
+	public ArrayList<HouseVO> getHouseList(int startnum, int end, String search, String search_text){
+		Map<String,String> param = new HashMap<String,String>();
+		
+		param.put("start", String.valueOf(startnum));
+		param.put("end", String.valueOf(end));
+		param.put("search", search);
+		param.put("search_text", search_text);
+		
+		List<HouseVO> list = sqlSession.selectList(namespace+".ajax_house_list_search",param);
+		
 		return (ArrayList<HouseVO>)list;
 	}
 	
@@ -65,6 +94,22 @@ public class HouseDAO extends DBConn {
 	//하트정보가져오기
 	public int getHeartInfoResult(HeartVO vo) {
 		return sqlSession.selectOne(namespace+".hearrt_info_result", vo);
+	}
+	
+	//리뷰 쓰기
+	public boolean getInsertResult(HouseReviewVO vo) {
+		boolean result = false;
+		
+		int value = sqlSession.insert(namespace+".insert_review", vo);
+		if(value != 0) result = true;
+		
+		return result;
+	}
+	
+	//리뷰 리스트
+	public ArrayList<HouseReviewVO> getTravelReview(String hid){
+		List<HouseReviewVO> list = sqlSession.selectList(namespace+".review_list", hid);
+		return (ArrayList<HouseReviewVO>)list;
 	}
 	
 }

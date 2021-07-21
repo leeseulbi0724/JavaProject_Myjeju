@@ -200,7 +200,7 @@
 						<c:if test = "${toplist.status eq 0 }">
 							<img src="http://localhost:9000/myjeju/images/house/empty_heart.png" width=25 height=25 class="heart_img" >${toplist.f_like }
 						</c:if>
-						<c:if test = "${toplist.status eq 1 }">
+						<c:if test = "${toplist.status >= 1 }">
 							<img src="http://localhost:9000/myjeju/images/house/red_heart.png"  width=25 height=25 class="heart_img" >${toplist.f_like }
 						</c:if>
 						</button>

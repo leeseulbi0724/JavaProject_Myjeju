@@ -8,7 +8,38 @@
 	
 	<!-- 숙소리스트 -->
 	<select id="houselist" resultType="com.myjeju.vo.HouseVO">
-		select hid, h_name, h_infor, h_infor2, h_tag, h_addr, h_vpoint, h_hpoint, h_hp, h_like, h_img from myjeju_house
+		select rno, hid, h_name, h_infor, h_infor2, h_tag, h_addr, h_vpoint, h_hpoint, h_hp, h_like, h_img
+  			from(select rownum rno, hid, h_name, h_infor, h_infor2, h_tag, h_addr, h_vpoint, h_hpoint, h_hp, h_like, h_img
+    		from(select hid, h_name, h_infor, h_infor2, h_tag, h_addr, h_vpoint, h_hpoint, h_hp, h_like, h_img
+    		from myjeju_house order by h_like desc))
+	</select>
+	
+	<!-- 숙소 리스트 처리 -->
+	<select id="ajax_house_list_num" parameterType="map" resultType="com.myjeju.vo.HouseVO">
+		select rno, hid, h_name, h_infor, h_infor2, h_tag, h_addr, h_vpoint, h_hpoint, h_hp, h_like, h_img
+			from(select rownum rno, hid, h_name, h_infor, h_infor2, h_tag, h_addr, h_vpoint, h_hpoint, h_hp, h_like, h_img
+    		from(select hid, h_name, h_infor, h_infor2, h_tag, h_addr, h_vpoint, h_hpoint, h_hp, h_like, h_img from myjeju_house order by h_like desc)) 
+    		where rno between #{start} and #{end}
+	</select>
+	
+	<!-- 숙소 리스트 검색 처리 -->
+	<select id="ajax_house_list_search" parameterType="java.util.Map" resultType="com.myjeju.vo.HouseVO">
+		<choose>
+			<when test="search.equals('h_name')">
+				select rno, hid, h_name, h_infor, h_infor2, h_tag, h_addr, h_vpoint, h_hpoint, h_hp, h_like, h_img
+					from(select rownum rno, hid, h_name, h_infor, h_infor2, h_tag, h_addr, h_vpoint, h_hpoint, h_hp, h_like, h_img
+	    			from(select hid, h_name, h_infor, h_infor2, h_tag, h_addr, h_vpoint, h_hpoint, h_hp, h_like, h_img from myjeju_house order by h_like desc)
+	    			where h_name like '%'||#{search_text}||'%') 
+	    			where rno between #{start} and #{end}
+			</when>
+			<when test="search.equals('h_addr')">
+				select rno, hid, h_name, h_infor, h_infor2, h_tag, h_addr, h_vpoint, h_hpoint, h_hp, h_like, h_img
+					from(select rownum rno, hid, h_name, h_infor, h_infor2, h_tag, h_addr, h_vpoint, h_hpoint, h_hp, h_like, h_img
+	    			from(select hid, h_name, h_infor, h_infor2, h_tag, h_addr, h_vpoint, h_hpoint, h_hp, h_like, h_img from myjeju_house order by h_like desc)
+	    			where h_addr like '%'||#{search_text}||'%') 
+	    			where rno between #{start} and #{end}
+			</when>
+		</choose>
 	</select>
 	
 	<!-- 숙소 상위 3개 -->
@@ -52,4 +83,18 @@
 	<update id="updateminusheart" parameterType="java.lang.String" >
 		update myjeju_house set h_like = h_like-1 where hid=#{hid}
 	</update>
+	
+	<!-- 리뷰 쓰기 -->
+	<insert id="insert_review" parameterType="com.myjeju.vo.HouseReviewVO">
+		insert into myjeju_house_review values('re_'||sequ_myjeju_house_review.nextval, #{hid}, #{id}, #{h_review}, #{h_star}, sysdate)
+	</insert>
+	
+	<!-- 리뷰 리스트 -->
+	<select id="review_list" resultType="com.myjeju.vo.HouseReviewVO">
+		select rno, reid, id, hid, h_review, h_star, h_time
+ 		 from(select rownum rno,  reid, id, hid, h_review, h_star, h_time
+  		  from(select rownum rno,  reid, id, hid, h_review, h_star, to_char(h_time, 'yyyy-mm-dd') h_time
+   		   from(select reid, id, hid, h_review, h_star, h_time from myjeju_house_review order by h_time) order by rno)
+   		    order by rno desc) where hid=#{hid}
+	</select>
 </mapper>

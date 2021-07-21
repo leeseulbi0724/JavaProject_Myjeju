@@ -1,6 +1,6 @@
 package com.myjeju.vo;
 
-public class ReviewVO {
+public class TravelReviewVO {
 	String tid, id, reid, t_review, t_time;
 	int t_star;
 	

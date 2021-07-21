@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 import com.myjeju.vo.CarSpotVO;
 import com.myjeju.vo.HeartVO;
 import com.myjeju.vo.PhotoSpotVO;
-import com.myjeju.vo.ReviewVO;
+import com.myjeju.vo.TravelReviewVO;
 import com.myjeju.vo.TravelVO;
 
 @Repository
@@ -41,7 +41,7 @@ public class TravelDAO extends DBConn {
 		param.put("start", String.valueOf(startnum));
 		param.put("end", String.valueOf(endnum));
 		
-		List<TravelVO> list = sqlSession.selectList(namespace+".ajaxlistnum",param);
+		List<TravelVO> list = sqlSession.selectList(namespace+".ajax_travel_list_num",param);
 		
 		return (ArrayList<TravelVO>)list;
 	}
@@ -55,7 +55,7 @@ public class TravelDAO extends DBConn {
 		param.put("search", search);
 		param.put("search_text", search_text);
 		
-		List<TravelVO> list = sqlSession.selectList(namespace+".ajaxlistsearch",param);
+		List<TravelVO> list = sqlSession.selectList(namespace+".ajax_travel_list_search",param);
 		
 		return (ArrayList<TravelVO>)list;
 	}
@@ -82,7 +82,7 @@ public class TravelDAO extends DBConn {
 	}
 	
 	//리뷰 쓰기
-	public boolean getInsertResult(ReviewVO vo) {
+	public boolean getInsertResult(TravelReviewVO vo) {
 		boolean result = false;
 		
 		int value = sqlSession.insert(namespace+".insert_review", vo);
@@ -92,10 +92,34 @@ public class TravelDAO extends DBConn {
 	}
 	
 	//리뷰 리스트
-	public ArrayList<ReviewVO> getTravelReview(String tid){
-		List<ReviewVO> list = sqlSession.selectList(namespace+".review_list", tid);
-		return (ArrayList<ReviewVO>)list;
+	public ArrayList<TravelReviewVO> getTravelReview(String tid){
+		List<TravelReviewVO> list = sqlSession.selectList(namespace+".review_list", tid);
+		return (ArrayList<TravelReviewVO>)list;
 	}
+	
+	
+	//리뷰 리스트
+	public ArrayList<TravelReviewVO> getTravelReview(int startnum, int endnum){
+		Map<String,String> param = new HashMap<String,String>();
+		
+		param.put("start", String.valueOf(startnum));
+		param.put("end", String.valueOf(endnum));
+		
+		List<TravelReviewVO> list = sqlSession.selectList(namespace+".ajax_review_list",param);
+		
+		return (ArrayList<TravelReviewVO>)list;
+	}
+	
+	
+	//리뷰 삭제
+	public int getTravelReviewDelete(String reid) {
+		return sqlSession.delete(namespace+".delete_review", reid);
+	}
+	
+	
+	
+	
+	
 	
 	//Update ---> 하트 업데이트
 	public int getUpdateHeart(String tid) {

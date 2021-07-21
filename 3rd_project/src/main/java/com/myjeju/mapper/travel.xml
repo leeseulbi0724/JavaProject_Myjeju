@@ -20,7 +20,7 @@
 	</select>
 	
 	<!-- 여행지 리스트 처리 -->
-	<select id="ajaxlistnum" parameterType="map" resultType="com.myjeju.vo.TravelVO">
+	<select id="ajax_travel_list_num" parameterType="map" resultType="com.myjeju.vo.TravelVO">
 		select rno, tid, t_name, t_tag, t_infor, t_infor2, t_addr, t_vpoint, t_hpoint, t_hp, t_like, t_image1, t_image2, t_image3, t_image4, t_image5
 			from(select rownum rno, tid, t_name, t_tag, t_infor, t_infor2, t_addr, t_vpoint, t_hpoint, t_hp, t_like, t_image1, t_image2, t_image3, t_image4, t_image5
     		from(select tid, t_name, t_tag, t_infor, t_infor2, t_addr, t_vpoint, t_hpoint, t_hp, t_like, t_image1, t_image2, t_image3, t_image4, t_image5 from myjeju_travel order by t_like desc)) 
@@ -28,7 +28,7 @@
 	</select>
 	
 	<!-- 여행지 리스트 검색 처리 -->
-	<select id="ajaxlistsearch" parameterType="java.util.Map" resultType="com.myjeju.vo.TravelVO">
+	<select id="ajax_travel_list_search" parameterType="java.util.Map" resultType="com.myjeju.vo.TravelVO">
 		<choose>
 			<when test="search.equals('t_name')">
 				select rno, tid, t_name, t_tag, t_infor, t_infor2, t_addr, t_vpoint, t_hpoint, t_hp, t_like, t_image1, t_image2, t_image3, t_image4, t_image5
@@ -77,18 +77,40 @@
 	</select>
 	
 	<!-- 리뷰 쓰기 -->
-	<insert id="insert_review" parameterType="com.myjeju.vo.ReviewVO">
+	<insert id="insert_review" parameterType="com.myjeju.vo.TravelReviewVO">
 		insert into myjeju_travel_review values('re_'||sequ_myjeju_travel_review.nextval, #{tid}, #{id}, #{t_review}, #{t_star}, sysdate)
 	</insert>
 	
 	<!-- 리뷰 리스트 -->
-	<select id="review_list" resultType="com.myjeju.vo.ReviewVO">
+	<select id="review_list" resultType="com.myjeju.vo.TravelReviewVO">
 		select rno, reid, id, tid, t_review, t_star, t_time
  		 from(select rownum rno,  reid, id, tid, t_review, t_star, t_time
   		  from(select rownum rno,  reid, id, tid, t_review, t_star, to_char(t_time, 'yyyy-mm-dd') t_time
    		   from(select reid, id, tid, t_review, t_star, t_time from myjeju_travel_review order by t_time) order by rno)
    		    order by rno desc) where tid=#{tid}
 	</select>
+	
+	<!-- 리뷰 리스트 처리-->
+	<select id="ajax_review_list" parameterType="map" resultType="com.myjeju.vo.TravelReviewVO">
+		select rno, reid, id, tid, t_review, t_star, t_time
+  		 from(select rownum rno, reid, id, tid, t_review, t_star, t_time
+ 		  from(select rownum rno,  reid, id, tid, t_review, t_star, t_time
+  		   from(select rownum rno,  reid, id, tid, t_review, t_star, to_char(t_time, 'yyyy-mm-dd') t_time
+   		    from(select reid, id, tid, t_review, t_star, t_time from myjeju_travel_review order by t_time) order by rno)
+   		     order by rno desc) where tid=#{tid}) where rno between #{start} and #{end}
+	</select>
+	
+	
+	
+	<!-- 리뷰 삭제 -->
+	<delete id="delete_review" parameterType="com.myjeju.vo.TravelReviewVO">
+		delete from myjeju_travel_review where reid = #{reid}
+	</delete>
+	
+	
+	
+	
+	
 	
 	<!-- 하트 테이블 + -->
 	<insert id="heart_plus" parameterType="com.myjeju.vo.HeartVO">

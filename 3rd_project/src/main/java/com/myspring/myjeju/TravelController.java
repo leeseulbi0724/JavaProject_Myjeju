@@ -19,7 +19,7 @@ import com.myjeju.service.TravelService;
 import com.myjeju.vo.CarSpotVO;
 import com.myjeju.vo.HeartVO;
 import com.myjeju.vo.PhotoSpotVO;
-import com.myjeju.vo.ReviewVO;
+import com.myjeju.vo.TravelReviewVO;
 import com.myjeju.vo.TravelVO;
 
 @Controller
@@ -76,7 +76,6 @@ public class TravelController {
 	@RequestMapping(value="/travel_proc.do", produces = "application/text; charset=utf8", method=RequestMethod.GET)
 	public String travel_proc(String pnum, String search, String search_text, HttpSession session) {
 		ArrayList<TravelVO> list = travelService.getTravelList();
-		//ArrayList<TravelVO> list = new ArrayList<TravelVO>();
 		
 		//로그인 회원정보 가져오기
 		String id = (String) session.getAttribute("session_id");
@@ -88,7 +87,6 @@ public class TravelController {
 		
 		int startnum = ((pageNumber-1)*5) +1;
 		int endnum = pageNumber*5; 
-		//int pagenum = (pageNumber -1) * 5;
 
 		if(search_text == null || search_text.equals("") || search_text.equals("null")) {
 			list = travelService.getTravelList(startnum, endnum);
@@ -193,10 +191,10 @@ public class TravelController {
 		PhotoSpotVO photovo = travelService.getPhotoSpot(tid);
 		CarSpotVO carvo = travelService.getCarSpot(tid); 
 		String infor2 = vo.getT_infor2().replace("\r\n", "<br>");
-		
 		String user_id = (String) session.getAttribute("session_id");
 
-		ArrayList<ReviewVO> revo = travelService.getTravelReview(tid);
+System.out.println("travel_detail.do:"+user_id);			
+		ArrayList<TravelReviewVO> revo = travelService.getTravelReview(tid);
 		
 		mv.setViewName("travel/travel_detail");
 		mv.addObject("vo",vo);
@@ -212,16 +210,23 @@ public class TravelController {
 	 * travel_review_proc.do : 여행지 리뷰 등록 처리
 	 */
 	@RequestMapping(value="/travel_review_proc.do", method=RequestMethod.POST)
-	public ModelAndView travel_review_proc(ReviewVO vo, HttpSession session) {
+	public ModelAndView travel_review_proc(TravelReviewVO vo, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		
 		String user_id = (String) session.getAttribute("session_id");
 		vo.setId(user_id);
-
+System.out.println("travel_review_proc.do:"+user_id);	
+System.out.println("getId:"+vo.getId());	
+System.out.println("getReid:"+vo.getReid());	
+System.out.println("getT_review:"+vo.getT_review());	
+System.out.println("getT_star:"+vo.getT_star());	
+System.out.println("getT_time:"+vo.getT_time());	
+System.out.println("getTid:"+vo.getTid());	
 		boolean result = travelService.getInsertResult(vo);
 		
 		if(result) {
 			mv.setViewName("redirect:/travel_detail.do");
+			mv.setViewName("redirect:/travel_review_list_proc.do");
 			mv.addObject("reid", vo.getReid());
 			mv.addObject("id", vo.getId());
 			mv.addObject("tid", vo.getTid());
@@ -231,6 +236,73 @@ public class TravelController {
 		}
 		return mv;
 	}
+	
+	
+	/**
+	 * 여행지 리뷰 리스트 ajax 처리
+	 */
+	@ResponseBody
+	@RequestMapping(value="/travel_review_list_proc.do", produces = "application/text; charset=utf8", method=RequestMethod.GET)
+	public String travel_review_list_proc(String pnum, String tid, HttpSession session) {
+		ArrayList<TravelReviewVO> list = travelService.getTravelReview(tid);
+		
+		String user_id = (String) session.getAttribute("session_id");
+System.out.println("travel_review_list_proc.do:"+user_id);	
+		int pageNumber = 1;
+
+		if(pnum != null) { 
+			pageNumber = Integer.parseInt(pnum) +1;
+		}
+System.out.println("pnum:"+pageNumber);			
+		int startnum = ((pageNumber-1)*5) +1;
+		int endnum = pageNumber*5; 
+
+		list = travelService.getTravelReview(startnum, endnum);
+
+		JsonObject jdata = new JsonObject();
+		JsonArray jlist = new JsonArray();
+		Gson gson = new Gson();
+		
+		for(TravelReviewVO vo : list) {
+			JsonObject jobj = new JsonObject();
+			jobj.addProperty("tid", vo.getTid());
+			jobj.addProperty("id", vo.getId());
+			jobj.addProperty("reid", vo.getReid());
+			jobj.addProperty("t_review", vo.getT_review());
+			jobj.addProperty("t_time", vo.getT_time());
+			jobj.addProperty("t_star", vo.getT_star());
+			jobj.addProperty("pnum", String.valueOf(pageNumber));
+			jobj.addProperty("user_id", user_id);
+			
+			jlist.add(jobj);
+		}
+		
+		jdata.add("jlist", jlist);
+
+		return gson.toJson(jdata);
+	}
+	
+	
+	/**
+	 * travel_review_delete.do : 여행지 리뷰 삭제
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/travel_review_delete.do", method=RequestMethod.POST)
+	public boolean travel_review_delete(HttpServletRequest request) {
+		boolean result = travelService.getTravelReviewDelete(request.getParameter("reid"));
+		
+		return result;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	/**
 	 * 좋아요 +

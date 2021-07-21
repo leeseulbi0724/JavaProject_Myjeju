@@ -9,7 +9,7 @@ import com.myjeju.dao.TravelDAO;
 import com.myjeju.vo.CarSpotVO;
 import com.myjeju.vo.HeartVO;
 import com.myjeju.vo.PhotoSpotVO;
-import com.myjeju.vo.ReviewVO;
+import com.myjeju.vo.TravelReviewVO;
 import com.myjeju.vo.TravelVO;
 
 @Service("travelService")
@@ -59,14 +59,31 @@ public class TravelServiceImpl implements TravelService{
 	}
 	
 	@Override
-	public boolean getInsertResult(ReviewVO vo) {
+	public boolean getInsertResult(TravelReviewVO vo) {
 		return travelDAO.getInsertResult(vo);
 	}
 	
 	@Override
-	public ArrayList<ReviewVO> getTravelReview(String tid){
+	public ArrayList<TravelReviewVO> getTravelReview(String tid){
 		return travelDAO.getTravelReview(tid);
 	}
+	
+	@Override
+	public ArrayList<TravelReviewVO> getTravelReview(int startnum, int endnum){
+		return travelDAO.getTravelReview(startnum, endnum);
+	}
+	
+	@Override
+	public boolean getTravelReviewDelete(String reid) {
+		int value = travelDAO.getTravelReviewDelete(reid);
+		
+		boolean result = false;
+		if(value != 0) result = true;
+		
+		return result;
+	}
+	
+	
 	
 	@Override
 	public boolean getUpdateHeart(String tid) {

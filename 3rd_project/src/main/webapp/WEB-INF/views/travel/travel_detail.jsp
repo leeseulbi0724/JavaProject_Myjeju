@@ -52,13 +52,6 @@
 				$(".detail_car_spot").show();
 			});
 			
-			
-			$(".t_review_null").on("click", function(){
-				alert("로그인");
-			});
-			
-			
-			
 			$("#travel_review_btn").on("click", function(){
 				if($("#t_review").val() == ""){
 					alert("리뷰를 입력해주세요.");
@@ -66,6 +59,113 @@
 					return false;
 				}else{
 					travel_review_form.submit();
+				}
+			});
+			
+			
+			var pnum=$(".pnum").val();
+
+			moreList(pnum); 
+			
+			function moreList(pnum){
+				var addListHtml="";
+				
+				$.ajax({
+					type:"GET",
+					url:"travel_review_list_proc.do",
+					data:{
+						pnum:pnum
+					},
+					success:function(result){
+						alert(pnum);
+						var jdata = JSON.parse(result);
+						
+						if(jdata.jlist == null){
+							$("#more_btn").remove();
+						}
+						for(var i in jdata.jlist){
+							addListHtml += "<div class='review_date' id='t_time'>" + jdata.jlist[i].t_time + "</div>";
+							addListHtml += "<dl>";
+							addListHtml += "<dt>";
+							addListHtml += "<img src='http://localhost:9000/myjeju/images/travel/travel_detail/human.png'>";
+							addListHtml += "<div class='user_name'>" + jdata.jlist[i].id + "</div>";
+							addListHtml += "</dt>";
+							if(jdata.jlist[i].t_star == 5){
+								addListHtml += "<dd>";
+								addListHtml += "<img src='http://localhost:9000/myjeju/images/travel/star5.png' class='review_star'>";
+								addListHtml += "</dd>";
+							}else if(jdata.jlist[i].t_star == 4){
+								addListHtml += "<dd>";
+								addListHtml += "<img src='http://localhost:9000/myjeju/images/travel/star4.png' class='review_star'>";
+								addListHtml += "</dd>";	
+							}else if(jdata.jlist[i].t_star == 3){
+								addListHtml += "<dd>";
+								addListHtml += "<img src='http://localhost:9000/myjeju/images/travel/star3.png' class='review_star'>";
+								addListHtml += "</dd>";
+							}else if(jdata.jlist[i].t_star == 2){
+								addListHtml += "<dd>";
+								addListHtml += "<img src='http://localhost:9000/myjeju/images/travel/star2.png' class='review_star'>";
+								addListHtml += "</dd>";
+							}else if(jdata.jlist[i].t_star == 1){
+								addListHtml += "<dd>";
+								addListHtml += "<img src='http://localhost:9000/myjeju/images/travel/star1.png' class='review_star'>";
+								addListHtml += "</dd>";
+							}
+							addListHtml += "<dd>" + jdata.jlist[i].t_review + "</dd>";
+							addListHtml += "<dd>";
+							addListHtml += "<img src='http://localhost:9000/myjeju/images/travel/travel_detail/like_finger.png' class='like_finger'>";
+							addListHtml += "<span class='like_score'>0</span>";
+							addListHtml += "</dd>";
+							if(user_id == jdata.jlist[i].id){
+								addListHtml += "<dd style='margin:-15px 0 -10px 0'>";
+								addListHtml += "<button type='button' name='" + jdata.jlist[i].reid + "'" + "class='btn_style3' id='travel_review_delete' style='margin-right:20px'>삭제</button>";
+								addListHtml += "</dd>";
+							}else{
+								addListHtml += "<dd>";
+								addListHtml += "<button type='button' class='btn_style3' id='travel_review_delete' style='display:none'>삭제</button>";
+								addListHtml += "</dd>";
+							}
+							addListHtml += "</dl>";
+						
+						}
+						$(".pnum").val(jdata.jlist[0].pnum);
+		                $("#travel_review_list").append(addListHtml);
+					},
+				});
+			}
+			
+	        $("#more_btn").on("click", function(){
+	            var pnum=$(".pnum").val();
+	            moreList(pnum);
+	        }); 
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			$("button[id^=travel_review_delete]").click(function(){
+				var delete_confirm = confirm("리뷰를 삭제하시겠습니까?");
+				
+				if(delete_confirm){
+					var reid = $(this).attr("name");
+					
+					$.ajax({
+						type:"post",
+						url:"travel_review_delete.do",
+						data:{reid : reid},
+						dataType:'json',
+						success:function(result){
+							location.reload();
+						},
+						
+					});
 				}
 			});
 			
@@ -229,8 +329,8 @@
 					</dl>
 				</form>
 			</div>
-			<div class="travel_review_zone2">
-				<c:forEach var="revo" items="${revo}">
+			<div id="travel_review_list"class="travel_review_zone2">
+				<%-- <c:forEach var="revo" items="${revo}">
 					<div class="review_date" id="t_time">${revo.t_time}</div>
 					<dl>
 							<dt>
@@ -272,23 +372,24 @@
 							</dd> 
 							<c:if test="${user_id eq revo.id}">
 								<dd style="margin:-15px 0 -10px 0;">
-									<button type="submit" class="btn_style3" id="travel_review_update">수정</button>
-									<button type="submit" class="btn_style3" id="travel_review_delete">삭제</button>
+									<button type="button" name="${revo.reid}" class="btn_style3" id="travel_review_update">수정</button>
+									<button type="button" name="${revo.reid}" class="btn_style3" id="travel_review_delete" style="margin-right:20px;">삭제</button>
 								</dd>
 							</c:if>
 							<c:if test="${user_id ne revo.id}">
 								<dd>
-									<button type="submit" class="btn_style3" id="travel_review_update" style="display:none;">수정</button>
-									<button type="submit" class="btn_style3" id="travel_review_delete" style="display:none;">삭제</button>
+									<button type="button" class="btn_style3" id="travel_review_update" style="display:none;">수정</button>
+									<button type="button" class="btn_style3" id="travel_review_delete" style="display:none;">삭제</button>
 								</dd>
 							</c:if>
 					</dl>
-				</c:forEach>
+				</c:forEach> --%>
 			</div>
 			<button type="button" class="btn_style6" id="more_btn">
 				<img src="http://localhost:9000/myjeju/images/travel/bill_list_btn2.png">
 				<img src="http://localhost:9000/myjeju/images/travel/bill_list_btn.png">
 			</button>
+			<input type="hidden" class="pnum" name="pnum">
 		</section>
 		
 		<!-- <section class="detail_recommend">
