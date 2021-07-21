@@ -142,7 +142,7 @@ public class TravelController {
 	 * travel_detail.do : 여행지 상세페이지
 	 */
 	@RequestMapping(value="/travel_detail.do", method=RequestMethod.GET)
-	public ModelAndView travel_detail(String tid, String id, HttpSession session) {
+	public ModelAndView travel_detail(String tid, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		
 		TravelVO vo = travelService.getTravelDetail(tid);
@@ -151,9 +151,8 @@ public class TravelController {
 		String infor2 = vo.getT_infor2().replace("\r\n", "<br>");
 		
 		String user_id = (String) session.getAttribute("session_id");
-System.out.println(user_id);
 
-		ArrayList<ReviewVO> revo = travelService.getTravelReview(id);
+		ArrayList<ReviewVO> revo = travelService.getTravelReview(tid);
 		
 		mv.setViewName("travel/travel_detail");
 		mv.addObject("vo",vo);
@@ -168,19 +167,23 @@ System.out.println(user_id);
 	/**
 	 * travel_review_proc.do : 여행지 리뷰 등록 처리
 	 */
-	@RequestMapping(value="/travel_review_proc.do", method=RequestMethod.GET)
+	@RequestMapping(value="/travel_review_proc.do", method=RequestMethod.POST)
 	public ModelAndView travel_review_proc(ReviewVO vo, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		
-		String id = (String) session.getAttribute("session_id");
-		vo.setId(id);
-System.out.println(id);
+		String user_id = (String) session.getAttribute("session_id");
+		vo.setId(user_id);
+
 		boolean result = travelService.getInsertResult(vo);
 		
 		if(result) {
 			mv.setViewName("redirect:/travel_detail.do");
-			mv.addObject("tid", vo.getTid());
+			mv.addObject("reid", vo.getReid());
 			mv.addObject("id", vo.getId());
+			mv.addObject("tid", vo.getTid());
+			mv.addObject("t_review", vo.getT_review());
+			mv.addObject("t_star", vo.getT_star());
+			mv.addObject("t_time", vo.getT_time());
 		}
 		return mv;
 	}

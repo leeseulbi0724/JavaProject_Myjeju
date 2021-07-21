@@ -91,8 +91,8 @@ public class TravelDAO extends DBConn {
 	}
 	
 	//¸®ºä ¸®½ºÆ®
-	public ArrayList<ReviewVO> getTravelReview(String id){
-		List<ReviewVO> list = sqlSession.selectList(namespace+".review_list", id);
+	public ArrayList<ReviewVO> getTravelReview(String tid){
+		List<ReviewVO> list = sqlSession.selectList(namespace+".review_list", tid);
 		return (ArrayList<ReviewVO>)list;
 	}
 	

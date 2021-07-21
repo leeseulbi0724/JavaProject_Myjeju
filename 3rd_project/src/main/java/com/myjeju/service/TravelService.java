@@ -17,5 +17,5 @@ public interface TravelService {
 	PhotoSpotVO getPhotoSpot(String tid);
 	CarSpotVO getCarSpot(String tid);
 	boolean getInsertResult(ReviewVO vo);
-	ArrayList<ReviewVO> getTravelReview(String id);
+	ArrayList<ReviewVO> getTravelReview(String tid);
 }

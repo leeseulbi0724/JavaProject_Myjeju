@@ -52,6 +52,13 @@
 				$(".detail_car_spot").show();
 			});
 			
+			
+			$(".t_review_null").on("click", function(){
+				alert("로그인");
+			});
+			
+			
+			
 			$("#travel_review_btn").on("click", function(){
 				if($("#t_review").val() == ""){
 					alert("리뷰를 입력해주세요.");
@@ -61,7 +68,6 @@
 					travel_review_form.submit();
 				}
 			});
-			
 			
 		});
 	</script>
@@ -193,7 +199,7 @@
 		<section class="detail_review">
 			<h3>리뷰</h3> 
 			<div class="travel_review_zone">
-				<form name="travel_review_form" action="travel_review_proc.do" method="GET">
+				<form name="travel_review_form" action="travel_review_proc.do?tid=${vo.tid}" method="POST">
 					<dl>
 						<dt>
 							<img src="http://localhost:9000/myjeju/images/travel/travel_detail/human.png">
@@ -208,10 +214,18 @@
 								<option id="star1" value="1">★☆☆☆☆</option>
 							</select>
 						</dd>
-						<dd><input type="text" name="t_review" id="t_review" placeholder="여행지가 어떠셨나요? 리뷰를 남겨주세요."></dd>
-						<dd>
-							<button type="submit" class="btn_style3" id="travel_review_btn">등록</button>
-						</dd>
+						<c:if test="${user_id != null}">
+							<dd><input type="text" name="t_review" id="t_review" placeholder="여행지가 어떠셨나요? 리뷰를 남겨주세요."></dd>
+							<dd>
+								<button type="button" class="btn_style3" id="travel_review_btn">등록</button>
+							</dd>
+						</c:if>
+						<c:if test="${user_id == null}">
+							<dd><input type="text" name="t_review" class="t_review_null"id="t_review" disabled placeholder="로그인 후 리뷰를 남겨주세요."></dd>
+							<dd>
+								<button type="button" class="btn_style3" id="travel_review_btn" disabled>등록</button>
+							</dd>
+						</c:if>
 					</dl>
 				</form>
 			</div>
@@ -253,43 +267,23 @@
 							<dd>${revo.t_review}</dd>
 							<dd>
 								<img src="http://localhost:9000/myjeju/images/travel/travel_detail/like_finger.png" class="like_finger">
-								<div class="like_score">0</div>
-								<img src="http://localhost:9000/myjeju/images/travel/travel_detail/btn-alert.png" class="btn_alert">
-							</dd>
+								<span class="like_score">0</span>
+								<!-- <img src="http://localhost:9000/myjeju/images/travel/travel_detail/btn-alert.png" class="btn_alert"> -->
+							</dd> 
+							<c:if test="${user_id eq revo.id}">
+								<dd style="margin:-15px 0 -10px 0;">
+									<button type="submit" class="btn_style3" id="travel_review_update">수정</button>
+									<button type="submit" class="btn_style3" id="travel_review_delete">삭제</button>
+								</dd>
+							</c:if>
+							<c:if test="${user_id ne revo.id}">
+								<dd>
+									<button type="submit" class="btn_style3" id="travel_review_update" style="display:none;">수정</button>
+									<button type="submit" class="btn_style3" id="travel_review_delete" style="display:none;">삭제</button>
+								</dd>
+							</c:if>
 					</dl>
 				</c:forEach>
-				<!-- <div class="review_date">2021-07-09</div>
-				<dl>
-					<dt>
-						<img src="http://localhost:9000/myjeju/images/travel/travel_detail/human.png">
-						<div class="user_name">김민호</div>
-					</dt>
-					<dd>
-						<img src="http://localhost:9000/myjeju/images/travel/star3.png"class="review_star">
-					</dd>
-					<dd>이곳은 정말 강추입니다!</dd>
-					<dd>
-						<img src="http://localhost:9000/myjeju/images/travel/travel_detail/like_finger.png" class="like_finger">
-						<div class="like_score">2</div>
-						<img src="http://localhost:9000/myjeju/images/travel/travel_detail/btn-alert.png" class="btn_alert">
-					</dd>
-				</dl>
-				<div class="review_date">2021-07-08</div>
-				<dl>
-					<dt>
-						<img src="http://localhost:9000/myjeju/images/travel/travel_detail/human.png">
-						<div class="user_name">이슬비</div>
-					</dt>
-					<dd>
-						<img src="http://localhost:9000/myjeju/images/travel/star4.png"class="review_star">
-					</dd>
-					<dd>경치가 대박이에요!!!</dd>
-					<dd>
-						<img src="http://localhost:9000/myjeju/images/travel/travel_detail/like_finger.png" class="like_finger">
-						<div class="like_score">8</div>
-						<img src="http://localhost:9000/myjeju/images/travel/travel_detail/btn-alert.png" class="btn_alert">
-					</dd>
-				</dl> -->
 			</div>
 			<button type="button" class="btn_style6" id="more_btn">
 				<img src="http://localhost:9000/myjeju/images/travel/bill_list_btn2.png">

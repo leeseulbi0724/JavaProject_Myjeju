@@ -78,7 +78,7 @@
 	
 	<!-- 리뷰 쓰기 -->
 	<insert id="insert_review" parameterType="com.myjeju.vo.ReviewVO">
-		insert into myjeju_travel_review values(#{tid}, #{id}, 're_'||sequ_myjeju_travel_review.nextval, #{t_review}, #{t_star}, sysdate);
+		insert into myjeju_travel_review values('re_'||sequ_myjeju_travel_review.nextval, #{tid}, #{id}, #{t_review}, #{t_star}, sysdate)
 	</insert>
 	
 	<!-- 리뷰 리스트 -->
@@ -87,6 +87,6 @@
  		 from(select rownum rno,  reid, id, tid, t_review, t_star, t_time
   		  from(select rownum rno,  reid, id, tid, t_review, t_star, to_char(t_time, 'yyyy-mm-dd') t_time
    		   from(select reid, id, tid, t_review, t_star, t_time from myjeju_travel_review order by t_time) order by rno)
-   		    order by rno desc)
+   		    order by rno desc) where tid=#{tid}
 	</select>
 </mapper>
