@@ -3,7 +3,7 @@ package com.myjeju.vo;
 public class FoodVO {
 	String fid, f_name, f_tag, f_infor, f_infor2, f_addr, f_vpoint, f_hpoint, f_hp, 
 	f_image1, f_image2, f_image3, f_image4, f_image5;
-	int rno, f_like;
+	int rno, f_like, status;
 	
 	public int getRno() {
 		return rno;
@@ -101,7 +101,14 @@ public class FoodVO {
 	public void setF_like(int f_like) {
 		this.f_like = f_like;
 	}
-
+	public int getStatus() {
+		return status;
+	}
+	public void setStatus(int status) {
+		this.status = status;
+	}
+	
+	
 	
 
 	

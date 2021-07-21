@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.myjeju.vo.FoodVO;
+import com.myjeju.vo.HeartVO;
 
 @Repository
 public class FoodDAO extends DBConn {
@@ -66,5 +67,30 @@ public class FoodDAO extends DBConn {
 	//음식점 상세 정보
 	public FoodVO getFoodDetail(String fid) {
 		return sqlSession.selectOne(namespace+".fooddetail", fid);
+	}
+	
+	//Update ---> 하트 업데이트
+	public int getUpdateHeart(String hid) {
+		return sqlSession.update(namespace+".updateheart", hid);
+	}
+	
+	//Update ---> 하트 업데이트 마이너스
+	public int getUpdateMinusHeart(String hid) {
+		return sqlSession.update(namespace+".updateminusheart", hid);
+	}
+	
+	//하트 테이블 추가
+	public int getHeartPlus(HeartVO vo) {
+		return sqlSession.insert(namespace+".heart_plus", vo);
+	}
+	
+	//하트 테이블 삭제
+	public int getHeartMinus(HeartVO vo) {
+		return sqlSession.delete(namespace+".heart_minus", vo);
+	}
+	
+	//하트정보가져오기
+	public int getHeartInfoResult(HeartVO vo) {
+		return sqlSession.selectOne(namespace+".hearrt_info_result", vo);
 	}
 }

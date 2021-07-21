@@ -1,7 +1,7 @@
 package com.myjeju.vo;
 
 public class HeartVO {
-	String id, hid;
+	String id, hid, fid;
 
 	public String getId() {
 		return id;
@@ -17,6 +17,14 @@ public class HeartVO {
 
 	public void setHid(String hid) {
 		this.hid = hid;
+	}
+
+	public String getFid() {
+		return fid;
+	}
+
+	public void setFid(String fid) {
+		this.fid = fid;
 	}
 	
 }

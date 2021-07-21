@@ -59,5 +59,30 @@
 		select fid, f_name, f_tag, f_infor, f_infor2, f_addr, f_hp, f_like,
 			   f_image1, f_image2, f_image3, f_image4, f_image5 from myjeju_food where fid=#{fid}
 	</select>
+	
+	<!-- 하트 테이블 + -->
+	<insert id="heart_plus" parameterType="com.myjeju.vo.HeartVO">
+		insert into myjeju_f_heart values(#{id}, #{fid})
+	</insert>
+
+	<!-- 하트 테이블 - -->
+	<insert id="heart_minus" parameterType="com.myjeju.vo.HeartVO">
+		delete from myjeju_f_heart where id=#{id} and fid=#{fid}
+	</insert>
+	
+	<!-- 하트정보가져오기 -->
+	<select id="hearrt_info_result" parameterType="com.myjeju.vo.HeartVO" resultType="java.lang.Integer">
+		select count(*) from myjeju_f_heart where id=#{id} and fid=#{fid}
+	</select>
+	
+	<!-- 음식점 테이블에 하트 추가 -->
+	<update id="updateheart" parameterType="java.lang.String" >
+		update myjeju_food set f_like = f_like+1 where fid=#{fid}
+	</update>
+	
+	<!-- 음식점 테이블에 하트 마이너스 -->
+	<update id="updateminusheart" parameterType="java.lang.String" >
+		update myjeju_food set f_like = f_like-1 where fid=#{fid}
+	</update>
 
 </mapper>

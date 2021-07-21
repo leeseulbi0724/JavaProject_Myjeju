@@ -72,17 +72,17 @@
 						<p class="spot_tag">${toplist.h_tag}</p>
 						<button type="button" class="btn_style" id="${toplist.status }" name="${toplist.hid }">
 						<c:if test = "${toplist.status eq 0 }">
-							<img src="http://localhost:9000/myjeju/images/house/empty_heart.png" width=25 height=25 class="heart_img" >${toplist.h_like }
+							<img src="http://localhost:9000/myjeju/images/house/empty_heart.png" class="heart_img" >${toplist.h_like }
 						</c:if>
 						<c:if test = "${toplist.status eq 1 }">
-							<img src="http://localhost:9000/myjeju/images/house/heart_after.png"  width=25 height=25 class="heart_img" >${toplist.h_like }
+							<img src="http://localhost:9000/myjeju/images/house/red_heart.png" class="heart_img">${toplist.h_like }
 						</c:if>
 						</button>
-				</div>
+						<img src="http://localhost:9000/myjeju/images/travel/star.png"><span class="star_score">4.9 (82)</span>
+					</div>
 				</article>
 			</c:forEach>
 				<%-- <img src="http://localhost:9000/myjeju/images/travel/empty_heart.png">${toplist.h_like} --%>
-				<img src="http://localhost:9000/myjeju/images/travel/star.png"><span class="star_score">4.9 (82)</span>
 			</div>
 		</section>
 		
@@ -186,7 +186,7 @@
 								<img src="http://localhost:9000/myjeju/images/house/empty_heart.png" width=25 height=25 class="heart_img" >${vo.h_like }
 							</c:if>
 							<c:if test = "${vo.status eq 1 }">
-								<img src="http://localhost:9000/myjeju/images/house/heart_after.png"  width=25 height=25 class="heart_img" >${vo.h_like }
+								<img src="http://localhost:9000/myjeju/images/house/red_heart.png"  width=25 height=25 class="heart_img" >${vo.h_like }
 							</c:if>
 						</button>
 						<button type="button" class="btn_style4" id="more_infor" onclick="location.href='http://localhost:9000/myjeju/house_detail.do?hid=${vo.hid}'">상세정보</button>

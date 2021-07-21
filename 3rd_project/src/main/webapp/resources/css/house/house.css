@@ -11,14 +11,12 @@
 	border-radius:10px;
 	padding:8px;
 	color:white;
-	font-size:18px;
+	font-size:15px;
 	font-weight:bold;
 	text-align:center;
 	margin-top:20px;
 	cursor:pointer;
-	vertical-align:top;
 }
-
 .btn_style:hover{
 	background-color:#268ecc;
 	border:1px solid #268ecc;
@@ -62,13 +60,14 @@
 	background-color:white;
 	border:2px solid lightgray;
 	border-radius:10px;
-	padding:10px;
+	padding:11px;
 	color:lightgray;
 	font-size:15px;
 	font-weight:bold;
 	text-align:center;
 	margin-top:20px;
 	cursor:pointer;
+	vertical-align:top;
 }
 .btn_style4:hover{
 	border:2px solid #4fa9de;
@@ -215,7 +214,13 @@ section.list_zone{
 div.travel_search_zone{
 	text-align:right;
 }
-input#travel_search{
+select.search{
+	width:80px;
+	height:29px;
+	border:1px solid #a1a1a1;
+	border-radius:4px;
+}
+input#search_text{
 	width:250px;
 	height:28px;
 	margin-top:10px;
@@ -256,6 +261,7 @@ table.travel_list p.spot_name>span{
 	font-size:14px;
 	font-weight:bold;
 	color:gray;
+	margin-left:5px;
 }
 table.travel_list p.spot_addr{
 	font-size:14px;
@@ -272,15 +278,15 @@ button#more_infor{
 
 
 
-button#more_btn>img{
+#more_btn>img{
 	width:18px;
 }
-button#more_btn>img:last-child{
+#more_btn>img:last-child{
 	display:none;
 }
-button#more_btn:hover img:first-child{
+#more_btn:hover img:first-child{
 	display:none;
 }
-button#more_btn:hover img:last-child{
+#more_btn:hover img:last-child{
 	display:inline-block;
 }

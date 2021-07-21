@@ -23,6 +23,33 @@
 	<script>
 		$(document).ready(function(){ 
 			
+			 $(".btn_style").click(function(){
+				var fid = $(this).attr("name");				
+				if ("${session_id}"=="") {
+					alert("로그인 후 이용바랍니다");
+				} else if ($(this).attr("id") == 1) {
+					$.ajax({
+				                type: "post",
+				                url: "heart_food_minus.do",
+				                data:{fid:fid},
+				                dataType: 'json',
+				                success: function (result) {
+				                location.reload();
+				                },
+				           }); 
+					} else {
+						$.ajax({
+				                type: "post",
+				               	url: "heart_food_plus.do",
+				                data:{fid:fid},
+				                dataType: 'json',
+				                success: function (result) {
+				                location.reload();
+				               	 },
+						});
+					}
+			}); 
+			
 			var pnum=$(".pnum").val();
 	
 			moreList(pnum); 
@@ -72,9 +99,12 @@
 						}
 						$(".pnum").val(jdata.jlist[0].pnum);
 		                $("#list_body").append(addListHtml);
+		              
 					}
 				});
 			}
+			
+			
 			
 	        $("#more_btn").on("click", function(){
 	            var pnum=$(".pnum").val();
@@ -135,8 +165,13 @@
 					<div class="spot_infor">
 						<p class="spot_name">${toplist.f_name} <span>${toplist.f_infor}</span></p>
 						<p class="spot_tag">${toplist.f_tag}</p>
-						<button type="button" class="btn_style" id="heart_btn">
-							<img src="http://localhost:9000/myjeju/images/travel/empty_heart.png">${toplist.f_like}
+						<button type="button" class="btn_style" id="${toplist.status }" name="${toplist.fid }">
+						<c:if test = "${toplist.status eq 0 }">
+							<img src="http://localhost:9000/myjeju/images/house/empty_heart.png" width=25 height=25 class="heart_img" >${toplist.f_like }
+						</c:if>
+						<c:if test = "${toplist.status eq 1 }">
+							<img src="http://localhost:9000/myjeju/images/house/red_heart.png"  width=25 height=25 class="heart_img" >${toplist.f_like }
+						</c:if>
 						</button>
 						<img src="http://localhost:9000/myjeju/images/travel/star.png"><span class="star_score">4.8 (223)</span>
 					</div>
