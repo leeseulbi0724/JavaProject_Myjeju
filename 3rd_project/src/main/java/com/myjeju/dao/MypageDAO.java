@@ -12,6 +12,8 @@ import com.myjeju.vo.CommunityVO;
 import com.myjeju.vo.MemberVO;
 import com.myjeju.vo.OrderVO;
 import com.myjeju.vo.PointVO;
+import com.myjeju.vo.ReviewVO;
+import com.myjeju.vo.StorevVO;
 
 @Repository
 public class MypageDAO {
@@ -97,6 +99,40 @@ public class MypageDAO {
 	public int getOrderSequ(BasketVO vo) {
 		return sqlSession.insert(namespace+".order_sequ", vo);
 	}
+	
+	
+	/** My후기 - 스토어 리뷰 **/
+	public ArrayList<StorevVO> getStoreReview(String id) {
+		List<StorevVO> list = sqlSession.selectList(namespace + ".store_review", id);
+		return (ArrayList<StorevVO>) list;
+	}
+	
+	/** My후기 - 여행지 리뷰 **/
+	public ArrayList<ReviewVO> getTravelReview(String id) {
+		List<ReviewVO> list = sqlSession.selectList(namespace + ".travel_review", id);
+		return (ArrayList<ReviewVO>) list;
+	}
+	
+	/** My후기 - 음식점 리뷰 **/
+	/*
+	 * public ArrayList<StorevVO> getFoodReview(String id) { List<StorevVO> list =
+	 * sqlSession.selectList(namespace + "food_review", id); return
+	 * (ArrayList<StorevVO>) list; }
+	 */
+	
+	/** My후기 - 카페 리뷰 **/
+	/*
+	 * public ArrayList<StorevVO> getCafeReview(String id) { List<StorevVO> list =
+	 * sqlSession.selectList(namespace + "cafe_review", id); return
+	 * (ArrayList<StorevVO>) list; }
+	 */
+	
+	/** My후기 - 숙소 리뷰 **/
+	/*
+	 * public ArrayList<StorevVO> getHouseReview(String id) { List<StorevVO> list =
+	 * sqlSession.selectList(namespace + "house_review", id); return
+	 * (ArrayList<StorevVO>) list; }
+	 */
 	
 	
 }

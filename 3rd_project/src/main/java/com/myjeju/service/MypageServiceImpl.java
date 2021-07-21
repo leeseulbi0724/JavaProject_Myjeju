@@ -13,7 +13,9 @@ import com.myjeju.vo.MReservationVO;
 import com.myjeju.vo.MemberVO;
 import com.myjeju.vo.OrderVO;
 import com.myjeju.vo.PointVO;
+import com.myjeju.vo.ReviewVO;
 import com.myjeju.vo.StoreVO;
+import com.myjeju.vo.StorevVO;
 
 @Service("MypageService")
 public class MypageServiceImpl implements MypageService {
@@ -164,6 +166,17 @@ public class MypageServiceImpl implements MypageService {
 		}
 		return result;
 	}
+
+	@Override
+	public ArrayList<StorevVO> getStoreReview(String id) {
+		return mypageDAO.getStoreReview(id);
+	}
+
+	@Override
+	public ArrayList<ReviewVO> getTravelReview(String id) {
+		return mypageDAO.getTravelReview(id);
+	}
+	
 	
 	
 	

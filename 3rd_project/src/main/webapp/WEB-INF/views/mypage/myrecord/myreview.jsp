@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -44,6 +44,31 @@
 	.inner-star {position: absolute;left: 0;top: 0;width: 0%;overflow: hidden;white-space: nowrap;}
 	.outer-star::before, .inner-star::before {content: '\f005 \f005 \f005 \f005 \f005';font-family: 'Font Awesome 5 free';font-weight: 900;}
 </style>
+<script>
+	
+	$(document).ready(function() {
+		
+		$("#delete").click(function() {
+			
+			if($("input[type^=checkbox]").is(":checked") == false) {
+				alert("삭제할 리뷰를 선택해주세요");
+			} else {
+				var result = confirm("해당 리뷰를 삭제하시겠습니까?");
+				
+				if(result) {
+					var index = $("input[type^=checkbox]:checked").val();
+					alert(index);
+					
+				}
+
+			}
+		});
+		
+		
+
+	});
+
+</script>
 </head>
 <body>
 <jsp:include page="../../header.jsp"></jsp:include>
@@ -51,29 +76,51 @@
 <section>
 	<div class="center">
 		<div><h3>My 후기</h3></div>		
-		<a href="#"  id="delete">삭제</a>
+		<button type = "button" id="delete">삭제</button>
 			<table class="table">
 				<tr>
-					<th><input type="checkbox"></th>
+					<th></th>
 					<th>구분</th>
 					<th>별점</th>
 					<th>내용</th>
 					<th>작성일</th>
 				</tr>
-				<tr>
-					<td><input type="checkbox"></td>
-					<td>숙소</td>
-					<td>
-						<div class='RatingStar'>
-						  <div class='RatingScore'>
-						    <div class='outer-star'><div class='inner-star'></div></div>
-						  </div>
-						</div>
-					</td>
-					<td>숙소 진짜 좋아요!</td>
-					<td>2017-07-06</td>
-				</tr>
-				<tr>
+				
+				<c:forEach var = "list" items = "${store_list}" varStatus = "status">
+					<tr>
+						<c:if test = "${!empty list.sid}">
+							<td><input type="checkbox" name = "${list.srid}"></td>
+							<td>상품 </td>
+							<td>
+								<div class='RatingStar'>
+								  <div class='RatingScore'>
+								    <div class='outer-star'><div class='inner-star' style = "width : ${(list.sr_star)*20}%"></div></div>
+								  </div>
+								</div>
+							</td>
+							<td><a href = "store_content.do?sid=${list.sid}">${list.sr_review}</a></td>
+							<td>${list.sr_time }</td>
+						</c:if>
+					</tr>
+					
+					<tr>
+						<c:if test = "${!empty travel_list[status.index].reid}">
+							<td><input type="checkbox" value = "${travel_list[status.index].tid}"></td>
+							<td>여행지</td>
+							<td>
+								<div class='RatingStar'>
+								  <div class='RatingScore'>
+								    <div class='outer-star'><div class='inner-star' style = "width : ${(travel_list[status.index].t_star)*20}%"></div></div>
+								  </div>
+								</div>
+							</td>
+							<td><a href = "travel_detail.do?tid=${travel_list[status.index].tid}">${travel_list[status.index].t_review}</a></td>
+							<td>${travel_list[status.index].t_time}</td>
+						</c:if>
+					</tr>
+					
+				</c:forEach>	
+				<!-- <tr>
 					<td><input type="checkbox"></td>
 					<td>상품</td>
 					<td>
@@ -85,7 +132,7 @@
 					</td>
 					<td>선물받은 지인이 오메기떡 진짜 맛있다네요!</td>
 					<td>2017-07-06</td>
-				</tr>
+				</tr> -->
 			</table>
 	</div>
 </section>

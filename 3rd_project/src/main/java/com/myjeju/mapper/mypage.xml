@@ -110,4 +110,15 @@
 		<insert id="order_sequ" parameterType="com.myjeju.vo.BasketVO">
 			insert into myjeju_order_sequ values(#{id}, #{sid})
 		</insert>
+		
+		
+		<!-- My후기 - 스토어 리뷰 -->
+		<select id = "store_review" parameterType = "java.lang.String" resultType = "com.myjeju.vo.StorevVO">
+			select id, sid, srid, sr_review, sr_star, to_char(sr_time, 'yyyy-mm-dd') sr_time from myjeju_storev where id = #{id}
+		</select>
+		
+		<!-- My후기 - 여행지 리뷰 -->
+		<select id = "travel_review" parameterType = "java.lang.String" resultType = "com.myjeju.vo.ReviewVO">
+			select id, tid, reid, t_review, t_star, to_char(t_time, 'yyyy-mm-dd') t_time from myjeju_travel_review where id = #{id}
+		</select>
     </mapper>

@@ -8,7 +8,8 @@ import com.myjeju.vo.MReservationVO;
 import com.myjeju.vo.MemberVO;
 import com.myjeju.vo.OrderVO;
 import com.myjeju.vo.PointVO;
-import com.myjeju.vo.StoreVO;
+import com.myjeju.vo.ReviewVO;
+import com.myjeju.vo.StorevVO;
 
 public interface MypageService {
 	
@@ -38,4 +39,9 @@ public interface MypageService {
 	OrderVO getHouseName(String hid);
 	OrderVO getRommName(String hdid);
 	boolean getOrderSequ(BasketVO vo);
+	
+	
+	ArrayList<StorevVO> getStoreReview(String id);
+	ArrayList<ReviewVO> getTravelReview(String id);
+	
 }

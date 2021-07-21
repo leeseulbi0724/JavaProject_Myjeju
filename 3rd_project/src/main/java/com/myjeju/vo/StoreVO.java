@@ -4,7 +4,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 public class StoreVO {
 	String sid, s_category, s_name, s_image, s_sfile, s_content, s_ssfile;
-	int s_price, rno;
+	int s_price, rno, star_count;
 	float star_avg;
 	CommonsMultipartFile sfile1, sfile2;
 	
@@ -68,6 +68,13 @@ public class StoreVO {
 	}
 	public void setStar_avg(float star_avg) {
 		this.star_avg = star_avg;
+	}
+	
+	public int getStar_count() {
+		return star_count;
+	}
+	public void setStar_count(int star_count) {
+		this.star_count = star_count;
 	}
 	
 	

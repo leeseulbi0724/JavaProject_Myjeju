@@ -14,18 +14,33 @@
 <script src="http://localhost:9000/myjeju/js/bootstrap.min.js"></script>
 <style>
 	
-	.star_img {
-		vertical-align : bottom;
-		margin-top : 15px;
+	.star-rating { 
+		width:100px; 
+		float:left; 
+		margin-top:15px; 
+		margin-right:15px; 
+	}
+
+	.star-rating, .star-rating span { 
+		display : inline-block; 
+		height : 18px; 
+		overflow : hidden; 
+		background : url("http://localhost:9000/myjeju/images/store/star99.png")no-repeat; 
 	}
 	
-	.star_avg {
-		vertical-align : bottom;
-		margin-left : 5px;
-		font-size : 20px;
-		font-weight : 500;
-		margin-top : 15px;
+	.star-rating span { 
+		background-position : left bottom; 
+		line-height : 0; 
+		vertical-align : top; 
+		float:left; 
 	}
+	
+	.title-box>span:last-child {
+		display : inline-block;
+		margin-top : 12px;
+		margin-left : 15px;
+		font-size : 18px;
+	} 
 
 </style>
 <script>
@@ -270,32 +285,10 @@
 							<input type = "hidden" name = "s_image" value = "${vo.s_image}">
 							<input type = "hidden" name = "s_sfile" value = "${vo.s_sfile}">
 							
-							<c:choose>
-								<c:when test = "${vo.star_avg <= 1}">
-									<img src = "http://localhost:9000/myjeju/images/travel/star.png" class = "star_img">
-									<span class = "star_avg">${vo.star_avg}</span>
-								</c:when>
-								<c:when test = "${vo.star_avg <= 1.5}">
-									<img src = "http://localhost:9000/myjeju/images/travel/star1.png" class = "star_img">
-									<span class = "star_avg">${vo.star_avg}</span>
-								</c:when>
-								<c:when test = "${vo.star_avg <= 2.5}">
-									<img src = "http://localhost:9000/myjeju/images/travel/star2.png" class = "star_img">
-									<span class = "star_avg">${vo.star_avg}</span>
-								</c:when>
-								<c:when test = "${vo.star_avg <= 3.5}">
-									<img src = "http://localhost:9000/myjeju/images/travel/star3.png" class = "star_img">
-									<span class = "star_avg">${vo.star_avg}</span>
-								</c:when>
-								<c:when test = "${vo.star_avg <= 4.5}">
-									<img src = "http://localhost:9000/myjeju/images/travel/star4.png" class = "star_img">
-									<span class = "star_avg">${vo.star_avg}</span>
-								</c:when>
-								<c:when test = "${vo.star_avg <= 5}">
-									<img src = "http://localhost:9000/myjeju/images/travel/star5.png" class = "star_img">
-									<span class = "star_avg">${vo.star_avg}</span>
-								</c:when>
-							</c:choose>
+							<span class='star-rating'>
+								<span style ="width : ${(vo.star_avg)*20}%"></span>   
+							</span>   
+							<span>${vo.star_avg} (${vo.star_count})</span>
 							
 						</div>
 						

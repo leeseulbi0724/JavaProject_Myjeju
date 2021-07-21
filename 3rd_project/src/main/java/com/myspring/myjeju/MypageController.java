@@ -16,10 +16,11 @@ import com.myjeju.service.MemberService;
 import com.myjeju.service.MypageService;
 import com.myjeju.vo.BasketVO;
 import com.myjeju.vo.CommunityVO;
-import com.myjeju.vo.MReservationVO;
 import com.myjeju.vo.MemberVO;
 import com.myjeju.vo.OrderVO;
 import com.myjeju.vo.PointVO;
+import com.myjeju.vo.ReviewVO;
+import com.myjeju.vo.StorevVO;
 
 @Controller
 public class MypageController {
@@ -236,8 +237,20 @@ public class MypageController {
 	 * 나의 후기
 	 */
 	@RequestMapping(value = "/myreview.do", method = RequestMethod.GET)
-	public String myreview() {
-		return "mypage/myrecord/myreview";
+	public ModelAndView myreview(HttpSession session) {
+		ModelAndView mv = new ModelAndView();
+		
+		String id = (String) session.getAttribute("session_id");
+		
+		ArrayList<StorevVO> storelist = MypageService.getStoreReview(id);
+		ArrayList<ReviewVO> travellist = MypageService.getTravelReview(id);
+		
+		mv.setViewName("mypage/myrecord/myreview");
+		
+		mv.addObject("store_list", storelist);
+		mv.addObject("travel_list", travellist);
+		
+		return mv;
 	}
 
 	/**
