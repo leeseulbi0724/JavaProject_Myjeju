@@ -2,6 +2,7 @@ package com.myspring.myjeju;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.myjeju.service.TravelService;
 import com.myjeju.vo.CarSpotVO;
+import com.myjeju.vo.HeartVO;
 import com.myjeju.vo.PhotoSpotVO;
 import com.myjeju.vo.ReviewVO;
 import com.myjeju.vo.TravelVO;
@@ -30,11 +32,35 @@ public class TravelController {
 	 * travel.do : 여행지 메인페이지
 	 */
 	@RequestMapping(value="/travel.do", method=RequestMethod.GET)
-	public ModelAndView travel() {
+	public ModelAndView travel(HttpSession session) {
 		ModelAndView mv = new ModelAndView();
+		//로그인 회원정보 가져오기
+		String id = (String) session.getAttribute("session_id");
 		
 		ArrayList<TravelVO> list = travelService.getTravelList(1, 5);
 		ArrayList<TravelVO> toplist = travelService.getTravelListTop3();
+		
+		if (id != null) {
+			for (int i=0; i<toplist.size(); i++) {
+				HeartVO vo = new HeartVO();		
+				vo.setId(id); vo.setTid(toplist.get(i).getTid());
+				int status = travelService.getHeartInfoResult(vo);
+				toplist.get(i).setStatus(status);				 
+			}
+			for (int i=0; i<list.size(); i++) {
+				HeartVO vo = new HeartVO();		
+				vo.setId(id); vo.setTid(list.get(i).getTid());
+				int status = travelService.getHeartInfoResult(vo);
+				list.get(i).setStatus(status);				 
+			}
+		} else {
+			for (int i=0; i<toplist.size(); i++) {
+				toplist.get(i).setStatus(0);
+			}
+			for (int i=0; i<list.size(); i++) {
+				list.get(i).setStatus(0);
+			}
+		}
 		
 		mv.setViewName("travel/travel");
 		mv.addObject("list",list);
@@ -48,10 +74,12 @@ public class TravelController {
 	 */
 	@ResponseBody
 	@RequestMapping(value="/travel_proc.do", produces = "application/text; charset=utf8", method=RequestMethod.GET)
-	public String travel_proc(String pnum, String search, String search_text) {
+	public String travel_proc(String pnum, String search, String search_text, HttpSession session) {
 		ArrayList<TravelVO> list = travelService.getTravelList();
 		//ArrayList<TravelVO> list = new ArrayList<TravelVO>();
 		
+		//로그인 회원정보 가져오기
+		String id = (String) session.getAttribute("session_id");
 		int pageNumber = 1;
 
 		if(!pnum.equals("")) { 
@@ -68,6 +96,21 @@ public class TravelController {
 			list = travelService.getTravelList(startnum, endnum, search, search_text);
 		}
 		
+		if (id != null) {
+			for (int i=0; i<list.size(); i++) {
+				HeartVO vo = new HeartVO();		
+				vo.setId(id); vo.setTid(list.get(i).getTid());
+				int status = travelService.getHeartInfoResult(vo);
+				list.get(i).setStatus(status);				 
+			}
+			for (int i=0; i<list.size(); i++) {
+				HeartVO vo = new HeartVO();		
+				vo.setId(id); vo.setTid(list.get(i).getTid());
+				int status = travelService.getHeartInfoResult(vo);
+				list.get(i).setStatus(status);				 
+			}
+		} 		
+		
 
 		JsonObject jdata = new JsonObject();
 		JsonArray jlist = new JsonArray();
@@ -81,6 +124,7 @@ public class TravelController {
 			jobj.addProperty("t_infor", vo.getT_infor());
 			jobj.addProperty("t_addr", vo.getT_addr());
 			jobj.addProperty("t_like", vo.getT_like());
+			jobj.addProperty("status", vo.getStatus());
 			jobj.addProperty("t_image1", vo.getT_image1());
 			jobj.addProperty("pnum", String.valueOf(pageNumber));
 			jobj.addProperty("search", search);
@@ -186,5 +230,50 @@ public class TravelController {
 			mv.addObject("t_time", vo.getT_time());
 		}
 		return mv;
+	}
+	
+	/**
+	 * 좋아요 +
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/heart_travel_plus.do", method=RequestMethod.POST)
+	public boolean heart_plus(HttpSession session, HttpServletRequest request) {
+		boolean total = false;
+		//로그인 회원정보 가져오기
+		String id = (String) session.getAttribute("session_id");
+		String tid = request.getParameter("tid");
+		HeartVO vo = new HeartVO();
+		vo.setId(id);
+		vo.setTid(tid);		
+		//heart 테이블 추가
+		total = travelService.getHeartPlus(vo);
+		//house테이블 하트+
+		if (total) {
+			boolean result = travelService.getUpdateHeart(tid);
+		}
+		return total;
+	}
+
+	/**
+	 * 좋아요 -
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/heart_travel_minus.do", method=RequestMethod.POST)
+	public boolean heart_minus(HttpSession session, HttpServletRequest request) {
+		boolean total = false;
+		//로그인 회원정보 가져오기
+		String id = (String) session.getAttribute("session_id");
+		String tid = request.getParameter("tid");
+		HeartVO vo = new HeartVO();
+		vo.setId(id);
+		vo.setTid(tid);		
+		//heart 테이블 삭제 
+		total = travelService.getHeartMinus(vo);
+		//house테이블 하트-
+		if (total) {
+			boolean result = travelService.getUpdateMinusHeart(tid);
+		}
+
+		return total;
 	}
 }

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.myjeju.dao.CafeDAO;
 import com.myjeju.vo.CafeVO;
+import com.myjeju.vo.HeartVO;
 
 @Service("cafeService")
 public class CafeServiceImpl implements CafeService{
@@ -44,4 +45,48 @@ public class CafeServiceImpl implements CafeService{
 		return cafeDAO.getCafeDetail(caid);
 	}
 	
+	@Override
+	public boolean getUpdateHeart(String caid) {
+		int val = cafeDAO.getUpdateHeart(caid);
+		boolean result = false;
+		if ( val!= 0) {
+			result = true;
+		}
+		return result;
+	}
+	
+	@Override
+	public boolean getUpdateMinusHeart(String caid) {
+		int val = cafeDAO.getUpdateMinusHeart(caid);
+		boolean result = false;
+		if ( val!= 0) {
+			result = true;
+		}
+		return result;
+	}
+	
+	@Override
+	public int getHeartInfoResult(HeartVO vo) {
+		return cafeDAO.getHeartInfoResult(vo);
+	}
+	
+	@Override
+	public boolean getHeartMinus(HeartVO vo) {
+		int val = cafeDAO.getHeartMinus(vo);
+		boolean result = false;
+		if ( val!= 0) {
+			result = true;
+		}
+		return result;
+	}
+	
+	@Override
+	public boolean getHeartPlus(HeartVO vo) {
+		int val = cafeDAO.getHeartPlus(vo);
+		boolean result = false;
+		if ( val!= 0) {
+			result = true;
+		}
+		return result;
+	}
 }

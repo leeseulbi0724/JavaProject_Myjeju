@@ -104,7 +104,7 @@
 						}
 						$(".pnum").val(jdata.jlist[0].pnum);
 		                $("#list_body").append(addListHtml);
-			   			 $(".btn_style").click(function(){
+			   			$(".btn_style").click(function(){
 			 				var fid = $(this).attr("name");			
 			 				if ("${session_id}"=="") {
 			 					alert("로그인 후 이용바랍니다");

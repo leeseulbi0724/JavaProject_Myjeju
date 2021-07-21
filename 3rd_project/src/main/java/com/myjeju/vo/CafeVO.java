@@ -3,7 +3,7 @@ package com.myjeju.vo;
 public class CafeVO {
 	String caid, ca_name, ca_tag, ca_infor, ca_infor2, ca_addr, ca_vpoint, ca_hpoint, ca_hp, 
 	ca_image1, ca_image2, ca_image3, ca_image4, ca_image5;
-	int ca_like;
+	int ca_like, status;
 	
 	public String getCaid() {
 		return caid;
@@ -95,6 +95,13 @@ public class CafeVO {
 	public void setCa_like(int ca_like) {
 		this.ca_like = ca_like;
 	}
+	public int getStatus() {
+		return status;
+	}
+	public void setStatus(int status) {
+		this.status = status;
+	}
+	
 	
 	
 

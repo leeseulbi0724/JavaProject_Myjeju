@@ -89,4 +89,29 @@
    		   from(select reid, id, tid, t_review, t_star, t_time from myjeju_travel_review order by t_time) order by rno)
    		    order by rno desc) where tid=#{tid}
 	</select>
+	
+	<!-- 하트 테이블 + -->
+	<insert id="heart_plus" parameterType="com.myjeju.vo.HeartVO">
+		insert into myjeju_t_heart values(#{id}, #{tid})
+	</insert>
+
+	<!-- 하트 테이블 - -->
+	<insert id="heart_minus" parameterType="com.myjeju.vo.HeartVO">
+		delete from myjeju_t_heart where id=#{id} and tid=#{tid}
+	</insert>
+	
+	<!-- 하트정보가져오기 -->
+	<select id="hearrt_info_result" parameterType="com.myjeju.vo.HeartVO" resultType="java.lang.Integer">
+		select count(*) from myjeju_t_heart where id=#{id} and tid=#{tid}
+	</select>
+	
+	<!-- 여행지 테이블에 하트 추가 -->
+	<update id="updateheart" parameterType="java.lang.String" >
+		update myjeju_travel set t_like = t_like+1 where tid=#{tid}
+	</update>
+	
+	<!-- 여행지 테이블에 하트 마이너스 -->
+	<update id="updateminusheart" parameterType="java.lang.String" >
+		update myjeju_travel set t_like = t_like-1 where tid=#{tid}
+	</update>
 </mapper>

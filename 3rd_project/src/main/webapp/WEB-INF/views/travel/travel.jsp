@@ -62,8 +62,12 @@
 							addListHtml += "</div>";
 							addListHtml += "</td>";
 							addListHtml += "<td>";
-							addListHtml += "<button type='button' class='btn_style' id='heart_btn'>"
-							addListHtml += "<img src='http://localhost:9000/myjeju/images/travel/empty_heart.png'>" + jdata.jlist[i].t_like;
+							addListHtml += "<button type='button' class='btn_style'  id='"+ jdata.jlist[i].status + "'" + " name= '"+ jdata.jlist[i].tid +"'>";
+							if (jdata.jlist[i].status == 0) {
+								addListHtml += "<img src='http://localhost:9000/myjeju/images/house/empty_heart.png'>" + jdata.jlist[i].t_like;
+							} else {
+								addListHtml += "<img src='http://localhost:9000/myjeju/images/house/red_heart.png'>" + jdata.jlist[i].t_like;
+							}
 							addListHtml += "</button>";
 							addListHtml += "<a href='http://localhost:9000/myjeju/travel_detail.do?tid=" + jdata.jlist[i].tid + "'>";
 							addListHtml += "<button type='button' class='btn_style4' id='more_infor'>상세정보</button>";
@@ -73,6 +77,32 @@
 						}
 						$(".pnum").val(jdata.jlist[0].pnum);
 		                $("#list_body").append(addListHtml);
+		                $(".btn_style").click(function(){
+			 				var tid = $(this).attr("name");			
+			 				if ("${session_id}"=="") {
+			 					alert("로그인 후 이용바랍니다");
+			 				} else if ($(this).attr("id") == 1) {
+			 					$.ajax({
+			 				                type: "post",
+			 				                url: "heart_travel_minus.do",
+			 				                data:{tid:tid},
+			 				                dataType: 'json',
+			 				                success: function (result) {
+			 				                location.reload();
+			 				                },
+			 				           }); 
+			 					} else {
+			 						$.ajax({
+			 				                type: "post",
+			 				               	url: "heart_travel_plus.do",
+			 				                data:{tid:tid},
+			 				                dataType: 'json',
+			 				                success: function (result) {
+			 				                location.reload();
+			 				               	 },
+			 						});
+			 				}
+	 					}); 
 					}
 				});
 			}
@@ -137,8 +167,13 @@
 					<div class="spot_infor">
 						<p class="spot_name">${toplist.t_name} <span>${toplist.t_infor}</span></p>
 						<p class="spot_tag">${toplist.t_tag}</p>
-						<button type="button" class="btn_style" id="heart_btn">
-							<img src="http://localhost:9000/myjeju/images/travel/empty_heart.png">${toplist.t_like}
+						<button type="button" class="btn_style" id="${toplist.status }" name="${toplist.tid }">
+						<c:if test = "${toplist.status eq 0 }">
+							<img src="http://localhost:9000/myjeju/images/house/empty_heart.png" width=25 height=25 class="heart_img" >${toplist.t_like }
+						</c:if>
+						<c:if test = "${toplist.status eq 1 }">
+							<img src="http://localhost:9000/myjeju/images/house/red_heart.png"  width=25 height=25 class="heart_img" >${toplist.t_like }
+						</c:if>
 						</button>
 						<img src="http://localhost:9000/myjeju/images/travel/star.png"><span class="star_score">4.6 (416)</span>
 					</div>

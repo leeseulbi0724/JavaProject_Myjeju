@@ -59,5 +59,29 @@
 		select caid, ca_name, ca_tag, ca_infor, ca_infor2, ca_addr, ca_hp, ca_like,
 			   ca_image1, ca_image2, ca_image3, ca_image4, ca_image5 from myjeju_cafe where caid=#{caid}
 	</select>
+	
+	<!-- 하트 테이블 + -->
+	<insert id="heart_plus" parameterType="com.myjeju.vo.HeartVO">
+		insert into myjeju_ca_heart values(#{id}, #{caid})
+	</insert>
 
+	<!-- 하트 테이블 - -->
+	<insert id="heart_minus" parameterType="com.myjeju.vo.HeartVO">
+		delete from myjeju_ca_heart where id=#{id} and caid=#{caid}
+	</insert>
+	
+	<!-- 하트정보가져오기 -->
+	<select id="hearrt_info_result" parameterType="com.myjeju.vo.HeartVO" resultType="java.lang.Integer">
+		select count(*) from myjeju_ca_heart where id=#{id} and caid=#{caid}
+	</select>
+	
+	<!-- 음식점 테이블에 하트 추가 -->
+	<update id="updateheart" parameterType="java.lang.String" >
+		update myjeju_cafe set ca_like = ca_like+1 where caid=#{caid}
+	</update>
+	
+	<!-- 음식점 테이블에 하트 마이너스 -->
+	<update id="updateminusheart" parameterType="java.lang.String" >
+		update myjeju_cafe set ca_like = ca_like-1 where caid=#{caid}
+	</update>
 </mapper>

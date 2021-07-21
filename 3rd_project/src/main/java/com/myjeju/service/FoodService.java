@@ -15,7 +15,7 @@ public interface FoodService {
 	
 	int getHeartInfoResult(HeartVO vo);
 	boolean getHeartMinus(HeartVO vo);
-	boolean getUpdateHeart(String hid);
-	boolean getUpdateMinusHeart(String hid);
+	boolean getUpdateHeart(String fid);
+	boolean getUpdateMinusHeart(String fid);
 	boolean getHeartPlus(HeartVO vo);
 }

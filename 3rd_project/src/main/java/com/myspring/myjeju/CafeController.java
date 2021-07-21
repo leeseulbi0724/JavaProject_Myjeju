@@ -2,6 +2,9 @@ package com.myspring.myjeju;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +18,7 @@ import com.google.gson.JsonObject;
 import com.myjeju.dao.CafeDAO;
 import com.myjeju.service.CafeService;
 import com.myjeju.vo.CafeVO;
+import com.myjeju.vo.HeartVO;
 
 @Controller
 public class CafeController {
@@ -26,11 +30,36 @@ public class CafeController {
 	 * cafe.do : 카페 메인페이지
 	 */
 	@RequestMapping(value="/cafe.do", method=RequestMethod.GET)
-	public ModelAndView cafe() {
+	public ModelAndView cafe(HttpSession session) {
 		ModelAndView mv = new ModelAndView();
+		//로그인 회원정보 가져오기
+		String id = (String) session.getAttribute("session_id");	
+		
 		
 		ArrayList<CafeVO> list = cafeService.getCafeList();
 		ArrayList<CafeVO> toplist = cafeService.getCafeListTop3();
+		
+		if (id != null) {
+			for (int i=0; i<toplist.size(); i++) {
+				HeartVO vo = new HeartVO();		
+				vo.setId(id); vo.setCaid(toplist.get(i).getCaid());
+				int status = cafeService.getHeartInfoResult(vo);
+				toplist.get(i).setStatus(status);				 
+			}
+			for (int i=0; i<list.size(); i++) {
+				HeartVO vo = new HeartVO();		
+				vo.setId(id); vo.setCaid(list.get(i).getCaid());
+				int status = cafeService.getHeartInfoResult(vo);
+				list.get(i).setStatus(status);				 
+			}
+		} else {
+			for (int i=0; i<toplist.size(); i++) {
+				toplist.get(i).setStatus(0);
+			}
+			for (int i=0; i<list.size(); i++) {
+				list.get(i).setStatus(0);
+			}
+		}
 		
 		mv.setViewName("food/cafe");
 		mv.addObject("list",list);
@@ -44,9 +73,11 @@ public class CafeController {
 	 */
 	@ResponseBody
 	@RequestMapping(value="/cafe_proc.do", produces = "application/text; charset=utf8", method=RequestMethod.GET)
-	public String cafe_proc(String pnum, String search, String search_text) {
+	public String cafe_proc(String pnum, String search, String search_text, HttpSession session) {
 		ArrayList<CafeVO> list = cafeService.getCafeList();
 		
+		//로그인 회원정보 가져오기
+		String id = (String) session.getAttribute("session_id");	
 		int pageNumber = 1;
 
 		if(!pnum.equals("")) { 
@@ -62,6 +93,21 @@ public class CafeController {
 			list = cafeService.getCafeList(startnum, endnum, search, search_text);
 		}
 		
+		if (id != null) {
+			for (int i=0; i<list.size(); i++) {
+				HeartVO vo = new HeartVO();		
+				vo.setId(id); vo.setCaid(list.get(i).getCaid());
+				int status = cafeService.getHeartInfoResult(vo);
+				list.get(i).setStatus(status);				 
+			}
+			for (int i=0; i<list.size(); i++) {
+				HeartVO vo = new HeartVO();		
+				vo.setId(id); vo.setCaid(list.get(i).getCaid());
+				int status = cafeService.getHeartInfoResult(vo);
+				list.get(i).setStatus(status);				 
+			}
+		} 		
+		
 
 		JsonObject jdata = new JsonObject();
 		JsonArray jlist = new JsonArray();
@@ -75,6 +121,7 @@ public class CafeController {
 			jobj.addProperty("ca_infor", vo.getCa_infor());
 			jobj.addProperty("ca_addr", vo.getCa_addr());
 			jobj.addProperty("ca_like", vo.getCa_like());
+			jobj.addProperty("status", vo.getStatus());
 			jobj.addProperty("ca_image1", vo.getCa_image1());
 			jobj.addProperty("pnum", String.valueOf(pageNumber));
 			jobj.addProperty("search", search);
@@ -103,5 +150,50 @@ public class CafeController {
 		mv.addObject("infor2",infor2);
 		
 		return mv;
+	}
+	
+	/**
+	 * 좋아요 +
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/heart_cafe_plus.do", method=RequestMethod.POST)
+	public boolean heart_plus(HttpSession session, HttpServletRequest request) {
+		boolean total = false;
+		//로그인 회원정보 가져오기
+		String id = (String) session.getAttribute("session_id");
+		String caid = request.getParameter("caid");
+		HeartVO vo = new HeartVO();
+		vo.setId(id);
+		vo.setCaid(caid);		
+		//heart 테이블 추가
+		total = cafeService.getHeartPlus(vo);
+		//hous테이블 하트+
+		if (total) {
+			boolean result = cafeService.getUpdateHeart(caid);
+		}
+		return total;
+	}
+
+	/**
+	 * 좋아요 -
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/heart_cafe_minus.do", method=RequestMethod.POST)
+	public boolean heart_minus(HttpSession session, HttpServletRequest request) {
+		boolean total = false;
+		//로그인 회원정보 가져오기
+		String id = (String) session.getAttribute("session_id");
+		String caid = request.getParameter("caid");
+		HeartVO vo = new HeartVO();
+		vo.setId(id);
+		vo.setCaid(caid);		
+		//heart 테이블 삭제 
+		total = cafeService.getHeartMinus(vo);
+		//hous테이블 하트-
+		if (total) {
+			boolean result = cafeService.getUpdateMinusHeart(caid);
+		}
+
+		return total;
 	}
 }

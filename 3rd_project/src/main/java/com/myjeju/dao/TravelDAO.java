@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.myjeju.vo.CarSpotVO;
+import com.myjeju.vo.HeartVO;
 import com.myjeju.vo.PhotoSpotVO;
 import com.myjeju.vo.ReviewVO;
 import com.myjeju.vo.TravelVO;
@@ -96,5 +97,30 @@ public class TravelDAO extends DBConn {
 		return (ArrayList<ReviewVO>)list;
 	}
 	
+	//Update ---> 하트 업데이트
+	public int getUpdateHeart(String tid) {
+		return sqlSession.update(namespace+".updateheart", tid);
+	}
+	
+	//Update ---> 하트 업데이트 마이너스
+	public int getUpdateMinusHeart(String tid) {
+		return sqlSession.update(namespace+".updateminusheart", tid);
+	}
+	
+	//하트 테이블 추가
+	public int getHeartPlus(HeartVO vo) {
+		return sqlSession.insert(namespace+".heart_plus", vo);
+	}
+	
+	//하트 테이블 삭제
+	public int getHeartMinus(HeartVO vo) {
+		return sqlSession.delete(namespace+".heart_minus", vo);
+	}
+	
+	//하트정보가져오기
+	public int getHeartInfoResult(HeartVO vo) {
+		return sqlSession.selectOne(namespace+".hearrt_info_result", vo);
+	}
+
 	
 }
