@@ -12,8 +12,8 @@ import com.myjeju.vo.CommunityVO;
 import com.myjeju.vo.MemberVO;
 import com.myjeju.vo.OrderVO;
 import com.myjeju.vo.PointVO;
-import com.myjeju.vo.ReviewVO;
 import com.myjeju.vo.StorevVO;
+import com.myjeju.vo.TravelReviewVO;
 
 @Repository
 public class MypageDAO {
@@ -108,9 +108,9 @@ public class MypageDAO {
 	}
 	
 	/** My후기 - 여행지 리뷰 **/
-	public ArrayList<ReviewVO> getTravelReview(String id) {
-		List<ReviewVO> list = sqlSession.selectList(namespace + ".travel_review", id);
-		return (ArrayList<ReviewVO>) list;
+	public ArrayList<TravelReviewVO> getTravelReview(String id) {
+		List<TravelReviewVO> list = sqlSession.selectList(namespace + ".travel_review", id);
+		return (ArrayList<TravelReviewVO>) list;
 	}
 	
 	/** My후기 - 음식점 리뷰 **/

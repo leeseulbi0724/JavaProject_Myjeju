@@ -19,8 +19,8 @@ import com.myjeju.vo.CommunityVO;
 import com.myjeju.vo.MemberVO;
 import com.myjeju.vo.OrderVO;
 import com.myjeju.vo.PointVO;
-import com.myjeju.vo.ReviewVO;
 import com.myjeju.vo.StorevVO;
+import com.myjeju.vo.TravelReviewVO;
 
 @Controller
 public class MypageController {
@@ -243,7 +243,7 @@ public class MypageController {
 		String id = (String) session.getAttribute("session_id");
 		
 		ArrayList<StorevVO> storelist = MypageService.getStoreReview(id);
-		ArrayList<ReviewVO> travellist = MypageService.getTravelReview(id);
+		ArrayList<TravelReviewVO> travellist = MypageService.getTravelReview(id);
 		
 		mv.setViewName("mypage/myrecord/myreview");
 		

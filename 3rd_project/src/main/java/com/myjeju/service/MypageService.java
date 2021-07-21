@@ -4,12 +4,11 @@ import java.util.ArrayList;
 
 import com.myjeju.vo.BasketVO;
 import com.myjeju.vo.CommunityVO;
-import com.myjeju.vo.MReservationVO;
 import com.myjeju.vo.MemberVO;
 import com.myjeju.vo.OrderVO;
 import com.myjeju.vo.PointVO;
-import com.myjeju.vo.ReviewVO;
 import com.myjeju.vo.StorevVO;
+import com.myjeju.vo.TravelReviewVO;
 
 public interface MypageService {
 	
@@ -42,6 +41,6 @@ public interface MypageService {
 	
 	
 	ArrayList<StorevVO> getStoreReview(String id);
-	ArrayList<ReviewVO> getTravelReview(String id);
+	ArrayList<TravelReviewVO> getTravelReview(String id);
 	
 }

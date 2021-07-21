@@ -118,7 +118,7 @@
 		</select>
 		
 		<!-- My후기 - 여행지 리뷰 -->
-		<select id = "travel_review" parameterType = "java.lang.String" resultType = "com.myjeju.vo.ReviewVO">
+		<select id = "travel_review" parameterType = "java.lang.String" resultType = "com.myjeju.vo.TravelReviewVO">
 			select id, tid, reid, t_review, t_star, to_char(t_time, 'yyyy-mm-dd') t_time from myjeju_travel_review where id = #{id}
 		</select>
     </mapper>
