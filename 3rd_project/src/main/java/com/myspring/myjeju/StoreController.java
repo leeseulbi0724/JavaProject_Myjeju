@@ -233,7 +233,7 @@ public class StoreController {
 	/**
 	 * store_review_proc.do : 스토어 상품평 등록 처리
 	 */
-	@RequestMapping(value = "/store_review_proc.do", method = RequestMethod.GET)
+	/**@RequestMapping(value = "/store_review_proc.do", method = RequestMethod.GET)
 	public ModelAndView store_review_proc(StorevVO vo) {
 		ModelAndView mv = new ModelAndView();
 		
@@ -244,7 +244,40 @@ public class StoreController {
 			mv.addObject("sid", vo.getSid());
 		}
 		return mv;
+	}**/
+	
+	
+	/**
+	 * store_review_proc1.do : 스토어 상품평 등록 처리 (ajax)
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/store_review_proc1.do", method = RequestMethod.POST)
+	public boolean store_review_proc1(HttpSession session, HttpServletRequest request) {
+
+		String id = (String) session.getAttribute("session_id");
+		String sid = request.getParameter("sid");
+		String sr_review = request.getParameter("sr_review");
+		String star = request.getParameter("sr_star");
+		if(star == null) {
+			star = "0";
+		}
+		int sr_star = Integer.parseInt(star);
+		
+		StorevVO vo = new StorevVO();
+
+
+		vo.setId(id);
+		vo.setSid(sid);
+		vo.setSr_review(sr_review);
+		vo.setSr_star(sr_star);
+		
+		boolean result = storeService.getInsertResult(vo);
+	
+		return result;
 	}
+	
+	
+	
 	
 	/**
 	 * review_delete.do : 상품평 삭제

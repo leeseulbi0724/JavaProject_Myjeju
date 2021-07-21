@@ -119,6 +119,35 @@
 		});
 		
 		
+		/* 상품평 유효성 체크 및 등록 */
+		$("#reviewInsert").click(function() {
+			if($("#sr_review").val() == "") {
+				alert("상품평을 입력해주세요");
+				$("#sr_review").focus();
+				return false;
+			} else {
+				var store_review_form = $("#store_review_form").serialize();
+				
+				$.ajax({
+					url : "store_review_proc1.do",
+					type : "post",
+					data : store_review_form,
+					dataType : "json",
+					
+					success : function(result) {
+						if(result) {
+							location.reload();
+						} else {
+							alert("실패실패");
+						}
+					}
+				});
+				
+				return true;
+			}
+		});
+		
+		
 		/* 상품평 수정 - 내용 가져오기 - 모달 띄우기 */
 		$("button[id^=reviewUpdateBtn]").click(function() {
 			var update = confirm("수정하시겠습니까??");
@@ -154,18 +183,6 @@
 						location.reload();
 					},
 				});
-			}
-		});
-		
-		
-		/* 상품평 유효성 체크 */
-		$("#reviewInsert").click(function() {
-			if($("#sr_review").val() == "") {
-				alert("상품평을 입력해주세요");
-				$("#sr_review").focus();
-				return false;
-			} else {
-				store_review_form.submit();	
 			}
 		});
 		
@@ -322,9 +339,9 @@
 					<div>상품평</div>
 					
 					<article class = "store_review_write">
-						<form name = "store_review_form" action = "store_review_proc.do" method = "GET">
-							<input type = "hidden" name = "id" value = "${id}">
-							<input type = "hidden" name = "sid" value = "${sid}">
+						<form name = "store_review_form" action = "store_review_proc1.do" method = "POST" id = "store_review_form">
+							<input type = "hidden" name = "id" id = "id" value = "${id}">
+							<input type = "hidden" name = "sid" id = "sid" value = "${sid}">
 							<select name="sr_star" id="sr_star">
 								<option id="star5" value="5">★★★★★</option>
 								<option id="star4" value="4">★★★★☆</option>
@@ -335,11 +352,11 @@
 							<span>상품평</span>
 							<c:if test ="${result eq 'true' }">
 								<input type = "text" name = "sr_review" id = "sr_review">
-								<button type = "submit" id = "reviewInsert" class = "StoreReviewBtn">등록</button>
+								<button type = "button" id = "reviewInsert" class = "StoreReviewBtn">등록</button>
 							</c:if>
 							<c:if test ="${result eq 'false' }">
 								<input type = "text" name = "sr_review" id = "sr_review" disabled placeholder="주문 후 이용 가능합니다">
-								<button type = "submit" id = "reviewInsert" class = "StoreReviewBtn" disabled>등록</button>
+								<button type = "button" id = "reviewInsert" class = "StoreReviewBtn" disabled>등록</button>
 							</c:if>
 						</form>
 					</article>
