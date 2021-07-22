@@ -187,7 +187,7 @@ $(document).ready(function(){
     	}
     
     $(".prebutton").click(function() {
-    	if(${month*100} < ${today}){
+    	if(${month*100} < ${today} && ${year} <= ${toyear}){
     		alert("예약할수 없는 날짜입니다.");
     	}else{
     		prepage.submit();

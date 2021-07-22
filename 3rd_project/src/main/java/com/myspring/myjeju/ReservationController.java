@@ -199,7 +199,7 @@ public class ReservationController {
 		Calendar cal = Calendar.getInstance();
 		
 		int today = (cal.get(Calendar.MONTH)+1)*100 + cal.get(Calendar.DAY_OF_MONTH);
-				
+		int toyear = cal.get(Calendar.YEAR); 
 		int year = 0;
 		int month = 0;
 		if(preyear == null && premonth == null) {
@@ -247,8 +247,16 @@ public class ReservationController {
 		
 		ArrayList<DateVO> value = calprint(year,month,maxrow);
 		
-		
-		String sMonth = String.valueOf(value.get(0).getMonth());
+		int presmonth = value.get(0).getMonth();
+		int syear = year;
+		if(presmonth>12) {
+			presmonth -= 12;
+			syear = year + 1;
+		}else if(presmonth<=0) {
+			presmonth += 12;
+			syear = year - 1;
+		}
+		String sMonth = String.valueOf(presmonth);
 		if(sMonth.length() == 1) {
 			sMonth = "0"+ sMonth;
 		}
@@ -256,18 +264,25 @@ public class ReservationController {
 		if(sDay.length() == 1) {
 			sDay = "0"+ sDay;
 		}
-		String start = year + sMonth + sDay;
-		String eMonth = String.valueOf(value.get(value.size()-1).getMonth());
+		String start = syear + sMonth + sDay;
+		int preemonth = value.get(value.size()-1).getMonth();
+		int eyear = year;
+		if(preemonth>12) {
+			preemonth -= 12;
+			eyear += 1;
+		}
+		String eMonth = String.valueOf(preemonth);
 		if(eMonth.length() == 1) {
 			eMonth = "0"+ eMonth;
 		}
+		
+		
 		String eDay = String.valueOf(value.get(value.size()-1).getDay());
 		if(eDay.length() == 1) {
 			eDay = "0"+ eDay;
 		}
 		
-		String end = year + eMonth + eDay;
-		
+		String end = eyear + eMonth + eDay;
 		ArrayList<RoomVO> searchroom = ReservationService.searchroom(start,end,hdid);
 		String[] availdate = new String[searchroom.size()];		
 		for(int i=0; i<searchroom.size(); i++) {
@@ -322,6 +337,7 @@ public class ReservationController {
 		mv.addObject("year",year);
 		mv.addObject("month",month);
 		mv.addObject("today",today);
+		mv.addObject("toyear",toyear);
 		mv.addObject("currentname",currentname);
 		return mv;
 	}

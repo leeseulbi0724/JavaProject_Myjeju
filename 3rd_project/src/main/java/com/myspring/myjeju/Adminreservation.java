@@ -259,11 +259,16 @@ public class Adminreservation {
 		String months = "";
 		if(month.length()==1) {
 			months = "0" + month;
+		}else {
+			months = month;
 		}
-		String years = year.substring(3,4);
+		String years = year.substring(2,4);
+		System.out.println("years=" + years);
+		System.out.println("months=" + months);
 		String checkmonth = years +"/"+ months;
+		System.out.println(checkmonth);
 		ArrayList<RoomVO> room = adminService.getmonthcheck(checkmonth);
-		
+		System.out.println(room.size());
 		int result = 0;
 		if(room.size() == 0) {
 			ArrayList<RoomVO> monthdate = new ArrayList<RoomVO>(); 
@@ -283,6 +288,7 @@ public class Adminreservation {
 						vo.setRdate(date);
 						vo.setAvailable("0");
 						monthdate.add(vo);
+						System.out.println(vo.getRoomid() +"/"+vo.getRdate());
 					}
 				}
 			}
@@ -300,6 +306,80 @@ public class Adminreservation {
 		mv.addObject("hdid", hdid);
 		return mv;
 	}
+	//객실 개별 룸 일괄예약
+		@RequestMapping(value="/adhouse_res_each.do",method= {RequestMethod.GET,RequestMethod.POST})
+		public ModelAndView resroomeach(String hdid, String year, String month,String roomid) {
+			ModelAndView mv = new ModelAndView();
+			ArrayList<RoomdeVO> list = adminService.gethousederoom(hdid);
+			int sum = 0;
+			int maxrow = 0;
+
+			int yeari = Integer.parseInt(year);
+			int monthi = Integer.parseInt(month);
+				
+			for (int i = 1583; i < yeari; i++) {
+				if ((i % 4 == 0 && i % 100 != 0) || i % 400 == 0) {
+					// 윤년이라면
+					sum += 2;
+				} else {
+					// 평년이라면
+					sum += 1;
+				}
+			}
+			int first = (sum + 6) % 7; // 입력한 year의 1월 1일의 요일
+			
+			int day = first % 7;
+			int maxday = day + monthDay(yeari, monthi);
+			if(maxday >= 36) {
+						maxrow = 6;
+					} else {
+						maxrow = 5;
+					}
+			
+			ArrayList<DateVO> value = calprint(yeari,monthi,maxrow);
+			String months = "";
+			if(month.length()==1) {
+				months = "0" + month;
+			}
+			String years = year.substring(3,4);
+			String checkmonth = years +"/"+ months;
+			ArrayList<RoomVO> room = adminService.getmonthcheck(checkmonth);
+			
+			int result = 0;
+			if(room.size() == 0) {
+				ArrayList<RoomVO> monthdate = new ArrayList<RoomVO>(); 
+				for(int i=0;i<value.size();i++) {	
+						RoomVO vo = new RoomVO();
+						if(value.get(i).getMonth() == monthi) {
+							String dayi = String.valueOf(value.get(i).getDay());
+							String days = "";
+							if(dayi.length() == 1) {
+								days = "0"+dayi;
+							} else {
+								days = dayi;
+							}
+							String date = year + "/" + months + "/" +days;
+							vo.setRoomid(roomid);
+							vo.setRdate(date);
+							vo.setAvailable("0");
+							monthdate.add(vo);
+						}
+				}
+				for(int i=0;i<monthdate.size();i++) {
+					//boolean result1 = adminService.insertres(monthdate.get(i));
+				}
+				result = 1;
+			} else {
+				result = 2;
+			}
+			
+			mv.setViewName("admin/adhouse_de_room");
+			mv.addObject("list", list);
+			mv.addObject("result", result);
+			mv.addObject("hdid", hdid);
+			return mv;
+		}
+
 }
 
 
