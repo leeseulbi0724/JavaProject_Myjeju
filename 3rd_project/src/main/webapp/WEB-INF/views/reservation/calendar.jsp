@@ -172,7 +172,6 @@ $(document).ready(function(){
    	     		var range = f_day + "/" + s_day;
    	     	 	var end3 = Number($(curval).children().val())*100 + Number($(curval).children("div").text());
    	     		$.fn.reset2(end3);
-   	     		alert(end3);
    	     		$(curval).children("div").css({"background-color":"#4fa9de","color":"white","border-radius":"0 20px 20px 0"});
    	     		$('[value='+ f_day +']').parent().children("div").css({"background-color":"#4fa9de","color":"white","border-radius":"20px 0 0 20px"});
    	     	 	$.fn.fillup(range);
@@ -234,7 +233,7 @@ $(document).ready(function(){
 		for(var i=deact_start; i<=today; i++) {
 	    	$('[value='+ i +']').parent().children("div").css({"color":"rgba(0,0,0,0.2)"});
 	    	}
-		$('[value='+ 1 +']').parent().children("div").css({"color":"rgba(0,0,0,0.2)"});
+		$('[value='+ -1 +']').parent().children("div").css({"color":"rgba(0,0,0,0.2)"});
     }
     $.fn.reset2 = function(end3) {
     	var end3 = Number(end3) +1;
@@ -253,7 +252,7 @@ $(document).ready(function(){
 	    		$('[value='+ i +']').parent().children("div").css({"color":"rgba(0,0,0,0.2)"});
 	    	}
     	}
-		$('[value='+ 1 +']').parent().children("div").css({"color":"rgba(0,0,0,0.2)"});
+		$('[value='+ -1 +']').parent().children("div").css({"color":"rgba(0,0,0,0.2)"});
     }
    
 });	
