@@ -111,7 +111,7 @@
 		</section>
 	
 		<section class ="setup_faq_list">
-			<a href="#" class="write" >방추가</a>
+			<a href="adhouse_de_room_write.do?hdid=${hdid}" class="write" >방추가</a>
 			<table class = "content_layout_setup_faq">
 				<tr>
 					<th> 번호 </th>

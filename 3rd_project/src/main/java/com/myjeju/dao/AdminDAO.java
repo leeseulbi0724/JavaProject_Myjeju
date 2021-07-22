@@ -102,12 +102,21 @@ public class AdminDAO {
 		List<RoomdeVO> list = sqlSession.selectList(namespace+".listdehouseroom",hdid);
 		return (ArrayList<RoomdeVO>)list;
 	}
-	public ArrayList<RoomVO> getmonthcheck(String month) {
-		List<RoomVO> list = sqlSession.selectList(namespace+".getmonthcheck",month);
+	public ArrayList<RoomVO> getmonthcheck(String month,String roomid) {
+		Map<String,String> se = new HashMap<String,String>();
+		se.put("month", month);
+		se.put("roomid", roomid);
+		List<RoomVO> list = sqlSession.selectList(namespace+".getmonthcheck",se);
 		return (ArrayList<RoomVO>)list;
 	}
 	public int insertres(RoomVO vo) {
 		return sqlSession.insert(namespace+".insertres", vo);
+	}
+	public int uploadroom(String hdid,String room_name) {
+		Map<String,String> se = new HashMap<String,String>();
+		se.put("hdid", String.valueOf(hdid));
+		se.put("room_name", room_name);
+		return sqlSession.insert(namespace+".uploadroom", se);
 	}
 	
 	//¼÷¼Ò -- °´½ÇÃß°¡

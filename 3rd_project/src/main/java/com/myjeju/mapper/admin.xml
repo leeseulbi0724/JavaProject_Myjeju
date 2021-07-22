@@ -100,13 +100,16 @@
 		</delete>
 	<!-- 관리자 객실 룸 -->	
 		<select id="listdehouseroom" parameterType="java.lang.String" resultType="com.myjeju.vo.RoomdeVO">
-			select rownum rno,hdid,roomid,room_name from myjeju_hdroom where hdid = #{hdid}
+			select rownum rno,hdid,roomid,room_name from myjeju_hdroom where hdid = #{hdid} order by room_name
 		</select>
-		<select id="getmonthcheck" parameterType="java.lang.String" resultType="com.myjeju.vo.RoomVO">
-			select * from myjeju_reservation where rdate like '%'||#{month}||'%'
+		<select id="getmonthcheck" parameterType="java.util.Map" resultType="com.myjeju.vo.RoomVO">
+			select * from myjeju_reservation where rdate like '%'||#{month}||'%' and roomid = #{roomid}
 		</select>
 		<insert id = "insertres" parameterType="com.myjeju.vo.RoomVO">
 			insert into myjeju_reservation values(#{roomid},#{rdate},#{available})
+		</insert>
+		<insert id = "uploadroom" parameterType="java.util.Map">
+		    insert into myjeju_hdroom values(#{hdid},'hdr_'||sequ_myjeju_room.nextval,#{room_name})
 		</insert>
 	<!-- 관리자 맛집 -->
 		<select id="listnumfood" parameterType="map" resultType="com.myjeju.vo.FoodVO">

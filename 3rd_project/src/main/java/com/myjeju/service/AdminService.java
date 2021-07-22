@@ -36,8 +36,10 @@ public interface AdminService {
 	
 	//包府磊 冯
 	ArrayList<RoomdeVO> gethousederoom(String hdid);
-	ArrayList<RoomVO> getmonthcheck(String month);
+	ArrayList<RoomVO> getmonthcheck(String month,String roomid);
 	boolean insertres(RoomVO vo);
+	boolean uploadroom(String hdid,String room_name);
+	
 	
 	//包府磊 咐笼
 	ArrayList<FoodVO> getlistfood(int startnum,int endnum);

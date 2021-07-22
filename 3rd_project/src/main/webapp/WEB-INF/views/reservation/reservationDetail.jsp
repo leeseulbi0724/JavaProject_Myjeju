@@ -30,11 +30,11 @@
 					<!-- The slideshow -->
 					<div class="carousel-inner">
 						<div class="carousel-item active">
-					    	<img src="http://localhost:9000/myjeju/images/house/house_detail/${himg[0].r_img}" width="100%">
+					    	<img src="http://localhost:9000/myjeju/images/house/house_detail/${img[0]}" width="100%">
 					    </div>
-						<c:forEach var="list" items="${himg}" varStatus="status" begin="1">
+						<c:forEach var="list" items="${img}" varStatus="status" begin="1">
 						<div class="carousel-item">
-					    	<img src="http://localhost:9000/myjeju/images/house/house_detail/${list.r_img}" width="100%">
+					    	<img src="http://localhost:9000/myjeju/images/house/house_detail/${list}" width="100%">
 					    </div>
 					 	</c:forEach>
 					</div>

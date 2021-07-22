@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.myjeju.service.ReservationService;
 import com.myjeju.vo.DateVO;
+import com.myjeju.vo.FoodVO;
 import com.myjeju.vo.HDetailVO;
 import com.myjeju.vo.HouseVO;
 import com.myjeju.vo.MReservationVO;
@@ -522,6 +523,9 @@ public class ReservationController {
 		f_day = year + "-" + f_month + "-" + f_day;
 		s_day = year + "-" + s_month + "-" + s_day;
 		
+		String img[] = detail.getHd_file().split(",");		
+		
+		
 		int night = comparedate(f_day,s_day);
 		int fullprice = night * detail.getHd_price();
 		mv.setViewName("reservation/reservationDetail");
@@ -538,6 +542,7 @@ public class ReservationController {
 		mv.addObject("hid",hid);
 		mv.addObject("hdid",hdid);
 		mv.addObject("himg",himg);
+		mv.addObject("img", img);
 		return mv;
 	}
 	@RequestMapping(value="/resersuccess.do", method=RequestMethod.POST)

@@ -64,8 +64,8 @@ public class AdminServiceImpl implements AdminService {
 	public ArrayList<RoomdeVO> gethousederoom(String hdid){
 		return adminDAO.gethousederoom(hdid);
 	}
-	public ArrayList<RoomVO> getmonthcheck(String month) {
-		return adminDAO.getmonthcheck(month);
+	public ArrayList<RoomVO> getmonthcheck(String month,String roomid) {
+		return adminDAO.getmonthcheck(month,roomid);
 	}
 	public boolean insertres(RoomVO vo) {
 		int val = adminDAO.insertres(vo);
@@ -75,7 +75,15 @@ public class AdminServiceImpl implements AdminService {
 		}
 		return result;
 	}
-	
+	@Override
+	public boolean uploadroom(String hdid,String room_name) {
+		int val = adminDAO.uploadroom(hdid,room_name);
+		boolean result = false;
+		if (val!=0) {
+			result = true;
+		}
+		return result;
+	}
 	//°ü¸®ÀÚ °´½Ç
 	public ArrayList<HDetailVO> gethousede(String hid){
 		return adminDAO.gethousede(hid);

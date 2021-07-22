@@ -267,10 +267,17 @@ public class Adminreservation {
 		System.out.println("months=" + months);
 		String checkmonth = years +"/"+ months;
 		System.out.println(checkmonth);
-		ArrayList<RoomVO> room = adminService.getmonthcheck(checkmonth);
-		System.out.println(room.size());
+		ArrayList<RoomdeVO> list1 = adminService.gethousederoom(hdid);
+		
+		int checksize = 0;
+		for(int i =0;i<list1.size();i++) {
+		ArrayList<RoomVO> room = adminService.getmonthcheck(checkmonth , list1.get(i).getRoomid());
+		checksize += room.size();
+		}
+		
+		System.out.println("roomsize="+checksize);
 		int result = 0;
-		if(room.size() == 0) {
+		if(checksize == 0) {
 			ArrayList<RoomVO> monthdate = new ArrayList<RoomVO>(); 
 			for(int i=0;i<value.size();i++) {	
 				for(int j =0; j<list.size();j++) {
@@ -343,7 +350,9 @@ public class Adminreservation {
 			}
 			String years = year.substring(3,4);
 			String checkmonth = years +"/"+ months;
-			ArrayList<RoomVO> room = adminService.getmonthcheck(checkmonth);
+			
+			
+			ArrayList<RoomVO> room = adminService.getmonthcheck(checkmonth , roomid);
 			
 			int result = 0;
 			if(room.size() == 0) {
@@ -376,6 +385,25 @@ public class Adminreservation {
 			mv.setViewName("admin/adhouse_de_room");
 			mv.addObject("list", list);
 			mv.addObject("result", result);
+			mv.addObject("hdid", hdid);
+			return mv;
+		}
+		
+		//·ë write
+		@RequestMapping(value="/adhouse_de_room_write.do",method= {RequestMethod.GET,RequestMethod.POST})
+		public ModelAndView toroomwrite(String hdid) {
+			ModelAndView mv = new ModelAndView();
+			
+			mv.setViewName("admin/adhouse_de_room_write");
+			mv.addObject("hdid", hdid);
+			return mv;
+		}
+		//·ë DB write
+		@RequestMapping(value="/adhouse_de_room_write_proc.do",method= {RequestMethod.GET,RequestMethod.POST})
+		public ModelAndView toroomwritedb(String hdid,String room_name) {
+			ModelAndView mv = new ModelAndView();
+			boolean result = adminService.uploadroom(hdid,room_name);
+			mv.setViewName("redirect:/adhouse_de_room.do");
 			mv.addObject("hdid", hdid);
 			return mv;
 		}
