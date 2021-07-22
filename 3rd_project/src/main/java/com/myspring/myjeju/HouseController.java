@@ -37,7 +37,7 @@ public class HouseController {
 		String id = (String) session.getAttribute("session_id");	
 
 		
-		ArrayList<HouseVO> list = houseService.getHouseList();		
+		ArrayList<HouseVO> list = houseService.getHouseList(1,5);		
 		ArrayList<HouseVO> toplist = houseService.getHouseListTop3();
 		
 		if (id != null) {

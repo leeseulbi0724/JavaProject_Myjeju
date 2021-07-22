@@ -36,7 +36,7 @@ public class CafeController {
 		String id = (String) session.getAttribute("session_id");	
 		
 		
-		ArrayList<CafeVO> list = cafeService.getCafeList();
+		ArrayList<CafeVO> list = cafeService.getCafeList(1,5);
 		ArrayList<CafeVO> toplist = cafeService.getCafeListTop3();
 		
 		if (id != null) {
@@ -147,9 +147,11 @@ public class CafeController {
 		if(!pnum.equals("")) { 
 			pageNumber = Integer.parseInt(pnum) +1;
 		}
-		
+		System.out.println(pageNumber);
 		int startnum = ((pageNumber-1)*5) +1;
 		int endnum = pageNumber*5; 
+		System.out.println(startnum);
+		System.out.println(endnum);
 		
 		
 		ArrayList<CafeVO> list = cafeService.getCafeList(startnum, endnum);
@@ -160,13 +162,13 @@ public class CafeController {
 		
 		for(CafeVO vo : list) {
 			JsonObject jobj = new JsonObject();
-			jobj.addProperty("tid", vo.getCaid());
-			jobj.addProperty("t_name", vo.getCa_name());
-			jobj.addProperty("t_addr", vo.getCa_addr());
-			jobj.addProperty("t_hp", vo.getCa_hp());
-			jobj.addProperty("t_image", vo.getCa_image1());
-			jobj.addProperty("t_vpoint", vo.getCa_vpoint());
-			jobj.addProperty("t_hpoint", vo.getCa_hpoint());
+			jobj.addProperty("caid", vo.getCaid());
+			jobj.addProperty("ca_name", vo.getCa_name());
+			jobj.addProperty("ca_addr", vo.getCa_addr());
+			jobj.addProperty("ca_hp", vo.getCa_hp());
+			jobj.addProperty("ca_image", vo.getCa_image1());
+			jobj.addProperty("ca_vpoint", vo.getCa_vpoint());
+			jobj.addProperty("ca_hpoint", vo.getCa_hpoint());
 			
 			jlist.add(jobj);
 		}

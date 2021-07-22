@@ -35,7 +35,7 @@ public class FoodController {
 		//로그인 회원정보 가져오기
 		String id = (String) session.getAttribute("session_id");	
 		
-		ArrayList<FoodVO> list = foodService.getFoodList(); 
+		ArrayList<FoodVO> list = foodService.getFoodList(1,5); 
 		ArrayList<FoodVO> toplist = foodService.getFoodListTop3();
 		
 		if (id != null) {
