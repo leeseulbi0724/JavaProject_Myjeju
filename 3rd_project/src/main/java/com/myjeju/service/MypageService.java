@@ -1,9 +1,11 @@
 package com.myjeju.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.myjeju.vo.BasketVO;
 import com.myjeju.vo.CommunityVO;
+import com.myjeju.vo.HeartVO;
 import com.myjeju.vo.MemberVO;
 import com.myjeju.vo.OrderVO;
 import com.myjeju.vo.PointVO;
@@ -47,5 +49,11 @@ public interface MypageService {
 	ArrayList<OrderVO> getDayResult(OrderVO vo);
 	boolean getReservationResult(OrderVO vo);
 	boolean getOrderDelete(String rid);
+	
+	ArrayList<HeartVO> getHouseHeartList(String id);
+	ArrayList<HeartVO> getFoodHeartList(String id);
+	ArrayList<HeartVO> getCafeHeartList(String id);
+	ArrayList<HeartVO> getTravelHeartList(String id);
+	
 	
 }

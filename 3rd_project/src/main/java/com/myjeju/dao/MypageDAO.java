@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.myjeju.vo.BasketVO;
 import com.myjeju.vo.CommunityVO;
+import com.myjeju.vo.HeartVO;
 import com.myjeju.vo.MemberVO;
 import com.myjeju.vo.OrderVO;
 import com.myjeju.vo.PointVO;
@@ -161,6 +162,30 @@ public class MypageDAO {
 	 */
 	public int getOrderDelete(String rid) {
 		return sqlSession.delete(namespace+".order_delete", rid);
+	}
+	
+	/** 좋아요 내역 - house **/
+	public ArrayList<HeartVO> getHouseHeartList(String id) {
+		List<HeartVO> list = sqlSession.selectList(namespace+".house_heart", id);
+		return (ArrayList<HeartVO>) list;
+	}
+	
+	/** 좋아요 내역 - food **/
+	public ArrayList<HeartVO> getFoodHeartList(String id) {
+		List<HeartVO> list = sqlSession.selectList(namespace+".food_heart", id);
+		return (ArrayList<HeartVO>) list;
+	}
+	
+	/** 좋아요 내역 - cafe **/
+	public ArrayList<HeartVO> getCafeHeartList(String id) {
+		List<HeartVO> list = sqlSession.selectList(namespace+".cafe_heart", id);
+		return (ArrayList<HeartVO>) list;
+	}
+	
+	/** 좋아요 내역 - travel **/
+	public ArrayList<HeartVO> getTravelHeartList(String id) {
+		List<HeartVO> list = sqlSession.selectList(namespace+".travel_heart", id);
+		return (ArrayList<HeartVO>) list;
 	}
 	
 	

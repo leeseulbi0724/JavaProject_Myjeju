@@ -143,4 +143,24 @@
 			delete from myjeju_member_reservation where rid=#{rid}
 		</delete>
 		
+		<!-- 하트 내역 - house -->
+		<select id="house_heart" parameterType="java.lang.String" resultType="com.myjeju.vo.HeartVO">
+			select id, hid from myjeju_h_heart where id=#{id}
+		</select>
+		
+		<!-- 하트 내역 - food -->
+		<select id="food_heart" parameterType="java.lang.String" resultType="com.myjeju.vo.HeartVO">
+			select id, fid from myjeju_f_heart where id=#{id}
+		</select>
+		
+		<!-- 하트 내역 - cafe -->
+		<select id="cafe_heart" parameterType="java.lang.String" resultType="com.myjeju.vo.HeartVO">
+			select id, caid from myjeju_ca_heart where id=#{id}
+		</select>
+		
+		<!-- 하트 내역 - travel -->
+		<select id="travel_heart" parameterType="java.lang.String" resultType="com.myjeju.vo.HeartVO">
+			select id, tid from myjeju_t_heart where id=#{id}
+		</select>
+		
     </mapper>

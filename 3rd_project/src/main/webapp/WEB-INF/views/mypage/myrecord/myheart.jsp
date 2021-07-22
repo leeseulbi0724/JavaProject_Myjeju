@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+    <c:set var = "house" value = "${fn:length(h_list) }" />
+    <c:set var = "cafe" value = "${fn:length(ca_list) }" />
+    <c:set var = "food" value = "${fn:length(f_list) }" />
+    <c:set var = "travel" value = "${fn:length(t_list) }" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,7 +33,7 @@
 	p>span { font-weight:bold; }
 	
 	.list_box { margin-top:40px; text-align:center; }
-	.list_box>div { display:inline-block; border:1px solid lightgray; width:200px; height:200px; }
+	.list_box>div { display:inline-block; border:1px solid lightgray; width:200px; height:200px; margin-top:50px; }
 	
 	.btn_style5{
 		width:65px;
@@ -58,29 +64,33 @@
 <section>
 	<div class="center">
 		<div><h3>My 좋아요</h3></div>		
-		<p>총 <span>4건</span></p>
+		<p>총 <span>${house+cafe+travel+food }건</span></p>
 		<div class="list_box">
-			<div>
-				<img src="http://localhost:9000/myjeju/images/travel/성산일출봉.jpg" width=100% height=100% >
-				<button type="button" class="btn_style" id="heart_btn"><img src="http://localhost:9000/myjeju/images/travel/empty_heart.png">452</button>
-			</div>
-			<div>
-				<img src="http://localhost:9000/myjeju/images/travel/한라산.jpg" width=100% height=100% >
-				<button type="button" class="btn_style" id="heart_btn"><img src="http://localhost:9000/myjeju/images/travel/empty_heart.png">452</button>
-			</div>
-			<div>
-				<img src="http://localhost:9000/myjeju/images/travel/사려니숲길.jpg" width=100% height=100% >
-				<button type="button" class="btn_style" id="heart_btn"><img src="http://localhost:9000/myjeju/images/travel/empty_heart.png">452</button>
-			</div>
-			<div>
-				<img src="http://localhost:9000/myjeju/images/no2.jpg" width=100% height=100% >
-				<button type="button" class="btn_style" id="heart_btn"><img src="http://localhost:9000/myjeju/images/travel/empty_heart.png">452</button>
-			</div>
-		</div>
-		<button type="button" class="btn_style5" id="more_btn">more
-			<img src="http://localhost:9000/myjeju/images/travel/bill_list_btn2.png">
-			<img src="http://localhost:9000/myjeju/images/travel/bill_list_btn.png">
-		</button>
+			<c:forEach var = "vo"  items="${h_list}">
+				<div>
+					<img src="http://localhost:9000/myjeju/images/house/${vo.h_img }" width=100% height=100% >
+					<button type="button" class="btn_style" id="heart_btn"><img src="http://localhost:9000/myjeju/images/house/red_heart.png">${vo.h_like }</button>
+				</div>
+			</c:forEach>
+			<c:forEach var = "vo"  items="${f_list}">
+				<div>
+					<img src="http://localhost:9000/myjeju/images/food/${vo.f_image1 }" width=100% height=100% >
+					<button type="button" class="btn_style" id="heart_btn"><img src="http://localhost:9000/myjeju/images/house/red_heart.png">${vo.f_like }</button>
+				</div>
+			</c:forEach>
+			<c:forEach var = "vo"  items="${ca_list}">
+				<div>
+					<img src="http://localhost:9000/myjeju/images/cafe/${vo.ca_image1 }" width=100% height=100% >
+					<button type="button" class="btn_style" id="heart_btn"><img src="http://localhost:9000/myjeju/images/house/red_heart.png">${vo.ca_like }</button>
+				</div>				
+			</c:forEach>
+			<c:forEach var = "vo"  items="${t_list}">
+				<div>
+					<img src="http://localhost:9000/myjeju/images/travel/${vo.t_image1 }" width=100% height=100% >
+					<button type="button" class="btn_style" id="heart_btn"><img src="http://localhost:9000/myjeju/images/house/red_heart.png">${vo.t_like }</button>
+				</div>
+			</c:forEach>
+		</div>	
 	</div>
 </section>
 

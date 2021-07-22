@@ -9,6 +9,7 @@ import com.myjeju.dao.BasketDAO;
 import com.myjeju.dao.MypageDAO;
 import com.myjeju.vo.BasketVO;
 import com.myjeju.vo.CommunityVO;
+import com.myjeju.vo.HeartVO;
 import com.myjeju.vo.MemberVO;
 import com.myjeju.vo.OrderVO;
 import com.myjeju.vo.PointVO;
@@ -203,6 +204,19 @@ public class MypageServiceImpl implements MypageService {
 			result = true;
 		}
 		return result;
+	}
+	
+	public ArrayList<HeartVO> getHouseHeartList(String id) {
+		return mypageDAO.getHouseHeartList(id);
+	}
+	public ArrayList<HeartVO> getFoodHeartList(String id) {
+		return mypageDAO.getFoodHeartList(id);
+	}
+	public ArrayList<HeartVO> getCafeHeartList(String id) {
+		return mypageDAO.getCafeHeartList(id);
+	}
+	public ArrayList<HeartVO> getTravelHeartList(String id) {
+		return mypageDAO.getTravelHeartList(id);
 	}
 	
 	

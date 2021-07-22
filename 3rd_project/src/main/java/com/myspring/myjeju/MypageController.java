@@ -12,15 +12,24 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.myjeju.service.CafeService;
+import com.myjeju.service.FoodService;
+import com.myjeju.service.HouseService;
 import com.myjeju.service.MemberService;
 import com.myjeju.service.MypageService;
+import com.myjeju.service.TravelService;
 import com.myjeju.vo.BasketVO;
+import com.myjeju.vo.CafeVO;
 import com.myjeju.vo.CommunityVO;
+import com.myjeju.vo.FoodVO;
+import com.myjeju.vo.HeartVO;
+import com.myjeju.vo.HouseVO;
 import com.myjeju.vo.MemberVO;
 import com.myjeju.vo.OrderVO;
 import com.myjeju.vo.PointVO;
 import com.myjeju.vo.StorevVO;
 import com.myjeju.vo.TravelReviewVO;
+import com.myjeju.vo.TravelVO;
 
 @Controller
 public class MypageController {
@@ -30,6 +39,18 @@ public class MypageController {
 
 	@Autowired
 	private MemberService memberService;
+	
+	@Autowired
+	private HouseService HouseService;
+	
+	@Autowired
+	private FoodService FoodService;
+	
+	@Autowired
+	private TravelService TravelService;
+	
+	@Autowired
+	private CafeService CafeService;
 
 	/**
 	 * 마이페이지 메인
@@ -257,8 +278,44 @@ public class MypageController {
 	 * 나의 좋아요
 	 */
 	@RequestMapping(value = "/myheart.do", method = RequestMethod.GET)
-	public String myheart() {
-		return "mypage/myrecord/myheart";
+	public ModelAndView myheart(HttpSession session) {
+		// 로그인 회원정보 가져오기
+		String id = (String) session.getAttribute("session_id");
+		
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("mypage/myrecord/myheart");
+		
+		ArrayList<HeartVO> h_list = MypageService.getHouseHeartList(id);
+		for (int i=0; i<h_list.size(); i++) {
+			HouseVO vo = HouseService.getHouseDetail(h_list.get(i).getHid());
+			h_list.get(i).setH_img(vo.getH_img());
+			h_list.get(i).setH_like(vo.getH_like());
+		}
+		ArrayList<HeartVO> f_list = MypageService.getFoodHeartList(id);
+		for (int i=0; i<f_list.size(); i++) {
+			FoodVO vo = FoodService.getFoodDetail(f_list.get(i).getFid());
+			f_list.get(i).setF_image1(vo.getF_image1());
+			f_list.get(i).setF_like(vo.getF_like());
+		}
+		ArrayList<HeartVO> ca_list = MypageService.getCafeHeartList(id);
+		for (int i=0; i<ca_list.size(); i++) {
+			CafeVO vo = CafeService.getCafeDetail(ca_list.get(i).getCaid());
+			ca_list.get(i).setCa_image1(vo.getCa_image1());
+			ca_list.get(i).setCa_like(vo.getCa_like());
+		}
+		ArrayList<HeartVO> t_list = MypageService.getTravelHeartList(id);
+		for (int i=0; i<t_list.size(); i++) {
+			TravelVO vo = TravelService.getTravelDetail(t_list.get(i).getTid());
+			t_list.get(i).setT_image1(vo.getT_image1());
+			t_list.get(i).setT_like(vo.getT_like());
+		}
+		
+		mv.addObject("h_list", h_list);
+		mv.addObject("f_list", f_list);
+		mv.addObject("ca_list", ca_list);
+		mv.addObject("t_list", t_list);
+		
+		return mv;
 	}
 
 	/**
