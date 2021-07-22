@@ -103,14 +103,14 @@ $(document).ready(function(){
     }
     
     $(".days,.days_sun,.days_sat").click(function() {
-    	if($(this).children('.dayval').val() > ${today}){
-			$.fn.myFunction(this);
-    	}else{
+    	if($(this).children('.dayval').val() < ${today} && ${year} <= ${toyear}){
     		alert("예약할수 없는 날짜 입니다.");
+    	}else{
+			$.fn.myFunction(this);
     	}
     });
-
-    $('[value='+ 1 +']').parent().children("div").css({"color":"rgba(0,0,0,0.2)"});
+    
+    $('[value='+ -1 +']').parent().children("div").css({"color":"rgba(0,0,0,0.2)"});
     
     $.fn.myFunction = function(curval) {
   		if(f_day == 0){
@@ -172,6 +172,7 @@ $(document).ready(function(){
    	     		var range = f_day + "/" + s_day;
    	     	 	var end3 = Number($(curval).children().val())*100 + Number($(curval).children("div").text());
    	     		$.fn.reset2(end3);
+   	     		alert(end3);
    	     		$(curval).children("div").css({"background-color":"#4fa9de","color":"white","border-radius":"0 20px 20px 0"});
    	     		$('[value='+ f_day +']').parent().children("div").css({"background-color":"#4fa9de","color":"white","border-radius":"20px 0 0 20px"});
    	     	 	$.fn.fillup(range);
@@ -183,7 +184,9 @@ $(document).ready(function(){
     var today = ${today};
     
     for(var i=deact_start; i<=today; i++) {
-    	$('[value='+ i +']').parent().children("div").css({"color":"rgba(0,0,0,0.2)"});
+    	if(${year} <= ${toyear}) {
+    		$('[value='+ i +']').parent().children("div").css({"color":"rgba(0,0,0,0.2)"});
+    		}
     	}
     
     $(".prebutton").click(function() {
@@ -245,9 +248,11 @@ $(document).ready(function(){
     	}
 		$('.days_sun').children("div").css({"color":"red"});
 		$('.days_sat').children("div").css({"color":"blue"});
-		for(var i=deact_start; i<=today; i++) {
-	    	$('[value='+ i +']').parent().children("div").css({"color":"rgba(0,0,0,0.2)"});
+		if(${year} <= ${toyear}){
+			for(var i=deact_start; i<=today; i++) {
+	    		$('[value='+ i +']').parent().children("div").css({"color":"rgba(0,0,0,0.2)"});
 	    	}
+    	}
 		$('[value='+ 1 +']').parent().children("div").css({"color":"rgba(0,0,0,0.2)"});
     }
    

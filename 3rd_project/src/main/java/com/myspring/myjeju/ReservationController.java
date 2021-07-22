@@ -81,8 +81,18 @@ public class ReservationController {
 					} else {
 						// 시작 일에 도달 전에는 공백
 						date.setDay(pre_day);
-						date.setMonth(month-1);
 						
+						int setmonth = month-1;
+						int syear = year;
+						if(setmonth <= 0) {
+							setmonth +=12;
+							syear = year -1;
+						}else if(setmonth >12) {
+							setmonth -=12;
+							syear = year + 1;
+						}
+						date.setMonth(setmonth);
+						date.setYear(syear);
 						calv.add(date);
 						pre_day++;
 						continue;
@@ -91,13 +101,22 @@ public class ReservationController {
 				if(num <= max) {
 					date.setDay(num);
 					date.setMonth(month);
-					
+					date.setYear(year);
 					calv.add(date);
 					num++;
 				}else {
 					date.setDay(next_day);
-					date.setMonth(month+1);
-					
+					int setmonth1 = month+1;
+					int syear1 = year;
+					if(setmonth1 <= 0) {
+						setmonth1 +=12;
+						syear1 = year - 1;
+					}else if(setmonth1 >12) {
+						setmonth1 -=12;
+						syear1 = year + 1;
+					}
+					date.setMonth(setmonth1);
+					date.setYear(syear1);
 					calv.add(date);
 					next_day++;
 				}
@@ -246,9 +265,8 @@ public class ReservationController {
 				}
 		
 		ArrayList<DateVO> value = calprint(year,month,maxrow);
-		
 		int presmonth = value.get(0).getMonth();
-		int syear = year;
+		int syear = value.get(0).getYear();
 		if(presmonth>12) {
 			presmonth -= 12;
 			syear = year + 1;
@@ -264,18 +282,23 @@ public class ReservationController {
 		if(sDay.length() == 1) {
 			sDay = "0"+ sDay;
 		}
+		
 		String start = syear + sMonth + sDay;
+		
 		int preemonth = value.get(value.size()-1).getMonth();
-		int eyear = year;
+		int eyear = value.get(value.size()-1).getYear();
 		if(preemonth>12) {
 			preemonth -= 12;
 			eyear += 1;
+		}else if(preemonth<=0) {
+			preemonth += 12;
+			eyear -= 1;
+			
 		}
 		String eMonth = String.valueOf(preemonth);
 		if(eMonth.length() == 1) {
 			eMonth = "0"+ eMonth;
 		}
-		
 		
 		String eDay = String.valueOf(value.get(value.size()-1).getDay());
 		if(eDay.length() == 1) {
@@ -283,11 +306,19 @@ public class ReservationController {
 		}
 		
 		String end = eyear + eMonth + eDay;
+		
+		System.out.println(start);
+		System.out.println(end);
 		ArrayList<RoomVO> searchroom = ReservationService.searchroom(start,end,hdid);
+		
+		
+		
 		String[] availdate = new String[searchroom.size()];		
 		for(int i=0; i<searchroom.size(); i++) {
 			availdate[i] = searchroom.get(i).getRdate();
 		}
+		
+		
 		ArrayList<String> arrayList = new ArrayList<String>();
 		for(String item : availdate){
             if(!arrayList.contains(item))
@@ -302,7 +333,17 @@ public class ReservationController {
 		ArrayList<String> availlast1 = new ArrayList<String>();
 		
 		for(int i = 0;i<value.size();i++) {
-			String sMonth1 = String.valueOf(value.get(i).getMonth());
+			int smonth2 = value.get(i).getMonth();
+			int syear1 = value.get(i).getYear();
+			if(smonth2<=0) {
+				smonth2 +=12;
+				syear1 -=1;
+			}else if (smonth2>12) {
+				smonth2 -=12;
+				syear1 +=1;
+			}
+			
+			String sMonth1 = String.valueOf(smonth2);
 			if(sMonth1.length() == 1) {
 				sMonth1 = "0"+ sMonth1;
 			}
@@ -310,9 +351,12 @@ public class ReservationController {
 			if(sDay1.length() == 1) {
 				sDay1 = "0"+ sDay1;
 			}
-			String start1 = year + sMonth1 + sDay1;
+			String start1 = syear1 + sMonth1 + sDay1;
 			availlast1.add(start1);
 		}
+		
+		
+	
 		
 		ArrayList<Integer> availlast = new ArrayList<Integer>();
 		for(int i = 0;i<value.size();i++) {
@@ -324,9 +368,16 @@ public class ReservationController {
 				}
 			}
 			if(!check) {
-				availlast.add(1);
+				availlast.add(-1);
 			}
 		}
+		
+		
+		for(int i=0;i<availlast.size();i++) {
+			System.out.println(availlast1.get(i));
+			System.out.println(availlast.get(i));
+		}
+		
 		
 		mv.setViewName("reservation/calendar");
 		mv.addObject("calvalue",value);
