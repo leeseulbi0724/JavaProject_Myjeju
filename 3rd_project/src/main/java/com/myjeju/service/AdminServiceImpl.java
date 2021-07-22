@@ -133,6 +133,29 @@ public class AdminServiceImpl implements AdminService {
 		}
 		return result;
 	}
+	@Override
+	public FoodVO getFoodcontent(String fid) {
+		return adminDAO.getFoodcontent(fid);
+	}
+	@Override
+	public boolean getFoodUpdate(FoodVO vo) {
+		int val = adminDAO.getFoodUpdate(vo);
+		boolean result = false;
+		if (val != 0) {
+			result = true;
+		}
+		return result;
+		
+	}
+	@Override
+	public boolean getFoodDelete(String fid) {
+		int val = adminDAO.getFoodDelete(fid);
+		boolean result = false;
+		if (val != 0) {
+			result = true;
+		}
+		return result;
+	}
 	//관리자 여행지
 	@Override
 	public ArrayList<TravelVO> getlisttravel(int startnum,int endnum){

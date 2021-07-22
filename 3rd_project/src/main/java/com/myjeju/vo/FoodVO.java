@@ -1,12 +1,18 @@
 package com.myjeju.vo;
 
 public class FoodVO {
-	String fid, f_name, f_tag, f_infor, f_infor2, f_addr, f_vpoint, f_hpoint, f_hp, f_addr1, f_addr2, f_file, f_sfile, 
+	String fid, f_name, f_tag, f_infor, f_infor2, f_addr, f_vpoint, f_hpoint, f_hp, f_addr1, f_addr2, f_file, f_sfile, old_name, 
 	f_image1, f_image2, f_image3, f_image4, f_image5;
 	int rno, f_like, status;
 	
 	
 	
+	public String getOld_name() {
+		return old_name;
+	}
+	public void setOld_name(String old_name) {
+		this.old_name = old_name;
+	}
 	public String getF_file() {
 		return f_file;
 	}

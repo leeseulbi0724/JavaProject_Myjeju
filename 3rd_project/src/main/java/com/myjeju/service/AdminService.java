@@ -45,6 +45,9 @@ public interface AdminService {
 	int targetfoodPage(int pageNumber);
 	int targetfoodPage(int pageNumber,String search,String search_text);
 	boolean getFoodUpload(FoodVO vo);
+	FoodVO getFoodcontent(String fid);
+	boolean getFoodUpdate(FoodVO vo);
+	boolean getFoodDelete(String fid);
 	
 	//관리자 여행지
 	ArrayList<TravelVO> getlisttravel(int startnum,int endnum);

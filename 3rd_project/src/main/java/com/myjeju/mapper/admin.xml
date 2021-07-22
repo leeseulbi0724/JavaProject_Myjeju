@@ -130,6 +130,15 @@
 		<insert id="food_upload" parameterType="com.myjeju.vo.FoodVO" >
 			insert into myjeju_food values('f_'||sequ_myjeju_food.nextval,#{f_name},#{f_tag},#{f_infor},#{f_infor2},#{f_addr},#{f_vpoint},#{f_hpoint},#{f_hp},0,#{f_file},#{f_sfile} )
 		</insert>
+		<select id= "food_content" parameterType="java.lang.String" resultType="com.myjeju.vo.FoodVO">
+			select * from myjeju_food where fid=#{fid}
+		</select>
+		<update id="food_update" parameterType="com.myjeju.vo.FoodVO">
+			update myjeju_food set f_name = #{f_name}, f_tag=#{f_tag}, f_infor=#{f_infor}, f_infor2=#{f_infor2}, f_addr=#{f_addr}, f_vpoint=#{f_vpoint}, f_hpoint=#{f_hpoint}, f_hp=#{f_hp}, f_file = #{f_file}, f_sfile=#{f_sfile} where fid=#{fid}
+		</update>
+		<delete id="food_delete" parameterType="java.lang.String">
+			delete from myjeju_food where fid=#{fid}
+		</delete>
 		<!-- 관리자 여행지 -->
 		<select id="listnumtravel" parameterType="map" resultType="com.myjeju.vo.TravelVO">
 			select rno, tid, t_name, t_tag, t_infor, t_infor2, t_addr, t_vpoint, t_hpoint, t_hp, t_like, t_image1, t_image2, t_image3, t_image4, t_image5

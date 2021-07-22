@@ -156,6 +156,18 @@ public class AdminDAO {
 	public int getFoodUpload(FoodVO vo) {
 		return sqlSession.insert(namespace+".food_upload", vo);
 	}
+	//음식점 상세보기
+	public FoodVO getFoodcontent(String fid) {
+		return sqlSession.selectOne(namespace+".food_content", fid);
+	}
+	//음식점 - 업데이트
+	public int getFoodUpdate(FoodVO vo) {
+		return sqlSession.update(namespace+".food_update", vo);
+	}
+	//음식점 - 삭제
+	public int getFoodDelete(String fid) {
+		return sqlSession.delete(namespace+".food_delete", fid);
+	}
 	
 	//여행지 리스트 가져오기
 	public ArrayList<TravelVO> getlisttravel(int startnum, int endnum) {

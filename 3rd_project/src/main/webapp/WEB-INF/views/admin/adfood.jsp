@@ -83,7 +83,7 @@
 				<tr>
 					<td>${vo.rno}</td>
 					<td>${vo.fid}</td>
-					<td>${vo.f_name}</td>
+					<td><a href="adfood_content.do?fid=${vo.fid}">${vo.f_name}</a></td>
 					<td>${vo.f_hp}</td>
 					<td>${vo.f_like}</td>
 				</tr>

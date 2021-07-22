@@ -32,10 +32,10 @@ import com.myjeju.vo.TravelVO;
 public class AdminController {
 
 	@Autowired
-	private AdminService adminService;
-	
+	private AdminService adminService;	
 	@Autowired
 	private CommunityService communityService;
+	
 
 	//메인 화면 가기
 	@RequestMapping(value="/adminindex.do", method=RequestMethod.GET)
@@ -388,6 +388,128 @@ public class AdminController {
 			mv.setViewName("redirect:/adfood.do");
 			return mv;
 			
+		}
+		
+		//음식점 상세
+		@RequestMapping(value="/adfood_content.do",method= {RequestMethod.GET,RequestMethod.POST})
+		public ModelAndView adfood_content(String fid) {
+			ModelAndView mv = new ModelAndView();
+			FoodVO vo = adminService.getFoodcontent(fid);
+			String img[] = vo.getF_sfile().split(",");		
+			
+			mv.addObject("vo", vo);
+			mv.addObject("img", img);
+			mv.setViewName("admin/adfood_content");
+			return mv;
+		}
+		
+		//음식점수정
+		@RequestMapping(value="/adfood_update.do",method= {RequestMethod.GET,RequestMethod.POST})
+		public ModelAndView adfood_update(String fid) {
+			ModelAndView mv = new ModelAndView();
+			FoodVO vo = adminService.getFoodcontent(fid);
+			String file[] = vo.getF_file().split(",");
+			String sfile[] = vo.getF_sfile().split(",");	
+			ArrayList<FoodVO> list = new ArrayList<FoodVO>();
+			for (int i=0; i<sfile.length; i++) {
+				FoodVO fvo = new FoodVO();
+				fvo.setF_file(file[i]);
+				fvo.setF_sfile(sfile[i]);				
+				list.add(fvo);				
+			}			
+			mv.addObject("vo", vo);
+			mv.addObject("list", list);
+			mv.setViewName("admin/adfood_update");
+			return mv;
+		}
+		
+		//음식점 수정하기 DB
+		@RequestMapping(value="/adfood_update_proc.do", method= {RequestMethod.GET,RequestMethod.POST})
+		public ModelAndView adfood_update_proc(MultipartHttpServletRequest request, @RequestParam("file") MultipartFile[] file) throws Exception {
+			ModelAndView mv = new ModelAndView();
+			
+			System.out.println("파일이름" + request.getParameter("f_file"));
+			System.out.print("파일경로" + request.getParameter("f_sfile"));
+			
+			String fileOldName=request.getParameter("f_file");
+			String fileOldRoot = request.getParameter("f_sfile");
+			
+			String root_path = request.getSession().getServletContext().getRealPath("/");
+			System.out.print(root_path);
+			String attach_path = "\\resources\\images\\food\\food_detail\\";
+			String fileOriginName = ""; 
+			String fileMultiName = "";
+			String fileMultiUplodaName= "";
+			
+			UUID uuid = UUID.randomUUID();
+			
+			System.out.print(file.length);
+
+			for(int i=0; i<file.length; i++) { 
+				fileOriginName = file[i].getOriginalFilename(); 
+				System.out.println("기존 파일명 : "+fileOriginName); 
+				File f = new File(root_path + attach_path + uuid +"_"+ fileOriginName); 
+				file[i].transferTo(f);
+				if (fileOriginName != "") {
+					if(i==0) { 
+						fileMultiName += fileOriginName; 
+						fileMultiUplodaName += uuid +"_"+fileOriginName;
+					} else { 
+						fileMultiName += ","+fileOriginName; 
+						fileMultiUplodaName += "," + uuid +"_"+fileOriginName;
+					} 
+				}
+			}
+			
+			String old_name = request.getParameter("old_name");
+			String old[] = old_name.split(",");
+			for (int i=0; i<old.length; i++) {
+				File old_file = new File(root_path+attach_path+old[i]);
+				if ( old_file.exists()) {
+					old_file.delete();
+				}
+			}
+
+			FoodVO vo = new FoodVO();
+			vo.setF_file(fileOldName+fileMultiName);
+			vo.setF_sfile(fileOldRoot+fileMultiUplodaName);
+			vo.setF_name(request.getParameter("f_name"));
+			vo.setF_tag(request.getParameter("f_tag"));
+			vo.setF_infor(request.getParameter("f_infor"));
+			vo.setF_infor2(request.getParameter("f_infor2"));
+			vo.setF_addr(request.getParameter("f_addr"));
+			vo.setF_vpoint(request.getParameter("f_vpoint"));
+			vo.setF_hpoint(request.getParameter("f_hpoint"));
+			vo.setF_hp(request.getParameter("f_hp"));
+			vo.setFid(request.getParameter("fid"));
+			
+			boolean result = adminService.getFoodUpdate(vo);
+			
+			mv.setViewName("redirect:/adfood_content.do?fid="+vo.getFid());
+			return mv;
+		}
+		//음식점 삭제
+		@ResponseBody
+		@RequestMapping(value = "/adfood_delete.do", method=RequestMethod.POST)
+		public boolean adfood_delete(HttpServletRequest request) {
+			String fid = request.getParameter("fid");			
+			String root_path = request.getSession().getServletContext().getRealPath("/");
+			String attach_path = "\\resources\\images\\food\\food_detail\\";
+			
+			FoodVO vo = adminService.getFoodcontent(fid);
+			
+			String old_name = vo.getF_sfile();
+			String old[] = old_name.split(",");
+			for (int i=0; i<old.length; i++) {
+				File old_file = new File(root_path+attach_path+old[i]);
+				if ( old_file.exists()) {
+					old_file.delete();
+				}
+			}
+			
+			boolean result = adminService.getFoodDelete(fid);
+			
+			return result;
 		}
 		
 		
