@@ -14,36 +14,7 @@
 	<script src="js/bootstrap.js"></script>
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script src="http://localhost:9000/myjeju/js/address.js"></script>
-	<script type="text/javascript">
-		
-		/* function registerCheckFunction() {
-			var userID = $('#userID').val();
-			$.ajax({
-				type: 'POST',
-				url: './UserRegisterCheckServlet',
-				data: {userID : userID},
-				success: function(result) {
-					if(result == 1) {
-						$('#checkMessage').html('사용할 수 있는 아이디입니다.');
-						$('#checkType').attr('class', 'modal-content panel-success');
-					} else {
-						$('#checkMessage').html('사용할 수 없는 아이디입니다.');
-						$('#checkType').attr('class', 'modal-content panel-warning');
-					}
-					$('#checkModal').modal("show");
-				}
-			});
-		}
-		function passwordCheckFunction() {
-			var userPassword1 = $('#userPassword1').val();
-			var userPassword2 = $('#userPassword2').val();
-			if(userPassword1 != userPassword2) {
-				$('#passwordCheckMessage').html('비밀번호가 서로 일치하지 않습니다.');
-			} else {
-				$('#passwordCheckMessage').html('');
-			}
-		} */
-		
+	<script type="text/javascript">		
 		$(function() {
 			$("#id_check").on("click", check);
 		})
@@ -61,6 +32,7 @@
                		if (result) {
                 		alert("사용하실 수 있는 아이디입니다");
                 		$("#userPassword1").focus();
+                		$("#id_check").attr("name", "on");
                 	} else {
                 		alert("존재하는 아이디입니다.")
                 		$("#userID").val("").focus();
@@ -82,6 +54,75 @@
 				var hp = $(".hp1").text($(this).text())
 				$("#hp1").val($(".hp1").text());
 			});
+			
+			$(".join").click(function() {
+				if ($("#userID").val() == "") {
+					alert("아이디를 입력해주세요");
+					$("#userID").focus();
+				} else if ($("#userPassword1").val() == "") {
+					alert("비밀번호를 입력해주세요");
+					$("#userPassword1").focus();
+				} else if ($("#userPassword2").val() == "") {
+					alert("비밀번호 확인을 입력해주세요");
+					$("#userPassword2").focus();
+				} else if ($("#userName").val() == "") {
+					alert("이름을 입력해주세요");
+					$("#userName").focus();
+				} else if ($("#userBirth").val() == "") {
+					alert("생년월일을 입력해주세요");
+					$("#userBirth").focus();
+				} else if ($("#userEmail1").val() == "") {
+					alert("이메일을 입력해주세요");
+					$("#userEmail1").focus();
+				} else if ($("#userEmail2").val() == "") {
+					alert("이메일 주소를 입력해주세요");
+					$("#userEmail2").focus();
+				} else if ( $("#hp1").val() == "" ) {
+					alert("휴대폰 번호를 선택해주세요");
+					$("#hp1").focus();
+				} else if ( $("#hp2").val() == "" ) {
+					alert("휴대폰 번호를 입력해주세요");
+					$("#hp2").focus();
+				} else if ( $("#hp3").val() == "" ) {
+					alert("휴대폰 번호를 입력해주세요");
+					$("#hp3").focus();
+				} else if ($("#addr1").val() == "" ) {
+					alert("주소를 입력해주세요");
+					$("#addr1").focus();
+				} else if ($("#addr2").val() == "" ) {
+					alert("상세 주소를 입력해주세요");
+					$("#addr2").focus();
+				} else if ($("#id_check").attr("name") == "off") {
+					 alert("아이디 중복확인 버튼을 클릭해주세요");
+					 $("#id_check").focus();
+				}  else if ($("#enterBtn").attr("name") == "off") {
+					alert("휴대폰 인증버튼을 클릭해주세요");
+					$("#enterBtn").focus();
+				} else {
+					member_join.submit();			
+				}
+				
+			});
+			
+			/* 비밀번호 - 비밀번호 확인 체크 */
+			$("#userPassword2").blur(function() {
+				if ($("#userPassword1").val() != $("#userPassword2").val() ) {
+					$(".pass_msg").text("비밀번호가 동일하지 않습니다.").css("color","red");
+					$("#userPassword2").val("").focus();
+				} else {
+					$(".pass_msg").text("비밀번호가 동일합니다.").css("color","blue");
+				}
+			});
+			
+			/* 생년월일 - 6자리 확인 */
+			$("#userBirth").blur(function() {
+				if ( $("#userBirth").val() != "" && $("#userBirth").val().length != "6") {
+					$(".birth_msg").text("생년월일 형식에 맞지 않습니다.").css("color","red");
+					$("#userBirth").val("").focus();
+				} else if ( $("#userBirth").val() != "" && $("#userBirth").val().length == "6" ) {
+					$(".birth_msg").text("");
+				}
+			});
 
 			
 			/** 휴대폰 인증 문자 보내기 **/
@@ -93,29 +134,17 @@
 		          alert(hp);
 		 
 		          /** 유효성 체크 **/
-		      /*     
-		       var to = $("#to").val();
-		       var name = $("#name").val();
-		       var first = $("#first").val();
-		       var last = $("#last").val();
-		       var id = $("#id").val();   	 */	      
-		    
-/* 			 if ( name == "" || name == null ) {
-		    	  alert("이름을 입력해주세요");
-		    	  $("#name").focus();
-		      } else if ( first == "" || first == null ) {
-		    	  alert("주민등록번호를 입력해주세요");
-		    	  $("#first").focus();
-		      } else if ( last == "" || last == null ) {
-		    	  alert("주민등록번호를 입력해주세요");
-		    	  $("#last").focus();    	  
-		      } else if ( id == "" || id == null ) {
-		 	      alert("아이디를 입력해주세요");
-		 	      $("#id").focus();
-			  } else if ( to == "" || to == null ) {
-		    	  alert("휴대폰 번호를 입력해주세요");
-		    	  $("#to").focus();    	 
-		      } else { */
+		        
+		         if ( $("#hp1").val() == "" ) {
+					alert("휴대폰 번호를 선택해주세요");
+					$("#hp1").focus();
+				} else if ( $("#hp2").val() == "" ) {
+					alert("휴대폰 번호를 입력해주세요");
+					$("#hp2").focus();
+				} else if ( $("#hp3").val() == "" ) {
+					alert("휴대폰 번호를 입력해주세요");
+					$("#hp3").focus();
+       			} else {
 		      		var con_test = confirm("해당번호로 인증문자를 발송하시겠습니까?");   /* 문자를 보낼껀지 물어본다 */          
 		          	if(con_test == true){   
 		               $.ajax({
@@ -137,7 +166,7 @@
 		          } else if(con_test == false) {
 		        	  /** 해당번호로 인증문자를 발송하시겠습니까?에서 취소 눌렀을 때 **/
 		             }
-/* 		         }  */  
+				 }
 		    })
 		    $("#enterBtn").click(function() {   /* 내가 작성한 번호와 인증번호를 비교한다 */
 		       var userNum = $("#userNum").val();       
@@ -149,6 +178,7 @@
 		    	} else{     
 		          if(userNum.trim() == sysNum.trim()){
 		              alert("인증번호가 일치합니다");
+		              $("#enterBtn").attr("name", "on");
 		              $("#addr1").foucs();
 		           }
 		           else {
@@ -186,7 +216,7 @@
 							<td style="width: 110px;"><h5>아이디</h5></td>
 							<td><input class="form-control" type="text" id="userID" name="id" maxlength="20" placeholder="아이디를 입력하세요."></td>
 							<td style="width: 110px;">
-								<button class="btn btn-primary" id="id_check" type="button" style="background-color:#4fa9de; border-color:#4fa9de;">중복체크</button>
+								<button class="btn btn-primary" name="off" id="id_check" type="button" style="background-color:#4fa9de; border-color:#4fa9de;">중복체크</button>
 								<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 							</td>
 						</tr>
@@ -196,7 +226,10 @@
 						</tr>
 						<tr>
 							<td style="width: 110px;"><h5>비밀번호 확인</h5></td>
-							<td colspan="2"><input onkeyup="passwordCheckFunction();" class="form-control" id="userPassword2" type="password" name="cpass" maxlength="20" placeholder="비밀번호 확인를 입력하세요."></td>
+							<td colspan="2">
+								<input onkeyup="passwordCheckFunction();" class="form-control" id="userPassword2" type="password" name="cpass" maxlength="20" placeholder="비밀번호 확인을 입력하세요.">
+								<div class="pass_msg" style="text-align:left;"></div>
+							</td>						`	
 						</tr>
 						<tr>
 							<td style="width: 110px;"><h5>이름</h5></td>
@@ -204,7 +237,10 @@
 						</tr>
 						<tr>
 							<td style="width: 110px;"><h5>생년월일</h5></td>
-							<td colspan="2"><input class="form-control" id="userbirth" type="text"  name="birth" maxlength="20" placeholder="생년월일 6자리를 입력하세요."></td>
+							<td colspan="2">
+								<input class="form-control" id="userBirth" type="text"  name="birth" maxlength="20" placeholder="생년월일 6자리를 입력하세요.">
+								<div class="birth_msg" style="text-align:left;"></div>
+							</td>
 						</tr>					
 						<tr>
 							<td style="width: 110px;"><h5>이메일</h5></td>
@@ -251,7 +287,7 @@
 						<tr>
 							<td style="width: 110px;"><h5>인증번호</h5></td>
 							<td><input class="form-control pull-left" placeholder="인증번호 6자리를 입력하세요." id="userNum" ></td>
-							<td style="width: 110px;"><button class="btn btn-primary" type="button" style="background-color:#4fa9de; border-color:#4fa9de;" id="enterBtn">확인</button>
+							<td style="width: 110px;"><button class="btn btn-primary" type="button" style="background-color:#4fa9de; border-color:#4fa9de;" id="enterBtn" name="off">확인</button>
 							<input type="hidden" name="text" id="text"></td>
 						</tr>
 						<tr>
@@ -263,7 +299,7 @@
 							<td style="width: 110px;"><button class="btn btn-primary" onclick="addr()" type="button" style="margin:17px 0;background-color:#4fa9de; border-color:#4fa9de;">주소검색</button></td>
 						</tr>
 						<tr>
-							<td Style="text-align: left;" colspan="3"><h5 style="color: red;" id="passwordCheckMessage"></h5><input class="btn btn-primary pull-right" type="submit" value="등록" style="background-color:#4fa9de; border-color:#4fa9de;"></td>
+							<td Style="text-align: left;" colspan="3"><h5 style="color: red;" id="passwordCheckMessage"></h5><input class="btn btn-primary pull-right join" type="button" value="등록" style="background-color:#4fa9de; border-color:#4fa9de;"></td>
 						</tr>
 					</tbody>
 				</table>
