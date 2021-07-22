@@ -123,7 +123,7 @@ public class AdminDAO {
 		return sqlSession.delete(namespace+".hdetail_delete", hdid);
 	}
 	
-	//맛집 리스트 가져오기
+	//음식점 리스트 가져오기
 	public ArrayList<FoodVO> getlistfood(int startnum, int endnum) {
 		Map<String,String> se = new HashMap<String,String>();
 		se.put("start", String.valueOf(startnum));
@@ -152,6 +152,11 @@ public class AdminDAO {
 		se.put("search_text", search_text);
 		return sqlSession.selectOne(namespace+".searchtargetfood", se);
 	}
+	//음식점 -- 추가
+	public int getFoodUpload(FoodVO vo) {
+		return sqlSession.insert(namespace+".food_upload", vo);
+	}
+	
 	//여행지 리스트 가져오기
 	public ArrayList<TravelVO> getlisttravel(int startnum, int endnum) {
 		Map<String,String> se = new HashMap<String,String>();

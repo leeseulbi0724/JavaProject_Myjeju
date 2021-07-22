@@ -110,40 +110,26 @@
 		</insert>
 	<!-- 관리자 맛집 -->
 		<select id="listnumfood" parameterType="map" resultType="com.myjeju.vo.FoodVO">
-			select rno, fid, f_name, f_tag, f_infor, f_infor2, f_addr, f_vpoint, f_hpoint, f_hp, f_like, f_image1, f_image2, f_image3, f_image4, f_image5
-             from(select rownum rno, f_name, fid, f_tag, f_infor, f_infor2, f_addr, f_vpoint, f_hpoint, f_hp, f_like, f_image1, f_image2, f_image3, f_image4, f_image5
+			select rno, fid, f_name, f_tag, f_infor, f_infor2, f_addr, f_vpoint, f_hpoint, f_hp, f_like, f_file, f_sfile
+             from(select rownum rno, f_name, fid, f_tag, f_infor, f_infor2, f_addr, f_vpoint, f_hpoint, f_hp, f_like,  f_file, f_sfile
 				     from(select * from myjeju_food order by rownum desc))
 				     where rno between #{start} and #{end}
 		</select>
 		<select id="listsearchfood" parameterType="java.util.Map" resultType="com.myjeju.vo.FoodVO">
-			<choose>
-				<when test='search.equals("name")'>
-				select rno, fid, f_name, f_tag, f_infor, f_infor2, f_addr, f_vpoint, f_hpoint, f_hp, f_like, f_image1, f_image2, f_image3, f_image4, f_image5
-				     from(select rownum rno, fid, f_name, f_tag, f_infor, f_infor2, f_addr, f_vpoint, f_hpoint, f_hp, f_like, f_image1, f_image2, f_image3, f_image4, f_image5
-				     from(select * from MYJEJU_food order by rownum desc) where name like '%'||#{search_text}||'%')
+				select rno, fid, f_name, f_tag, f_infor, f_infor2, f_addr, f_vpoint, f_hpoint, f_hp, f_like,  f_file, f_sfile
+				     from(select rownum rno, fid, f_name, f_tag, f_infor, f_infor2, f_addr, f_vpoint, f_hpoint, f_hp, f_like,  f_file, f_sfile
+				     from(select * from MYJEJU_food order by rownum desc) where f_name like '%'||#{search_text}||'%')
 				     where rno between #{start} and #{end}
-				</when>
-				<otherwise>
-				select rno, fid, f_name, f_tag, f_infor, f_infor2, f_addr, f_vpoint, f_hpoint, f_hp, f_like, f_image1, f_image2, f_image3, f_image4, f_image5
-				     from(select rownum rno, fid, f_name, f_tag, f_infor, f_infor2, f_addr, f_vpoint, f_hpoint, f_hp, f_like, f_image1, f_image2, f_image3, f_image4, f_image5
-				     from(select * from MYJEJU_food order by rownum desc) where id like '%'||#{search_text}||'%' )
-				     where rno between #{start} and #{end}
-				</otherwise>
-			</choose>
 		</select>
 		<select id="targetfood" parameterType="java.lang.Integer" resultType="java.lang.Integer">
 			select count(num) from(select rownum num from MYJEJU_food) where num >= #{pageNumber}
 		</select>
 		<select id="searchtargetfood" parameterType="java.util.Map" resultType="java.lang.Integer">
-			<choose>
-				<when test='search.equals("name")'>
-				select count(num) from(select rownum num from myjeju_food where name like '%'||#{search_text}||'%') where num >= #{pageNumber}
-				</when>
-				<otherwise>
-				select count(num) from(select rownum num from myjeju_food where id like '%'||#{search_text}||'%') where num >= #{pageNumber}
-				</otherwise>
-			</choose>
+				select count(num) from(select rownum num from myjeju_food where f_name like '%'||#{search_text}||'%') where num >= #{pageNumber}
 		</select>
+		<insert id="food_upload" parameterType="com.myjeju.vo.FoodVO" >
+			insert into myjeju_food values('f_'||sequ_myjeju_food.nextval,#{f_name},#{f_tag},#{f_infor},#{f_infor2},#{f_addr},#{f_vpoint},#{f_hpoint},#{f_hp},0,#{f_file},#{f_sfile} )
+		</insert>
 		<!-- 관리자 여행지 -->
 		<select id="listnumtravel" parameterType="map" resultType="com.myjeju.vo.TravelVO">
 			select rno, tid, t_name, t_tag, t_infor, t_infor2, t_addr, t_vpoint, t_hpoint, t_hp, t_like, t_image1, t_image2, t_image3, t_image4, t_image5

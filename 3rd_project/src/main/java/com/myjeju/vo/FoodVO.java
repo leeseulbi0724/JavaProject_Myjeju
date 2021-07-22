@@ -1,10 +1,36 @@
 package com.myjeju.vo;
 
 public class FoodVO {
-	String fid, f_name, f_tag, f_infor, f_infor2, f_addr, f_vpoint, f_hpoint, f_hp, 
+	String fid, f_name, f_tag, f_infor, f_infor2, f_addr, f_vpoint, f_hpoint, f_hp, f_addr1, f_addr2, f_file, f_sfile, 
 	f_image1, f_image2, f_image3, f_image4, f_image5;
 	int rno, f_like, status;
 	
+	
+	
+	public String getF_file() {
+		return f_file;
+	}
+	public void setF_file(String f_file) {
+		this.f_file = f_file;
+	}
+	public String getF_sfile() {
+		return f_sfile;
+	}
+	public void setF_sfile(String f_sfile) {
+		this.f_sfile = f_sfile;
+	}
+	public String getF_addr1() {
+		return f_addr1;
+	}
+	public void setF_addr1(String f_addr1) {
+		this.f_addr1 = f_addr1;
+	}
+	public String getF_addr2() {
+		return f_addr2;
+	}
+	public void setF_addr2(String f_addr2) {
+		this.f_addr2 = f_addr2;
+	}
 	public int getRno() {
 		return rno;
 	}

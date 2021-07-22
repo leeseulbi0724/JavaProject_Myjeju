@@ -18,6 +18,16 @@
 	<script src="js/bootstrap.js"></script>
 	<script type="text/javascript"></script>
 </head>
+<style>
+	.write { 
+		background-color:rgb(20,86,184); 
+		color:white; 
+		padding:5px 10px;
+		border-radius:4px;
+		float:right;
+		margin:10px 0;
+	}
+</style>
 <body>
 	<nav class="navbar navbar-default">
 		<div class ="navbar-header">
@@ -55,11 +65,12 @@
 	
 		<section class = "section_setup_faq">
 			<div></div>
-			<div> 맛집관리 </div>
+			<div> 음식점관리 </div>
 			<div></div>
 		</section>
 	
 		<section class ="setup_faq_list">
+			<a href="adfood_write.do" class="write" >음식점 추가</a>
 			<table class = "content_layout_setup_faq">
 				<tr>
 					<th> 번호 </th>
@@ -129,7 +140,6 @@
 		<section class = "setup_faq_search">
 			<form name = "setup_counsel_form" action ="adfood.do" method = "post">
 				<select class = "search" name = "search" style = "width: 70px; height: 27px">
-					<option value = "id">아이디</option>
 					<option value = "name">이름</option>
 				</select>
 				<input type = "text" name = "search_text" class = "search_text" style = "width: 300px; margin: 0 10px;">

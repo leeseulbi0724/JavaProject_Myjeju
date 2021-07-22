@@ -107,7 +107,7 @@ public class AdminServiceImpl implements AdminService {
 		}
 		return result;
 	}
-	//관리자 맛집
+	//관리자 음식점
 	@Override
 	public ArrayList<FoodVO> getlistfood(int startnum,int endnum){
 		return adminDAO.getlistfood(startnum,endnum);
@@ -123,6 +123,15 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public int targetfoodPage(int pageNumber,String search,String search_text){
 		return adminDAO.targetfoodPage(pageNumber,search,search_text);
+	}
+	@Override
+	public boolean getFoodUpload(FoodVO vo) {
+		int val = adminDAO.getFoodUpload(vo);
+		boolean result = false;
+		if (val != 0) {
+			result = true;
+		}
+		return result;
 	}
 	//관리자 여행지
 	@Override

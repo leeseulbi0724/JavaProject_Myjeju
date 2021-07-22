@@ -44,6 +44,7 @@ public interface AdminService {
 	ArrayList<FoodVO> getlistfood(int startnum,int endnum,String search,String search_text);
 	int targetfoodPage(int pageNumber);
 	int targetfoodPage(int pageNumber,String search,String search_text);
+	boolean getFoodUpload(FoodVO vo);
 	
 	//관리자 여행지
 	ArrayList<TravelVO> getlisttravel(int startnum,int endnum);

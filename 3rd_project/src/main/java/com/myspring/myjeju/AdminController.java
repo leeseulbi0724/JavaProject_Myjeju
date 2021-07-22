@@ -1,7 +1,6 @@
 package com.myspring.myjeju;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -301,7 +300,7 @@ public class AdminController {
 		
 		
 		
-		//맛집관리 리스트
+		//음식점관리 리스트
 		@RequestMapping(value="/adfood.do",method= {RequestMethod.GET,RequestMethod.POST})
 		public ModelAndView tofood(String pnum, String search, String search_text) {
 			ModelAndView mv = new ModelAndView();
@@ -340,6 +339,58 @@ public class AdminController {
 			
 			return mv;
 		}
+		//음식점 등록
+		@RequestMapping(value="/adfood_write.do", method=RequestMethod.GET)
+		public String adfood_write() {
+			return "admin/adfood_write";
+		}
+		//음식점 등록 DB
+		@RequestMapping(value="/adfood_write_proc.do", method={RequestMethod.GET,RequestMethod.POST})
+		public ModelAndView adfood_write_proc(MultipartHttpServletRequest request, @RequestParam("file") MultipartFile[] file) throws Exception {
+			ModelAndView mv = new ModelAndView();			
+			
+			String root_path = request.getSession().getServletContext().getRealPath("/");
+			String attach_path = "\\resources\\images\\food\\food_detail\\";
+			String fileOriginName = ""; 
+			String fileMultiName = "";
+			String fileMultiUplodaName= "";
+			
+			UUID uuid = UUID.randomUUID();
+			for(int i=0; i<file.length; i++) { 
+				fileOriginName = file[i].getOriginalFilename(); 
+				System.out.println("기존 파일명 : "+fileOriginName); 
+				File f = new File(root_path + attach_path + uuid +"_"+ fileOriginName); 
+				file[i].transferTo(f);
+				if(i==0) { 
+					fileMultiName += fileOriginName; 
+					fileMultiUplodaName += uuid +"_"+fileOriginName;
+				} else { 
+					fileMultiName += ","+fileOriginName; 
+					fileMultiUplodaName += "," + uuid +"_"+fileOriginName;
+					} 
+			}
+			FoodVO vo = new FoodVO();
+			vo.setF_file(fileMultiName);
+			vo.setF_sfile(fileMultiUplodaName);
+			vo.setF_name(request.getParameter("f_name"));
+			vo.setF_tag(request.getParameter("f_tag"));
+			vo.setF_infor(request.getParameter("f_infor"));
+			vo.setF_infor2(request.getParameter("f_infor2"));
+			vo.setF_addr1(request.getParameter("f_addr1"));
+			vo.setF_addr2(request.getParameter("f_addr2"));
+			vo.setF_addr(vo.getF_addr1()+" "+vo.getF_addr2());
+			vo.setF_vpoint(request.getParameter("f_vpoint"));
+			vo.setF_hpoint(request.getParameter("f_hpoint"));
+			vo.setF_hp(request.getParameter("f_hp"));
+			
+			boolean result = adminService.getFoodUpload(vo);
+			
+			mv.setViewName("redirect:/adfood.do");
+			return mv;
+			
+		}
+		
+		
 		//여행지관리 리스트
 		@RequestMapping(value="/adtravel.do",method= {RequestMethod.GET,RequestMethod.POST})
 		public ModelAndView totravel(String pnum, String search, String search_text) {
