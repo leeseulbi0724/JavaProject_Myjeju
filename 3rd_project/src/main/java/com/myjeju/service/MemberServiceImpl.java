@@ -26,8 +26,13 @@ public class MemberServiceImpl implements MemberService {
 	}
 	
 	@Override
-	public SessionVO getLoginResult(MemberVO vo) {
-		return memberDAO.getLoginResult(vo);
+	public boolean getLoginResult(MemberVO vo) {
+		int val = memberDAO.getLoginResult(vo);
+		boolean result = false;
+		if ( val != 0) {
+			result = true;
+		}		
+		return result;
 	}
 	
 	@Override

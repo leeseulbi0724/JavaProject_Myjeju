@@ -6,7 +6,7 @@ import com.myjeju.vo.SessionVO;
 public interface MemberService {
 	
 	boolean getJoinResult(MemberVO vo);
-	SessionVO getLoginResult(MemberVO vo);
+	boolean getLoginResult(MemberVO vo);
 	String getIdSearchResult(MemberVO vo);
 	String getPassSearchResult(MemberVO vo);
 	boolean getPassUpdateResult(MemberVO vo);

@@ -21,7 +21,7 @@ public class MemberDAO {
 	}
 	
 	//·Î±×ÀÎ
-	public  SessionVO getLoginResult(MemberVO vo) {
+	public  int getLoginResult(MemberVO vo) {
 		return sqlSession.selectOne(namespace+".login", vo);
 	}
 	

@@ -1,8 +1,5 @@
 package com.myspring.myjeju;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -15,8 +12,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.myjeju.service.MemberService;
 import com.myjeju.service.MessageService;
+import com.myjeju.service.MypageService;
 import com.myjeju.vo.MemberVO;
-import com.myjeju.vo.SessionVO;
 
 @Controller
 public class MemberController {
@@ -26,6 +23,9 @@ public class MemberController {
 	
 	@Autowired
 	private MemberService memberService;
+	
+	@Autowired
+	private MypageService mypageService;
 
 	/**
 	 * main.do : 시작페이지
@@ -77,20 +77,22 @@ public class MemberController {
 	/**
 	 * 로그인
 	 */
+	@ResponseBody
 	@RequestMapping(value = "/login_proc.do", method=RequestMethod.POST ) 
-	public String login_proc (HttpServletRequest request, MemberVO vo) {
+	public boolean login_proc (HttpServletRequest request) {
 		HttpSession session = request.getSession();
-		String result = "";  	
-		SessionVO svo = memberService.getLoginResult(vo);
+		boolean result = false; 	
+		MemberVO vo = new MemberVO();
+		vo.setId(request.getParameter("id"));
+		vo.setPass(request.getParameter("pass"));
 		
-		session.setAttribute("session_id", svo.getId());
-		session.setAttribute("session_name", svo.getName());
+		result = memberService.getLoginResult(vo);
+		
+		session.setAttribute("session_id", request.getParameter("id"));
+		MemberVO mvo = mypageService.getMemberContent(request.getParameter("id"));
+		session.setAttribute("session_name", mvo.getName());
 	
-		//로그인 처리
-		if (svo != null) {
-			/* svo.setId(vo.getId()); */				
-			result = "index";
-		} 
+		
 		return result;
 	}
 	

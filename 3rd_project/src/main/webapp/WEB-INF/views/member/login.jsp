@@ -21,6 +21,33 @@
 		$("input[value='비밀번호찾기']").click(function() {
 			location.replace("passsearch.do");
 		});
+		
+		$("#login").click(function() {
+			if ($("#id").val() == "") {
+				alert("아이디를 입력해주세요");
+				$("#id").focus();
+			} else if ($("#pass").val() == "") {
+				alert("비밀번호를 입력해주세요");
+				$("#pass").focus();
+			} else{
+				 var form1 = $("#form").serialize();
+		            console.log(form1);
+		            $.ajax({
+		                type: "post",
+		                url: "login_proc.do",
+		                data: form1,
+		                dataType: 'json',
+		                success: function (result) {
+		                    if (result) {
+		                    	 location.replace("index.do");
+		                    } else {
+		                    	alert("아이디 또는 비밀번호가 틀립니다");	                    	
+		                    }
+		                },
+
+		            });
+			}
+		})
 	});
 </script>
 <body>
@@ -42,15 +69,15 @@
 		<h3 style="width: 80px;">로그인</h3>
 		</div>
 		<div class="container" style="margin: 90px auto; margin-top:60px;">
-			<form id="form" method="post" action="login_proc.do" style="margin-bottom:120px; border:1px solid rgba(0,0,0,0.1); text-align:center; padding:65px; padding-bottom:40px; width:92%; margin:0 auto;">
+			<form id="form" name="member_login" method="post" style="margin-bottom:120px; border:1px solid rgba(0,0,0,0.1); text-align:center; padding:65px; padding-bottom:40px; width:92%; margin:0 auto;">
 				<table class="table" style="text-align: center; width:55%; display:inline-block; margin-bottom:0;">
 					<tbody>
 						<tr>
-							<td style="border:none; width: 400px;"><input class="form-control" type="text" name="id" maxlength="20" placeholder="아이디 입력" style="height: 50px; border-radius:0;"></td>
-							<td rowspan=2 style="border:none;"><input class="btn btn-primary pull-right" type="submit" value="로그인" style="background-color:#4fa9de; border-color:#4fa9de; font-size: 20px; height: 115px; width:120px; border-radius:0;"></td>
+							<td style="border:none; width: 400px;"><input class="form-control" type="text" name="id" maxlength="20" placeholder="아이디 입력" id="id" style="height: 50px; border-radius:0;"></td>
+							<td rowspan=2 style="border:none;"><input class="btn btn-primary pull-right" type="button" value="로그인"  id="login" style="background-color:#4fa9de; border-color:#4fa9de; font-size: 20px; height: 115px; width:120px; border-radius:0;"></td>
 						</tr>
 						<tr>
-							<td style="border:none;"><input class="form-control" type="password" name="pass" maxlength="20" placeholder="패스워드 입력" style="height: 50px; border-radius:0;"></td>
+							<td style="border:none;"><input class="form-control" type="password" name="pass" maxlength="20" id="pass" placeholder="패스워드 입력" style="height: 50px; border-radius:0;"></td>
 						</tr>
 						<tr>
 							<td style="text-align : left; border:none;" colspan="2">
