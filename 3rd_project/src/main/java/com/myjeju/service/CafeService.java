@@ -2,6 +2,7 @@ package com.myjeju.service;
 
 import java.util.ArrayList;
 
+import com.myjeju.vo.CafeReviewVO;
 import com.myjeju.vo.CafeVO;
 import com.myjeju.vo.HeartVO;
 
@@ -18,4 +19,9 @@ public interface CafeService {
 	boolean getUpdateHeart(String caid);
 	boolean getUpdateMinusHeart(String caid);
 	boolean getHeartPlus(HeartVO vo);
+	
+	boolean getInsertResult(CafeReviewVO vo);
+	ArrayList<CafeReviewVO> getCafeReview(String caid);
+	ArrayList<CafeReviewVO> getCafeReview(String caid, int startnum, int endnum);
+	boolean getCafeReviewDelete(String reid);
 }

@@ -27,6 +27,11 @@ public interface HouseService{
 	boolean getUpdateHeart(String hid);
 	boolean getUpdateMinusHeart(String hid);
 	boolean getHeartPlus(HeartVO vo);
+	
 	boolean getInsertResult(HouseReviewVO vo);
-	ArrayList<HouseReviewVO> getTravelReview(String hid);
+	ArrayList<HouseReviewVO> getHouseReview(String hid);
+	ArrayList<HouseReviewVO> getHouseReview(String hid, int startnum, int endnum);
+	boolean getHouseReviewDelete(String reid);
+	
+	
 }

@@ -16,6 +16,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.myjeju.service.HouseService;
+import com.myjeju.vo.FoodReviewVO;
 import com.myjeju.vo.HDetailVO;
 import com.myjeju.vo.HeartVO;
 import com.myjeju.vo.HouseReviewVO;
@@ -190,6 +191,8 @@ public class HouseController {
 
 		ModelAndView mv = new ModelAndView();
 		
+		int pnum = 1;
+		
 		HouseVO vo = houseService.getHouseDetail(hid);
 		if (id!= null) {
 			HeartVO hvo = new HeartVO();
@@ -203,14 +206,16 @@ public class HouseController {
 		String infor2 = vo.getH_infor2().replace("\r\n", "<br>");
 		
 		ArrayList<HDetailVO> list = houseService.getHDetail(hid);
-		ArrayList<HouseReviewVO> hvo = houseService.getTravelReview(hid);
+		ArrayList<HouseReviewVO> hvo = houseService.getHouseReview(hid);
 		
 		mv.setViewName("house/house_detail");
+		mv.addObject("pnum",pnum);
 		mv.addObject("vo",vo);
 		mv.addObject("infor2",infor2);
 		mv.addObject("list",list);
 		mv.addObject("hvo",hvo);
 		mv.addObject("id",id);
+		mv.addObject("hid",hid);
 		
 		return mv;
 	}
@@ -264,23 +269,90 @@ public class HouseController {
 	 * house_review_proc.do : 槛家 府轰 殿废 贸府
 	 */
 	@RequestMapping(value="/house_review_proc.do", method=RequestMethod.POST)
-	public ModelAndView travel_review_proc(HouseReviewVO vo, HttpSession session) {
+	public ModelAndView house_review_proc(HouseReviewVO vo, HttpSession session, HttpServletRequest request) {
+		
 		ModelAndView mv = new ModelAndView();
 		
 		String user_id = (String) session.getAttribute("session_id");
+		String hid = request.getParameter("hid");
+		String h_review = request.getParameter("h_review");
+		String star = request.getParameter("h_star");
+		
+		if(star == null) {
+			star = "0";
+		}
+		
+		int h_star = Integer.parseInt(star);
+		
 		vo.setId(user_id);
+		vo.setHid(hid);
+		vo.setH_review(h_review);
+		vo.setH_star(h_star);
 
 		boolean result = houseService.getInsertResult(vo);
 		
 		if(result) {
 			mv.setViewName("redirect:/house_detail.do");
-			mv.addObject("reid", vo.getReid());
-			mv.addObject("id", vo.getId());
 			mv.addObject("hid", vo.getHid());
-			mv.addObject("h_review", vo.getH_review());
-			mv.addObject("h_star", vo.getH_star());
-			mv.addObject("h_time", vo.getH_time());
 		}
 		return mv;
 	}
+	
+	
+	/**
+	 * 槛家 府轰 府胶飘 ajax 贸府
+	 */
+	
+	@ResponseBody
+	@RequestMapping(value="/house_review_list_proc.do", produces = "application/text; charset=utf8", method=RequestMethod.POST)
+	public String house_review_list_proc(String pnum, String hid, HttpSession session) {
+		
+		ArrayList<HouseReviewVO> list = houseService.getHouseReview(hid);
+		String user_id = (String) session.getAttribute("session_id");
+		int pageNumber = 1;
+
+		if(!pnum.equals("")) { 
+			pageNumber = Integer.parseInt(pnum) +1;
+		}
+		int startnum = ((pageNumber-1)*5) +1;
+		int endnum = pageNumber*5; 
+		list = houseService.getHouseReview(hid, startnum, endnum);
+		
+		JsonObject jdata = new JsonObject();
+		JsonArray jlist = new JsonArray();
+		Gson gson = new Gson();
+		
+		for(HouseReviewVO vo : list) {
+			JsonObject jobj = new JsonObject();
+			jobj.addProperty("reid", vo.getReid());
+			jobj.addProperty("hid", vo.getHid());
+			jobj.addProperty("id", vo.getId());
+			jobj.addProperty("h_review", vo.getH_review());
+			jobj.addProperty("h_star", vo.getH_star());
+			jobj.addProperty("h_time", vo.getH_time());
+			jobj.addProperty("pnum", String.valueOf(pageNumber));
+			jobj.addProperty("user_id", user_id);
+			
+			jlist.add(jobj);
+		}
+		
+		jdata.add("jlist", jlist);
+		
+		return gson.toJson(jdata);
+	}
+
+	
+	/**
+	 * house_review_delete.do : 槛家 府轰 昏力
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/house_review_delete.do", method=RequestMethod.POST)
+	public boolean house_review_delete(HttpServletRequest request) {
+		boolean result = houseService.getHouseReviewDelete(request.getParameter("reid"));
+		
+		return result;
+	}
+	
+
+	
 }

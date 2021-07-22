@@ -98,8 +98,23 @@ public class HouseServiceImpl implements HouseService {
 	}
 	
 	@Override
-	public ArrayList<HouseReviewVO> getTravelReview(String hid){
-		return houseDAO.getTravelReview(hid);
+	public ArrayList<HouseReviewVO> getHouseReview(String hid){
+		return houseDAO.getHouseReview(hid);
+	}
+	
+	@Override
+	public ArrayList<HouseReviewVO> getHouseReview(String hid, int startnum, int endnum){
+		return houseDAO.getHouseReview(hid, startnum, endnum);
+	}
+	
+	@Override
+	public boolean getHouseReviewDelete(String reid) {
+		int value = houseDAO.getHouseReviewDelete(reid);
+		
+		boolean result = false;
+		if(value != 0) result = true;
+		
+		return result;
 	}
 	
 }

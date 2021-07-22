@@ -33,7 +33,9 @@ public class TravelController {
 	 */
 	@RequestMapping(value="/travel.do", method=RequestMethod.GET)
 	public ModelAndView travel(HttpSession session) {
+		
 		ModelAndView mv = new ModelAndView();
+		
 		//로그인 회원정보 가져오기
 		String id = (String) session.getAttribute("session_id");
 		
@@ -75,6 +77,7 @@ public class TravelController {
 	@ResponseBody
 	@RequestMapping(value="/travel_proc.do", produces = "application/text; charset=utf8", method=RequestMethod.GET)
 	public String travel_proc(String pnum, String search, String search_text, HttpSession session) {
+		
 		ArrayList<TravelVO> list = travelService.getTravelList();
 		
 		//로그인 회원정보 가져오기
@@ -175,9 +178,6 @@ public class TravelController {
 		jdata.add("jlist", jlist);
 
 		return gson.toJson(jdata);
-		
-		
-		//return "{\"title\":\"이호테우 해변\",\"addr\":\"제주특별자치도 제주시 도리로 20\",\"tel\":\"(+82) 064-728-3993\",\"img\":\"이호테우.jpg\",\"idx\":\"5\",\"latlng\":{\"La\":126.45318694807267,\"Ma\":33.49796826011083}}";
 	}
 	
 	/**
@@ -185,6 +185,7 @@ public class TravelController {
 	 */
 	@RequestMapping(value="/travel_detail.do", method=RequestMethod.GET)
 	public ModelAndView travel_detail(String tid, HttpSession session) {
+		
 		ModelAndView mv = new ModelAndView();
 		
 		int pnum = 1;
@@ -206,6 +207,7 @@ public class TravelController {
 		mv.addObject("revo", revo);
 		mv.addObject("user_id", user_id);
 		mv.addObject("tid", tid);
+		
 		return mv;
 	}
 	
@@ -214,15 +216,18 @@ public class TravelController {
 	 */
 	@RequestMapping(value="/travel_review_proc.do", method=RequestMethod.POST)
 	public ModelAndView travel_review_proc(TravelReviewVO vo, HttpSession session, HttpServletRequest request) {
+		
 		ModelAndView mv = new ModelAndView();
 		
 		String user_id = (String) session.getAttribute("session_id");
 		String tid = request.getParameter("tid");
 		String t_review = request.getParameter("t_review");
 		String star = request.getParameter("t_star");
+		
 		if(star == null) {
 			star = "0";
 		}
+		
 		int t_star = Integer.parseInt(star);
 		
 		vo.setId(user_id);
@@ -234,9 +239,9 @@ public class TravelController {
 		
 		if(result) {
 			mv.setViewName("redirect:/travel_detail.do");
+			mv.addObject("tid", vo.getTid());
 			//mv.setViewName("redirect:/travel_review_list_proc.do");
 			//mv.addObject("id", vo.getId());
-			mv.addObject("tid", vo.getTid());
 			//mv.addObject("t_review", vo.getT_review());
 			//mv.addObject("t_star", vo.getT_star());
 		}
@@ -251,43 +256,38 @@ public class TravelController {
 	@ResponseBody
 	@RequestMapping(value="/travel_review_list_proc.do", produces = "application/text; charset=utf8", method=RequestMethod.POST)
 	public String travel_review_list_proc(String pnum, String tid, HttpSession session) {
-System.out.println("-----------1111111111111111");		
+		
 		ArrayList<TravelReviewVO> list = travelService.getTravelReview(tid);
-		System.out.println(tid);
-System.out.println("-----------2222222222222222");		
 		String user_id = (String) session.getAttribute("session_id");
-System.out.println("travel_review_list_proc.do:"+user_id);	
 		int pageNumber = 1;
 
 		if(!pnum.equals("")) { 
 			pageNumber = Integer.parseInt(pnum) +1;
 		}
-System.out.println("pnum:"+pageNumber);	
 		int startnum = ((pageNumber-1)*5) +1;
 		int endnum = pageNumber*5; 
-System.out.println("33333333333333333333");
 		list = travelService.getTravelReview(tid, startnum, endnum);
 		
-System.out.println("44444444444444444");
 		JsonObject jdata = new JsonObject();
 		JsonArray jlist = new JsonArray();
 		Gson gson = new Gson();
 		
 		for(TravelReviewVO vo : list) {
 			JsonObject jobj = new JsonObject();
+			jobj.addProperty("reid", vo.getReid());
 			jobj.addProperty("tid", vo.getTid());
 			jobj.addProperty("id", vo.getId());
 			jobj.addProperty("t_review", vo.getT_review());
 			jobj.addProperty("t_star", vo.getT_star());
+			jobj.addProperty("t_time", vo.getT_time());
 			jobj.addProperty("pnum", String.valueOf(pageNumber));
 			jobj.addProperty("user_id", user_id);
-			jobj.addProperty("t_time", vo.getT_time());
-			jobj.addProperty("reid", vo.getReid());
+			
 			jlist.add(jobj);
 		}
 		
 		jdata.add("jlist", jlist);
-System.out.println(jdata);
+		
 		return gson.toJson(jdata);
 	}
 
@@ -302,14 +302,6 @@ System.out.println(jdata);
 		
 		return result;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	

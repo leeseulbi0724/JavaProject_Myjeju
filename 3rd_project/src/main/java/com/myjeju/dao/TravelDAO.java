@@ -24,13 +24,13 @@ public class TravelDAO extends DBConn {
 	
 	//Select --> 전체 리스트
 	public ArrayList<TravelVO> getList(){
-		List<TravelVO> list = sqlSession.selectList(namespace+".maplist");
+		List<TravelVO> list = sqlSession.selectList(namespace+".map_list");
 		return (ArrayList<TravelVO>)list;
 	}
 		
 	//여행지 전체 리스트
 	public ArrayList<TravelVO> getTravelList(){
-		List<TravelVO> list = sqlSession.selectList(namespace+".travellist");
+		List<TravelVO> list = sqlSession.selectList(namespace+".travel_list");
 		return (ArrayList<TravelVO>)list;
 	}
 	
@@ -62,23 +62,23 @@ public class TravelDAO extends DBConn {
 	
 	//여행지 상위3
 	public ArrayList<TravelVO> getTravelListTop3(){
-		List<TravelVO> list = sqlSession.selectList(namespace+".traveltop3");
+		List<TravelVO> list = sqlSession.selectList(namespace+".travel_top3");
 		return (ArrayList<TravelVO>)list;
 	}
 	
 	//여행지 상세 정보
 	public TravelVO getTravelDetail(String tid) {
-		return sqlSession.selectOne(namespace+".traveldetail", tid);
+		return sqlSession.selectOne(namespace+".travel_detail", tid);
 	}
 	
 	//포토 스팟 
 	public PhotoSpotVO getPhotoSpot(String tid) {
-		return sqlSession.selectOne(namespace+".photospot", tid);
+		return sqlSession.selectOne(namespace+".photo_spot", tid);
 	}
 	
 	//차박 스팟
 	public CarSpotVO getCarSpot(String tid) {
-		return sqlSession.selectOne(namespace+".carspot", tid);
+		return sqlSession.selectOne(namespace+".car_spot", tid);
 	}
 	
 	//리뷰 쓰기

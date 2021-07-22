@@ -7,7 +7,7 @@
 <mapper namespace="mapper.house">
 	
 	<!-- 숙소리스트 -->
-	<select id="houselist" resultType="com.myjeju.vo.HouseVO">
+	<select id="house_list" resultType="com.myjeju.vo.HouseVO">
 		select rno, hid, h_name, h_infor, h_infor2, h_tag, h_addr, h_vpoint, h_hpoint, h_hp, h_like, h_img
   			from(select rownum rno, hid, h_name, h_infor, h_infor2, h_tag, h_addr, h_vpoint, h_hpoint, h_hp, h_like, h_img
     		from(select hid, h_name, h_infor, h_infor2, h_tag, h_addr, h_vpoint, h_hpoint, h_hp, h_like, h_img
@@ -43,19 +43,19 @@
 	</select>
 	
 	<!-- 숙소 상위 3개 -->
-	<select id="housetop3" resultType="com.myjeju.vo.HouseVO">
+	<select id="house_top3" resultType="com.myjeju.vo.HouseVO">
 		<![CDATA[ select hid, h_name, h_tag, h_infor, h_like, h_img from 
 				   (select hid, h_name, h_tag, h_infor, h_like, h_img from myjeju_house order by h_like desc)
 				   where rownum <= 3 ]]>
 	</select>
 	
 	<!-- 숙소 상세 정보 -->
-	<select id="housedetail" parameterType="java.lang.String" resultType="com.myjeju.vo.HouseVO">
+	<select id="house_detail" parameterType="java.lang.String" resultType="com.myjeju.vo.HouseVO">
 		select hid, h_name, h_tag, h_infor, h_infor2, h_addr, h_hp, h_like, h_img from myjeju_house where hid = #{hid}
 	</select>
 	
 	<!-- 숙소 객실 정보 -->
-	<select id="roomdetail" parameterType="java.lang.String" resultType="com.myjeju.vo.HDetailVO">
+	<select id="room_detail" parameterType="java.lang.String" resultType="com.myjeju.vo.HDetailVO">
 		select hd_name, hd_price, hd_people, hd_img, hdid, hid from myjeju_hdetail where hid = #{hid}
 	</select>
 	
@@ -97,4 +97,19 @@
    		   from(select reid, id, hid, h_review, h_star, h_time from myjeju_house_review order by h_time) order by rno)
    		    order by rno desc) where hid=#{hid}
 	</select>
+	
+	<!-- 리뷰 리스트 처리-->
+	<select id="ajax_review_list" parameterType="map" resultType="com.myjeju.vo.HouseReviewVO">
+		select rno, reid, id, hid, h_review, h_star, h_time
+  		 from(select rownum rno, reid, id, hid, h_review, h_star, h_time
+ 		  from(select rownum rno,  reid, id, hid, h_review, h_star, h_time
+  		   from(select rownum rno,  reid, id, hid, h_review, h_star, to_char(h_time, 'yyyy-mm-dd') h_time
+   		    from(select reid, id, hid, h_review, h_star, h_time from myjeju_house_review order by h_time) order by rno)
+   		     order by rno desc) where hid=#{hid}) where rno between #{start} and #{end}
+	</select>
+	
+	<!-- 리뷰 삭제 -->
+	<delete id="delete_review" parameterType="com.myjeju.vo.HouseReviewVO">
+		delete from myjeju_house_review where reid = #{reid}
+	</delete>
 </mapper>

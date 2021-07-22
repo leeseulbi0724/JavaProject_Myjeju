@@ -404,13 +404,15 @@ img.review_star{
 	width:90px;
 }
 img.like_finger{
-	margin-left:7px;
+	margin-left:15px;
+	margin-top:5px;
 }
 span.like_score{
 	width:30px;
 	color:gray;
 	font-size:13px;
 	text-align:center;
+	margin-left:5px;
 }
 img.btn_alert{
 	float:right;

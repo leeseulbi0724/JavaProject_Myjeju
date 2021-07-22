@@ -24,7 +24,7 @@ public class HouseDAO extends DBConn {
 	
 	//¼÷¼Ò ÀüÃ¼¸®½ºÆ®
 	public ArrayList<HouseVO> getHouseList(){
-		List<HouseVO> list = sqlSession.selectList(namespace+".houselist");
+		List<HouseVO> list = sqlSession.selectList(namespace+".house_list");
 		return (ArrayList<HouseVO>)list;
 	}
 	
@@ -56,18 +56,18 @@ public class HouseDAO extends DBConn {
 	
 	//¼÷¼Ò »óÀ§3°³
 	public ArrayList<HouseVO> getHouseListTop3(){
-		List<HouseVO> list = sqlSession.selectList(namespace+".housetop3");
+		List<HouseVO> list = sqlSession.selectList(namespace+".house_top3");
 		return (ArrayList<HouseVO>)list;
 	}
 	
 	//¼÷¼Ò »ó¼¼ Á¤º¸
 	public HouseVO getHouseDetail(String hid) {
-		return sqlSession.selectOne(namespace+".housedetail", hid);
+		return sqlSession.selectOne(namespace+".house_detail", hid);
 	}
 	
 	//¼÷¼Ò °´½Ç Á¤º¸
 	public ArrayList<HDetailVO> getHDetail(String hid){
-		List<HDetailVO> list = sqlSession.selectList(namespace+".roomdetail",hid);
+		List<HDetailVO> list = sqlSession.selectList(namespace+".room_detail",hid);
 		return (ArrayList<HDetailVO>)list;
 	}
 	
@@ -107,9 +107,29 @@ public class HouseDAO extends DBConn {
 	}
 	
 	//¸®ºä ¸®½ºÆ®
-	public ArrayList<HouseReviewVO> getTravelReview(String hid){
+	public ArrayList<HouseReviewVO> getHouseReview(String hid){
 		List<HouseReviewVO> list = sqlSession.selectList(namespace+".review_list", hid);
 		return (ArrayList<HouseReviewVO>)list;
+	}
+	
+	
+	//¸®ºä ¸®½ºÆ®
+	public ArrayList<HouseReviewVO> getHouseReview(String hid, int startnum, int endnum){
+		Map<String,String> param = new HashMap<String,String>();
+		
+		param.put("hid", hid);
+		param.put("start", String.valueOf(startnum));
+		param.put("end", String.valueOf(endnum));
+		
+		List<HouseReviewVO> list = sqlSession.selectList(namespace+".ajax_review_list",param);
+		
+		return (ArrayList<HouseReviewVO>)list;
+	}
+	
+	
+	//¸®ºä »èÁ¦
+	public int getHouseReviewDelete(String reid) {
+		return sqlSession.delete(namespace+".delete_review", reid);
 	}
 	
 }

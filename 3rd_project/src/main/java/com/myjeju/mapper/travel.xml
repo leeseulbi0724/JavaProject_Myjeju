@@ -7,12 +7,12 @@
 <mapper namespace="mapper.travel">
 
 	<!-- 지도 리스트 -->
-	<select id="maplist" resultType="com.myjeju.vo.TravelVO">
+	<select id="map_list" resultType="com.myjeju.vo.TravelVO">
 		select t_vpoint, t_hpoint, t_name, t_addr, t_hp, t_image1 from myjeju_travel
 	</select>
 	
 	<!-- 여행지 전체 리스트 -->
-	<select id="travellist" resultType="com.myjeju.vo.TravelVO">
+	<select id="travel_list" resultType="com.myjeju.vo.TravelVO">
 		select rno, tid, t_name, t_tag, t_infor, t_infor2, t_addr, t_vpoint, t_hpoint, t_hp, t_like, t_image1, t_image2, t_image3, t_image4, t_image5
   			from(select rownum rno, tid, t_name, t_tag, t_infor, t_infor2, t_addr, t_vpoint, t_hpoint, t_hp, t_like, t_image1, t_image2, t_image3, t_image4, t_image5
     		from(select tid, t_name, t_tag, t_infor, t_infor2, t_addr, t_vpoint, t_hpoint, t_hp, t_like, t_image1, t_image2, t_image3, t_image4, t_image5 
@@ -48,20 +48,20 @@
 	</select>
 	
 	<!-- 여행지 상위3 -->
-	<select id="traveltop3" resultType="com.myjeju.vo.TravelVO">
+	<select id="travel_top3" resultType="com.myjeju.vo.TravelVO">
 		<![CDATA[ select tid, t_name, t_tag, t_infor, t_like, t_image1 from 
 				   (select tid, t_name, t_tag, t_infor, t_like, t_image1 from myjeju_travel order by t_like desc)
 				   where rownum <= 3 ]]>
 	</select>
 	
 	<!-- 여행지 상세 정보 -->
-	<select id="traveldetail" parameterType="java.lang.String" resultType="com.myjeju.vo.TravelVO">
+	<select id="travel_detail" parameterType="java.lang.String" resultType="com.myjeju.vo.TravelVO">
 		select tid, t_name, t_tag, t_infor, t_infor2, t_addr, t_hp, t_like,
 			   t_image1, t_image2, t_image3, t_image4, t_image5 from myjeju_travel where tid=#{tid}
 	</select>
 	
 	<!-- 포토 스팟 -->
-	<select id="photospot" parameterType="java.lang.String" resultType="com.myjeju.vo.PhotoSpotVO">
+	<select id="photo_spot" parameterType="java.lang.String" resultType="com.myjeju.vo.PhotoSpotVO">
 		select myjeju_travel.t_name, myjeju_photo_spot.tid, myjeju_photo_spot.ps_name, myjeju_photo_spot.ps_infor, 
 			   myjeju_photo_spot.ps_psfile
 		from myjeju_travel, myjeju_photo_spot 
@@ -69,12 +69,13 @@
 	</select>
 	
 	<!-- 차박 스팟 -->
-	<select id="carspot" parameterType="java.lang.String" resultType="com.myjeju.vo.CarSpotVO">
+	<select id="car_spot" parameterType="java.lang.String" resultType="com.myjeju.vo.CarSpotVO">
 		select myjeju_travel.t_name, myjeju_car_spot.tid, myjeju_car_spot.cs_name, myjeju_car_spot.cs_infor, 
 			   myjeju_car_spot.cs_csfile
 		from myjeju_travel, myjeju_car_spot 
 		where myjeju_travel.tid = myjeju_car_spot.tid and myjeju_travel.tid=#{tid}
 	</select>
+	
 	
 	<!-- 리뷰 쓰기 -->
 	<insert id="insert_review" parameterType="com.myjeju.vo.TravelReviewVO">
@@ -99,8 +100,6 @@
    		    from(select reid, id, tid, t_review, t_star, t_time from myjeju_travel_review order by t_time) order by rno)
    		     order by rno desc) where tid=#{tid}) where rno between #{start} and #{end}
 	</select>
-	
-	
 	
 	<!-- 리뷰 삭제 -->
 	<delete id="delete_review" parameterType="com.myjeju.vo.TravelReviewVO">

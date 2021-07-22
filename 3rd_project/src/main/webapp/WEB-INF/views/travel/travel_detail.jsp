@@ -13,6 +13,13 @@
 	<script src="http://localhost:9000/myjeju/js/jquery-3.6.0.min.js"></script>
 	<script>
 		$(document).ready(function(){
+			
+			var pnum=$(".pnum").val();
+			
+			var tid = $("#travel_review_btn").attr("name");
+
+			moreList(pnum, tid); 
+			
 			$(".infor_content").each(function(){
 				var content = $(".infor_content");
 				var content_txt = content.text();
@@ -83,13 +90,6 @@
 			});
 			
 			
-			
-			var pnum=$(".pnum").val();
-			alert(pnum);
-			var tid = $("#travel_review_btn").attr("name");
-
-			moreList(pnum, tid); 
-			
 			 function moreList(pnum,tid){
 				var addListHtml="";
 				
@@ -134,15 +134,19 @@
 								addListHtml += "</dd>";
 							}
 							addListHtml += "<dd>" + jdata.jlist[i].t_review + "</dd>";
-							addListHtml += "<dd>";
-							addListHtml += "<img src='http://localhost:9000/myjeju/images/travel/travel_detail/like_finger.png' class='like_finger'>";
-							addListHtml += "<span class='like_score'>0</span>";
-							addListHtml += "</dd>";
 							if(jdata.jlist[i].user_id == jdata.jlist[i].id){
+								addListHtml += "<dd style='margin-top:-10px'>";
+								addListHtml += "<img src='http://localhost:9000/myjeju/images/travel/travel_detail/like_finger.png' class='like_finger'>";
+								addListHtml += "<span class='like_score'>0</span>";
+								addListHtml += "</dd>";
 								addListHtml += "<dd style='margin:-15px 0 -10px 0'>";
 								addListHtml += "<button type='button' name='" + jdata.jlist[i].reid + "'" + "class='btn_style3' id='travel_review_delete' style='margin-right:20px'>삭제</button>";
 								addListHtml += "</dd>";
 							 }else{
+								addListHtml += "<dd>";
+								addListHtml += "<img src='http://localhost:9000/myjeju/images/travel/travel_detail/like_finger.png' class='like_finger'>";
+								addListHtml += "<span class='like_score'>0</span>";
+								addListHtml += "</dd>"; 
 								addListHtml += "<dd>";
 								addListHtml += "<button type='button' class='btn_style3' id='travel_review_delete' style='display:none'>삭제</button>";
 								addListHtml += "</dd>";
@@ -152,7 +156,7 @@
 						}
 						$(".pnum").val(jdata.jlist[0].pnum);
 		                $("#travel_review_list").append(addListHtml);
-		                //alert("테스트3");
+		                
 		                
 		                $("button[id^=travel_review_delete]").click(function(){
 		    				var delete_confirm = confirm("리뷰를 삭제하시겠습니까?");
@@ -184,20 +188,6 @@
 	            moreList(pnum, tid);
 	        });  
 	         
-			
-			
-			/* document.on('click', 'button[id^=travel_review_delete]', function() {
-				alert("ww");
-			}); */
-			
-			
-			
-			
-			
-			
-			
-			
-			
 			
 		});
 	</script>

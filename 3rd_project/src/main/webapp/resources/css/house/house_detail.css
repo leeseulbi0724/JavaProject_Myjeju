@@ -102,12 +102,12 @@ button#more_btn>img{
 button#more_btn>img:last-child{
 	display:none;
 }
-/* button#more_btn:hover img:first-child{
+button#more_btn:hover img:first-child{
 	display:none;
 }
 button#more_btn:hover img:nth-child(2){
 	display:inline-block;
-} */
+}
 
 
 /**
@@ -263,6 +263,13 @@ div.room_text{
 section.detail_review{
 	padding-bottom:80px;
 }
+section.detail_review>h3{
+	display:inline-block;
+	padding:10px;
+	margin:0 auto 80px auto;
+	border-top:2px solid #4fa9de;
+	border-bottom:2px solid #4fa9de;
+}
 div.food_review_zone{
 	border-bottom:3px solid lightgray;
 	padding-bottom:30px;
@@ -276,7 +283,7 @@ div.food_review_zone dl{
 div.food_review_zone dt{
 	text-align:left;
 }
-input#food_review{
+input#h_review{
 	width:620px;
 	height:40px;
 	margin-top:10px;
@@ -284,17 +291,17 @@ input#food_review{
 	border:1px solid #a1a1a1;
 	border-radius:4px;
 }
-input#food_review::placeholder{
+input#h_review::placeholder{
 	font-size:15px;
 }
-button#food_review_btn{
+button#house_review_btn{
 	margin-top:7px;
 	width:60px;
 	height:40px;
 }
 /***/
 div.review_date{
-	width:940px;
+	width:910px;
 	margin:auto;
 	margin-bottom:-20px;
 	text-align:right;
@@ -338,7 +345,9 @@ div.food_review_zone2 dd:nth-child(4){
 	margin-left:20px;
 	vertical-align:middle;
 }
-
+div.food_review_zone2 dd:last-child{
+	text-align:right;
+} 
 div.user_name{
 	width:60px;
 	color:gray;
@@ -350,19 +359,21 @@ img.review_star{
 	width:90px;
 }
 img.like_finger{
-	margin-left:7px;
+	margin-left:15px;
+	margin-top:5px;
 }
-div.like_score{
+span.like_score{
 	width:30px;
 	color:gray;
 	font-size:13px;
 	text-align:center;
+	margin-left:5px;
 }
 img.btn_alert{
 	float:right;
 	margin-top:-30px;
 }
-select#star{
+select#h_star{
 	width:110px;
 	height:40px;
 	font-size:15px;
@@ -372,15 +383,11 @@ select#star{
 	margin-top:10px;
 	margin-left:-5px;
 }
-select#star option{
+select#h_star option{
 	font-size:15px;
 	color:#face49;
 }
 
-button#reserve_btn{
-	margin-top:30px;
-	width:200px;
-}
 
 
 

@@ -15,8 +15,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.myjeju.dao.CafeDAO;
 import com.myjeju.service.CafeService;
+import com.myjeju.vo.CafeReviewVO;
 import com.myjeju.vo.CafeVO;
 import com.myjeju.vo.HeartVO;
 
@@ -136,21 +136,178 @@ public class CafeController {
 	}
 	
 	/**
+	 * 카페 리스트 추가분 ajax 처리
+	 */
+	@ResponseBody
+	@RequestMapping(value="/cafe_proc_add.do", produces = "application/text; charset=utf8", method=RequestMethod.GET)
+	public String cafe_proc(String pnum) {
+		
+		int pageNumber = 1;
+		
+		if(!pnum.equals("")) { 
+			pageNumber = Integer.parseInt(pnum) +1;
+		}
+		
+		int startnum = ((pageNumber-1)*5) +1;
+		int endnum = pageNumber*5; 
+		
+		
+		ArrayList<CafeVO> list = cafeService.getCafeList(startnum, endnum);
+		
+		JsonObject jdata = new JsonObject();
+		JsonArray jlist = new JsonArray();
+		Gson gson = new Gson();
+		
+		for(CafeVO vo : list) {
+			JsonObject jobj = new JsonObject();
+			jobj.addProperty("tid", vo.getCaid());
+			jobj.addProperty("t_name", vo.getCa_name());
+			jobj.addProperty("t_addr", vo.getCa_addr());
+			jobj.addProperty("t_hp", vo.getCa_hp());
+			jobj.addProperty("t_image", vo.getCa_image1());
+			jobj.addProperty("t_vpoint", vo.getCa_vpoint());
+			jobj.addProperty("t_hpoint", vo.getCa_hpoint());
+			
+			jlist.add(jobj);
+		}
+		
+		jdata.add("jlist", jlist);
+
+		return gson.toJson(jdata);
+	}
+	
+	
+	/**
 	 * cafe_detail.do : 카페 상세페이지
 	 */
 	@RequestMapping(value="/cafe_detail.do", method=RequestMethod.GET)
-	public ModelAndView cafe_detail(String caid) {
+	public ModelAndView cafe_detail(String caid, HttpSession session) {
+		
 		ModelAndView mv = new ModelAndView();
+		
+		int pnum = 1;
 		
 		CafeVO vo = cafeService.getCafeDetail(caid);
 		String infor2 = vo.getCa_infor2().replace("-", "<br>");
+		String user_id = (String) session.getAttribute("session_id");
+		
+		ArrayList<CafeReviewVO> cavo = cafeService.getCafeReview(caid);
 		
 		mv.setViewName("food/cafe_detail");
+		mv.addObject("pnum",pnum);
 		mv.addObject("vo",vo);
 		mv.addObject("infor2",infor2);
+		mv.addObject("cavo", cavo);
+		mv.addObject("user_id", user_id);
+		mv.addObject("caid", caid);
 		
 		return mv;
 	}
+	
+	/**
+	 * cafe_review_proc.do : 카페 리뷰 등록 처리
+	 */
+	@RequestMapping(value="/cafe_review_proc.do", method=RequestMethod.POST)
+	public ModelAndView cafe_review_proc(CafeReviewVO vo, HttpSession session, HttpServletRequest request) {
+		
+		ModelAndView mv = new ModelAndView();
+		
+		String user_id = (String) session.getAttribute("session_id");
+		String caid = request.getParameter("caid");
+		String ca_review = request.getParameter("ca_review");
+		String star = request.getParameter("ca_star");
+		
+		if(star == null) {
+			star = "0";
+		}
+		
+		int ca_star = Integer.parseInt(star);
+		
+		vo.setId(user_id);
+		vo.setCaid(caid);
+		vo.setCa_review(ca_review);
+		vo.setCa_star(ca_star);
+
+		boolean result = cafeService.getInsertResult(vo);
+		
+		if(result) {
+			mv.setViewName("redirect:/cafe_detail.do");
+			mv.addObject("caid", vo.getCaid());
+		}
+		return mv;
+	}
+	
+	
+	/**
+	 * 카페 리뷰 리스트 ajax 처리
+	 */
+	
+	@ResponseBody
+	@RequestMapping(value="/cafe_review_list_proc.do", produces = "application/text; charset=utf8", method=RequestMethod.POST)
+	public String cafe_review_list_proc(String pnum, String caid, HttpSession session) {
+		
+		ArrayList<CafeReviewVO> list = cafeService.getCafeReview(caid);
+		String user_id = (String) session.getAttribute("session_id");
+		int pageNumber = 1;
+
+		if(!pnum.equals("")) { 
+			pageNumber = Integer.parseInt(pnum) +1;
+		}
+		int startnum = ((pageNumber-1)*5) +1;
+		int endnum = pageNumber*5; 
+		list = cafeService.getCafeReview(caid, startnum, endnum);
+		
+		JsonObject jdata = new JsonObject();
+		JsonArray jlist = new JsonArray();
+		Gson gson = new Gson();
+		
+		for(CafeReviewVO vo : list) {
+			JsonObject jobj = new JsonObject();
+			jobj.addProperty("reid", vo.getReid());
+			jobj.addProperty("caid", vo.getCaid());
+			jobj.addProperty("id", vo.getId());
+			jobj.addProperty("ca_review", vo.getCa_review());
+			jobj.addProperty("ca_star", vo.getCa_star());
+			jobj.addProperty("ca_time", vo.getCa_time());
+			jobj.addProperty("pnum", String.valueOf(pageNumber));
+			jobj.addProperty("user_id", user_id);
+			
+			jlist.add(jobj);
+		}
+		
+		jdata.add("jlist", jlist);
+		
+		return gson.toJson(jdata);
+	}
+
+	
+	/**
+	 * cafe_review_delete.do : 카페 리뷰 삭제
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/cafe_review_delete.do", method=RequestMethod.POST)
+	public boolean cafe_review_delete(HttpServletRequest request) {
+		boolean result = cafeService.getCafeReviewDelete(request.getParameter("reid"));
+		
+		return result;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	/**
 	 * 좋아요 +

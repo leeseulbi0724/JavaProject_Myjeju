@@ -15,8 +15,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.myjeju.dao.FoodDAO;
 import com.myjeju.service.FoodService;
+import com.myjeju.vo.FoodReviewVO;
 import com.myjeju.vo.FoodVO;
 import com.myjeju.vo.HeartVO;
 
@@ -137,23 +137,171 @@ public class FoodController {
 		return gson.toJson(jdata);
 	}
 	
+	/**
+	 * 음식점 리스트 추가분 ajax 처리
+	 */
+	@ResponseBody
+	@RequestMapping(value="/food_proc_add.do", produces = "application/text; charset=utf8", method=RequestMethod.GET)
+	public String food_proc(String pnum) {
+		
+		int pageNumber = 1;
+		
+		if(!pnum.equals("")) { 
+			pageNumber = Integer.parseInt(pnum) +1;
+		}
+		
+		int startnum = ((pageNumber-1)*5) +1;
+		int endnum = pageNumber*5; 
+		
+		
+		ArrayList<FoodVO> list = foodService.getFoodList(startnum, endnum);
+		
+		JsonObject jdata = new JsonObject();
+		JsonArray jlist = new JsonArray();
+		Gson gson = new Gson();
+		
+		for(FoodVO vo : list) {
+			JsonObject jobj = new JsonObject();
+			jobj.addProperty("fid", vo.getFid());
+			jobj.addProperty("f_name", vo.getF_name());
+			jobj.addProperty("f_addr", vo.getF_addr());
+			jobj.addProperty("f_hp", vo.getF_hp());
+			jobj.addProperty("f_image", vo.getF_image1());
+			jobj.addProperty("f_vpoint", vo.getF_vpoint());
+			jobj.addProperty("f_hpoint", vo.getF_hpoint());
+			
+			jlist.add(jobj);
+		}
+		
+		jdata.add("jlist", jlist);
+
+		return gson.toJson(jdata);
+	}
 	
 	/**
 	 * food_detail.do : 음식점 상세페이지
 	 */
 	@RequestMapping(value="/food_detail.do", method=RequestMethod.GET)
-	public ModelAndView food_detail(String fid) {
+	public ModelAndView food_detail(String fid, HttpSession session) {
+		
 		ModelAndView mv = new ModelAndView();
+		
+		int pnum = 1;
 		
 		FoodVO vo = foodService.getFoodDetail(fid);
 		String infor2 = vo.getF_infor2().replace("-", "<br>");
+		String user_id = (String) session.getAttribute("session_id");
+		
+		ArrayList<FoodReviewVO> fvo = foodService.getFoodReview(fid);
 		
 		mv.setViewName("food/food_detail");
+		mv.addObject("pnum",pnum);
 		mv.addObject("vo",vo);
 		mv.addObject("infor2",infor2);
+		mv.addObject("fvo", fvo);
+		mv.addObject("user_id", user_id);
+		mv.addObject("fid", fid);
 		
 		return mv;
 	}
+	
+	
+	
+	/**
+	 * food_review_proc.do : 음식점 리뷰 등록 처리
+	 */
+	@RequestMapping(value="/food_review_proc.do", method=RequestMethod.POST)
+	public ModelAndView food_review_proc(FoodReviewVO vo, HttpSession session, HttpServletRequest request) {
+		
+		ModelAndView mv = new ModelAndView();
+		
+		String user_id = (String) session.getAttribute("session_id");
+		String fid = request.getParameter("fid");
+		String f_review = request.getParameter("f_review");
+		String star = request.getParameter("f_star");
+		
+		if(star == null) {
+			star = "0";
+		}
+		
+		int f_star = Integer.parseInt(star);
+		
+		vo.setId(user_id);
+		vo.setFid(fid);
+		vo.setF_review(f_review);
+		vo.setF_star(f_star);
+
+		boolean result = foodService.getInsertResult(vo);
+		
+		if(result) {
+			mv.setViewName("redirect:/food_detail.do");
+			mv.addObject("fid", vo.getFid());
+		}
+		return mv;
+	}
+	
+	
+	/**
+	 * 음식점 리뷰 리스트 ajax 처리
+	 */
+	
+	@ResponseBody
+	@RequestMapping(value="/food_review_list_proc.do", produces = "application/text; charset=utf8", method=RequestMethod.POST)
+	public String food_review_list_proc(String pnum, String fid, HttpSession session) {
+		
+		ArrayList<FoodReviewVO> list = foodService.getFoodReview(fid);
+		String user_id = (String) session.getAttribute("session_id");
+		int pageNumber = 1;
+
+		if(!pnum.equals("")) { 
+			pageNumber = Integer.parseInt(pnum) +1;
+		}
+		int startnum = ((pageNumber-1)*5) +1;
+		int endnum = pageNumber*5; 
+		list = foodService.getFoodReview(fid, startnum, endnum);
+		
+		JsonObject jdata = new JsonObject();
+		JsonArray jlist = new JsonArray();
+		Gson gson = new Gson();
+		
+		for(FoodReviewVO vo : list) {
+			JsonObject jobj = new JsonObject();
+			jobj.addProperty("reid", vo.getReid());
+			jobj.addProperty("fid", vo.getFid());
+			jobj.addProperty("id", vo.getId());
+			jobj.addProperty("f_review", vo.getF_review());
+			jobj.addProperty("f_star", vo.getF_star());
+			jobj.addProperty("f_time", vo.getF_time());
+			jobj.addProperty("pnum", String.valueOf(pageNumber));
+			jobj.addProperty("user_id", user_id);
+			
+			jlist.add(jobj);
+		}
+		
+		jdata.add("jlist", jlist);
+		
+		return gson.toJson(jdata);
+	}
+
+	
+	/**
+	 * food_review_delete.do : 음식점 리뷰 삭제
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/food_review_delete.do", method=RequestMethod.POST)
+	public boolean food_review_delete(HttpServletRequest request) {
+		boolean result = foodService.getFoodReviewDelete(request.getParameter("reid"));
+		
+		return result;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	/**
 	 * 좋아요 +

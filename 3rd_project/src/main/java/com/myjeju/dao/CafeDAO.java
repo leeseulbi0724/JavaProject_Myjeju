@@ -9,6 +9,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.myjeju.vo.CafeReviewVO;
 import com.myjeju.vo.CafeVO;
 import com.myjeju.vo.HeartVO;
 
@@ -21,13 +22,13 @@ public class CafeDAO extends DBConn {
 	
 	//Select --> 전체 리스트
 	public ArrayList<CafeVO> getList(){
-		List<CafeVO> list = sqlSession.selectList(namespace+".maplist");
+		List<CafeVO> list = sqlSession.selectList(namespace+".map_list");
 		return (ArrayList<CafeVO>)list;
 	}
 	
 	//카페 전체 리스트
 	public ArrayList<CafeVO> getCafeList(){
-		List<CafeVO> list = sqlSession.selectList(namespace+".cafelist");
+		List<CafeVO> list = sqlSession.selectList(namespace+".cafe_list");
 		return (ArrayList<CafeVO>)list;
 	}
 	
@@ -38,7 +39,7 @@ public class CafeDAO extends DBConn {
 		param.put("start", String.valueOf(startnum));
 		param.put("end", String.valueOf(endnum));
 		
-		List<CafeVO> list = sqlSession.selectList(namespace+".ajaxcafelistnum",param);
+		List<CafeVO> list = sqlSession.selectList(namespace+".ajax_cafe_list_num",param);
 		
 		return (ArrayList<CafeVO>)list;
 	}
@@ -52,21 +53,57 @@ public class CafeDAO extends DBConn {
 		param.put("search", search);
 		param.put("search_text", search_text);
 		
-		List<CafeVO> list = sqlSession.selectList(namespace+".ajaxcafelistsearch",param);
+		List<CafeVO> list = sqlSession.selectList(namespace+".ajax_cafe_list_search",param);
 		
 		return (ArrayList<CafeVO>)list;
 	}
 	
 	//카페 상위3
 	public ArrayList<CafeVO> getCafeListTop3(){
-		List<CafeVO> list = sqlSession.selectList(namespace+".cafetop3");
+		List<CafeVO> list = sqlSession.selectList(namespace+".cafe_top3");
 		return (ArrayList<CafeVO>)list;
 	}
 	
 	//카페 상세 정보
 	public CafeVO getCafeDetail(String caid) {
-		return sqlSession.selectOne(namespace+".cafedetail", caid);
+		return sqlSession.selectOne(namespace+".cafe_detail", caid);
 	}
+	
+	
+	//리뷰 쓰기
+	public boolean getInsertResult(CafeReviewVO vo) {
+		boolean result = false;
+		
+		int value = sqlSession.insert(namespace+".insert_review", vo);
+		if(value != 0) result = true;
+		
+		return result;
+	}
+	
+	//리뷰 리스트
+	public ArrayList<CafeReviewVO> getCafeReview(String caid){
+		List<CafeReviewVO> list = sqlSession.selectList(namespace+".review_list", caid);
+		return (ArrayList<CafeReviewVO>)list;
+	}
+	
+	//리뷰 리스트
+	public ArrayList<CafeReviewVO> getCafeReview(String caid, int startnum, int endnum){
+		Map<String,String> param = new HashMap<String,String>();
+		
+		param.put("caid", caid);
+		param.put("start", String.valueOf(startnum));
+		param.put("end", String.valueOf(endnum));
+		
+		List<CafeReviewVO> list = sqlSession.selectList(namespace+".ajax_review_list",param);
+		
+		return (ArrayList<CafeReviewVO>)list;
+	}
+	
+	//리뷰 삭제
+	public int getCafeReviewDelete(String reid) {
+		return sqlSession.delete(namespace+".delete_review", reid);
+	}
+	
 	
 	//Update ---> 하트 업데이트
 	public int getUpdateHeart(String caid) {

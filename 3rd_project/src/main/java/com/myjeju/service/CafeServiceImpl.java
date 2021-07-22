@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.myjeju.dao.CafeDAO;
+import com.myjeju.vo.CafeReviewVO;
 import com.myjeju.vo.CafeVO;
 import com.myjeju.vo.HeartVO;
 
@@ -44,6 +45,34 @@ public class CafeServiceImpl implements CafeService{
 	public CafeVO getCafeDetail(String caid) {
 		return cafeDAO.getCafeDetail(caid);
 	}
+	
+	
+	@Override
+	public boolean getInsertResult(CafeReviewVO vo) {
+		return cafeDAO.getInsertResult(vo);
+	}
+	
+	@Override
+	public ArrayList<CafeReviewVO> getCafeReview(String caid){
+		return cafeDAO.getCafeReview(caid);
+	}
+	
+	@Override
+	public ArrayList<CafeReviewVO> getCafeReview(String caid, int startnum, int endnum){
+		return cafeDAO.getCafeReview(caid, startnum, endnum);
+	}
+	
+	@Override
+	public boolean getCafeReviewDelete(String reid) {
+		int value = cafeDAO.getCafeReviewDelete(reid);
+		
+		boolean result = false;
+		if(value != 0) result = true;
+		
+		return result;
+	}
+	
+	
 	
 	@Override
 	public boolean getUpdateHeart(String caid) {

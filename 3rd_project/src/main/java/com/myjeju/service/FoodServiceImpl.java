@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.myjeju.dao.FoodDAO;
+import com.myjeju.vo.FoodReviewVO;
 import com.myjeju.vo.FoodVO;
 import com.myjeju.vo.HeartVO;
 
@@ -44,6 +45,33 @@ public class FoodServiceImpl implements FoodService {
 	public FoodVO getFoodDetail(String fid) {
 		return foodDAO.getFoodDetail(fid);
 	}
+	
+	
+	@Override
+	public boolean getInsertResult(FoodReviewVO vo) {
+		return foodDAO.getInsertResult(vo);
+	}
+	
+	@Override
+	public ArrayList<FoodReviewVO> getFoodReview(String fid){
+		return foodDAO.getFoodReview(fid);
+	}
+	
+	@Override
+	public ArrayList<FoodReviewVO> getFoodReview(String fid, int startnum, int endnum){
+		return foodDAO.getFoodReview(fid, startnum, endnum);
+	}
+	
+	@Override
+	public boolean getFoodReviewDelete(String reid) {
+		int value = foodDAO.getFoodReviewDelete(reid);
+		
+		boolean result = false;
+		if(value != 0) result = true;
+		
+		return result;
+	}
+	
 	
 	@Override
 	public boolean getUpdateHeart(String fid) {
