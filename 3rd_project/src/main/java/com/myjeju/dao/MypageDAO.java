@@ -134,5 +134,34 @@ public class MypageDAO {
 	 * (ArrayList<StorevVO>) list; }
 	 */
 	
+	/**
+	 * 예약내역가져오기
+	 */
+	public OrderVO getOrderContent(String rid) {
+		return sqlSession.selectOne(namespace+".order_content", rid);
+	}
+	
+	/**
+	 * 날짜사이에 날짜구하기
+	 */
+	public ArrayList<OrderVO> getDayResult(OrderVO vo) {
+		List<OrderVO> list = sqlSession.selectList(namespace+".day_result", vo);
+		return (ArrayList<OrderVO>) list;
+	}
+	
+	/**
+	 * reservation 0만들기
+	 */
+	public int getReservationResult(OrderVO vo) {
+		return sqlSession.update(namespace+".reservation_result", vo);
+	}
+	
+	/**
+	 * 예약내역삭제
+	 */
+	public int getOrderDelete(String rid) {
+		return sqlSession.delete(namespace+".order_delete", rid);
+	}
+	
 	
 }

@@ -2,7 +2,9 @@
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>    
+    <c:set var="today" value="<%=new java.util.Date()%>" />	
+    <c:set var="date"><fmt:formatDate value="${today}" pattern="yyyy-MM-dd" /></c:set>
 <!DOCTYPE html>
 <html>
 <head>
@@ -77,10 +79,12 @@
 	.more span { font-size:14px; margin-left:5px; }
 	
 	.more_box { display:none; }
+	
+	.btn { padding:5px; font-size:13px; margin-top:40px; }
 </style>
 </head>
 <script>
-	$(document).ready(function() {
+	$(document).ready(function() {		
 		$(".reservation").click(function() {
 			$(".store_content").css("display","none");
 			$(".reservation_content").css("display","block");
@@ -103,6 +107,14 @@
 		$(".reservation_more").click(function() {
 			$(".reservation_more_box").css("display","inline-block");
 		});		
+		
+		$("button[id=cancel]").click(function() {
+			var rid = $(this).attr("name");
+			var con_test = confirm("게시글을 삭제하시겠습니까?"); 
+        	if(con_test == true){   
+        		location.replace("myorder_delete.do?rid="+rid);
+        	}
+		});
 		
 	});
 </script>
@@ -137,8 +149,7 @@
 			<div class="more store_more">
 				<div class="img"></div><span>더보기</span>
 			</div>	
-		</div>
-		
+		</div>		
 		<div class="content reservation_content">
 			<p>2021.07</p>
 			<c:if test="${not empty mlist }">
@@ -152,18 +163,24 @@
 						<p class="info">${vo.rdate }<br><a href="house_detail.do?hid=${vo.hid }">${vo.h_name }</a><br><span>${vo.hd_name }</span></p>
 						<p class="date"><strong>예약일</strong> <br><strong>입실</strong> ${vo.firstday }<br><strong>퇴실</strong> ${vo.lastday }</p>
 						<p class="price"><fmt:formatNumber value="${ (endDate - strDate)*vo.hd_price }" pattern="#,###" />원</p>
+						<c:if test = "${ date < vo.firstday }">
+							<button class="btn btn-outline-secondary" id="cancel" name="${vo.rid }">예약취소</button>
+						</c:if>
 					</div>
 				</c:forEach>
 				<c:forEach var = "vo"  items="${mlist}" begin="4" end="${fn:length(mlist)-1}" >		
 				<fmt:parseDate value="${vo.firstday }" var="strPlanDate" pattern="yyyy-MM-dd"/>
 				<fmt:parseNumber value="${strPlanDate.time / (1000*60*60*24)}" integerOnly="true" var="strDate"></fmt:parseNumber>
 				<fmt:parseDate value="${vo.lastday }" var="endPlanDate" pattern="yyyy-MM-dd"/>
-				<fmt:parseNumber value="${endPlanDate.time / (1000*60*60*24)}" integerOnly="true" var="endDate"></fmt:parseNumber>		
+				<fmt:parseNumber value="${endPlanDate.time / (1000*60*60*24)}" integerOnly="true" var="endDate"></fmt:parseNumber>
 					<div class="box more_box reservation_more_box">
 						<img src="http://localhost:9000/myjeju/images/house/${vo.h_img }" width=100 height=80>
 						<p class="info">${vo.rdate }<br><a href="house_detail.do?hid=${vo.hid }">${vo.h_name }</a><br><span>${vo.hd_name }</span></p>
 						<p class="date"><strong>예약일</strong> <br><strong>입실</strong> ${vo.firstday }<br><strong>퇴실</strong> ${vo.lastday }</p>
 						<p class="price"><fmt:formatNumber value="${ (endDate - strDate)*vo.hd_price }" pattern="#,###" />원</p>
+						<c:if test = "${ date < vo.firstday }">
+							<button class="btn btn-outline-secondary" id="cancel" name="${vo.rid }">예약취소</button>
+						</c:if>
 					</div>
 				</c:forEach>
 				</c:if>	

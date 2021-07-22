@@ -362,4 +362,33 @@ public class MypageController {
 		return result;
 
 	}
+	
+	/**
+	 * 예약내역 삭제
+	 */
+	@RequestMapping(value="/myorder_delete.do", method=RequestMethod.GET)
+	public ModelAndView myorder_delete(String rid) {
+		ModelAndView mv = new ModelAndView();
+		//예약 내역 가져오기
+		OrderVO vo = MypageService.getOrderContent(rid);
+		//사이에 모든 날짜 구하기
+		String first[] = vo.getFirstday().split("-");
+		String last[] = vo.getLastday().split("-");
+		vo.setFirstday(first[0]+first[1]+first[2]);
+		vo.setLastday(last[0]+last[1]+last[2]);
+		ArrayList<OrderVO> list = MypageService.getDayResult(vo);
+		boolean result = false;
+		//reservation 테이블 0만들기
+		for (int i=0; i<list.size(); i++) {
+			vo.setDay(list.get(i).getDay());
+			result = MypageService.getReservationResult(vo);
+		}
+		if (result) {
+			//예약내역 삭제
+			MypageService.getOrderDelete(rid);
+		}
+		mv.setViewName("redirect:/myorder.do");
+		return mv;
+		
+	}
 }

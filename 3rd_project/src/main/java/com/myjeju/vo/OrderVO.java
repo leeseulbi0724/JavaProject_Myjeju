@@ -4,10 +4,27 @@ public class OrderVO {
 	
 	String o_name, o_price, o_count, o_file, o_sfile, o_date, id;
 	
-	String hid, h_name, hdid, hd_name, roomid, firstday, lastday, rdate, h_img;
-	int hd_price;
+	String hid, h_name, hdid, hd_name, roomid, firstday, lastday, rdate, h_img, rid, day;
+	int hd_price;	
 	
 	
+	
+	public String getDay() {
+		return day;
+	}
+
+	public void setDay(String day) {
+		this.day = day;
+	}
+
+	public String getRid() {
+		return rid;
+	}
+
+	public void setRid(String rid) {
+		this.rid = rid;
+	}
+
 	public int getHd_price() {
 		return hd_price;
 	}

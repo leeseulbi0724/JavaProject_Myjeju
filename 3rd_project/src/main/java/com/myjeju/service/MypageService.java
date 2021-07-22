@@ -43,4 +43,9 @@ public interface MypageService {
 	ArrayList<StorevVO> getStoreReview(String id);
 	ArrayList<TravelReviewVO> getTravelReview(String id);
 	
+	OrderVO getOrderContent(String rid);
+	ArrayList<OrderVO> getDayResult(OrderVO vo);
+	boolean getReservationResult(OrderVO vo);
+	boolean getOrderDelete(String rid);
+	
 }

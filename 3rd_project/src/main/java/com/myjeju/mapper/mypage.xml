@@ -93,7 +93,7 @@
 		
 		<!-- 회원 예약내역 -->
 		<select id="mreservation_list" parameterType="java.lang.String" resultType="com.myjeju.vo.OrderVO">
-			select id, hid, hdid, roomid, to_char(firstday, 'yyyy-mm-dd') firstday, to_char(lastday, 'yyyy-mm-dd') lastday, rdate from myjeju_member_reservation where id=#{id} order by rdate desc
+			select id, hid, hdid, roomid, to_char(firstday, 'yyyy-mm-dd') firstday, to_char(lastday, 'yyyy-mm-dd') lastday, rdate, rid from myjeju_member_reservation where id=#{id} order by rdate desc
 		</select>
 		
 		<!-- 숙소이름 가져오기 -->
@@ -121,4 +121,26 @@
 		<select id = "travel_review" parameterType = "java.lang.String" resultType = "com.myjeju.vo.TravelReviewVO">
 			select id, tid, reid, t_review, t_star, to_char(t_time, 'yyyy-mm-dd') t_time from myjeju_travel_review where id = #{id}
 		</select>
+		
+		<!-- 예약내역 -->
+		<select id="order_content" parameterType="java.lang.String" resultType="com.myjeju.vo.OrderVO">
+			select id, hid, hdid, roomid, to_char(firstday, 'yyyy-mm-dd') firstday, to_char(lastday, 'yyyy-mm-dd') lastday, rdate, rid from myjeju_member_reservation where rid=#{rid}
+		</select>
+		
+		<!-- 날짜사이에 모든날짜 구하기 -->
+		<select id="day_result" parameterType="java.lang.String" resultType="com.myjeju.vo.OrderVO">
+			select to_char(to_date(#{firstday}, 'yyyymmdd')+level-1, 'yyyy-mm-dd') as day from dual
+			connect by <![CDATA[level < (to_date(#{lastday}, 'yyyymmdd' ) - to_date(#{firstday}, 'yyyymmdd') +1)]]>			
+		</select>
+		
+		<!-- reservation 0만들기 -->
+		<update id="reservation_result" parameterType="com.myjeju.vo.OrderVO">
+			update myjeju_reservation set available=0 where to_char(rdate,'yyyy-mm-dd') = #{day} and roomid=#{roomid}
+		</update>
+		
+		<!-- 예약내역삭제 -->
+		<delete id="order_delete" parameterType="java.lang.String">
+			delete from myjeju_member_reservation where rid=#{rid}
+		</delete>
+		
     </mapper>

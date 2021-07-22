@@ -29,7 +29,7 @@
 	</select>
 	
 	<insert id="inserreservation" parameterType="com.myjeju.vo.MReservationVO">
-		insert into myjeju_member_reservation values(#{id},#{hid},#{hdid},#{roomid},TO_DATE(#{firstday},'YYYY-MM-DD hh24:mi:ss'),TO_DATE(#{lastday},'YYYY-MM-DD hh24:mi:ss'),sysdate)
+		insert into myjeju_member_reservation values(#{id},#{hid},#{hdid},#{roomid},TO_DATE(#{firstday},'YYYY-MM-DD hh24:mi:ss'),TO_DATE(#{lastday},'YYYY-MM-DD hh24:mi:ss'),sysdate,'r_'||sequ_myjeju_member_reservation.nextval)
 	</insert>
 	
 	<update id="updateavail" parameterType="map">

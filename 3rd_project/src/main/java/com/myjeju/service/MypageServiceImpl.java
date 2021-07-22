@@ -175,7 +175,35 @@ public class MypageServiceImpl implements MypageService {
 		return mypageDAO.getTravelReview(id);
 	}
 	
+	@Override
+	public OrderVO getOrderContent(String rid) {
+		return mypageDAO.getOrderContent(rid);
+	}
 	
+	@Override
+	public ArrayList<OrderVO> getDayResult(OrderVO vo) {
+		return mypageDAO.getDayResult(vo);
+	}
+	
+	@Override
+	public boolean getReservationResult(OrderVO vo) {
+		int val = mypageDAO.getReservationResult(vo);
+		boolean result = false;
+		if ( val!=0) {
+			result = true;
+		}
+		return result;
+	}
+	
+	@Override
+	public boolean getOrderDelete(String rid) {
+		int val = mypageDAO.getOrderDelete(rid);
+		boolean result = false;
+		if ( val!=0) {
+			result = true;
+		}
+		return result;
+	}
 	
 	
 	
