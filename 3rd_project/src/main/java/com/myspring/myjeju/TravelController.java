@@ -205,6 +205,7 @@ public class TravelController {
 		mv.addObject("infor2",infor2);
 		mv.addObject("revo", revo);
 		mv.addObject("user_id", user_id);
+		mv.addObject("tid", tid);
 		return mv;
 	}
 	
@@ -212,21 +213,32 @@ public class TravelController {
 	 * travel_review_proc.do : 여행지 리뷰 등록 처리
 	 */
 	@RequestMapping(value="/travel_review_proc.do", method=RequestMethod.POST)
-	public ModelAndView travel_review_proc(TravelReviewVO vo, HttpSession session) {
+	public ModelAndView travel_review_proc(TravelReviewVO vo, HttpSession session, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView();
 		
 		String user_id = (String) session.getAttribute("session_id");
+		String tid = request.getParameter("tid");
+		String t_review = request.getParameter("t_review");
+		String star = request.getParameter("t_star");
+		if(star == null) {
+			star = "0";
+		}
+		int t_star = Integer.parseInt(star);
+		
 		vo.setId(user_id);
+		vo.setTid(tid);
+		vo.setT_review(t_review);
+		vo.setT_star(t_star);
 
 		boolean result = travelService.getInsertResult(vo);
 		
 		if(result) {
 			mv.setViewName("redirect:/travel_detail.do");
 			//mv.setViewName("redirect:/travel_review_list_proc.do");
-			mv.addObject("id", vo.getId());
+			//mv.addObject("id", vo.getId());
 			mv.addObject("tid", vo.getTid());
-			mv.addObject("t_review", vo.getT_review());
-			mv.addObject("t_star", vo.getT_star());
+			//mv.addObject("t_review", vo.getT_review());
+			//mv.addObject("t_star", vo.getT_star());
 		}
 		return mv;
 	}
@@ -235,19 +247,19 @@ public class TravelController {
 	/**
 	 * 여행지 리뷰 리스트 ajax 처리
 	 */
-	/* 
+	
 	@ResponseBody
-	@RequestMapping(value="/travel_review_list_proc.do", produces = "application/text; charset=utf8", method=RequestMethod.GET)
+	@RequestMapping(value="/travel_review_list_proc.do", produces = "application/text; charset=utf8", method=RequestMethod.POST)
 	public String travel_review_list_proc(String pnum, String tid, HttpSession session) {
 System.out.println("-----------1111111111111111");		
-	
 		ArrayList<TravelReviewVO> list = travelService.getTravelReview(tid);
+		System.out.println(tid);
 System.out.println("-----------2222222222222222");		
 		String user_id = (String) session.getAttribute("session_id");
 System.out.println("travel_review_list_proc.do:"+user_id);	
 		int pageNumber = 1;
 
-		if(pnum != null) { 
+		if(!pnum.equals("")) { 
 			pageNumber = Integer.parseInt(pnum) +1;
 		}
 System.out.println("pnum:"+pageNumber);	
@@ -269,7 +281,8 @@ System.out.println("44444444444444444");
 			jobj.addProperty("t_star", vo.getT_star());
 			jobj.addProperty("pnum", String.valueOf(pageNumber));
 			jobj.addProperty("user_id", user_id);
-			
+			jobj.addProperty("t_time", vo.getT_time());
+			jobj.addProperty("reid", vo.getReid());
 			jlist.add(jobj);
 		}
 		
@@ -277,7 +290,7 @@ System.out.println("44444444444444444");
 System.out.println(jdata);
 		return gson.toJson(jdata);
 	}
-	*/
+
 	
 	/**
 	 * travel_review_delete.do : 여행지 리뷰 삭제

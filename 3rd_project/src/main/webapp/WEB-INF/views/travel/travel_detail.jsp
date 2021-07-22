@@ -59,6 +59,7 @@
 					return false;
 				}else{
 					travel_review_form.submit();
+					moreList(pnum, tid);
 					//location.reload();
 				}
 				/* else{
@@ -77,28 +78,34 @@
 						
 					});
 				} */
+				
+				
 			});
 			
-			/*
+			
+			
 			var pnum=$(".pnum").val();
+			alert(pnum);
+			var tid = $("#travel_review_btn").attr("name");
 
-			moreList(pnum); 
+			moreList(pnum, tid); 
 			
 			 function moreList(pnum,tid){
 				var addListHtml="";
 				
 				$.ajax({
-					type:"GET",
+					type:"post",
 					url:"travel_review_list_proc.do",
 					data:{
 						pnum:pnum,
 						tid:tid
 					},
-					success:function(result){
-						var jdata = JSON.parse(result);
-						alert("테스트1");
+					dataType : "json",
+					success : function(result) {
+						var data = JSON.stringify(result);
+						var jdata = JSON.parse(data);
+						//alert(jdata);
 						for(var i in jdata.jlist){
-							alert("테스트2");
 							addListHtml += "<div class='review_date' id='t_time'>" + jdata.jlist[i].t_time + "</div>";
 							addListHtml += "<dl>";
 							addListHtml += "<dt>";
@@ -135,26 +142,53 @@
 								addListHtml += "<dd style='margin:-15px 0 -10px 0'>";
 								addListHtml += "<button type='button' name='" + jdata.jlist[i].reid + "'" + "class='btn_style3' id='travel_review_delete' style='margin-right:20px'>삭제</button>";
 								addListHtml += "</dd>";
-							}else{
+							 }else{
 								addListHtml += "<dd>";
 								addListHtml += "<button type='button' class='btn_style3' id='travel_review_delete' style='display:none'>삭제</button>";
 								addListHtml += "</dd>";
-							} 
+							}
 							addListHtml += "</dl>";
 						
 						}
 						$(".pnum").val(jdata.jlist[0].pnum);
 		                $("#travel_review_list").append(addListHtml);
-		                alert("테스트3");
-					},
+		                //alert("테스트3");
+		                
+		                $("button[id^=travel_review_delete]").click(function(){
+		    				var delete_confirm = confirm("리뷰를 삭제하시겠습니까?");
+		    				
+		    				if(delete_confirm){
+		    					var reid = $(this).attr("name");
+		    					
+		    					$.ajax({
+		    						type:"post",
+		    						url:"travel_review_delete.do",
+		    						data:{reid : reid},
+		    						dataType:'json',
+		    						success:function(result){
+		    							location.reload();
+		    						},
+		    						
+		    					});
+		    				}
+		    			});
+					}
 				});
 			} 
 			
+			
+			
 	        $("#more_btn").on("click", function(){
 	            var pnum=$(".pnum").val();
-	            moreList(pnum);
+	            var tid = $("#tid").val();
+	            moreList(pnum, tid);
 	        });  
-	        */ 
+	         
+			
+			
+			/* document.on('click', 'button[id^=travel_review_delete]', function() {
+				alert("ww");
+			}); */
 			
 			
 			
@@ -164,26 +198,6 @@
 			
 			
 			
-			
-			
-			$("button[id^=travel_review_delete]").click(function(){
-				var delete_confirm = confirm("리뷰를 삭제하시겠습니까?");
-				
-				if(delete_confirm){
-					var reid = $(this).attr("name");
-					
-					$.ajax({
-						type:"post",
-						url:"travel_review_delete.do",
-						data:{reid : reid},
-						dataType:'json',
-						success:function(result){
-							location.reload();
-						},
-						
-					});
-				}
-			});
 			
 		});
 	</script>
@@ -316,8 +330,8 @@
 			<h3>리뷰</h3> 
 			<div class="travel_review_zone">
 				<form id="travel_review_form" name="travel_review_form" action="travel_review_proc.do?tid=${vo.tid }" method="POST">
-					<%-- <input type="hidden" name="id" id="id" value="${user_id}">
-					<input type="hidden" name="tid" id="tid" value="${vo.tid}"> --%>
+					<%-- <input type="hidden" name="id" id="id" value="${user_id}"> --%>
+					<input type="hidden" name="tid" id="tid" value="${tid}"> 
 					<dl>
 						<dt>
 							<img src="http://localhost:9000/myjeju/images/travel/travel_detail/human.png">
@@ -335,7 +349,7 @@
 						<c:if test="${user_id != null}">
 							<dd><input type="text" name="t_review" id="t_review" placeholder="여행지가 어떠셨나요? 리뷰를 남겨주세요."></dd>
 							<dd>
-								<button type="button" class="btn_style3" id="travel_review_btn">등록</button>
+								<button type="button" name = "${tid}" class="btn_style3" id="travel_review_btn">등록</button>
 							</dd>
 						</c:if>
 						<c:if test="${user_id == null}">
@@ -348,7 +362,7 @@
 				</form>
 			</div>
 			<div id="travel_review_list"class="travel_review_zone2">
-				<c:forEach var="revo" items="${revo}">
+				<%-- <c:forEach var="revo" items="${revo}">
 					<div class="review_date" id="t_time">${revo.t_time}</div>
 					<dl>
 							<dt>
@@ -390,7 +404,7 @@
 							</dd> 
 							<c:if test="${user_id eq revo.id}">
 								<dd style="margin:-15px 0 -10px 0;">
-									<%-- <button type="button" name="${revo.reid}" class="btn_style3" id="travel_review_update">수정</button> --%>
+									<button type="button" name="${revo.reid}" class="btn_style3" id="travel_review_update">수정</button>
 									<button type="button" name="${revo.reid}" class="btn_style3" id="travel_review_delete" style="margin-right:20px;">삭제</button>
 								</dd>
 							</c:if>
@@ -401,13 +415,13 @@
 								</dd>
 							</c:if>
 					</dl>
-				</c:forEach>  
+				</c:forEach>  --%> 
 			</div>
 			<button type="button" class="btn_style6" id="more_btn">
 				<img src="http://localhost:9000/myjeju/images/travel/bill_list_btn2.png">
 				<img src="http://localhost:9000/myjeju/images/travel/bill_list_btn.png">
 			</button>
-			<%-- <input type="text" class="pnum" name="pnum" value="${pnum}"> --%>
+			<input type="hidden" class="pnum" name="pnum">
 		</section>
 		
 		<!-- <section class="detail_recommend">
