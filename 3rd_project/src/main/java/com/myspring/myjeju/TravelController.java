@@ -187,16 +187,18 @@ public class TravelController {
 	public ModelAndView travel_detail(String tid, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		
+		int pnum = 1;
+		
 		TravelVO vo = travelService.getTravelDetail(tid);
 		PhotoSpotVO photovo = travelService.getPhotoSpot(tid);
 		CarSpotVO carvo = travelService.getCarSpot(tid); 
 		String infor2 = vo.getT_infor2().replace("\r\n", "<br>");
 		String user_id = (String) session.getAttribute("session_id");
 
-System.out.println("travel_detail.do:"+user_id);			
 		ArrayList<TravelReviewVO> revo = travelService.getTravelReview(tid);
 		
 		mv.setViewName("travel/travel_detail");
+		mv.addObject("pnum",pnum);
 		mv.addObject("vo",vo);
 		mv.addObject("photovo",photovo);
 		mv.addObject("carvo",carvo);
@@ -215,24 +217,16 @@ System.out.println("travel_detail.do:"+user_id);
 		
 		String user_id = (String) session.getAttribute("session_id");
 		vo.setId(user_id);
-System.out.println("travel_review_proc.do:"+user_id);	
-System.out.println("getId:"+vo.getId());	
-System.out.println("getReid:"+vo.getReid());	
-System.out.println("getT_review:"+vo.getT_review());	
-System.out.println("getT_star:"+vo.getT_star());	
-System.out.println("getT_time:"+vo.getT_time());	
-System.out.println("getTid:"+vo.getTid());	
+
 		boolean result = travelService.getInsertResult(vo);
 		
 		if(result) {
 			mv.setViewName("redirect:/travel_detail.do");
-			mv.setViewName("redirect:/travel_review_list_proc.do");
-			mv.addObject("reid", vo.getReid());
+			//mv.setViewName("redirect:/travel_review_list_proc.do");
 			mv.addObject("id", vo.getId());
 			mv.addObject("tid", vo.getTid());
 			mv.addObject("t_review", vo.getT_review());
 			mv.addObject("t_star", vo.getT_star());
-			mv.addObject("t_time", vo.getT_time());
 		}
 		return mv;
 	}
@@ -241,11 +235,14 @@ System.out.println("getTid:"+vo.getTid());
 	/**
 	 * 여행지 리뷰 리스트 ajax 처리
 	 */
+	/* 
 	@ResponseBody
 	@RequestMapping(value="/travel_review_list_proc.do", produces = "application/text; charset=utf8", method=RequestMethod.GET)
 	public String travel_review_list_proc(String pnum, String tid, HttpSession session) {
+System.out.println("-----------1111111111111111");		
+	
 		ArrayList<TravelReviewVO> list = travelService.getTravelReview(tid);
-		
+System.out.println("-----------2222222222222222");		
 		String user_id = (String) session.getAttribute("session_id");
 System.out.println("travel_review_list_proc.do:"+user_id);	
 		int pageNumber = 1;
@@ -253,12 +250,13 @@ System.out.println("travel_review_list_proc.do:"+user_id);
 		if(pnum != null) { 
 			pageNumber = Integer.parseInt(pnum) +1;
 		}
-System.out.println("pnum:"+pageNumber);			
+System.out.println("pnum:"+pageNumber);	
 		int startnum = ((pageNumber-1)*5) +1;
 		int endnum = pageNumber*5; 
-
-		list = travelService.getTravelReview(startnum, endnum);
-
+System.out.println("33333333333333333333");
+		list = travelService.getTravelReview(tid, startnum, endnum);
+		
+System.out.println("44444444444444444");
 		JsonObject jdata = new JsonObject();
 		JsonArray jlist = new JsonArray();
 		Gson gson = new Gson();
@@ -267,9 +265,7 @@ System.out.println("pnum:"+pageNumber);
 			JsonObject jobj = new JsonObject();
 			jobj.addProperty("tid", vo.getTid());
 			jobj.addProperty("id", vo.getId());
-			jobj.addProperty("reid", vo.getReid());
 			jobj.addProperty("t_review", vo.getT_review());
-			jobj.addProperty("t_time", vo.getT_time());
 			jobj.addProperty("t_star", vo.getT_star());
 			jobj.addProperty("pnum", String.valueOf(pageNumber));
 			jobj.addProperty("user_id", user_id);
@@ -278,10 +274,10 @@ System.out.println("pnum:"+pageNumber);
 		}
 		
 		jdata.add("jlist", jlist);
-
+System.out.println(jdata);
 		return gson.toJson(jdata);
 	}
-	
+	*/
 	
 	/**
 	 * travel_review_delete.do : 여행지 리뷰 삭제

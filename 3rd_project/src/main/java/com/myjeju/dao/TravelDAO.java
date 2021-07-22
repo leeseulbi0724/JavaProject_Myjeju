@@ -99,9 +99,10 @@ public class TravelDAO extends DBConn {
 	
 	
 	//府轰 府胶飘
-	public ArrayList<TravelReviewVO> getTravelReview(int startnum, int endnum){
+	public ArrayList<TravelReviewVO> getTravelReview(String tid, int startnum, int endnum){
 		Map<String,String> param = new HashMap<String,String>();
 		
+		param.put("tid", tid);
 		param.put("start", String.valueOf(startnum));
 		param.put("end", String.valueOf(endnum));
 		
@@ -109,6 +110,8 @@ public class TravelDAO extends DBConn {
 		
 		return (ArrayList<TravelReviewVO>)list;
 	}
+	
+	
 	
 	
 	//府轰 昏力

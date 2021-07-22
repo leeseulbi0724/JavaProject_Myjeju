@@ -27,6 +27,6 @@ public interface TravelService {
 	
 	boolean getInsertResult(TravelReviewVO vo);
 	ArrayList<TravelReviewVO> getTravelReview(String tid);
-	ArrayList<TravelReviewVO> getTravelReview(int startnum, int endnum);
+	ArrayList<TravelReviewVO> getTravelReview(String tid, int startnum, int endnum);
 	boolean getTravelReviewDelete(String reid);
 }

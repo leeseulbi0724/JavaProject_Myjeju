@@ -69,8 +69,8 @@ public class TravelServiceImpl implements TravelService{
 	}
 	
 	@Override
-	public ArrayList<TravelReviewVO> getTravelReview(int startnum, int endnum){
-		return travelDAO.getTravelReview(startnum, endnum);
+	public ArrayList<TravelReviewVO> getTravelReview(String tid, int startnum, int endnum){
+		return travelDAO.getTravelReview(tid, startnum, endnum);
 	}
 	
 	@Override

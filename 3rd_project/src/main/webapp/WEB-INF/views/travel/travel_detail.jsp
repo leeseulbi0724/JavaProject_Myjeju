@@ -59,31 +59,46 @@
 					return false;
 				}else{
 					travel_review_form.submit();
+					//location.reload();
 				}
+				/* else{
+					var travel_review_form = $("#travel_review_form").serialize();
+					
+					$.ajax({
+						url:url:"travel_review_list_proc.do",
+						type="POST",
+						data:travel_review_form,
+						dataType="json",
+						success:function(result){
+							if(result){
+								location.reload();
+							}
+						},
+						
+					});
+				} */
 			});
 			
-			
+			/*
 			var pnum=$(".pnum").val();
 
 			moreList(pnum); 
 			
-			function moreList(pnum){
+			 function moreList(pnum,tid){
 				var addListHtml="";
 				
 				$.ajax({
 					type:"GET",
 					url:"travel_review_list_proc.do",
 					data:{
-						pnum:pnum
+						pnum:pnum,
+						tid:tid
 					},
 					success:function(result){
-						alert(pnum);
 						var jdata = JSON.parse(result);
-						
-						if(jdata.jlist == null){
-							$("#more_btn").remove();
-						}
+						alert("테스트1");
 						for(var i in jdata.jlist){
+							alert("테스트2");
 							addListHtml += "<div class='review_date' id='t_time'>" + jdata.jlist[i].t_time + "</div>";
 							addListHtml += "<dl>";
 							addListHtml += "<dt>";
@@ -116,7 +131,7 @@
 							addListHtml += "<img src='http://localhost:9000/myjeju/images/travel/travel_detail/like_finger.png' class='like_finger'>";
 							addListHtml += "<span class='like_score'>0</span>";
 							addListHtml += "</dd>";
-							if(user_id == jdata.jlist[i].id){
+							if(jdata.jlist[i].user_id == jdata.jlist[i].id){
 								addListHtml += "<dd style='margin:-15px 0 -10px 0'>";
 								addListHtml += "<button type='button' name='" + jdata.jlist[i].reid + "'" + "class='btn_style3' id='travel_review_delete' style='margin-right:20px'>삭제</button>";
 								addListHtml += "</dd>";
@@ -124,21 +139,22 @@
 								addListHtml += "<dd>";
 								addListHtml += "<button type='button' class='btn_style3' id='travel_review_delete' style='display:none'>삭제</button>";
 								addListHtml += "</dd>";
-							}
+							} 
 							addListHtml += "</dl>";
 						
 						}
 						$(".pnum").val(jdata.jlist[0].pnum);
 		                $("#travel_review_list").append(addListHtml);
+		                alert("테스트3");
 					},
 				});
-			}
+			} 
 			
 	        $("#more_btn").on("click", function(){
 	            var pnum=$(".pnum").val();
 	            moreList(pnum);
-	        }); 
-			
+	        });  
+	        */ 
 			
 			
 			
@@ -299,7 +315,9 @@
 		<section class="detail_review">
 			<h3>리뷰</h3> 
 			<div class="travel_review_zone">
-				<form name="travel_review_form" action="travel_review_proc.do?tid=${vo.tid}" method="POST">
+				<form id="travel_review_form" name="travel_review_form" action="travel_review_proc.do?tid=${vo.tid }" method="POST">
+					<%-- <input type="hidden" name="id" id="id" value="${user_id}">
+					<input type="hidden" name="tid" id="tid" value="${vo.tid}"> --%>
 					<dl>
 						<dt>
 							<img src="http://localhost:9000/myjeju/images/travel/travel_detail/human.png">
@@ -330,7 +348,7 @@
 				</form>
 			</div>
 			<div id="travel_review_list"class="travel_review_zone2">
-				<%-- <c:forEach var="revo" items="${revo}">
+				<c:forEach var="revo" items="${revo}">
 					<div class="review_date" id="t_time">${revo.t_time}</div>
 					<dl>
 							<dt>
@@ -372,7 +390,7 @@
 							</dd> 
 							<c:if test="${user_id eq revo.id}">
 								<dd style="margin:-15px 0 -10px 0;">
-									<button type="button" name="${revo.reid}" class="btn_style3" id="travel_review_update">수정</button>
+									<%-- <button type="button" name="${revo.reid}" class="btn_style3" id="travel_review_update">수정</button> --%>
 									<button type="button" name="${revo.reid}" class="btn_style3" id="travel_review_delete" style="margin-right:20px;">삭제</button>
 								</dd>
 							</c:if>
@@ -383,13 +401,13 @@
 								</dd>
 							</c:if>
 					</dl>
-				</c:forEach> --%>
+				</c:forEach>  
 			</div>
 			<button type="button" class="btn_style6" id="more_btn">
 				<img src="http://localhost:9000/myjeju/images/travel/bill_list_btn2.png">
 				<img src="http://localhost:9000/myjeju/images/travel/bill_list_btn.png">
 			</button>
-			<input type="hidden" class="pnum" name="pnum">
+			<%-- <input type="text" class="pnum" name="pnum" value="${pnum}"> --%>
 		</section>
 		
 		<!-- <section class="detail_recommend">
