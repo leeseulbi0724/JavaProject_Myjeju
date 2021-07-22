@@ -552,8 +552,180 @@ public class AdminController {
 			
 			return mv;
 		}
+		
+		//여행지관리 상세페이지
+		@RequestMapping(value="/adtravel_content.do",method= {RequestMethod.GET,RequestMethod.POST})
+		public ModelAndView totravel(String tid) {
+			ModelAndView mv = new ModelAndView();
+			
+			TravelVO vo = new TravelVO();
+			vo = adminService.gettravel(tid);
+			String img[] = vo.getT_file().split(",");		
+			mv.setViewName("admin/adtravel_content");
+			mv.addObject("img", img);
+			mv.addObject("vo", vo);
+			mv.addObject("hid", tid);
+			return mv;
+		}
 	
-	
+		//여행지 등록
+				@RequestMapping(value="/adtravel_write.do", method=RequestMethod.GET)
+				public String adtravel_write() {
+					return "admin/adtravel_write";
+				}
+		//여행지 등록 DB
+		@RequestMapping(value="/adtravel_write_proc.do", method={RequestMethod.GET,RequestMethod.POST})
+		public ModelAndView adtravel_write_proc(MultipartHttpServletRequest request, @RequestParam("file") MultipartFile[] file) throws Exception {
+			ModelAndView mv = new ModelAndView();			
+			
+			String root_path = request.getSession().getServletContext().getRealPath("/");
+			String attach_path = "\\resources\\images\\travel\\travel_detail\\";
+			String fileOriginName = ""; 
+			String fileMultiName = "";
+			String fileMultiUplodaName= "";
+			
+			UUID uuid = UUID.randomUUID();
+			for(int i=0; i<file.length; i++) { 
+				fileOriginName = file[i].getOriginalFilename(); 
+				File f = new File(root_path + attach_path + uuid +"_"+ fileOriginName); 
+				file[i].transferTo(f);
+				if(i==0) { 
+					fileMultiName += fileOriginName; 
+					fileMultiUplodaName += uuid +"_"+fileOriginName;
+				} else { 
+					fileMultiName += ","+fileOriginName; 
+					fileMultiUplodaName += "," + uuid +"_"+fileOriginName;
+					} 
+			}
+			TravelVO vo = new TravelVO();
+			vo.setT_image(fileMultiName);
+			vo.setT_file(fileMultiUplodaName);
+			vo.setT_name(request.getParameter("t_name"));
+			vo.setT_tag(request.getParameter("t_tag"));
+			vo.setT_infor(request.getParameter("t_infor"));
+			vo.setT_infor2(request.getParameter("t_infor2"));
+			vo.setT_addr1(request.getParameter("t_addr1"));
+			vo.setT_addr2(request.getParameter("t_addr2"));
+			vo.setT_addr(vo.getT_addr1()+" "+vo.getT_addr2());
+			vo.setT_vpoint(request.getParameter("t_vpoint"));
+			vo.setT_hpoint(request.getParameter("t_hpoint"));
+			vo.setT_hp(request.getParameter("t_hp"));
+			
+			boolean result = adminService.getTravelUpload(vo);
+			
+			mv.setViewName("redirect:/adtravel.do");
+			return mv;
+			
+		}
+		
+
+		//음식점수정
+		@RequestMapping(value="/adtravel_update.do",method= {RequestMethod.GET,RequestMethod.POST})
+		public ModelAndView adtravel_update(String tid) {
+			ModelAndView mv = new ModelAndView();
+			TravelVO vo = adminService.gettravel(tid);
+			String file[] = vo.getT_image().split(",");
+			String sfile[] = vo.getT_file().split(",");	
+			ArrayList<TravelVO> list = new ArrayList<TravelVO>();
+			for (int i=0; i<sfile.length; i++) {
+				TravelVO fvo = new TravelVO();
+				fvo.setT_image(file[i]);
+				fvo.setT_file(sfile[i]);				
+				list.add(fvo);				
+			}			
+			mv.addObject("vo", vo);
+			mv.addObject("list", list);
+			mv.setViewName("admin/adtravel_update");
+			return mv;
+		}
+		
+		//음식점 수정하기 DB
+		@RequestMapping(value="/adtravel_update_proc.do", method= {RequestMethod.GET,RequestMethod.POST})
+		public ModelAndView adtravel_update_proc(MultipartHttpServletRequest request, @RequestParam("file") MultipartFile[] file) throws Exception {
+			ModelAndView mv = new ModelAndView();
+			
+			System.out.println("파일이름" + request.getParameter("t_image"));
+			System.out.print("파일경로" + request.getParameter("t_file"));
+			
+			String fileOldName = request.getParameter("t_image");
+			String fileOldRoot = request.getParameter("t_file");
+			
+			String root_path = request.getSession().getServletContext().getRealPath("/");
+			String attach_path = "\\resources\\images\\travel\\travel_detail\\";
+			String fileOriginName = ""; 
+			String fileMultiName = "";
+			String fileMultiUplodaName= "";
+			
+			UUID uuid = UUID.randomUUID();
+			
+
+			for(int i=0; i<file.length; i++) { 
+				fileOriginName = file[i].getOriginalFilename(); 
+				System.out.println("기존 파일명 : "+fileOriginName); 
+				File f = new File(root_path + attach_path + uuid +"_"+ fileOriginName); 
+				file[i].transferTo(f);
+				if (fileOriginName != "") {
+					if(i==0) { 
+						fileMultiName += fileOriginName; 
+						fileMultiUplodaName += uuid +"_"+fileOriginName;
+					} else { 
+						fileMultiName += ","+fileOriginName; 
+						fileMultiUplodaName += "," + uuid +"_"+fileOriginName;
+					} 
+				}
+			}
+			
+			String old_name = request.getParameter("old_name");
+			String old[] = old_name.split(",");
+			for (int i=0; i<old.length; i++) {
+				File old_file = new File(root_path+attach_path+old[i]);
+				if ( old_file.exists()) {
+					old_file.delete();
+				}
+			}
+
+			TravelVO vo = new TravelVO();
+			vo.setT_image(fileOldName+fileMultiName);
+			vo.setT_file(fileOldRoot+fileMultiUplodaName);
+			vo.setT_name(request.getParameter("t_name"));
+			vo.setT_tag(request.getParameter("t_tag"));
+			vo.setT_infor(request.getParameter("t_infor"));
+			vo.setT_infor2(request.getParameter("t_infor2"));
+			vo.setT_addr(request.getParameter("t_addr"));
+			vo.setT_vpoint(request.getParameter("t_vpoint"));
+			vo.setT_hpoint(request.getParameter("t_hpoint"));
+			vo.setT_hp(request.getParameter("t_hp"));
+			vo.setTid(request.getParameter("tid"));
+			
+			boolean result = adminService.getTravelUpdate(vo);
+			
+			mv.setViewName("redirect:/adtravel_content.do?tid="+vo.getTid());
+			return mv;
+		}
+		//여행지 삭제
+		@ResponseBody
+		@RequestMapping(value = "/adtravel_delete.do", method=RequestMethod.POST)
+		public boolean adtravel_delete(HttpServletRequest request) {
+			String tid = request.getParameter("tid");			
+			String root_path = request.getSession().getServletContext().getRealPath("/");
+			String attach_path = "\\resources\\images\\travel\\travel_detail\\";
+			
+			TravelVO vo = adminService.gettravel(tid);
+			
+			String old_name = vo.getT_file();
+			String old[] = old_name.split(",");
+			for (int i=0; i<old.length; i++) {
+				File old_file = new File(root_path+attach_path+old[i]);
+				if ( old_file.exists()) {
+					old_file.delete();
+				}
+			}
+			
+			boolean result = adminService.getTravelDelete(tid);
+			
+			return result;
+		}
+		
 	// 관리자 게시판
 	@RequestMapping(value="/adboard.do",method= {RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView toboard(String pnum, String search, String search_text) {

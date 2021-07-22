@@ -199,6 +199,21 @@ public class AdminDAO {
 		return sqlSession.selectOne(namespace+".searchtargettravel", se);
 	}
 	
+	public TravelVO gettravel(String tid) {
+		return sqlSession.selectOne(namespace+".gettravel", tid);
+	}
+	//여행지 -- 추가
+		public int getTravelUpload(TravelVO vo) {
+			return sqlSession.insert(namespace+".travel_upload", vo);
+		}
+	//여행지 - 업데이트
+		public int getTravelUpdate(TravelVO vo) {
+			return sqlSession.update(namespace+".travel_update", vo);
+		}
+	//여행지 - 삭제
+	public int getTravelDelete(String tid) {
+		return sqlSession.delete(namespace+".travel_delete", tid);
+	}
 	
 	//관리자 게시판 리스트
 	public ArrayList<CommunityVO> getBoardList(int startnum, int endnum) {

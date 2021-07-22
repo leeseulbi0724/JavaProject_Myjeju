@@ -1,10 +1,34 @@
 package com.myjeju.vo;
 
 public class TravelVO {
-	String tid, t_name, t_tag, t_infor, t_infor2, t_addr, t_vpoint, t_hpoint, t_hp, 
-			t_image1, t_image2, t_image3, t_image4, t_image5;
+	String tid, t_name, t_tag, t_infor, t_infor2, t_addr, t_addr1, t_addr2, t_vpoint, t_hpoint, t_hp, 
+			t_image1, t_image2, t_image3, t_image4, t_image5,t_image,t_file;
 	int rno, t_like, status;
 	
+	public String getT_addr1() {
+		return t_addr1;
+	}
+	public void setT_addr1(String t_addr1) {
+		this.t_addr1 = t_addr1;
+	}
+	public String getT_addr2() {
+		return t_addr2;
+	}
+	public void setT_addr2(String t_addr2) {
+		this.t_addr2 = t_addr2;
+	}
+	public String getT_image() {
+		return t_image;
+	}
+	public void setT_image(String t_image) {
+		this.t_image = t_image;
+	}
+	public String getT_file() {
+		return t_file;
+	}
+	public void setT_file(String t_file) {
+		this.t_file = t_file;
+	}
 	public int getRno() {
 		return rno;
 	}

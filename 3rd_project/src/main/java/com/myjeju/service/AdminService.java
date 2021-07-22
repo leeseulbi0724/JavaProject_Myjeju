@@ -54,7 +54,10 @@ public interface AdminService {
 	ArrayList<TravelVO> getlisttravel(int startnum,int endnum,String search,String search_text);
 	int targettravelPage(int pageNumber);
 	int targettravelPage(int pageNumber,String search,String search_text);
-	
+	TravelVO gettravel(String tid);
+	boolean getTravelUpload(TravelVO vo);
+	boolean getTravelUpdate(TravelVO vo);
+	boolean getTravelDelete(String tid);
 	
 	//관리자 게시판
 	ArrayList<CommunityVO> getBoardList(int startnum,int endnum);

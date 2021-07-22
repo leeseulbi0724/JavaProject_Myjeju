@@ -173,7 +173,38 @@ public class AdminServiceImpl implements AdminService {
 	public int targettravelPage(int pageNumber,String search,String search_text){
 		return adminDAO.targettravelPage(pageNumber,search,search_text);
 	}
-	
+	@Override
+	public TravelVO gettravel(String tid){
+		return adminDAO.gettravel(tid);
+	}
+	@Override
+	public boolean getTravelUpload(TravelVO vo) {
+		int val = adminDAO.getTravelUpload(vo);
+		boolean result = false;
+		if (val != 0) {
+			result = true;
+		}
+		return result;
+	}
+	@Override
+	public boolean getTravelUpdate(TravelVO vo) {
+		int val = adminDAO.getTravelUpdate(vo);
+		boolean result = false;
+		if (val != 0) {
+			result = true;
+		}
+		return result;
+		
+	}
+	@Override
+	public boolean getTravelDelete(String tid) {
+		int val = adminDAO.getTravelDelete(tid);
+		boolean result = false;
+		if (val != 0) {
+			result = true;
+		}
+		return result;
+	}
 	//관리자 게시판
 	@Override
 	public ArrayList<CommunityVO> getBoardList(int startnum,int endnum) {

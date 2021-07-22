@@ -175,6 +175,18 @@
 				</otherwise>
 			</choose>
 		</select>
+		<select id= "gettravel" parameterType="java.lang.String" resultType="com.myjeju.vo.TravelVO">
+			select * from myjeju_travel where tid=#{tid}
+		</select>
+		<insert id="travel_upload" parameterType="com.myjeju.vo.TravelVO" >
+			insert into myjeju_travel values('t_'||sequ_myjeju_travel.nextval,#{t_name},#{t_tag},#{t_infor},#{t_infor2},#{t_addr},#{t_vpoint},#{t_hpoint},#{t_hp},0,null,null,null,null,null,#{t_image},#{t_file})
+		</insert>
+		<update id="travel_update" parameterType="com.myjeju.vo.TravelVO">
+			update myjeju_travel set t_name = #{t_name}, t_tag=#{t_tag}, t_infor=#{t_infor}, t_infor2=#{t_infor2}, t_addr=#{t_addr}, t_vpoint=#{t_vpoint}, t_hpoint=#{t_hpoint}, t_hp=#{t_hp}, t_image = #{t_image}, t_file=#{t_file} where tid=#{tid}
+		</update>
+		<delete id="travel_delete" parameterType="java.lang.String">
+			delete from myjeju_travel where tid=#{tid}
+		</delete>
 		
 		<!-- 관리자 게시판 -->
 		<select id="board_list" parameterType="map" resultType="com.myjeju.vo.CommunityVO">

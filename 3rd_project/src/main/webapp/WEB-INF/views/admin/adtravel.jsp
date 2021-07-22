@@ -18,6 +18,16 @@
 	<script src="js/bootstrap.js"></script>
 	<script type="text/javascript"></script>
 </head>
+<style>
+	.write { 
+		background-color:rgb(20,86,184); 
+		color:white; 
+		padding:5px 10px;
+		border-radius:4px;
+		float:right;
+		margin:10px 0;
+	}
+</style>
 <body>
 	<nav class="navbar navbar-default">
 		<div class ="navbar-header">
@@ -60,6 +70,7 @@
 		</section>
 	
 		<section class ="setup_faq_list">
+			<a href="adtravel_write.do" class="write">여행지추가</a>
 			<table class = "content_layout_setup_faq">
 				<tr>
 					<th> 번호 </th>
@@ -71,9 +82,9 @@
 			 	<c:forEach var="vo" items="${list}">
 				<tr>
 					<td>${vo.rno}</td>
-					<td>${vo.tid}</td>
-					<td>${vo.t_name}</td>
-					<td>${vo.t_hp}</td>
+					<td onclick="location.href='adtravel_content.do?tid=${vo.tid}'">${vo.tid}</td>
+					<td onclick="location.href='adtravel_content.do?tid=${vo.tid}'">${vo.t_name}</td>
+					<td onclick="location.href='adtravel_content.do?tid=${vo.tid}'">${vo.t_hp}</td>
 					<td>${vo.t_like}</td>
 				</tr>
 				</c:forEach>
