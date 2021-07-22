@@ -64,7 +64,14 @@ public class ReservationController {
 		
 		int num = 1; // month의 일 표시
 		int max = monthDay(year, month); // 해당 month가 가지는 최대 일 수
-		int pre_max = monthDay(year, month-1);
+		
+		int montha = month-1;
+		int preyeara = year;
+		if(montha == 0) {
+			montha = montha + 12;
+			preyeara -= 1;
+		}
+		int pre_max = monthDay(preyeara, montha);
 		int pre_day = pre_max-(day-1);
 		int next_day = 1;
 		
@@ -263,7 +270,6 @@ public class ReservationController {
 				} else {
 					maxrow = 5;
 				}
-		
 		ArrayList<DateVO> value = calprint(year,month,maxrow);
 		int presmonth = value.get(0).getMonth();
 		int syear = value.get(0).getYear();
@@ -307,11 +313,7 @@ public class ReservationController {
 		
 		String end = eyear + eMonth + eDay;
 		
-		System.out.println(start);
-		System.out.println(end);
 		ArrayList<RoomVO> searchroom = ReservationService.searchroom(start,end,hdid);
-		
-		
 		
 		String[] availdate = new String[searchroom.size()];		
 		for(int i=0; i<searchroom.size(); i++) {
@@ -372,13 +374,6 @@ public class ReservationController {
 			}
 		}
 		
-		
-		for(int i=0;i<availlast.size();i++) {
-			System.out.println(availlast1.get(i));
-			System.out.println(availlast.get(i));
-		}
-		
-		
 		mv.setViewName("reservation/calendar");
 		mv.addObject("calvalue",value);
 		mv.addObject("availlast",availlast);
@@ -419,11 +414,11 @@ public class ReservationController {
 			end = ((startvalue+6) - monthday) +100;
 			if(month==12) {
 				end = end - 1200;
+				end = end + 10000;
 			}
 		}else {
 			end = startvalue+6;
 		}
-		
 		ArrayList<RoomVO> searchroom = ReservationService.searchroom(String.valueOf(start),String.valueOf(end),hdid);
 		ArrayList<String> roomname = new ArrayList<String>(); 
 		for(int i=0;i<searchroom.size();i++) {

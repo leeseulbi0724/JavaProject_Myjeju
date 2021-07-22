@@ -1,3 +1,4 @@
+<%@page import="org.apache.maven.shared.invoker.SystemOutHandler"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%	
@@ -7,7 +8,6 @@
 	String presday = request.getParameter("presday");
 	String hid = request.getParameter("hid");
 	String hdid = request.getParameter("hdid");
-	
 	String month = "0"; 
 	String day = "0";
 	String smonth = "0"; 
@@ -53,6 +53,7 @@ $(document).ready(function(){
 			},
 			success: function(result) {
 				$.fn.availvalue(result);
+				alert(result);
 			},
 			error: function(){
                 alert("simpleWithObject err");
@@ -76,6 +77,12 @@ $(document).ready(function(){
     var day = <%= day %>;
     var smonth = <%= smonth %>;
     var sday = <%= sday %>;
+    var preyears = ${year};
+    if(month == 12 && ${month} == 1){
+    	var preyears = ${year-1};
+    }
+    
+    
     f_day = (month*100)+day;
     s_day = (smonth*100)+sday;
     if(f_day != 0 && s_day == 0){
@@ -86,7 +93,7 @@ $(document).ready(function(){
     	if(month1.length ==1){
     		month2 = "0" + month1;
     	}
-    	var startvalue = String(${year}) + String(month2) + String(day);
+    	var startvalue = preyears + String(month2) + String(day);
 	    $.fn.checkavailable(startvalue,month1);
 	    $('[value='+ f_day +']').parent().children("div").css({"background-color":"#4fa9de","color":"white","border-radius":"20px 0 0 20px"});
     }
@@ -104,7 +111,11 @@ $(document).ready(function(){
     
     $(".days,.days_sun,.days_sat").click(function() {
     	if($(this).children('.dayval').val() < ${today} && ${year} <= ${toyear}){
+    		if($(this).children('.dayval').val()<107 && month == 12){
+			$.fn.myFunction(this);
+    		}else{
     		alert("예약할수 없는 날짜 입니다.");
+    		}
     	}else{
 			$.fn.myFunction(this);
     	}
@@ -123,7 +134,7 @@ $(document).ready(function(){
 	       		var month = $(curval).children().val();
 	       		var month1 = $(curval).children().val();
 	       		if(month<10) {month= "0" + month;}
-	  			var startvalue = ${year} + month + $(curval).children("div").text();
+	  			var startvalue = $(curval).children(".year").val() + month + $(curval).children("div").text();
 	       		$.fn.checkavailable(startvalue,month1);
   			}else{
   	    		alert("예약할수 없는 날짜 입니다.");
@@ -141,7 +152,7 @@ $(document).ready(function(){
 		     	var month = $(curval).children().val();
 	       		var month1 = $(curval).children().val();
 	       		if(month<10) {month= "0" + month;}
-	  			var startvalue = ${year} + month + $(curval).children("div").text();
+	  			var startvalue = $(curval).children(".year").val() + month + $(curval).children("div").text();
 	       		$.fn.checkavailable(startvalue,month1);
    	    	}else{
    	    		alert("예약할수 없는 날짜 입니다.");
@@ -149,22 +160,22 @@ $(document).ready(function(){
    		}else if(f_day != 0){
    	    	s_day = $(curval).children().val()*100 + Number($(curval).children("div").text());
    	    	if(s_day <= f_day){
-   	    		if($(curval).children('.avail').val() != 1){
-	   	     		$(".firstday").text($(curval).children().val() + "." + $(curval).children("div").text());
-	   	     		$(".secondday").text("");
-			    	$(".preday").val($(curval).children().val() + "/" + $(curval).children("div").text());
-			    	$(curval).children("div").css({"background-color":"#4fa9de","color":"white","border-radius":"20px 0 0 20px"});
-			    	$.fn.reset();
-	   	     		f_day = s_day;
-	   	     		s_day = 0;
-		   	     	var month = $(curval).children().val();
-		   	     	var month1 = $(curval).children().val();
-		       		if(month<10) {month= "0" + month;}
-		  			var startvalue = ${year} + month + $(curval).children("div").text();
-		  			$.fn.checkavailable(startvalue,month1);
-   	    		}else{
-   	     		alert("예약할수 없는 날짜 입니다.");
-   	     	}
+	   	    	if($(curval).children('.avail').val() != 1){
+		   	    	$(".firstday").text($(curval).children().val() + "." + $(curval).children("div").text());
+		   	    	$(".secondday").text("");
+				   	$(".preday").val($(curval).children().val() + "/" + $(curval).children("div").text());
+				   	$(curval).children("div").css({"background-color":"#4fa9de","color":"white","border-radius":"20px 0 0 20px"});
+				   	$.fn.reset();
+		   	    	f_day = s_day;
+		   	    	s_day = 0;
+			   	   	var month = $(curval).children().val();
+			   	   	var month1 = $(curval).children().val();
+			    	if(month<10) {month= "0" + month;}
+			  			var startvalue = $(curval).children(".year").val() + month + $(curval).children("div").text();
+			  			$.fn.checkavailable(startvalue,month1);
+	   	    		}else{
+	   	     			alert("예약할수 없는 날짜 입니다.");
+	   	     		}
    	    	}else if (s_day > f_day){
    	     		$(".secondday").text($(curval).children().val() + "." + $(curval).children("div").text());
 		    	$(".presday").val($(curval).children().val() + "/" + $(curval).children("div").text());
@@ -206,9 +217,19 @@ $(document).ready(function(){
     	start2 = Number(value[2]);
     	end2 = Number(value[3]);
     	$('.targetroom').val(value[4]);
-    	for(var i=start; i<=end; i++) {
-        	$('[value='+ i +']').parent().children("div").css({"background-color":"#87ff87","color":"white"});
-        }
+    	if(start>=1226){
+    		for(var i=start; i<=1231; i++) {
+	        	$('[value='+ i +']').parent().children("div").css({"background-color":"#87ff87","color":"white"});
+    		}
+    		for(var i=101; i<=end; i++) {
+	        	$('[value='+ i +']').parent().children("div").css({"background-color":"#87ff87","color":"white"});
+    		}
+   		}else{
+    		for(var i=start; i<=end; i++) {
+	        	$('[value='+ i +']').parent().children("div").css({"background-color":"#87ff87","color":"white"});
+    		}
+    	}
+        
         for(var j=deact_start; j<start2; j++) {
     	   	$('[value='+ j +']').parent().children("div").css({"color":"rgba(0,0,0,0.2)"});
     		$('[value='+ j +']').parent().children("div").click(function() {
@@ -216,12 +237,14 @@ $(document).ready(function(){
     	   		event.stopPropagation();
     	   	});
     	} 
-        for(var h = end2; h<1231; h++) {
-    	   	$('[value='+ h +']').parent().children("div").css({"color":"rgba(0,0,0,0.2)"});
-    	   	$('[value='+ h +']').parent().children("div").click(function() {
-    	   		alert("예약할수 없는 날짜입니다.");
-    	   		event.stopPropagation();
-    	   	});
+        for(var h = end2; h<=1231; h++) {
+        	if(end2>107){
+	    	 	$('[value='+ h +']').parent().children("div").css({"color":"rgba(0,0,0,0.2)"});
+	    	  	$('[value='+ h +']').parent().children("div").click(function() {
+	    	 		alert("예약할수 없는 날짜입니다.");
+	    	 		event.stopPropagation();
+	    	  	});
+        	}
     	} 
     }
     
@@ -237,13 +260,26 @@ $(document).ready(function(){
     }
     $.fn.reset2 = function(end3) {
     	var end3 = Number(end3) +1;
+    	alert(end3);
     	for(var j=deact_start; j<start2; j++) {
      	   	$('[value='+ j +']').parent().children("div").css({"background-color":"white","color":"black","border-radius":"0"});
      	    $('[value='+ j +']').parent().children("div").off('click');
     	}
-    	for(var h = end3; h<1231; h++) {
-     	   	$('[value='+ h +']').parent().children("div").css({"background-color":"white","color":"black","border-radius":"0"});
-     	    $('[value='+ h +']').parent().children("div").off('click');
+    	if(end3>=1227){
+	    	for(var h = end3; h<=1231; h++) {
+	     	   	$('[value='+ h +']').parent().children("div").css({"background-color":"white","color":"black","border-radius":"0"});
+	     	    $('[value='+ h +']').parent().children("div").off('click');
+	    	}
+	    	for(var h = 101; h<=106; h++) {
+	     	   	$('[value='+ h +']').parent().children("div").css({"background-color":"white","color":"black","border-radius":"0"});
+	     	    $('[value='+ h +']').parent().children("div").off('click');
+	    	}
+    	}else{
+	    	for(var h = end3; h<=1231; h++) {
+	     	   	$('[value='+ h +']').parent().children("div").css({"background-color":"white","color":"black","border-radius":"0"});
+	     	    $('[value='+ h +']').parent().children("div").off('click');
+	    	}
+    		
     	}
 		$('.days_sun').children("div").css({"color":"red"});
 		$('.days_sat').children("div").css({"color":"blue"});
@@ -299,6 +335,7 @@ $(document).ready(function(){
 				<input type="hidden" value = "${calvalue[0].month}">
 				<input type="hidden" class="dayval" value = "${calvalue[0].month*100 + calvalue[0].day}">
 				<input type="hidden" class="avail" value = "${availlast[0]}">
+				<input type="hidden" class="year" value = "${calvalue[0].year}">
 				<div>${calvalue[0].day}</div> 
 			</div>
 			<c:forEach var="list" items="${calvalue}" varStatus="status" begin="1" end="5">
@@ -306,6 +343,7 @@ $(document).ready(function(){
 				<input type="hidden" value = "${list.month}"> 
 				<input type="hidden" class="dayval" value = "${list.month*100 + list.day}"> 
 				<input type="hidden" class="avail" value = "${availlast[status.index]}">
+				<input type="hidden" class="year" value = "${list.year}"> 
 				<div>${list.day }</div> 
 			</div>
 			</c:forEach>
@@ -313,6 +351,7 @@ $(document).ready(function(){
 				<input type="hidden" value = "${calvalue[6].month}"> 
 				<input type="hidden" class="dayval" value = "${calvalue[6].month*100 + calvalue[6].day}"> 
 				<input type="hidden" class="avail" value = "${availlast[6]}">
+				<input type="hidden" class="year" value = "${calvalue[6].year}"> 
 				<div>${calvalue[6].day}</div>
 			</div>
 			<br>
@@ -320,6 +359,7 @@ $(document).ready(function(){
 				<input type="hidden" value = "${calvalue[7].month}"> 
 				<input type="hidden" class="dayval" value = "${calvalue[7].month*100 + calvalue[7].day}">  
 				<input type="hidden" class="avail" value = "${availlast[7]}">
+				<input type="hidden" class="year" value = "${calvalue[7].year}">  
 				<div>${calvalue[7].day}</div>
 			</div>
 			<c:forEach var="list" items="${calvalue}" varStatus="status" begin="8" end="12">
@@ -327,6 +367,7 @@ $(document).ready(function(){
 				<input type="hidden" value = "${list.month}"> 
 				<input type="hidden" class="dayval" value = "${list.month*100 + list.day}"> 
 				<input type="hidden" class="avail" value = "${availlast[status.index]}">
+				<input type="hidden" class="year" value = "${list.year}"> 
 				<div>${list.day }</div>
 			</div>
 			</c:forEach>
@@ -334,6 +375,7 @@ $(document).ready(function(){
 				<input type="hidden" value = "${calvalue[13].month}"> 
 				<input type="hidden" class="dayval" value = "${calvalue[13].month*100 + calvalue[13].day}"> 
 				<input type="hidden" class="avail" value = "${availlast[13]}">
+				<input type="hidden" class="year" value = "${calvalue[13].year}"> 
 				<div>${calvalue[13].day}</div> 
 			</div>
 			<br>
@@ -341,6 +383,7 @@ $(document).ready(function(){
 				<input type="hidden" value = "${calvalue[14].month}"> 
 				<input type="hidden" class="dayval" value = "${calvalue[14].month*100 + calvalue[14].day}"> 
 				<input type="hidden" class="avail" value = "${availlast[14]}">
+				<input type="hidden" class="year" value = "${calvalue[14].year}"> 
 				<div>${calvalue[14].day}</div> 
 			</div>
 			<c:forEach var="list" items="${calvalue}" varStatus="status" begin="15" end="19">
@@ -348,6 +391,7 @@ $(document).ready(function(){
 				<input type="hidden" value = "${list.month}"> 
 				<input type="hidden" class="dayval" value = "${list.month*100 + list.day}"> 
 				<input type="hidden" class="avail" value = "${availlast[status.index]}">
+				<input type="hidden" class="year" value = "${list.year}"> 
 				<div>${list.day }</div> 
 			</div>
 			</c:forEach>
@@ -355,6 +399,7 @@ $(document).ready(function(){
 				<input type="hidden" value = "${calvalue[20].month}"> 
 				<input type="hidden" class="dayval" value = "${calvalue[20].month*100 + calvalue[20].day}">
 				<input type="hidden" class="avail" value = "${availlast[20]}">
+				<input type="hidden" class="year" value = "${calvalue[20].year}">
 				<div>${calvalue[20].day}</div>
 			</div>
 			<br>
@@ -362,6 +407,7 @@ $(document).ready(function(){
 				<input type="hidden" value = "${calvalue[21].month}"> 
 				<input type="hidden" class="dayval" value = "${calvalue[21].month*100 + calvalue[21].day}">
 				<input type="hidden" class="avail" value = "${availlast[21]}"> 
+				<input type="hidden" class="year" value = "${calvalue[21].year}">
 				<div>${calvalue[21].day}</div>
 			</div>
 			<c:forEach var="list" items="${calvalue}" varStatus="status" begin="22" end="26">
@@ -369,6 +415,7 @@ $(document).ready(function(){
 				<input type="hidden" value = "${list.month}"> 
 				<input type="hidden" class="dayval" value = "${list.month*100 + list.day}">  
 				<input type="hidden" class="avail" value = "${availlast[status.index]}">
+				<input type="hidden" class="year" value = "${list.year}">  
 				<div>${list.day }</div> 
 			</div>
 			</c:forEach>
@@ -376,6 +423,7 @@ $(document).ready(function(){
 				<input type="hidden" value = "${calvalue[27].month}"> 
 				<input type="hidden" class="dayval" value = "${calvalue[27].month*100 + calvalue[27].day}"> 
 				<input type="hidden" class="avail" value = "${availlast[27]}"> 
+				<input type="hidden" class="year" value = "${calvalue[27].year}"> 
 				<div>${calvalue[27].day}</div> 
 			</div>
 			<br>
@@ -383,6 +431,7 @@ $(document).ready(function(){
 				<input type="hidden" value = "${calvalue[28].month}"> 
 				<input type="hidden" class="dayval" value = "${calvalue[28].month*100 + calvalue[28].day}">
 				<input type="hidden" class="avail" value = "${availlast[28]}">  
+				<input type="hidden" class="year" value = "${calvalue[28].year}">
 				<div>${calvalue[28].day}</div> 
 			</div>
 			<c:forEach var="list" items="${calvalue}" varStatus="status" begin="29" end="33">
@@ -390,6 +439,7 @@ $(document).ready(function(){
 				<input type="hidden" value = "${list.month}"> 
 				<input type="hidden" class="dayval" value = "${list.month*100 + list.day}"> 
 				<input type="hidden" class="avail" value = "${availlast[status.index]}">
+				<input type="hidden" class="year" value = "${list.year}"> 
 				<div>${list.day }</div> 
 			</div>
 			</c:forEach>
@@ -397,6 +447,7 @@ $(document).ready(function(){
 				<input type="hidden" value = "${calvalue[34].month}"> 
 				<input type="hidden" class="dayval" value = "${calvalue[34].month*100 + calvalue[34].day}">
 				<input type="hidden" class="avail" value = "${availlast[34]}">
+				<input type="hidden" class="year" value = "${calvalue[34].year}">
 				<div>${calvalue[34].day}</div> 
 			</div>
 			<br>
@@ -407,6 +458,7 @@ $(document).ready(function(){
 					<input type="hidden" value = "${calvalue[35].month}"> 
 					<input type="hidden" class="dayval" value = "${calvalue[35].month*100 + calvalue[35].day}"> 
 					<input type="hidden" class="avail" value = "${availlast[35]}">
+					<input type="hidden" class="year" value = "${calvalue[35].year}"> 
 					<div>${calvalue[35].day}</div> 
 				</div>
 				</c:forEach>
@@ -417,6 +469,7 @@ $(document).ready(function(){
 					<input type="hidden" value = "${list.month}"> 
 					<input type="hidden" class="dayval" value = "${list.month*100 + list.day}"> 
 					<input type="hidden" class="avail" value = "${availlast[status.index]}">
+					<input type="hidden" class="year" value = "${list.year}"> 
 					<div>${list.day}</div> 
 				</div>
 				</c:forEach>
@@ -427,6 +480,7 @@ $(document).ready(function(){
 					<input type="hidden" value = "${calvalue[41].month}"> 
 					<input type="hidden" class="dayval" value = "${calvalue[41].month*100 + calvalue[41].day}"> 
 					<input type="hidden" class="avail" value = "${availlast[41]}">
+					<input type="hidden" class="year" value = "${calvalue[41].year}"> 
 					<div>${calvalue[41].day}</div> 
 				</div>
 				</c:forEach>
