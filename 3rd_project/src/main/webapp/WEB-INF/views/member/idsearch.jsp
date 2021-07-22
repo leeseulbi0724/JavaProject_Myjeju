@@ -6,7 +6,7 @@
 	<meta name ="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="css/admincss/bootstrap.css">
 	<link rel="stylesheet" href="css/member/custom.css">
-	<link rel="stylesheet" href="http://localhost:9000/myjeju/css/member/index.css">
+	<link rel="stylesheet" href="http://localhost:9000/myjeju/css/index.css">
 	<link rel="shortcut icon" type="image⁄x-icon" href="http://localhost:9000/myjeju/images/index/icon.png">
 	<title>JEJU ISLAND</title>
 	<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>

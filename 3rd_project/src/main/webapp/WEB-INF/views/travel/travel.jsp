@@ -292,8 +292,9 @@
 				    });
 				}
 			}
-		</script>
+			</script>
 		</section>
+		
 		<section class="list_zone">
 			<div class="travel_title">여행지 리스트</div>
 			<div class="travel_search_zone">

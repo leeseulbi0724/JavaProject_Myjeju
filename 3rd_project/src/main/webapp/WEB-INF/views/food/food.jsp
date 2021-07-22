@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
-<head>
+<head profile="http://www.w3.org/2005/10/profile">
 <meta charset="UTF-8">
 	<link rel="shortcut icon" type="image⁄x-icon" href="http://localhost:9000/myjeju/images/index/icon.png">
 	<title>음식점 | JEJU ISLAND</title>
@@ -22,34 +22,6 @@
 	<script src="http://localhost:9000/myjeju/js/jquery-3.6.0.min.js"></script>
 	<script>
 		$(document).ready(function(){ 
-			
-			 /*$(".btn_style").click(function(){
-				var fid = $(this).attr("name");				
-				alert("11");
-				if ("${session_id}"=="") {
-					alert("로그인 후 이용바랍니다");
-				} else if ($(this).attr("id") == 1) {
-					$.ajax({
-				                type: "post",
-				                url: "heart_food_minus.do",
-				                data:{fid:fid},
-				                dataType: 'json',
-				                success: function (result) {
-				                location.reload();
-				                },
-				           }); 
-					} else {
-						$.ajax({
-				                type: "post",
-				               	url: "heart_food_plus.do",
-				                data:{fid:fid},
-				                dataType: 'json',
-				                success: function (result) {
-				                location.reload();
-				               	 },
-						});
-					}
-			}); */
 			
 			var pnum=$(".pnum").val();
 	
@@ -70,9 +42,7 @@
 						
 						var jdata = JSON.parse(result);
 						
-						if(jdata.jlist == null){
-							$("#more_btn").remove();
-						}
+						
 						for(var i in jdata.jlist){
 							addListHtml += "<tr class='travel_list1'>";
 							addListHtml += "<td class='travel_list_pic'>";
@@ -89,7 +59,7 @@
 							addListHtml += "</div>";
 							addListHtml += "</td>";
 							addListHtml += "<td>";
-							addListHtml += "<button type='button' class='btn_style'  id='"+ jdata.jlist[i].status + "'" + " name= '"+ jdata.jlist[i].fid +"'>";
+							addListHtml += "<button type='button' class='btn_style' id='"+ jdata.jlist[i].status + "'" + " name= '"+ jdata.jlist[i].fid +"'>";
 							if (jdata.jlist[i].status == 0) {
 								addListHtml += "<img src='http://localhost:9000/myjeju/images/house/empty_heart.png'>" + jdata.jlist[i].f_like;
 							} else {
@@ -212,76 +182,118 @@
 		</section>
 		<section class="map_zone">
 			<div class="travel_title" style="margin-bottom:20px;">음식점 찾기</div>
-	<div id="map" style="width:100%;height:500px;"></div>
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2d54e46df64658650b7436b0cf338c67&libraries=services"></script>
-	<script>
-	var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
-    	mapOption = { 
-	        center: new kakao.maps.LatLng(33.407461303086784, 126.61957095129178), // 지도의 중심좌표
-	        level: 10 // 지도의 확대 레벨
-    };
-
-	var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
- 	
-	// 마커를 표시할 위치와 title 객체 배열입니다 
-	var positions = [
-		<c:forEach var="vo" items="${list}">
-		{
-			title : '${vo.f_name}',
-			addr : '${vo.f_addr}',
-			tel : '${vo.f_hp}',
-			img : '${vo.f_image1}',
-			idx : '${vo.fid}',
-			latlng:	new kakao.maps.LatLng(${vo.f_vpoint}, ${vo.f_hpoint})
-		},
-		</c:forEach>
-	]
-	
-	for(let i=0; i < positions.length; i++){
-	    var data = positions[i];
-	    displayMarker(data);
-	}
-	
-	// 지도에 마커를 표시하는 함수입니다    
-	function displayMarker(data) { 
-	    var marker = new kakao.maps.Marker({
-	        map: map,
-	        position: data.latlng
-	    });
-	    var overlay = new kakao.maps.CustomOverlay({
-	        yAnchor: 1,
-	        position: marker.getPosition()
-	    });
-	    
-    	var content = document.createElement('div');
-  	    content.innerHTML = "<div class='overlay'>" 
-	    	+ "<div class='content'>"
-    		+ "<div class='title'>" + data.title + "</div>"
-    			+ "<div class='body'>"
-    				+ "<div class='img'>" + "<img src=" + "http://localhost:9000/myjeju/images/food/"+data.img + ">" + "</div>" 
-    				+ "<div class='addr'>" + data.addr + "</div>" + "<br>" 
-    				+ "<div class='tel'>" + data.tel +  "</div>" + "<br>"
-    				+ "<a href="+"http://localhost:9000/myjeju/food_detail.do?fid=" + data.idx + ">상세보기</a>"
-    			+ "</div>"
-    		+ "</div>"
-    	+ "</div>";
-  	    content.style.cssText = 'background: white; border-radius:10px; margin:0; padding:0; ';
-	
-	    var closeBtn = document.createElement('button');
-	    closeBtn.innerHTML = '닫기';
-	    closeBtn.style.cssText = 'background:white; border: 1px solid white; float:right; margin-top:-132px; color:black; font-weight:bold; padding:5.5px;';
-	    closeBtn.onclick = function () {
-	        overlay.setMap(null);
-	    };
-	    content.appendChild(closeBtn);
-	    overlay.setContent(content);
-
-	    kakao.maps.event.addListener(marker, 'click', function() {
-	        overlay.setMap(map);
-	    });
-	}
-</script>
+			<div id="map" style="width:100%;height:500px;"></div>
+			<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2d54e46df64658650b7436b0cf338c67&libraries=services"></script>
+			<script>
+			window.onload = function() {
+				
+				var addval;
+				
+				function makeposition(addval) {
+					var positionadd = 
+			  				{
+			 					title : addval.f_name,
+			 					addr : addval.f_addr,
+								tel : addval.f_hp,
+								img : addval.f_image,
+								idx : addval.tid,
+								latlng:	new kakao.maps.LatLng(addval.f_vpoint,addval.f_hpoint)
+							}
+					return positionadd;
+				}
+				
+				function addposition(pnum){
+					$.ajax({
+						type:"GET",
+						url:"food_proc_add.do",
+						async:false,
+						data:{
+							pnum:pnum,
+						},
+						success:function(result){
+							addval = JSON.parse(result);
+						}
+					});
+				}
+				
+				$("#more_btn").on("click", function(){
+					 var pnum=Number($(".pnum").val());
+					 addposition(pnum);
+					 for(var i=0;i<addval.jlist.length;i++){
+					 displayMarker(makeposition(addval.jlist[i]));
+					 }
+				});
+				
+				
+				var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
+			    	mapOption = { 
+				        center: new kakao.maps.LatLng(33.407461303086784, 126.61957095129178), // 지도의 중심좌표
+				        level: 10 // 지도의 확대 레벨
+			    };
+			
+				var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+			 	
+				// 마커를 표시할 위치와 title 객체 배열입니다 
+				var positions = [
+					<c:forEach var="vo" items="${list}">
+					{
+						title : '${vo.f_name}',
+						addr : '${vo.f_addr}',
+						tel : '${vo.f_hp}',
+						img : '${vo.f_image1}',
+						idx : '${vo.fid}',
+						latlng:	new kakao.maps.LatLng(${vo.f_vpoint}, ${vo.f_hpoint})
+					},
+					</c:forEach>
+				]
+				
+				for(let i=0; i < positions.length; i++){
+				    var data = positions[i];
+				    displayMarker(data);
+				}
+				
+				// 지도에 마커를 표시하는 함수입니다    
+				function displayMarker(data) { 
+				    var marker = new kakao.maps.Marker({
+				        map: map,
+				        position: data.latlng
+				    });
+				    var overlay = new kakao.maps.CustomOverlay({
+				        yAnchor: 1,
+				        position: marker.getPosition()
+				    });
+				    
+			    	var content = document.createElement('div');
+			  	    content.innerHTML = "<div class='overlay'>" 
+				    	+ "<div class='content'>"
+			    		+ "<div class='title'>" + data.title + "</div>"
+			    			+ "<div class='body'>"
+			    				+ "<div class='img'>" + "<img src=" + "http://localhost:9000/myjeju/images/food/"+data.img + ">" + "</div>" 
+			    				+ "<div class='addr'>" + data.addr + "</div>" + "<br>" 
+			    				+ "<div class='tel'>" + data.tel +  "</div>" + "<br>"
+			    				+ "<a href="+"http://localhost:9000/myjeju/food_detail.do?fid=" + data.idx + ">상세보기</a>"
+			    			+ "</div>"
+			    		+ "</div>"
+			    	+ "</div>";
+			  	    content.style.cssText = 'background: white; border-radius:10px; margin:0; padding:0; ';
+				
+				    var closeBtn = document.createElement('button');
+				    closeBtn.innerHTML = '닫기';
+				    closeBtn.style.cssText = 'background:white; border: 1px solid white; float:right; margin-top:-132px; color:black; font-weight:bold; padding:5.5px;';
+				    closeBtn.onclick = function () {
+				        overlay.setMap(null);
+				    };
+				    content.appendChild(closeBtn);
+				    overlay.setContent(content);
+			
+				    kakao.maps.event.addListener(marker, 'click', function() {
+				        overlay.setMap(map);
+				    });
+				}
+			}
+			</script>
 		</section>
+		
 		<section class="list_zone">
 			<div class="travel_title">음식점 리스트</div>
 			<div class="travel_search_zone">

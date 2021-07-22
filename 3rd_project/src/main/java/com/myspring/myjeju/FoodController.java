@@ -128,6 +128,7 @@ public class FoodController {
 			jobj.addProperty("pnum", String.valueOf(pageNumber));
 			jobj.addProperty("search", search);
 			jobj.addProperty("search_text", search_text);
+			jobj.addProperty("endnum", endnum);
 			
 			jlist.add(jobj);
 		}
