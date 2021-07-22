@@ -366,7 +366,7 @@ public class Adminreservation {
 						}
 				}
 				for(int i=0;i<monthdate.size();i++) {
-					//boolean result1 = adminService.insertres(monthdate.get(i));
+					boolean result1 = adminService.insertres(monthdate.get(i));
 				}
 				result = 1;
 			} else {

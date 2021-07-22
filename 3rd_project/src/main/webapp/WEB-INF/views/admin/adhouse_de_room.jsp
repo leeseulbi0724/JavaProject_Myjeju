@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import = "javax.servlet.jsp.*" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -40,6 +41,22 @@
 				location.href = "adhouse_res_all.do?hdid="+hdid+"&month="+month+"&year="+year;
 			}
 		});
+		$(".btn_res_each").click(function() {
+			var year = $("#countyear").val();
+			var month = $("#countmonth").val();
+			var roomid = $(this).val();
+			if($("#countyear").val() == "") {
+				alert("년도를 입력해주세요");
+				$("#countyear").focus();
+				return false;
+			}else if($("#countmonth").val() == "") {
+				alert("월을 입력해주세요");
+				$("#countmonth").focus();
+				return false;
+			}else {
+				location.href = "adhouse_res_each.do?hdid="+hdid+"&month="+month+"&year="+year+"&roomid="+roomid;
+			}
+		});
 	});
 
 </script>
@@ -73,8 +90,7 @@
 					<li><a href="adrequest.do">요청관리</a></li>
 					<li><a href="admember.do">회원관리<span id="unread" class="label label-info"></span></a></li>
 					<li class="active"><a href="adhouse.do">숙소관리</a></li>
-					<li><a href="adfood.do">음식점관리</a></li>
-					<li><a href="#">카페관리</a></li>
+					<li><a href="adfood.do">맛집관리</a></li>
 					<li><a href="adtravel.do">여행지관리</a></li>
 					<li><a href="adstore.do">상품관리</a>
 				</ul>
@@ -112,7 +128,7 @@
 					<td onclick="#'">${vo.room_name}</td>
 					<td style="width:200px;">
 						<button>상세예약</button>
-						<button>일괄예약</button>
+						<button type="button" class="btn_res_each" value="${vo.roomid}">일괄예약</button>
 					</td>
 				</tr>
 				</c:forEach>
