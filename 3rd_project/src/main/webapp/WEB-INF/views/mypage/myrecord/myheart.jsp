@@ -55,9 +55,65 @@
 	button#more_btn>img { width:18px; }
 	button#more_btn>img:last-child { display:none; }
 	button#more_btn:hover img:first-child {	display:none; }
-		button#more_btn:hover img:last-child { display:inline-block; }
+	button#more_btn:hover img:last-child { display:inline-block; }
 </style>
 </head>
+<script>
+	$(document).ready(function() {
+		$(".btn_style").click(function() {
+			var id = $(this).attr("name");
+			var type = $(this).attr("id");
+			var url;
+			var data;
+			if (type == "hid") {
+				$.ajax({
+					type:"post",
+					url:"heart_minus.do",
+					data:{
+						hid:id
+					},
+					success:function(result){
+						location.reload();
+					}
+				});
+			} else if (type == "fid") {
+				$.ajax({
+					type:"post",
+					url:"heart_food_minus.do",
+					data:{
+						fid:id
+					},
+					success:function(result){
+						location.reload();
+					}
+				});
+			} else if (type == "caid") {
+				$.ajax({
+					type:"post",
+					url:"heart_cafe_minus.do",
+					data:{
+						caid:id
+					},
+					success:function(result){
+						location.reload();
+					}
+				});
+			} else {
+				$.ajax({
+					type:"post",
+					url:"heart_travel_minus.do",
+					data:{
+						tid:id
+					},
+					success:function(result){
+						location.reload();
+					}
+				});
+			}
+			
+		});
+	});
+</script>
 <body>
 <jsp:include page="../../header.jsp"></jsp:include>
 
@@ -68,26 +124,26 @@
 		<div class="list_box">
 			<c:forEach var = "vo"  items="${h_list}">
 				<div>
-					<img src="http://localhost:9000/myjeju/images/house/${vo.h_img }" width=100% height=100% >
-					<button type="button" class="btn_style" id="heart_btn"><img src="http://localhost:9000/myjeju/images/house/red_heart.png">${vo.h_like }</button>
+					<a href="house_detail.do?hid=${vo.hid }"><img src="http://localhost:9000/myjeju/images/house/${vo.h_img }" width=100% height=100% ></a>
+					<button type="button" class="btn_style" id="hid" name="${vo.hid }"><img src="http://localhost:9000/myjeju/images/house/red_heart.png">${vo.h_like }</button>
 				</div>
 			</c:forEach>
 			<c:forEach var = "vo"  items="${f_list}">
 				<div>
-					<img src="http://localhost:9000/myjeju/images/food/${vo.f_image1 }" width=100% height=100% >
-					<button type="button" class="btn_style" id="heart_btn"><img src="http://localhost:9000/myjeju/images/house/red_heart.png">${vo.f_like }</button>
+					<a href="food_detail.do?fid=${vo.fid }"><img src="http://localhost:9000/myjeju/images/food/${vo.f_image1 }" width=100% height=100% ></a>
+					<button type="button" class="btn_style" id="fid" name="${vo.fid }"><img src="http://localhost:9000/myjeju/images/house/red_heart.png">${vo.f_like }</button>
 				</div>
 			</c:forEach>
 			<c:forEach var = "vo"  items="${ca_list}">
 				<div>
-					<img src="http://localhost:9000/myjeju/images/cafe/${vo.ca_image1 }" width=100% height=100% >
-					<button type="button" class="btn_style" id="heart_btn"><img src="http://localhost:9000/myjeju/images/house/red_heart.png">${vo.ca_like }</button>
+					<a href="cafe_detail.do?caid=${vo.caid }"><img src="http://localhost:9000/myjeju/images/cafe/${vo.ca_image1 }" width=100% height=100% ></a>
+					<button type="button" class="btn_style" id="caid" name="${vo.caid }"><img src="http://localhost:9000/myjeju/images/house/red_heart.png">${vo.ca_like }</button>
 				</div>				
 			</c:forEach>
 			<c:forEach var = "vo"  items="${t_list}">
 				<div>
-					<img src="http://localhost:9000/myjeju/images/travel/${vo.t_image1 }" width=100% height=100% >
-					<button type="button" class="btn_style" id="heart_btn"><img src="http://localhost:9000/myjeju/images/house/red_heart.png">${vo.t_like }</button>
+					<a href="travel_detail.do?tid=${vo.tid }"><img src="http://localhost:9000/myjeju/images/travel/${vo.t_image1 }" width=100% height=100% ></a>
+					<button type="button" class="btn_style" id="tid" name="${vo.tid }"><img src="http://localhost:9000/myjeju/images/house/red_heart.png">${vo.t_like }</button>
 				</div>
 			</c:forEach>
 		</div>	
