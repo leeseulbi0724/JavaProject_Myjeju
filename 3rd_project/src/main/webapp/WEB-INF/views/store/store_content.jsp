@@ -305,7 +305,7 @@
 							<span class='star-rating'>
 								<span style ="width : ${(vo.star_avg)*20}%"></span>   
 							</span>   
-							<span>${vo.star_avg} (${vo.star_count})</span>
+							<span>${vo.star_avg} (vo.star_count)</span>
 							
 						</div>
 						

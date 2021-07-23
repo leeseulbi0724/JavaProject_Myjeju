@@ -13,10 +13,11 @@
 	section {
 		text-align : center; 
 		margin-top : 80px;
+		border : 1px solid red;
 	}
 	
 	.store, .storeeat, .storesouve, .storeetc {
-		/* border : 1px solid blue; */
+		border : 1px solid blue;
 		width : 1000px;
 		margin : auto;
 	}
@@ -113,7 +114,7 @@
 		background-color : #f2f2f2;
 	}
 
-	img {
+	.click img {
 		border: 3px solid white;
 		border-radius: 7px;
 		-moz-border-radius: 7px;

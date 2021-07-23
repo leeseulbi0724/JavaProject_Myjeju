@@ -45,7 +45,7 @@
 	$(document).ready(function() {
 		$('.store_nav a').click(function() {
 			$('.store_nav li').removeClass()
-				$(this).addClass('on')
+				$(this).addClass('on');
 		});
 		
 		var sid = ${best.sid}.val();
@@ -103,7 +103,7 @@
 			<c:forEach var = "eat" items = "${eatlist}">
 				<ul>
 					<li>
-						<a href = "store_content.do?sid=${eat.sid}">
+						<a href = "store_content.do?sid=${eat.sid}" class = "click">
 							<img src = "http://localhost:9000/myjeju/images/store/${eat.s_image}" width = "260">
 							<p>[${eat.s_category}] ${eat.s_name}</p>
 							
@@ -125,7 +125,7 @@
 			<c:forEach var = "souve" items = "${souvelist}">
 				<ul>
 					<li>
-						<a href = "store_content.do?sid=${souve.sid}">
+						<a href = "store_content.do?sid=${souve.sid}" class = "click">
 							<img src = "http://localhost:9000/myjeju/images/store/${souve.s_image}" width = "260">
 							<p>[${souve.s_category}] ${souve.s_name}</p>
 							
@@ -147,7 +147,7 @@
 			<c:forEach var = "etc" items = "${etclist}">
 				<ul>
 					<li>
-						<a href = "store_content.do?sid=${etc.sid}">
+						<a href = "store_content.do?sid=${etc.sid}" class = "click">
 							<img src = "http://localhost:9000/myjeju/images/store/${etc.s_image}" width = "260">
 							<p>[${etc.s_category}] ${etc.s_name}</p>
 							
