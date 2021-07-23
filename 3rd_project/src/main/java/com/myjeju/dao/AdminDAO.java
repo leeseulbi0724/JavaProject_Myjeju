@@ -58,6 +58,9 @@ public class AdminDAO {
 		se.put("search_text", search_text);
 		return sqlSession.selectOne(namespace+".searchtarget1", se);
 	}
+	public MemberVO getmember(String id) {
+		return sqlSession.selectOne(namespace+".getmember", id);
+	}
 	//¼÷¼Ò ¸®½ºÆ® °¡Á®¿À±â
 	public ArrayList<HouseVO> getlisthouse(int startnum, int endnum) {
 		Map<String,String> se = new HashMap<String,String>();
@@ -118,6 +121,9 @@ public class AdminDAO {
 		se.put("hdid", String.valueOf(hdid));
 		se.put("room_name", room_name);
 		return sqlSession.insert(namespace+".uploadroom", se);
+	}
+	public RoomdeVO getroom(String roomid) {
+		return sqlSession.selectOne(namespace+".getroom", roomid);
 	}
 	
 	//¼÷¼Ò -- °´½ÇÃß°¡

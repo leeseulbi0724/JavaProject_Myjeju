@@ -20,6 +20,7 @@ public interface AdminService {
 	ArrayList<MemberVO> getlist(int startnum,int endnum,String search,String search_text);
 	int targetPage(int pageNumber);
 	int targetPage(int pageNumber,String search,String search_text);
+	MemberVO getmember(String id);
 	
 	//包府磊 槛家
 	HouseVO gethouse(String hid);
@@ -40,6 +41,7 @@ public interface AdminService {
 	ArrayList<RoomVO> getmonthcheck(String month,String roomid);
 	boolean insertres(RoomVO vo);
 	boolean uploadroom(String hdid,String room_name);
+	RoomdeVO getroom(String roomid);
 	
 	
 	//包府磊 咐笼

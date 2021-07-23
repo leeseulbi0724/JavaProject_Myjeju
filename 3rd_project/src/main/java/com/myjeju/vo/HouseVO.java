@@ -1,7 +1,15 @@
 package com.myjeju.vo;
 
 public class HouseVO {
-	String hid, h_name, h_infor, h_infor2, h_tag, h_addr, h_vpoint, h_hpoint, h_hp, h_img;
+	String hid, h_name, h_infor, h_infor2, h_tag, h_addr, h_vpoint, h_hpoint, h_hp, h_img, email;
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	int  rno, h_like, status;
 
 	

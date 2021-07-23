@@ -40,6 +40,10 @@ public class AdminServiceImpl implements AdminService {
 	public int targetPage(int pageNumber,String search,String search_text){
 		return adminDAO.targetPage(pageNumber,search,search_text);
 	}
+	@Override
+	public MemberVO getmember(String id) {
+		return adminDAO.getmember(id);
+	}
 	//包府磊 槛家
 	@Override
 	public ArrayList<HouseVO> getlisthouse(int startnum,int endnum){
@@ -84,6 +88,10 @@ public class AdminServiceImpl implements AdminService {
 			result = true;
 		}
 		return result;
+	}
+	@Override
+	public RoomdeVO getroom(String roomid) {
+		return adminDAO.getroom(roomid);
 	}
 	//包府磊 按角
 	public ArrayList<HDetailVO> gethousede(String hid){

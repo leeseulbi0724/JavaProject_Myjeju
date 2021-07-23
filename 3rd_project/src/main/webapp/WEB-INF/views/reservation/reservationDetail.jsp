@@ -13,6 +13,15 @@
 <script src="http://localhost:9000/myjeju/js/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+$(document).ready(function(){
+	$('#success').click(function() { 
+		success_frm.submit();
+		return true;
+	});
+	
+});
+</script>
 </head>
 <body>
 	<!-- header -->
@@ -75,14 +84,14 @@
 			<input type="hidden" name="premonth" value='${premonth}'>
 			<button class="search_btn" type="submit">일정변경</button>			
 			</form>
-			<form action="http://localhost:9000/myjeju/resersuccess.do" method="post">
+			<form name="success_frm" action="http://localhost:9000/myjeju/resersuccess.do" method="post">
 			<input type="hidden" name="hid" value='${hid}'>
 			<input type="hidden" name="hdid" value='${hdid}'>
 			<input type="hidden" name="roomid" value='${roomid}'>
 			<input type="hidden" name="sessionid" value='${session_id}'>
 			<input type="hidden" name="f_day" value='${f_day}'>
 			<input type="hidden" name="s_day" value='${s_day}'>
-			<button class="search_btn" type="submit">예약하기</button>			
+			<button class="search_btn" type="button" id="success">예약하기</button>			
 			</form>
 		</div>		
 	</section>

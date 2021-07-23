@@ -42,6 +42,9 @@
 				</otherwise>
 			</choose>
 		</select>
+		<select id="getmember" parameterType="java.lang.String" resultType="com.myjeju.vo.MemberVO">
+			select * from myjeju_member where id = #{id}
+		</select>
 	
 	<!-- 관리자 숙소 -->
 		<select id="listnumhouse" parameterType="map" resultType="com.myjeju.vo.HouseVO">
@@ -111,6 +114,9 @@
 		<insert id = "uploadroom" parameterType="java.util.Map">
 		    insert into myjeju_hdroom values(#{hdid},'hdr_'||sequ_myjeju_room.nextval,#{room_name})
 		</insert>
+		<select id="getroom" parameterType="java.lang.String" resultType="com.myjeju.vo.RoomdeVO">
+			select * from myjeju_hdroom where roomid = #{roodid}
+		</select>
 	<!-- 관리자 맛집 -->
 		<select id="listnumfood" parameterType="map" resultType="com.myjeju.vo.FoodVO">
 			select rno, fid, f_name, f_tag, f_infor, f_infor2, f_addr, f_vpoint, f_hpoint, f_hp, f_like, f_file, f_sfile

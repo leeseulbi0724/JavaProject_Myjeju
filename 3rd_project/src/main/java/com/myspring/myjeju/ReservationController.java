@@ -1,8 +1,20 @@
 package com.myspring.myjeju;
 
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.Properties;
+
+import javax.mail.Address;
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,14 +23,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.myjeju.service.AdminService;
 import com.myjeju.service.ReservationService;
 import com.myjeju.vo.DateVO;
-import com.myjeju.vo.FoodVO;
 import com.myjeju.vo.HDetailVO;
 import com.myjeju.vo.HouseVO;
 import com.myjeju.vo.MReservationVO;
+import com.myjeju.vo.MemberVO;
 import com.myjeju.vo.RoomImgVO;
 import com.myjeju.vo.RoomVO;
+import com.myjeju.vo.RoomdeVO;
+
+import util.Code;
+import util.Gmail;
 
 @Controller
 public class ReservationController {
@@ -214,6 +231,8 @@ public class ReservationController {
 	
 	@Autowired
 	private ReservationService ReservationService;
+	@Autowired
+	private AdminService adminService;	
 	/**
 	 * main.do : 시작페이지
 	 */
@@ -546,7 +565,7 @@ public class ReservationController {
 		return mv;
 	}
 	@RequestMapping(value="/resersuccess.do", method=RequestMethod.POST)
-	public String resersuccess(String hid, String hdid, String roomid, String sessionid, String f_day, String s_day) {
+	public String resersuccess(HttpServletRequest request, HttpServletResponse response,String hid, String hdid, String roomid, String sessionid, String f_day, String s_day) {
 		
 		MReservationVO vo = new MReservationVO();
 		vo.setId(sessionid);
@@ -564,6 +583,7 @@ public class ReservationController {
 			boolean updateresult = ReservationService.updateavail(roomid,f_dated,comparedateminus(s_day,1)); 
 			
 			if(updateresult) {
+				sendemail(request,response);
 				return "reservation/success";
 			} else {
 				return "reservation/fail";
@@ -573,5 +593,69 @@ public class ReservationController {
 		}
 		
 		
+	}
+	@RequestMapping(value="/sendemail.do", method=RequestMethod.POST)
+	public void sendemail(HttpServletRequest request, HttpServletResponse response) {
+		System.out.println(request.getParameter("f_day"));
+		System.out.println(request.getParameter("s_day"));
+		System.out.println(request.getParameter("sessionid"));
+		System.out.println(request.getParameter("roomid"));
+		
+		String hid = request.getParameter("hid");
+		String hdid = request.getParameter("hdid");
+		String roomid = request.getParameter("roomid");
+		String id = request.getParameter("sessionid");
+		String f_day = request.getParameter("f_day");
+		String s_day = request.getParameter("s_day");
+		HouseVO hvo = adminService.gethouse(hid);
+		HDetailVO hdvo = adminService.gethousedecontent(hdid);
+		RoomdeVO roomvo = adminService.getroom(roomid);
+		MemberVO membervo = adminService.getmember(id);
+		
+		
+		response.setCharacterEncoding("UTF-8");
+		String userID = id;
+		String name = membervo.getName();
+		String toEmail =hvo.getEmail();
+		
+		Code code = new Code();
+		String checkCode =Code.getCode();
+		
+		// 사용자에게 보낼 메시지를 기입합니다.
+		String host = "http://localhost:9000/myjeju/";
+		String from = "jsggo2001@gmail.com";
+		String to = toEmail;
+		String subject = "고객님의 새 예약 정보 입니다";
+		String content = "업체 이름 : " + hvo.getH_name() + "<br>" + "객실이름 : " + hdvo.getHd_name() + "<br>";
+		content += "호실 : " + roomvo.getRoom_name() + "<br>" + "고객님 성함 : " + membervo.getName() + "<br>";
+		content += "기간 : " + f_day + " ~ " + s_day; 
+
+		Properties p = new Properties();
+		p.put("mail.smtp.user", from);
+		p.put("mail.smtp.host", "smtp.googlemail.com");
+		p.put("mail.smtp.port", "456");
+		p.put("mail.smtp.starttls.enable", "true");
+		p.put("mail.smtp.auth", "true");
+		p.put("mail.smtp.debug", "true");
+		p.put("mail.smtp.socketFactory.port", "465");
+		p.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+		p.put("mail.smtp.socketFactory.fallback", "false");
+
+		try {
+			Authenticator auth = new Gmail();
+			Session ses = Session.getInstance(p, auth);
+			ses.setDebug(false);
+			MimeMessage msg = new MimeMessage(ses);
+			msg.setSubject(subject);
+			Address fromAddr = new InternetAddress(from);
+			msg.setFrom(fromAddr);
+			Address toAddr = new InternetAddress(to);
+			msg.addRecipient(Message.RecipientType.TO, toAddr);
+			msg.setContent(content, "text/html;charset=UTF8");
+			Transport.send(msg);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

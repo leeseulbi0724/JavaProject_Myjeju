@@ -53,7 +53,6 @@ $(document).ready(function(){
 			},
 			success: function(result) {
 				$.fn.availvalue(result);
-				alert(result);
 			},
 			error: function(){
                 alert("simpleWithObject err");
@@ -260,7 +259,6 @@ $(document).ready(function(){
     }
     $.fn.reset2 = function(end3) {
     	var end3 = Number(end3) +1;
-    	alert(end3);
     	for(var j=deact_start; j<start2; j++) {
      	   	$('[value='+ j +']').parent().children("div").css({"background-color":"white","color":"black","border-radius":"0"});
      	    $('[value='+ j +']').parent().children("div").off('click');
