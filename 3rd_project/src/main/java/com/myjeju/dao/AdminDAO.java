@@ -9,6 +9,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.myjeju.vo.CafeVO;
 import com.myjeju.vo.CommunityVO;
 import com.myjeju.vo.FoodVO;
 import com.myjeju.vo.HDetailVO;
@@ -223,6 +224,56 @@ public class AdminDAO {
 	public int getTravelDelete(String tid) {
 		return sqlSession.delete(namespace+".travel_delete", tid);
 	}
+	
+	
+	//카페 리스트 가져오기
+	public ArrayList<CafeVO> getlistcafe(int startnum, int endnum) {
+		Map<String,String> se = new HashMap<String,String>();
+		se.put("start", String.valueOf(startnum));
+		se.put("end", String.valueOf(endnum));
+		
+		List<CafeVO> list = sqlSession.selectList(namespace+".listnumcafe",se);
+		return (ArrayList<CafeVO>)list;
+	}
+	public ArrayList<CafeVO> getlistcafe(int startnum, int end, String search, String search_text) {
+		Map<String,String> se = new HashMap<String,String>();
+		se.put("start", String.valueOf(startnum));
+		se.put("end", String.valueOf(end));
+		se.put("search", search);
+		se.put("search_text", search_text);
+		
+		List<CafeVO> list = sqlSession.selectList(namespace+".listsearchcafe",se);
+		return (ArrayList<CafeVO>)list;
+	}
+	public int targetcafePage(int pageNumber) {
+		return sqlSession.selectOne(namespace+".targetcafe", pageNumber);
+	}
+	public int targetcafePage(int pageNumber,String search,String search_text) {
+		Map<String,String> se = new HashMap<String,String>();
+		se.put("pageNumber", String.valueOf(pageNumber));
+		se.put("search", search);
+		se.put("search_text", search_text);
+		return sqlSession.selectOne(namespace+".searchtargetcafe", se);
+	}
+	//카페 -- 추가
+	public int getCafeUpload(CafeVO vo) {
+		return sqlSession.insert(namespace+".cafe_upload", vo);
+	}
+	//카페 상세보기
+	public CafeVO getCafecontent(String fid) {
+		return sqlSession.selectOne(namespace+".cafe_content", fid);
+	}
+	//카페 - 업데이트
+	public int getCafeUpdate(CafeVO vo) {
+		return sqlSession.update(namespace+".cafe_update", vo);
+	}
+	//카페 - 삭제
+	public int getCafeDelete(String fid) {
+		return sqlSession.delete(namespace+".cafe_delete", fid);
+	}
+	
+	
+	
 	
 	//관리자 게시판 리스트
 	public ArrayList<CommunityVO> getBoardList(int startnum, int endnum) {

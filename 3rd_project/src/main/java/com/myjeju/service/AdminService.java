@@ -2,6 +2,7 @@ package com.myjeju.service;
 
 import java.util.ArrayList;
 
+import com.myjeju.vo.CafeVO;
 import com.myjeju.vo.CommunityVO;
 import com.myjeju.vo.FoodVO;
 import com.myjeju.vo.HDetailVO;
@@ -60,6 +61,16 @@ public interface AdminService {
 	boolean getTravelUpload(TravelVO vo);
 	boolean getTravelUpdate(TravelVO vo);
 	boolean getTravelDelete(String tid);
+	
+	//관리자 카페
+	ArrayList<CafeVO> getlistcafe(int startnum, int endnum);
+	ArrayList<CafeVO> getlistcafe(int startnum, int end, String search, String search_text);
+	int targetcafePage(int pageNumber);
+	int targetcafePage(int pageNumber,String search,String search_text);
+	CafeVO getCafecontent(String fid);
+	boolean getCafeUpload(CafeVO vo);
+	boolean getCafeUpdate(CafeVO vo);
+	boolean getCafeDelete(String fid);
 	
 	//관리자 게시판
 	ArrayList<CommunityVO> getBoardList(int startnum,int endnum);

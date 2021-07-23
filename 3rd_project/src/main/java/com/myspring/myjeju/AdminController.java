@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.myjeju.service.AdminService;
 import com.myjeju.service.CommunityService;
+import com.myjeju.vo.CafeVO;
 import com.myjeju.vo.CommunityVO;
 import com.myjeju.vo.FoodVO;
 import com.myjeju.vo.HDetailVO;
@@ -725,6 +726,225 @@ public class AdminController {
 			
 			return result;
 		}
+		
+		
+		
+		//카페 관리 리스트
+		@RequestMapping(value="/adcafe.do",method= {RequestMethod.GET,RequestMethod.POST})
+		public ModelAndView tocafe(String pnum, String search, String search_text) {
+			ModelAndView mv = new ModelAndView();
+			
+			int pageNumber = 1;
+			 
+			if(pnum != null) {
+		  		pageNumber = Integer.parseInt(pnum);
+		  	}
+			
+			int startnum = ((pageNumber-1)*10) +1;
+			int endnum = pageNumber*10; 
+			int pagenum = (pageNumber -1) * 10;
+			int target = 0;
+			ArrayList<CafeVO> list = new ArrayList<CafeVO>();
+			if(search_text == null || search_text.equals("") || search_text.equals("null")) {
+				list = adminService.getlistcafe(startnum, endnum);
+				target = adminService.targetcafePage(pageNumber);
+		  	} else {
+		  		list = adminService.getlistcafe(startnum, endnum, search, search_text);
+		  		target = adminService.targetcafePage(pageNumber, search, search_text);
+		  	}
+				
+			int targetpage = 0;
+			if(pageNumber != 1 ) {
+				targetpage = (target-2) / 10 ;
+				} else {
+				targetpage = (target-1) / 10 ;
+				}
+			mv.setViewName("admin/adcafe");
+			mv.addObject("list", list);
+			mv.addObject("targetpage", String.valueOf(targetpage));
+			mv.addObject("pageNumber", String.valueOf(pageNumber));
+			mv.addObject("search", search);
+			mv.addObject("search_text", search_text);
+			
+			return mv;
+		}
+		//카페 등록
+		@RequestMapping(value="/adcafe_write.do", method=RequestMethod.GET)
+		public String adcafe_write() {
+			return "admin/adcafe_write";
+		}
+		//카페 등록 DB
+		@RequestMapping(value="/adcafe_write_proc.do", method={RequestMethod.GET,RequestMethod.POST})
+		public ModelAndView adcafe_write_proc(MultipartHttpServletRequest request, @RequestParam("file") MultipartFile[] file) throws Exception {
+			ModelAndView mv = new ModelAndView();			
+			
+			String root_path = request.getSession().getServletContext().getRealPath("/");
+			String attach_path = "\\resources\\images\\cafe\\cafe_detail\\";
+			String fileOriginName = ""; 
+			String fileMultiName = "";
+			String fileMultiUplodaName= "";
+			
+			UUID uuid = UUID.randomUUID();
+			for(int i=0; i<file.length; i++) { 
+				fileOriginName = file[i].getOriginalFilename(); 
+				System.out.println("기존 파일명 : "+fileOriginName); 
+				File f = new File(root_path + attach_path + uuid +"_"+ fileOriginName); 
+				file[i].transferTo(f);
+				if(i==0) { 
+					fileMultiName += fileOriginName; 
+					fileMultiUplodaName += uuid +"_"+fileOriginName;
+				} else { 
+					fileMultiName += ","+fileOriginName; 
+					fileMultiUplodaName += "," + uuid +"_"+fileOriginName;
+					} 
+			}
+			CafeVO vo = new CafeVO();
+			
+			vo.setCa_file(fileMultiName);
+			vo.setCa_sfile(fileMultiUplodaName);
+			vo.setCa_name(request.getParameter("ca_name"));
+			vo.setCa_tag(request.getParameter("ca_tag"));
+			vo.setCa_infor(request.getParameter("ca_infor"));
+			vo.setCa_infor2(request.getParameter("ca_infor2"));
+			vo.setCa_addr1(request.getParameter("ca_addr1"));
+			vo.setCa_addr2(request.getParameter("ca_addr2"));
+			vo.setCa_addr(vo.getCa_addr1() + " " + vo.getCa_addr2());
+			vo.setCa_vpoint(request.getParameter("ca_vpoint"));
+			vo.setCa_hpoint(request.getParameter("ca_hpoint"));
+			vo.setCa_hp(request.getParameter("ca_hp"));
+			
+			boolean result = adminService.getCafeUpload(vo);
+			
+			mv.setViewName("redirect:/adcafe.do");
+			return mv;
+			
+		}
+		
+		//카페 상세
+		@RequestMapping(value="/adcafe_content.do",method= {RequestMethod.GET,RequestMethod.POST})
+		public ModelAndView adcafe_content(String caid) {
+			ModelAndView mv = new ModelAndView();
+			CafeVO vo = adminService.getCafecontent(caid);
+			String img[] = vo.getCa_sfile().split(",");
+			
+			mv.addObject("vo", vo);
+			mv.addObject("img", img);
+			mv.setViewName("admin/adcafe_content");
+			return mv;
+		}
+		
+		//카페 수정
+		@RequestMapping(value="/adcafe_update.do",method= {RequestMethod.GET,RequestMethod.POST})
+		public ModelAndView adcafe_update(String caid) {
+			ModelAndView mv = new ModelAndView();
+			CafeVO vo = adminService.getCafecontent(caid);
+			String file[] = vo.getCa_file().split(",");
+			String sfile[] = vo.getCa_sfile().split(",");
+			
+			ArrayList<CafeVO> list = new ArrayList<CafeVO>();
+			for (int i=0; i<sfile.length; i++) {
+				CafeVO cvo = new CafeVO();
+				cvo.setCa_file(file[i]);
+				cvo.setCa_sfile(sfile[i]);
+				list.add(cvo);
+			}
+			
+			mv.addObject("vo", vo);
+			mv.addObject("list", list);
+			mv.setViewName("admin/adcafe_update");
+			return mv;
+		}
+		
+		//카페 수정하기 DB
+		@RequestMapping(value="/adcafe_update_proc.do", method= {RequestMethod.GET,RequestMethod.POST})
+		public ModelAndView adcafe_update_proc(MultipartHttpServletRequest request, @RequestParam("file") MultipartFile[] file) throws Exception {
+			ModelAndView mv = new ModelAndView();
+			
+			System.out.println("파일이름" + request.getParameter("ca_file"));
+			System.out.print("파일경로" + request.getParameter("ca_sfile"));
+			
+			String fileOldName = request.getParameter("ca_file");
+			String fileOldRoot = request.getParameter("ca_sfile");
+			
+			String root_path = request.getSession().getServletContext().getRealPath("/");
+			System.out.print(root_path);
+			String attach_path = "\\resources\\images\\cafe\\cafe_detail\\";
+			String fileOriginName = ""; 
+			String fileMultiName = "";
+			String fileMultiUploadName= "";
+			
+			UUID uuid = UUID.randomUUID();
+			
+			System.out.print(file.length);
+
+			for(int i=0; i<file.length; i++) { 
+				fileOriginName = file[i].getOriginalFilename(); 
+				System.out.println("기존 파일명 : "+fileOriginName); 
+				File f = new File(root_path + attach_path + uuid +"_"+ fileOriginName); 
+				file[i].transferTo(f);
+				if (fileOriginName != "") {
+					if(i==0) { 
+						fileMultiName += fileOriginName; 
+						fileMultiUploadName += uuid +"_"+fileOriginName;
+					} else { 
+						fileMultiName += ","+fileOriginName; 
+						fileMultiUploadName += "," + uuid +"_"+fileOriginName;
+					} 
+				}
+			}
+			
+			String old_name = request.getParameter("old_name");
+			String old[] = old_name.split(",");
+			for (int i=0; i<old.length; i++) {
+				File old_file = new File(root_path+attach_path+old[i]);
+				if ( old_file.exists()) {
+					old_file.delete();
+				}
+			}
+
+			CafeVO vo = new CafeVO();
+			vo.setCa_file(fileOldName + fileMultiName);
+			vo.setCa_sfile(fileOldRoot + fileMultiUploadName);
+			vo.setCa_name(request.getParameter("ca_name"));
+			vo.setCa_tag(request.getParameter("ca_tag"));
+			vo.setCa_infor(request.getParameter("ca_infor"));
+			vo.setCa_infor2(request.getParameter("ca_infor2"));
+			vo.setCa_addr(request.getParameter("ca_addr"));
+			vo.setCa_vpoint(request.getParameter("ca_vpoint"));
+			vo.setCa_hpoint(request.getParameter("ca_hpoint"));
+			vo.setCa_hp(request.getParameter("ca_hp"));
+			vo.setCaid(request.getParameter("caid"));
+			
+			boolean result = adminService.getCafeUpdate(vo);
+			
+			mv.setViewName("redirect:/adcafe_content.do?caid=" + vo.getCaid());
+			
+			return mv;
+		}
+		//카페 삭제
+		@ResponseBody
+		@RequestMapping(value = "/adcafe_delete.do", method=RequestMethod.POST)
+		public boolean adcafe_delete(HttpServletRequest request) {
+			String caid = request.getParameter("caid");
+			String root_path = request.getSession().getServletContext().getRealPath("/");
+			String attach_path = "\\resources\\images\\cafe\\cafe_detail\\";
+			
+			CafeVO vo = adminService.getCafecontent(caid);
+			
+			String old_name = vo.getCa_sfile();
+			String old[] = old_name.split(",");
+			for (int i=0; i<old.length; i++) {
+				File old_file = new File(root_path+attach_path+old[i]);
+				if ( old_file.exists()) {
+					old_file.delete();
+				}
+			}
+			
+			boolean result = adminService.getCafeDelete(caid);
+			
+			return result;
+		}	
+		
 		
 	// 관리자 게시판
 	@RequestMapping(value="/adboard.do",method= {RequestMethod.GET,RequestMethod.POST})

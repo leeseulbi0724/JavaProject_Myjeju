@@ -142,6 +142,7 @@
 		<delete id="food_delete" parameterType="java.lang.String">
 			delete from myjeju_food where fid=#{fid}
 		</delete>
+		
 		<!-- 관리자 여행지 -->
 		<select id="listnumtravel" parameterType="map" resultType="com.myjeju.vo.TravelVO">
 			select rno, tid, t_name, t_tag, t_infor, t_infor2, t_addr, t_vpoint, t_hpoint, t_hp, t_like, t_image1, t_image2, t_image3, t_image4, t_image5
@@ -189,6 +190,38 @@
 		</update>
 		<delete id="travel_delete" parameterType="java.lang.String">
 			delete from myjeju_travel where tid=#{tid}
+		</delete>
+		
+		<!-- 관리자 카페 -->
+		<select id="listnumcafe" parameterType="map" resultType="com.myjeju.vo.CafeVO">
+			select rno, caid, ca_name, ca_tag, ca_infor, ca_infor2, ca_addr, ca_vpoint, ca_hpoint, ca_hp, ca_like, ca_file, ca_sfile
+				from (select rownum rno, caid, ca_name, ca_tag, ca_infor, ca_infor2, ca_addr, ca_vpoint, ca_hpoint, ca_hp, ca_like, ca_file, ca_sfile
+					from (select * from myjeju_cafe order by rownum desc)) 
+						where rno between #{start} and #{end}
+		</select>
+		<select id="listsearchcafe" parameterType="java.util.Map" resultType="com.myjeju.vo.CafeVO">
+			select rno, caid, ca_name, ca_tag, ca_infor, ca_infor2, ca_addr, ca_vpoint, ca_hpoint, ca_hp, ca_like, ca_file, ca_sfile
+				from (select rownum rno, caid, ca_name, ca_tag, ca_infor, ca_infor2, ca_addr, ca_vpoint, ca_hpoint, ca_hp, ca_like, ca_file, ca_sfile
+					from (select * from myjeju_cafe order by rownum desc) where ca_name like '%'||#{search_text}||'%') 
+						where rno between #{start} and #{end}
+		</select>
+		<select id="targetcafe" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+			select count(num) from (select rownum num from myjeju_cafe) where num >= #{pageNumber}
+		</select>
+		<select id="searchtargetcafe" parameterType="java.util.Map" resultType="java.lang.Integer">
+				select count(num) from (select rownum num from myjeju_cafe where ca_name like '%'||#{search_text}||'%') where num >= #{pageNumber}
+		</select>
+		<insert id="cafe_upload" parameterType="com.myjeju.vo.CafeVO" >
+			insert into myjeju_cafe values('ca_'||sequ_myjeju_cafe.nextval, #{ca_name}, #{ca_tag}, #{ca_infor}, #{ca_infor2}, #{ca_addr}, #{ca_vpoint}, #{ca_hpoint}, #{ca_hp}, 0, #{ca_file}, #{ca_sfile})
+		</insert>
+		<select id= "cafe_content" parameterType="java.lang.String" resultType="com.myjeju.vo.CafeVO">
+			select * from myjeju_cafe where caid = #{caid}
+		</select>
+		<update id="cafe_update" parameterType="com.myjeju.vo.CafeVO">
+			update myjeju_cafe set ca_name = #{ca_name}, ca_tag = #{ca_tag}, ca_infor = #{ca_infor}, ca_infor2 = #{ca_infor2}, ca_addr = #{ca_addr}, ca_vpoint = #{ca_vpoint}, ca_hpoint = #{ca_hpoint}, ca_hp = #{ca_hp}, ca_file = #{ca_file}, ca_sfile = #{ca_sfile} where caid = #{caid}
+		</update>
+		<delete id="cafe_delete" parameterType="java.lang.String">
+			delete from myjeju_cafe where caid = #{caid}
 		</delete>
 		
 		<!-- 관리자 게시판 -->

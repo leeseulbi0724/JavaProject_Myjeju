@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.myjeju.dao.AdminDAO;
+import com.myjeju.vo.CafeVO;
 import com.myjeju.vo.CommunityVO;
 import com.myjeju.vo.FoodVO;
 import com.myjeju.vo.HDetailVO;
@@ -213,6 +214,58 @@ public class AdminServiceImpl implements AdminService {
 		}
 		return result;
 	}
+	
+	// 관리자 카페
+	@Override
+	public ArrayList<CafeVO> getlistcafe(int startnum, int endnum) {
+		return adminDAO.getlistcafe(startnum, endnum);
+	}
+	@Override
+	public ArrayList<CafeVO> getlistcafe(int startnum, int end, String search, String search_text) {
+		return adminDAO.getlistcafe(startnum, end, search, search_text);
+	}
+	@Override
+	public int targetcafePage(int pageNumber) {
+		return adminDAO.targetcafePage(pageNumber);
+	}
+	@Override
+	public int targetcafePage(int pageNumber, String search, String search_text) {
+		return adminDAO.targetcafePage(pageNumber, search, search_text);
+	}
+	@Override
+	public CafeVO getCafecontent(String fid) {
+		return adminDAO.getCafecontent(fid);
+	}
+	@Override
+	public boolean getCafeUpload(CafeVO vo) {
+		int val = adminDAO.getCafeUpload(vo);
+		boolean result = false;
+		if(val != 0) {
+			result = true;
+		}
+		return result;
+	}
+	@Override
+	public boolean getCafeUpdate(CafeVO vo) {
+		int val = adminDAO.getCafeUpdate(vo);
+		boolean result = false;
+		if(val != 0) {
+			result = true;
+		}
+		return result;
+	}
+	@Override
+	public boolean getCafeDelete(String fid) {
+		int val = adminDAO.getCafeDelete(fid);
+		boolean result = false;
+		if(val != 0) {
+			result = true;
+		}
+		return result;
+	}
+	
+	
+	
 	//관리자 게시판
 	@Override
 	public ArrayList<CommunityVO> getBoardList(int startnum,int endnum) {
