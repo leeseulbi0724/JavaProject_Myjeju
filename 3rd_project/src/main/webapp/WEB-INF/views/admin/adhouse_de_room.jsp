@@ -26,6 +26,8 @@
 			alert("방 삭제에 성공했습니다");
 		}else if (result=="4") {
 			alert("방 삭제에 실패했습니다");
+		}else if (result=="5") {
+			alert("월간 예약 데이터가 없습니다.\n일괄예약을 먼저 실행해주세요.");
 		}
 		
 		var hdid = $(".hdid").val();
@@ -59,6 +61,23 @@
 				return false;
 			}else {
 				location.href = "adhouse_res_each.do?hdid="+hdid+"&month="+month+"&year="+year+"&roomid="+roomid;
+			}
+		});
+		
+		$(".btn_deres").click(function() {
+			var year = $("#countyear").val();
+			var month = $("#countmonth").val();
+			if($("#countyear").val() == "") {
+				alert("년도를 입력해주세요");
+				$("#countyear").focus();
+				return false;
+			}else if($("#countmonth").val() == "") {
+				alert("월을 입력해주세요");
+				$("#countmonth").focus();
+				return false;
+			}else{
+				$(".deyear").val(year);
+				$(".demonth").val(month);
 			}
 		});
 	});
@@ -133,7 +152,14 @@
 					<td onclick="#'">${vo.roomid}</td>
 					<td onclick="#'">${vo.room_name}</td>
 					<td style="width:150px;">
-						<button>상세예약</button>
+						<form name="deres1" action="adcalendar.do" method="post" style="display:inline-block;">
+							<input type="hidden" name="roomid" value="${vo.roomid}">
+							<input type="hidden" name="hdid" value="${vo.hdid}">
+							<input type="hidden" name="deyear" class="deyear">
+							<input type="hidden" name="demonth" class="demonth">
+							<input type="hidden" name="room_name" value='${vo.room_name}'>
+							<button type ="submit" class="btn_deres">상세예약</button>
+						</form>
 						<button type="button" class="btn_res_each" value="${vo.roomid}">일괄예약</button>
 					</td>
 					<td style="width:110px;">

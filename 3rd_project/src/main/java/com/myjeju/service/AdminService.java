@@ -43,7 +43,8 @@ public interface AdminService {
 	boolean uploadroom(String hdid,String room_name);
 	RoomdeVO getroom(String roomid);
 	boolean deleteroom(String roomid);
-	
+	boolean notavail(String roomid,String date);
+	boolean toavail(String roomid,String date);
 	
 	//관리자 맛집
 	ArrayList<FoodVO> getlistfood(int startnum,int endnum);

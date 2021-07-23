@@ -1,6 +1,5 @@
 package com.myspring.myjeju;
 
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -22,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.myjeju.service.AdminService;
 import com.myjeju.service.ReservationService;
@@ -97,7 +97,6 @@ public class ReservationController {
 
 		loop: for (int row = 0; row < maxrow; row++) {
 			for (int column = 0; column <= 6; column++) {
-				DateVO date = new DateVO();
 				if (row == 0 && !start) {
 					// 달력의 첫 행
 					if (column == day) {
@@ -105,6 +104,7 @@ public class ReservationController {
 						start = true;
 					} else {
 						// 시작 일에 도달 전에는 공백
+						DateVO date = new DateVO();
 						date.setDay(pre_day);
 						
 						int setmonth = month-1;
@@ -124,12 +124,116 @@ public class ReservationController {
 					}
 				}
 				if(num <= max) {
+					DateVO date = new DateVO();
 					date.setDay(num);
 					date.setMonth(month);
 					date.setYear(year);
 					calv.add(date);
 					num++;
 				}else {
+					DateVO date = new DateVO();
+					date.setDay(next_day);
+					int setmonth1 = month+1;
+					int syear1 = year;
+					if(setmonth1 <= 0) {
+						setmonth1 +=12;
+						syear1 = year - 1;
+					}else if(setmonth1 >12) {
+						setmonth1 -=12;
+						syear1 = year + 1;
+					}
+					date.setMonth(setmonth1);
+					date.setYear(syear1);
+					calv.add(date);
+					next_day++;
+				}
+				
+				if (num > max && column==6) {
+					// 최대 일 수 + 마지막칸에 도달하면 break loop
+					break loop;
+				}
+			}
+		}
+		return calv;
+	}
+	public static ArrayList<DateVO> calprintforderes(int year, int month, int maxrow) {
+		
+		int sum = 0;
+		
+		for (int i = 1583; i < year; i++) {
+			if ((i % 4 == 0 && i % 100 != 0) || i % 400 == 0) {
+				// 윤년이라면
+				sum += 2;
+			} else {
+				// 평년이라면
+				sum += 1;
+			}
+		}
+		int first = (sum + 6) % 7; // 입력한 year의 1월 1일의 요일
+		
+		for (int j = 1; j < month; j++) {
+			first += monthDay(year, j) % 7;
+		}
+		
+		int day = first % 7; // 입력한 month의 1일의 요일
+		
+		
+		ArrayList<DateVO> calv = new ArrayList<DateVO>();
+		
+		
+		
+		int num = 1; // month의 일 표시
+		int max = monthDay(year, month); // 해당 month가 가지는 최대 일 수
+		
+		int montha = month-1;
+		int preyeara = year;
+		if(montha == 0) {
+			montha = montha + 12;
+			preyeara -= 1;
+		}
+		int pre_max = monthDay(preyeara, montha);
+		int pre_day = pre_max-(day-1);
+		int next_day = 1;
+		
+		boolean start = false;
+		
+		loop: for (int row = 0; row < maxrow; row++) {
+			for (int column = 0; column <= 6; column++) {
+				if (row == 0 && !start) {
+					// 달력의 첫 행
+					if (column == day) {
+						// 시작 일에 도달하면
+						start = true;
+					} else {
+						// 시작 일에 도달 전에는 공백
+						DateVO date = new DateVO();
+						date.setDay(pre_day);
+						
+						int setmonth = month-1;
+						int syear = year;
+						if(setmonth <= 0) {
+							setmonth +=12;
+							syear = year -1;
+						}else if(setmonth >12) {
+							setmonth -=12;
+							syear = year + 1;
+						}
+						date.setMonth(setmonth);
+						date.setYear(syear);
+						calv.add(date);
+						pre_day++;
+						continue;
+					}
+				}
+				if(num <= max) {
+					DateVO date = new DateVO();
+					date.setDay(num);
+					date.setMonth(month);
+					date.setYear(year);
+					calv.add(date);
+					num++;
+				}else {
+					DateVO date = new DateVO();
 					date.setDay(next_day);
 					int setmonth1 = month+1;
 					int syear1 = year;
@@ -596,10 +700,6 @@ public class ReservationController {
 	}
 	@RequestMapping(value="/sendemail.do", method=RequestMethod.POST)
 	public void sendemail(HttpServletRequest request, HttpServletResponse response) {
-		System.out.println(request.getParameter("f_day"));
-		System.out.println(request.getParameter("s_day"));
-		System.out.println(request.getParameter("sessionid"));
-		System.out.println(request.getParameter("roomid"));
 		
 		String hid = request.getParameter("hid");
 		String hdid = request.getParameter("hdid");
@@ -656,6 +756,262 @@ public class ReservationController {
 
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+	}
+	/**
+	 * 어드민 캘린더
+	 */
+	@RequestMapping(value="/adcalendar.do", method= {RequestMethod.GET,RequestMethod.POST})
+	public ModelAndView adcalendar(String deyear, String demonth, String hdid, String room_name, String roomid) {
+		
+		ModelAndView mv = new ModelAndView();
+		Calendar cal = Calendar.getInstance();
+		
+		boolean activateresult = true;
+		
+		HDetailVO hdvo = adminService.gethousedecontent(hdid);
+		String hdname = hdvo.getHd_name();
+		String demonth1 = "";
+		String deyear1 = deyear.substring(2,4);
+		if(demonth.length() == 1) {
+			demonth1 = "0"+demonth; 
+		}
+		demonth1 = deyear1+"/"+demonth1;
+		ArrayList<RoomVO> room = adminService.getmonthcheck(demonth1 ,roomid);
+		
+		if(room.size() == 0) {
+			activateresult = false;
+		}
+		
+		int today = (cal.get(Calendar.MONTH)+1)*100 + cal.get(Calendar.DAY_OF_MONTH);
+		int toyear = cal.get(Calendar.YEAR); 
+		int year = Integer.parseInt(deyear);
+		int month = Integer.parseInt(demonth);
+		
+		if(month == 13) {
+			year += 1;
+			month -= 12;
+		}
+		if(month == 0) {
+			year -=1;
+			month += 12;
+		}
+		
+		
+		int maxrow = 0;
+		int maxday = 0;
+		
+		int sum = 0;
+
+		for (int i = 1583; i < year; i++) {
+			if ((i % 4 == 0 && i % 100 != 0) || i % 400 == 0) {
+				// 윤년이라면
+				sum += 2;
+			} else {
+				// 평년이라면
+				sum += 1;
+			}
+		}
+		int first = (sum + 6) % 7; // 입력한 year의 1월 1일의 요일
+		
+		int day = first % 7;
+
+		maxday = day + monthDay(year, month);
+		if(maxday >= 36) {
+					maxrow = 6;
+				} else {
+					maxrow = 5;
+				}
+		ArrayList<DateVO> value = calprintforderes(year,month,maxrow);
+		
+		int presmonth = value.get(0).getMonth();
+		int syear = value.get(0).getYear();
+		if(presmonth>12) {
+			presmonth -= 12;
+			syear = year + 1;
+		}else if(presmonth<=0) {
+			presmonth += 12;
+			syear = year - 1;
+		}
+		String sMonth = String.valueOf(presmonth);
+		if(sMonth.length() == 1) {
+			sMonth = "0"+ sMonth;
+		}
+		String sDay = String.valueOf(value.get(0).getDay());
+		if(sDay.length() == 1) {
+			sDay = "0"+ sDay;
+		}
+		
+		String start = syear + sMonth + sDay;
+		
+		int preemonth = value.get(value.size()-1).getMonth();
+		int eyear = value.get(value.size()-1).getYear();
+		if(preemonth>12) {
+			preemonth -= 12;
+			eyear += 1;
+		}else if(preemonth<=0) {
+			preemonth += 12;
+			eyear -= 1;
+			
+		}
+		String eMonth = String.valueOf(preemonth);
+		if(eMonth.length() == 1) {
+			eMonth = "0"+ eMonth;
+		}
+		
+		String eDay = String.valueOf(value.get(value.size()-1).getDay());
+		if(eDay.length() == 1) {
+			eDay = "0"+ eDay;
+		}
+		
+		String end = eyear + eMonth + eDay;
+		
+		ArrayList<RoomVO> searchroom = ReservationService.searchroom(start,end,hdid);
+		ArrayList<RoomVO> notavails = ReservationService.notavails(start,end,hdid);
+		
+		String[] availdate = new String[searchroom.size()];		
+		for(int i=0; i<searchroom.size(); i++) {
+			availdate[i] = searchroom.get(i).getRdate();
+		}
+		
+		ArrayList<String> arrayList = new ArrayList<String>();
+		for(String item : availdate){
+            if(!arrayList.contains(item))
+                arrayList.add(item);
+        }
+		ArrayList<String> conver = new ArrayList<String>();
+		for(int i =0; i<arrayList.size();i++) {
+			String[] a = arrayList.get(i).split("-");
+			String aa = a[0] + a[1] + a[2];
+			conver.add(aa.substring(0,8));
+		}
+		
+		String[] availdate1 = new String[notavails.size()];		
+		for(int i=0; i<notavails.size(); i++) {
+			availdate1[i] = notavails.get(i).getRdate();
+		}
+		
+		ArrayList<String> arrayList1 = new ArrayList<String>();
+		for(String item : availdate1){
+			if(!arrayList1.contains(item))
+				arrayList1.add(item);
+		}
+		ArrayList<String> conver2 = new ArrayList<String>();
+		for(int i =0; i<arrayList1.size();i++) {
+			String[] a = arrayList1.get(i).split("-");
+			String aa = a[0] + a[1] + a[2];
+			conver2.add(aa.substring(0,8));
+		}
+		
+		ArrayList<String> availlast1 = new ArrayList<String>();
+		
+		for(int i = 0;i<value.size();i++) {
+			int smonth2 = value.get(i).getMonth();
+			int syear1 = value.get(i).getYear();
+			if(smonth2<=0) {
+				smonth2 +=12;
+				syear1 -=1;
+			}else if (smonth2>12) {
+				smonth2 -=12;
+				syear1 +=1;
+			}
+			
+			String sMonth1 = String.valueOf(smonth2);
+			if(sMonth1.length() == 1) {
+				sMonth1 = "0"+ sMonth1;
+			}
+			String sDay1 = String.valueOf(value.get(i).getDay());
+			if(sDay1.length() == 1) {
+				sDay1 = "0"+ sDay1;
+			}
+			String start1 = syear1 + sMonth1 + sDay1;
+			availlast1.add(start1);
+		}
+		ArrayList<Integer> availlast = new ArrayList<Integer>();
+		for(int i = 0;i<value.size();i++) {
+			int check = 0;
+			for(int j = 0 ;j<conver.size();j++) {
+				if(availlast1.get(i).equals(conver.get(j))) {
+					availlast.add(0);
+					check = 1;
+				}
+			}
+			for(int h = 0;h < conver2.size();h++) {
+				if(availlast1.get(i).equals(conver2.get(h))) {
+					availlast.add(2);
+					check = 2;
+				}
+			}
+			if(check == 0) {
+				availlast.add(-1);
+			}
+		}
+		
+		if(activateresult) {
+			mv.setViewName("admin/adcalendar");
+			mv.addObject("calvalue",value);
+			mv.addObject("availlast",availlast);
+			mv.addObject("hdid",hdid);
+			mv.addObject("roomid",roomid);
+			mv.addObject("maxrow",maxrow);
+			mv.addObject("year",year);
+			mv.addObject("month",month);
+			mv.addObject("today",today);
+			mv.addObject("toyear",toyear);
+			mv.addObject("hdname",hdname);
+			mv.addObject("roomname",room_name);
+		return mv;
+		} else {
+			mv.setView(new RedirectView("adhouse_de_room.do?hdid="+hdid));
+			mv.addObject("result","5");
+		return mv;
+		}
+	}
+	
+	@RequestMapping(value="/notavail", method=RequestMethod.POST, produces = "application/text; charset=utf8")
+	@ResponseBody
+	public String notavail(String year, String month, String roomid, String day) {
+		
+		String date ="";
+		
+		date += year.substring(2,4) + "/";
+		if(month.length()==1) {
+			month = "0"+month;
+		}
+		if(day.length()==1) {
+			day = "0"+day;
+		}
+		
+		date += month + "/";
+		date += day;
+		boolean result = adminService.notavail(roomid,date);
+		if(result) {
+		return "예약 불가 상태로 바뀌었습니다.";
+		}else {
+		return "실패";
+		}
+	}
+	@RequestMapping(value="/toavail", method=RequestMethod.POST, produces = "application/text; charset=utf8")
+	@ResponseBody
+	public String toavail(String year, String month, String roomid, String day) {
+		
+		String date ="";
+		
+		date += year.substring(2,4) + "/";
+		if(month.length()==1) {
+			month = "0"+month;
+		}
+		if(day.length()==1) {
+			day = "0"+day;
+		}
+		
+		date += month + "/";
+		date += day;
+		boolean result = adminService.toavail(roomid,date);
+		if(result) {
+			return "예약 가능 상태로 바뀌었습니다.";
+		}else {
+			return "실패";
 		}
 	}
 }

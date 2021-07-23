@@ -12,6 +12,7 @@ public interface ReservationService {
 	
 	String getCurrentName(String hid);
 	ArrayList<RoomVO> searchroom(String start, String end ,String hdid);
+	ArrayList<RoomVO> notavails(String start, String end ,String hdid);
 	HouseVO gethouse(String hid);
 	HDetailVO getdetail(String hdid);
 	ArrayList<RoomImgVO> gethimg(String hdid);

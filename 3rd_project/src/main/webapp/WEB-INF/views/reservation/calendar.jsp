@@ -124,7 +124,7 @@ $(document).ready(function(){
     
     $.fn.myFunction = function(curval) {
   		if(f_day == 0){
-  			if($(curval).children('.avail').val() != 1){
+  			if($(curval).children('.avail').val() == 0){
 		       	f_day = $(curval).children().val()*100 + Number($(curval).children("div").text());
 	       		$(".firstday").text($(curval).children().val() + "." + $(curval).children("div").text());
 	       		$(".preday").val($(curval).children().val() + "/" + $(curval).children("div").text());
@@ -139,7 +139,7 @@ $(document).ready(function(){
   	    		alert("예약할수 없는 날짜 입니다.");
   	    	}
    	    }else if(f_day != 0 && s_day !=0){
-   	    	if($(curval).children('.avail').val() != 1){
+   	    	if($(curval).children('.avail').val() == 0){
 		       	f_day = $(curval).children().val()*100 + Number($(curval).children("div").text());
 	   	    	$(".firstday").text($(curval).children().val() + "." + $(curval).children("div").text());
 		     	$(".secondday").text("");
@@ -159,7 +159,7 @@ $(document).ready(function(){
    		}else if(f_day != 0){
    	    	s_day = $(curval).children().val()*100 + Number($(curval).children("div").text());
    	    	if(s_day <= f_day){
-	   	    	if($(curval).children('.avail').val() != 1){
+	   	    	if($(curval).children('.avail').val() == 0){
 		   	    	$(".firstday").text($(curval).children().val() + "." + $(curval).children("div").text());
 		   	    	$(".secondday").text("");
 				   	$(".preday").val($(curval).children().val() + "/" + $(curval).children("div").text());

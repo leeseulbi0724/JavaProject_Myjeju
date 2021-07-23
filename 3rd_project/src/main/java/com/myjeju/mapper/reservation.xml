@@ -15,6 +15,12 @@
 			(select MYJEJU_reservation.roomid, rdate, available from MYJEJU_reservation,MYJEJU_HDROOM where myjeju_reservation.roomid = myjeju_hdroom.roomid and hdid=#{hdid})
 		where rdate between to_date(#{start},'YYYYMMDD') and to_date(#{end},'YYYYMMDD') and available = 0 order by roomid,rdate
 	</select>
+ 	
+	<select id="notavails" parameterType="map" resultType="com.myjeju.vo.RoomVO">
+		select roomid, rdate, available from  
+			(select MYJEJU_reservation.roomid, rdate, available from MYJEJU_reservation,MYJEJU_HDROOM where myjeju_reservation.roomid = myjeju_hdroom.roomid and hdid=#{hdid})
+		where rdate between to_date(#{start},'YYYYMMDD') and to_date(#{end},'YYYYMMDD') and available = 2 order by roomid,rdate
+	</select>
 	
 	<select id="gethouse" parameterType="String" resultType="com.myjeju.vo.HouseVO">
 		select * from myjeju_house where hid = #{hid}

@@ -101,6 +101,24 @@ public class AdminServiceImpl implements AdminService {
 	public RoomdeVO getroom(String roomid) {
 		return adminDAO.getroom(roomid);
 	}
+	@Override
+	public boolean notavail(String roomid,String date) {
+		int val = adminDAO.notavail(roomid,date);
+		boolean result = false;
+		if (val!=0) {
+			result = true;
+		}
+		return result;
+	}
+	@Override
+	public boolean toavail(String roomid,String date) {
+		int val = adminDAO.toavail(roomid,date);
+		boolean result = false;
+		if (val!=0) {
+			result = true;
+		}
+		return result;
+	}
 	//°ü¸®ÀÚ °´½Ç
 	public ArrayList<HDetailVO> gethousede(String hid){
 		return adminDAO.gethousede(hid);

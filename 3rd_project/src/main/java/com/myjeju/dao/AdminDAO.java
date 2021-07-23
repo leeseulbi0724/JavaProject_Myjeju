@@ -128,6 +128,20 @@ public class AdminDAO {
 	public int deleteroom(String roomid) {
 		return sqlSession.delete(namespace+".deleteroom", roomid);
 	}
+	//·ë -- ¿¹¾àºÒ°¡
+	public int notavail(String roomid,String date) {
+		Map<String,String> se = new HashMap<String,String>();
+		se.put("roomid",roomid);
+		se.put("date", date);
+		return sqlSession.update(namespace+".notavail",se);
+		}
+	//·ë -- ¿¹¾à°¡´É
+	public int toavail(String roomid,String date) {
+		Map<String,String> se = new HashMap<String,String>();
+		se.put("roomid",roomid);
+		se.put("date", date);
+		return sqlSession.update(namespace+".toavail",se);
+	}
 	
 	//¼÷¼Ò -- °´½ÇÃß°¡
 	public int getHdetailUpload(HDetailVO vo) {
