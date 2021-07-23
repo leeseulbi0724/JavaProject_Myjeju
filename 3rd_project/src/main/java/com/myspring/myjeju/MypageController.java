@@ -1,6 +1,7 @@
 package com.myspring.myjeju;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -272,10 +273,15 @@ public class MypageController {
 		ArrayList<CafeReviewVO> cafelist = MypageService.getCafeReview(id);
 		ArrayList<HouseReviewVO> houselist = MypageService.getHouseReview(id);
 		
+
+		
 		mv.setViewName("mypage/myrecord/myreview");
 		
 		mv.addObject("store_list", storelist);
 		mv.addObject("travel_list", travellist);
+		mv.addObject("food_list", foodlist);
+		mv.addObject("cafe_list", cafelist);
+		mv.addObject("house_list", houselist);
 		
 		return mv;
 	}

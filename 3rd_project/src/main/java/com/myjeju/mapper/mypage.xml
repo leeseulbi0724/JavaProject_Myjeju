@@ -114,13 +114,29 @@
 		
 		<!-- My후기 - 스토어 리뷰 -->
 		<select id = "store_review" parameterType = "java.lang.String" resultType = "com.myjeju.vo.StorevVO">
-			select id, sid, srid, sr_review, sr_star, to_char(sr_time, 'yyyy-mm-dd') sr_time from myjeju_storev where id = #{id}
+			select id, sid, srid, sr_review, sr_star, to_char(sr_time, 'yyyy-mm-dd') sr_time from myjeju_storev where id = #{id} order by sr_time desc
 		</select>
 		
 		<!-- My후기 - 여행지 리뷰 -->
 		<select id = "travel_review" parameterType = "java.lang.String" resultType = "com.myjeju.vo.TravelReviewVO">
-			select id, tid, reid, t_review, t_star, to_char(t_time, 'yyyy-mm-dd') t_time from myjeju_travel_review where id = #{id}
+			select id, tid, reid, t_review, t_star, to_char(t_time, 'yyyy-mm-dd') t_time from myjeju_travel_review where id = #{id} order by t_time desc
 		</select>
+		
+		<!-- My후기 - 음식점 리뷰 -->
+		<select id = "food_review" parameterType = "java.lang.String" resultType = "com.myjeju.vo.FoodReviewVO">
+			select id, fid, reid, f_review, f_star, to_char(f_time, 'yyyy-mm-dd') f_time from myjeju_food_review where id = #{id} order by f_time desc
+		</select>
+		
+		<!-- My후기 - 카페 리뷰 -->
+		<select id = "cafe_review" parameterType = "java.lang.String" resultType = "com.myjeju.vo.CafeReviewVO">
+			select id, caid, reid, ca_review, ca_star, to_char(ca_time, 'yyyy-mm-dd') ca_time from myjeju_cafe_review where id = #{id} order by ca_time desc
+		</select>
+		
+		<!-- My후기 - 숙소 리뷰 -->
+		<select id = "house_review" parameterType = "java.lang.String" resultType = "com.myjeju.vo.HouseReviewVO">
+			select id, hid, reid, h_review, h_star, to_char(h_time, 'yyyy-mm-dd') h_time from myjeju_house_review where id = #{id} order by h_time desc
+		</select>
+		
 		
 		<!-- 예약내역 -->
 		<select id="order_content" parameterType="java.lang.String" resultType="com.myjeju.vo.OrderVO">
