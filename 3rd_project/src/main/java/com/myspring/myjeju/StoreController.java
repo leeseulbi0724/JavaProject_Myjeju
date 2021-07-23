@@ -135,11 +135,6 @@ public class StoreController {
 			result = storeService.getOrderResult(bvo);
 		}
 		
-		// 별점 -> myjeju_store.table에 update
-		boolean star = storeService.getReviewAvgUpdate(sid);
-		
-				
-		
 		mv.setViewName("store/store_content");
 		
 		mv.addObject("vo", vo);
@@ -147,7 +142,7 @@ public class StoreController {
 		mv.addObject("rlist", rlist);
 		mv.addObject("result", result);
 		
-		mv.addObject("sid", sid);
+		mv.addObject("sid", sid);			
 		mv.addObject("id", user_id);
 
 		
@@ -230,22 +225,6 @@ public class StoreController {
 		return mv;
 	}
 	
-	/**
-	 * store_review_proc.do : 스토어 상품평 등록 처리
-	 */
-	/**@RequestMapping(value = "/store_review_proc.do", method = RequestMethod.GET)
-	public ModelAndView store_review_proc(StorevVO vo) {
-		ModelAndView mv = new ModelAndView();
-		
-		boolean result = storeService.getInsertResult(vo);
-		
-		if(result) {
-			mv.setViewName("redirect:/store_content.do");
-			mv.addObject("sid", vo.getSid());
-		}
-		return mv;
-	}**/
-	
 	
 	/**
 	 * store_review_proc1.do : 스토어 상품평 등록 처리 (ajax)
@@ -265,13 +244,16 @@ public class StoreController {
 		
 		StorevVO vo = new StorevVO();
 
-
 		vo.setId(id);
 		vo.setSid(sid);
 		vo.setSr_review(sr_review);
 		vo.setSr_star(sr_star);
 		
 		boolean result = storeService.getInsertResult(vo);
+		if(result) {
+			// 별점 -> myjeju_store.table에 update
+			boolean star2 = storeService.getReviewAvgUpdate(sid);
+		}
 	
 		return result;
 	}

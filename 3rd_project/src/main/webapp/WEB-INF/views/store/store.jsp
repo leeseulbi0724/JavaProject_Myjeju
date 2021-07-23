@@ -23,7 +23,7 @@
 		width:100px; 
 		float:left; 
 		margin-top:5px; 
-		margin-right:5px; 
+		margin-left:30px; 
 	}
 
 	.star-rating, .star-rating span { 
@@ -85,9 +85,9 @@
 							<p>[${best.s_category}] ${best.s_name}</p>
 
 							<span class='star-rating'>
-								<span style ="width : ${(best.star_avg)*20}%"></span>   
+								<span style ="width : ${best.star_avg*20}%"></span>   
 							</span>   
-							<span>${best.star_avg} (best.star_count)</span>
+							<span>${best.star_avg} (${best.star_count})</span>
 							
 						</a>
 					</li>
@@ -108,9 +108,9 @@
 							<p>[${eat.s_category}] ${eat.s_name}</p>
 							
 							<span class='star-rating'>
-								<span style ="width : ${(eat.star_avg)*20}%"></span>   
+								<span style ="width : ${eat.star_avg*20}%"></span>   
 							</span>   
-							<span>${eat.star_avg} (<%-- ${eat.star_count} --%>)</span>
+							<span>${eat.star_avg} (${eat.star_count})</span>
 						</a>
 					</li>
 				</ul>
@@ -130,9 +130,9 @@
 							<p>[${souve.s_category}] ${souve.s_name}</p>
 							
 							<span class='star-rating'>
-								<span style ="width : ${(souve.star_avg)*20}%"></span>   
+								<span style ="width : ${souve.star_avg*20}%"></span>   
 							</span>   
-							<span>${souve.star_avg} (<%-- ${souve.star_count} --%>)</span>
+							<span>${souve.star_avg} (${souve.star_count})</span>
 						</a>
 					</li>
 				</ul>
@@ -152,9 +152,9 @@
 							<p>[${etc.s_category}] ${etc.s_name}</p>
 							
 							<span class='star-rating'>
-								<span style ="width : ${(etc.star_avg)*20}%"></span>   
+								<span style ="width : ${etc.star_avg*20}%"></span>   
 							</span>   
-							<span>${etc.star_avg} (<%-- ${etc.star_count} --%>)</span>
+							<span>${etc.star_avg} (${etc.star_count})</span>
 							
 						</a>
 					</li>

@@ -18,7 +18,7 @@
 		width:100px; 
 		float:left; 
 		margin-top:15px; 
-		margin-right:15px; 
+		margin-left:15px; 
 	}
 
 	.star-rating, .star-rating span { 
@@ -38,8 +38,9 @@
 	.title-box>span:last-child {
 		display : inline-block;
 		margin-top : 12px;
-		margin-left : 15px;
+		margin-left : 20px;
 		font-size : 18px;
+		font-weight : 500;
 	} 
 
 </style>
@@ -303,9 +304,9 @@
 							<input type = "hidden" name = "s_sfile" value = "${vo.s_sfile}">
 							
 							<span class='star-rating'>
-								<span style ="width : ${(vo.star_avg)*20}%"></span>   
+								<span style ="width : ${vo.star_avg*20}%"></span>   
 							</span>   
-							<span>${vo.star_avg} (vo.star_count)</span>
+							<span>${vo.star_avg} (${vo.star_count})</span>
 							
 						</div>
 						

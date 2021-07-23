@@ -4,9 +4,9 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 public class StoreVO {
 	String sid, s_category, s_name, s_image, s_sfile, s_content, s_ssfile;
-	int s_price, rno, star_avg;
+	int s_price, rno, star_count;
 	CommonsMultipartFile sfile1, sfile2;
-	
+	float star_avg;
 	public String getSid() {
 		return sid;
 	}
@@ -61,8 +61,12 @@ public class StoreVO {
 	public void setRno(int rno) {
 		this.rno = rno;
 	}
-	
-	
+	public int getStar_count() {
+		return star_count;
+	}
+	public void setStar_count(int star_count) {
+		this.star_count = star_count;
+	}
 	public CommonsMultipartFile getSfile1() {
 		return sfile1;
 	}
@@ -75,12 +79,14 @@ public class StoreVO {
 	public void setSfile2(CommonsMultipartFile sfile2) {
 		this.sfile2 = sfile2;
 	}
-	public int getStar_avg() {
+	public float getStar_avg() {
 		return star_avg;
 	}
-	public void setStar_avg(int star_avg) {
+	public void setStar_avg(float star_avg) {
 		this.star_avg = star_avg;
 	}
+	
+
 	
 	
 	
