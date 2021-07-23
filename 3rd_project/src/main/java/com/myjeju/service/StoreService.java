@@ -35,6 +35,8 @@ public interface StoreService {
 	boolean getReviewDelete(String srid);
 	int getReviewCount(String sid);
 	int getReviewAvg(String sid);
+	boolean getReviewAvgUpdate(String sid);
+	
 	
 	boolean getOrderResult(BasketVO vo);
 }

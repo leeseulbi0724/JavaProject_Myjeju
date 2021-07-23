@@ -49,6 +49,9 @@ public class StoreController {
 		ArrayList<StoreVO> souvelist = storeService.getSouveList();
 		ArrayList<StoreVO> etclist = storeService.getEtcList();
 		
+		// 상품평 
+		
+		
 		mv.setViewName("store/store");
 		
 		mv.addObject("bestlist", bestlist);
@@ -132,10 +135,9 @@ public class StoreController {
 			result = storeService.getOrderResult(bvo);
 		}
 		
-		/*
-		 * //별점 보이기 int star = storeService.getReviewAvg(sid); int reviewCount =
-		 * storeService.getReviewCount(sid);
-		 */
+		// 별점 -> myjeju_store.table에 update
+		boolean star = storeService.getReviewAvgUpdate(sid);
+		
 				
 		
 		mv.setViewName("store/store_content");
@@ -147,9 +149,7 @@ public class StoreController {
 		
 		mv.addObject("sid", sid);
 		mv.addObject("id", user_id);
-		/*
-		 * mv.addObject("star", star); mv.addObject("reviewCount", reviewCount);
-		 */
+
 		
 		return mv;
 	}

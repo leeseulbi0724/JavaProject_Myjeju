@@ -8,8 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.myjeju.vo.BasketVO;
+import com.myjeju.vo.CafeReviewVO;
 import com.myjeju.vo.CommunityVO;
+import com.myjeju.vo.FoodReviewVO;
 import com.myjeju.vo.HeartVO;
+import com.myjeju.vo.HouseReviewVO;
 import com.myjeju.vo.MemberVO;
 import com.myjeju.vo.OrderVO;
 import com.myjeju.vo.PointVO;
@@ -115,25 +118,22 @@ public class MypageDAO {
 	}
 	
 	/** My후기 - 음식점 리뷰 **/
-	/*
-	 * public ArrayList<StorevVO> getFoodReview(String id) { List<StorevVO> list =
-	 * sqlSession.selectList(namespace + "food_review", id); return
-	 * (ArrayList<StorevVO>) list; }
-	 */
+	public ArrayList<FoodReviewVO> getFoodReview(String id) { 
+		List<FoodReviewVO> list = sqlSession.selectList(namespace + ".food_review", id); 
+		return (ArrayList<FoodReviewVO>) list; 
+	}
 	
 	/** My후기 - 카페 리뷰 **/
-	/*
-	 * public ArrayList<StorevVO> getCafeReview(String id) { List<StorevVO> list =
-	 * sqlSession.selectList(namespace + "cafe_review", id); return
-	 * (ArrayList<StorevVO>) list; }
-	 */
+	public ArrayList<CafeReviewVO> getCafeReview(String id) { 
+		List<CafeReviewVO> list = sqlSession.selectList(namespace + ".cafe_review", id); 
+		return (ArrayList<CafeReviewVO>) list; 
+	}
 	
 	/** My후기 - 숙소 리뷰 **/
-	/*
-	 * public ArrayList<StorevVO> getHouseReview(String id) { List<StorevVO> list =
-	 * sqlSession.selectList(namespace + "house_review", id); return
-	 * (ArrayList<StorevVO>) list; }
-	 */
+	public ArrayList<HouseReviewVO> getHouseReview(String id) { 
+		List<HouseReviewVO> list = sqlSession.selectList(namespace + ".house_review", id); 
+		return (ArrayList<HouseReviewVO>) list; 
+	}
 	
 	/**
 	 * 예약내역가져오기

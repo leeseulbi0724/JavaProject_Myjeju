@@ -8,8 +8,11 @@ import org.springframework.stereotype.Service;
 import com.myjeju.dao.BasketDAO;
 import com.myjeju.dao.MypageDAO;
 import com.myjeju.vo.BasketVO;
+import com.myjeju.vo.CafeReviewVO;
 import com.myjeju.vo.CommunityVO;
+import com.myjeju.vo.FoodReviewVO;
 import com.myjeju.vo.HeartVO;
+import com.myjeju.vo.HouseReviewVO;
 import com.myjeju.vo.MemberVO;
 import com.myjeju.vo.OrderVO;
 import com.myjeju.vo.PointVO;
@@ -165,7 +168,9 @@ public class MypageServiceImpl implements MypageService {
 		}
 		return result;
 	}
-
+	
+	
+	/** ¸®ºä **/
 	@Override
 	public ArrayList<StorevVO> getStoreReview(String id) {
 		return mypageDAO.getStoreReview(id);
@@ -175,6 +180,23 @@ public class MypageServiceImpl implements MypageService {
 	public ArrayList<TravelReviewVO> getTravelReview(String id) {
 		return mypageDAO.getTravelReview(id);
 	}
+	
+	@Override
+	public ArrayList<FoodReviewVO> getFoodReview(String id) {
+		return mypageDAO.getFoodReview(id);
+	}
+
+	@Override
+	public ArrayList<CafeReviewVO> getCafeReview(String id) {
+		return mypageDAO.getCafeReview(id);
+	}
+
+	@Override
+	public ArrayList<HouseReviewVO> getHouseReview(String id) {
+		return mypageDAO.getHouseReview(id);
+	}
+
+	
 	
 	@Override
 	public OrderVO getOrderContent(String rid) {

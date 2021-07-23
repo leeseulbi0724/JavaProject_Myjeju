@@ -1,11 +1,13 @@
 package com.myjeju.service;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import com.myjeju.vo.BasketVO;
+import com.myjeju.vo.CafeReviewVO;
 import com.myjeju.vo.CommunityVO;
+import com.myjeju.vo.FoodReviewVO;
 import com.myjeju.vo.HeartVO;
+import com.myjeju.vo.HouseReviewVO;
 import com.myjeju.vo.MemberVO;
 import com.myjeju.vo.OrderVO;
 import com.myjeju.vo.PointVO;
@@ -41,9 +43,12 @@ public interface MypageService {
 	OrderVO getRommName(String hdid);
 	boolean getOrderSequ(BasketVO vo);
 	
-	
+	/* ¸®ºä */
 	ArrayList<StorevVO> getStoreReview(String id);
 	ArrayList<TravelReviewVO> getTravelReview(String id);
+	ArrayList<FoodReviewVO> getFoodReview(String id);
+	ArrayList<CafeReviewVO> getCafeReview(String id);
+	ArrayList<HouseReviewVO> getHouseReview(String id);
 	
 	OrderVO getOrderContent(String rid);
 	ArrayList<OrderVO> getDayResult(OrderVO vo);

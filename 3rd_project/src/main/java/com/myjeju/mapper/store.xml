@@ -8,57 +8,57 @@
 
 	<!-- BEST MENU 3개 -->
 	<select id = "best3list" resultType = "com.myjeju.vo.StoreVO">
-		<![CDATA[ select rno, sid, s_category, s_name, s_price, s_image, s_sfile, s_content, s_ssfile, round(star_avg, 1) star_avg, star_count
-					  from (select rownum rno, sid, s_category, s_name, s_price, s_image, s_sfile, s_content, s_ssfile, round(star_avg, 1) star_avg, star_count
-					    from (select sid, s_category, s_name, s_price, s_image, s_sfile, s_content, s_ssfile, round(star_avg, 1) star_avg, star_count 
+		<![CDATA[ select rno, sid, s_category, s_name, s_price, s_image, s_sfile, s_content, s_ssfile, star_avg
+					  from (select rownum rno, sid, s_category, s_name, s_price, s_image, s_sfile, s_content, s_ssfile, star_avg
+					    from (select sid, s_category, s_name, s_price, s_image, s_sfile, s_content, s_ssfile, star_avg
 					      from myjeju_store order by star_avg desc) order by rno) where rno <=3 ]]>
 	</select>
 
 	<!-- EAT MENU 3개 -->
 	<select id = "eat3list" resultType = "com.myjeju.vo.StoreVO">
-		<![CDATA[ select rno, sid, s_category, s_name, s_price, s_image, s_sfile, s_content, s_ssfile, round(star_avg, 1) star_avg, star_count
-					  from (select rownum rno, sid, s_category, s_name, s_price, s_image, s_sfile, s_content, s_ssfile, round(star_avg, 1) star_avg, star_count
-					    from (select sid, s_category, s_name, s_price, s_image, s_sfile, s_content, s_ssfile, round(star_avg, 1) star_avg, star_count 
+		<![CDATA[ select rno, sid, s_category, s_name, s_price, s_image, s_sfile, s_content, s_ssfile, star_avg
+					  from (select rownum rno, sid, s_category, s_name, s_price, s_image, s_sfile, s_content, s_ssfile, star_avg
+					    from (select sid, s_category, s_name, s_price, s_image, s_sfile, s_content, s_ssfile, star_avg
 					      from myjeju_store where s_category = '식품' order by star_avg desc) order by rno) where rno <=3 ]]>
 	</select>
 	
 	<!-- EAT 화면 -->
 	<select id = "eatlist" resultType = "com.myjeju.vo.StoreVO">
-		select sid, s_category, s_name, s_price, s_image, s_sfile, s_content, s_ssfile, round(star_avg, 1) star_avg, star_count
+		select sid, s_category, s_name, s_price, s_image, s_sfile, s_content, s_ssfile, star_avg
 			from myjeju_store where s_category = '식품'
 	</select>
 
 	<!-- SOUVE MENU 3개 -->
 	<select id = "souve3list" resultType = "com.myjeju.vo.StoreVO">
-		<![CDATA[ select rno, sid, s_category, s_name, s_price, s_image, s_sfile, s_content, s_ssfile, round(star_avg, 1) star_avg, star_count
-					  from (select rownum rno, sid, s_category, s_name, s_price, s_image, s_sfile, s_content, s_ssfile, round(star_avg, 1) star_avg, star_count
-					    from (select sid, s_category, s_name, s_price, s_image, s_sfile, s_content, s_ssfile, round(star_avg, 1) star_avg, star_count 
+		<![CDATA[ select rno, sid, s_category, s_name, s_price, s_image, s_sfile, s_content, s_ssfile, star_avg
+					  from (select rownum rno, sid, s_category, s_name, s_price, s_image, s_sfile, s_content, s_ssfile, star_avg
+					    from (select sid, s_category, s_name, s_price, s_image, s_sfile, s_content, s_ssfile, star_avg
 					      from myjeju_store where s_category = '기념품' order by star_avg desc) order by rno) where rno <=3 ]]>
 	</select>
 	
 	<!-- SOUVE 화면 -->
 	<select id = "souvelist" resultType = "com.myjeju.vo.StoreVO">
-		select sid, s_category, s_name, s_price, s_image, s_sfile, s_content, s_ssfile, round(star_avg, 1) star_avg, star_count
+		select sid, s_category, s_name, s_price, s_image, s_sfile, s_content, s_ssfile, star_avg
 			from myjeju_store where s_category = '기념품'
 	</select>
 
 	<!-- ETC MENU 3개 -->
 	<select id = "etc3list" resultType = "com.myjeju.vo.StoreVO">
-		<![CDATA[ select rno, sid, s_category, s_name, s_price, s_image, s_sfile, s_content, s_ssfile, round(star_avg, 1) star_avg, star_count
-					  from (select rownum rno, sid, s_category, s_name, s_price, s_image, s_sfile, s_content, s_ssfile, round(star_avg, 1) star_avg, star_count
-					    from (select sid, s_category, s_name, s_price, s_image, s_sfile, s_content, s_ssfile, round(star_avg, 1) star_avg, star_count 
+		<![CDATA[ select rno, sid, s_category, s_name, s_price, s_image, s_sfile, s_content, s_ssfile, star_avg
+					  from (select rownum rno, sid, s_category, s_name, s_price, s_image, s_sfile, s_content, s_ssfile, star_avg
+					    from (select sid, s_category, s_name, s_price, s_image, s_sfile, s_content, s_ssfile, star_avg
 					      from myjeju_store where s_category = '잡화' order by star_avg desc) order by rno) where rno <=3 ]]>
 	</select>
 
 	<!-- ETC 화면 -->
 	<select id = "etclist" resultType = "com.myjeju.vo.StoreVO">
-		select sid, s_category, s_name, s_price, s_image, s_sfile, s_content, s_ssfile, round(star_avg, 1) star_avg, star_count
+		select sid, s_category, s_name, s_price, s_image, s_sfile, s_content, s_ssfile, star_avg
 			from myjeju_store where s_category = '잡화'
 	</select>
 
 	<!-- 스토어 상품 상세 화면 -->
 	<select id = "content" parameterType = "java.lang.String" resultType = "com.myjeju.vo.StoreVO">
-		select sid, s_category, s_name, s_price, s_image, s_content, s_sfile, s_ssfile, round(star_avg, 1) star_avg, star_count
+		select sid, s_category, s_name, s_price, s_image, s_content, s_sfile, s_ssfile, star_avg
 			from myjeju_store where sid = #{sid}
 	</select>
 
@@ -95,10 +95,25 @@
 		select count(*) from myjeju_storev where sid = #{sid}
 	</select>
 	
-	<!-- 스토어 상품평 별점 평균 -->
-	<select id = "reviewAvg" parameterType = "java.lang.String" resultType = "java.lang.Integer">
-		select avg(sr_star) sr_star from myjeju_storev where sid = #{sid}
-	</select>
+	<!-- 스토어 상품평 별점 sum
+	<select id = "reviewAvg" parameterType = "">
+		select s.sid, count(sr_review) review_count, round(avg(sr_star),1) star_avg
+			from myjeju_store s, myjeju_storev re
+				where s.sid = re.sid
+				group by s.sid;
+	</select> -->
+	
+	<!-- 스토어 상품평 별점 자동 update -->
+	<update id = "review_avg_update" parameterType = "java.lang.String">
+	update myjeju_store set star_avg = 
+	(
+		select round(avg(sr_star),1)
+		from myjeju_storev re
+		join myjeju_store s on(re.sid = s.sid)
+		where s.sid = (select sid from myjeju_store where sid = #{sid})
+	)
+	where sid = (select sid from myjeju_store where sid = #{sid})
+	</update>
 	
 	<!-- 주문여부확인 -->
 	<select id="order_result" parameterType="com.myjeju.vo.BasketVO" resultType="java.lang.Integer">

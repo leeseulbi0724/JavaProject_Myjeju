@@ -122,6 +122,12 @@ public class StoreServiceImpl implements StoreService {
 	public int getReviewAvg(String sid) {
 		return storevDAO.getReviewAvg(sid);
 	}
+	
+
+	@Override
+	public boolean getReviewAvgUpdate(String sid) {
+		return storevDAO.getReviewAvgUpdate(sid);
+	}
 
 	@Override
 	public boolean getOrderResult(BasketVO vo) {

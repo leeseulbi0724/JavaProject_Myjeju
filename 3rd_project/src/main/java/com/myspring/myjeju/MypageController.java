@@ -19,10 +19,13 @@ import com.myjeju.service.MemberService;
 import com.myjeju.service.MypageService;
 import com.myjeju.service.TravelService;
 import com.myjeju.vo.BasketVO;
+import com.myjeju.vo.CafeReviewVO;
 import com.myjeju.vo.CafeVO;
 import com.myjeju.vo.CommunityVO;
+import com.myjeju.vo.FoodReviewVO;
 import com.myjeju.vo.FoodVO;
 import com.myjeju.vo.HeartVO;
+import com.myjeju.vo.HouseReviewVO;
 import com.myjeju.vo.HouseVO;
 import com.myjeju.vo.MemberVO;
 import com.myjeju.vo.OrderVO;
@@ -265,6 +268,9 @@ public class MypageController {
 		
 		ArrayList<StorevVO> storelist = MypageService.getStoreReview(id);
 		ArrayList<TravelReviewVO> travellist = MypageService.getTravelReview(id);
+		ArrayList<FoodReviewVO> foodlist = MypageService.getFoodReview(id);
+		ArrayList<CafeReviewVO> cafelist = MypageService.getCafeReview(id);
+		ArrayList<HouseReviewVO> houselist = MypageService.getHouseReview(id);
 		
 		mv.setViewName("mypage/myrecord/myreview");
 		

@@ -39,7 +39,7 @@
 					<li><a href="admember.do">회원관리<span id="unread" class="label label-info"></span></a></li>
 					<li class="active"><a href="adhouse.do">숙소관리</a></li>
 					<li><a href="adfood.do">음식점관리</a></li>
-					<li><a href="#">카페관리</a></li>
+					<li><a href="adcafe.do">카페관리</a></li>
 					<li><a href="adtravel.do">여행지관리</a></li>
 					<li><a href="adstore.do">상품관리</a>
 				</ul>

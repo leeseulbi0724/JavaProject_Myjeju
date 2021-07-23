@@ -54,4 +54,11 @@ public class StorevDAO {
 	public int getReviewAvg(String sid) {
 		return sqlSession.selectOne(namespace + ".reviewAvg", sid);
 	}
+	
+	public boolean getReviewAvgUpdate(String sid) {
+		boolean result = false;
+		int value = sqlSession.update(namespace + ".review_avg_update", sid);
+		if(value != 0) result = true;
+		return result;
+	}
 }
