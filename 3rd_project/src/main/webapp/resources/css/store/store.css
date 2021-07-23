@@ -13,11 +13,11 @@
 	section {
 		text-align : center; 
 		margin-top : 80px;
-		border : 1px solid red;
+		/* border : 1px solid red; */
 	}
 	
 	.store, .storeeat, .storesouve, .storeetc {
-		border : 1px solid blue;
+		/* border : 1px solid blue; */
 		width : 1000px;
 		margin : auto;
 	}

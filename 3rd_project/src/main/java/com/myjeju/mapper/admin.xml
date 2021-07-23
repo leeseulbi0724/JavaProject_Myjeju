@@ -391,7 +391,7 @@
 		<select id = "store_list" parameterType="map" resultType="com.myjeju.vo.StoreVO">
 			select rno, sid, s_category, s_name, s_price, s_image, s_content, s_sfile, s_ssfile
 				from(select rownum rno, sid, s_category, s_name, s_price, s_image, s_content, s_sfile, s_ssfile
-				     from(select * from myjeju_store order by sid desc))
+				     from(select * from myjeju_store order by rownum desc))
 				     where rno between #{start} and #{end}
 		</select>
 		
@@ -453,7 +453,7 @@
 		
 		<!-- 스토어 상품 등록 -->
 		<insert id = "storeInsert" parameterType = "com.myjeju.vo.StoreVO">
-			insert into myjeju_store values('s_'||sequ_myjeju_store.nextval, #{s_category}, #{s_name}, #{s_price}, #{s_image}, #{s_content}, #{s_sfile}, #{s_ssfile})
+			insert into myjeju_store values('s_'||sequ_myjeju_store.nextval, #{s_category}, #{s_name}, #{s_price}, #{s_image}, #{s_content}, #{s_sfile}, #{s_ssfile}, 0, 0)
 		</insert>
 		
 		<!-- 스토어 상품 삭제 -->
