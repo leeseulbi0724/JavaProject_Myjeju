@@ -22,6 +22,10 @@
 			alert("일괄예약에 성공했습니다.");
 		}else if (result=="2") {
 			alert("일괄예약에 실패했습니다.\n상세예약 또는 방별 일괄 예약을 진행해 주십시오.");
+		}else if (result=="3") {
+			alert("방 삭제에 성공했습니다");
+		}else if (result=="4") {
+			alert("방 삭제에 실패했습니다");
 		}
 		
 		var hdid = $(".hdid").val();
@@ -120,6 +124,7 @@
 					<th> 방아이디 </th>
 					<th> 방이름 </th>
 					<th> 예약처리 </th>
+					<th> 방삭제 </th>
 				</tr>
 			 	<c:forEach var="vo" items="${list}">
 				<tr>
@@ -127,9 +132,16 @@
 					<td onclick="#'">${vo.hdid}</td>
 					<td onclick="#'">${vo.roomid}</td>
 					<td onclick="#'">${vo.room_name}</td>
-					<td style="width:200px;">
+					<td style="width:150px;">
 						<button>상세예약</button>
 						<button type="button" class="btn_res_each" value="${vo.roomid}">일괄예약</button>
+					</td>
+					<td style="width:110px;">
+						<form name="delete" action="adhouse_de_room_delete_proc.do" method="get">
+						<input type="hidden" name="roomid" value="${vo.roomid}">
+						<input type="hidden" name="hdid" value="${vo.hdid}">
+						<button type="submit">삭제</button>
+						</form>
 					</td>
 				</tr>
 				</c:forEach>

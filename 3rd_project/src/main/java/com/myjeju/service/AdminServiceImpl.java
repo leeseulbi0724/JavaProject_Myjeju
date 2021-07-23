@@ -80,6 +80,14 @@ public class AdminServiceImpl implements AdminService {
 		}
 		return result;
 	}
+	public boolean deleteroom(String roomid) {
+		int val = adminDAO.deleteroom(roomid);
+		boolean result = false;
+		if (val!=0) {
+			result = true;
+		}
+		return result;
+	}
 	@Override
 	public boolean uploadroom(String hdid,String room_name) {
 		int val = adminDAO.uploadroom(hdid,room_name);

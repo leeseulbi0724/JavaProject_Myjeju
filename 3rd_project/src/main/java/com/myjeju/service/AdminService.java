@@ -42,6 +42,7 @@ public interface AdminService {
 	boolean insertres(RoomVO vo);
 	boolean uploadroom(String hdid,String room_name);
 	RoomdeVO getroom(String roomid);
+	boolean deleteroom(String roomid);
 	
 	
 	//관리자 맛집

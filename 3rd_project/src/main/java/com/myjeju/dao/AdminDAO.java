@@ -125,6 +125,9 @@ public class AdminDAO {
 	public RoomdeVO getroom(String roomid) {
 		return sqlSession.selectOne(namespace+".getroom", roomid);
 	}
+	public int deleteroom(String roomid) {
+		return sqlSession.delete(namespace+".deleteroom", roomid);
+	}
 	
 	//¼÷¼Ò -- °´½ÇÃß°¡
 	public int getHdetailUpload(HDetailVO vo) {

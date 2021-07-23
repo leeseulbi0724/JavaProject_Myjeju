@@ -117,6 +117,9 @@
 		<select id="getroom" parameterType="java.lang.String" resultType="com.myjeju.vo.RoomdeVO">
 			select * from myjeju_hdroom where roomid = #{roodid}
 		</select>
+		<insert id = "deleteroom" parameterType="java.lang.String">
+			delete from myjeju_hdroom where roomid = #{roodid}
+		</insert>
 	<!-- 관리자 맛집 -->
 		<select id="listnumfood" parameterType="map" resultType="com.myjeju.vo.FoodVO">
 			select rno, fid, f_name, f_tag, f_infor, f_infor2, f_addr, f_vpoint, f_hpoint, f_hp, f_like, f_file, f_sfile

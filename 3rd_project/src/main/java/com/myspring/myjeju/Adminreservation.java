@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.myjeju.service.AdminService;
 import com.myjeju.vo.DateVO;
@@ -214,15 +215,17 @@ public class Adminreservation {
 	}
 	//°´½Ç ·ë ¸®½ºÆ®
 	@RequestMapping(value="/adhouse_de_room.do",method= {RequestMethod.GET,RequestMethod.POST})
-	public ModelAndView toroom(String hdid) {
+	public ModelAndView toroom(String hdid,String result) {
 		ModelAndView mv = new ModelAndView();
 		ArrayList<RoomdeVO> list = adminService.gethousederoom(hdid);
-		int result = 0;
-		
+		int result1 = 0;
+		if(result != null) {
+			result1 = Integer.parseInt(result);
+		}
 		mv.setViewName("admin/adhouse_de_room");
 		mv.addObject("list", list);
 		mv.addObject("hdid", hdid);
-		mv.addObject("result", result);
+		mv.addObject("result", result1);
 		return mv;
 	}
 	//°´½Ç ·ë ÀÏ°ý¿¹¾à
@@ -263,10 +266,7 @@ public class Adminreservation {
 			months = month;
 		}
 		String years = year.substring(2,4);
-		System.out.println("years=" + years);
-		System.out.println("months=" + months);
 		String checkmonth = years +"/"+ months;
-		System.out.println(checkmonth);
 		ArrayList<RoomdeVO> list1 = adminService.gethousederoom(hdid);
 		
 		int checksize = 0;
@@ -275,7 +275,6 @@ public class Adminreservation {
 		checksize += room.size();
 		}
 		
-		System.out.println("roomsize="+checksize);
 		int result = 0;
 		if(checksize == 0) {
 			ArrayList<RoomVO> monthdate = new ArrayList<RoomVO>(); 
@@ -295,7 +294,6 @@ public class Adminreservation {
 						vo.setRdate(date);
 						vo.setAvailable("0");
 						monthdate.add(vo);
-						System.out.println(vo.getRoomid() +"/"+vo.getRdate());
 					}
 				}
 			}
@@ -407,6 +405,22 @@ public class Adminreservation {
 			mv.addObject("hdid", hdid);
 			return mv;
 		}
+		// ·ë DB delete 
+		@RequestMapping(value="/adhouse_de_room_delete_proc.do",method=RequestMethod.GET)
+		public ModelAndView toroomdeletedb(String hdid,String roomid) {
+			ModelAndView mv = new ModelAndView();
+			boolean result = adminService.deleteroom(roomid);
+			int result1 = 0;
+			if(result) {
+				result1 = 3;
+			}else {
+				result1 = 4;
+			}
+			mv.setView(new RedirectView("adhouse_de_room.do?hdid="+hdid));
+			mv.addObject("result", result1);
+			return mv;
+		}
+		
 
 }
 
