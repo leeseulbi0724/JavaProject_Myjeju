@@ -162,7 +162,7 @@
 			<div class="travel_spot">
 			<c:forEach var="toplist" items="${toplist}">
 				<article class="travel_spot1">
-					<a href="http://localhost:9000/myjeju/cafe_detail.do?caid=${toplist.caid}"><img src="http://localhost:9000/myjeju/images/cafe/${toplist.ca_sfile}"></a>
+					<a href="http://localhost:9000/myjeju/cafe_detail.do?caid=${toplist.caid}"><img src="http://localhost:9000/myjeju/images/cafe/cafe_detail/${toplist.ca_sfile}"></a>
 					<div class="spot_infor">
 						<p class="spot_name">${toplist.ca_name} <span>${toplist.ca_infor}</span></p>
 						<p class="spot_tag">${toplist.ca_tag}</p>
