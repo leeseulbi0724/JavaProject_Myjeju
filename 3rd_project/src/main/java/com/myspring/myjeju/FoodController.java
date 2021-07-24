@@ -37,13 +37,13 @@ public class FoodController {
 		String id = (String) session.getAttribute("session_id");	
 		
 		ArrayList<FoodVO> toplist = foodService.getFoodListTop3();
-		for (int i=0; i>toplist.size(); i++) {
+		for (int i=0; i<toplist.size(); i++) {
 			String img[] = toplist.get(i).getF_sfile().split(",");
 			toplist.get(i).setF_sfile(img[0]);
 		}
 		
 		ArrayList<FoodVO> list = foodService.getFoodList(1,5); 
-		for (int i=0; i>list.size(); i++) {
+		for (int i=0; i<list.size(); i++) {
 			String img[] = list.get(i).getF_sfile().split(",");
 			list.get(i).setF_sfile(img[0]);
 		}		
