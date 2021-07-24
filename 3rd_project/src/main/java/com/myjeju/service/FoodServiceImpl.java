@@ -72,6 +72,17 @@ public class FoodServiceImpl implements FoodService {
 		return result;
 	}
 	
+	@Override
+	public boolean getStarAvgUpdate(String fid) {
+		return foodDAO.getStarAvgUpdate(fid);
+	}
+	
+	@Override
+	public boolean getReviewCountUpdate(String fid) {
+		return foodDAO.getReviewCountUpdate(fid);
+	}
+	
+	
 	
 	@Override
 	public boolean getUpdateHeart(String fid) {

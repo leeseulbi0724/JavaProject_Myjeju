@@ -13,17 +13,18 @@
 	
 	<!-- 음식점 전체 리스트 -->
 	<select id="food_list" resultType="com.myjeju.vo.FoodVO">
-		select rno, fid, f_name, f_tag, f_infor, f_infor2, f_addr, f_vpoint, f_hpoint, f_hp, f_like, f_file, f_sfile
-  			from(select rownum rno, fid, f_name, f_tag, f_infor, f_infor2, f_addr, f_vpoint, f_hpoint, f_hp, f_like, f_file, f_sfile
-    		from(select fid, f_name, f_tag, f_infor, f_infor2, f_addr, f_vpoint, f_hpoint, f_hp, f_like,  f_file, f_sfile
+		select rno, fid, f_name, f_tag, f_infor, f_infor2, f_addr, f_vpoint, f_hpoint, f_hp, f_like, f_file, f_sfile, star_avg, review_count
+  			from(select rownum rno, fid, f_name, f_tag, f_infor, f_infor2, f_addr, f_vpoint, f_hpoint, f_hp, f_like, f_file, f_sfile, star_avg, review_count
+    		from(select fid, f_name, f_tag, f_infor, f_infor2, f_addr, f_vpoint, f_hpoint, f_hp, f_like, f_file, f_sfile, star_avg, review_count
     		from myjeju_food order by f_like desc))
+    		
 	</select>
 	
 	<!-- 음식점 리스트 처리 -->
 	<select id="ajax_food_list_num" parameterType="map" resultType="com.myjeju.vo.FoodVO">
-		select rno, fid, f_name, f_tag, f_infor, f_infor2, f_addr, f_vpoint, f_hpoint, f_hp, f_like,  f_file, f_sfile
-			from(select rownum rno, fid, f_name, f_tag, f_infor, f_infor2, f_addr, f_vpoint, f_hpoint, f_hp, f_like, f_file, f_sfile
-    		from(select fid, f_name, f_tag, f_infor, f_infor2, f_addr, f_vpoint, f_hpoint, f_hp, f_like,  f_file, f_sfile from myjeju_food order by f_like desc)) 
+		select rno, fid, f_name, f_tag, f_infor, f_infor2, f_addr, f_vpoint, f_hpoint, f_hp, f_like, f_file, f_sfile, star_avg, review_count
+			from(select rownum rno, fid, f_name, f_tag, f_infor, f_infor2, f_addr, f_vpoint, f_hpoint, f_hp, f_like, f_file, f_sfile, star_avg, review_count
+    		from(select fid, f_name, f_tag, f_infor, f_infor2, f_addr, f_vpoint, f_hpoint, f_hp, f_like, f_file, f_sfile, star_avg, review_count from myjeju_food order by f_like desc)) 
     		where rno between #{start} and #{end}
 	</select>
 	
@@ -31,16 +32,16 @@
 	<select id="ajax_food_list_search" parameterType="java.util.Map" resultType="com.myjeju.vo.FoodVO">
 		<choose>
 			<when test="search.equals('f_name')">
-				select rno, fid, f_name, f_tag, f_infor, f_infor2, f_addr, f_vpoint, f_hpoint, f_hp, f_like,  f_file, f_sfile
-					from(select rownum rno, fid, f_name, f_tag, f_infor, f_infor2, f_addr, f_vpoint, f_hpoint, f_hp, f_like,  f_file, f_sfile
-	    			from(select fid, f_name, f_tag, f_infor, f_infor2, f_addr, f_vpoint, f_hpoint, f_hp, f_like,  f_file, f_sfile from myjeju_food order by f_like desc)
+				select rno, fid, f_name, f_tag, f_infor, f_infor2, f_addr, f_vpoint, f_hpoint, f_hp, f_like, f_file, f_sfile, star_avg, review_count
+					from(select rownum rno, fid, f_name, f_tag, f_infor, f_infor2, f_addr, f_vpoint, f_hpoint, f_hp, f_like, f_file, f_sfile, star_avg, review_count
+	    			from(select fid, f_name, f_tag, f_infor, f_infor2, f_addr, f_vpoint, f_hpoint, f_hp, f_like, f_file, f_sfile, star_avg, review_count from myjeju_food order by f_like desc)
 	    			where f_name like '%'||#{search_text}||'%') 
 	    			where rno between #{start} and #{end}
 			</when>
 			<when test="search.equals('f_addr')">
-				select rno, fid, f_name, f_tag, f_infor, f_infor2, f_addr, f_vpoint, f_hpoint, f_hp, f_like,  f_file, f_sfile
-					from(select rownum rno, fid, f_name, f_tag, f_infor, f_infor2, f_addr, f_vpoint, f_hpoint, f_hp, f_like,  f_file, f_sfile
-	    			from(select fid, f_name, f_tag, f_infor, f_infor2, f_addr, f_vpoint, f_hpoint, f_hp, f_like, f_file, f_sfile from myjeju_food order by f_like desc)
+				select rno, fid, f_name, f_tag, f_infor, f_infor2, f_addr, f_vpoint, f_hpoint, f_hp, f_like, f_file, f_sfile, star_avg, review_count
+					from(select rownum rno, fid, f_name, f_tag, f_infor, f_infor2, f_addr, f_vpoint, f_hpoint, f_hp, f_like, f_file, f_sfile, star_avg, review_count
+	    			from(select fid, f_name, f_tag, f_infor, f_infor2, f_addr, f_vpoint, f_hpoint, f_hp, f_like, f_file, f_sfile, star_avg, review_count from myjeju_food order by f_like desc)
 	    			where f_addr like '%'||#{search_text}||'%') 
 	    			where rno between #{start} and #{end}
 			</when>
@@ -49,15 +50,17 @@
 	
 	<!-- 음식점 상위3 -->
 	<select id="food_top3" resultType="com.myjeju.vo.FoodVO">
-		<![CDATA[ select fid, f_name, f_tag, f_infor, f_like, f_file, f_sfile from 
-				   (select fid, f_name, f_tag, f_infor, f_like,  f_file, f_sfile from myjeju_food order by f_like desc)
-				   where rownum <= 3 ]]>
+		<![CDATA[ select rno, fid, f_name, f_tag, f_infor, f_like, f_file, f_sfile, star_avg, review_count
+					  from (select rownum rno, fid, f_name, f_tag, f_infor, f_like, f_file, f_sfile, star_avg, review_count
+					    from (select fid, f_name, f_tag, f_infor, f_like, f_file, f_sfile, star_avg, review_count
+					      from myjeju_food order by f_like desc) order by rno) where rno <=3 ]]>
+				   
 	</select>
 	
 	<!-- 음식점 상세 정보 -->
 	<select id="food_detail" parameterType="java.lang.String" resultType="com.myjeju.vo.FoodVO">
-		select fid, f_name, f_tag, f_infor, f_infor2, f_addr, f_hp, f_like,
-			   f_file, f_sfile from myjeju_food where fid=#{fid}
+		select fid, f_name, f_tag, f_infor, f_infor2, f_addr, f_hp, f_like, f_file, f_sfile, star_avg, review_count
+			   from myjeju_food where fid=#{fid}
 	</select>
 	
 	
@@ -90,6 +93,27 @@
 		delete from myjeju_food_review where reid = #{reid}
 	</delete>
 	
+	<!-- 별점 업데이트 -->
+	<update id="star_avg_update" parameterType = "java.lang.String">
+		update myjeju_food set star_avg = 
+		( select round(avg(f_star),1) 
+		  from myjeju_food_review fr
+		  join myjeju_food f on(fr.fid = f.fid)
+		  where f.fid = (select fid from myjeju_food where fid=#{fid})
+		)
+		where fid = (select fid from myjeju_food where fid=#{fid})
+	</update>
+	
+	<!-- 리뷰 카운트 업데이트 -->
+	<update id="review_count_update" parameterType = "java.lang.String">
+		update myjeju_food set review_count = 
+		( select count(f_review)
+		  from myjeju_food_review fr
+		  join myjeju_food f on(fr.fid = f.fid)
+		  where f.fid = (select fid from myjeju_food where fid=#{fid})
+		)
+		where fid = (select fid from myjeju_food where fid=#{fid})
+	</update>
 	
 	<!-- 하트 테이블 + -->
 	<insert id="heart_plus" parameterType="com.myjeju.vo.HeartVO">

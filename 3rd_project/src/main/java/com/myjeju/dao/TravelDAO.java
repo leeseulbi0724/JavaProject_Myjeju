@@ -111,17 +111,36 @@ public class TravelDAO extends DBConn {
 		return (ArrayList<TravelReviewVO>)list;
 	}
 	
-	
-	
-	
 	//리뷰 삭제
 	public int getTravelReviewDelete(String reid) {
 		return sqlSession.delete(namespace+".delete_review", reid);
 	}
 	
+	//리뷰 카운트 
+	public int getReviewCount(String tid) {
+		return sqlSession.selectOne(namespace+".review_count", tid);
+	}
 	
+	//별점 평균
+	public int getAvgStar(String tid) {
+		return sqlSession.selectOne(namespace+".avg_star", tid);
+	}
 	
+	//별점 평균 업데이트
+	public boolean getStarAvgUpdate(String tid) {
+		boolean result = false;
+		int value = sqlSession.update(namespace+".star_avg_update", tid);
+		if(value != 0) result = true;
+		return result;
+	}
 	
+	//리뷰 카운트 업데이트
+	public boolean getReviewCountUpdate(String tid) {
+		boolean result =false;
+		int value = sqlSession.update(namespace+".review_count_update", tid);
+		if(value != 0) result =true;
+		return result;
+	}
 	
 	
 	//Update ---> 하트 업데이트

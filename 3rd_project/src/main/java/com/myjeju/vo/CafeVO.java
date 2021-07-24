@@ -1,9 +1,9 @@
 package com.myjeju.vo;
 
 public class CafeVO {
-	String caid, ca_name, ca_tag, ca_infor, ca_infor2, ca_addr, ca_addr1, ca_addr2, ca_vpoint, ca_hpoint, ca_hp, ca_file, ca_sfile, old_name,
-	ca_image1, ca_image2, ca_image3, ca_image4, ca_image5;
-	int rno, ca_like, status;
+	String caid, ca_name, ca_tag, ca_infor, ca_infor2, ca_addr, ca_addr1, ca_addr2, ca_vpoint, ca_hpoint, ca_hp, ca_file, ca_sfile, old_name;
+	int rno, ca_like, status, review_count;
+	float star_avg;
 	
 	public String getCaid() {
 		return caid;
@@ -35,7 +35,24 @@ public class CafeVO {
 	public void setCa_infor2(String ca_infor2) {
 		this.ca_infor2 = ca_infor2;
 	}
-
+	public String getCa_addr() {
+		return ca_addr;
+	}
+	public void setCa_addr(String ca_addr) {
+		this.ca_addr = ca_addr;
+	}
+	public String getCa_addr1() {
+		return ca_addr1;
+	}
+	public void setCa_addr1(String ca_addr1) {
+		this.ca_addr1 = ca_addr1;
+	}
+	public String getCa_addr2() {
+		return ca_addr2;
+	}
+	public void setCa_addr2(String ca_addr2) {
+		this.ca_addr2 = ca_addr2;
+	}
 	public String getCa_vpoint() {
 		return ca_vpoint;
 	}
@@ -53,48 +70,6 @@ public class CafeVO {
 	}
 	public void setCa_hp(String ca_hp) {
 		this.ca_hp = ca_hp;
-	}
-	public String getCa_image1() {
-		return ca_image1;
-	}
-	public void setCa_image1(String ca_image1) {
-		this.ca_image1 = ca_image1;
-	}
-	public String getCa_image2() {
-		return ca_image2;
-	}
-	public void setCa_image2(String ca_image2) {
-		this.ca_image2 = ca_image2;
-	}
-	public String getCa_image3() {
-		return ca_image3;
-	}
-	public void setCa_image3(String ca_image3) {
-		this.ca_image3 = ca_image3;
-	}
-	public String getCa_image4() {
-		return ca_image4;
-	}
-	public void setCa_image4(String ca_image4) {
-		this.ca_image4 = ca_image4;
-	}
-	public String getCa_image5() {
-		return ca_image5;
-	}
-	public void setCa_image5(String ca_image5) {
-		this.ca_image5 = ca_image5;
-	}
-	public int getCa_like() {
-		return ca_like;
-	}
-	public void setCa_like(int ca_like) {
-		this.ca_like = ca_like;
-	}
-	public int getStatus() {
-		return status;
-	}
-	public void setStatus(int status) {
-		this.status = status;
 	}
 	public String getCa_file() {
 		return ca_file;
@@ -120,31 +95,30 @@ public class CafeVO {
 	public void setRno(int rno) {
 		this.rno = rno;
 	}
-	
-	public String getCa_addr1() {
-		return ca_addr1;
+	public int getCa_like() {
+		return ca_like;
 	}
-	public void setCa_addr1(String ca_addr1) {
-		this.ca_addr1 = ca_addr1;
+	public void setCa_like(int ca_like) {
+		this.ca_like = ca_like;
 	}
-	public String getCa_addr2() {
-		return ca_addr2;
+	public int getStatus() {
+		return status;
 	}
-	public void setCa_addr2(String ca_addr2) {
-		this.ca_addr2 = ca_addr2;
+	public void setStatus(int status) {
+		this.status = status;
 	}
-	public String getCa_addr() {
-		return ca_addr;
+	public int getReview_count() {
+		return review_count;
 	}
-	public void setCa_addr(String ca_addr) {
-		this.ca_addr = ca_addr;
+	public void setReview_count(int review_count) {
+		this.review_count = review_count;
 	}
-	
-	
-	
-	
-	
-
+	public float getStar_avg() {
+		return star_avg;
+	}
+	public void setStar_avg(float star_avg) {
+		this.star_avg = star_avg;
+	}
 	
 	
 }

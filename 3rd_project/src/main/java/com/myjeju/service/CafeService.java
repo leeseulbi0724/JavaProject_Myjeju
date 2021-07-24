@@ -24,4 +24,6 @@ public interface CafeService {
 	ArrayList<CafeReviewVO> getCafeReview(String caid);
 	ArrayList<CafeReviewVO> getCafeReview(String caid, int startnum, int endnum);
 	boolean getCafeReviewDelete(String reid);
+	boolean getStarAvgUpdate(String caid);
+	boolean getReviewCountUpdate(String caid);
 }

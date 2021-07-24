@@ -138,9 +138,10 @@
 			</table>
 		</section>
 		<section class = "setup_faq_search">
-			<form name = "setup_counsel_form" action ="adfood.do" method = "post">
+			<form name = "setup_counsel_form" action ="adcafe.do" method = "post">
 				<select class = "search" name = "search" style = "width: 70px; height: 27px">
 					<option value = "name">카페명</option>
+					<option value = "addr">지역명</option>
 				</select>
 				<input type = "text" name = "search_text" class = "search_text" style = "width: 300px; margin: 0 10px;">
 				<button type = "submit" class = "btn_search">검색</button>

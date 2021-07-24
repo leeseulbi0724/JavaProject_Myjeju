@@ -117,4 +117,13 @@ public class HouseServiceImpl implements HouseService {
 		return result;
 	}
 	
+	@Override
+	public boolean getStarAvgUpdate(String hid) {
+		return houseDAO.getStarAvgUpdate(hid);
+	}
+	
+	@Override
+	public boolean getReviewCountUpdate(String hid) {
+		return houseDAO.getReviewCountUpdate(hid);
+	}
 }

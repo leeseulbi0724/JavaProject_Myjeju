@@ -320,7 +320,8 @@ public class MypageController {
 		ArrayList<HeartVO> t_list = MypageService.getTravelHeartList(id);
 		for (int i=0; i<t_list.size(); i++) {
 			TravelVO vo = TravelService.getTravelDetail(t_list.get(i).getTid());
-			t_list.get(i).setT_image1(vo.getT_image1());
+			String img[] = vo.getT_sfile().split(",");
+			t_list.get(i).setT_image1(img[0]);
 			t_list.get(i).setT_like(vo.getT_like());
 		}
 		

@@ -150,7 +150,7 @@
 				<button type="button" class="btn_style" id="heart_btn">
 					<img src="http://localhost:9000/myjeju/images/travel/empty_heart.png">${vo.f_like}
 				</button>
-				<img src="http://localhost:9000/myjeju/images/travel/star.png"><span class="star_score">4.8 (223)</span>
+				<img src="http://localhost:9000/myjeju/images/travel/star.png"><span class="star_score">${vo.star_avg} (${vo.review_count})</span>
 			</div>
 		</div>
 	</div>

@@ -128,13 +128,15 @@ public class HouseController {
 			jobj.addProperty("h_like", vo.getH_like());
 			jobj.addProperty("status", vo.getStatus());
 			jobj.addProperty("h_img", vo.getH_img());
+			jobj.addProperty("star_avg", vo.getStar_avg()); 
+			jobj.addProperty("review_count", vo.getReview_count());
 			jobj.addProperty("pnum", String.valueOf(pageNumber));
 			jobj.addProperty("search", search);
 			jobj.addProperty("search_text", search_text);
 			
 			jlist.add(jobj);
 		}
-		
+	
 		jdata.add("jlist", jlist);
 
 		return gson.toJson(jdata);
@@ -290,10 +292,14 @@ public class HouseController {
 		vo.setH_star(h_star);
 
 		boolean result = houseService.getInsertResult(vo);
+		boolean star_avg = houseService.getStarAvgUpdate(hid);
+		boolean review_count = houseService.getReviewCountUpdate(hid);
 		
 		if(result) {
 			mv.setViewName("redirect:/house_detail.do");
 			mv.addObject("hid", vo.getHid());
+			mv.addObject("star_avg",star_avg);
+			mv.addObject("review_count",review_count);
 		}
 		return mv;
 	}

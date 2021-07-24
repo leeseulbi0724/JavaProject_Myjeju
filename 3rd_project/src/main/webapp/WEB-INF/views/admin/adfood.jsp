@@ -140,7 +140,8 @@
 		<section class = "setup_faq_search">
 			<form name = "setup_counsel_form" action ="adfood.do" method = "post">
 				<select class = "search" name = "search" style = "width: 70px; height: 27px">
-					<option value = "name">이름</option>
+					<option value = "name">가게명</option>
+					<option value = "name">지역명</option>
 				</select>
 				<input type = "text" name = "search_text" class = "search_text" style = "width: 300px; margin: 0 10px;">
 				<button type = "submit" class = "btn_search">검색</button>

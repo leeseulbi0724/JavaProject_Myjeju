@@ -55,7 +55,7 @@
 							addListHtml += "<p class='spot_addr'>" + jdata.jlist[i].f_addr + "</p>";
 							addListHtml += "<div>";
 							addListHtml += "<img src='http://localhost:9000/myjeju/images/travel/star.png'>";
-							addListHtml += "<span class='star_score'>4.4 (268)</span>";
+							addListHtml += "<span class='star_score'>" + jdata.jlist[i].star_avg + " (" + jdata.jlist[i].review_count + ")" + "</span>";
 							addListHtml += "</div>";
 							addListHtml += "</td>";
 							addListHtml += "<td>";
@@ -174,7 +174,7 @@
 							<img src="http://localhost:9000/myjeju/images/house/red_heart.png"  width=25 height=25 class="heart_img" >${toplist.f_like }
 						</c:if>
 						</button>
-						<img src="http://localhost:9000/myjeju/images/travel/star.png"><span class="star_score">4.8 (223)</span>
+						<img src="http://localhost:9000/myjeju/images/travel/star.png"><span class="star_score">${toplist.star_avg} (${toplist.review_count})</span>
 					</div>
 				</article>
 			</c:forEach>

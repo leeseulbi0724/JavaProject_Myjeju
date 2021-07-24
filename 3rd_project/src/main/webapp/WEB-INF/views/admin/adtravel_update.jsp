@@ -168,7 +168,7 @@ $(document).ready(function() {
 			<table class="table">
 		 		<tr>
 		 			<th class="title">이름</th>
-		 			<th><input type="text" class="form-control" placeholder="상호명을 입력해주세요" id="name" name="t_name" value="${vo.t_name }"></th>
+		 			<th><input type="text" class="form-control" placeholder="여행지명을 입력해주세요" id="name" name="t_name" value="${vo.t_name }"></th>
 		 			<th class="title">해시태그</th>
 		 			<th><input type="text" class="form-control" placeholder="해시태그를 입력해주세요" id="tag" name="t_tag" value="${vo.t_tag }"></th>
 		 			<th class="title">종류</th>
@@ -176,7 +176,7 @@ $(document).ready(function() {
 		 		</tr>
 		 		<tr>
 		 			<th class="title">설명</th>
-		 			<th colspan="5"><input type="text" class="form-control" placeholder="간단한 설명을 입력해주세요" id="info" name="t_infor2" value="${vo.t_infor2 }"></th>
+		 			<th colspan="5"><textarea class="form-control" placeholder="설명을 입력해주세요" id="info" name="t_infor2" style="height:200px;">${vo.t_infor2 }</textarea></th>
 		 		</tr>	
 		 		<tr>
 		 			<th class="title">주소</th>
@@ -202,11 +202,11 @@ $(document).ready(function() {
 		 			<th colspan="7">
 				 		<c:forEach var="vo"  items="${list}">
 			 				<div>
-			 					<input type="text" class="form-control"  id="file" readonly value="${vo.t_image }" name="${vo.t_file }">
+			 					<input type="text" class="form-control"  id="file" readonly value="${vo.t_file }" name="${vo.t_sfile }">
 			 					<button type="button" class="minus">-</button>
 			 				</div>
-		 					<span class="file_name">${vo.t_image},</span>		 					
-		 					<span class="sfile_name">${vo.t_file},</span>
+		 					<span class="file_name">${vo.t_file},</span>		 					
+		 					<span class="sfile_name">${vo.t_sfile},</span>
 				 		</c:forEach>
 		 			</th>		 			
 		 		</tr> 		

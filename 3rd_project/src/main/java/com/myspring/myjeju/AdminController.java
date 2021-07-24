@@ -599,8 +599,8 @@ public class AdminController {
 					} 
 			}
 			TravelVO vo = new TravelVO();
-			vo.setT_image(fileMultiName);
-			vo.setT_file(fileMultiUplodaName);
+			vo.setT_file(fileMultiName);
+			vo.setT_sfile(fileMultiUplodaName);
 			vo.setT_name(request.getParameter("t_name"));
 			vo.setT_tag(request.getParameter("t_tag"));
 			vo.setT_infor(request.getParameter("t_infor"));
@@ -625,13 +625,13 @@ public class AdminController {
 		public ModelAndView adtravel_update(String tid) {
 			ModelAndView mv = new ModelAndView();
 			TravelVO vo = adminService.gettravel(tid);
-			String file[] = vo.getT_image().split(",");
+			String file[] = vo.getT_file().split(",");
 			String sfile[] = vo.getT_file().split(",");	
 			ArrayList<TravelVO> list = new ArrayList<TravelVO>();
 			for (int i=0; i<sfile.length; i++) {
 				TravelVO fvo = new TravelVO();
-				fvo.setT_image(file[i]);
-				fvo.setT_file(sfile[i]);				
+				fvo.setT_file(file[i]);
+				fvo.setT_sfile(sfile[i]);				
 				list.add(fvo);				
 			}			
 			mv.addObject("vo", vo);
@@ -686,8 +686,8 @@ public class AdminController {
 			}
 
 			TravelVO vo = new TravelVO();
-			vo.setT_image(fileOldName+fileMultiName);
-			vo.setT_file(fileOldRoot+fileMultiUplodaName);
+			vo.setT_file(fileOldName+fileMultiName);
+			vo.setT_sfile(fileOldRoot+fileMultiUplodaName);
 			vo.setT_name(request.getParameter("t_name"));
 			vo.setT_tag(request.getParameter("t_tag"));
 			vo.setT_infor(request.getParameter("t_infor"));

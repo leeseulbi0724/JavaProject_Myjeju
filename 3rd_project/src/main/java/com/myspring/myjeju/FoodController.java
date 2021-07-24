@@ -48,9 +48,9 @@ public class FoodController {
 			list.get(i).setF_sfile(img[0]);
 		}		
 		
-		System.out.print(toplist.get(0).getF_sfile());
-		System.out.print(toplist.get(1).getF_sfile());
-		System.out.print(toplist.get(2).getF_sfile());
+		//System.out.print(toplist.get(0).getF_sfile());
+		//System.out.print(toplist.get(1).getF_sfile());
+		//System.out.print(toplist.get(2).getF_sfile());
 		
 		
 		if (id != null) {
@@ -142,6 +142,8 @@ public class FoodController {
 			jobj.addProperty("f_like", vo.getF_like());
 			jobj.addProperty("status", vo.getStatus());
 			jobj.addProperty("f_image", img[0]);
+			jobj.addProperty("star_avg", vo.getStar_avg()); 
+			jobj.addProperty("review_count", vo.getReview_count());
 			jobj.addProperty("pnum", String.valueOf(pageNumber));
 			jobj.addProperty("search", search);
 			jobj.addProperty("search_text", search_text);
@@ -210,7 +212,7 @@ public class FoodController {
 		int pnum = 1;
 		
 		FoodVO vo = foodService.getFoodDetail(fid);
-		String infor2 = vo.getF_infor2().replace("-", "<br>");
+		String infor2 = vo.getF_infor2().replace("\r\n", "<br>");
 		String user_id = (String) session.getAttribute("session_id");
 		String img[] = vo.getF_sfile().split(",");
 		
@@ -256,10 +258,14 @@ public class FoodController {
 		vo.setF_star(f_star);
 
 		boolean result = foodService.getInsertResult(vo);
+		boolean star_avg = foodService.getStarAvgUpdate(fid);
+		boolean review_count = foodService.getReviewCountUpdate(fid);
 		
 		if(result) {
 			mv.setViewName("redirect:/food_detail.do");
 			mv.addObject("fid", vo.getFid());
+			mv.addObject("star_avg",star_avg);
+			mv.addObject("review_count",review_count);
 		}
 		return mv;
 	}

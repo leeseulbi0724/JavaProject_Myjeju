@@ -32,6 +32,6 @@ public interface HouseService{
 	ArrayList<HouseReviewVO> getHouseReview(String hid);
 	ArrayList<HouseReviewVO> getHouseReview(String hid, int startnum, int endnum);
 	boolean getHouseReviewDelete(String reid);
-	
-	
+	boolean getStarAvgUpdate(String hid);
+	boolean getReviewCountUpdate(String hid);
 }

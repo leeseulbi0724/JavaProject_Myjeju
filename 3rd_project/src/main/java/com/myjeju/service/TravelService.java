@@ -29,4 +29,8 @@ public interface TravelService {
 	ArrayList<TravelReviewVO> getTravelReview(String tid);
 	ArrayList<TravelReviewVO> getTravelReview(String tid, int startnum, int endnum);
 	boolean getTravelReviewDelete(String reid);
+	int getReviewCount(String tid);
+	int getAvgStar(String tid);
+	boolean getStarAvgUpdate(String tid);
+	boolean getReviewCountUpdate(String tid);
 }

@@ -1,40 +1,10 @@
 package com.myjeju.vo;
 
 public class TravelVO {
-	String tid, t_name, t_tag, t_infor, t_infor2, t_addr, t_addr1, t_addr2, t_vpoint, t_hpoint, t_hp, 
-			t_image1, t_image2, t_image3, t_image4, t_image5,t_image,t_file;
-	int rno, t_like, status;
+	String tid, t_name, t_tag, t_infor, t_infor2, t_addr, t_addr1, t_addr2, t_vpoint, t_hpoint, t_hp, t_file, t_sfile, old_name;
+	int rno, t_like, status, review_count;
+	float star_avg;
 	
-	public String getT_addr1() {
-		return t_addr1;
-	}
-	public void setT_addr1(String t_addr1) {
-		this.t_addr1 = t_addr1;
-	}
-	public String getT_addr2() {
-		return t_addr2;
-	}
-	public void setT_addr2(String t_addr2) {
-		this.t_addr2 = t_addr2;
-	}
-	public String getT_image() {
-		return t_image;
-	}
-	public void setT_image(String t_image) {
-		this.t_image = t_image;
-	}
-	public String getT_file() {
-		return t_file;
-	}
-	public void setT_file(String t_file) {
-		this.t_file = t_file;
-	}
-	public int getRno() {
-		return rno;
-	}
-	public void setRno(int rno) {
-		this.rno = rno;
-	}
 	public String getTid() {
 		return tid;
 	}
@@ -71,6 +41,18 @@ public class TravelVO {
 	public void setT_addr(String t_addr) {
 		this.t_addr = t_addr;
 	}
+	public String getT_addr1() {
+		return t_addr1;
+	}
+	public void setT_addr1(String t_addr1) {
+		this.t_addr1 = t_addr1;
+	}
+	public String getT_addr2() {
+		return t_addr2;
+	}
+	public void setT_addr2(String t_addr2) {
+		this.t_addr2 = t_addr2;
+	}
 	public String getT_vpoint() {
 		return t_vpoint;
 	}
@@ -89,35 +71,29 @@ public class TravelVO {
 	public void setT_hp(String t_hp) {
 		this.t_hp = t_hp;
 	}
-	public String getT_image1() {
-		return t_image1;
+	public String getT_file() {
+		return t_file;
 	}
-	public void setT_image1(String t_image1) {
-		this.t_image1 = t_image1;
+	public void setT_file(String t_file) {
+		this.t_file = t_file;
 	}
-	public String getT_image2() {
-		return t_image2;
+	public String getT_sfile() {
+		return t_sfile;
 	}
-	public void setT_image2(String t_image2) {
-		this.t_image2 = t_image2;
+	public void setT_sfile(String t_sfile) {
+		this.t_sfile = t_sfile;
 	}
-	public String getT_image3() {
-		return t_image3;
+	public String getOld_name() {
+		return old_name;
 	}
-	public void setT_image3(String t_image3) {
-		this.t_image3 = t_image3;
+	public void setOld_name(String old_name) {
+		this.old_name = old_name;
 	}
-	public String getT_image4() {
-		return t_image4;
+	public int getRno() {
+		return rno;
 	}
-	public void setT_image4(String t_image4) {
-		this.t_image4 = t_image4;
-	}
-	public String getT_image5() {
-		return t_image5;
-	}
-	public void setT_image5(String t_image5) {
-		this.t_image5 = t_image5;
+	public void setRno(int rno) {
+		this.rno = rno;
 	}
 	public int getT_like() {
 		return t_like;
@@ -131,6 +107,17 @@ public class TravelVO {
 	public void setStatus(int status) {
 		this.status = status;
 	}
-	
+	public int getReview_count() {
+		return review_count;
+	}
+	public void setReview_count(int review_count) {
+		this.review_count = review_count;
+	}
+	public float getStar_avg() {
+		return star_avg;
+	}
+	public void setStar_avg(float star_avg) {
+		this.star_avg = star_avg;
+	}
 	
 }

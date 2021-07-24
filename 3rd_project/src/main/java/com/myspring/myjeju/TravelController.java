@@ -40,7 +40,16 @@ public class TravelController {
 		String id = (String) session.getAttribute("session_id");
 		
 		ArrayList<TravelVO> list = travelService.getTravelList(1, 5);
+		for (int i=0; i<list.size(); i++) {
+			String img[] = list.get(i).getT_sfile().split(",");
+			list.get(i).setT_sfile(img[0]);
+		}
+		
 		ArrayList<TravelVO> toplist = travelService.getTravelListTop3();
+		for (int i=0; i<toplist.size(); i++) {
+			String img[] = toplist.get(i).getT_sfile().split(",");
+			toplist.get(i).setT_sfile(img[0]);
+		}
 		
 		if (id != null) {
 			for (int i=0; i<toplist.size(); i++) {
@@ -64,6 +73,8 @@ public class TravelController {
 			}
 		}
 		
+		
+		
 		mv.setViewName("travel/travel");
 		mv.addObject("list",list);
 		mv.addObject("toplist",toplist);
@@ -79,7 +90,7 @@ public class TravelController {
 	public String travel_proc(String pnum, String search, String search_text, HttpSession session) {
 		
 		ArrayList<TravelVO> list = travelService.getTravelList();
-		
+
 		//로그인 회원정보 가져오기
 		String id = (String) session.getAttribute("session_id");
 		int pageNumber = 1;
@@ -118,6 +129,7 @@ public class TravelController {
 		Gson gson = new Gson();
 		
 		for(TravelVO vo : list) {
+			String img[] = vo.getT_sfile().split(",");
 			JsonObject jobj = new JsonObject();
 			jobj.addProperty("tid", vo.getTid());
 			jobj.addProperty("t_name", vo.getT_name());
@@ -126,7 +138,9 @@ public class TravelController {
 			jobj.addProperty("t_addr", vo.getT_addr());
 			jobj.addProperty("t_like", vo.getT_like());
 			jobj.addProperty("status", vo.getStatus());
-			jobj.addProperty("t_image1", vo.getT_image1());
+			jobj.addProperty("t_image", img[0]);
+			jobj.addProperty("star_avg", vo.getStar_avg()); 
+			jobj.addProperty("review_count", vo.getReview_count());
 			jobj.addProperty("pnum", String.valueOf(pageNumber));
 			jobj.addProperty("search", search);
 			jobj.addProperty("search_text", search_text);
@@ -163,12 +177,13 @@ public class TravelController {
 		Gson gson = new Gson();
 		
 		for(TravelVO vo : list) {
+			String img[] = vo.getT_sfile().split(",");
 			JsonObject jobj = new JsonObject();
 			jobj.addProperty("tid", vo.getTid());
 			jobj.addProperty("t_name", vo.getT_name());
 			jobj.addProperty("t_addr", vo.getT_addr());
 			jobj.addProperty("t_hp", vo.getT_hp());
-			jobj.addProperty("t_image", vo.getT_image1());
+			jobj.addProperty("t_image", img[0]);
 			jobj.addProperty("t_vpoint", vo.getT_vpoint());
 			jobj.addProperty("t_hpoint", vo.getT_hpoint());
 			
@@ -195,7 +210,8 @@ public class TravelController {
 		CarSpotVO carvo = travelService.getCarSpot(tid); 
 		String infor2 = vo.getT_infor2().replace("\r\n", "<br>");
 		String user_id = (String) session.getAttribute("session_id");
-
+		String img[] = vo.getT_sfile().split(",");
+		
 		ArrayList<TravelReviewVO> revo = travelService.getTravelReview(tid);
 		
 		mv.setViewName("travel/travel_detail");
@@ -207,6 +223,7 @@ public class TravelController {
 		mv.addObject("revo", revo);
 		mv.addObject("user_id", user_id);
 		mv.addObject("tid", tid);
+		mv.addObject("img",img);
 		
 		return mv;
 	}
@@ -236,10 +253,14 @@ public class TravelController {
 		vo.setT_star(t_star);
 
 		boolean result = travelService.getInsertResult(vo);
+		boolean star_avg = travelService.getStarAvgUpdate(tid);
+		boolean review_count = travelService.getReviewCountUpdate(tid);
 		
 		if(result) {
 			mv.setViewName("redirect:/travel_detail.do");
 			mv.addObject("tid", vo.getTid());
+			mv.addObject("star_avg",star_avg);
+			mv.addObject("review_count",review_count);
 			//mv.setViewName("redirect:/travel_review_list_proc.do");
 			//mv.addObject("id", vo.getId());
 			//mv.addObject("t_review", vo.getT_review());

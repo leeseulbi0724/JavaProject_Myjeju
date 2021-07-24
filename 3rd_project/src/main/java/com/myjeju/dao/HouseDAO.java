@@ -132,4 +132,20 @@ public class HouseDAO extends DBConn {
 		return sqlSession.delete(namespace+".delete_review", reid);
 	}
 	
+	//별점 평균 업데이트
+	public boolean getStarAvgUpdate(String hid) {
+		boolean result = false;
+		int value = sqlSession.update(namespace+".star_avg_update", hid);
+		if(value != 0) result = true;
+		return result;
+	}
+	
+	//리뷰 카운트 업데이트
+	public boolean getReviewCountUpdate(String hid) {
+		boolean result =false;
+		int value = sqlSession.update(namespace+".review_count_update", hid);
+		if(value != 0) result =true;
+		return result;
+	}
+	
 }

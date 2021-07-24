@@ -83,7 +83,25 @@ public class TravelServiceImpl implements TravelService{
 		return result;
 	}
 	
+	@Override
+	public int getReviewCount(String tid) {
+		return travelDAO.getReviewCount(tid);
+	}
+
+	@Override
+	public int getAvgStar(String tid) {
+		return travelDAO.getAvgStar(tid);
+	}
 	
+	@Override
+	public boolean getStarAvgUpdate(String tid) {
+		return travelDAO.getStarAvgUpdate(tid);
+	}
+	
+	@Override
+	public boolean getReviewCountUpdate(String tid) {
+		return travelDAO.getReviewCountUpdate(tid);
+	}
 	
 	@Override
 	public boolean getUpdateHeart(String tid) {
@@ -129,4 +147,6 @@ public class TravelServiceImpl implements TravelService{
 		}
 		return result;
 	}
+	
+	
 }

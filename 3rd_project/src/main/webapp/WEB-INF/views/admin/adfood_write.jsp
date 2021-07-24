@@ -160,7 +160,7 @@ $(document).ready(function() {
 		 		</tr>
 		 		<tr>
 		 			<th class="title">설명</th>
-		 			<th colspan="5"><input type="text" class="form-control" placeholder="간단한 설명을 입력해주세요" id="info" name="f_infor2"></th>
+		 			<th colspan="5"><textarea class="form-control" placeholder="설명을 입력해주세요" id="info" name="f_infor2" style="height:100px;"></textarea></th>
 		 		</tr>	
 		 		<tr>
 		 			<th class="title">주소</th>

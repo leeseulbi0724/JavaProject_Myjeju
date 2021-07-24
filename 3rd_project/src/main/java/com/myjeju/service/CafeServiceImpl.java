@@ -72,7 +72,15 @@ public class CafeServiceImpl implements CafeService{
 		return result;
 	}
 	
+	@Override
+	public boolean getStarAvgUpdate(String caid) {
+		return cafeDAO.getStarAvgUpdate(caid);
+	}
 	
+	@Override
+	public boolean getReviewCountUpdate(String caid) {
+		return cafeDAO.getReviewCountUpdate(caid);
+	}
 	
 	@Override
 	public boolean getUpdateHeart(String caid) {

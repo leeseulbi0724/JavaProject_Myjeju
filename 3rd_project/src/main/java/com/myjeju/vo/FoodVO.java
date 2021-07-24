@@ -1,48 +1,10 @@
 package com.myjeju.vo;
 
 public class FoodVO {
-	String fid, f_name, f_tag, f_infor, f_infor2, f_addr, f_vpoint, f_hpoint, f_hp, f_addr1, f_addr2, f_file, f_sfile, old_name, 
-	f_image1, f_image2, f_image3, f_image4, f_image5;
-	int rno, f_like, status;
+	String fid, f_name, f_tag, f_infor, f_infor2, f_addr, f_vpoint, f_hpoint, f_hp, f_addr1, f_addr2, f_file, f_sfile, old_name;
+	int rno, f_like, status, review_count;
+	float star_avg;
 	
-	
-	
-	public String getOld_name() {
-		return old_name;
-	}
-	public void setOld_name(String old_name) {
-		this.old_name = old_name;
-	}
-	public String getF_file() {
-		return f_file;
-	}
-	public void setF_file(String f_file) {
-		this.f_file = f_file;
-	}
-	public String getF_sfile() {
-		return f_sfile;
-	}
-	public void setF_sfile(String f_sfile) {
-		this.f_sfile = f_sfile;
-	}
-	public String getF_addr1() {
-		return f_addr1;
-	}
-	public void setF_addr1(String f_addr1) {
-		this.f_addr1 = f_addr1;
-	}
-	public String getF_addr2() {
-		return f_addr2;
-	}
-	public void setF_addr2(String f_addr2) {
-		this.f_addr2 = f_addr2;
-	}
-	public int getRno() {
-		return rno;
-	}
-	public void setRno(int rno) {
-		this.rno = rno;
-	}
 	public String getFid() {
 		return fid;
 	}
@@ -97,35 +59,41 @@ public class FoodVO {
 	public void setF_hp(String f_hp) {
 		this.f_hp = f_hp;
 	}
-	public String getF_image1() {
-		return f_image1;
+	public String getF_addr1() {
+		return f_addr1;
 	}
-	public void setF_image1(String f_image1) {
-		this.f_image1 = f_image1;
+	public void setF_addr1(String f_addr1) {
+		this.f_addr1 = f_addr1;
 	}
-	public String getF_image2() {
-		return f_image2;
+	public String getF_addr2() {
+		return f_addr2;
 	}
-	public void setF_image2(String f_image2) {
-		this.f_image2 = f_image2;
+	public void setF_addr2(String f_addr2) {
+		this.f_addr2 = f_addr2;
 	}
-	public String getF_image3() {
-		return f_image3;
+	public String getF_file() {
+		return f_file;
 	}
-	public void setF_image3(String f_image3) {
-		this.f_image3 = f_image3;
+	public void setF_file(String f_file) {
+		this.f_file = f_file;
 	}
-	public String getF_image4() {
-		return f_image4;
+	public String getF_sfile() {
+		return f_sfile;
 	}
-	public void setF_image4(String f_image4) {
-		this.f_image4 = f_image4;
+	public void setF_sfile(String f_sfile) {
+		this.f_sfile = f_sfile;
 	}
-	public String getF_image5() {
-		return f_image5;
+	public String getOld_name() {
+		return old_name;
 	}
-	public void setF_image5(String f_image5) {
-		this.f_image5 = f_image5;
+	public void setOld_name(String old_name) {
+		this.old_name = old_name;
+	}
+	public int getRno() {
+		return rno;
+	}
+	public void setRno(int rno) {
+		this.rno = rno;
 	}
 	public int getF_like() {
 		return f_like;
@@ -139,11 +107,19 @@ public class FoodVO {
 	public void setStatus(int status) {
 		this.status = status;
 	}
-	
-	
+	public int getReview_count() {
+		return review_count;
+	}
+	public void setReview_count(int review_count) {
+		this.review_count = review_count;
+	}
+	public float getStar_avg() {
+		return star_avg;
+	}
+	public void setStar_avg(float star_avg) {
+		this.star_avg = star_avg;
+	}
 	
 
-	
-	
 
 }

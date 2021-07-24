@@ -125,9 +125,9 @@ $(document).ready(function() {
 					<li><a href="adrequest.do">요청관리</a></li>
 					<li><a href="admember.do">회원관리<span id="unread" class="label label-info"></span></a></li>
 					<li><a href="adhouse.do">숙소관리</a></li>
-					<li  class="active"><a href="adfood.do">음식점관리</a></li>
+					<li><a href="adfood.do">음식점관리</a></li>
 					<li><a href="adcafe.do">카페관리</a></li>
-					<li><a href="adtravel.do">여행지관리</a></li>
+					<li  class="active"><a href="adtravel.do">여행지관리</a></li>
 					<li><a href="adstore.do">상품관리</a>
 				</ul>
 			<ul class="nav navbar-nav navbar-right">
@@ -142,7 +142,7 @@ $(document).ready(function() {
 	
 		<section class = "section_setup_faq">
 			<div></div>
-			<div> 음식점관리 </div>
+			<div> 여행지관리 </div>
 			<div></div>
 		</section>
 			<div style="width:1000px; display:inline-block;">
@@ -150,7 +150,7 @@ $(document).ready(function() {
 			<table class="table">
 		 		<tr>
 		 			<th class="title">이름</th>
-		 			<th><input type="text" class="form-control" placeholder="상호명을 입력해주세요" id="name" name="t_name"></th>
+		 			<th><input type="text" class="form-control" placeholder="여행지명을 입력해주세요" id="name" name="t_name"></th>
 		 			<th class="title">해시태그</th>
 		 			<th><input type="text" class="form-control" placeholder="해시태그를 입력해주세요" id="tag" name="t_tag"></th>
 		 			<th class="title">종류</th>
@@ -158,7 +158,7 @@ $(document).ready(function() {
 		 		</tr>
 		 		<tr>
 		 			<th class="title">설명</th>
-		 			<th colspan="5"><input type="text" class="form-control" placeholder="간단한 설명을 입력해주세요" id="info" name="t_infor2"></th>
+		 			<th colspan="5"><textarea class="form-control" placeholder="설명을 입력해주세요" id="info" name="t_infor2" style="height:200px;"></textarea></th>
 		 		</tr>	
 		 		<tr>
 		 			<th class="title">주소</th>

@@ -25,7 +25,7 @@
 		$(document).ready(function(){ 
 			
 			var pnum=$(".pnum").val();
-
+			
 			moreList(pnum); 
 			
 			function moreList(pnum, search, search_text){
@@ -58,7 +58,7 @@
 							addListHtml += "<p class='spot_addr'>" + jdata.jlist[i].h_addr + "</p>";
 							addListHtml += "<div>";
 							addListHtml += "<img src='http://localhost:9000/myjeju/images/travel/star.png'>";
-							addListHtml += "<span class='star_score'>4.4 (268)</span>";
+							addListHtml += "<span class='star_score'>" + jdata.jlist[i].star_avg + " (" + jdata.jlist[i].review_count + ")" + "</span>";
 							addListHtml += "</div>";
 							addListHtml += "</td>";
 							addListHtml += "<td>";
@@ -175,7 +175,7 @@
 							<img src="http://localhost:9000/myjeju/images/house/red_heart.png" class="heart_img">${toplist.h_like }
 						</c:if>
 						</button>
-						<img src="http://localhost:9000/myjeju/images/travel/star.png"><span class="star_score">4.9 (82)</span>
+						<img src="http://localhost:9000/myjeju/images/travel/star.png"><span class="star_score">${toplist.star_avg} (${toplist.review_count})</span>
 					</div>
 				</article>
 			</c:forEach>

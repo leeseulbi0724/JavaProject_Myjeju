@@ -104,6 +104,22 @@ public class CafeDAO extends DBConn {
 		return sqlSession.delete(namespace+".delete_review", reid);
 	}
 	
+	//별점 평균 업데이트
+	public boolean getStarAvgUpdate(String caid) {
+		boolean result = false;
+		int value = sqlSession.update(namespace+".star_avg_update", caid);
+		if(value != 0) result = true;
+		return result;
+	}
+	
+	//리뷰 카운트 업데이트
+	public boolean getReviewCountUpdate(String caid) {
+		boolean result =false;
+		int value = sqlSession.update(namespace+".review_count_update", caid);
+		if(value != 0) result =true;
+		return result;
+	}
+	
 	
 	//Update ---> 하트 업데이트
 	public int getUpdateHeart(String caid) {

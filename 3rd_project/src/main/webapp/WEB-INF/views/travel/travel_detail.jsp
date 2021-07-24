@@ -198,7 +198,7 @@
 	
 	<!-- content -->
 	<div class="travel_detail_top">
-		<img src="http://localhost:9000/myjeju/images/travel/${vo.t_image1}">
+		<img src="http://localhost:9000/myjeju/images/travel/travel_detail/${img[0]}">
 		<div>
 			<h1>${vo.t_name}</h1>
 			<h2>${vo.t_infor}</h2>
@@ -224,16 +224,16 @@
 		
 		<section class="detail_image">
 			<div class="detail_image2">
-	 			<img src="http://localhost:9000/myjeju/images/travel/travel_detail/${vo.t_image2}">
+	 			<img src="http://localhost:9000/myjeju/images/travel/travel_detail/${img[1]}">
 	 		</div>
 	 		<div class="detail_image2">
-	 			<img src="http://localhost:9000/myjeju/images/travel/travel_detail/${vo.t_image3}">
+	 			<img src="http://localhost:9000/myjeju/images/travel/travel_detail/${img[2]}">
 	 		</div>
 	 		<div class="detail_image2">
-	 			<img src="http://localhost:9000/myjeju/images/travel/travel_detail/${vo.t_image4}">
+	 			<img src="http://localhost:9000/myjeju/images/travel/travel_detail/${img[3]}">
 	 		</div>
 	 		<div class="detail_image2">
-	 			<img src="http://localhost:9000/myjeju/images/travel/travel_detail/${vo.t_image5}">
+	 			<img src="http://localhost:9000/myjeju/images/travel/travel_detail/${img[4]}">
 	 		</div>
 		</section>
 		

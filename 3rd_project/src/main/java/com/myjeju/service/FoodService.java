@@ -24,4 +24,6 @@ public interface FoodService {
 	ArrayList<FoodReviewVO> getFoodReview(String fid);
 	ArrayList<FoodReviewVO> getFoodReview(String fid, int startnum, int endnum);
 	boolean getFoodReviewDelete(String reid);
+	boolean getStarAvgUpdate(String fid);
+	boolean getReviewCountUpdate(String fid);
 }

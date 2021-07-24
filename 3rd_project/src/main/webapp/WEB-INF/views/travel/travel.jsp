@@ -25,7 +25,7 @@
 		$(document).ready(function(){ 
 			
 			var pnum=$(".pnum").val();
-
+			
 			moreList(pnum); 
 			
 			function moreList(pnum, search, search_text){
@@ -49,7 +49,7 @@
 						for(var i in jdata.jlist){
 							addListHtml += "<tr class='travel_list1'>";
 							addListHtml += "<td class='travel_list_pic'>";
-							addListHtml += "<img src='http://localhost:9000/myjeju/images/travel/" + jdata.jlist[i].t_image1 + "'>";
+							addListHtml += "<img src='http://localhost:9000/myjeju/images/travel/travel_detail/" + jdata.jlist[i].t_image + "'>";
 							addListHtml += "</td>";
 							addListHtml += "<td>";
 							addListHtml += "<p class='spot_name'>" + jdata.jlist[i].t_name;
@@ -58,7 +58,7 @@
 							addListHtml += "<p class='spot_addr'>" + jdata.jlist[i].t_addr + "</p>";
 							addListHtml += "<div>";
 							addListHtml += "<img src='http://localhost:9000/myjeju/images/travel/star.png'>";
-							addListHtml += "<span class='star_score'>4.4 (268)</span>";
+							addListHtml += "<span class='star_score'>" + jdata.jlist[i].star_avg + " (" + jdata.jlist[i].review_count + ")" + "</span>";
 							addListHtml += "</div>";
 							addListHtml += "</td>";
 							addListHtml += "<td>";
@@ -163,7 +163,7 @@
 			<div class="travel_spot">
 			<c:forEach var="toplist" items="${toplist}">
 				<article class="travel_spot1">
-					<a href="http://localhost:9000/myjeju/travel_detail.do?tid=${toplist.tid}"><img src="http://localhost:9000/myjeju/images/travel/${toplist.t_image1}"></a>
+					<a href="http://localhost:9000/myjeju/travel_detail.do?tid=${toplist.tid}"><img src="http://localhost:9000/myjeju/images/travel/travel_detail/${toplist.t_sfile}"></a>
 					<div class="spot_infor">
 						<p class="spot_name">${toplist.t_name} <span>${toplist.t_infor}</span></p>
 						<p class="spot_tag">${toplist.t_tag}</p>
@@ -175,7 +175,7 @@
 							<img src="http://localhost:9000/myjeju/images/house/red_heart.png"  width=25 height=25 class="heart_img" >${toplist.t_like }
 						</c:if>
 						</button>
-						<img src="http://localhost:9000/myjeju/images/travel/star.png"><span class="star_score">4.6 (416)</span>
+						<img src="http://localhost:9000/myjeju/images/travel/star.png"><span class="star_score">${toplist.star_avg} (${toplist.review_count})</span>
 					</div>
 				</article>
 			</c:forEach>
@@ -240,7 +240,7 @@
 						title : '${vo.t_name}',
 						addr : '${vo.t_addr}',
 						tel : '${vo.t_hp}',
-						img : '${vo.t_image1}',
+						img : '${vo.t_sfile}',
 						idx : '${vo.tid}',
 						latlng:	new kakao.maps.LatLng(${vo.t_vpoint}, ${vo.t_hpoint})
 					},

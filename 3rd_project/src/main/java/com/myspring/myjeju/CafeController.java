@@ -132,6 +132,8 @@ public class CafeController {
 			jobj.addProperty("ca_like", vo.getCa_like());
 			jobj.addProperty("status", vo.getStatus());
 			jobj.addProperty("ca_image", img[0]);
+			jobj.addProperty("star_avg", vo.getStar_avg()); 
+			jobj.addProperty("review_count", vo.getReview_count());
 			jobj.addProperty("pnum", String.valueOf(pageNumber));
 			jobj.addProperty("search", search);
 			jobj.addProperty("search_text", search_text);
@@ -200,7 +202,7 @@ public class CafeController {
 		int pnum = 1;
 		
 		CafeVO vo = cafeService.getCafeDetail(caid);
-		String infor2 = vo.getCa_infor2().replace("-", "<br>");
+		String infor2 = vo.getCa_infor2().replace("\r\n", "<br>");
 		String user_id = (String) session.getAttribute("session_id");
 		String img[] = vo.getCa_sfile().split(",");
 		
@@ -243,10 +245,14 @@ public class CafeController {
 		vo.setCa_star(ca_star);
 
 		boolean result = cafeService.getInsertResult(vo);
+		boolean star_avg = cafeService.getStarAvgUpdate(caid);
+		boolean review_count = cafeService.getReviewCountUpdate(caid);
 		
 		if(result) {
 			mv.setViewName("redirect:/cafe_detail.do");
 			mv.addObject("caid", vo.getCaid());
+			mv.addObject("star_avg",star_avg);
+			mv.addObject("review_count",review_count);
 		}
 		return mv;
 	}

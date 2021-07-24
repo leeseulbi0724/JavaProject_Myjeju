@@ -87,7 +87,6 @@ public class FoodDAO extends DBConn {
 		return (ArrayList<FoodReviewVO>)list;
 	}
 	
-	
 	//리뷰 리스트
 	public ArrayList<FoodReviewVO> getFoodReview(String fid, int startnum, int endnum){
 		Map<String,String> param = new HashMap<String,String>();
@@ -101,13 +100,26 @@ public class FoodDAO extends DBConn {
 		return (ArrayList<FoodReviewVO>)list;
 	}
 	
-	
 	//리뷰 삭제
 	public int getFoodReviewDelete(String reid) {
 		return sqlSession.delete(namespace+".delete_review", reid);
 	}
 	
+	//별점 평균 업데이트
+	public boolean getStarAvgUpdate(String fid) {
+		boolean result = false;
+		int value = sqlSession.update(namespace+".star_avg_update", fid);
+		if(value != 0) result = true;
+		return result;
+	}
 	
+	//리뷰 카운트 업데이트
+	public boolean getReviewCountUpdate(String fid) {
+		boolean result =false;
+		int value = sqlSession.update(namespace+".review_count_update", fid);
+		if(value != 0) result =true;
+		return result;
+	}
 	
 	//Update ---> 하트 업데이트
 	public int getUpdateHeart(String hid) {
