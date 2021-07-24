@@ -1,5 +1,6 @@
 package com.myspring.myjeju;
 
+import java.io.Console;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -35,8 +36,22 @@ public class FoodController {
 		//로그인 회원정보 가져오기
 		String id = (String) session.getAttribute("session_id");	
 		
-		ArrayList<FoodVO> list = foodService.getFoodList(1,5); 
 		ArrayList<FoodVO> toplist = foodService.getFoodListTop3();
+		for (int i=0; i>toplist.size(); i++) {
+			String img[] = toplist.get(i).getF_sfile().split(",");
+			toplist.get(i).setF_sfile(img[0]);
+		}
+		
+		ArrayList<FoodVO> list = foodService.getFoodList(1,5); 
+		for (int i=0; i>list.size(); i++) {
+			String img[] = list.get(i).getF_sfile().split(",");
+			list.get(i).setF_sfile(img[0]);
+		}		
+		
+		System.out.print(toplist.get(0).getF_sfile());
+		System.out.print(toplist.get(1).getF_sfile());
+		System.out.print(toplist.get(2).getF_sfile());
+		
 		
 		if (id != null) {
 			for (int i=0; i<toplist.size(); i++) {
@@ -63,6 +78,7 @@ public class FoodController {
 		mv.setViewName("food/food");
 		mv.addObject("list",list);
 		mv.addObject("toplist",toplist);
+		
 		
 		return mv;
 	}
@@ -116,6 +132,7 @@ public class FoodController {
 		
 		
 		for(FoodVO vo : list) {
+			String img[] = vo.getF_sfile().split(",");
 			JsonObject jobj = new JsonObject();
 			jobj.addProperty("fid", vo.getFid());
 			jobj.addProperty("f_name", vo.getF_name());
@@ -124,7 +141,7 @@ public class FoodController {
 			jobj.addProperty("f_addr", vo.getF_addr());
 			jobj.addProperty("f_like", vo.getF_like());
 			jobj.addProperty("status", vo.getStatus());
-			jobj.addProperty("f_image1", vo.getF_image1());
+			jobj.addProperty("f_image", img[0]);
 			jobj.addProperty("pnum", String.valueOf(pageNumber));
 			jobj.addProperty("search", search);
 			jobj.addProperty("search_text", search_text);
@@ -162,14 +179,17 @@ public class FoodController {
 		Gson gson = new Gson();
 		
 		for(FoodVO vo : list) {
+			String img[] = vo.getF_sfile().split(",");
 			JsonObject jobj = new JsonObject();
 			jobj.addProperty("fid", vo.getFid());
 			jobj.addProperty("f_name", vo.getF_name());
 			jobj.addProperty("f_addr", vo.getF_addr());
 			jobj.addProperty("f_hp", vo.getF_hp());
-			jobj.addProperty("f_image", vo.getF_image1());
+			jobj.addProperty("f_image", img[0]);
 			jobj.addProperty("f_vpoint", vo.getF_vpoint());
 			jobj.addProperty("f_hpoint", vo.getF_hpoint());
+			
+			System.out.print(img[0]);
 			
 			jlist.add(jobj);
 		}
@@ -192,12 +212,15 @@ public class FoodController {
 		FoodVO vo = foodService.getFoodDetail(fid);
 		String infor2 = vo.getF_infor2().replace("-", "<br>");
 		String user_id = (String) session.getAttribute("session_id");
+		String img[] = vo.getF_sfile().split(",");
+		
 		
 		ArrayList<FoodReviewVO> fvo = foodService.getFoodReview(fid);
 		
 		mv.setViewName("food/food_detail");
 		mv.addObject("pnum",pnum);
 		mv.addObject("vo",vo);
+		mv.addObject("img",img);
 		mv.addObject("infor2",infor2);
 		mv.addObject("fvo", fvo);
 		mv.addObject("user_id", user_id);

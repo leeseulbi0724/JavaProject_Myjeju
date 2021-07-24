@@ -48,7 +48,7 @@
 						for(var i in jdata.jlist){
 							addListHtml += "<tr class='travel_list1'>";
 							addListHtml += "<td class='travel_list_pic'>";
-							addListHtml += "<img src='http://localhost:9000/myjeju/images/cafe/" + jdata.jlist[i].ca_image1 + "'>";
+							addListHtml += "<img src='http://localhost:9000/myjeju/images/cafe/cafe_detail/" + jdata.jlist[i].ca_image + "'>";
 							addListHtml += "</td>";
 							addListHtml += "<td>";
 							addListHtml += "<p class='spot_name'>" + jdata.jlist[i].ca_name;
@@ -162,7 +162,7 @@
 			<div class="travel_spot">
 			<c:forEach var="toplist" items="${toplist}">
 				<article class="travel_spot1">
-					<a href="http://localhost:9000/myjeju/cafe_detail.do?caid=${toplist.caid}"><img src="http://localhost:9000/myjeju/images/cafe/${toplist.ca_image1}"></a>
+					<a href="http://localhost:9000/myjeju/cafe_detail.do?caid=${toplist.caid}"><img src="http://localhost:9000/myjeju/images/cafe/${toplist.ca_sfile}"></a>
 					<div class="spot_infor">
 						<p class="spot_name">${toplist.ca_name} <span>${toplist.ca_infor}</span></p>
 						<p class="spot_tag">${toplist.ca_tag}</p>
@@ -240,7 +240,7 @@
 						title : '${vo.ca_name}',
 						addr : '${vo.ca_addr}',
 						tel : '${vo.ca_hp}',
-						img : '${vo.ca_image1}',
+						img : '${vo.ca_sfile}',
 						idx : '${vo.caid}',
 						latlng:	new kakao.maps.LatLng(${vo.ca_vpoint}, ${vo.ca_hpoint})
 					},
@@ -268,7 +268,7 @@
 				    	+ "<div class='content'>"
 			    		+ "<div class='title'>" + data.title + "</div>"
 			    			+ "<div class='body'>"
-			    				+ "<div class='img'>" + "<img src=" + "http://localhost:9000/myjeju/images/cafe/"+data.img + ">" + "</div>" 
+			    				+ "<div class='img'>" + "<img src=" + "http://localhost:9000/myjeju/images/cafe/cafe_detail/"+data.img + ">" + "</div>" 
 			    				+ "<div class='addr'>" + data.addr + "</div>" + "<br>" 
 			    				+ "<div class='tel'>" + data.tel +  "</div>" + "<br>"
 			    				+ "<a href="+"http://localhost:9000/myjeju/cafe_detail.do?caid=" + data.idx + ">상세보기</a>"

@@ -37,7 +37,15 @@ public class CafeController {
 		
 		
 		ArrayList<CafeVO> list = cafeService.getCafeList(1,5);
+		for (int i=0; i<list.size(); i++) {
+			String img[] = list.get(i).getCa_sfile().split(",");
+			list.get(i).setCa_sfile(img[0]);
+		}
 		ArrayList<CafeVO> toplist = cafeService.getCafeListTop3();
+		for (int i=0; i<toplist.size(); i++) {
+			String img[] = toplist.get(i).getCa_sfile().split(",");
+			toplist.get(i).setCa_sfile(img[0]);
+		}
 		
 		if (id != null) {
 			for (int i=0; i<toplist.size(); i++) {
@@ -114,6 +122,7 @@ public class CafeController {
 		Gson gson = new Gson();
 		
 		for(CafeVO vo : list) {
+			String img[] = vo.getCa_sfile().split(",");
 			JsonObject jobj = new JsonObject();
 			jobj.addProperty("caid", vo.getCaid());
 			jobj.addProperty("ca_name", vo.getCa_name());
@@ -122,7 +131,7 @@ public class CafeController {
 			jobj.addProperty("ca_addr", vo.getCa_addr());
 			jobj.addProperty("ca_like", vo.getCa_like());
 			jobj.addProperty("status", vo.getStatus());
-			jobj.addProperty("ca_image1", vo.getCa_image1());
+			jobj.addProperty("ca_image", img[0]);
 			jobj.addProperty("pnum", String.valueOf(pageNumber));
 			jobj.addProperty("search", search);
 			jobj.addProperty("search_text", search_text);
@@ -161,12 +170,13 @@ public class CafeController {
 		Gson gson = new Gson();
 		
 		for(CafeVO vo : list) {
+			String img[] = vo.getCa_sfile().split(",");
 			JsonObject jobj = new JsonObject();
 			jobj.addProperty("caid", vo.getCaid());
 			jobj.addProperty("ca_name", vo.getCa_name());
 			jobj.addProperty("ca_addr", vo.getCa_addr());
 			jobj.addProperty("ca_hp", vo.getCa_hp());
-			jobj.addProperty("ca_image", vo.getCa_image1());
+			jobj.addProperty("ca_image", img[0]);
 			jobj.addProperty("ca_vpoint", vo.getCa_vpoint());
 			jobj.addProperty("ca_hpoint", vo.getCa_hpoint());
 			
@@ -192,6 +202,7 @@ public class CafeController {
 		CafeVO vo = cafeService.getCafeDetail(caid);
 		String infor2 = vo.getCa_infor2().replace("-", "<br>");
 		String user_id = (String) session.getAttribute("session_id");
+		String img[] = vo.getCa_sfile().split(",");
 		
 		ArrayList<CafeReviewVO> cavo = cafeService.getCafeReview(caid);
 		
@@ -200,6 +211,7 @@ public class CafeController {
 		mv.addObject("vo",vo);
 		mv.addObject("infor2",infor2);
 		mv.addObject("cavo", cavo);
+		mv.addObject("img", img);
 		mv.addObject("user_id", user_id);
 		mv.addObject("caid", caid);
 		

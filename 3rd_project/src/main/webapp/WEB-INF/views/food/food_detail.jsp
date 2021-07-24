@@ -138,7 +138,7 @@
 	
 	<!-- content -->
 	<div class="food_detail_top">
-		<img src="http://localhost:9000/myjeju/images/food/${vo.f_image1}">
+		<img src="http://localhost:9000/myjeju/images/food/food_detail/${img[0]}">
 		<div>
 			<h1>${vo.f_name}</h1>
 			<h3>${vo.f_infor}</h3>
@@ -163,16 +163,16 @@
 		
 		<section class="detail_image">
 			<div class="detail_image2">
-	 			<img src="http://localhost:9000/myjeju/images/food/food_detail/${vo.f_image2}">
+	 			<img src="http://localhost:9000/myjeju/images/food/food_detail/${img[1]}">
 	 		</div>
 	 		<div class="detail_image2">
-	 			<img src="http://localhost:9000/myjeju/images/food/food_detail/${vo.f_image3}">
+	 			<img src="http://localhost:9000/myjeju/images/food/food_detail/${img[2]}">
 	 		</div>
 	 		<div class="detail_image2">
-	 			<img src="http://localhost:9000/myjeju/images/food/food_detail/${vo.f_image4}">
+	 			<img src="http://localhost:9000/myjeju/images/food/food_detail/${img[3]}">
 	 		</div>
 	 		<div class="detail_image2">
-	 			<img src="http://localhost:9000/myjeju/images/food/food_detail/${vo.f_image5}">
+	 			<img src="http://localhost:9000/myjeju/images/food/food_detail/${img[4]}">
 	 		</div>
 		</section>
 		

@@ -13,17 +13,17 @@
 	
 	<!-- 음식점 전체 리스트 -->
 	<select id="food_list" resultType="com.myjeju.vo.FoodVO">
-		select rno, fid, f_name, f_tag, f_infor, f_infor2, f_addr, f_vpoint, f_hpoint, f_hp, f_like, f_image1, f_image2, f_image3, f_image4, f_image5
-  			from(select rownum rno, fid, f_name, f_tag, f_infor, f_infor2, f_addr, f_vpoint, f_hpoint, f_hp, f_like, f_image1, f_image2, f_image3, f_image4, f_image5
-    		from(select fid, f_name, f_tag, f_infor, f_infor2, f_addr, f_vpoint, f_hpoint, f_hp, f_like, f_image1, f_image2, f_image3, f_image4, f_image5
+		select rno, fid, f_name, f_tag, f_infor, f_infor2, f_addr, f_vpoint, f_hpoint, f_hp, f_like, f_file, f_sfile
+  			from(select rownum rno, fid, f_name, f_tag, f_infor, f_infor2, f_addr, f_vpoint, f_hpoint, f_hp, f_like, f_file, f_sfile
+    		from(select fid, f_name, f_tag, f_infor, f_infor2, f_addr, f_vpoint, f_hpoint, f_hp, f_like,  f_file, f_sfile
     		from myjeju_food order by f_like desc))
 	</select>
 	
 	<!-- 음식점 리스트 처리 -->
 	<select id="ajax_food_list_num" parameterType="map" resultType="com.myjeju.vo.FoodVO">
-		select rno, fid, f_name, f_tag, f_infor, f_infor2, f_addr, f_vpoint, f_hpoint, f_hp, f_like, f_image1, f_image2, f_image3, f_image4, f_image5
-			from(select rownum rno, fid, f_name, f_tag, f_infor, f_infor2, f_addr, f_vpoint, f_hpoint, f_hp, f_like, f_image1, f_image2, f_image3, f_image4, f_image5
-    		from(select fid, f_name, f_tag, f_infor, f_infor2, f_addr, f_vpoint, f_hpoint, f_hp, f_like, f_image1, f_image2, f_image3, f_image4, f_image5 from myjeju_food order by f_like desc)) 
+		select rno, fid, f_name, f_tag, f_infor, f_infor2, f_addr, f_vpoint, f_hpoint, f_hp, f_like,  f_file, f_sfile
+			from(select rownum rno, fid, f_name, f_tag, f_infor, f_infor2, f_addr, f_vpoint, f_hpoint, f_hp, f_like, f_file, f_sfile
+    		from(select fid, f_name, f_tag, f_infor, f_infor2, f_addr, f_vpoint, f_hpoint, f_hp, f_like,  f_file, f_sfile from myjeju_food order by f_like desc)) 
     		where rno between #{start} and #{end}
 	</select>
 	
@@ -31,16 +31,16 @@
 	<select id="ajax_food_list_search" parameterType="java.util.Map" resultType="com.myjeju.vo.FoodVO">
 		<choose>
 			<when test="search.equals('f_name')">
-				select rno, fid, f_name, f_tag, f_infor, f_infor2, f_addr, f_vpoint, f_hpoint, f_hp, f_like, f_image1, f_image2, f_image3, f_image4, f_image5
-					from(select rownum rno, fid, f_name, f_tag, f_infor, f_infor2, f_addr, f_vpoint, f_hpoint, f_hp, f_like, f_image1, f_image2, f_image3, f_image4, f_image5
-	    			from(select fid, f_name, f_tag, f_infor, f_infor2, f_addr, f_vpoint, f_hpoint, f_hp, f_like, f_image1, f_image2, f_image3, f_image4, f_image5 from myjeju_food order by f_like desc)
+				select rno, fid, f_name, f_tag, f_infor, f_infor2, f_addr, f_vpoint, f_hpoint, f_hp, f_like,  f_file, f_sfile
+					from(select rownum rno, fid, f_name, f_tag, f_infor, f_infor2, f_addr, f_vpoint, f_hpoint, f_hp, f_like,  f_file, f_sfile
+	    			from(select fid, f_name, f_tag, f_infor, f_infor2, f_addr, f_vpoint, f_hpoint, f_hp, f_like,  f_file, f_sfile from myjeju_food order by f_like desc)
 	    			where f_name like '%'||#{search_text}||'%') 
 	    			where rno between #{start} and #{end}
 			</when>
 			<when test="search.equals('f_addr')">
-				select rno, fid, f_name, f_tag, f_infor, f_infor2, f_addr, f_vpoint, f_hpoint, f_hp, f_like, f_image1, f_image2, f_image3, f_image4, f_image5
-					from(select rownum rno, fid, f_name, f_tag, f_infor, f_infor2, f_addr, f_vpoint, f_hpoint, f_hp, f_like, f_image1, f_image2, f_image3, f_image4, f_image5
-	    			from(select fid, f_name, f_tag, f_infor, f_infor2, f_addr, f_vpoint, f_hpoint, f_hp, f_like, f_image1, f_image2, f_image3, f_image4, f_image5 from myjeju_food order by f_like desc)
+				select rno, fid, f_name, f_tag, f_infor, f_infor2, f_addr, f_vpoint, f_hpoint, f_hp, f_like,  f_file, f_sfile
+					from(select rownum rno, fid, f_name, f_tag, f_infor, f_infor2, f_addr, f_vpoint, f_hpoint, f_hp, f_like,  f_file, f_sfile
+	    			from(select fid, f_name, f_tag, f_infor, f_infor2, f_addr, f_vpoint, f_hpoint, f_hp, f_like, f_file, f_sfile from myjeju_food order by f_like desc)
 	    			where f_addr like '%'||#{search_text}||'%') 
 	    			where rno between #{start} and #{end}
 			</when>
@@ -49,15 +49,15 @@
 	
 	<!-- 음식점 상위3 -->
 	<select id="food_top3" resultType="com.myjeju.vo.FoodVO">
-		<![CDATA[ select fid, f_name, f_tag, f_infor, f_like, f_image1 from 
-				   (select fid, f_name, f_tag, f_infor, f_like, f_image1 from myjeju_food order by f_like desc)
+		<![CDATA[ select fid, f_name, f_tag, f_infor, f_like, f_file, f_sfile from 
+				   (select fid, f_name, f_tag, f_infor, f_like,  f_file, f_sfile from myjeju_food order by f_like desc)
 				   where rownum <= 3 ]]>
 	</select>
 	
 	<!-- 음식점 상세 정보 -->
 	<select id="food_detail" parameterType="java.lang.String" resultType="com.myjeju.vo.FoodVO">
 		select fid, f_name, f_tag, f_infor, f_infor2, f_addr, f_hp, f_like,
-			   f_image1, f_image2, f_image3, f_image4, f_image5 from myjeju_food where fid=#{fid}
+			   f_file, f_sfile from myjeju_food where fid=#{fid}
 	</select>
 	
 	

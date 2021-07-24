@@ -46,7 +46,7 @@
 						for(var i in jdata.jlist){
 							addListHtml += "<tr class='travel_list1'>";
 							addListHtml += "<td class='travel_list_pic'>";
-							addListHtml += "<img src='http://localhost:9000/myjeju/images/food/" + jdata.jlist[i].f_image1 + "'>";
+							addListHtml += "<img src='http://localhost:9000/myjeju/images/food/food_detail/" + jdata.jlist[i].f_image + "'>";
 							addListHtml += "</td>";
 							addListHtml += "<td>";
 							addListHtml += "<p class='spot_name'>" + jdata.jlist[i].f_name;
@@ -162,7 +162,7 @@
 			<div class="travel_spot">
 			<c:forEach var="toplist" items="${toplist}">
 				<article class="travel_spot1">
-					<a href="http://localhost:9000/myjeju/food_detail.do?fid=${toplist.fid}"><img src="http://localhost:9000/myjeju/images/food/${toplist.f_image1}"></a>
+					<a href="http://localhost:9000/myjeju/food_detail.do?fid=${toplist.fid}"><img src="http://localhost:9000/myjeju/images/food/food_detail/${toplist.f_sfile}"></a>
 					<div class="spot_infor">
 						<p class="spot_name">${toplist.f_name} <span>${toplist.f_infor}</span></p>
 						<p class="spot_tag">${toplist.f_tag}</p>
@@ -240,7 +240,7 @@
 						title : '${vo.f_name}',
 						addr : '${vo.f_addr}',
 						tel : '${vo.f_hp}',
-						img : '${vo.f_image1}',
+						img : '${vo.f_sfile}',
 						idx : '${vo.fid}',
 						latlng:	new kakao.maps.LatLng(${vo.f_vpoint}, ${vo.f_hpoint})
 					},
@@ -268,7 +268,7 @@
 				    	+ "<div class='content'>"
 			    		+ "<div class='title'>" + data.title + "</div>"
 			    			+ "<div class='body'>"
-			    				+ "<div class='img'>" + "<img src=" + "http://localhost:9000/myjeju/images/food/"+data.img + ">" + "</div>" 
+			    				+ "<div class='img'>" + "<img src=" + "http://localhost:9000/myjeju/images/food/food_detail/"+data.img + ">" + "</div>" 
 			    				+ "<div class='addr'>" + data.addr + "</div>" + "<br>" 
 			    				+ "<div class='tel'>" + data.tel +  "</div>" + "<br>"
 			    				+ "<a href="+"http://localhost:9000/myjeju/food_detail.do?fid=" + data.idx + ">상세보기</a>"

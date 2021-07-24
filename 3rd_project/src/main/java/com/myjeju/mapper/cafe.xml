@@ -8,22 +8,22 @@
 
 	<!-- 지도 리스트 -->
 	<select id="map_list" resultType="com.myjeju.vo.CafeVO">
-		select ca_vpoint, ca_hpoint, ca_name, ca_addr, ca_hp , ca_image1 from myjeju_cafe
+		select ca_vpoint, ca_hpoint, ca_name, ca_addr, ca_hp , ca_file, ca_sfile from myjeju_cafe
 	</select>
 	
 	<!-- 카페 전체 리스트 -->
 	<select id="cafe_list" resultType="com.myjeju.vo.CafeVO">
-		select rno, caid, ca_name, ca_tag, ca_infor, ca_infor2, ca_addr, ca_vpoint, ca_hpoint, ca_hp, ca_like, ca_image1, ca_image2, ca_image3, ca_image4, ca_image5
-  			from(select rownum rno, caid, ca_name, ca_tag, ca_infor, ca_infor2, ca_addr, ca_vpoint, ca_hpoint, ca_hp, ca_like, ca_image1, ca_image2, ca_image3, ca_image4, ca_image5
-    		from(select caid, ca_name, ca_tag, ca_infor, ca_infor2, ca_addr, ca_vpoint, ca_hpoint, ca_hp, ca_like, ca_image1, ca_image2, ca_image3, ca_image4, ca_image5
+		select rno, caid, ca_name, ca_tag, ca_infor, ca_infor2, ca_addr, ca_vpoint, ca_hpoint, ca_hp, ca_like, ca_file, ca_sfile
+  			from(select rownum rno, caid, ca_name, ca_tag, ca_infor, ca_infor2, ca_addr, ca_vpoint, ca_hpoint, ca_hp, ca_like, ca_file, ca_sfile
+    		from(select caid, ca_name, ca_tag, ca_infor, ca_infor2, ca_addr, ca_vpoint, ca_hpoint, ca_hp, ca_like, ca_file, ca_sfile
     		from myjeju_cafe order by ca_like desc))
 	</select>
 	
 	<!-- 카페 리스트 처리 -->
 	<select id="ajax_cafe_list_num" parameterType="map" resultType="com.myjeju.vo.CafeVO">
-		select rno, caid, ca_name, ca_tag, ca_infor, ca_infor2, ca_addr, ca_vpoint, ca_hpoint, ca_hp, ca_like, ca_image1, ca_image2, ca_image3, ca_image4, ca_image5
-			from(select rownum rno, caid, ca_name, ca_tag, ca_infor, ca_infor2, ca_addr, ca_vpoint, ca_hpoint, ca_hp, ca_like, ca_image1, ca_image2, ca_image3, ca_image4, ca_image5
-    		from(select caid, ca_name, ca_tag, ca_infor, ca_infor2, ca_addr, ca_vpoint, ca_hpoint, ca_hp, ca_like, ca_image1, ca_image2, ca_image3, ca_image4, ca_image5 from myjeju_cafe order by ca_like desc)) 
+		select rno, caid, ca_name, ca_tag, ca_infor, ca_infor2, ca_addr, ca_vpoint, ca_hpoint, ca_hp, ca_like, ca_file, ca_sfile
+			from(select rownum rno, caid, ca_name, ca_tag, ca_infor, ca_infor2, ca_addr, ca_vpoint, ca_hpoint, ca_hp, ca_like, ca_file, ca_sfile
+    		from(select caid, ca_name, ca_tag, ca_infor, ca_infor2, ca_addr, ca_vpoint, ca_hpoint, ca_hp, ca_like,ca_file, ca_sfile from myjeju_cafe order by ca_like desc)) 
     		where rno between #{start} and #{end}
 	</select>
 	
@@ -31,16 +31,16 @@
 	<select id="ajax_cafe_list_search" parameterType="java.util.Map" resultType="com.myjeju.vo.CafeVO">
 		<choose>
 			<when test="search.equals('ca_name')">
-				select rno, caid, ca_name, ca_tag, ca_infor, ca_infor2, ca_addr, ca_vpoint, ca_hpoint, ca_hp, ca_like, ca_image1, ca_image2, ca_image3, ca_image4, ca_image5
-					from(select rownum rno, caid, ca_name, ca_tag, ca_infor, ca_infor2, ca_addr, ca_vpoint, ca_hpoint, ca_hp, ca_like, ca_image1, ca_image2, ca_image3, ca_image4, ca_image5
-	    			from(select caid, ca_name, ca_tag, ca_infor, ca_infor2, ca_addr, ca_vpoint, ca_hpoint, ca_hp, ca_like, ca_image1, ca_image2, ca_image3, ca_image4, ca_image5 from myjeju_cafe order by ca_like desc)
+				select rno, caid, ca_name, ca_tag, ca_infor, ca_infor2, ca_addr, ca_vpoint, ca_hpoint, ca_hp, ca_like, ca_file, ca_sfile
+					from(select rownum rno, caid, ca_name, ca_tag, ca_infor, ca_infor2, ca_addr, ca_vpoint, ca_hpoint, ca_hp, ca_like, ca_file, ca_sfile
+	    			from(select caid, ca_name, ca_tag, ca_infor, ca_infor2, ca_addr, ca_vpoint, ca_hpoint, ca_hp, ca_like, ca_file, ca_sfile from myjeju_cafe order by ca_like desc)
 	    			where ca_name like '%'||#{search_text}||'%') 
 	    			where rno between #{start} and #{end}
 			</when>
 			<when test="search.equals('ca_addr')">
-				select rno, caid, ca_name, ca_tag, ca_infor, ca_infor2, ca_addr, ca_vpoint, ca_hpoint, ca_hp, ca_like, ca_image1, ca_image2, ca_image3, ca_image4, ca_image5
-					from(select rownum rno, caid, ca_name, ca_tag, ca_infor, ca_infor2, ca_addr, ca_vpoint, ca_hpoint, ca_hp, ca_like, ca_image1, ca_image2, ca_image3, ca_image4, ca_image5
-	    			from(select caid, ca_name, ca_tag, ca_infor, ca_infor2, ca_addr, ca_vpoint, ca_hpoint, ca_hp, ca_like, ca_image1, ca_image2, ca_image3, ca_image4, ca_image5 from myjeju_cafe order by ca_like desc)
+				select rno, caid, ca_name, ca_tag, ca_infor, ca_infor2, ca_addr, ca_vpoint, ca_hpoint, ca_hp, ca_like, ca_file, ca_sfile
+					from(select rownum rno, caid, ca_name, ca_tag, ca_infor, ca_infor2, ca_addr, ca_vpoint, ca_hpoint, ca_hp, ca_like, ca_file, ca_sfile
+	    			from(select caid, ca_name, ca_tag, ca_infor, ca_infor2, ca_addr, ca_vpoint, ca_hpoint, ca_hp, ca_like, ca_file, ca_sfile from myjeju_cafe order by ca_like desc)
 	    			where ca_addr like '%'||#{search_text}||'%') 
 	    			where rno between #{start} and #{end}
 			</when>
@@ -49,15 +49,15 @@
 	
 	<!-- 카페 상위3 -->
 	<select id="cafe_top3" resultType="com.myjeju.vo.CafeVO">
-		<![CDATA[ select caid, ca_name, ca_tag, ca_infor, ca_like, ca_image1 from 
-				   (select caid, ca_name, ca_tag, ca_infor, ca_like, ca_image1 from myjeju_cafe order by ca_like desc)
+		<![CDATA[ select caid, ca_name, ca_tag, ca_infor, ca_like, ca_sfile from 
+				   (select caid, ca_name, ca_tag, ca_infor, ca_like, ca_sfile from myjeju_cafe order by ca_like desc)
 				   where rownum <= 3 ]]>
 	</select>
 	
 	<!-- 카페 상세 정보 -->
 	<select id="cafe_detail" parameterType="java.lang.String" resultType="com.myjeju.vo.CafeVO">
 		select caid, ca_name, ca_tag, ca_infor, ca_infor2, ca_addr, ca_hp, ca_like,
-			   ca_image1, ca_image2, ca_image3, ca_image4, ca_image5 from myjeju_cafe where caid=#{caid}
+			   ca_file, ca_sfile from myjeju_cafe where caid=#{caid}
 	</select>
 	
 	
