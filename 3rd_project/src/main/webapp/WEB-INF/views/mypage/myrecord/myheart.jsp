@@ -130,13 +130,13 @@
 			</c:forEach>
 			<c:forEach var = "vo"  items="${f_list}">
 				<div>
-					<a href="food_detail.do?fid=${vo.fid }"><img src="http://localhost:9000/myjeju/images/food/${vo.f_image1 }" width=100% height=100% ></a>
+					<a href="food_detail.do?fid=${vo.fid }"><img src="http://localhost:9000/myjeju/images/food/food_detail/${vo.f_image1 }" width=100% height=100% ></a>
 					<button type="button" class="btn_style" id="fid" name="${vo.fid }"><img src="http://localhost:9000/myjeju/images/house/red_heart.png">${vo.f_like }</button>
 				</div>
 			</c:forEach>
 			<c:forEach var = "vo"  items="${ca_list}">
 				<div>
-					<a href="cafe_detail.do?caid=${vo.caid }"><img src="http://localhost:9000/myjeju/images/cafe/${vo.ca_image1 }" width=100% height=100% ></a>
+					<a href="cafe_detail.do?caid=${vo.caid }"><img src="http://localhost:9000/myjeju/images/cafe/cafe_detail/${vo.ca_image1 }" width=100% height=100% ></a>
 					<button type="button" class="btn_style" id="caid" name="${vo.caid }"><img src="http://localhost:9000/myjeju/images/house/red_heart.png">${vo.ca_like }</button>
 				</div>				
 			</c:forEach>

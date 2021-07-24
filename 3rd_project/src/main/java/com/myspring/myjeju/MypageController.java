@@ -306,13 +306,15 @@ public class MypageController {
 		ArrayList<HeartVO> f_list = MypageService.getFoodHeartList(id);
 		for (int i=0; i<f_list.size(); i++) {
 			FoodVO vo = FoodService.getFoodDetail(f_list.get(i).getFid());
-			f_list.get(i).setF_image1(vo.getF_image1());
+			String img[] = vo.getF_sfile().split(",");
+			f_list.get(i).setF_image1(img[0]);
 			f_list.get(i).setF_like(vo.getF_like());
 		}
 		ArrayList<HeartVO> ca_list = MypageService.getCafeHeartList(id);
 		for (int i=0; i<ca_list.size(); i++) {
 			CafeVO vo = CafeService.getCafeDetail(ca_list.get(i).getCaid());
-			ca_list.get(i).setCa_image1(vo.getCa_image1());
+			String img[] = vo.getCa_sfile().split(",");
+			ca_list.get(i).setCa_image1(img[0]);
 			ca_list.get(i).setCa_like(vo.getCa_like());
 		}
 		ArrayList<HeartVO> t_list = MypageService.getTravelHeartList(id);
