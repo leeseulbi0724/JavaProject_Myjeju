@@ -239,7 +239,7 @@
 							  </div>
 							</div>
 						</td>
-						<td><a href = "food_detail.do?tid=${list].fid}">${list.f_review}</a></td>
+						<td><a href = "food_detail.do?fid=${list.fid}">${list.f_review}</a></td>
 						<td>${list.f_time}</td>
 					</tr>
 				</c:forEach>
