@@ -10,12 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.myjeju.vo.CafeVO;
+import com.myjeju.vo.CarSpotVO;
 import com.myjeju.vo.CommunityVO;
 import com.myjeju.vo.FoodVO;
 import com.myjeju.vo.HDetailVO;
 import com.myjeju.vo.HouseVO;
 import com.myjeju.vo.MemberVO;
 import com.myjeju.vo.NoticeVO;
+import com.myjeju.vo.PhotoSpotVO;
 import com.myjeju.vo.RoomVO;
 import com.myjeju.vo.RoomdeVO;
 import com.myjeju.vo.StoreVO;
@@ -270,18 +272,50 @@ public class AdminDAO {
 		return sqlSession.selectOne(namespace+".gettravel", tid);
 	}
 	//여행지 -- 추가
-		public int getTravelUpload(TravelVO vo) {
-			return sqlSession.insert(namespace+".travel_upload", vo);
-		}
+	public int getTravelUpload(TravelVO vo) {
+		return sqlSession.insert(namespace+".travel_upload", vo);
+	}
 	//여행지 - 업데이트
-		public int getTravelUpdate(TravelVO vo) {
-			return sqlSession.update(namespace+".travel_update", vo);
-		}
+	public int getTravelUpdate(TravelVO vo) {
+		return sqlSession.update(namespace+".travel_update", vo);
+	}
 	//여행지 - 삭제
 	public int getTravelDelete(String tid) {
 		return sqlSession.delete(namespace+".travel_delete", tid);
 	}
 	
+	//여행지 포토스팟 -- 추가
+	public int getTravelPhotoSpotUpload(PhotoSpotVO photovo) {
+		return sqlSession.insert(namespace+".travel_photospot_upload", photovo);
+	}
+	//여행지 차박스팟 -- 추가
+	public int getTravelCarSpotUpload(CarSpotVO carvo) {
+		return sqlSession.insert(namespace+".travel_carspot_upload", carvo);
+	}
+	//여행지 포토스팟 가져오기
+	public PhotoSpotVO getPhotoSpot(String tid) {
+		return sqlSession.selectOne(namespace+".photo_spot", tid);
+	}
+	//여행지 차박스팟 가져오기
+	public CarSpotVO getCarSpot(String tid) {
+		return sqlSession.selectOne(namespace+".car_spot", tid);
+	}
+	//여행지 포토스팟 수정
+	public int getPhotoSpotUpdate(PhotoSpotVO photovo) {
+		return sqlSession.update(namespace+".photospot_update", photovo);
+	}
+	//여행지 차박스팟 수정
+	public int getCarSpotUpdate(CarSpotVO carvo) {
+		return sqlSession.update(namespace+".carspot_update", carvo);
+	}
+	//여행지 포토스팟 삭제
+	public int getPhotoSpotDelete(String tid) {
+		return sqlSession.delete(namespace+".photospot_delete", tid);
+	}
+	//여행지 차박스팟 삭제
+	public int getCarSpotDelete(String tid) {
+		return sqlSession.delete(namespace+".carspot_delete", tid);
+	}
 	
 	//카페 리스트 가져오기
 	public ArrayList<CafeVO> getlistcafe(int startnum, int endnum) {

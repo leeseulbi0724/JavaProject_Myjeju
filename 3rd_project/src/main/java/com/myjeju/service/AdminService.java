@@ -3,12 +3,14 @@ package com.myjeju.service;
 import java.util.ArrayList;
 
 import com.myjeju.vo.CafeVO;
+import com.myjeju.vo.CarSpotVO;
 import com.myjeju.vo.CommunityVO;
 import com.myjeju.vo.FoodVO;
 import com.myjeju.vo.HDetailVO;
 import com.myjeju.vo.HouseVO;
 import com.myjeju.vo.MemberVO;
 import com.myjeju.vo.NoticeVO;
+import com.myjeju.vo.PhotoSpotVO;
 import com.myjeju.vo.RoomVO;
 import com.myjeju.vo.RoomdeVO;
 import com.myjeju.vo.StoreVO;
@@ -71,6 +73,18 @@ public interface AdminService {
 	boolean getTravelUpload(TravelVO vo);
 	boolean getTravelUpdate(TravelVO vo);
 	boolean getTravelDelete(String tid);
+	
+	boolean getTravelPhotoSpotUpload(PhotoSpotVO photovo);
+	boolean getTravelCarSpotUpload(CarSpotVO carvo);
+	
+	PhotoSpotVO getPhotoSpot(String tid);
+	CarSpotVO getCarSpot(String tid);
+	
+	boolean getPhotoSpotUpdate(PhotoSpotVO photovo);
+	boolean getCarSpotUpdate(CarSpotVO carvo);
+	
+	boolean getPhotoSpotDelete(String tid);
+	boolean getCarSpotDelete(String tid);
 	
 	//관리자 카페
 	ArrayList<CafeVO> getlistcafe(int startnum, int endnum);

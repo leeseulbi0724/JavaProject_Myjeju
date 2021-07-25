@@ -249,6 +249,38 @@
 		<delete id="travel_delete" parameterType="java.lang.String">
 			delete from myjeju_travel where tid=#{tid}
 		</delete>
+		<!-- 여행지 스팟 -->
+		<insert id="travel_photospot_upload" parameterType="com.myjeju.vo.PhotoSpotVO">
+			insert into myjeju_photo_spot values('ps_'||sequ_myjeju_travel_photo_spot.nextval,#{tid},#{ps_name},#{ps_infor},#{ps_psfile},#{ps_pssfile})
+		</insert>
+		<insert id="travel_carspot_upload" parameterType="com.myjeju.vo.CarSpotVO">
+			insert into myjeju_car_spot values('cs_'||sequ_myjeju_travel_car_spot.nextval,#{tid},#{cs_name},#{cs_infor},#{cs_csfile},#{cs_cssfile})
+		</insert>
+		
+		<select id="photo_spot" parameterType="java.lang.String" resultType="com.myjeju.vo.PhotoSpotVO">
+			select myjeju_travel.t_name, myjeju_photo_spot.tid, myjeju_photo_spot.ps_name, myjeju_photo_spot.ps_infor, myjeju_photo_spot.ps_psfile
+				from myjeju_travel, myjeju_photo_spot 
+				where myjeju_travel.tid = myjeju_photo_spot.tid and myjeju_travel.tid=#{tid}
+		</select>
+		<select id="car_spot" parameterType="java.lang.String" resultType="com.myjeju.vo.CarSpotVO">
+			select myjeju_travel.t_name, myjeju_car_spot.tid, myjeju_car_spot.cs_name, myjeju_car_spot.cs_infor, myjeju_car_spot.cs_csfile
+				from myjeju_travel, myjeju_car_spot 
+				where myjeju_travel.tid = myjeju_car_spot.tid and myjeju_travel.tid=#{tid}
+		</select>
+		
+		<update id="photospot_update" parameterType="com.myjeju.vo.PhotoSpotVO">
+			update myjeju_photo_spot set ps_name=#{ps_name}, ps_infor=#{ps_infor}, ps_psfile=#{ps_psfile} , ps_pssfile=#{ps_pssfile} where tid=#{tid}
+		</update>
+		<update id="carspot_update" parameterType="com.myjeju.vo.CarSpotVO">
+			update myjeju_car_spot set cs_name=#{cs_name}, cs_infor=#{cs_infor}, cs_csfile=#{cs_csfile} , cs_cssfile=#{cs_cssfile} where tid=#{tid}
+		</update>
+		
+		<delete id="photospot_delete" parameterType="java.lang.String">
+			delete from myjeju_photo_spot where tid=#{tid}
+		</delete>
+		<delete id="carspot_delete" parameterType="java.lang.String">
+			delete from myjeju_car_spot where tid=#{tid}
+		</delete>
 		
 		<!-- 관리자 카페 -->
 		<select id="listnumcafe" parameterType="map" resultType="com.myjeju.vo.CafeVO">

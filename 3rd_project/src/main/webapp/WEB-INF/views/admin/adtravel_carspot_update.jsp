@@ -41,36 +41,20 @@ $(document).ready(function() {
 	$("#sfile_name").val($(".sfile_name").text());
 	
 	$(".write").click(function() {
-		if ($("#name").val() == "") {
-			alert("이름을 입력해주세요");
-			$("#name").focus();		
-		} else if ($("#tag").val() == "") {
-			alert("태그를 입력해주세요");
-			$("#tag").focus();		
-		} else if ($("#category").val() == "") {
-			alert("종류를 입력해주세요");
-			$("#category").focus();		
-		} else if ($("#info").val() == "") {
+		/*
+		if ($("input[name^=cs_name]").val() == "") {
+			alert("스팟명을 입력해주세요");
+			$(this).focus();		
+		} else if ($("textarea[name^=cs_infor]").val() == "") {
 			alert("설명을 입력해주세요");
-			$("#info").focus();		
-		} else if ($("#addr1").val() == "") {
-			alert("주소를 입력해주세요");
-			$("#addr1").focus();		
-		} else if ($("#addr2").val() == "") {
-			alert("상세 주소를 입력해주세요");
-			$("#addr2").focus();		
-		} else if ($("#vpoint").val() == "") {
-			alert("경도를 입력해주세요");
-			$("#vpoint").focus();		
-		} else if ($("#hpoint").val() == "") {
-			alert("위도를 입력해주세요");
-			$("#hpoint").focus();		
-		} else if ($("#hp").val() == "") {
-			alert("번호를 입력해주세요");
-			$("#hp").focus();		
+			$(this).focus();		
+		} else if ($("#file").val() == "") {
+			alert("파일을 첨부해주세요");
+			$("#file").focus();		
 		} else {
-			admin_travel.submit();
-		}
+		} 
+		*/
+		admin_travel_spot.submit();
 	});
 	
 	$("#search").click(function() {
@@ -164,56 +148,48 @@ $(document).ready(function() {
 			<div></div>
 		</section>
 			<div style="width:1000px; display:inline-block;">
-			<form name="admin_travel" action="adtravel_update_proc.do" method="post" enctype= "multipart/form-data">			
+			<form name="admin_travel_spot" action="adtravel_carspot_update_proc.do" method="post" enctype= "multipart/form-data">			
 			<table class="table">
 		 		<tr>
+		 			<th class="title">스팟</th>
+		 			<th>
+		 				<select name="spot_choice" class="form-control" id="spot_choice">
+		 					<option value="photo">포토스팟</option>
+		 					<option value="car" selected>차박스팟</option>
+		 				</select>
+		 			</th>
 		 			<th class="title">이름</th>
-		 			<th><input type="text" class="form-control" placeholder="여행지명을 입력해주세요" id="name" name="t_name" value="${vo.t_name }"></th>
-		 			<th class="title">해시태그</th>
-		 			<th><input type="text" class="form-control" placeholder="해시태그를 입력해주세요" id="tag" name="t_tag" value="${vo.t_tag }"></th>
-		 			<th class="title">종류</th>
-		 			<th><input type="text" class="form-control" placeholder="종류를 입력해주세요" id="category" name="t_infor" value="${vo.t_infor }"></th>
+		 			<th>
+		 				<input type="text" class="form-control" placeholder="차박스팟명을 입력해주세요" id="cs_name" name="cs_name" value="${carvo.cs_name}">
+		 			</th>
 		 		</tr>
 		 		<tr>
 		 			<th class="title">설명</th>
-		 			<th colspan="5"><textarea class="form-control" placeholder="설명을 입력해주세요" id="info" name="t_infor2" style="height:200px;">${vo.t_infor2 }</textarea></th>
-		 		</tr>	
-		 		<tr>
-		 			<th class="title">주소</th>
 		 			<th colspan="4">
-		 				<input type="text" class="form-control" placeholder="주소를 입력해주세요" name="t_addr"  id="addr" value="${vo.t_addr }">
-		 				<button class="btn btn-primary" type="button" style="margin:17px 0;background-color:#4fa9de; border-color:#4fa9de;" id="search">주소검색</button>
-		 			</th>			 			
-		 		</tr>	
-		 		<tr>
-		 			<th class="title">경도</th>
-		 			<th><input type="text" class="form-control" placeholder="경도를 입력해주세요" id="vpoint" name="t_vpoint" value="${vo.t_vpoint }"></th>
-		 			<th class="title">위도</th>
-		 			<th><input type="text" class="form-control" placeholder="위도를 입력해주세요" id="hpoint" name="t_hpoint" value="${vo.t_hpoint }"></th>
-		 			<th class="title">연락처</th>
-		 			<th><input type="text" class="form-control" placeholder="연락처를 입력해주세요" id="hp" name="t_hp" value="${vo.t_hp }"></th>
-		 		</tr>	
+		 				<textarea class="form-control" placeholder="차박스팟 설명을 입력해주세요" id="cs_info" name="cs_infor" style="height:200px;">${carvo.cs_infor}</textarea>
+		 			</th>
+		 		</tr>
 		 		<tr>
 		 			<th class="title" >사진 추가</th>
-		 			<th colspan="7"><input type="file" class="form-control" multiple="multiple" name="file" id="file"></th>
+		 			<th colspan="4"><input type="file" class="form-control" multiple="multiple" name="file" id="file"></th>
 		 		</tr> 		
 		 		<tr>
 		 			<th class="title" rowspan="3">기존 사진</th>
-		 			<th colspan="7">
-				 		<c:forEach var="vo"  items="${list}">
+		 			<th colspan="4">
+				 		<c:forEach var="carvo"  items="${list}">
 			 				<div>
-			 					<input type="text" class="form-control"  id="file" readonly value="${vo.t_file }" name="${vo.t_sfile }">
+			 					<input type="text" class="form-control"  id="file" readonly value="${carvo.cs_csfile }" name="${carvo.cs_cssfile }">
 			 					<button type="button" class="minus">-</button>
 			 				</div>
-		 					<span class="file_name">${vo.t_file},</span>		 					
-		 					<span class="sfile_name">${vo.t_sfile},</span>
+		 					<span class="file_name">${carvo.cs_csfile},</span>		 					
+		 					<span class="sfile_name">${carvo.cs_cssfile},</span>
 				 		</c:forEach>
 		 			</th>		 			
 		 		</tr> 		
 		 	</table>
 		 		<input type="hidden" name="tid" value="${vo.tid }">
-		 		<input id="file_name" type="hidden" name="t_image">
-		 		<input id="sfile_name"  type="hidden" name="t_file">
+		 		<input id="file_name" type="hidden" name="cs_csfile">
+		 		<input id="sfile_name"  type="hidden" name="cs_cssfile">
 		 		<input id="old_name" type="hidden" name="old_name">
 		 		<span class="old_name"></span>
 				<a href="adtravel.do" class="list" >취소</a>

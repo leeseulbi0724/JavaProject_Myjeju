@@ -56,17 +56,44 @@
 							addListHtml += "<span>" + jdata.jlist[i].h_infor + "</span>";
 							addListHtml += "</p>";
 							addListHtml += "<p class='spot_addr'>" + jdata.jlist[i].h_addr + "</p>";
-							addListHtml += "<div>";
-							addListHtml += "<img src='http://localhost:9000/myjeju/images/travel/star.png'>";
-							addListHtml += "<span class='star_score'>" + jdata.jlist[i].star_avg + " (" + jdata.jlist[i].review_count + ")" + "</span>";
-							addListHtml += "</div>";
+							if(jdata.jlist[i].star_avg == 5){
+								addListHtml += "<div>";
+								addListHtml += "<img src='http://localhost:9000/myjeju/images/travel/star5.png' width=98 height=17>";
+								addListHtml += "<span class='star_score'>" + jdata.jlist[i].star_avg + " (" + jdata.jlist[i].review_count + ")" + "</span>";
+								addListHtml += "</div>";
+							}else if(jdata.jlist[i].star_avg > 3 && jdata.jlist[i].star_avg < 5){
+								addListHtml += "<div>";
+								addListHtml += "<img src='http://localhost:9000/myjeju/images/travel/star4.png' width=98 height=17>";
+								addListHtml += "<span class='star_score'>" + jdata.jlist[i].star_avg + " (" + jdata.jlist[i].review_count + ")" + "</span>";
+								addListHtml += "</div>";
+							}else if(jdata.jlist[i].star_avg > 2 && jdata.jlist[i].star_avg < 4){
+								addListHtml += "<div>";
+								addListHtml += "<img src='http://localhost:9000/myjeju/images/travel/star3.png' width=98 height=17>";
+								addListHtml += "<span class='star_score'>" + jdata.jlist[i].star_avg + " (" + jdata.jlist[i].review_count + ")" + "</span>";
+								addListHtml += "</div>";
+							}else if(jdata.jlist[i].star_avg > 1 && jdata.jlist[i].star_avg < 3){
+								addListHtml += "<div>";
+								addListHtml += "<img src='http://localhost:9000/myjeju/images/travel/star2.png' width=98 height=17>";
+								addListHtml += "<span class='star_score'>" + jdata.jlist[i].star_avg + " (" + jdata.jlist[i].review_count + ")" + "</span>";
+								addListHtml += "</div>";
+							}else if(jdata.jlist[i].star_avg > 0 && jdata.jlist[i].star_avg < 2){
+								addListHtml += "<div>";
+								addListHtml += "<img src='http://localhost:9000/myjeju/images/travel/star1.png' width=98 height=17>";
+								addListHtml += "<span class='star_score'>" + jdata.jlist[i].star_avg + " (" + jdata.jlist[i].review_count + ")" + "</span>";
+								addListHtml += "</div>";
+							}else if(jdata.jlist[i].star_avg == 0){
+								addListHtml += "<div>";
+								addListHtml += "<img src='http://localhost:9000/myjeju/images/travel/star0.png' width=98 height=17>";
+								addListHtml += "<span class='star_score'>" + jdata.jlist[i].star_avg + " (" + jdata.jlist[i].review_count + ")" + "</span>";
+								addListHtml += "</div>";
+							}
 							addListHtml += "</td>";
 							addListHtml += "<td>";
 							addListHtml += "<button type='button' class='btn_style'  id='"+ jdata.jlist[i].status + "'" + " name= '"+ jdata.jlist[i].hid +"'>";
 							if (jdata.jlist[i].status == 0) {
-								addListHtml += "<img src='http://localhost:9000/myjeju/images/house/empty_heart.png'>" + jdata.jlist[i].h_like;
+								addListHtml += "<img src='http://localhost:9000/myjeju/images/house/empty_heart.png' class='heart_img'><span class='like_num'>" + jdata.jlist[i].h_like + "</span>";
 							} else {
-								addListHtml += "<img src='http://localhost:9000/myjeju/images/house/red_heart.png'>" + jdata.jlist[i].h_like;
+								addListHtml += "<img src='http://localhost:9000/myjeju/images/house/red_heart.png' class='heart_img'><span class='like_num'>" + jdata.jlist[i].h_like + "</span>";
 							}
 							addListHtml += "</button>";
 							addListHtml += "<a href='http://localhost:9000/myjeju/house_detail.do?hid=" + jdata.jlist[i].hid + "'>";
@@ -169,13 +196,31 @@
 						<p class="spot_tag">${toplist.h_tag}</p>
 						<button type="button" class="btn_style" id="${toplist.status }" name="${toplist.hid }">
 						<c:if test = "${toplist.status eq 0 }">
-							<img src="http://localhost:9000/myjeju/images/house/empty_heart.png" class="heart_img" >${toplist.h_like }
+							<img src="http://localhost:9000/myjeju/images/house/empty_heart.png" class="heart_img" ><span class="like_num">${toplist.h_like }</span>
 						</c:if>
 						<c:if test = "${toplist.status >= 1 }">
-							<img src="http://localhost:9000/myjeju/images/house/red_heart.png" class="heart_img">${toplist.h_like }
+							<img src="http://localhost:9000/myjeju/images/house/red_heart.png" class="heart_img"><span class="like_num">${toplist.h_like }</span>
 						</c:if>
 						</button>
-						<img src="http://localhost:9000/myjeju/images/travel/star.png"><span class="star_score">${toplist.star_avg} (${toplist.review_count})</span>
+						
+						<c:if test="${toplist.star_avg == 5}">
+							<img src="http://localhost:9000/myjeju/images/travel/star5.png" width=98 height=17><span class="star_score">${toplist.star_avg} (${toplist.review_count})</span>
+						</c:if>
+						<c:if test="${toplist.star_avg > 3 && toplist.star_avg < 5}">
+							<img src="http://localhost:9000/myjeju/images/travel/star4.png" width=98 height=17><span class="star_score">${toplist.star_avg} (${toplist.review_count})</span>
+						</c:if>
+						<c:if test="${toplist.star_avg > 2 && toplist.star_avg < 4}">
+							<img src="http://localhost:9000/myjeju/images/travel/star3.png" width=98 height=17><span class="star_score">${toplist.star_avg} (${toplist.review_count})</span>
+						</c:if>
+						<c:if test="${toplist.star_avg > 1 && toplist.star_avg < 3}">
+							<img src="http://localhost:9000/myjeju/images/travel/star2.png" width=98 height=17><span class="star_score">${toplist.star_avg} (${toplist.review_count})</span>
+						</c:if>
+						<c:if test="${toplist.star_avg > 0 && toplist.star_avg < 2}">
+							<img src="http://localhost:9000/myjeju/images/travel/star1.png" width=98 height=17><span class="star_score">${toplist.star_avg} (${toplist.review_count})</span>
+						</c:if>
+						<c:if test="${toplist.star_avg == 0}">
+							<img src="http://localhost:9000/myjeju/images/travel/star0.png" width=98 height=17><span class="star_score">${toplist.star_avg} (${toplist.review_count})</span>
+						</c:if>
 					</div>
 				</article>
 			</c:forEach>

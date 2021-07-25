@@ -30,47 +30,22 @@
 		vertical-align : middle;		
 	}
 	.table #hid { width:60px; display:inline-block; }
-	
-	.file_name, .sfile_name, .old_name { display:none; }
-	th>div>button { display:inline-block; margin-left:5px; }
-	#file { width:600px; display:inline-block; }
 </style>
 <script>
 $(document).ready(function() {
-	$("#file_name").val($(".file_name").text());
-	$("#sfile_name").val($(".sfile_name").text());
-	
 	$(".write").click(function() {
-		if ($("#name").val() == "") {
-			alert("이름을 입력해주세요");
-			$("#name").focus();		
-		} else if ($("#tag").val() == "") {
-			alert("태그를 입력해주세요");
-			$("#tag").focus();		
-		} else if ($("#category").val() == "") {
-			alert("종류를 입력해주세요");
-			$("#category").focus();		
-		} else if ($("#info").val() == "") {
+		/* if ($("input[name^=ps_name]").val() == "" || $("input[name^=cs_name]").val() == "") {
+			alert("스팟명을 입력해주세요");
+			$(this).focus();		
+		} else if ($("textarea[name^=ps_infor]").val() == "" || $("textarea[name^=cs_infor]").val() == "") {
 			alert("설명을 입력해주세요");
-			$("#info").focus();		
-		} else if ($("#addr1").val() == "") {
-			alert("주소를 입력해주세요");
-			$("#addr1").focus();		
-		} else if ($("#addr2").val() == "") {
-			alert("상세 주소를 입력해주세요");
-			$("#addr2").focus();		
-		} else if ($("#vpoint").val() == "") {
-			alert("경도를 입력해주세요");
-			$("#vpoint").focus();		
-		} else if ($("#hpoint").val() == "") {
-			alert("위도를 입력해주세요");
-			$("#hpoint").focus();		
-		} else if ($("#hp").val() == "") {
-			alert("번호를 입력해주세요");
-			$("#hp").focus();		
+			$(this).focus();		
+		} else if ($("#file").val() == "") {
+			alert("파일을 첨부해주세요");
+			$("#file").focus();		
 		} else {
-			admin_travel.submit();
-		}
+		} */
+		admin_travel_spot.submit();
 	});
 	
 	$("#search").click(function() {
@@ -99,28 +74,31 @@ $(document).ready(function() {
 	                } else {
 	                 
 	                }
-	                document.getElementById("addr").value = addr;
+	                document.getElementById("addr1").value = addr;
 	                // 커서를 상세주소 필드로 이동한다.
-	                document.getElementById("addr").focus();
+	                document.getElementById("addr2").focus();
 				}
 			}).open();
 		});	
 		
 	});
 	
-	$("button[class='minus']").click(function() {
-		$(this).closest("div").next().next().remove();
-		$(this).closest("div").next().remove();
-		$(this).closest("div").remove();
+	/** 스팟선택 **/
+	$("#spot_choice").change(function(){
+		if($("#spot_choice").val() == "photo"){
+			$("input[name^=cs_name]").css("display","none");
+			$("textarea[name^=cs_infor]").css("display","none");
+			$("input[name^=ps_name]").css("display","inline-block");
+			$("textarea[name^=ps_infor]").css("display","inline-block");
+			
+		}else if($("#spot_choice").val() == "car"){
+			$("input[name^=ps_name]").css("display","none");
+			$("textarea[name^=ps_infor]").css("display","none");
+			$("input[name^=cs_name]").css("display","inline-block");
+			$("textarea[name^=cs_infor]").css("display","inline-block");
+		}
+	}); 
 		
-		$("#sfile_name").val($(".sfile_name").text());
-		$("#file_name").val($(".file_name").text());
-		
-		$(".old_name").append($(this).prev().attr("name")+",");
-		$("#old_name").val($(".old_name").text());
-	});
-	
-	
 });
 </script>
 <body style="height:900px">
@@ -145,7 +123,7 @@ $(document).ready(function() {
 					<li><a href="adhouse.do">숙소관리</a></li>
 					<li><a href="adfood.do">음식점관리</a></li>
 					<li><a href="adcafe.do">카페관리</a></li>
-					<li class="active"><a href="adtravel.do">여행지관리</a></li>
+					<li  class="active"><a href="adtravel.do">여행지관리</a></li>
 					<li><a href="adstore.do">상품관리</a>
 				</ul>
 			<ul class="nav navbar-nav navbar-right">
@@ -160,62 +138,39 @@ $(document).ready(function() {
 	
 		<section class = "section_setup_faq">
 			<div></div>
-			<div> 여행지관리 </div>
+			<div> 스팟관리 </div>
 			<div></div>
 		</section>
 			<div style="width:1000px; display:inline-block;">
-			<form name="admin_travel" action="adtravel_update_proc.do" method="post" enctype= "multipart/form-data">			
+			<form name="admin_travel_spot" action="adtravel_spot_write_proc.do" method="post" enctype= "multipart/form-data">			
+			<input type="hidden" name="tid" id="tid" value="${tid}"> 
 			<table class="table">
 		 		<tr>
+		 			<th class="title">스팟</th>
+		 			<th>
+		 				<select name="spot_choice" class="form-control" id="spot_choice">
+		 					<option value="photo">포토스팟</option>
+		 					<option value="car">차박스팟</option>
+		 				</select>
+		 			</th>
 		 			<th class="title">이름</th>
-		 			<th><input type="text" class="form-control" placeholder="여행지명을 입력해주세요" id="name" name="t_name" value="${vo.t_name }"></th>
-		 			<th class="title">해시태그</th>
-		 			<th><input type="text" class="form-control" placeholder="해시태그를 입력해주세요" id="tag" name="t_tag" value="${vo.t_tag }"></th>
-		 			<th class="title">종류</th>
-		 			<th><input type="text" class="form-control" placeholder="종류를 입력해주세요" id="category" name="t_infor" value="${vo.t_infor }"></th>
+		 			<th>
+		 				<input type="text" class="form-control" placeholder="포토스팟명을 입력해주세요" id="ps_name" name="ps_name">
+		 				<input type="text" class="form-control" placeholder="차박스팟명을 입력해주세요" id="cs_name" name="cs_name" style="display:none;">
+		 			</th>
 		 		</tr>
 		 		<tr>
 		 			<th class="title">설명</th>
-		 			<th colspan="5"><textarea class="form-control" placeholder="설명을 입력해주세요" id="info" name="t_infor2" style="height:200px;">${vo.t_infor2 }</textarea></th>
-		 		</tr>	
-		 		<tr>
-		 			<th class="title">주소</th>
 		 			<th colspan="4">
-		 				<input type="text" class="form-control" placeholder="주소를 입력해주세요" name="t_addr"  id="addr" value="${vo.t_addr }">
-		 				<button class="btn btn-primary" type="button" style="margin:17px 0;background-color:#4fa9de; border-color:#4fa9de;" id="search">주소검색</button>
-		 			</th>			 			
+		 				<textarea class="form-control" placeholder="포토스팟 설명을 입력해주세요" id="ps_info" name="ps_infor" style="height:200px;"></textarea>
+		 				<textarea class="form-control" placeholder="차박스팟 설명을 입력해주세요" id="cs_info" name="cs_infor" style="height:200px; display:none;"></textarea>
+		 			</th>
 		 		</tr>	
 		 		<tr>
-		 			<th class="title">경도</th>
-		 			<th><input type="text" class="form-control" placeholder="경도를 입력해주세요" id="vpoint" name="t_vpoint" value="${vo.t_vpoint }"></th>
-		 			<th class="title">위도</th>
-		 			<th><input type="text" class="form-control" placeholder="위도를 입력해주세요" id="hpoint" name="t_hpoint" value="${vo.t_hpoint }"></th>
-		 			<th class="title">연락처</th>
-		 			<th><input type="text" class="form-control" placeholder="연락처를 입력해주세요" id="hp" name="t_hp" value="${vo.t_hp }"></th>
-		 		</tr>	
-		 		<tr>
-		 			<th class="title" >사진 추가</th>
-		 			<th colspan="7"><input type="file" class="form-control" multiple="multiple" name="file" id="file"></th>
-		 		</tr> 		
-		 		<tr>
-		 			<th class="title" rowspan="3">기존 사진</th>
-		 			<th colspan="7">
-				 		<c:forEach var="vo"  items="${list}">
-			 				<div>
-			 					<input type="text" class="form-control"  id="file" readonly value="${vo.t_file }" name="${vo.t_sfile }">
-			 					<button type="button" class="minus">-</button>
-			 				</div>
-		 					<span class="file_name">${vo.t_file},</span>		 					
-		 					<span class="sfile_name">${vo.t_sfile},</span>
-				 		</c:forEach>
-		 			</th>		 			
+		 			<th class="title">사진</th>
+		 			<th colspan="4"><input type="file" class="form-control" multiple="multiple" name="file" id="file"></th>
 		 		</tr> 		
 		 	</table>
-		 		<input type="hidden" name="tid" value="${vo.tid }">
-		 		<input id="file_name" type="hidden" name="t_image">
-		 		<input id="sfile_name"  type="hidden" name="t_file">
-		 		<input id="old_name" type="hidden" name="old_name">
-		 		<span class="old_name"></span>
 				<a href="adtravel.do" class="list" >취소</a>
 				<a class="write" >등록</a>
 			</form>

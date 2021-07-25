@@ -74,19 +74,21 @@ $(document).ready(function() {
 				<h3>${vo.f_name}</h3>
 				<div>${vo.f_infor}</div>
 				<hr style="display: inline-block; width:100%; border-top:1px solid #006DCC; opacity:0.5;">
-				<div class="content" style="text-align:left; padding-left:300px;">
-						<div style="margin-bottom: 30px;margin-top: 5px; ">
-						<c:forEach var="img_name" items="${img}">
-							<img src="http://localhost:9000/myjeju/resources/images/food/food_detail/${img_name}" style ="width:200px; height:200px;">
-						</c:forEach>
-						</div>
-					<div style="margin-bottom: 30px">설명 : ${vo.f_infor2}</div>
-					<div style="margin-bottom: 30px">태그정보 : ${vo.f_tag}</div>
-					<div style="margin-bottom: 30px">주소 : ${vo.f_addr}</div>
-					<div style="margin-bottom: 30px">경도 : ${vo.f_vpoint}</div>
-					<div style="margin-bottom: 30px">위도 : ${vo.f_hpoint}</div>
-					<div style="margin-bottom: 30px">HP : ${vo.f_hp}</div>
-					<div style="margin-bottom: 30px">좋아요 : ${vo.f_like}</div>
+				<div class="content" style="text-align:left;">
+					<div style="margin:5px 0 30px 0; text-align:center;">
+					<c:forEach var="img_name" items="${img}">
+						<img src="http://localhost:9000/myjeju/resources/images/food/food_detail/${img_name}" style ="width:200px; height:200px;">
+					</c:forEach>
+					</div>
+					<div style="padding-left:100px;">
+						<div style="margin-bottom: 30px">설명 : ${vo.f_infor2}</div>
+						<div style="margin-bottom: 30px">태그정보 : ${vo.f_tag}</div>
+						<div style="margin-bottom: 30px">주소 : ${vo.f_addr}</div>
+						<div style="margin-bottom: 30px">경도 : ${vo.f_vpoint}</div>
+						<div style="margin-bottom: 30px">위도 : ${vo.f_hpoint}</div>
+						<div style="margin-bottom: 30px">HP : ${vo.f_hp}</div>
+						<div style="margin-bottom: 30px">좋아요 : ${vo.f_like}</div>
+					</div>
 				</div>
 				<hr style="border-top:1px solid #006DCC; opacity:0.5;">
 				<button type = "button" class = "btn_setup_faq" onclick="location.href='adfood_update.do?fid=${vo.fid}'">수정</button>

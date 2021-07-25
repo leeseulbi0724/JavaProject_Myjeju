@@ -20,12 +20,14 @@ import org.springframework.web.servlet.ModelAndView;
 import com.myjeju.service.AdminService;
 import com.myjeju.service.CommunityService;
 import com.myjeju.vo.CafeVO;
+import com.myjeju.vo.CarSpotVO;
 import com.myjeju.vo.CommunityVO;
 import com.myjeju.vo.FoodVO;
 import com.myjeju.vo.HDetailVO;
 import com.myjeju.vo.HouseVO;
 import com.myjeju.vo.MemberVO;
 import com.myjeju.vo.NoticeVO;
+import com.myjeju.vo.PhotoSpotVO;
 import com.myjeju.vo.StoreVO;
 import com.myjeju.vo.TravelVO;
 
@@ -303,8 +305,7 @@ public class AdminController {
 		}
 		
 		
-		
-		//음식점관리 리스트
+//음식점관리 리스트
 		@RequestMapping(value="/adfood.do",method= {RequestMethod.GET,RequestMethod.POST})
 		public ModelAndView tofood(String pnum, String search, String search_text) {
 			ModelAndView mv = new ModelAndView();
@@ -343,12 +344,12 @@ public class AdminController {
 			
 			return mv;
 		}
-		//음식점 등록
+//음식점 등록
 		@RequestMapping(value="/adfood_write.do", method=RequestMethod.GET)
 		public String adfood_write() {
 			return "admin/adfood_write";
 		}
-		//음식점 등록 DB
+//음식점 등록 DB
 		@RequestMapping(value="/adfood_write_proc.do", method={RequestMethod.GET,RequestMethod.POST})
 		public ModelAndView adfood_write_proc(MultipartHttpServletRequest request, @RequestParam("file") MultipartFile[] file) throws Exception {
 			ModelAndView mv = new ModelAndView();			
@@ -394,7 +395,7 @@ public class AdminController {
 			
 		}
 		
-		//음식점 상세
+//음식점 상세
 		@RequestMapping(value="/adfood_content.do",method= {RequestMethod.GET,RequestMethod.POST})
 		public ModelAndView adfood_content(String fid) {
 			ModelAndView mv = new ModelAndView();
@@ -407,7 +408,7 @@ public class AdminController {
 			return mv;
 		}
 		
-		//음식점수정
+//음식점수정
 		@RequestMapping(value="/adfood_update.do",method= {RequestMethod.GET,RequestMethod.POST})
 		public ModelAndView adfood_update(String fid) {
 			ModelAndView mv = new ModelAndView();
@@ -427,7 +428,7 @@ public class AdminController {
 			return mv;
 		}
 		
-		//음식점 수정하기 DB
+//음식점 수정하기 DB
 		@RequestMapping(value="/adfood_update_proc.do", method= {RequestMethod.GET,RequestMethod.POST})
 		public ModelAndView adfood_update_proc(MultipartHttpServletRequest request, @RequestParam("file") MultipartFile[] file) throws Exception {
 			ModelAndView mv = new ModelAndView();
@@ -492,7 +493,8 @@ public class AdminController {
 			mv.setViewName("redirect:/adfood_content.do?fid="+vo.getFid());
 			return mv;
 		}
-		//음식점 삭제
+		
+//음식점 삭제
 		@ResponseBody
 		@RequestMapping(value = "/adfood_delete.do", method=RequestMethod.POST)
 		public boolean adfood_delete(HttpServletRequest request) {
@@ -517,7 +519,7 @@ public class AdminController {
 		}
 		
 		
-		//여행지관리 리스트
+//여행지관리 리스트
 		@RequestMapping(value="/adtravel.do",method= {RequestMethod.GET,RequestMethod.POST})
 		public ModelAndView totravel(String pnum, String search, String search_text) {
 			ModelAndView mv = new ModelAndView();
@@ -557,27 +559,43 @@ public class AdminController {
 			return mv;
 		}
 		
-		//여행지관리 상세페이지
+//여행지관리 상세페이지
 		@RequestMapping(value="/adtravel_content.do",method= {RequestMethod.GET,RequestMethod.POST})
 		public ModelAndView totravel(String tid) {
 			ModelAndView mv = new ModelAndView();
 			
 			TravelVO vo = new TravelVO();
+			PhotoSpotVO photovo = new PhotoSpotVO();
+			CarSpotVO carvo = new CarSpotVO();
+
+			
+			if(photovo.getPs_psfile() == null || carvo.getCs_csfile() == null) {
+				photovo = adminService.getPhotoSpot(tid);
+				carvo = adminService.getCarSpot(tid);
+			}
+
 			vo = adminService.gettravel(tid);
-			String img[] = vo.getT_sfile().split(",");		
+			
+			String img[] = vo.getT_sfile().split(",");	
+					
 			mv.setViewName("admin/adtravel_content");
 			mv.addObject("img", img);
 			mv.addObject("vo", vo);
-			mv.addObject("hid", tid);
+			mv.addObject("photovo", photovo);
+			mv.addObject("carvo", carvo);
+			mv.addObject("tid", tid);
+
 			return mv;
 		}
 	
-		//여행지 등록
-				@RequestMapping(value="/adtravel_write.do", method=RequestMethod.GET)
-				public String adtravel_write() {
-					return "admin/adtravel_write";
-				}
-		//여행지 등록 DB
+//여행지 등록
+		@RequestMapping(value="/adtravel_write.do", method=RequestMethod.GET)
+		public String adtravel_write() {
+			return "admin/adtravel_write";
+		}
+		
+		
+//여행지 등록 DB
 		@RequestMapping(value="/adtravel_write_proc.do", method={RequestMethod.GET,RequestMethod.POST})
 		public ModelAndView adtravel_write_proc(MultipartHttpServletRequest request, @RequestParam("file") MultipartFile[] file) throws Exception {
 			ModelAndView mv = new ModelAndView();			
@@ -622,8 +640,8 @@ public class AdminController {
 			
 		}
 		
-
-		//음식점수정
+		
+//여행지 수정
 		@RequestMapping(value="/adtravel_update.do",method= {RequestMethod.GET,RequestMethod.POST})
 		public ModelAndView adtravel_update(String tid) {
 			ModelAndView mv = new ModelAndView();
@@ -643,7 +661,7 @@ public class AdminController {
 			return mv;
 		}
 		
-		//음식점 수정하기 DB
+//여행지 수정하기 DB
 		@RequestMapping(value="/adtravel_update_proc.do", method= {RequestMethod.GET,RequestMethod.POST})
 		public ModelAndView adtravel_update_proc(MultipartHttpServletRequest request, @RequestParam("file") MultipartFile[] file) throws Exception {
 			ModelAndView mv = new ModelAndView();
@@ -706,7 +724,8 @@ public class AdminController {
 			mv.setViewName("redirect:/adtravel_content.do?tid="+vo.getTid());
 			return mv;
 		}
-		//여행지 삭제
+		
+//여행지 삭제
 		@ResponseBody
 		@RequestMapping(value = "/adtravel_delete.do", method=RequestMethod.POST)
 		public boolean adtravel_delete(HttpServletRequest request) {
@@ -729,6 +748,288 @@ public class AdminController {
 			
 			return result;
 		}
+		
+		
+//여행지 스팟 등록
+		@RequestMapping(value="/adtravel_spot_write.do", method=RequestMethod.GET)
+		public ModelAndView adtravel_spot_write(String tid) {
+			ModelAndView mv = new ModelAndView();
+			
+			mv.setViewName("admin/adtravel_spot_write");
+			mv.addObject("tid",tid);
+			return mv;
+		}
+		
+//여행지 스팟 등록 DB
+		@RequestMapping(value="/adtravel_spot_write_proc.do", method={RequestMethod.GET,RequestMethod.POST})
+		public ModelAndView adtravel_spot_write_proc(String spot_choice, MultipartHttpServletRequest request, @RequestParam("file") MultipartFile[] file) throws Exception {
+			ModelAndView mv = new ModelAndView();			
+			
+			String root_path = request.getSession().getServletContext().getRealPath("/");
+			String attach_path = "\\resources\\images\\spot\\";
+			String fileOriginName = ""; 
+			String fileMultiName = "";
+			String fileMultiUplodaName= "";
+			
+			String tid = request.getParameter("tid");
+			String ps_name = request.getParameter("ps_name");
+			String cs_name = request.getParameter("cs_name");
+			String ps_infor = request.getParameter("ps_infor");
+			String cs_infor = request.getParameter("cs_infor");
+			
+			UUID uuid = UUID.randomUUID();
+			for(int i=0; i<file.length; i++) { 
+				fileOriginName = file[i].getOriginalFilename(); 
+				File f = new File(root_path + attach_path + uuid +"_"+ fileOriginName); 
+				file[i].transferTo(f);
+				if(i==0) { 
+					fileMultiName += fileOriginName; 
+					fileMultiUplodaName += uuid +"_"+fileOriginName;
+				} else { 
+					fileMultiName += ","+fileOriginName; 
+					fileMultiUplodaName += "," + uuid +"_"+fileOriginName;
+					} 
+			}
+			
+			PhotoSpotVO photovo = new PhotoSpotVO();
+			CarSpotVO carvo = new CarSpotVO();
+			
+			if(spot_choice.equals("photo")) {
+				photovo.setPs_psfile(fileMultiName);
+				photovo.setPs_pssfile(fileMultiUplodaName);
+				photovo.setTid(tid);
+				photovo.setPs_name(ps_name);
+				photovo.setPs_infor(ps_infor);
+				boolean result = adminService.getTravelPhotoSpotUpload(photovo);
+			}else {
+				carvo.setCs_csfile(fileMultiName);
+				carvo.setCs_cssfile(fileMultiUplodaName);
+				carvo.setTid(tid);
+				carvo.setCs_name(cs_name);
+				carvo.setCs_infor(cs_infor);
+				boolean result = adminService.getTravelCarSpotUpload(carvo);
+			}
+
+			mv.setViewName("redirect:/adtravel_content.do");
+			mv.addObject("tid",tid);
+			
+			return mv;
+			
+		}
+		
+//여행지 포토스팟 수정
+		@RequestMapping(value="/adtravel_photospot_update.do",method= {RequestMethod.GET,RequestMethod.POST})
+		public ModelAndView adtravel_photospot_update(String tid) {
+			ModelAndView mv = new ModelAndView();
+			
+			PhotoSpotVO photovo = adminService.getPhotoSpot(tid);
+			
+			String file = photovo.getPs_psfile();
+			String sfile = photovo.getPs_pssfile();
+			
+			ArrayList<PhotoSpotVO> list = new ArrayList<PhotoSpotVO>();
+			
+			PhotoSpotVO pvo = new PhotoSpotVO();
+			pvo.setPs_psfile(file);
+			pvo.setPs_pssfile(sfile);			
+			list.add(pvo);				
+					
+			mv.setViewName("admin/adtravel_photospot_update");
+			mv.addObject("photovo", photovo);
+			mv.addObject("list", list);
+			return mv;
+		}	
+		
+//여행지 포토스팟 수정 DB
+		@RequestMapping(value="/adtravel_photospot_update_proc.do", method= {RequestMethod.GET,RequestMethod.POST})
+		public ModelAndView adtravel_photospot_update_proc(MultipartHttpServletRequest request, @RequestParam("file") MultipartFile[] file) throws Exception {
+			ModelAndView mv = new ModelAndView();
+			
+			System.out.println("파일이름" + request.getParameter("ps_psfile"));
+			System.out.print("파일경로" + request.getParameter("ps_pssfile"));
+			
+			String fileOldName = request.getParameter("ps_psfile");
+			String fileOldRoot = request.getParameter("ps_pssfile");
+			
+			String root_path = request.getSession().getServletContext().getRealPath("/");
+			String attach_path = "\\resources\\images\\spot\\";
+			String fileOriginName = ""; 
+			String fileMultiName = "";
+			String fileMultiUplodaName= "";
+			
+			UUID uuid = UUID.randomUUID();
+			
+
+			for(int i=0; i<file.length; i++) { 
+				fileOriginName = file[i].getOriginalFilename(); 
+				System.out.println("기존 파일명 : "+fileOriginName); 
+				File f = new File(root_path + attach_path + uuid +"_"+ fileOriginName); 
+				file[i].transferTo(f);
+				if (fileOriginName != "") {
+					if(i==0) { 
+						fileMultiName += fileOriginName; 
+						fileMultiUplodaName += uuid +"_"+fileOriginName;
+					} else { 
+						fileMultiName += ","+fileOriginName; 
+						fileMultiUplodaName += "," + uuid +"_"+fileOriginName;
+					} 
+				}
+			}
+			
+			String old_name = request.getParameter("old_name");
+			String old[] = old_name.split(",");
+			for (int i=0; i<old.length; i++) {
+				File old_file = new File(root_path+attach_path+old[i]);
+				if ( old_file.exists()) {
+					old_file.delete();
+				}
+			}
+
+			PhotoSpotVO photovo = new PhotoSpotVO();
+			
+			photovo.setPs_psfile(fileMultiName);
+			photovo.setPs_pssfile(fileMultiUplodaName);
+			photovo.setTid(request.getParameter("tid"));
+			photovo.setPs_name(request.getParameter("ps_name"));
+			photovo.setPs_infor(request.getParameter("ps_infor"));
+			
+			boolean result = adminService.getPhotoSpotUpdate(photovo);
+			
+			mv.setViewName("redirect:/adtravel_content.do?tid="+photovo.getTid());
+			return mv;
+		}
+		
+//여행지 차박스팟 수정
+		@RequestMapping(value="/adtravel_carspot_update.do",method= {RequestMethod.GET,RequestMethod.POST})
+		public ModelAndView adtravel_carspot_update(String tid) {
+			ModelAndView mv = new ModelAndView();
+			
+			CarSpotVO carvo = adminService.getCarSpot(tid);
+			
+			String file = carvo.getCs_csfile();
+			String sfile = carvo.getCs_cssfile();
+			
+			ArrayList<CarSpotVO> list = new ArrayList<CarSpotVO>();
+			
+			CarSpotVO cvo = new CarSpotVO();
+			cvo.setCs_csfile(file);
+			cvo.setCs_cssfile(sfile);			
+			list.add(cvo);				
+					
+			mv.setViewName("admin/adtravel_carspot_update");
+			mv.addObject("carvo", carvo);
+			mv.addObject("list", list);
+			return mv;
+		}		
+//여행지 차박스팟 수정 DB
+		@RequestMapping(value="/adtravel_carspot_update_proc.do", method= {RequestMethod.GET,RequestMethod.POST})
+		public ModelAndView adtravel_carspot_update_proc(MultipartHttpServletRequest request, @RequestParam("file") MultipartFile[] file) throws Exception {
+			ModelAndView mv = new ModelAndView();
+			
+			System.out.println("파일이름" + request.getParameter("cs_csfile"));
+			System.out.print("파일경로" + request.getParameter("cs_cssfile"));
+			
+			String fileOldName = request.getParameter("cs_csfile");
+			String fileOldRoot = request.getParameter("cs_cssfile");
+			
+			String root_path = request.getSession().getServletContext().getRealPath("/");
+			String attach_path = "\\resources\\images\\spot\\";
+			String fileOriginName = ""; 
+			String fileMultiName = "";
+			String fileMultiUplodaName= "";
+			
+			UUID uuid = UUID.randomUUID();
+			
+
+			for(int i=0; i<file.length; i++) { 
+				fileOriginName = file[i].getOriginalFilename(); 
+				System.out.println("기존 파일명 : "+fileOriginName); 
+				File f = new File(root_path + attach_path + uuid +"_"+ fileOriginName); 
+				file[i].transferTo(f);
+				if (fileOriginName != "") {
+					if(i==0) { 
+						fileMultiName += fileOriginName; 
+						fileMultiUplodaName += uuid +"_"+fileOriginName;
+					} else { 
+						fileMultiName += ","+fileOriginName; 
+						fileMultiUplodaName += "," + uuid +"_"+fileOriginName;
+					} 
+				}
+			}
+			
+			String old_name = request.getParameter("old_name");
+			String old[] = old_name.split(",");
+			for (int i=0; i<old.length; i++) {
+				File old_file = new File(root_path+attach_path+old[i]);
+				if ( old_file.exists()) {
+					old_file.delete();
+				}
+			}
+
+			CarSpotVO carvo = new CarSpotVO();
+			
+			carvo.setCs_csfile(fileMultiName);
+			carvo.setCs_cssfile(fileMultiUplodaName);
+			carvo.setTid(request.getParameter("tid"));
+			carvo.setCs_name(request.getParameter("cs_name"));
+			carvo.setCs_infor(request.getParameter("cs_infor"));
+			
+			boolean result = adminService.getCarSpotUpdate(carvo);
+			
+			mv.setViewName("redirect:/adtravel_content.do?tid="+carvo.getTid());
+			return mv;
+		}
+				
+//여행지 스팟 삭제
+		@ResponseBody
+		@RequestMapping(value = "/adtravel_photospot_delete.do", method=RequestMethod.POST)
+		public boolean adtravel_photospot_delete(HttpServletRequest request) {
+			String tid = request.getParameter("tid");			
+			String root_path = request.getSession().getServletContext().getRealPath("/");
+			String attach_path = "\\resources\\images\\spot\\";
+			
+			PhotoSpotVO photovo = adminService.getPhotoSpot(tid);
+			
+			String old_psfile = photovo.getPs_psfile();
+			
+			File old_file = new File(root_path + attach_path + old_psfile);
+			if ( old_file.exists()) {
+				old_file.delete();
+			}
+			
+			boolean result = adminService.getPhotoSpotDelete(tid);
+			
+			return result;
+		}		
+		@ResponseBody
+		@RequestMapping(value = "/adtravel_carspot_delete.do", method=RequestMethod.POST)
+		public boolean adtravel_carspot_delete(HttpServletRequest request) {
+			String tid = request.getParameter("tid");			
+			String root_path = request.getSession().getServletContext().getRealPath("/");
+			String attach_path = "\\resources\\images\\spot\\";
+			
+			CarSpotVO carvo = adminService.getCarSpot(tid);
+			
+			String old_csfile = carvo.getCs_csfile();
+			
+			File old_file = new File(root_path + attach_path + old_csfile);
+			if ( old_file.exists()) {
+				old_file.delete();
+			}
+			
+			boolean result = adminService.getCarSpotDelete(tid);
+			
+			return result;
+		}		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		
 		

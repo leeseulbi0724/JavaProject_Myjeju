@@ -7,12 +7,14 @@ import org.springframework.stereotype.Service;
 
 import com.myjeju.dao.AdminDAO;
 import com.myjeju.vo.CafeVO;
+import com.myjeju.vo.CarSpotVO;
 import com.myjeju.vo.CommunityVO;
 import com.myjeju.vo.FoodVO;
 import com.myjeju.vo.HDetailVO;
 import com.myjeju.vo.HouseVO;
 import com.myjeju.vo.MemberVO;
 import com.myjeju.vo.NoticeVO;
+import com.myjeju.vo.PhotoSpotVO;
 import com.myjeju.vo.RoomVO;
 import com.myjeju.vo.RoomdeVO;
 import com.myjeju.vo.StoreVO;
@@ -282,6 +284,77 @@ public class AdminServiceImpl implements AdminService {
 		}
 		return result;
 	}
+	
+	//여행지 스팟
+	@Override
+	public boolean getTravelPhotoSpotUpload(PhotoSpotVO photovo) {
+		int val = adminDAO.getTravelPhotoSpotUpload(photovo);
+		boolean result = false;
+		if (val != 0) {
+			result = true;
+		}
+		return result;
+	}
+	
+	@Override
+	public boolean getTravelCarSpotUpload(CarSpotVO carvo) {
+		int val = adminDAO.getTravelCarSpotUpload(carvo);
+		boolean result = false;
+		if (val != 0) {
+			result = true;
+		}
+		return result;
+	}
+	
+	@Override
+	public PhotoSpotVO getPhotoSpot(String tid){
+		return adminDAO.getPhotoSpot(tid);
+	}
+	
+	@Override
+	public CarSpotVO getCarSpot(String tid){
+		return adminDAO.getCarSpot(tid);
+	}
+	@Override
+	public boolean getPhotoSpotUpdate(PhotoSpotVO photovo) {
+		int val = adminDAO.getPhotoSpotUpdate(photovo);
+		boolean result = false;
+		if (val != 0) {
+			result = true;
+		}
+		return result;
+	}
+	
+	@Override
+	public boolean getCarSpotUpdate(CarSpotVO carvo) {
+		int val = adminDAO.getCarSpotUpdate(carvo);
+		boolean result = false;
+		if (val != 0) {
+			result = true;
+		}
+		return result;
+	}
+	
+	@Override
+	public boolean getPhotoSpotDelete(String tid) {
+		int val = adminDAO.getPhotoSpotDelete(tid);
+		boolean result = false;
+		if (val != 0) {
+			result = true;
+		}
+		return result;
+	}
+	@Override
+	public boolean getCarSpotDelete(String tid) {
+		int val = adminDAO.getCarSpotDelete(tid);
+		boolean result = false;
+		if (val != 0) {
+			result = true;
+		}
+		return result;
+	}
+	
+	
 	
 	// 관리자 카페
 	@Override

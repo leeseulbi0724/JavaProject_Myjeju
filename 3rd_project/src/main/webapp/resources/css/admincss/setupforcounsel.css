@@ -1023,6 +1023,27 @@ setup_faq_write, setup_faq_update
 		height : 40px;
 	}
 	
+	div.spot_btn{
+		text-align:right;
+		margin:20px 0;
+	}
+	button.spot_btn_style{
+		width:50px;
+		background-color:#4fa9de;
+		border:1px solid #4fa9de;
+		border-radius:5px;
+		padding:5px 10px;
+		margin:0 3px;
+		color:white;
+		font-size:13px;
+		font-weight:bold;
+		text-align:center;
+		cursor:pointer;
+	}
+	button.spot_btn_style:hover{
+		background-color:#268ecc;
+		border:1px solid #268ecc;
+	}
 	
 /****** setup_faq_write, setup_faq_update ******/
 	.content_setup_faq_write {

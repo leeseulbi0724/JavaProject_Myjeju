@@ -1,7 +1,15 @@
 package com.myjeju.vo;
 
 public class PhotoSpotVO {
-	String psid, tid, ps_name, ps_infor, ps_psfile, ps_pssfile;
+	String psid, tid, ps_name, ps_infor, ps_psfile, ps_pssfile, old_name;
+	
+	public String getOld_name() {
+		return old_name;
+	}
+
+	public void setOld_name(String old_name) {
+		this.old_name = old_name;
+	}
 
 	public String getPsid() {
 		return psid;

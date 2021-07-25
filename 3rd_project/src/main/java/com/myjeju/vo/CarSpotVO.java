@@ -1,7 +1,15 @@
 package com.myjeju.vo;
 
 public class CarSpotVO {
-	String csid, tid, cs_name, cs_infor, cs_csfile, cs_cssfile;
+	String csid, tid, cs_name, cs_infor, cs_csfile, cs_cssfile, old_name;
+	
+	public String getOld_name() {
+		return old_name;
+	}
+
+	public void setOld_name(String old_name) {
+		this.old_name = old_name;
+	}
 
 	public String getCsid() {
 		return csid;
