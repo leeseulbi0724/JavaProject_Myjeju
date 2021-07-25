@@ -1,5 +1,7 @@
 package com.myspring.myjeju;
 
+import java.sql.Date;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -86,13 +88,14 @@ public class MemberController {
 		vo.setId(request.getParameter("id"));
 		vo.setPass(request.getParameter("pass"));
 		
+		
 		result = memberService.getLoginResult(vo);
 		
 		session.setAttribute("session_id", request.getParameter("id"));
 		MemberVO mvo = mypageService.getMemberContent(request.getParameter("id"));
 		session.setAttribute("session_name", mvo.getName());
-	
 		
+	
 		return result;
 	}
 	

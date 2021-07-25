@@ -117,8 +117,9 @@
 				<input type = "text" name = "h_vpoint" id = "h_vpoint"  value = "${vo.h_vpoint}" class = "form-control" placeholder = "숙소위도를 입력해주세요" style="margin-bottom:20px;">
 				<input type = "text" name = "h_hpoint" id = "h_hpoint" value = "${vo.h_hpoint}" class = "form-control" placeholder = "숙소경도를 입력해주세요" style="margin-bottom:20px;">
 				<input type = "text" name = "h_hp" id = "h_hp"  value = "${vo.h_hp}" class = "form-control" placeholder = "숙소연락처를 입력해주세요" style="margin-bottom:20px;">
+				<input type = "text" name = "email" id = "email"  value = "${vo.email}" class = "form-control" placeholder = "숙소연락처를 입력해주세요" style="margin-bottom:20px;">
 				<input type = "file" name = "hfile1" id = "hfile1" class="form-control" style="margin-bottom:20px;"><span id="fname" style="float:left; margin-left:90px;">${vo.h_img }</span>
-			
+				<input type="hidden" name="hid" value="${vo.hid }">
 				<button type = "button" id = "adhouseUpdateBtn">수정</button>
 				<a href = "adhouse.do"><button type ="button">숙소 홈으로</button></a>
 			</form>

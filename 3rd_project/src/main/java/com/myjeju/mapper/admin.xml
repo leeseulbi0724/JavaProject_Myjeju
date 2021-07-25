@@ -86,7 +86,7 @@
 			select * from myjeju_house where hid = #{hid}
 		</select>
 		<insert id="houseInsert" parameterType="com.myjeju.vo.HouseVO" >
-			insert into myjeju_house values('h_'||sequ_myjeju_house.nextval,#{h_name},#{h_infor},#{h_infor2},#{h_tag},#{h_addr},#{h_vpoint},#{h_hpoint},#{h_hp},1,#{h_img},#{h_file})
+			insert into myjeju_house values('h_'||sequ_myjeju_house.nextval,#{h_name},#{h_infor},#{h_infor2},#{h_tag},#{h_addr},#{h_vpoint},#{h_hpoint},#{h_hp},1,#{h_img},#{h_file}, #{email})
 		</insert>
 		<!-- 숙소 수정 화면 -->
 		<select id = "house_content" parameterType = "java.lang.String" resultType = "com.myjeju.vo.HouseVO">
@@ -94,12 +94,12 @@
 		</select>
 		<!-- 숙소 파일 포함 업데이트 -->
 		<update id="house_update_file" parameterType="com.myjeju.vo.HouseVO">
-			update myjeju_house set h_name = #{h_name}, h_infor = #{h_infor}, h_infor2 = #{h_infor2}, h_tag = #{h_tag}, h_addr = #{h_addr}, h_vpoint = #{h_vpoint}, h_hpoint = #{h_hpoint}, h_hp = #{h_hp}, h_img = #{h_img}, h_file = #{h_file} where hid = #{hid}
+			update myjeju_house set h_name = #{h_name}, h_infor = #{h_infor}, h_infor2 = #{h_infor2}, h_tag = #{h_tag}, h_addr = #{h_addr}, h_vpoint = #{h_vpoint}, h_hpoint = #{h_hpoint}, h_hp = #{h_hp}, h_img = #{h_img}, h_file = #{h_file}, email=#{email} where hid = #{hid}
 		</update>
 		
 		<!-- 숙소 파일 미포함 업데이트 -->
 		<update id="house_update_no_file" parameterType="com.myjeju.vo.HouseVO">
-			update myjeju_house set h_name = #{h_name}, h_infor = #{h_infor}, h_infor2 = #{h_infor2}, h_tag = #{h_tag}, h_addr = #{h_addr}, h_vpoint = #{h_vpoint}, h_hpoint = #{h_hpoint}, h_hp = #{h_hp} where hid = #{hid}
+			update myjeju_house set h_name = #{h_name}, h_infor = #{h_infor}, h_infor2 = #{h_infor2}, h_tag = #{h_tag}, h_addr = #{h_addr}, h_vpoint = #{h_vpoint}, h_hpoint = #{h_hpoint}, h_hp = #{h_hp}, email=#{email} where hid = #{hid}
 		</update>
 		
 		<!-- 숙소 기존 파일 가져오기 -->

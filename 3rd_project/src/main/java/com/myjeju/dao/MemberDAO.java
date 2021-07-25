@@ -1,5 +1,8 @@
 package com.myjeju.dao;
 
+import java.sql.Date;
+import java.util.Map;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -44,4 +47,8 @@ public class MemberDAO {
 	public int getIdCheckResult(String id) {
 		return sqlSession.selectOne(namespace+".id_check", id);
 	}
+	
+	
+
+	
 }

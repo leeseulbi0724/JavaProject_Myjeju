@@ -51,6 +51,10 @@
 				alert("숙소경도를 입력해주세요");
 				$("#h_vpoint").focus();
 				return false;
+			}else if ($("#email").val() == "") {
+				alert("이메일을 입력해주세요");
+				$("#email").focus();
+				return false;
 			}else if ($("#h_hp").val() == "") {
 				alert("숙소연락처를 입력해주세요");
 				$("#h_hp").focus();
@@ -117,6 +121,7 @@
 				<input type = "text" name = "h_vpoint" id = "h_vpoint"  class = "form-control" placeholder = "숙소위도를 입력해주세요" style="margin-bottom:20px;">
 				<input type = "text" name = "h_hpoint" id = "h_hpoint"  class = "form-control" placeholder = "숙소경도를 입력해주세요" style="margin-bottom:20px;">
 				<input type = "text" name = "h_hp" id = "h_hp"  class = "form-control" placeholder = "숙소연락처를 입력해주세요" style="margin-bottom:20px;">
+				<input type = "text" name = "email" id = "email" class="form-control" placeholder = "이메일을 입력해주세요" style="margin-bottom:20px;">
 				<input type = "file" name = "hfile1" id = "hfile1" class="form-control" style="margin-bottom:20px;">
 			
 				<button type = "button" id = "adhouseWriteBtn">숙소등록</button>

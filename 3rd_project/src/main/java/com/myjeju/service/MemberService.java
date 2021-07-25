@@ -1,5 +1,7 @@
 package com.myjeju.service;
 
+import java.sql.Date;
+
 import com.myjeju.vo.MemberVO;
 import com.myjeju.vo.SessionVO;
 
@@ -11,5 +13,6 @@ public interface MemberService {
 	String getPassSearchResult(MemberVO vo);
 	boolean getPassUpdateResult(MemberVO vo);
 	int getIdCheckResult(String id);
+	
 
 }

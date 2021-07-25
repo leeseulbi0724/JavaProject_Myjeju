@@ -86,6 +86,7 @@ $(document).ready(function() {
 					<div style="margin-bottom: 30px">위도 : ${vo.h_hpoint}</div>
 					<div style="margin-bottom: 30px">HP : ${vo.h_hp}</div>
 					<div style="margin-bottom: 30px">좋아요 : ${vo.h_like}</div>
+					<div style="margin-bottom: 30px">이메일 : ${vo.email}</div>
 				</div>
 				<hr style="border-top:1px solid #006DCC; opacity:0.5;">
 				<button type = "button" class = "btn_setup_faq" onclick="location.href='adhouse_update.do?hid=${hid}'">수정</button>

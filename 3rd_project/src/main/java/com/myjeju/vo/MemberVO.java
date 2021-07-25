@@ -1,8 +1,12 @@
 package com.myjeju.vo;
 
+import java.sql.Date;
+
 public class MemberVO {
-	String id, pass, cpass, name, birth, email1, email2, email, hp1, hp2, hp3, hp, addr1, addr2, mdate, type;
+	String id, pass, cpass, name, birth, email1, email2, email, hp1, hp2, hp3, hp, addr1, addr2, mdate, type, sessionId;
 	int point, rno;
+	Date limitTime;
+	
 	
 	
 	public String getType() {
@@ -123,5 +127,22 @@ public class MemberVO {
 	}
 	public void setPoint(int point) {
 		this.point = point;
+	}
+	public String getSessionId() {
+		return sessionId;
+	}
+	public void setSessionId(String sessionId) {
+		this.sessionId = sessionId;
+	}
+	public Date getLimitTime() {
+		return limitTime;
+	}
+	public void setLimitTime(Date limitTime) {
+		this.limitTime = limitTime;
+	}
+	
+	@Override
+	public String toString() {
+		return "MemberVO [id=" + id + ", pass=" + pass + ",name=" + name + ",mdate=" + mdate + ",sessionId=" + sessionId + "limitTime=" + limitTime + "]";
 	}
 }
