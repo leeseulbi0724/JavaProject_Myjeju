@@ -198,6 +198,53 @@ public class MypageServiceImpl implements MypageService {
 
 	
 	
+	/* ∏Æ∫‰ ªË¡¶ */
+	@Override
+	public boolean getMyreviewStoreDelete(String reid) {
+		boolean result = false;
+		int value = mypageDAO.getMyreviewStoreDelete(reid);
+		if(value != 0) result = true;
+		
+		return result;
+	}
+
+	@Override
+	public boolean getMyreviewTravelDelete(String reid) {
+		boolean result = false;
+		int value = mypageDAO.getMyreviewTravelDelete(reid);
+		if(value != 0) result = true;
+		
+		return result;
+	}
+
+	@Override
+	public boolean getMyreviewFoodDelete(String reid) {
+		boolean result = false;
+		int value = mypageDAO.getMyreviewFoodDelete(reid);
+		if(value != 0) result = true;
+		
+		return result;
+	}
+
+	@Override
+	public boolean getMyreviewCafeDelete(String reid) {
+		boolean result = false;
+		int value = mypageDAO.getMyreviewCafeDelete(reid);
+		if(value != 0) result = true;
+		
+		return result;
+	}
+
+	@Override
+	public boolean getMyreviewHouseDelete(String reid) {
+		boolean result = false;
+		int value = mypageDAO.getMyreviewHouseDelete(reid);
+		if(value != 0) result = true;
+		
+		return result;
+	}
+	
+
 	@Override
 	public OrderVO getOrderContent(String rid) {
 		return mypageDAO.getOrderContent(rid);

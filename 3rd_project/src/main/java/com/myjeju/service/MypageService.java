@@ -50,6 +50,14 @@ public interface MypageService {
 	ArrayList<CafeReviewVO> getCafeReview(String id);
 	ArrayList<HouseReviewVO> getHouseReview(String id);
 	
+	/* ∏Æ∫‰ ªË¡¶ */
+	boolean getMyreviewStoreDelete(String reid);
+	boolean getMyreviewTravelDelete(String reid);
+	boolean getMyreviewFoodDelete(String reid);
+	boolean getMyreviewCafeDelete(String reid);
+	boolean getMyreviewHouseDelete(String reid);
+	
+	
 	OrderVO getOrderContent(String rid);
 	ArrayList<OrderVO> getDayResult(OrderVO vo);
 	boolean getReservationResult(OrderVO vo);

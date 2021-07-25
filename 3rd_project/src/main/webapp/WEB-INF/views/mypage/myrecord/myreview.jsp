@@ -79,13 +79,29 @@
 				var result = confirm("해당 리뷰를 삭제하시겠습니까?");
 				
 				if(result) {
-					var index = $("input[type^=checkbox]:checked").attr("name");
-					alert(index);
+					var reid = $("input[type^=checkbox]:checked").attr("name");
+					var change_id = $("input[type^=checkbox]:checked").attr("id");
+					
+					$.ajax({
+						type : "post",
+						url : "myreview_delete.do",
+						data : {
+							reid : reid,
+							change_id : change_id
+							},
+						dataType : "json",
+						success : function(result) {
+							location.reload();
+						}
+					});
+					
 					
 				}
 
 			}
 		});
+		
+		
 		
 		$(".house_list_table").show();
 		$(".food_list_table").css("display", "none");
@@ -165,7 +181,7 @@
 				
 				<c:forEach var = "list" items = "${store_list}" varStatus = "status">
 					<tr>
-						<td><input type="checkbox" name = "${list.srid}"></td>
+						<td><input type="checkbox" name = "${list.srid}" id = "${list.sid}"></td>
 						<td>상품 </td>
 						<td>
 							<div class='RatingStar'>
@@ -197,7 +213,7 @@
 				
 				<c:forEach var = "list" items = "${travel_list}" varStatus = "status">	
 					<tr>
-							<td><input type="checkbox" value = "${list.tid}"></td>
+							<td><input type="checkbox" name = "${list.reid}" id = "${list.tid}"></td>
 							<td>여행지</td>
 							<td>
 								<div class='RatingStar'>
@@ -230,7 +246,7 @@
 				
 				<c:forEach var = "list" items = "${food_list}" varStatus = "status">	
 					<tr>
-						<td><input type="checkbox" value = "${list.fid}"></td>
+						<td><input type="checkbox" name = "${list.reid}" id = "${list.fid}"></td>
 						<td>맛집</td>
 						<td>
 							<div class='RatingStar'>
@@ -263,7 +279,7 @@
 					
 				<c:forEach var = "list" items = "${cafe_list}" varStatus = "status">	
 					<tr>
-						<td><input type="checkbox" value = "${list.caid}"></td>
+						<td><input type="checkbox" name = "${list.reid}" id = "${list.caid}"></td>
 						<td>카페</td>
 						<td>
 							<div class='RatingStar'>
@@ -295,7 +311,7 @@
 					
 				<c:forEach var = "list" items = "${house_list}" varStatus = "status">	
 					<tr>
-						<td><input type="checkbox" value = "${list.hid}"></td>
+						<td><input type="checkbox" name = "${list.reid}" id = "${list.hid}"></td>
 						<td>숙소</td>
 						<td>
 							<div class='RatingStar'>

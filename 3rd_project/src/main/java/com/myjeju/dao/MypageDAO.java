@@ -135,6 +135,31 @@ public class MypageDAO {
 		return (ArrayList<HouseReviewVO>) list; 
 	}
 	
+	/** My후기 - 스토어 - 나의 리뷰 삭제 **/
+	public int getMyreviewStoreDelete(String reid) {
+		return sqlSession.delete(namespace + ".myreview_store_delete", reid);
+	}
+	
+	/** My후기 - 여행지 - 나의 리뷰 삭제 **/
+	public int getMyreviewTravelDelete(String reid) {
+		return sqlSession.delete(namespace + ".myreview_travel_delete", reid);
+	}
+	
+	/** My후기 - 음식점 - 나의 리뷰 삭제 **/
+	public int getMyreviewFoodDelete(String reid) {
+		return sqlSession.delete(namespace + ".myreview_food_delete", reid);
+	}
+	
+	/** My후기 - 카페 - 나의 리뷰 삭제 **/
+	public int getMyreviewCafeDelete(String reid) {
+		return sqlSession.delete(namespace + ".myreview_cafe_delete", reid);
+	}
+	
+	/** My후기 - 숙소 - 나의 리뷰 삭제 **/
+	public int getMyreviewHouseDelete(String reid) {
+		return sqlSession.delete(namespace + ".myreview_house_delete", reid);
+	}
+	
 	/**
 	 * 예약내역가져오기
 	 */

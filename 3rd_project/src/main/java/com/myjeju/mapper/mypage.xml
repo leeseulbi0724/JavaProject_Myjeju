@@ -137,6 +137,31 @@
 			select id, hid, reid, h_review, h_star, to_char(h_time, 'yyyy-mm-dd') h_time from myjeju_house_review where id = #{id} order by h_time desc
 		</select>
 		
+		<!-- My후기 스토어 - 내 리뷰 삭제 -->
+		<delete id = "myreview_store_delete" parameterType = "java.lang.String">
+			delete from myjeju_storev where srid = #{srid}
+		</delete>
+		
+		<!-- My후기 여행지 - 내 리뷰 삭제 -->
+		<delete id = "myreview_travel_delete" parameterType = "java.lang.String">
+			delete from myjeju_travel_review where reid = #{reid}
+		</delete>
+		
+		<!-- My후기 음식점 - 내 리뷰 삭제 -->
+		<delete id = "myreview_food_delete" parameterType = "java.lang.String">
+			delete from myjeju_food_review where reid = #{reid}
+		</delete>
+		
+		<!-- My후기 카페 - 내 리뷰 삭제 -->
+		<delete id = "myreview_cafe_delete" parameterType = "java.lang.String">
+			delete from myjeju_cafe_review where reid = #{reid}
+		</delete>
+		
+		<!-- My후기 숙소 - 내 리뷰 삭제 -->
+		<delete id = "myreview_house_delete" parameterType = "java.lang.String">
+			delete from myjeju_house_review where reid = #{reid}
+		</delete>
+		
 		
 		<!-- 예약내역 -->
 		<select id="order_content" parameterType="java.lang.String" resultType="com.myjeju.vo.OrderVO">

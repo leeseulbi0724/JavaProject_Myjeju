@@ -259,7 +259,7 @@ public class MypageController {
 	}
 
 	/**
-	 * 나의 후기
+	 * 나의 리뷰
 	 */
 	@RequestMapping(value = "/myreview.do", method = RequestMethod.GET)
 	public ModelAndView myreview(HttpSession session) {
@@ -284,6 +284,36 @@ public class MypageController {
 		mv.addObject("house_list", houselist);
 		
 		return mv;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/myreview_delete.do", method = RequestMethod.POST)
+	public boolean myreview_delete(HttpServletRequest request) {
+		boolean result = false;
+		
+		
+		
+		String reid = request.getParameter("reid");
+		String change_id = request.getParameter("change_id");
+		
+		String search_id = String.valueOf(change_id.charAt(0));
+		
+		
+		 if(search_id.equals("s")) { 
+			 result = MypageService.getMyreviewStoreDelete(reid);
+		 } else if (search_id.equals("t")) { 
+			 result = MypageService.getMyreviewTravelDelete(reid); 
+		 } else if (search_id.equals("f")) { 
+			 result = MypageService.getMyreviewFoodDelete(reid);
+		 } else if (search_id.equals("c")) { 
+			 result = MypageService.getMyreviewCafeDelete(reid); 
+		 } else if (search_id.equals("h")) { 
+			 result = MypageService.getMyreviewHouseDelete(reid); 
+		}
+		 
+		
+		
+		return result;
 	}
 
 	/**
