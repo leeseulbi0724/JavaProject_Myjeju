@@ -564,7 +564,7 @@ public class AdminController {
 			
 			TravelVO vo = new TravelVO();
 			vo = adminService.gettravel(tid);
-			String img[] = vo.getT_file().split(",");		
+			String img[] = vo.getT_sfile().split(",");		
 			mv.setViewName("admin/adtravel_content");
 			mv.addObject("img", img);
 			mv.addObject("vo", vo);
