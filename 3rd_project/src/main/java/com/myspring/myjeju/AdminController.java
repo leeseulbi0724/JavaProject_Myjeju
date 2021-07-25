@@ -1499,7 +1499,136 @@ public class AdminController {
 		return mv;
 	}
 	
+	//숙소 숙소등록 화면
+		@RequestMapping(value = "/adhouse_write.do", method = RequestMethod.GET)
+		public String adhouse_write() {
+			return "admin/adhouse_write";
+		}
+		
+		//숙소 등록 DB적용
+		@RequestMapping(value="/adhouse_write_proc.do", method = RequestMethod.POST)
+		public ModelAndView adhouse_write_proc(HouseVO vo, HttpServletRequest request) throws Exception {
+			ModelAndView mv = new ModelAndView();			
+			
+			String root_path = "";
+			String attach_path = "";
+			
+			if(vo.getHfile1().getSize() != 0) {
+				// 1. 파일 저장 위치
+				root_path = request.getSession().getServletContext().getRealPath("/");
+				attach_path = "\\resources\\images\\house\\";
+				
+				// 2. 파일 이름 --> vo에 저장
+				//rfname 중복방지 처리
+				UUID uuid = UUID.randomUUID();
+				vo.setH_img(vo.getHfile1().getOriginalFilename());
+				vo.setH_file(uuid + "_" + vo.getHfile1().getOriginalFilename());
+				System.out.println("himg--->" + vo.getH_img());
+				System.out.println("hfile--->" + vo.getH_file());
+					
+			}
+				
+			// 3. DB연동
+			boolean result = adminService.getHouseInsertResult(vo);
+			
+			if(result) {
+				
+				// 4. DB 연동 성공 --> upload 폴더에 저장			//DB저장 완료 후 폴더에 저장하기
+				File file = new File(root_path + attach_path + vo.getH_file());
+				vo.getHfile1().transferTo(file);
+				
+				mv.setViewName("redirect:/adhouse.do");
+			}
+				
+			return mv;
+		}
+		
+		//숙소 수정 화면
+		@RequestMapping(value = "/adhouse_update.do", method=RequestMethod.GET)
+		public ModelAndView adhouse_update(String hid) {
+			ModelAndView mv = new ModelAndView();
+			
+			HouseVO vo = adminService.getHouseContent(hid);
+			
+			mv.addObject("vo", vo);
+			mv.addObject("hid", hid);
+			mv.setViewName("admin/adhouse_update");
+			
+			return mv;
+		}
+		
+		//숙소 수정 처리
+		@RequestMapping(value = "/adhouse_update_proc.do", method=RequestMethod.POST)
+		public ModelAndView adhouse_update_proc(HouseVO vo, HttpServletRequest request) throws Exception {
+			ModelAndView mv = new ModelAndView();
+			String hid = vo.getHid();
+			String root_path;
+			String attach_path;
+			
+			if (vo.getHfile1().getOriginalFilename() != "") {
+				//파일 존재
+				root_path = request.getSession().getServletContext().getRealPath("/");
+				attach_path = "\\resources\\images\\house\\";
+				System.out.println(root_path);
+				
+				//rfname 중복방지 처리			
+				UUID uuid = UUID.randomUUID();
+				System.out.println((vo.getHfile1().getOriginalFilename()));
+				System.out.println((uuid +"_"+vo.getHfile1().getOriginalFilename()));	
+					
+				//DB저장
+				vo.setH_img(vo.getHfile1().getOriginalFilename());
+				vo.setH_file(uuid + "_" + vo.getHfile1().getOriginalFilename());
+				
+				String old_hfile1 = adminService.getHouseOldFile(vo.getHid());
+				boolean result = adminService.getHouseUpdateFile(vo);
+				
+				
+				//DB저장 완료 후 폴더에 저장하기
+				if (result) {
+					File file1 = new File(root_path + attach_path + vo.getH_file());
+					vo.getHfile1().transferTo(file1);
+					
+					//기존 upload 폴더에 존재하는 파일 삭제
+					File old_file = new File(root_path + attach_path + old_hfile1);
+					if (old_file.exists()) {
+						old_file.delete();
+					}
+				}
+				
+			} else {
+				//파일 미포함 업데이트
+				boolean result = adminService.getHouseUpdateNoFile(vo);
+			}
+			mv.setViewName("redirect:/adhouse_content.do?hid=" + hid);
+			return mv;
+		}
 	
+		//관리자 상품 삭제
+		@RequestMapping(value = "/adhouse_delete_proc.do", method=RequestMethod.GET)
+		public ModelAndView adhouse_delete_proc(HttpServletRequest request, String hid) {
+			ModelAndView mv = new ModelAndView();
+			
+			//String old_bsfile = adminService.getOldFile(nid);
+			String old_sfile = adminService.getHouseOldFile(hid);
+			
+			String root_path = request.getSession().getServletContext().getRealPath("/");
+			String attach_path = "\\\\resources\\\\images\\\\house\\\\";
+			
+			File old_file = new File(root_path + attach_path + old_sfile);
+			
+			if ( old_file.exists()) {
+				old_file.delete();
+			}
+			
+			boolean result = adminService.getHouseDelete(hid);
+			
+			if(result) {
+				mv.setViewName("redirect:/adhouse.do");
+			}
+			
+			return mv;
+		}
 	
 	
 	

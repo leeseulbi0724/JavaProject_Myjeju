@@ -18,6 +18,16 @@
 	<script src="js/bootstrap.js"></script>
 	<script type="text/javascript"></script>
 </head>
+<style>
+	.write { 
+		background-color:rgb(20,86,184); 
+		color:white; 
+		padding:5px 10px;
+		border-radius:4px;
+		float:right;
+		margin-bottom:10px;
+	}
+</style>
 <body>
 	<nav class="navbar navbar-default">
 		<div class ="navbar-header">
@@ -60,6 +70,7 @@
 		</section>
 	
 		<section class ="setup_faq_list">
+		<a href = "adhouse_write.do" class = "write">숙소등록</a>
 			<table class = "content_layout_setup_faq">
 				<tr>
 					<th> 번호 </th>

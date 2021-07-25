@@ -22,6 +22,17 @@ function deleteFunction() {
     	alert("삭제을 취소했습니다.");
     }
 }
+
+$(document).ready(function() {
+	
+	$("#delete").click(function() {
+		var del = confirm("해당 상품을 삭제하시겠습니까?");
+		
+		if(del) {
+			location.replace("adhouse_delete_proc.do?hid=${vo.hid}");
+		}
+	});
+});
 </script>
 </head>
 <body>
@@ -76,8 +87,8 @@ function deleteFunction() {
 					<div style="margin-bottom: 30px">좋아요 : ${vo.h_like}</div>
 				</div>
 				<hr style="border-top:1px solid #006DCC; opacity:0.5;">
-				<button type = "button" class = "btn_setup_faq" onclick="#">수정</button>
-				<button type = "button" class = "btn_setup_faq" onclick="#">삭제</button>
+				<button type = "button" class = "btn_setup_faq" onclick="location.href='adhouse_update.do?hid=${hid}'">수정</button>
+				<button type = "button" class = "btn_setup_faq"  id="delete">삭제</button>
 				<button type = "button" class = "btn_setup_faq" onclick="location.href='adhouse_de.do?hid=${hid}'">객실정보</button>
 				
 				<a href = "adhouse.do"><button type = "button" class = "btn_setup_faq">목록</button></a>

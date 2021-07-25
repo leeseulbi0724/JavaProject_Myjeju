@@ -1,9 +1,13 @@
 package com.myjeju.vo;
 
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
+
 public class HouseVO {
-	String hid, h_name, h_infor, h_infor2, h_tag, h_addr, h_vpoint, h_hpoint, h_hp, h_img, email;
+	String hid, h_name, h_infor, h_infor2, h_tag, h_addr, h_vpoint, h_hpoint, h_hp, h_img, email, h_file;
 	int  rno, h_like, status, review_count;
 	float star_avg;
+	CommonsMultipartFile hfile1;
 	
 	public String getHid() {
 		return hid;
@@ -101,6 +105,19 @@ public class HouseVO {
 	public void setStar_avg(float star_avg) {
 		this.star_avg = star_avg;
 	}
+	public String getH_file() {
+		return h_file;
+	}
+	public void setH_file(String h_file) {
+		this.h_file = h_file;
+	}
+	public CommonsMultipartFile getHfile1() {
+		return hfile1;
+	}
+	public void setHfile1(CommonsMultipartFile hfile1) {
+		this.hfile1 = hfile1;
+	}
+	
 	
 	
 }

@@ -28,6 +28,12 @@ public interface AdminService {
 	ArrayList<HouseVO> getlisthouse(int startnum,int endnum,String search,String search_text);
 	int targethousePage(int pageNumber);
 	int targethousePage(int pageNumber,String search,String search_text);
+	boolean getHouseInsertResult(HouseVO vo);
+	HouseVO getHouseContent(String hid);
+	boolean getHouseUpdateFile(HouseVO vo);
+	boolean getHouseUpdateNoFile(HouseVO vo);
+	String getHouseOldFile(String hid);
+	boolean getHouseDelete(String hid);
 	
 	//°ü¸®ÀÚ °´½Ç
 	ArrayList<HDetailVO> gethousede(String hid);

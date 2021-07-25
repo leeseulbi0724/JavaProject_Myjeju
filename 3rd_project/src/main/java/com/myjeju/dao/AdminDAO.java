@@ -93,11 +93,45 @@ public class AdminDAO {
 	public HouseVO gethouse(String hid) {
 		return sqlSession.selectOne(namespace+".gethouse", hid);
 	}
+	//INSERT --> 숙소 숙소 등록
+	public boolean getHouseInsertResult(HouseVO vo) {
+		boolean result = false;
+		int value = sqlSession.insert(namespace + ".houseInsert", vo);
+		if(value != 0) result = true;
+		return result;
+	}
+	
+	//SELECT --> 숙소 수정 화면
+	public HouseVO getHouseContent(String hid) {
+		return sqlSession.selectOne(namespace + ".house_content", hid);
+	}
+	//관리자 - 숙소 UPDATE 파일 포함
+	public int getHouseUpdateFile(HouseVO vo) {
+		return sqlSession.update(namespace + ".house_update_file", vo);
+	}	
+	
+	//관리자 - 숙소 UPDATE 파일 미 포함
+	public int getHouseUpdateNoFile(HouseVO vo) {
+		return sqlSession.update(namespace + ".house_update_no_file", vo);
+	}
+	//관리자 - 숙소 오래된 이미지 찾기
+	public String getHouseOldFile(String hid) {
+		return sqlSession.selectOne(namespace+".house_oldfile", hid);
+	}
 	//숙소 객실 리스트 가져오기
 	public ArrayList<HDetailVO> gethousede(String hid) {
 		List<HDetailVO> list = sqlSession.selectList(namespace+".listdehouse",hid);
 		return (ArrayList<HDetailVO>)list;
 	}
+	
+	//관리자 숙소 삭제
+	public boolean getHouseDelete(String hid) {
+		boolean result = false;
+		int value = sqlSession.delete(namespace+".house_delete", hid);
+		if(value != 0) result = true;
+		return result;
+	}
+	
 	public HDetailVO gethousedecontent(String hdid) {
 		return sqlSession.selectOne(namespace+".getdehousecontent", hdid);
 	}

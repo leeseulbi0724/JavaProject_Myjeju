@@ -65,6 +65,40 @@ public class AdminServiceImpl implements AdminService {
 	public HouseVO gethouse(String hid){
 		return adminDAO.gethouse(hid);
 	}
+	@Override
+	public boolean getHouseInsertResult(HouseVO vo) {
+		return adminDAO.getHouseInsertResult(vo);
+	}
+	@Override
+	public HouseVO getHouseContent(String hid) {
+		return adminDAO.getHouseContent(hid);
+	}
+	@Override
+	public boolean getHouseUpdateFile(HouseVO vo) {
+		boolean result = false;
+		int value = adminDAO.getHouseUpdateFile(vo);
+		if (value != 0) {
+			result = true;
+		}
+		return result;
+	}
+	@Override
+	public boolean getHouseUpdateNoFile(HouseVO vo) {
+		boolean result = false;
+		int value = adminDAO.getHouseUpdateNoFile(vo);
+		if (value != 0) {
+			result = true;
+		}
+		return result;
+	}
+	@Override
+	public String getHouseOldFile(String hid) {
+		return adminDAO.getHouseOldFile(hid);
+	}
+	@Override
+	public boolean getHouseDelete(String hid) {
+		return adminDAO.getHouseDelete(hid);
+	}
 	//°ü¸®ÀÚ ·ë
 	public ArrayList<RoomdeVO> gethousederoom(String hdid){
 		return adminDAO.gethousederoom(hdid);

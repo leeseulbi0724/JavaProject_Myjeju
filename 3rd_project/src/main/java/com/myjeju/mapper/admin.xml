@@ -85,6 +85,32 @@
 		<select id="gethouse" parameterType="java.lang.String" resultType="com.myjeju.vo.HouseVO">
 			select * from myjeju_house where hid = #{hid}
 		</select>
+		<insert id="houseInsert" parameterType="com.myjeju.vo.HouseVO" >
+			insert into myjeju_house values('h_'||sequ_myjeju_house.nextval,#{h_name},#{h_infor},#{h_infor2},#{h_tag},#{h_addr},#{h_vpoint},#{h_hpoint},#{h_hp},1,#{h_img},#{h_file})
+		</insert>
+		<!-- 숙소 수정 화면 -->
+		<select id = "house_content" parameterType = "java.lang.String" resultType = "com.myjeju.vo.HouseVO">
+			select * from myjeju_house where hid=#{hid}
+		</select>
+		<!-- 숙소 파일 포함 업데이트 -->
+		<update id="house_update_file" parameterType="com.myjeju.vo.HouseVO">
+			update myjeju_house set h_name = #{h_name}, h_infor = #{h_infor}, h_infor2 = #{h_infor2}, h_tag = #{h_tag}, h_addr = #{h_addr}, h_vpoint = #{h_vpoint}, h_hpoint = #{h_hpoint}, h_hp = #{h_hp}, h_img = #{h_img}, h_file = #{h_file} where hid = #{hid}
+		</update>
+		
+		<!-- 숙소 파일 미포함 업데이트 -->
+		<update id="house_update_no_file" parameterType="com.myjeju.vo.HouseVO">
+			update myjeju_house set h_name = #{h_name}, h_infor = #{h_infor}, h_infor2 = #{h_infor2}, h_tag = #{h_tag}, h_addr = #{h_addr}, h_vpoint = #{h_vpoint}, h_hpoint = #{h_hpoint}, h_hp = #{h_hp} where hid = #{hid}
+		</update>
+		
+		<!-- 숙소 기존 파일 가져오기 -->
+		<select id="house_oldfile" parameterType="java.lang.String" resultType="java.lang.String">
+			select h_img, h_file from myjeju_house where hid = #{hid}
+		</select>
+		<!-- 숙소 삭제 -->
+		<delete id="house_delete" parameterType="java.lang.String">
+			delete from myjeju_house where hid = #{hid}
+		</delete>	
+		
 	<!-- 관리자 객실 -->	
 		<select id="listdehouse" parameterType="java.lang.String" resultType="com.myjeju.vo.HDetailVO">
 			select rownum rno,hid,hdid,hd_name,hd_price,hd_people,hd_img from myjeju_hdetail where hid = #{hid}
