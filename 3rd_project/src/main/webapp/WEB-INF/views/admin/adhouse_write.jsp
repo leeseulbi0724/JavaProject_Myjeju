@@ -59,6 +59,10 @@
 				alert("숙소연락처를 입력해주세요");
 				$("#h_hp").focus();
 				return false;
+			}else if ($("#email").val() == "") {
+				alert("숙소연락처를 입력해주세요");
+				$("#email").focus();
+				return false;
 			}else {
 				adhouse_write_form.submit();
 			}
