@@ -76,8 +76,9 @@ $(document).ready(function() {
 				<hr style="display: inline-block; width:100%; border-top:1px solid #006DCC; opacity:0.5;">
 				<div class="content" style="text-align:left; padding-left:300px;">
 					<div style="margin-bottom: 30px;margin-top: 5px; padding-left:197px;">
-						<img src="http://localhost:9000/myjeju/resources/images/house/${vo.h_img}" style ="width:200px; height:200px;">
+						<img src="http://localhost:9000/myjeju/resources/images/house/${vo.h_file}" style ="width:200px; height:200px;">
 					</div>
+					<div>그림패스 : ${vo.h_file}</div>
 					<div style="margin-bottom: 30px">설명 : ${vo.h_infor2}</div>
 					<div style="margin-bottom: 30px">태그정보 : ${vo.h_tag}</div>
 					<div style="margin-bottom: 30px">주소 : ${vo.h_addr}</div>

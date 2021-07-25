@@ -132,6 +132,9 @@ public class AdminController {
 			
 			HouseVO vo = new HouseVO();
 			vo = adminService.gethouse(hid);
+			System.out.println(vo.getH_file());
+			System.out.println(vo.getH_img());
+			
 			mv.setViewName("admin/adhouse_content");
 			mv.addObject("vo", vo);
 			mv.addObject("hid", hid);
@@ -1532,7 +1535,7 @@ public class AdminController {
 			boolean result = adminService.getHouseInsertResult(vo);
 			
 			if(result) {
-				
+				System.out.println("path=" + root_path + attach_path + vo.getH_file());
 				// 4. DB 연동 성공 --> upload 폴더에 저장			//DB저장 완료 후 폴더에 저장하기
 				File file = new File(root_path + attach_path + vo.getH_file());
 				vo.getHfile1().transferTo(file);
@@ -1564,6 +1567,9 @@ public class AdminController {
 			String hid = vo.getHid();
 			String root_path;
 			String attach_path;
+			
+			System.out.println(hid);
+			System.out.println(vo.getH_name());
 			
 			if (vo.getHfile1().getOriginalFilename() != "") {
 				//파일 존재
@@ -1614,7 +1620,7 @@ public class AdminController {
 			
 			String root_path = request.getSession().getServletContext().getRealPath("/");
 			String attach_path = "\\\\resources\\\\images\\\\house\\\\";
-			
+			System.out.println("올드 패스=" + root_path + attach_path + old_sfile);
 			File old_file = new File(root_path + attach_path + old_sfile);
 			
 			if ( old_file.exists()) {

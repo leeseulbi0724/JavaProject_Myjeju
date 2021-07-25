@@ -104,7 +104,7 @@
 		
 		<!-- 숙소 기존 파일 가져오기 -->
 		<select id="house_oldfile" parameterType="java.lang.String" resultType="java.lang.String">
-			select h_img, h_file from myjeju_house where hid = #{hid}
+			select h_file from myjeju_house where hid = #{hid}
 		</select>
 		<!-- 숙소 삭제 -->
 		<delete id="house_delete" parameterType="java.lang.String">
