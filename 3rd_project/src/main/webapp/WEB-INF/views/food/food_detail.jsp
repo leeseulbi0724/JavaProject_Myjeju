@@ -148,7 +148,7 @@
 			</p>
 			<div>
 				<button type="button" class="btn_style" id="heart_btn">
-					<img src="http://localhost:9000/myjeju/images/travel/empty_heart.png">${vo.f_like}
+					<img src="http://localhost:9000/myjeju/images/travel/empty_heart.png"  class="heart_img"><span class='like_num'>${vo.f_like}</span>
 				</button>
 				<c:if test="${vo.star_avg == 5}">
 					<img src="http://localhost:9000/myjeju/images/travel/star5.png" width=98 height=17><span class="star_score">${vo.star_avg} (${vo.review_count})</span>
