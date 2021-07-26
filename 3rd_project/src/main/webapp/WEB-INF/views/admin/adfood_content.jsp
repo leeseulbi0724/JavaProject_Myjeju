@@ -95,7 +95,7 @@ $(document).ready(function() {
 				<button type = "button" class = "btn_setup_faq" id="delete" >삭제</button>
 				
 				<a href = "adfood.do"><button type = "button" class = "btn_setup_faq">목록</button></a>
-				<a href = "http://localhost:9000/myjeju/admin/adminindex.jsp"><button type = "button" class = "btn_setup_faq">홈으로</button></a>
+				<a href = "http://localhost:9000/myjeju/adminindex.do"><button type = "button" class = "btn_setup_faq">홈으로</button></a>
 			</form>	
 		</section>
 	</div>

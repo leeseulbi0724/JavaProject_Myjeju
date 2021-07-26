@@ -93,7 +93,7 @@ $(document).ready(function() {
 				<button type = "button" class = "btn_setup_faq" onclick="location.href='adhouse_de.do?hid=${hid}'">객실정보</button>
 				
 				<a href = "adhouse.do"><button type = "button" class = "btn_setup_faq">목록</button></a>
-				<a href = "http://localhost:9000/myjeju/admin/adminindex.jsp"><button type = "button" class = "btn_setup_faq">홈으로</button></a>
+				<a href = "http://localhost:9000/myjeju/adminindex.do"><button type = "button" class = "btn_setup_faq">홈으로</button></a>
 			</form>	
 		</section>
 	</div>

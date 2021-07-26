@@ -641,13 +641,13 @@ public class AdminController {
 		}
 		
 		
-//여행지 수정
+		//여행지 수정
 		@RequestMapping(value="/adtravel_update.do",method= {RequestMethod.GET,RequestMethod.POST})
 		public ModelAndView adtravel_update(String tid) {
 			ModelAndView mv = new ModelAndView();
 			TravelVO vo = adminService.gettravel(tid);
 			String file[] = vo.getT_file().split(",");
-			String sfile[] = vo.getT_file().split(",");	
+			String sfile[] = vo.getT_sfile().split(",");	
 			ArrayList<TravelVO> list = new ArrayList<TravelVO>();
 			for (int i=0; i<sfile.length; i++) {
 				TravelVO fvo = new TravelVO();
@@ -661,7 +661,7 @@ public class AdminController {
 			return mv;
 		}
 		
-//여행지 수정하기 DB
+		//여행지 수정하기 DB
 		@RequestMapping(value="/adtravel_update_proc.do", method= {RequestMethod.GET,RequestMethod.POST})
 		public ModelAndView adtravel_update_proc(MultipartHttpServletRequest request, @RequestParam("file") MultipartFile[] file) throws Exception {
 			ModelAndView mv = new ModelAndView();
