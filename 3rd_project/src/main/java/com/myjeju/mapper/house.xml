@@ -44,20 +44,20 @@
 	
 	<!-- 숙소 상위 3개 -->
 	<select id="house_top3" resultType="com.myjeju.vo.HouseVO">
-		<![CDATA[ select rno, hid, h_name, h_tag, h_infor, h_like, h_img, star_avg, review_count
-					  from (select rownum rno, hid, h_name, h_tag, h_infor, h_like, h_img, star_avg, review_count
-					    from (select hid, h_name, h_tag, h_infor, h_like, h_img, star_avg, review_count
+		<![CDATA[ select rno, hid, h_name, h_tag, h_infor, h_like, h_img, h_file, email, star_avg, review_count
+					  from (select rownum rno, hid, h_name, h_tag, h_infor, h_like, h_img, h_file, email,star_avg, review_count
+					    from (select hid, h_name, h_tag, h_infor, h_like, h_img,h_file,email,star_avg, review_count
 					      from myjeju_house order by h_like desc) order by rno) where rno <=3 ]]>
 	</select>
 	
 	<!-- 숙소 상세 정보 -->
 	<select id="house_detail" parameterType="java.lang.String" resultType="com.myjeju.vo.HouseVO">
-		select hid, h_name, h_tag, h_infor, h_infor2, h_addr, h_hp, h_like, h_img, star_avg, review_count from myjeju_house where hid = #{hid}
+		select hid, h_name, h_tag, h_infor, h_infor2, h_addr, h_hp, h_like, h_img, h_file, email, star_avg, review_count from myjeju_house where hid = #{hid}
 	</select>
 	
 	<!-- 숙소 객실 정보 -->
 	<select id="room_detail" parameterType="java.lang.String" resultType="com.myjeju.vo.HDetailVO">
-		select hd_name, hd_price, hd_people, hd_img, hdid, hid from myjeju_hdetail where hid = #{hid}
+		select hd_name, hd_price, hd_people, hd_img, hd_file, hdid, hid from myjeju_hdetail where hid = #{hid}
 	</select>
 	
 	<!-- 하트 테이블 + -->

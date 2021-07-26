@@ -208,6 +208,11 @@ public class HouseController {
 		String infor2 = vo.getH_infor2().replace("\r\n", "<br>");
 		
 		ArrayList<HDetailVO> list = houseService.getHDetail(hid);
+		
+		for(int i=0; i<list.size(); i++) {
+			String img[] = list.get(i).getHd_file().split(",");
+			list.get(i).setHd_file(img[0]);
+		}
 		ArrayList<HouseReviewVO> hvo = houseService.getHouseReview(hid);
 		
 		mv.setViewName("house/house_detail");
