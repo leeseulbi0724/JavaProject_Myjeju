@@ -128,6 +128,7 @@ public class HouseController {
 			jobj.addProperty("h_like", vo.getH_like());
 			jobj.addProperty("status", vo.getStatus());
 			jobj.addProperty("h_img", vo.getH_img());
+			jobj.addProperty("h_file", vo.getH_file());
 			jobj.addProperty("star_avg", vo.getStar_avg()); 
 			jobj.addProperty("review_count", vo.getReview_count());
 			jobj.addProperty("pnum", String.valueOf(pageNumber));

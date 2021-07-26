@@ -8,17 +8,17 @@
 	
 	<!-- 숙소리스트 -->
 	<select id="house_list" resultType="com.myjeju.vo.HouseVO">
-		select rno, hid, h_name, h_infor, h_infor2, h_tag, h_addr, h_vpoint, h_hpoint, h_hp, h_like, h_img, star_avg, review_count
-  			from(select rownum rno, hid, h_name, h_infor, h_infor2, h_tag, h_addr, h_vpoint, h_hpoint, h_hp, h_like, h_img, star_avg, review_count
-    		from(select hid, h_name, h_infor, h_infor2, h_tag, h_addr, h_vpoint, h_hpoint, h_hp, h_like, h_img, star_avg, review_count
+		select rno, hid, h_name, h_infor, h_infor2, h_tag, h_addr, h_vpoint, h_hpoint, h_hp, h_like, h_img,h_file,star_avg, review_count
+  			from(select rownum rno, hid, h_name, h_infor, h_infor2, h_tag, h_addr, h_vpoint, h_hpoint, h_hp, h_like, h_img,h_file,star_avg, review_count
+    		from(select hid, h_name, h_infor, h_infor2, h_tag, h_addr, h_vpoint, h_hpoint, h_hp, h_like, h_img,h_file,star_avg, review_count
     		from myjeju_house order by h_like desc))
 	</select>
 	
 	<!-- 숙소 리스트 처리 -->
 	<select id="ajax_house_list_num" parameterType="map" resultType="com.myjeju.vo.HouseVO">
-		select rno, hid, h_name, h_infor, h_infor2, h_tag, h_addr, h_vpoint, h_hpoint, h_hp, h_like, h_img, star_avg, review_count
-			from(select rownum rno, hid, h_name, h_infor, h_infor2, h_tag, h_addr, h_vpoint, h_hpoint, h_hp, h_like, h_img, star_avg, review_count
-    		from(select hid, h_name, h_infor, h_infor2, h_tag, h_addr, h_vpoint, h_hpoint, h_hp, h_like, h_img, star_avg, review_count from myjeju_house order by h_like desc)) 
+		select rno, hid, h_name, h_infor, h_infor2, h_tag, h_addr, h_vpoint, h_hpoint, h_hp, h_like, h_img, h_file, star_avg, review_count
+			from(select rownum rno, hid, h_name, h_infor, h_infor2, h_tag, h_addr, h_vpoint, h_hpoint, h_hp, h_like, h_img,h_file,star_avg, review_count
+    		from(select hid, h_name, h_infor, h_infor2, h_tag, h_addr, h_vpoint, h_hpoint, h_hp, h_like, h_img, h_file, star_avg, review_count from myjeju_house order by h_like desc)) 
     		where rno between #{start} and #{end}
 	</select>
 	
@@ -26,16 +26,16 @@
 	<select id="ajax_house_list_search" parameterType="java.util.Map" resultType="com.myjeju.vo.HouseVO">
 		<choose>
 			<when test="search.equals('h_name')">
-				select rno, hid, h_name, h_infor, h_infor2, h_tag, h_addr, h_vpoint, h_hpoint, h_hp, h_like, h_img, star_avg, review_count
-					from(select rownum rno, hid, h_name, h_infor, h_infor2, h_tag, h_addr, h_vpoint, h_hpoint, h_hp, h_like, h_img, star_avg, review_count
-	    			from(select hid, h_name, h_infor, h_infor2, h_tag, h_addr, h_vpoint, h_hpoint, h_hp, h_like, h_img, star_avg, review_count from myjeju_house order by h_like desc)
+				select rno, hid, h_name, h_infor, h_infor2, h_tag, h_addr, h_vpoint, h_hpoint, h_hp, h_like, h_img, h_file,star_avg, review_count
+					from(select rownum rno, hid, h_name, h_infor, h_infor2, h_tag, h_addr, h_vpoint, h_hpoint, h_hp, h_like,h_img, h_file, star_avg, review_count
+	    			from(select hid, h_name, h_infor, h_infor2, h_tag, h_addr, h_vpoint, h_hpoint, h_hp, h_like, h_img,h_file,star_avg, review_count from myjeju_house order by h_like desc)
 	    			where h_name like '%'||#{search_text}||'%') 
 	    			where rno between #{start} and #{end}
 			</when>
 			<when test="search.equals('h_addr')">
-				select rno, hid, h_name, h_infor, h_infor2, h_tag, h_addr, h_vpoint, h_hpoint, h_hp, h_like, h_img, star_avg, review_count
-					from(select rownum rno, hid, h_name, h_infor, h_infor2, h_tag, h_addr, h_vpoint, h_hpoint, h_hp, h_like, h_img, star_avg, review_count
-	    			from(select hid, h_name, h_infor, h_infor2, h_tag, h_addr, h_vpoint, h_hpoint, h_hp, h_like, h_img, star_avg, review_count from myjeju_house order by h_like desc)
+				select rno, hid, h_name, h_infor, h_infor2, h_tag, h_addr, h_vpoint, h_hpoint, h_hp, h_like, h_img, h_file, star_avg, review_count
+					from(select rownum rno, hid, h_name, h_infor, h_infor2, h_tag, h_addr, h_vpoint, h_hpoint, h_hp, h_like, h_img, h_file,star_avg, review_count
+	    			from(select hid, h_name, h_infor, h_infor2, h_tag, h_addr, h_vpoint, h_hpoint, h_hp, h_like, h_img,h_file,star_avg, review_count from myjeju_house order by h_like desc)
 	    			where h_addr like '%'||#{search_text}||'%') 
 	    			where rno between #{start} and #{end}
 			</when>
@@ -46,7 +46,7 @@
 	<select id="house_top3" resultType="com.myjeju.vo.HouseVO">
 		<![CDATA[ select rno, hid, h_name, h_tag, h_infor, h_like, h_img, h_file, email, star_avg, review_count
 					  from (select rownum rno, hid, h_name, h_tag, h_infor, h_like, h_img, h_file, email,star_avg, review_count
-					    from (select hid, h_name, h_tag, h_infor, h_like, h_img,h_file,email,star_avg, review_count
+					    from (select hid, h_name, h_tag, h_infor, h_like, h_img,h_file, email,star_avg, review_count
 					      from myjeju_house order by h_like desc) order by rno) where rno <=3 ]]>
 	</select>
 	

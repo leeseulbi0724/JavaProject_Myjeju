@@ -49,7 +49,7 @@
 						for(var i in jdata.jlist){
 							addListHtml += "<tr class='travel_list1'>";
 							addListHtml += "<td class='travel_list_pic'>";
-							addListHtml += "<img src='http://localhost:9000/myjeju/images/house/" + jdata.jlist[i].h_img + "'>";
+							addListHtml += "<img src='http://localhost:9000/myjeju/images/house/" + jdata.jlist[i].h_file + "'>";
 							addListHtml += "</td>";
 							addListHtml += "<td>";
 							addListHtml += "<p class='spot_name'>" + jdata.jlist[i].h_name;
