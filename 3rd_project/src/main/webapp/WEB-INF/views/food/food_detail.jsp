@@ -175,6 +175,7 @@
 			</p>
 			<div>
 				<button type="button" class="btn_style" id="${vo.status }" name="${vo.fid }">
+				
 				<c:if test="${vo.status eq 0 }">
 					<img src="http://localhost:9000/myjeju/images/travel/empty_heart.png"  class="heart_img"><span class='like_num'>${vo.f_like}</span>
 				</c:if>
