@@ -619,6 +619,7 @@ public class AdminController {
 					fileMultiUplodaName += "," + uuid +"_"+fileOriginName;
 					} 
 			}
+			
 			TravelVO vo = new TravelVO();
 			vo.setT_file(fileMultiName);
 			vo.setT_sfile(fileMultiUplodaName);
