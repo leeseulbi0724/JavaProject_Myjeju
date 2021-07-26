@@ -178,7 +178,7 @@
 					<img src="http://localhost:9000/myjeju/images/house/empty_heart.png" class="heart_img"><span class='like_num'>${vo.h_like}</span>
 				</c:if>
 				<c:if test = "${vo.status eq 1 }">
-					<img src="http://localhost:9000/myjeju/images/house/heart_after.png" width=25 height=25 class="heart_img"><span class='like_num'>${vo.h_like}</span>
+					<img src="http://localhost:9000/myjeju/images/house/red_heart.png" class="heart_img"><span class='like_num'>${vo.h_like}</span>
 				</c:if>
 				</button>
 				<c:if test="${vo.star_avg == 5}">
