@@ -13,6 +13,33 @@
 	<script>
 		$(document).ready(function(){
 			
+			$(".btn_style").click(function(){
+				var caid = $(this).attr("name");				
+				if ("${session_id}"=="") {
+					alert("로그인 후 이용바랍니다");
+				} else if ($(this).attr("id") == 1) {
+					$.ajax({
+				                type: "post",
+				                url: "heart_cafe_minus.do",
+				                data:{caid:caid},
+				                dataType: 'json',
+				                success: function (result) {
+				                    location.reload();
+				                },
+				           }); 
+					} else {	
+						$.ajax({
+				                type: "post",
+				               	url: "heart_cafe_plus.do",
+				                data:{caid:caid},
+				                dataType: 'json',
+				                success: function (result) {
+				                    location.reload();
+				               	 },
+						});
+					}
+			});
+			
 			var pnum=$(".pnum").val();
 			
 			var caid = $("#cafe_review_btn").attr("name");
@@ -148,8 +175,13 @@
 				${vo.ca_hp}
 			</p>
 			<div>
-				<button type="button" class="btn_style" id="heart_btn">
+				<button type="button" class="btn_style" id="${vo.status }" name="${vo.caid }">
+				<c:if test="${vo.status eq 0 }">
 					<img src="http://localhost:9000/myjeju/images/travel/empty_heart.png"  class="heart_img"><span class='like_num'>${vo.ca_like}</span>
+				</c:if>
+				<c:if test = "${vo.status eq 1 }">
+					<img src="http://localhost:9000/myjeju/images/house/red_heart.png" class="heart_img"><span class='like_num'>${vo.ca_like}</span>
+				</c:if>
 				</button>
 				<c:if test="${vo.star_avg == 5}">
 					<img src="http://localhost:9000/myjeju/images/travel/star5.png" width=98 height=17><span class="star_score">${vo.star_avg} (${vo.review_count})</span>

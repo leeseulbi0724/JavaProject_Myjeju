@@ -206,12 +206,22 @@ public class FoodController {
 	 */
 	@RequestMapping(value="/food_detail.do", method=RequestMethod.GET)
 	public ModelAndView food_detail(String fid, HttpSession session) {
+		//로그인 회원정보 가져오기
+		String id = (String) session.getAttribute("session_id");
 		
 		ModelAndView mv = new ModelAndView();
 		
 		int pnum = 1;
 		
 		FoodVO vo = foodService.getFoodDetail(fid);
+		if (id!= null) {
+			HeartVO hvo = new HeartVO();
+			hvo.setId(id);  hvo.setFid(fid);
+			int status = foodService.getHeartInfoResult(hvo);		
+			vo.setStatus(status);
+		} else {
+			vo.setStatus(0);
+		}
 		String infor2 = vo.getF_infor2().replace("\r\n", "<br>");
 		String user_id = (String) session.getAttribute("session_id");
 		String img[] = vo.getF_sfile().split(",");

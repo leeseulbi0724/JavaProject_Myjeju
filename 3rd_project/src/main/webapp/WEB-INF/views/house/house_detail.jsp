@@ -17,7 +17,6 @@
 				if ("${session_id}"=="") {
 					alert("로그인 후 이용바랍니다");
 				} else if ($(this).attr("id") == 1) {
-					alert("마이너스");
 					$.ajax({
 				                type: "post",
 				                url: "heart_minus.do",
@@ -27,8 +26,7 @@
 				                    location.reload();
 				                },
 				           }); 
-					} else {
-					 alert("플러스");						
+					} else {			
 						$.ajax({
 				                type: "post",
 				               	url: "heart_plus.do",

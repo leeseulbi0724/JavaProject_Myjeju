@@ -195,10 +195,10 @@
 						<p class="spot_tag">${toplist.ca_tag}</p>
 						<button type="button" class="btn_style" id="${toplist.status }" name="${toplist.caid }">
 						<c:if test = "${toplist.status eq 0 }">
-							<img src="http://localhost:9000/myjeju/images/house/empty_heart.png" width=25 height=25 class="heart_img" ><span class="like_num">${toplist.ca_like }</span>
+							<img src="http://localhost:9000/myjeju/images/house/empty_heart.png" width=25 height=25  class="heart_img" ><span class="like_num">${toplist.ca_like }</span>
 						</c:if>
 						<c:if test = "${toplist.status >= 1 }">
-							<img src="http://localhost:9000/myjeju/images/house/red_heart.png"  width=25 height=25 class="heart_img" ><span class="like_num">${toplist.ca_like }</span>
+							<img src="http://localhost:9000/myjeju/images/house/red_heart.png"  width=25 height=25  class="heart_img" ><span class="like_num">${toplist.ca_like }</span>
 						</c:if>
 						</button>
 						
