@@ -98,7 +98,7 @@
 		
 		<!-- 숙소이름 가져오기 -->
 		<select id="housename" parameterType="java.lang.String" resultType="com.myjeju.vo.OrderVO">
-			select h_name, h_img from myjeju_house where hid=#{hid}
+			select h_name, h_file from myjeju_house where hid=#{hid}
 		</select>
 		
 		<!-- 방이름 가져오기 -->

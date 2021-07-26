@@ -4,7 +4,7 @@ public class OrderVO {
 	
 	String o_name, o_price, o_count, o_file, o_sfile, o_date, id;
 	
-	String hid, h_name, hdid, hd_name, roomid, firstday, lastday, rdate, h_img, rid, day;
+	String hid, h_name, hdid, hd_name, roomid, firstday, lastday, rdate, h_file, rid, day;
 	int hd_price;	
 	
 	
@@ -33,12 +33,12 @@ public class OrderVO {
 		this.hd_price = hd_price;
 	}
 
-	public String getH_img() {
-		return h_img;
+	public String getH_file() {
+		return h_file;
 	}
 
-	public void setH_img(String h_img) {
-		this.h_img = h_img;
+	public void setH_file(String h_file) {
+		this.h_file = h_file;
 	}
 
 	public String getHid() {

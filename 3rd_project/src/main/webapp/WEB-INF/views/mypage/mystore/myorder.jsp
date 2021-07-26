@@ -159,7 +159,7 @@
 				<fmt:parseDate value="${vo.lastday }" var="endPlanDate" pattern="yyyy-MM-dd"/>
 				<fmt:parseNumber value="${endPlanDate.time / (1000*60*60*24)}" integerOnly="true" var="endDate"></fmt:parseNumber>
 					<div class="box">
-						<img src="http://localhost:9000/myjeju/images/house/${vo.h_img }" width=100 height=80>
+						<img src="http://localhost:9000/myjeju/images/house/${vo.h_file }" width=100 height=80>
 						<p class="info">${vo.rdate }<br><a href="house_detail.do?hid=${vo.hid }">${vo.h_name }</a><br><span>${vo.hd_name }</span></p>
 						<p class="date"><strong>예약일</strong> <br><strong>입실</strong> ${vo.firstday }<br><strong>퇴실</strong> ${vo.lastday }</p>
 						<p class="price"><fmt:formatNumber value="${ (endDate - strDate)*vo.hd_price }" pattern="#,###" />원</p>

@@ -46,7 +46,7 @@
             data:{rid:rid, textarea:textarea } ,
             dataType: 'json',
             success: function (result) {
-                alert(result);
+            	  location.reload();
             },
         });
 	  }	

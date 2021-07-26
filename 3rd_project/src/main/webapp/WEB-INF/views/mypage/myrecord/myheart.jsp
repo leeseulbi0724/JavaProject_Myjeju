@@ -142,7 +142,7 @@
 			</c:forEach>
 			<c:forEach var = "vo"  items="${t_list}">
 				<div>
-					<a href="travel_detail.do?tid=${vo.tid }"><img src="http://localhost:9000/myjeju/images/travel/${vo.t_image1 }" width=100% height=100% ></a>
+					<a href="travel_detail.do?tid=${vo.tid }"><img src="http://localhost:9000/myjeju/images/travel/travel_detail/${vo.t_image1 }" width=100% height=100% ></a>
 					<button type="button" class="btn_style" id="tid" name="${vo.tid }"><img src="http://localhost:9000/myjeju/images/house/red_heart.png">${vo.t_like }</button>
 				</div>
 			</c:forEach>

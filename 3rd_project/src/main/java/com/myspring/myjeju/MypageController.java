@@ -145,7 +145,7 @@ public class MypageController {
 			//숙소이름가져오기
 			OrderVO vo = MypageService.getHouseName(mlist.get(i).getHid());
 			mlist.get(i).setH_name(vo.getH_name());
-			mlist.get(i).setH_img(vo.getH_img());
+			mlist.get(i).setH_file(vo.getH_file());
 			
 			//방이름가져오기
 			OrderVO ovo = MypageService.getRommName(mlist.get(i).getHdid());
@@ -330,8 +330,8 @@ public class MypageController {
 		ArrayList<HeartVO> h_list = MypageService.getHouseHeartList(id);
 		for (int i=0; i<h_list.size(); i++) {
 			HouseVO vo = HouseService.getHouseDetail(h_list.get(i).getHid());
-			h_list.get(i).setH_img(vo.getH_img());
 			h_list.get(i).setH_like(vo.getH_like());
+			h_list.get(i).setH_img(vo.getH_file());
 		}
 		ArrayList<HeartVO> f_list = MypageService.getFoodHeartList(id);
 		for (int i=0; i<f_list.size(); i++) {
