@@ -30,8 +30,11 @@
 	.table th:first-child { width:100px; }
 	.table td>textarea { width:100%; background-color:white; border:none; }
 </style>
+<script src="http://rawgit.com/jackmoored/autosize/master/dist/autosize.min.js"></script>
 <script>
 $(document).ready(function() {
+	$("#content").css("height", $("textarea").prop('scrollHeight')+5);
+	
 	$(".write").click(function() {
 		if ($("#title").val() == "") {
 			alert("제목을 입력해주세요");
@@ -107,7 +110,7 @@ $(document).ready(function() {
 		 		</tr>
 		 		<tr>
 		 			<td colspan="2">
-		 				<textarea disabled style="resize: none;">${vo.ncontent }</textarea>
+		 				<textarea disabled style="resize: none;" id="content">${vo.ncontent }</textarea>
 		 				<c:if test = "${!empty vo.nsfile}">
 							<img src="http://localhost:9000/myjeju/upload/${vo.nsfile }" width=50% height=500px >
 						</c:if>		

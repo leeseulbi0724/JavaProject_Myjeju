@@ -564,19 +564,19 @@ public class AdminController {
 		public ModelAndView totravel(String tid) {
 			ModelAndView mv = new ModelAndView();
 			
-			TravelVO vo = new TravelVO();
+			
 			PhotoSpotVO photovo = new PhotoSpotVO();
 			CarSpotVO carvo = new CarSpotVO();
-
 			
 			if(photovo.getPs_psfile() == null || carvo.getCs_csfile() == null) {
 				photovo = adminService.getPhotoSpot(tid);
 				carvo = adminService.getCarSpot(tid);
 			}
 
-			vo = adminService.gettravel(tid);
-			
+			TravelVO vo = adminService.gettravel(tid);
+	
 			String img[] = vo.getT_sfile().split(",");	
+
 					
 			mv.setViewName("admin/adtravel_content");
 			mv.addObject("img", img);
@@ -976,7 +976,8 @@ public class AdminController {
 			
 			boolean result = adminService.getCarSpotUpdate(carvo);
 			
-			mv.setViewName("redirect:/adtravel_content.do?tid="+carvo.getTid());
+			mv.setViewName("redirect:/adtravel_content.do");
+			mv.addObject("tid",request.getParameter("tid"));
 			return mv;
 		}
 				

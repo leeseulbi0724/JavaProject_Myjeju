@@ -48,7 +48,7 @@ $(document).ready(function() {
 		 		</tr>
 		 		<tr>
 		 			<td colspan="2">
-		 				<textarea disabled style="resize: none;">${vo.ncontent }</textarea>
+		 				<textarea disabled style="resize: none;" id="con_textarea">${vo.ncontent }</textarea>
 		 				<c:if test = "${!empty vo.nsfile}">
 							<img src="http://localhost:9000/myjeju/upload/${vo.nsfile }" width=50% height=500px >
 						</c:if>		
