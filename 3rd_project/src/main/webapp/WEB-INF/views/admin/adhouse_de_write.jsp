@@ -110,7 +110,7 @@ $(document).ready(function() {
 		 			</th>
 		 		</tr>		
 		 		<tr>
-		 			<th class="title">객실 사진 (여러장 가능)</th>
+		 			<th class="title">객실 사진</th>
 		 			<th colspan="7"><input type="file" class="form-control" multiple="multiple" name="file"></th>
 		 		</tr> 		
 		 	</table>
