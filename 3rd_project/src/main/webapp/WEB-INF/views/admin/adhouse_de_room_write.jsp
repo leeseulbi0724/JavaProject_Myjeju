@@ -79,7 +79,7 @@ $(document).ready(function() {
 	
 		<section class = "section_setup_faq">
 			<div></div>
-			<div> 숙소관리 </div>
+			<div> 방추가 </div>
 			<div></div>
 		</section>
 			<div style="width:1000px; display:inline-block;">
