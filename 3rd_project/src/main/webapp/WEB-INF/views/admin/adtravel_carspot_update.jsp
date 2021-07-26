@@ -187,7 +187,7 @@ $(document).ready(function() {
 		 			</th>		 			
 		 		</tr> 		
 		 	</table>
-		 		<input type="hidden" name="tid" value="${vo.tid }">
+		 		<input type="hidden" name="tid" value="${carvo.tid }">
 		 		<input id="file_name" type="hidden" name="cs_csfile">
 		 		<input id="sfile_name"  type="hidden" name="cs_cssfile">
 		 		<input id="old_name" type="hidden" name="old_name">

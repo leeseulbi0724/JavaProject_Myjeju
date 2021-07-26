@@ -183,7 +183,24 @@
 					<img src="http://localhost:9000/myjeju/images/house/heart_after.png" width=25 height=25>${vo.h_like}
 				</c:if>
 				</button>
-				<img src="http://localhost:9000/myjeju/images/travel/star.png"><span class="star_score">${vo.star_avg} (${vo.review_count})</span>
+				<c:if test="${vo.star_avg == 5}">
+					<img src="http://localhost:9000/myjeju/images/travel/star5.png" width=98 height=17><span class="star_score">${vo.star_avg} (${vo.review_count})</span>
+				</c:if>
+				<c:if test="${vo.star_avg > 3 && vo.star_avg < 5}">
+					<img src="http://localhost:9000/myjeju/images/travel/star4.png" width=98 height=17><span class="star_score">${vo.star_avg} (${vo.review_count})</span>
+				</c:if>
+				<c:if test="${vo.star_avg > 2 && vo.star_avg < 4}">
+					<img src="http://localhost:9000/myjeju/images/travel/star3.png" width=98 height=17><span class="star_score">${vo.star_avg} (${vo.review_count})</span>
+				</c:if>
+				<c:if test="${vo.star_avg > 1 && vo.star_avg < 3}">
+					<img src="http://localhost:9000/myjeju/images/travel/star2.png" width=98 height=17><span class="star_score">${vo.star_avg} (${vo.review_count})</span>
+				</c:if>
+				<c:if test="${vo.star_avg > 0 && vo.star_avg < 2}">
+					<img src="http://localhost:9000/myjeju/images/travel/star1.png" width=98 height=17><span class="star_score">${vo.star_avg} (${vo.review_count})</span>
+				</c:if>
+				<c:if test="${vo.star_avg == 0}">
+					<img src="http://localhost:9000/myjeju/images/travel/star0.png" width=98 height=17><span class="star_score">${vo.star_avg} (${vo.review_count})</span>
+				</c:if>
 			</div>
 		</div>
 	</div>

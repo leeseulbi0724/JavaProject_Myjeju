@@ -186,7 +186,7 @@ $(document).ready(function() {
 		 			</th>		 			
 		 		</tr> 		
 		 	</table>
-		 		<input type="hidden" name="tid" value="${vo.tid }">
+		 		<input type="hidden" name="tid" value="${photovo.tid }">
 		 		<input id="file_name" type="hidden" name="ps_psfile">
 		 		<input id="sfile_name"  type="hidden" name="ps_pssfile">
 		 		<input id="old_name" type="hidden" name="old_name">
