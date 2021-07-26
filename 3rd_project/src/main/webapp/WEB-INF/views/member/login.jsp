@@ -133,8 +133,8 @@
 							<td style="text-align : left; border:none;" colspan="2">
 							<input type="checkbox" name="idsave" value ="true" id="idSaveCheck">
 							<span style="margin-right: 20px; position:relative; top:-1px; font-size: 14px;">아이디 저장</span>
-							<input type="checkbox" name="loginck" value ="true">
-							<span style="margin-right: 20px; position:relative; top:-1px; font-size: 14px;">자동로그인</span>							
+							<!-- <input type="checkbox" name="loginck" value ="true">
+							<span style="margin-right: 20px; position:relative; top:-1px; font-size: 14px;">자동로그인</span>				 -->			
 							<input class="btn btn-primary pull-right" type="button" value="비밀번호찾기" style="background-color:rgba(0,0,0,0); border-color:rgba(0,0,0,0); color:black; position:relative; top:-6px; padding-right:0;">
 							<div class="pull-right" style="height:15px; width:1px; background-color:rgba(0,0,0,0.3); display:inline-block; margin-top:10px; margin-right:3px; position:relative; top:-6px;"></div>
 							<input class="btn btn-primary pull-right" type="button" value="아이디찾기"  style="margin-right: 7px; background-color:rgba(0,0,0,0); border-color:rgba(0,0,0,0); color:black; position:relative; top:-6px;">
