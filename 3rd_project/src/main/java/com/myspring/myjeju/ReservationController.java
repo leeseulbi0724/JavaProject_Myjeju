@@ -866,8 +866,8 @@ public class ReservationController {
 		
 		String end = eyear + eMonth + eDay;
 		
-		ArrayList<RoomVO> searchroom = ReservationService.searchroom(start,end,hdid);
-		ArrayList<RoomVO> notavails = ReservationService.notavails(start,end,hdid);
+		ArrayList<RoomVO> searchroom = ReservationService.searchroom_each(start,end,roomid);
+		ArrayList<RoomVO> notavails = ReservationService.notavails(start,end,roomid);
 		
 		String[] availdate = new String[searchroom.size()];		
 		for(int i=0; i<searchroom.size(); i++) {
@@ -981,7 +981,8 @@ public class ReservationController {
 		if(day.length()==1) {
 			day = "0"+day;
 		}
-		
+		System.out.println("예약 안됨 =" + roomid);
+		System.out.println("예약 안됨 =" +date);
 		date += month + "/";
 		date += day;
 		boolean result = adminService.notavail(roomid,date);
@@ -1004,9 +1005,10 @@ public class ReservationController {
 		if(day.length()==1) {
 			day = "0"+day;
 		}
-		
 		date += month + "/";
 		date += day;
+		System.out.println("예약 됨 =" +roomid);
+		System.out.println("예약 됨 =" +date);
 		boolean result = adminService.toavail(roomid,date);
 		if(result) {
 			return "예약 가능 상태로 바뀌었습니다.";

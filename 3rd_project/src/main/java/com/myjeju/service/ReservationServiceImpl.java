@@ -27,6 +27,10 @@ public class ReservationServiceImpl implements ReservationService{
 		return reservationDAO.searchroom(start,end,hdid); 
 	}
 	@Override
+	public ArrayList<RoomVO> searchroom_each(String start, String end,String roomid){
+		return reservationDAO.searchroom_each(start,end,roomid); 
+	}
+	@Override
 	public ArrayList<RoomVO> notavails(String start, String end,String hdid){
 		return reservationDAO.notavails(start,end,hdid); 
 	}

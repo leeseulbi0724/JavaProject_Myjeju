@@ -34,6 +34,18 @@ public class ReservationDAO {
 		List<RoomVO> list = sqlSession.selectList(namespace+".searchroom", se);
 		return (ArrayList<RoomVO>)list;
 	}
+	public ArrayList<RoomVO> searchroom_each(String start, String end,String roomid) {
+		
+		Map<String,String> se = new HashMap<String,String>();
+		se.put("start", start);
+		se.put("end", end);
+		se.put("roomid", roomid);
+		System.out.println(start);
+		System.out.println(end);
+		System.out.println(roomid);
+		List<RoomVO> list = sqlSession.selectList(namespace+".searchroomeach", se);
+		return (ArrayList<RoomVO>)list;
+	}
 	
 	public ArrayList<RoomVO> notavails(String start, String end,String hdid) {
 		

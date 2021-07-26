@@ -196,6 +196,7 @@ public class Adminreservation {
 		ArrayList<HDetailVO> list = adminService.gethousede(hid);
 		
 		mv.setViewName("admin/adhouse_de");
+		mv.addObject("hid", hid);
 		mv.addObject("list", list);
 		return mv;
 	}

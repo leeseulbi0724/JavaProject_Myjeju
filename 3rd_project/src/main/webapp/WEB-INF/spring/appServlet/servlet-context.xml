@@ -140,6 +140,8 @@
 	</interceptors>
 	
 	<context:component-scan base-package="com.myspring.myjeju" />
-	 <context:component-scan base-package="com.myjeju.dao" />
+	<context:component-scan base-package="com.myjeju.dao" />
+	 
+	
 	
 </beans:beans>

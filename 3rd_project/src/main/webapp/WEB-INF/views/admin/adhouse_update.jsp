@@ -13,7 +13,23 @@
 	<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="js/bootstrap.js"></script>
 	<script type="text/javascript"></script>
-</head>	
+</head>
+<style>
+	.write, .list { 				
+		padding:5px 10px;
+		border-radius:4px;
+		margin:10px 0; 
+	}
+	.write { background-color:rgb(20,86,184); color:white;  }
+	.list { background-color:rgb(228,228,228); color:black; }
+	
+	.table tr { border-bottom:1px solid lightgray; }
+	.table .title {
+		background-color:rgb(248,248,248);
+		vertical-align : middle;		
+	}
+	.table #hid { width:60px; display:inline-block; }
+</style>		
 <script>
 
 	$(document).ready(function() {
@@ -107,22 +123,50 @@
 	<div class = "content_setup_faq">
 		<section class = "section_setup_faq">
 			<div></div>
-			<div>숙소등록</div>
+			<div>숙소수정</div>
 			<div></div>
 		</section>
 		
 		<div style="width:1000px; display:inline-block;">
 			<form name = "adhouse_update_form" action = "adhouse_update_proc.do" method = "post" enctype = "multipart/form-data">
-				<input type = "text" name = "h_name" id = "h_name" value = "${vo.h_name}" class = "form-control" placeholder = "숙소명을 입력해주세요" style="margin-bottom:20px;">
-				<input type = "text" name = "h_infor" id = "h_infor" value = "${vo.h_infor}" class = "form-control" placeholder = "숙소종류를 입력해주세요" style="margin-bottom:20px;">
-				<input type = "text" name = "h_infor2" id = "h_infor2"  value = "${vo.h_infor2}" class = "form-control" placeholder = "숙소설명을 입력해주세요" style="margin-bottom:20px;">
-				<input type = "text" name = "h_tag" id = "h_tag"  value = "${vo.h_tag}" class = "form-control" placeholder = "숙소태그를 입력해주세요" style="margin-bottom:20px;">
-				<input type = "text" name = "h_addr" id = "h_addr"  value = "${vo.h_addr}" class = "form-control" placeholder = "숙소주소를 입력해주세요" style="margin-bottom:20px;">
-				<input type = "text" name = "h_vpoint" id = "h_vpoint"  value = "${vo.h_vpoint}" class = "form-control" placeholder = "숙소위도를 입력해주세요" style="margin-bottom:20px;">
-				<input type = "text" name = "h_hpoint" id = "h_hpoint" value = "${vo.h_hpoint}" class = "form-control" placeholder = "숙소경도를 입력해주세요" style="margin-bottom:20px;">
-				<input type = "text" name = "h_hp" id = "h_hp"  value = "${vo.h_hp}" class = "form-control" placeholder = "숙소연락처를 입력해주세요" style="margin-bottom:20px;">
-				<input type = "text" name = "email" id = "email"  value = "${vo.email}" class = "form-control" placeholder = "숙소이메일를 입력해주세요" style="margin-bottom:20px;">
-				<input type = "file" name = "hfile1" id = "hfile1" class="form-control" style="margin-bottom:20px;"><span id="fname" style="float:left; margin-left:90px;">${vo.h_img }</span>
+						<table class="table">
+				<tr>
+					<th class="title">이름</th>
+					<th><input type = "text" name = "h_name" id = "h_name" value = "${vo.h_name}" class = "form-control" placeholder = "숙소명을 입력해주세요"></th>
+					<th class="title">해시태그</th>
+					<th><input type = "text" name = "h_tag" id = "h_tag" value = "${vo.h_tag}" class = "form-control" placeholder = "숙소태그를 입력해주세요"></th>
+					<th class="title">종류</th>
+					<th><input type = "text" name = "h_infor" id = "h_infor" value = "${vo.h_infor}" class = "form-control" placeholder = "숙소종류를 입력해주세요"></th>
+				</tr>
+				<tr>
+					<th class="title">설명</th>
+					<th colspan="5"><input type = "text" name = "h_infor2" id = "h_infor2" value = "${vo.h_infor2}" class = "form-control" placeholder = "숙소설명을 입력해주세요"></th>
+				</tr>
+				<tr>
+					<th class="title">주소</th>
+					<th colspan="4">
+						<input type = "text" name = "h_addr" id = "h_addr" value = "${vo.h_addr}" class = "form-control" placeholder = "숙소주소를 입력해주세요">
+					</th>
+				</tr>
+				<tr>
+					<th class="title">경도</th>
+					<th><input type = "text" name = "h_vpoint" id = "h_vpoint" value = "${vo.h_vpoint}" class = "form-control" placeholder = "숙소경도를 입력해주세요"></th>
+					<th class="title">위도</th>
+					<th><input type = "text" name = "h_hpoint" id = "h_hpoint" value = "${vo.h_hpoint}" class = "form-control" placeholder = "숙소위도를 입력해주세요"></th>
+					<th class="title">연락처</th>
+					<th><input type = "text" name = "h_hp" id = "h_hp"  class = "form-control" value="(+82)${vo.h_hpoint}" placeholder = "숙소연락처를 입력해주세요"></th>
+				</tr>
+				<tr>
+					<th class="title">이메일</th>
+					<th colspan="4">
+						<input type = "text" name = "email" id = "email" value = "${vo.email}" class="form-control" placeholder = "이메일을 입력해주세요">
+					</th>
+				</tr>
+				<tr>
+					<th class="title">사진</th>
+					<th colspan="5"><input type = "file" name = "hfile1" id = "hfile1" class="form-control"></th>
+				</tr>		
+			</table>
 				<input type="hidden" name="hid" value="${vo.hid }">
 				<button type = "button" id = "adhouseUpdateBtn">수정</button>
 				<a href = "adhouse.do"><button type ="button">숙소 홈으로</button></a>

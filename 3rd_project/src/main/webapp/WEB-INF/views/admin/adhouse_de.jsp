@@ -66,7 +66,7 @@
 		</section>
 	
 		<section class ="setup_faq_list">
-			<a href="adhouse_de_write.do?hid=${list.get(0).hid }" class="write" >객실추가</a>
+			<a href="adhouse_de_write.do?hid=${hid}" class="write" >객실추가</a>
 			<table class = "content_layout_setup_faq">
 				<tr>
 					<th> 번호 </th>

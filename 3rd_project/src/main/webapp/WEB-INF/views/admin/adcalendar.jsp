@@ -18,8 +18,12 @@
 <meta charset="UTF-8">
 <link rel="shortcut icon" type="image⁄x-icon" href="http://localhost:9000/myjeju/images/index/icon.png">
 <title>예약하기 | JEJU ISLAND</title>
-<link rel="stylesheet" href="http://localhost:9000/myjeju/css/index.css">
-<link rel="stylesheet" href="http://localhost:9000/myjeju/css/reservation/reservation.css">
+	<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script src="js/bootstrap.js"></script>
+	<link rel="stylesheet" href="css/admincss/bootstrap.css">
+	<link rel="stylesheet" href="css/admincss/custom.css">
+	<link rel="stylesheet" href="css/admincss/setupforcounsel.css">
+	<link rel="stylesheet" href="http://localhost:9000/myjeju/css/reservation/reservation.css">
 <script>
 $(document).ready(function(){
 	$('.month[value='+ ${month} +']').parent().css({"background-color":"#e3ff90"});
@@ -96,8 +100,37 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
-	<!-- header -->
-	<jsp:include page="../header.jsp"></jsp:include>
+	<nav class="navbar navbar-default">
+		<div class ="navbar-header">
+			<button type="button" class="navbar-toggle collapsed"
+				data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+				aria-expeanded="false">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="http://localhost:9000/myjeju/adminindex.do">Myjeju 관리자 메뉴</a>
+		</div>
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+					<li><a href="http://localhost:9000/myjeju/adminindex.do">메인</a>
+					<li><a href="adnotice.do">공지사항관리</a></li>
+					<li ><a href="adboard.do">게시판관리</a></li>
+					<li><a href="adrequest.do">요청관리</a></li>
+					<li><a href="admember.do">회원관리<span id="unread" class="label label-info"></span></a></li>
+					<li class="active"><a href="adhouse.do">숙소관리</a></li>
+					<li><a href="adfood.do">음식점관리</a></li>
+					<li><a href="adcafe.do">카페관리</a></li>
+					<li><a href="adtravel.do">여행지관리</a></li>
+					<li><a href="adstore.do">상품관리</a>
+				</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li class="dropdown">
+					<a href="http://localhost:9000/myjeju/index.do">메인으로</a>
+				</li>
+			</ul>						
+			</div>
+		</nav>
 	<!-- content -->
 	<div class="calendar_content">
 		<h3 style="margin-bottom: 10px;">예약하기</h3>
@@ -108,7 +141,7 @@ $(document).ready(function(){
 			<%
 			for(int i = 0; i< days.length; i++) {
 			%>
-				<div class="day"><%= days[i] %></div>	
+				<div class="day" style="padding:40px;padding-top:0px;"><%= days[i] %></div>	
 			<%
 			}
 			%>
@@ -297,8 +330,5 @@ $(document).ready(function(){
 	</div>
 	<input type="hidden" class="roomid" value="${roomid}">
 	<input type="hidden" class="hdid" value="${hdid}">
-	<!-- footer -->
-	<jsp:include page="../footer.jsp"></jsp:include>
-	
 </body>
 </html>

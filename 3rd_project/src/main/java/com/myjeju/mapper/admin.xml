@@ -85,8 +85,9 @@
 		<select id="gethouse" parameterType="java.lang.String" resultType="com.myjeju.vo.HouseVO">
 			select * from myjeju_house where hid = #{hid}
 		</select>
+		<!-- 숙소 등록 -->
 		<insert id="houseInsert" parameterType="com.myjeju.vo.HouseVO" >
-			insert into myjeju_house values('h_'||sequ_myjeju_house.nextval,#{h_name},#{h_infor},#{h_infor2},#{h_tag},#{h_addr},#{h_vpoint},#{h_hpoint},#{h_hp},1,#{h_img},#{h_file}, #{email})
+			insert into myjeju_house values('h_'||sequ_myjeju_house.nextval,#{h_name},#{h_infor},#{h_infor2},#{h_tag},#{h_addr},#{h_vpoint},#{h_hpoint},#{h_hp},1,#{h_img},#{h_file}, #{email},0,0)
 		</insert>
 		<!-- 숙소 수정 화면 -->
 		<select id = "house_content" parameterType = "java.lang.String" resultType = "com.myjeju.vo.HouseVO">
