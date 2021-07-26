@@ -888,8 +888,8 @@ public class AdminController {
 
 			PhotoSpotVO photovo = new PhotoSpotVO();
 			
-			photovo.setPs_psfile(fileMultiName);
-			photovo.setPs_pssfile(fileMultiUplodaName);
+			photovo.setPs_psfile(fileOldName+fileMultiName);
+			photovo.setPs_pssfile(fileOldRoot+fileMultiUplodaName);
 			photovo.setTid(request.getParameter("tid"));
 			photovo.setPs_name(request.getParameter("ps_name"));
 			photovo.setPs_infor(request.getParameter("ps_infor"));
@@ -969,8 +969,8 @@ public class AdminController {
 
 			CarSpotVO carvo = new CarSpotVO();
 			
-			carvo.setCs_csfile(fileMultiName);
-			carvo.setCs_cssfile(fileMultiUplodaName);
+			carvo.setCs_csfile(fileOldName+fileMultiName);
+			carvo.setCs_cssfile(fileOldRoot+fileMultiUplodaName);
 			carvo.setTid(request.getParameter("tid"));
 			carvo.setCs_name(request.getParameter("cs_name"));
 			carvo.setCs_infor(request.getParameter("cs_infor"));
