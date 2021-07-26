@@ -666,11 +666,11 @@ public class AdminController {
 		public ModelAndView adtravel_update_proc(MultipartHttpServletRequest request, @RequestParam("file") MultipartFile[] file) throws Exception {
 			ModelAndView mv = new ModelAndView();
 			
-			System.out.println("파일이름" + request.getParameter("t_image"));
-			System.out.print("파일경로" + request.getParameter("t_file"));
+			String fileOldName = request.getParameter("t_file");
+			String fileOldRoot = request.getParameter("t_sfile");
 			
-			String fileOldName = request.getParameter("t_image");
-			String fileOldRoot = request.getParameter("t_file");
+			System.out.println(request.getParameter("t_sfile"));
+			System.out.println(request.getParameter("t_sfile"));
 			
 			String root_path = request.getSession().getServletContext().getRealPath("/");
 			String attach_path = "\\resources\\images\\travel\\travel_detail\\";

@@ -212,8 +212,8 @@ $(document).ready(function() {
 		 		</tr> 		
 		 	</table>
 		 		<input type="hidden" name="tid" value="${vo.tid }">
-		 		<input id="file_name" type="hidden" name="t_image">
-		 		<input id="sfile_name"  type="hidden" name="t_file">
+		 		<input id="file_name" type="hidden" name="t_file">
+		 		<input id="sfile_name"  type="hidden" name="t_sfile">
 		 		<input id="old_name" type="hidden" name="old_name">
 		 		<span class="old_name"></span>
 				<a href="adtravel.do" class="list" >취소</a>
