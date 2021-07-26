@@ -681,12 +681,12 @@ public class ReservationController {
 		vo.setFirstday(f_dated);
 		vo.setLastday(s_dated);
 		
-		boolean result = ReservationService.setreservation(vo);
+		boolean updateresult = ReservationService.updateavail(roomid,f_dated,comparedateminus(s_day,1)); 
 		
-		if(result) {
-			boolean updateresult = ReservationService.updateavail(roomid,f_dated,comparedateminus(s_day,1)); 
+		if(updateresult) {
+			boolean result = ReservationService.setreservation(vo);
 			
-			if(updateresult) {
+			if(result) {
 				sendemail(request,response);
 				return "reservation/success";
 			} else {
