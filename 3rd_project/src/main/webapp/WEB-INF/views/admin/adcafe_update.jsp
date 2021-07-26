@@ -191,7 +191,7 @@ $(document).ready(function() {
 		 			<th class="title">위도</th>
 		 			<th><input type="text" class="form-control" placeholder="위도를 입력해주세요" id="hpoint" name="ca_hpoint" value="${vo.ca_hpoint }"></th>
 		 			<th class="title">연락처</th>
-		 			<th><input type="text" class="form-control" value="(+82)" placeholder="연락처를 입력해주세요" id="hp" name="ca_hp" value="${vo.ca_hp }"></th>
+		 			<th><input type="text" class="form-control" placeholder="연락처를 입력해주세요" id="hp" name="ca_hp" value="${vo.ca_hp }"></th>
 		 		</tr>	
 		 		<tr>
 		 			<th class="title" >사진 추가</th>
