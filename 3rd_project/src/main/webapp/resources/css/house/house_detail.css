@@ -160,8 +160,14 @@ button#heart_btn>img{
 div.food_detail_top>div>div>img{
 	padding:0 10px;
 }
-
-
+img.heart_img{
+	margin-left:-20px;
+}
+span.like_num{
+	margin-top:2px;
+	margin-left:8px;
+	position:absolute;
+}
 
 
 
