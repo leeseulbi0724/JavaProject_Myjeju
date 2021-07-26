@@ -11,7 +11,6 @@ import net.nurigo.java_sdk.exceptions.CoolsmsException;
 
 @Service("MessageService")
 public class MessageServiceImpl implements MessageService  {
-
 	
 	@Override
 	public void sendMessage(String toNumber, String randomNumber) {
