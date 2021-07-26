@@ -16,7 +16,7 @@ public class MessageServiceImpl implements MessageService  {
 	@Override
 	public void sendMessage(String toNumber, String randomNumber) {
 
-		Message coolsms = new Message("NCSERDFODJECD0QJ", "BNFUVUATMMBORHT4SIO0UHGMBNYEFGFF");
+		Message coolsms = new Message("NCSAVCBCDEFG9LQP", "XSPJQ0B9GHI3EVERY17R34Q5IS2BODYHI");
 
 		HashMap<String, String> params = new HashMap<String, String>();
 		params.put("to", toNumber);
