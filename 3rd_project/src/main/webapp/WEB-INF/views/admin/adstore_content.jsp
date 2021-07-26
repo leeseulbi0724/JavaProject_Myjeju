@@ -113,13 +113,13 @@
 		 		<tr>
 		 			<td colspan="2">
 		 				<c:if test = "${!empty vo.s_sfile}">
-							<img src="http://localhost:9000/myjeju/upload/${vo.s_sfile}" width=50% height=500px >
+							<img src="http://localhost:9000/myjeju/images/store/store_detail/${vo.s_sfile}" width=50% height=500px >
 						</c:if>		
 						<br>
 						<hr style="border : 1px solid lightgray;">
 						
 						<br>
-						<img src="http://localhost:9000/myjeju/upload/${vo.s_ssfile}" width=50% >
+						<img src="http://localhost:9000/myjeju/images/store/store_detail/${vo.s_ssfile}" width=50% >
 		 			</td>
 		 		</tr>
 		 	</table>

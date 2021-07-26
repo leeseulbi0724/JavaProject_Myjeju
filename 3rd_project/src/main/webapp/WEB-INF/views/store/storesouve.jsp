@@ -73,7 +73,7 @@
 				<ul>
 					<li>
 						<a href = "store_content.do?sid=${souve.sid}">
-						<img src = "http://localhost:9000/myjeju/images/store/${souve.s_image}" width = "260">
+						<img src = "http://localhost:9000/myjeju/images/store/store_detail/${souve.s_sfile}" width = "260">
 						<p>[${souve.s_category}] ${souve.s_name}</p>
 						
 						<span class='star-rating'>

@@ -291,7 +291,7 @@
 			<div class = "store_content_top">
 				<form name = "store_form" action = "store_buy2.do" method = "POST" class = "store_content_form" id = "store_form">					
 					<div class = "img_area">
-						<img src = "http://localhost:9000/myjeju/images/store/${vo.s_image}">
+						<img src = "http://localhost:9000/myjeju/images/store/store_detail/${vo.s_sfile}">
 					</div>
 					
 					<div class = "text_area">
@@ -300,8 +300,8 @@
 							<div class = "store_content_price">가격　　　　　　${vo.s_price}원</div>
 							<input type = "hidden" name = "s_name" value = "${vo.s_name}">
 							<input type = "hidden" name = "s_price" value = "${vo.s_price}">
-							<input type = "hidden" name = "s_image" value = "${vo.s_image}">
-							<input type = "hidden" name = "s_sfile" value = "${vo.s_sfile}">
+							<input type = "hidden" name = "s_image" value = "${vo.s_sfile}">
+							<input type = "hidden" name = "s_sfile" value = "${vo.s_ssfile}">
 							
 							<span class='star-rating'>
 								<span style ="width : ${vo.star_avg*20}%"></span>   
@@ -333,7 +333,7 @@
 				</div>
 			
 				<div class = "content_area">
-					<img src = "http://localhost:9000/myjeju/images/store/${vo.s_content}" id = "here1">
+					<img src = "http://localhost:9000/myjeju/images/store/store_detail/${vo.s_ssfile}" id = "here1">
 				</div>
 				
 				<div class = "store_product_review" id = "here2">

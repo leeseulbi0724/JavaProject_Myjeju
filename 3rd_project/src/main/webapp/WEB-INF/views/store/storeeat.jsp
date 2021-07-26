@@ -72,7 +72,7 @@
 				<ul>
 					<li>
 						<a href = "store_content.do?sid=${eat.sid}">
-						<img src = "http://localhost:9000/myjeju/images/store/${eat.s_image}" width = "260">
+						<img src = "http://localhost:9000/myjeju/images/store/store_detail/${eat.s_sfile}" width = "260">
 						<p>[${eat.s_category}] ${eat.s_name}</p>
 						
 						<span class='star-rating'>

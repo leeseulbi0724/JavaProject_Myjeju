@@ -1680,7 +1680,7 @@ public class AdminController {
 		if (vo.getSfile1().getOriginalFilename() != "") {
 			//파일 존재
 			String root_path = request.getSession().getServletContext().getRealPath("/");
-			String attach_path = "\\resources\\upload\\";
+			String attach_path = "\\resources\\images\\store\\store_detail\\";
 			//System.out.print(root_path);
 			
 			//rfname 중복방지 처리			
@@ -1743,7 +1743,7 @@ public class AdminController {
 		if(vo.getSfile1().getSize() != 0) {
 			// 1. 파일 저장 위치
 			root_path = request.getSession().getServletContext().getRealPath("/");
-			attach_path = "\\resources\\upload\\";
+			attach_path = "\\resources\\images\\store\\store_detail\\";
 			
 			// 2. 파일 이름 --> vo에 저장
 			//rfname 중복방지 처리
@@ -1786,7 +1786,7 @@ public class AdminController {
 		String old_sfile = adminService.getStoreOldFile(sid);
 		
 		String root_path = request.getSession().getServletContext().getRealPath("/");
-		String attach_path = "\\resources\\upload\\";
+		String attach_path = "\\resources\\images\\store\\store_detail\\";
 		
 		File old_file = new File(root_path + attach_path + old_sfile);
 		

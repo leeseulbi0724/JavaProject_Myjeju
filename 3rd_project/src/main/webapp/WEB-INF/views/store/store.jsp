@@ -81,7 +81,7 @@
 				<ul>
 					<li>
 						<a href = "store_content.do?sid=${best.sid}" class = "click">
-							<img src = "http://localhost:9000/myjeju/images/store/${best.s_image}" width = "260">
+							<img src = "http://localhost:9000/myjeju/images/store/store_detail/${best.s_sfile}" width = "260">
 							<p>[${best.s_category}] ${best.s_name}</p>
 
 							<span class='star-rating'>
@@ -104,7 +104,7 @@
 				<ul>
 					<li>
 						<a href = "store_content.do?sid=${eat.sid}" class = "click">
-							<img src = "http://localhost:9000/myjeju/images/store/${eat.s_image}" width = "260">
+							<img src = "http://localhost:9000/myjeju/images/store/store_detail/${eat.s_sfile}" width = "260">
 							<p>[${eat.s_category}] ${eat.s_name}</p>
 							
 							<span class='star-rating'>
@@ -126,7 +126,7 @@
 				<ul>
 					<li>
 						<a href = "store_content.do?sid=${souve.sid}" class = "click">
-							<img src = "http://localhost:9000/myjeju/images/store/${souve.s_image}" width = "260">
+							<img src = "http://localhost:9000/myjeju/images/store/store_detail/${souve.s_sfile}" width = "260">
 							<p>[${souve.s_category}] ${souve.s_name}</p>
 							
 							<span class='star-rating'>
@@ -148,7 +148,7 @@
 				<ul>
 					<li>
 						<a href = "store_content.do?sid=${etc.sid}" class = "click">
-							<img src = "http://localhost:9000/myjeju/images/store/${etc.s_image}" width = "260">
+							<img src = "http://localhost:9000/myjeju/images/store/store_detail/${etc.s_sfile}" width = "260">
 							<p>[${etc.s_category}] ${etc.s_name}</p>
 							
 							<span class='star-rating'>

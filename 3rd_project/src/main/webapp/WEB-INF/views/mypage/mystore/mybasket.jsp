@@ -104,7 +104,7 @@
 				<tr>
 					<td><input type="checkbox" checked id="check" value="${list.s_price * list.b_count }" name="${list.sid }"></td>
 					<td>
-						<img src="http://localhost:9000/myjeju/images/store/${list.s_image}" width=50 height=30>
+						<img src="http://localhost:9000/myjeju/images/store/store_detail/${list.s_sfile}" width=50 height=30>
 						<a href="#">${list.s_name}</a>
 					</td>
 					<td>
