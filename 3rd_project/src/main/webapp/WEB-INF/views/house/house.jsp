@@ -242,7 +242,7 @@
 			 					title : addval.h_name,
 			 					addr : addval.h_addr,
 								tel : addval.h_hp,
-								img : addval.h_img,
+								img : addval.h_file,
 								idx : addval.hid,
 								latlng:	new kakao.maps.LatLng(addval.h_vpoint,addval.h_hpoint)
 							}
@@ -287,7 +287,7 @@
 			    		title : '${vo.h_name}',
 			    		addr : '${vo.h_addr}',
 			    		tel : '${vo.h_hp}',
-			    		img : '${vo.h_img}',
+			    		img : '${vo.h_file}',
 			    		idx : '${vo.hid}',
 			        	latlng: new kakao.maps.LatLng(${vo.h_vpoint}, ${vo.h_hpoint})
 			    	},

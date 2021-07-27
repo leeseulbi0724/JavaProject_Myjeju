@@ -173,6 +173,7 @@ public class HouseController {
 			jobj.addProperty("h_addr", vo.getH_addr());
 			jobj.addProperty("h_hp", vo.getH_hp());
 			jobj.addProperty("h_img", vo.getH_img());
+			jobj.addProperty("h_file", vo.getH_file());
 			jobj.addProperty("h_vpoint", vo.getH_vpoint());
 			jobj.addProperty("h_hpoint", vo.getH_hpoint());
 			

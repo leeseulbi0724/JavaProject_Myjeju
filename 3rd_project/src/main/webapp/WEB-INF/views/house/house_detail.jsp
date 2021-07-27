@@ -164,7 +164,7 @@
 	
 	<!-- content -->
 	<div class="food_detail_top">
-		<img src="http://localhost:9000/myjeju/images/house/house_detail/${vo.h_img }">
+		<img src="http://localhost:9000/myjeju/images/house/${vo.h_file }">
 		<div>
 			<h1>${vo.h_name}</h1>
 			<h3>${vo.h_infor}</h3>
