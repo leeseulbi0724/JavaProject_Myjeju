@@ -559,7 +559,7 @@ public class AdminController {
 			return mv;
 		}
 		
-//咯青瘤包府 惑技其捞瘤
+		//咯青瘤包府 惑技其捞瘤
 		@RequestMapping(value="/adtravel_content.do",method= {RequestMethod.GET,RequestMethod.POST})
 		public ModelAndView totravel(String tid) {
 			ModelAndView mv = new ModelAndView();
