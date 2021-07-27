@@ -572,6 +572,8 @@ public class AdminController {
 				photovo = adminService.getPhotoSpot(tid);
 				carvo = adminService.getCarSpot(tid);
 			}
+			System.out.println(photovo.getPs_psfile());
+			System.out.println(carvo.getCs_csfile());
 
 			TravelVO vo = adminService.gettravel(tid);
 	

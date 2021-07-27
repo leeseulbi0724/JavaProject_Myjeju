@@ -184,6 +184,7 @@ public class TravelController {
 			jobj.addProperty("t_addr", vo.getT_addr());
 			jobj.addProperty("t_hp", vo.getT_hp());
 			jobj.addProperty("t_image", img[0]);
+			jobj.addProperty("t_sfile", vo.getT_sfile());
 			jobj.addProperty("t_vpoint", vo.getT_vpoint());
 			jobj.addProperty("t_hpoint", vo.getT_hpoint());
 			

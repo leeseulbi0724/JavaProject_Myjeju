@@ -241,7 +241,7 @@
 			 					addr : addval.f_addr,
 								tel : addval.f_hp,
 								img : addval.f_image,
-								idx : addval.tid,
+								idx : addval.fid,
 								latlng:	new kakao.maps.LatLng(addval.f_vpoint,addval.f_hpoint)
 							}
 					return positionadd;

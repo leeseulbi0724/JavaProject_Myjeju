@@ -315,7 +315,7 @@
 				    	+ "<div class='content'>"
 			    		+ "<div class='title'>" + data.title + "</div>"
 			    			+ "<div class='body'>"
-			    				+ "<div class='img'>" + "<img src=" + "http://localhost:9000/myjeju/images/travel/"+data.img + ">" + "</div>" 
+			    				+ "<div class='img'>" + "<img src=" + "http://localhost:9000/myjeju/images/travel/travel_detail/"+data.img + ">" + "</div>" 
 			    				+ "<div class='addr'>" + data.addr + "</div>" + "<br>" 
 			    				+ "<div class='tel'>" + data.tel +  "</div>" + "<br>"
 			    				+ "<a href="+"http://localhost:9000/myjeju/travel_detail.do?tid=" + data.idx + ">상세보기</a>"

@@ -137,7 +137,7 @@ $(document).ready(function() {
 					<div class="content" style="margin:10px 0; text-align:left; border-top:1px solid lightgray">
 						<h3 id="spot_title">포토스팟</h3>
 						<div style="margin:30px 0; text-align:center;">
-							<img src="http://localhost:9000/myjeju/resources/images/spot/${photovo.ps_psfile}" style ="width:200px; height:200px;">
+							<img src="http://localhost:9000/myjeju/resources/images/spot/${photovo.ps_pssfile}" style ="width:200px; height:200px;">
 						</div>
 						<div style="padding-left:100px;">
 							<div style="margin-bottom: 30px">이름 : ${photovo.ps_name}</div>
@@ -153,7 +153,7 @@ $(document).ready(function() {
 					<div class="content" style="margin:10px 0; text-align:left; border-top:1px solid lightgray">
 						<h3 id="spot_title">차박스팟</h3>
 						<div style="margin:30px 0; text-align:center;">
-							<img src="http://localhost:9000/myjeju/resources/images/spot/${carvo.cs_csfile}" style ="width:200px; height:200px;">
+							<img src="http://localhost:9000/myjeju/resources/images/spot/${carvo.cs_cssfile}" style ="width:200px; height:200px;">
 						</div>
 						<div style="padding-left:100px;">
 							<div style="margin-bottom: 30px">이름 : ${carvo.cs_name}</div>

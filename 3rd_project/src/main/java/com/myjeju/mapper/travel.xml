@@ -64,7 +64,7 @@
 	<!-- 포토 스팟 -->
 	<select id="photo_spot" parameterType="java.lang.String" resultType="com.myjeju.vo.PhotoSpotVO">
 		select myjeju_travel.t_name, myjeju_photo_spot.tid, myjeju_photo_spot.ps_name, myjeju_photo_spot.ps_infor, 
-			   myjeju_photo_spot.ps_psfile
+			   myjeju_photo_spot.ps_psfile, myjeju_photo_spot.ps_pssfile
 		from myjeju_travel, myjeju_photo_spot 
 		where myjeju_travel.tid = myjeju_photo_spot.tid and myjeju_travel.tid=#{tid}
 	</select>
@@ -72,7 +72,7 @@
 	<!-- 차박 스팟 -->
 	<select id="car_spot" parameterType="java.lang.String" resultType="com.myjeju.vo.CarSpotVO">
 		select myjeju_travel.t_name, myjeju_car_spot.tid, myjeju_car_spot.cs_name, myjeju_car_spot.cs_infor, 
-			   myjeju_car_spot.cs_csfile
+			   myjeju_car_spot.cs_csfile,myjeju_car_spot.cs_cssfile
 		from myjeju_travel, myjeju_car_spot 
 		where myjeju_travel.tid = myjeju_car_spot.tid and myjeju_travel.tid=#{tid}
 	</select>

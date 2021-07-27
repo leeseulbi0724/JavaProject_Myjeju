@@ -224,7 +224,7 @@
 				<c:choose>
 					<c:when test="${!empty photovo.ps_psfile && !empty carvo.cs_csfile}" > <!-- 포토스팟 ㅇ, 차박스팟 ㅇ -->
 						<div class="detail_spot_pic">
-				 			<img src="http://localhost:9000/myjeju/images/spot/${photovo.ps_psfile}">
+				 			<img src="http://localhost:9000/myjeju/images/spot/${photovo.ps_pssfile}">
 				 		</div>
 						<div class="spot_choice">
 							<h3 class="photo_spot_btn" style="border:2px solid #4fa9de; color:#4fa9de;">포토스팟</h3>
@@ -241,7 +241,7 @@
 					</c:when>
 					<c:when test="${!empty photovo.ps_psfile && empty carvo.cs_csfile}"> <!-- 포토스팟 ㅇ, 차박스팟 x -->
 						<div class="detail_spot_pic">
-				 			<img src="http://localhost:9000/myjeju/images/spot/${photovo.ps_psfile}">
+				 			<img src="http://localhost:9000/myjeju/images/spot/${photovo.ps_pssfile}">
 				 		</div>
 						<div class="spot_choice">
 							<h3 class="photo_spot_btn" style="border:2px solid #4fa9de; color:#4fa9de; margin-left:130px;">포토스팟</h3>
@@ -262,7 +262,7 @@
 				<c:choose>
 					<c:when test="${!empty carvo.cs_csfile && !empty photovo.ps_psfile}"> <!-- 차박스팟 ㅇ, 포토스팟 ㅇ,  -->
 						<div class="detail_spot_pic">
-				 			<img src="http://localhost:9000/myjeju/images/spot/${carvo.cs_csfile}">
+				 			<img src="http://localhost:9000/myjeju/images/spot/${carvo.cs_cssfile}">
 				 		</div>
 						<div class="spot_choice">
 							<h3 class="photo_spot_btn" style="border:2px solid lightgray; color:lightgray;">포토스팟</h3>
@@ -279,7 +279,7 @@
 					</c:when>
 					<c:when test="${!empty carvo.cs_csfile && empty photovo.ps_psfile}"> <!-- 차박스팟 ㅇ, 포토스팟 x,  -->
 						<div class="detail_spot_pic">
-				 			<img src="http://localhost:9000/myjeju/images/spot/${carvo.cs_csfile}">
+				 			<img src="http://localhost:9000/myjeju/images/spot/${carvo.cs_cssfile}">
 				 		</div>
 						<div class="spot_choice">
 							<h3 class="photo_spot_btn" style="border:2px solid lightgray; color:lightgray; display:none;">포토스팟</h3>
